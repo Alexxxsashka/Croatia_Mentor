@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { lessonsData, getLocalizedText } from "@/lib/lessons-data";
@@ -18,6 +18,18 @@ export default function LessonsPage() {
   const locale = useLocale();
   const [filterType, setFilterType] = useState<string>("all");
   const [filterLevel, setFilterLevel] = useState<string>("all");
+  const [completedLessons, setCompletedLessons] = useState<string[]>([]);
+
+  useEffect(() => {
+    fetch("/api/progress")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.progress && data.progress.completedLessons) {
+          setCompletedLessons(data.progress.completedLessons);
+        }
+      })
+      .catch(console.error);
+  }, []);
 
   const types = [
     { value: "all", label: t("all") },
@@ -108,38 +120,57 @@ export default function LessonsPage() {
         {filtered.map((lesson) => {
           const Icon = typeIcons[lesson.type] || BookOpen;
           const gradient = typeGradients[lesson.type] || "from-gray-500 to-gray-400";
+          const isCompleted = completedLessons.includes(lesson.id);
 
           return (
             <Link
               key={lesson.id}
               href={`/lessons/${lesson.id}`}
-              className="group glass rounded-2xl p-6 card-hover block"
+              className={`group glass rounded-2xl p-6 block transition-all ${
+                isCompleted 
+                  ? "border-emerald-500/20 bg-emerald-500/5 hover:border-emerald-500/40 opacity-80"
+                  : "card-hover"
+              }`}
             >
               <div className="flex items-start gap-4 mb-4">
                 <div
-                  className={`w-12 h-12 rounded-xl bg-gradient-to-br ${gradient} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
+                  className={`w-12 h-12 rounded-xl bg-gradient-to-br ${
+                    isCompleted ? "from-emerald-600 to-teal-500" : gradient
+                  } flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
                 >
                   <Icon className="w-6 h-6 text-white" />
                 </div>
-                <div>
-                  <span
-                    className={`text-xs font-semibold px-2 py-0.5 rounded-md level-${lesson.level.toLowerCase()} text-white`}
-                  >
-                    {lesson.level}
-                  </span>
-                  <span className="text-xs text-muted-foreground ml-2 capitalize">
-                    {t(lesson.type as "grammar" | "reading" | "dictation" | "communication")}
-                  </span>
+                <div className="flex-1 flex items-center justify-between">
+                  <div>
+                    <span
+                      className={`text-xs font-semibold px-2 py-0.5 rounded-md level-${lesson.level.toLowerCase()} text-white`}
+                    >
+                      {lesson.level}
+                    </span>
+                    <span className="text-xs text-muted-foreground ml-2 capitalize">
+                      {t(lesson.type as "grammar" | "reading" | "dictation" | "communication")}
+                    </span>
+                  </div>
+                  {isCompleted && (
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      {t("completed")}
+                    </span>
+                  )}
                 </div>
               </div>
-              <h3 className="font-semibold mb-2 group-hover:text-blue-400 transition-colors">
+              <h3 className={`font-semibold mb-2 group-hover:text-blue-400 transition-colors ${
+                isCompleted ? "text-muted-foreground" : ""
+              }`}>
                 {getLocalizedText(lesson.title, locale)}
               </h3>
               <p className="text-sm text-muted-foreground line-clamp-2">
                 {getLocalizedText(lesson.content.description, locale)}
               </p>
-              <div className="flex items-center gap-1 mt-4 text-sm text-blue-400 font-medium">
-                {t("startLesson")}
+              <div className={`flex items-center gap-1 mt-4 text-sm font-medium ${
+                isCompleted ? "text-emerald-400" : "text-blue-400"
+              }`}>
+                {isCompleted ? t("repeatLesson") : t("startLesson")}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </div>
             </Link>

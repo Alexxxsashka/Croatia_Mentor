@@ -152,7 +152,8 @@
     "pause": "Пауза",
     "replay": "Повторити",
     "yourAnswer": "Ваша відповідь",
-    "correctAnswer": "Правильна відповідь"
+    "correctAnswer": "Правильна відповідь",
+    "repeatLesson": "Повторити урок"
   },
   "games": {
     "title": "Міні-ігри",

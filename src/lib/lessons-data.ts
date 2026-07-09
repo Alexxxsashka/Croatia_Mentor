@@ -113,6 +113,30 @@ export const lessonsData: LessonData[] = [
             ru: "Подумайте о местоимении 3-го лица женского рода (Она)",
             ua: "Подумайте про займенник 3-ї особи жіночого роду (Вона)"
           }
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "Kako ste _____? (How are you [plural/formal]?)",
+            ru: "Kako ste _____? (Как у вас дела? / Как вы [мн.ч./вежл.]?)",
+            ua: "Kako ste _____? (Як ваші справи? / Як ви [мн.ч./ввічл.]?)"
+          },
+          options: ["vi", "ja", "ti", "ona"],
+          correctAnswer: "vi"
+        },
+        {
+          type: "fill-blank",
+          question: {
+            en: "Complete: _____ smo sretni. (We are happy.)",
+            ru: "Заполните: _____ smo sretni. (Мы счастливы.)",
+            ua: "Заповніть: _____ smo sretni. (Ми щасливі.)"
+          },
+          correctAnswer: "Mi",
+          hint: {
+            en: "Think of first person plural pronoun",
+            ru: "Подумайте о местоимении 1-го лица множественного числа (Мы)",
+            ua: "Подумайте про займенник 1-ї особи множини (Ми)"
+          }
         }
       ]
     }
@@ -193,6 +217,25 @@ export const lessonsData: LessonData[] = [
             ua: "Перекладіть на хорватську: \"Дякую\""
           },
           correctAnswer: "Hvala"
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "What does the waiter ask after Ana orders a coffee?",
+            ru: "Что спрашивает официант после заказа Аны?",
+            ua: "Що запитує офіціант після замовлення Ани?"
+          },
+          options: ["S mlijekom ili bez?", "Kava ili čaj?", "Toplo ili hladno?", "Sada ili kasnije?"],
+          correctAnswer: "S mlijekom ili bez?"
+        },
+        {
+          type: "translation",
+          question: {
+            en: "Translate to Croatian: \"Goodbye\"",
+            ru: "Переведите на хорватский: \"До свидания\"",
+            ua: "Перекладіть на хорватську: \"До побачення\""
+          },
+          correctAnswer: "Doviđenja"
         }
       ]
     }
@@ -223,6 +266,26 @@ export const lessonsData: LessonData[] = [
             ua: "Запишіть те, що ви чуєте:"
           },
           correctAnswer: "Dobar dan. Kako ste? Ja sam dobro, hvala."
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "Which Croatian phrase means \"Good day\"?",
+            ru: "Какая хорватская фраза означает \"Добрый день\"?",
+            ua: "Яка хорватська фраза означає \"Добрий день\"?"
+          },
+          options: ["Dobar dan", "Dobra večer", "Laku noć", "Hvala"],
+          correctAnswer: "Dobar dan"
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "Select the correct spelling of the Croatian word for \"thank you\":",
+            ru: "Выберите правильное написание слова \"спасибо\" на хорватском:",
+            ua: "Оберіть правильне написання слова \"дякую\" хорватською:"
+          },
+          options: ["Hvala", "Fala", "Xvala", "Havla"],
+          correctAnswer: "Hvala"
         }
       ]
     }
@@ -304,6 +367,40 @@ export const lessonsData: LessonData[] = [
             ru: "Окончание женского рода -a меняется на -u",
             ua: "Закінчення жіночого роду -a змінюється на -u"
           }
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "Volim _____ (Hrvatska). (I love Croatia.)",
+            ru: "Volim _____ (Hrvatska). (Я люблю Хорватию.)",
+            ua: "Volim _____ (Hrvatska). (Я люблю Хорватію.)"
+          },
+          options: ["Hrvatsku", "Hrvatska", "Hrvatski", "Hrvatske"],
+          correctAnswer: "Hrvatsku"
+        },
+        {
+          type: "fill-blank",
+          question: {
+            en: "Jedem _____ (jabuka). (I am eating an apple.)",
+            ru: "Jedem _____ (jabuka). (Я ем яблоко.)",
+            ua: "Jedem _____ (jabuka). (Я їм яблуко.)"
+          },
+          correctAnswer: "jabuku",
+          hint: {
+            en: "Change 'jabuka' to accusative form",
+            ru: "Поставьте 'jabuka' в винительный падеж",
+            ua: "Поставте 'jabuka' у знахідний відмінок"
+          }
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "On traži _____ (adresa). (He is looking for the address.)",
+            ru: "On traži _____ (adresa). (Он ищет адрес.)",
+            ua: "On traži _____ (adresa). (Він шукає адресу.)"
+          },
+          options: ["adresu", "adresa", "adrese", "adresi"],
+          correctAnswer: "adresu"
         }
       ]
     }
@@ -369,6 +466,40 @@ export const lessonsData: LessonData[] = [
             ua: "Перекладіть: \"Рахунок, будь ласка.\""
           },
           correctAnswer: "Račun, molim."
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "What does the phrase \"Što preporučujete?\" mean?",
+            ru: "Что означает фраза \"Što preporučujete?\"?",
+            ua: "Що означає фраза \"Što preporučujete?\"?"
+          },
+          options: [
+            "What do you recommend?",
+            "What would you like to drink?",
+            "How much does it cost?",
+            "Where is the table?"
+          ],
+          correctAnswer: "What do you recommend?"
+        },
+        {
+          type: "translation",
+          question: {
+            en: "Translate to Croatian: \"Can I get a glass of water?\"",
+            ru: "Переведите на хорватский: \"Можно стакан воды?\"",
+            ua: "Перекладіть на хорватську: \"Можна склянку води?\""
+          },
+          correctAnswer: "Mogu li dobiti čašu vode."
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "How do you express \"It was excellent!\" in Croatian?",
+            ru: "Как сказать \"Было отлично/великолепно!\" по-хорватски?",
+            ua: "Як сказати \"Було чудово/прекрасно!\" хорватською?"
+          },
+          options: ["Bilo je izvrsno!", "Dobar tek!", "U redu je", "Nema na čemu"],
+          correctAnswer: "Bilo je izvrsno!"
         }
       ]
     }
@@ -429,6 +560,45 @@ export const lessonsData: LessonData[] = [
           },
           options: ["čitam", "pročitam", "pročitao sam", "čitat ću"],
           correctAnswer: "čitam"
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "He usually writes letters for an hour, but today he wrote one in ten minutes.",
+            ru: "Обычно он пишет письмо целый час, но сегодня он написал его за 10 минут.",
+            ua: "Зазвичай він пише листа цілу годину, але сьогодні він написав його за 10 хвилин."
+          },
+          options: [
+            "Obično piše pismo... danas ga je napisao",
+            "Obično napiše pismo... danas ga je pisao",
+            "Obično pisao pismo... danas ga je piše",
+            "Obično piše pismo... danas ga piše"
+          ],
+          correctAnswer: "Obično piše pismo... danas ga je napisao"
+        },
+        {
+          type: "fill-blank",
+          question: {
+            en: "Complete: Jučer sam _____ (pisati, imperfective past) zadaću tri sata.",
+            ru: "Заполните: Jučer sam _____ (pisati, нсв прош. вр.) zadaću tri sata. (Вчера я три часа писал домашнее задание.)",
+            ua: "Заповніть: Jučer sam _____ (pisati, недок. в. мин. ч.) zadaću tri sata. (Вчора я три години писав домашнє завдання.)"
+          },
+          correctAnswer: "pisao",
+          hint: {
+            en: "Use masculine past form for 'ja' (assuming a male speaker)",
+            ru: "Используйте мужской род прошедшего времени глагола 'pisati'",
+            ua: "Використовуйте чоловічий рід минулого часу дієслова 'pisati'"
+          }
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "Moram _____ (naučiti, perfective) ove riječi do sutra. (I must learn these words by tomorrow.)",
+            ru: "Moram _____ (naučiti, св) ove riječi do sutra. (Я должен выучить эти слова к завтрашнему дню.)",
+            ua: "Moram _____ (naučiti, док. в.) ove riječi do sutra. (Я мушу вивчити ці слова до завтра.)"
+          },
+          options: ["naučiti", "učiti", "naučim", "učim"],
+          correctAnswer: "naučiti"
         }
       ]
     }
@@ -513,6 +683,40 @@ export const lessonsData: LessonData[] = [
             ru: "Форма 1-го лица мн. ч. Futur II от 'naučiti'",
             ua: "Форма 1-ї особи мн. ч. Futur II від 'naučiti'"
           }
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "Kad _____ (ti, završiti) posao, javi mi se. (When you [singular] finish work, let me know.)",
+            ru: "Kad _____ (ti, završiti) posao, javi mi se. (Когда закончишь работу, дай мне знать.)",
+            ua: "Kad _____ (ti, završiti) posao, javi mi se. (Коли закінчиш роботу, дай мені знати.)"
+          },
+          options: ["budeš završio", "završiš", "budeš završila", "završit ćeš"],
+          correctAnswer: "budeš završio"
+        },
+        {
+          type: "fill-blank",
+          question: {
+            en: "Complete: Ako _____ (on, doći) na vrijeme, stignut ćemo na vlak.",
+            ru: "Заполните: Ako _____ (on, doći) na vrijeme, stignut ćemo na vlak. (Если он придет вовремя, мы успеем на поезд.)",
+            ua: "Заповніть: Ako _____ (on, doći) na vrijeme, stignut ćemo na vlak. (Якщо він прийде вчасно, ми встигнемо на поїзд.)"
+          },
+          correctAnswer: "bude došao",
+          hint: {
+            en: "Future II masculine third-person singular",
+            ru: "Futur II мужского рода 3-го лица единственного числа",
+            ua: "Futur II чоловічого роду 3-ї особи однини"
+          }
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "Kad _____ (oni, kupiti) auto, putovat će više. (When they buy the car, they will travel more.)",
+            ru: "Kad _____ (oni, kupiti) auto, putovat će više. (Когда они купят машину, они будут путешествовать больше.)",
+            ua: "Kad _____ (oni, kupiti) auto, putovat će više. (Коли вони куплять машину, вони будуть подорожувати більше.)"
+          },
+          options: ["budu kupili", "kupe", "kupit će", "budu kupovali"],
+          correctAnswer: "budu kupili"
         }
       ]
     }
@@ -583,6 +787,39 @@ export const lessonsData: LessonData[] = [
           },
           options: ["O čistom zraku, vodi i zelenim površinama", "O novcu", "O brzim automobilima", "O velikim trgovinama"],
           correctAnswer: "O čistom zraku, vodi i zelenim površinama"
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "What does the word \"okoliš\" mean?",
+            ru: "Что означает слово \"okoliš\"?",
+            ua: "Що означає слово \"okoliš\"?"
+          },
+          options: ["environment", "waste", "ecology", "air"],
+          correctAnswer: "environment"
+        },
+        {
+          type: "fill-blank",
+          question: {
+            en: "Complete the word: Briga za _____ (ecology) postaje sve važnija.",
+            ru: "Заполните слово: Briga za _____ (ecology) postaje sve važnija. (Забота об экологии...)",
+            ua: "Заповніть слово: Briga za _____ (ecology) postaje sve važnija. (Турбота про екологію...)"
+          },
+          correctAnswer: "ekologiju",
+          hint: {
+            en: "Write 'ekologija' in accusative singular",
+            ru: "Напишите 'ekologija' в винительном падеже",
+            ua: "Напишіть 'ekologija' у знахідному відмінку"
+          }
+        },
+        {
+          type: "translation",
+          question: {
+            en: "Translate to Croatian: \"clean air\"",
+            ru: "Переведите на хорватский: \"чистый воздух\"",
+            ua: "Перекладіть на хорватську: \"чисте повітря\""
+          },
+          correctAnswer: "čisti zrak"
         }
       ]
     }
@@ -665,6 +902,30 @@ export const lessonsData: LessonData[] = [
             ru: "Глагол 'radovati se' требует дательного падежа (dativ)",
             ua: "Дієслово 'radovati se' вимагає давального відмінка (dativ)"
           }
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "Upravljam _____ (automobil). (I drive the car.)",
+            ru: "Upravljam _____ (automobil). (Я управляю автомобилем.)",
+            ua: "Upravljam _____ (automobil). (Я керую автомобілем.)"
+          },
+          options: ["automobilom", "automobil", "automobilu", "automobila"],
+          correctAnswer: "automobilom"
+        },
+        {
+          type: "fill-blank",
+          question: {
+            en: "Complete: Zanimam se za _____ (glazba). (I am interested in music.)",
+            ru: "Заполните: Zanimam se za _____ (glazba). (Я интересуюсь музыкой.)",
+            ua: "Заповніть: Zanimam se za _____ (glazba). (Я цікавлюся музикою.)"
+          },
+          correctAnswer: "glazbu",
+          hint: {
+            en: "Accusative feminine of 'glazba'",
+            ru: "Винительный падеж женского рода от 'glazba'",
+            ua: "Знахідний відмінок жіночого роду від 'glazba'"
+          }
         }
       ]
     }
@@ -739,6 +1000,40 @@ export const lessonsData: LessonData[] = [
           },
           options: ["se gradi", "gradi", "je građena", "bila je građena"],
           correctAnswer: "se gradi"
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "What is the verbal noun for \"putovati\"?",
+            ru: "Какое отглагольное существительное образуется от \"putovati\"?",
+            ua: "Який віддієслівний іменник утворюється від \"putovati\"?"
+          },
+          options: ["putovanje", "putovati", "putopis", "putnik"],
+          correctAnswer: "putovanje"
+        },
+        {
+          type: "fill-blank",
+          question: {
+            en: "Complete: Pismo je _____ (napisati, past participle neuter) jučer.",
+            ru: "Заполните: Pismo je _____ (napisati, причастие ср. р.) jučer. (Письмо было написано вчера.)",
+            ua: "Заповніть: Pismo je _____ (napisati, дієприкметник сер. р.) jučer. (Лист був написаний вчора.)"
+          },
+          correctAnswer: "napisano",
+          hint: {
+            en: "Neuter singular forms end in -o",
+            ru: "Формы среднего рода ед. ч. оканчиваются на -o",
+            ua: "Форми середнього роду однини закінчуються на -o"
+          }
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "Passive: Odluka _____ (donijeti, past passive feminine) na sastanku.",
+            ru: "Пассив: Odluka _____ (donijeti, ж.р. прош.вр. пассив) na sastanku. (Решение было принято на собрании.)",
+            ua: "Пасив: Odluka _____ (donijeti, ж.р. мин.ч. пасив) na sastanku. (Рішення було прийняте на зборах.)"
+          },
+          options: ["je donesena", "se donosi", "je donio", "bude donesena"],
+          correctAnswer: "je donesena"
         }
       ]
     }
@@ -796,6 +1091,35 @@ export const lessonsData: LessonData[] = [
             ua: "Перекладіть: 'співбесіда на роботу' -> razgovor za _____."
           },
           correctAnswer: "posao"
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "What does the term \"prekovremeni rad\" refer to?",
+            ru: "К чему относится термин \"prekovremeni rad\"?",
+            ua: "До чого відноситься термін \"prekovremeni rad\"?"
+          },
+          options: ["overtime work", "part-time work", "vacation days", "working from home"],
+          correctAnswer: "overtime work"
+        },
+        {
+          type: "translation",
+          question: {
+            en: "Translate to Croatian: \"employment\"",
+            ru: "Переведите на хорватский: \"трудоустройство\"",
+            ua: "Перекладіть на хорватську: \"працевлаштування\""
+          },
+          correctAnswer: "zapošljavanje"
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "Select the Croatian word for \"employer\":",
+            ru: "Выберите хорватское слово, означающее \"работодатель\":",
+            ua: "Оберіть хорватське слово, що означає \"роботодавець\":"
+          },
+          options: ["poslodavac", "radnik", "direktor", "kolega"],
+          correctAnswer: "poslodavac"
         }
       ]
     }

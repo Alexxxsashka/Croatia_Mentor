@@ -152,7 +152,8 @@
     "pause": "Pause",
     "replay": "Replay",
     "yourAnswer": "Your answer",
-    "correctAnswer": "Correct answer"
+    "correctAnswer": "Correct answer",
+    "repeatLesson": "Repeat Lesson"
   },
   "games": {
     "title": "Mini-Games",

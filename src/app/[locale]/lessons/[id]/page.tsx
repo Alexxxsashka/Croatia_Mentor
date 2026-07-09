@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, use } from "react";
+import { useState, use, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { lessonsData, getLocalizedText } from "@/lib/lessons-data";
@@ -32,6 +32,53 @@ export default function LessonDetailPage({
   const [showResult, setShowResult] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
   const [completed, setCompleted] = useState(false);
+  const [alreadyCompleted, setAlreadyCompleted] = useState(false);
+  const [xpAdded, setXpAdded] = useState(false);
+
+  // Fetch initial progress to see if already completed
+  useEffect(() => {
+    fetch("/api/progress")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.progress) {
+          const completedList = data.progress.completedLessons || [];
+          if (completedList.includes(id)) {
+            setAlreadyCompleted(true);
+          }
+        }
+      })
+      .catch(console.error);
+  }, [id]);
+
+  // Save progress when completed
+  useEffect(() => {
+    if (completed && !xpAdded) {
+      setXpAdded(true);
+      
+      fetch("/api/progress")
+        .then((res) => res.json())
+        .then((data) => {
+          const currentProgress = data.progress || {};
+          const currentCompleted = currentProgress.completedLessons || [];
+          const currentXP = currentProgress.totalXP || 0;
+          
+          const isNewCompletion = !currentCompleted.includes(id);
+          const newCompleted = isNewCompletion ? [...currentCompleted, id] : currentCompleted;
+          const xpEarned = isNewCompletion ? (correctCount * 15) : 0;
+          const newXP = currentXP + xpEarned;
+          
+          fetch("/api/progress", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              completedLessons: newCompleted,
+              totalXP: newXP
+            })
+          }).catch(console.error);
+        })
+        .catch(console.error);
+    }
+  }, [completed, correctCount, id, xpAdded]);
 
   if (!lesson) {
     return (
@@ -81,7 +128,7 @@ export default function LessonDetailPage({
   };
 
   if (completed) {
-    const xpEarned = correctCount * 15;
+    const xpEarned = alreadyCompleted ? 0 : (correctCount * 15);
     return (
       <div className="max-w-2xl mx-auto px-4 py-16 text-center animate-fade-in">
         <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-yellow-400 to-orange-500 mb-6 shadow-2xl">
@@ -96,6 +143,11 @@ export default function LessonDetailPage({
           </p>
           <p className="text-2xl font-bold text-green-400">
             +{xpEarned} {t("xpEarned")}
+            {alreadyCompleted && (
+              <span className="text-xs text-muted-foreground block mt-1">
+                (Already completed)
+              </span>
+            )}
           </p>
           <div className="h-3 rounded-full bg-white/5 overflow-hidden">
             <div
