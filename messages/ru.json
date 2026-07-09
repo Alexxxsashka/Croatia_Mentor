@@ -234,6 +234,19 @@
     "question": "Вопрос",
     "of": "из",
     "quizComplete": "Тест завершен!",
-    "tryAgain": "Попробовать снова"
+    "tryAgain": "Попробовать снова",
+    "loading": "Загрузка словаря...",
+    "dictionary": "Словарь и HJP",
+    "wordsLoaded": "слов загружено",
+    "revealTranslation": "Нажмите, чтобы показать перевод",
+    "general": "Общее",
+    "listenPronunciation": "Прослушать произношение",
+    "previous": "Назад",
+    "next": "Вперед",
+    "chooseCorrectTranslation": "Выберите правильный перевод:",
+    "nextQuestion": "Следующий вопрос",
+    "finish": "Завершить тест",
+    "localDictionary": "Локальный словарь",
+    "hjpInputPlaceholder": "Введите слово для изучения (например, učiti)..."
   }
 }

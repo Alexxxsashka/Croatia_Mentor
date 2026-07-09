@@ -234,6 +234,19 @@
     "question": "Question",
     "of": "of",
     "quizComplete": "Quiz Complete!",
-    "tryAgain": "Try Again"
+    "tryAgain": "Try Again",
+    "loading": "Loading vocabulary...",
+    "dictionary": "Dictionary & HJP",
+    "wordsLoaded": "words loaded",
+    "revealTranslation": "Click to reveal translation",
+    "general": "General",
+    "listenPronunciation": "Listen Pronunciation",
+    "previous": "Previous",
+    "next": "Next",
+    "chooseCorrectTranslation": "Choose the correct translation:",
+    "nextQuestion": "Next Question",
+    "finish": "Finish Quiz",
+    "localDictionary": "Local Dictionary",
+    "hjpInputPlaceholder": "Enter word to study (e.g. učiti)..."
   }
 }

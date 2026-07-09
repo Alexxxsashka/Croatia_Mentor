@@ -234,6 +234,19 @@
     "question": "Питання",
     "of": "з",
     "quizComplete": "Тест завершено!",
-    "tryAgain": "Спробувати знову"
+    "tryAgain": "Спробувати знову",
+    "loading": "Завантаження словника...",
+    "dictionary": "Словник та HJP",
+    "wordsLoaded": "слів завантажено",
+    "revealTranslation": "Натисніть, щоб показати переклад",
+    "general": "Загальне",
+    "listenPronunciation": "Прослухати вимову",
+    "previous": "Назад",
+    "next": "Вперед",
+    "chooseCorrectTranslation": "Оберіть правильний переклад:",
+    "nextQuestion": "Наступне питання",
+    "finish": "Завершити тест",
+    "localDictionary": "Локальний словник",
+    "hjpInputPlaceholder": "Введіть слово для вивчення (наприклад, učiti)..."
   }
 }

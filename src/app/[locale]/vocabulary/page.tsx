@@ -9,7 +9,6 @@ import {
   Languages,
   Volume2,
   BookOpen,
-  HelpCircle,
   Trophy,
   Check,
   X,
@@ -31,6 +30,7 @@ interface Flashcard {
 
 export default function VocabularyPortal() {
   const t = useTranslations("vocabulary");
+  const tCommon = useTranslations("common");
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -184,7 +184,7 @@ export default function VocabularyPortal() {
       <div className="flex-1 flex items-center justify-center min-h-[50vh]">
         <div className="flex flex-col items-center gap-3">
           <Loader2 className="w-10 h-10 text-blue-500 animate-spin" />
-          <p className="text-sm text-muted-foreground">Loading vocabulary...</p>
+          <p className="text-sm text-muted-foreground">{t("loading")}</p>
         </div>
       </div>
     );
@@ -198,10 +198,10 @@ export default function VocabularyPortal() {
       {/* Header */}
       <div className="text-center mb-8 animate-fade-in">
         <h1 className="text-4xl font-extrabold tracking-tight">
-          <span className="gradient-text">{t("title") || "Vocabulary Hub"}</span>
+          <span className="gradient-text">{t("title")}</span>
         </h1>
         <p className="text-muted-foreground mt-2 max-w-lg mx-auto">
-          {t("subtitle") || "Learn and test vocabulary, and verify accents on HJP"}
+          {t("subtitle")}
         </p>
       </div>
 
@@ -214,7 +214,7 @@ export default function VocabularyPortal() {
               activeTab === "flashcards" ? "bg-blue-600 text-white shadow-md" : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            {t("flashcards") || "Flashcards"}
+            {t("flashcards")}
           </button>
           <button
             onClick={() => { setActiveTab("quiz"); setQuizStarted(false); }}
@@ -222,7 +222,7 @@ export default function VocabularyPortal() {
               activeTab === "quiz" ? "bg-blue-600 text-white shadow-md" : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            {t("quiz") || "Quiz"}
+            {t("quiz")}
           </button>
           <button
             onClick={() => setActiveTab("dictionary")}
@@ -230,7 +230,7 @@ export default function VocabularyPortal() {
               activeTab === "dictionary" ? "bg-blue-600 text-white shadow-md" : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            {t("dictionary") || "Dictionary & HJP"}
+            {t("dictionary")}
           </button>
         </div>
       </div>
@@ -240,7 +240,7 @@ export default function VocabularyPortal() {
         <div className="flex flex-wrap items-center justify-between gap-4 mb-6 animate-fade-in">
           <div className="flex items-center gap-2">
             <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
-              {t("levelFilter") || "Level"}:
+              {t("levelFilter")}:
             </span>
             <div className="flex gap-1">
               {["all", "A1", "A2", "B1", "B2"].map((lvl) => (
@@ -257,14 +257,14 @@ export default function VocabularyPortal() {
                       : "border-white/5 text-muted-foreground hover:text-foreground hover:bg-white/5"
                   }`}
                 >
-                  {lvl === "all" ? (t("all") || "All") : lvl}
+                  {lvl === "all" ? t("all") : lvl}
                 </button>
               ))}
             </div>
           </div>
 
           <div className="text-xs text-muted-foreground">
-            {filteredWords.length} words loaded
+            {filteredWords.length} {t("wordsLoaded")}
           </div>
         </div>
       )}
@@ -293,14 +293,14 @@ export default function VocabularyPortal() {
                       {activeWord.wordHr}
                     </h2>
                     <p className="text-xs text-muted-foreground mt-4 select-none">
-                      Click to reveal translation
+                      {t("revealTranslation")}
                     </p>
                   </div>
 
                   {/* Back Side */}
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-6 backface-hidden rotate-y-180">
                     <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 uppercase tracking-wider mb-2 border border-emerald-500/20">
-                      {activeWord.category || "General"}
+                      {activeWord.category || t("general")}
                     </span>
                     <h3 className="text-3xl font-extrabold text-foreground">
                       {getTranslation(activeWord)}
@@ -314,7 +314,7 @@ export default function VocabularyPortal() {
                       className="mt-6 p-2 rounded-full bg-blue-600/10 text-blue-400 border border-blue-500/20 hover:bg-blue-600 hover:text-white transition-all flex items-center gap-1.5 text-xs font-medium"
                     >
                       <Volume2 className="w-4 h-4" />
-                      Listen Pronunciation
+                      {t("listenPronunciation")}
                     </button>
                   </div>
                 </div>
@@ -330,7 +330,7 @@ export default function VocabularyPortal() {
                   }}
                   className="px-4 py-2 text-sm font-semibold rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 disabled:opacity-50 transition-all text-foreground"
                 >
-                  Previous
+                  {t("previous")}
                 </button>
                 <span className="text-sm font-medium text-muted-foreground">
                   {currentCardIndex + 1} / {filteredWords.length}
@@ -343,13 +343,13 @@ export default function VocabularyPortal() {
                   }}
                   className="px-4 py-2 text-sm font-semibold rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 disabled:opacity-50 transition-all text-foreground"
                 >
-                  Next
+                  {t("next")}
                 </button>
               </div>
             </div>
           ) : (
             <div className="text-center py-12 glass rounded-2xl border border-white/10">
-              <p className="text-muted-foreground">{t("noWordsFound") || "No words available for this level."}</p>
+              <p className="text-muted-foreground">{t("noWordsFound")}</p>
             </div>
           )}
         </div>
@@ -361,23 +361,23 @@ export default function VocabularyPortal() {
           {!quizStarted ? (
             <div className="text-center py-12 glass rounded-2xl border border-white/10 flex flex-col items-center">
               <Trophy className="w-12 h-12 text-yellow-400 mb-4 animate-bounce" />
-              <h2 className="text-2xl font-bold text-foreground">{t("quiz") || "Vocabulary Quiz"}</h2>
+              <h2 className="text-2xl font-bold text-foreground">{t("quiz")}</h2>
               <p className="text-sm text-muted-foreground mt-2 max-w-sm">
-                {t("quizSubtitle") || "Test your understanding of Croatian vocabulary. You earn 10 XP for each correct answer!"}
+                {t("quizSubtitle")}
               </p>
               <button
                 onClick={startQuiz}
                 className="mt-6 px-6 py-2.5 rounded-xl font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/25 transition-all"
               >
-                {t("start") || "Start Quiz"}
+                {t("start")}
               </button>
             </div>
           ) : quizComplete ? (
             <div className="text-center py-12 glass rounded-2xl border border-white/10 flex flex-col items-center">
               <Trophy className="w-14 h-14 text-yellow-400 mb-4" />
-              <h2 className="text-3xl font-extrabold text-foreground">{t("quizComplete") || "Quiz Completed!"}</h2>
+              <h2 className="text-3xl font-extrabold text-foreground">{t("quizComplete")}</h2>
               <p className="text-lg text-muted-foreground mt-2">
-                {t("score") || "Your score"}: <span className="text-blue-400 font-black">{quizScore} / {quizQuestions.length}</span>
+                {t("score")}: <span className="text-blue-400 font-black">{quizScore} / {quizQuestions.length}</span>
               </p>
               <p className="text-sm text-green-400 font-semibold mt-2">
                 +{quizScore * 10} XP Earned!
@@ -387,7 +387,7 @@ export default function VocabularyPortal() {
                 className="mt-6 px-6 py-2.5 rounded-xl font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg transition-all flex items-center gap-2"
               >
                 <RefreshCw className="w-4 h-4" />
-                {t("tryAgain") || "Restart Quiz"}
+                {t("tryAgain")}
               </button>
             </div>
           ) : (
@@ -395,7 +395,7 @@ export default function VocabularyPortal() {
               {/* Quiz progress */}
               <div className="flex items-center justify-between text-xs text-muted-foreground">
                 <span className="font-semibold uppercase tracking-wider">
-                  {t("question") || "Question"} {currentQuizIndex + 1} {t("of") || "of"} {quizQuestions.length}
+                  {t("question")} {currentQuizIndex + 1} {t("of")} {quizQuestions.length}
                 </span>
                 <span className="font-bold text-green-400">XP: +{quizScore * 10}</span>
               </div>
@@ -406,7 +406,7 @@ export default function VocabularyPortal() {
                   {quizQuestions[currentQuizIndex].word.wordHr}
                 </h3>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Choose the correct translation:
+                  {t("chooseCorrectTranslation")}
                 </p>
               </div>
 
@@ -449,7 +449,7 @@ export default function VocabularyPortal() {
                     onClick={nextQuizQuestion}
                     className="px-6 py-2 rounded-xl font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg transition-all"
                   >
-                    {currentQuizIndex < quizQuestions.length - 1 ? (t("next") || "Next Question") : (t("finish") || "Finish Quiz")}
+                    {currentQuizIndex < quizQuestions.length - 1 ? t("nextQuestion") : t("finish")}
                   </button>
                 </div>
               )}
@@ -463,11 +463,11 @@ export default function VocabularyPortal() {
         <div className="space-y-6 animate-fade-in">
           {/* Dictionary Search */}
           <div className="glass rounded-2xl border border-white/10 p-6 space-y-4">
-            <h3 className="font-bold text-lg text-foreground">Local Dictionary</h3>
+            <h3 className="font-bold text-lg text-foreground">{t("localDictionary")}</h3>
             <div className="relative">
               <input
                 type="text"
-                placeholder={t("searchPlaceholder") || "Search words..."}
+                placeholder={t("searchPlaceholder")}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 pl-11 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:border-blue-500 transition-colors"
@@ -515,7 +515,7 @@ export default function VocabularyPortal() {
 
               {filteredWords.filter((w) => w.wordHr.toLowerCase().includes(searchQuery.toLowerCase())).length === 0 && (
                 <p className="text-xs text-muted-foreground col-span-2 text-center py-4">
-                  {t("noWordsFound") || "No matching words found."}
+                  {t("noWordsFound")}
                 </p>
               )}
             </div>
@@ -529,13 +529,13 @@ export default function VocabularyPortal() {
             </div>
             
             <p className="text-sm text-muted-foreground leading-relaxed">
-              {t("hjpNotice") || "Verify word etymology, detailed declension table (padeži), and correct accentuation directly on the Croatian Language Portal (HJP):"}
+              {t("hjpNotice")}
             </p>
 
             <div className="flex gap-3 flex-col sm:flex-row">
               <input
                 type="text"
-                placeholder="Enter word to study (e.g. učiti)..."
+                placeholder={t("hjpInputPlaceholder")}
                 value={hjpSearchWord}
                 onChange={(e) => setHjpSearchWord(e.target.value)}
                 className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-foreground focus:outline-none focus:border-blue-500 transition-colors"
@@ -544,7 +544,7 @@ export default function VocabularyPortal() {
                 onClick={() => openHjp(hjpSearchWord)}
                 className="px-5 py-2.5 rounded-xl font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg transition-all flex items-center justify-center gap-1.5 text-sm"
               >
-                <span>{t("hjpLinkText") || "Search on HJP"}</span>
+                <span>{t("hjpLinkText")}</span>
                 <ExternalLink className="w-4 h-4" />
               </button>
             </div>
