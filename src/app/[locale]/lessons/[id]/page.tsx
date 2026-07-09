@@ -3,7 +3,7 @@
 import { useState, use } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
-import { lessonsData } from "@/lib/lessons-data";
+import { lessonsData, getLocalizedText } from "@/lib/lessons-data";
 import { DictationPlayer } from "@/components/dictation-player";
 import {
   ArrowLeft,
@@ -20,7 +20,7 @@ export default function LessonDetailPage({
 }: {
   params: Promise<{ id: string; locale: string }>;
 }) {
-  const { id } = use(params);
+  const { id, locale } = use(params);
   const t = useTranslations("lessons");
   const router = useRouter();
 
@@ -137,7 +137,7 @@ export default function LessonDetailPage({
               {lesson.type}
             </span>
           </div>
-          <h1 className="text-2xl font-bold mt-1">{lesson.title}</h1>
+          <h1 className="text-2xl font-bold mt-1">{getLocalizedText(lesson.title, locale)}</h1>
         </div>
       </div>
 
@@ -146,9 +146,9 @@ export default function LessonDetailPage({
         <div className="space-y-6 mb-10 animate-slide-up">
           {lesson.content.sections.map((section, i) => (
             <div key={i} className="glass rounded-2xl p-6">
-              <h2 className="text-lg font-semibold mb-3">{section.title}</h2>
+              <h2 className="text-lg font-semibold mb-3">{getLocalizedText(section.title, locale)}</h2>
               <p className="text-sm text-muted-foreground whitespace-pre-line leading-relaxed">
-                {section.text}
+                {getLocalizedText(section.text, locale)}
               </p>
               {section.examples && (
                 <ul className="mt-4 space-y-2">
@@ -157,7 +157,7 @@ export default function LessonDetailPage({
                       key={j}
                       className="text-sm pl-4 border-l-2 border-blue-500/30 py-1"
                     >
-                      {ex}
+                      {getLocalizedText(ex, locale)}
                     </li>
                   ))}
                 </ul>
@@ -190,7 +190,7 @@ export default function LessonDetailPage({
           </div>
         </div>
 
-        <p className="text-lg font-medium mb-6">{exercise.question}</p>
+        <p className="text-lg font-medium mb-6">{getLocalizedText(exercise.question, locale)}</p>
 
         {/* Multiple choice */}
         {exercise.type === "multiple-choice" && exercise.options && (
@@ -248,7 +248,7 @@ export default function LessonDetailPage({
             {exercise.hint && (
               <div className="flex items-center gap-2 text-sm text-yellow-400 bg-yellow-500/10 px-4 py-2 rounded-xl">
                 <Lightbulb className="w-4 h-4" />
-                {exercise.hint}
+                {getLocalizedText(exercise.hint, locale)}
               </div>
             )}
             <input

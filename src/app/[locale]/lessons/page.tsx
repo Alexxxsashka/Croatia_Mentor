@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { lessonsData } from "@/lib/lessons-data";
+import { lessonsData, getLocalizedText } from "@/lib/lessons-data";
 import {
   BookOpen,
   Languages,
@@ -15,6 +15,7 @@ import {
 
 export default function LessonsPage() {
   const t = useTranslations("lessons");
+  const locale = useLocale();
   const [filterType, setFilterType] = useState<string>("all");
   const [filterLevel, setFilterLevel] = useState<string>("all");
 
@@ -132,10 +133,10 @@ export default function LessonsPage() {
                 </div>
               </div>
               <h3 className="font-semibold mb-2 group-hover:text-blue-400 transition-colors">
-                {lesson.title}
+                {getLocalizedText(lesson.title, locale)}
               </h3>
               <p className="text-sm text-muted-foreground line-clamp-2">
-                {lesson.content.description}
+                {getLocalizedText(lesson.content.description, locale)}
               </p>
               <div className="flex items-center gap-1 mt-4 text-sm text-blue-400 font-medium">
                 {t("startLesson")}
