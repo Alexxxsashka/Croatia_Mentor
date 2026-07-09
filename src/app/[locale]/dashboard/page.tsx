@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import { Link } from "@/i18n/navigation";
+import { useState, useEffect } from "react";
 import {
   Trophy,
   Flame,
@@ -15,23 +16,81 @@ import {
   TrendingUp,
   CheckCircle2,
   Clock,
+  Loader2,
 } from "lucide-react";
+
+interface TestScore {
+  type: string;
+  score: number;
+  total: number;
+  level: string;
+  date: string;
+}
+
+interface UserProgress {
+  currentLevel: string;
+  totalXP: number;
+  currentStreak: number;
+  completedLessons: string[];
+  testScores: TestScore[];
+}
 
 export default function DashboardPage() {
   const t = useTranslations("dashboard");
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+
+  const [loading, setLoading] = useState(true);
+  const [progress, setProgress] = useState<UserProgress | null>(null);
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      fetch("/api/progress")
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.progress) {
+            let parsedScores: TestScore[] = [];
+            try {
+              parsedScores = typeof data.progress.testScores === "string"
+                ? JSON.parse(data.progress.testScores)
+                : data.progress.testScores || [];
+            } catch {
+              parsedScores = data.progress.testScores || [];
+            }
+
+            setProgress({
+              currentLevel: data.progress.currentLevel || "A1",
+              totalXP: data.progress.totalXP || 0,
+              currentStreak: data.progress.currentStreak || 0,
+              completedLessons: data.progress.completedLessons || [],
+              testScores: parsedScores,
+            });
+          }
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error("Failed to load progress:", err);
+          setLoading(false);
+        });
+    } else if (status === "unauthenticated") {
+      setLoading(false);
+    }
+  }, [status]);
 
   const user = session?.user as Record<string, unknown> | undefined;
-  const currentLevel = (user?.currentLevel as string) || "A1";
   const userName = (user?.name as string) || "Learner";
 
-  // Mock data for the dashboard display
-  const stats = {
-    totalXP: 1250,
-    streak: 7,
-    lessonsCompleted: 12,
-    successRate: 78,
-  };
+  const currentLevel = progress?.currentLevel || (user?.currentLevel as string) || "A1";
+  const totalXP = progress?.totalXP ?? 0;
+  const streak = progress?.currentStreak ?? 0;
+  const completedCount = progress?.completedLessons?.length ?? 0;
+
+  // Calculate success rate based on real placement/test scores
+  let successRate = 0;
+  if (progress?.testScores && progress.testScores.length > 0) {
+    const totalCorrect = progress.testScores.reduce((acc, curr) => acc + (curr.score || 0), 0);
+    const totalQuestions = progress.testScores.reduce((acc, curr) => acc + (curr.total || 1), 0);
+    successRate = Math.round((totalCorrect / totalQuestions) * 100);
+  }
 
   const levelColors: Record<string, string> = {
     A1: "level-a1",
@@ -42,11 +101,24 @@ export default function DashboardPage() {
     C2: "level-c2",
   };
 
-  const recentActivity = [
-    { type: "lesson", title: "Basic Greetings", xp: 50, time: "2h ago" },
-    { type: "game", title: "Word Match", xp: 30, time: "5h ago" },
-    { type: "chat", title: "AI Chat Practice", xp: 25, time: "1d ago" },
-  ];
+  // Build dynamic recent activity based on actual test scores and completions
+  const recentActivity: { type: "lesson" | "game" | "chat" | "test"; title: string; xp: number; time: string }[] = [];
+  
+  if (progress?.testScores) {
+    progress.testScores.slice(0, 3).forEach((score) => {
+      const date = new Date(score.date);
+      const diffMs = new Date().getTime() - date.getTime();
+      const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+      const timeStr = diffHours < 1 ? "Just now" : diffHours < 24 ? `${diffHours}h ago` : `${Math.floor(diffHours / 24)}d ago`;
+      
+      recentActivity.push({
+        type: "test",
+        title: score.type === "placement" ? "Placement Test" : "Level Quiz",
+        xp: score.score * 10,
+        time: timeStr,
+      });
+    });
+  }
 
   const quickActions = [
     {
@@ -79,6 +151,17 @@ export default function DashboardPage() {
     },
   ];
 
+  if (loading || status === "loading") {
+    return (
+      <div className="flex-1 flex items-center justify-center min-h-[50vh]">
+        <div className="flex flex-col items-center gap-3">
+          <Loader2 className="w-10 h-10 text-blue-500 animate-spin" />
+          <p className="text-sm text-muted-foreground">{t("loading") || "Loading progress..."}</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Welcome Header */}
@@ -104,7 +187,7 @@ export default function DashboardPage() {
           </div>
           <div className="flex items-center gap-3">
             <span
-              className={`${levelColors[currentLevel]} text-white text-2xl font-black px-3 py-1 rounded-xl`}
+              className={`${levelColors[currentLevel] || "level-a1"} text-white text-2xl font-black px-3 py-1 rounded-xl`}
             >
               {currentLevel}
             </span>
@@ -120,10 +203,10 @@ export default function DashboardPage() {
             <Star className="w-5 h-5 text-blue-400" />
           </div>
           <div className="text-3xl font-black">
-            {stats.totalXP.toLocaleString()}
+            {totalXP.toLocaleString()}
           </div>
           <div className="text-xs text-muted-foreground mt-1">
-            +150 this week
+            Keep learning to get more XP
           </div>
         </div>
 
@@ -136,9 +219,9 @@ export default function DashboardPage() {
             <Flame className="w-5 h-5 text-orange-400" />
           </div>
           <div className="flex items-baseline gap-1">
-            <span className="text-3xl font-black">{stats.streak}</span>
+            <span className="text-3xl font-black">{streak}</span>
             <span className="text-sm text-muted-foreground">
-              {t("days")} 🔥
+              {t("days")}
             </span>
           </div>
         </div>
@@ -152,12 +235,12 @@ export default function DashboardPage() {
             <TrendingUp className="w-5 h-5 text-green-400" />
           </div>
           <div className="flex items-baseline gap-1">
-            <span className="text-3xl font-black">{stats.successRate}%</span>
+            <span className="text-3xl font-black">{successRate}%</span>
           </div>
           <div className="mt-2 h-2 rounded-full bg-white/5 overflow-hidden">
             <div
               className="h-full rounded-full bg-gradient-to-r from-green-400 to-emerald-400 transition-all duration-1000"
-              style={{ width: `${stats.successRate}%` }}
+              style={{ width: `${successRate || 0}%` }}
             />
           </div>
         </div>
@@ -197,19 +280,19 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-semibold">{t("lessonsCompleted")}</h3>
               <span className="text-2xl font-black text-blue-400">
-                {stats.lessonsCompleted}
+                {completedCount}
               </span>
             </div>
             <div className="h-3 rounded-full bg-white/5 overflow-hidden">
               <div
                 className="h-full rounded-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-1000"
                 style={{
-                  width: `${Math.min((stats.lessonsCompleted / 50) * 100, 100)}%`,
+                  width: `${Math.min((completedCount / 50) * 100, 100)}%`,
                 }}
               />
             </div>
             <p className="text-xs text-muted-foreground mt-2">
-              {stats.lessonsCompleted} / 50 lessons to next level
+              {completedCount} / 50 lessons to next level
             </p>
           </div>
         </div>
@@ -257,7 +340,7 @@ export default function DashboardPage() {
 
             {recentActivity.length === 0 && (
               <p className="text-sm text-muted-foreground text-center py-4">
-                {t("noActivity")}
+                {t("noActivity") || "No activity yet."}
               </p>
             )}
           </div>
