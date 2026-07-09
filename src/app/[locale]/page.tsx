@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { useSession } from "next-auth/react";
 import { Link } from "@/i18n/navigation";
 import {
   MessageCircle,
@@ -15,6 +16,7 @@ import {
 
 export default function HomePage() {
   const t = useTranslations("landing");
+  const { data: session } = useSession();
 
   const features = [
     {
@@ -82,19 +84,31 @@ export default function HomePage() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <Link
-              href="/sign-up"
-              className="group flex items-center gap-2 px-8 py-4 rounded-2xl text-lg font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition-all shadow-2xl shadow-blue-500/25 glow-hover"
-            >
-              {t("hero.cta")}
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/sign-in"
-              className="flex items-center gap-2 px-8 py-4 rounded-2xl text-lg font-semibold glass hover:bg-white/10 transition-all"
-            >
-              {t("hero.ctaSecondary")}
-            </Link>
+            {session ? (
+              <Link
+                href="/dashboard"
+                className="group flex items-center gap-2 px-8 py-4 rounded-2xl text-lg font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition-all shadow-2xl shadow-blue-500/25 glow-hover"
+              >
+                {t("hero.goToDashboard")}
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href="/sign-up"
+                  className="group flex items-center gap-2 px-8 py-4 rounded-2xl text-lg font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition-all shadow-2xl shadow-blue-500/25 glow-hover"
+                >
+                  {t("hero.cta")}
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <Link
+                  href="/sign-in"
+                  className="flex items-center gap-2 px-8 py-4 rounded-2xl text-lg font-semibold glass hover:bg-white/10 transition-all"
+                >
+                  {t("hero.ctaSecondary")}
+                </Link>
+              </>
+            )}
           </div>
         </div>
 
@@ -163,10 +177,10 @@ export default function HomePage() {
             mastering Croatian with AI.
           </p>
           <Link
-            href="/sign-up"
+            href={session ? "/dashboard" : "/sign-up"}
             className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-lg font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition-all shadow-2xl shadow-blue-500/25"
           >
-            {t("hero.cta")}
+            {session ? t("hero.goToDashboard") : t("hero.cta")}
             <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
