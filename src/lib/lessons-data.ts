@@ -260,4 +260,210 @@ export const lessonsData: LessonData[] = [
       ],
     },
   },
+  // B1 Level Lesson 1 (From Book "Razgovarajte s nama B1-B2")
+  {
+    id: "b1-grammar-2",
+    type: "grammar",
+    title: "Zemlje, jezici i Futur II (Countries, Languages and Future II)",
+    level: "B1",
+    content: {
+      description: "Explore vocabulary regarding mother tongues and master the Future II tense in relative clauses.",
+      sections: [
+        {
+          title: "Materinski jezik i podrijetlo (Mother tongue and origins)",
+          text: "At B1 level, you communicate about identities, language differences, and where people originate. Common terms: domovina (homeland), materinski jezik (mother tongue), dvojezičnost (bilingualism).",
+          examples: [
+            "Moj materinski jezik je ukrajinski, ali tečno govorim i hrvatski. (My mother tongue is Ukrainian, but I also speak Croatian fluently.)",
+            "Dvojezičnost je prednost u suvremenom društvu. (Bilingualism is an advantage in modern society.)"
+          ]
+        },
+        {
+          title: "Futur II (Future Exact / Second Future)",
+          text: "Future II is used in subordinate clauses (usually starting with 'ako' or 'kad') to express an action that will happen BEFORE another future action.",
+          examples: [
+            "Form: auxiliary verb 'biti' in present tense (budem, budeš, bude, budemo, budete, budu) + active verbal adjective (-o, -la, -lo, -li, -le, -la).",
+            "Ako budem učio, položit ću ispit. (If I study/have studied, I will pass the exam.)",
+            "Kad budete stigli u Zagreb, nazovite me. (When you arrive in Zagreb, call me.)"
+          ]
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: "Ako sutra _____ (padati) kiša, ostat ćemo kod kuće.",
+          options: ["bude padala", "padat će", "bude pala", "pada"],
+          correctAnswer: "bude padala",
+          hint: "Use Future II of 'padati' (feminine singular because of kiša)"
+        },
+        {
+          type: "fill-blank",
+          question: "Complete: Kad _____ (mi, naučiti) riječi, igrat ćemo kviz.",
+          correctAnswer: "budemo naučili",
+          hint: "First-person plural Future II of 'naučiti'"
+        }
+      ]
+    }
+  },
+  // B1 Level Lesson 2 (From Book "Razgovarajte s nama B1-B2" Unit 2)
+  {
+    id: "b1-reading-2",
+    type: "reading",
+    title: "Kvaliteta života i ekologija (Quality of Life & Ecology)",
+    level: "B1",
+    content: {
+      description: "Read about environmental concerns and lifestyle standards in Croatia.",
+      sections: [
+        {
+          title: "Tekst: Zeleni Zagreb",
+          text: "Hrvatska ima prekrasnu prirodu, ali briga za ekologiju postaje sve važnija. U Zagrebu se provodi novi sustav razvrstavanja otpada. Građani moraju odvajati papir, plastiku, staklo i biootpad. Mnogi se žale da je sustav kompliciran, ali većina shvaća da bez toga ne možemo sačuvati čisti okoliš. Kvaliteta života ovisi o čistom zraku, čistoj vodi i zelenim površinama u gradu.",
+        },
+        {
+          title: "Rječnik (Vocabulary)",
+          text: "Key vocabulary from the text:",
+          examples: [
+            "otpad — waste / garbage",
+            "razvrstavanje — sorting",
+            "okoliš — environment",
+            "zelene površine — green spaces",
+            "biootpad — bio-waste",
+            "sačuvati — to preserve"
+          ]
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: "Što građani Zagreba moraju odvajati?",
+          options: ["Papir, plastiku, staklo i biootpad", "Samo metal", "Ništa, sve ide u istu kantu", "Samo papir"],
+          correctAnswer: "Papir, plastiku, staklo i biootpad"
+        },
+        {
+          type: "multiple-choice",
+          question: "O čemu ovisi kvaliteta života prema tekstu?",
+          options: ["O čistom zraku, vodi i zelenim površinama", "O novcu", "O brzim automobilima", "O velikim trgovinama"],
+          correctAnswer: "O čistom zraku, vodi i zelenim površinama"
+        }
+      ]
+    }
+  },
+  // B1 Test preparation (Based on B1-test document questions)
+  {
+    id: "b1-reading-3",
+    type: "reading",
+    title: "Priprema za B1 ispit: Poznavanje jezika (Language Test Preparation)",
+    level: "B1",
+    content: {
+      description: "Practice grammar and vocabulary structure questions typically found in B1 language exams.",
+      sections: [
+        {
+          title: "Gramatičke strukture na B1 ispitu",
+          text: "B1 exams check your comprehension of prepositions, verbal aspects, relative pronouns and proper case endings. Pay close attention to verbs that trigger Genitive, Dative, or Locative.",
+          examples: [
+            "Zadovoljan sam svojim poslom. (I am satisfied with my job - Locative/Instrumental)",
+            "Čestitam ti na uspjehu. (I congratulate you on your success - Dative)"
+          ]
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: "Putujem u Zagreb _____ (vlak). (I travel to Zagreb by train.)",
+          options: ["vlakom", "vlak", "vlaku", "vlaka"],
+          correctAnswer: "vlakom",
+          hint: "Use Instrumental case (vlak → vlakom)"
+        },
+        {
+          type: "multiple-choice",
+          question: "On se boji _____ (pas). (He is afraid of the dog.)",
+          options: ["psa", "pas", "psu", "psi"],
+          correctAnswer: "psa",
+          hint: "Verb 'bojati se' requires Genitive case"
+        },
+        {
+          type: "fill-blank",
+          question: "Complete: Radujem se _____ (vikend). (I look forward to the weekend.)",
+          correctAnswer: "vikendu",
+          hint: "Verb 'radovati se' requires Dative case (vikend → vikendu)"
+        }
+      ]
+    }
+  },
+  // B2 Level Lesson 1 (From Book "Razgovarajte s nama B1-B2" Unit 5)
+  {
+    id: "b2-grammar-1",
+    type: "grammar",
+    title: "Odnosi, pasiv i glagolske imenice (Relationships, Passive & Verbal Nouns)",
+    level: "B2",
+    content: {
+      description: "Learn how to use passive voice and form verbal nouns to express abstract ideas at B2 level.",
+      sections: [
+        {
+          title: "Pasiv (Passive Voice)",
+          text: "In B2, passive voice is common in official and written styles. It is formed using the verb 'biti' or 'bivati' + passive verbal adjective, or by using the reflexive particle 'se'.",
+          examples: [
+            "Knjiga je napisana prošle godine. (The book was written last year.)",
+            "Odluka se donosi na sastanku. (The decision is being made at the meeting.)",
+            "Porezi su povećani. (Taxes have been increased.)"
+          ]
+        },
+        {
+          title: "Glagolske imenice (Verbal Nouns)",
+          text: "Verbal nouns ending in -nje are formed from verbs (mostly imperfective) and describe process or action.",
+          examples: [
+            "učiti → učenje (learning / studying)",
+            "putovati → putovanje (traveling / trip)",
+            "razgovarati → razgovaranje (conversation / chatting)",
+            "donijeti → donošenje (bringing / decision making)"
+          ]
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: "Kako glasi glagolska imenica od glagola 'čitati'?",
+          options: ["čitanje", "čitač", "pročitano", "čitati"],
+          correctAnswer: "čitanje"
+        },
+        {
+          type: "multiple-choice",
+          question: "Passive: Kuća _____ (graditi, present passive) već tri godine.",
+          options: ["se gradi", "gradi", "je građena", "bila je građena"],
+          correctAnswer: "se gradi"
+        }
+      ]
+    }
+  },
+  // B2 Level Lesson 2 (From Book "Razgovarajte s nama B1-B2" Unit 6)
+  {
+    id: "b2-communication-1",
+    type: "communication",
+    title: "Posao i radno okruženje (Work & Work Environment)",
+    level: "B2",
+    content: {
+      description: "Learn professional vocabulary, idioms, and speak about careers in Croatian.",
+      sections: [
+        {
+          title: "Tko radi, ne boji se gladi (Idiom: Who works doesn't fear hunger)",
+          text: "Speaking about career paths, professional goals, and job interviews in Croatia. Common terms: zapošljavanje (employment), životopis (resume), razgovor za posao (job interview), prekovremeni rad (overtime work).",
+          examples: [
+            "Poslao sam svoj životopis na natječaj za posao programera. (I sent my resume to the developer job opening.)",
+            "Radna atmosfera u našem uredu je izuzetno motivirajuća. (The working atmosphere in our office is extremely motivating.)"
+          ]
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: "Što znači riječ 'životopis'?",
+          options: ["Resume / CV", "Biography book", "Job contract", "Working hours"],
+          correctAnswer: "Resume / CV"
+        },
+        {
+          type: "fill-blank",
+          question: "Translate: 'job interview' -> razgovor za _____.",
+          correctAnswer: "posao"
+        }
+      ]
+    }
+  }
 ];

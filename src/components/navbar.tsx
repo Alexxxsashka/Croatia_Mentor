@@ -13,6 +13,7 @@ import {
   X,
   LogOut,
   GraduationCap,
+  Languages,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -29,6 +30,7 @@ export function Navbar() {
           icon: LayoutDashboard,
         },
         { href: "/lessons", label: t("lessons"), icon: BookOpen },
+        { href: "/vocabulary", label: t("vocabulary"), icon: Languages },
         { href: "/games", label: t("games"), icon: Gamepad2 },
         { href: "/ai-chat", label: t("aiChat"), icon: MessageCircle },
       ]

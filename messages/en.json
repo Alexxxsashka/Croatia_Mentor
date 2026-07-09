@@ -25,6 +25,7 @@
     "lessons": "Lessons",
     "games": "Mini-Games",
     "aiChat": "AI Chat",
+    "vocabulary": "Vocabulary",
     "profile": "Profile",
     "signOut": "Sign Out",
     "signIn": "Sign In",
@@ -210,5 +211,29 @@
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
     "copyright": "© 2026 Croatia Mentor. All rights reserved."
+  },
+  "vocabulary": {
+    "title": "Vocabulary Portal",
+    "subtitle": "Learn, memorize, and search Croatian words",
+    "searchPlaceholder": "Search word (e.g. kava, pas...)",
+    "searchButton": "Search",
+    "hjpLinkText": "View on Hrvatski Jezični Portal (HJP)",
+    "noWordsFound": "No words found. Try a different query.",
+    "levelFilter": "Level Filter",
+    "all": "All Levels",
+    "flashcards": "Flashcards",
+    "flashcardSubtitle": "Active recall memorization practice",
+    "quiz": "Vocabulary Quiz",
+    "quizSubtitle": "Test your word comprehension",
+    "mediaWords": "Contextual Words",
+    "mediaWordsSubtitle": "Words in cultural memes, music and movie clips",
+    "hjpNotice": "Verify word etymology, declension, and syntax on HJP:",
+    "correct": "Correct!",
+    "incorrect": "Incorrect",
+    "score": "Score",
+    "question": "Question",
+    "of": "of",
+    "quizComplete": "Quiz Complete!",
+    "tryAgain": "Try Again"
   }
 }
