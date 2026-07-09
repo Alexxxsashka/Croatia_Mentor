@@ -4,9 +4,11 @@ import type { NextRequest } from "next/server";
 
 const intlMiddleware = createMiddleware(routing);
 
-export default function proxy(request: NextRequest) {
+export function proxy(request: NextRequest) {
   return intlMiddleware(request);
 }
+
+export default proxy;
 
 export const config = {
   matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
