@@ -1,0 +1,214 @@
+{
+  "common": {
+    "appName": "Croatia Mentor",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "next": "Next",
+    "previous": "Previous",
+    "back": "Back",
+    "continue": "Continue",
+    "finish": "Finish",
+    "correct": "Correct!",
+    "incorrect": "Incorrect",
+    "score": "Score",
+    "level": "Level",
+    "xp": "XP",
+    "streak": "Streak",
+    "days": "days",
+    "points": "points"
+  },
+  "nav": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "lessons": "Lessons",
+    "games": "Mini-Games",
+    "aiChat": "AI Chat",
+    "profile": "Profile",
+    "signOut": "Sign Out",
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
+  },
+  "landing": {
+    "hero": {
+      "title": "Master Croatian",
+      "titleHighlight": "with AI",
+      "subtitle": "Your personal AI-powered Croatian language tutor. Learn grammar, practice conversations, and immerse yourself in Croatian culture.",
+      "cta": "Start Learning Free",
+      "ctaSecondary": "Take Placement Test"
+    },
+    "features": {
+      "title": "Why Croatia Mentor?",
+      "ai": {
+        "title": "AI-Powered Tutoring",
+        "description": "Chat with an intelligent AI mentor that adapts to your level and corrects your mistakes in real-time."
+      },
+      "structured": {
+        "title": "Structured Lessons",
+        "description": "Grammar, reading, dictation, and communication lessons aligned to CEFR levels A1 through C2."
+      },
+      "games": {
+        "title": "Fun Mini-Games",
+        "description": "Learn through play with word matching, fill-in-the-blanks, and more interactive exercises."
+      },
+      "media": {
+        "title": "Cultural Immersion",
+        "description": "Learn vocabulary through memes, movie clips, and music from Croatian pop culture."
+      },
+      "tracking": {
+        "title": "Progress Tracking",
+        "description": "Track your streak, XP, and level progression with detailed statistics and insights."
+      },
+      "multilingual": {
+        "title": "Multilingual Support",
+        "description": "Interface available in English, Russian, and Ukrainian with translations in all three languages."
+      }
+    }
+  },
+  "auth": {
+    "signIn": {
+      "title": "Welcome Back",
+      "subtitle": "Sign in to continue your Croatian journey",
+      "email": "Email",
+      "password": "Password",
+      "button": "Sign In",
+      "noAccount": "Don't have an account?",
+      "createAccount": "Create one",
+      "orContinueWith": "Or continue with",
+      "google": "Continue with Google",
+      "github": "Continue with GitHub",
+      "error": "Invalid email or password"
+    },
+    "signUp": {
+      "title": "Join Croatia Mentor",
+      "subtitle": "Start your Croatian language adventure",
+      "name": "Full Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "nativeLanguage": "Your Native Language",
+      "button": "Create Account",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "passwordMismatch": "Passwords do not match",
+      "success": "Account created! Please sign in."
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome back",
+    "currentLevel": "Current Level",
+    "totalXP": "Total XP",
+    "dailyStreak": "Daily Streak",
+    "lessonsCompleted": "Lessons Completed",
+    "successRate": "Success Rate",
+    "recentActivity": "Recent Activity",
+    "quickActions": "Quick Actions",
+    "continueLearning": "Continue Learning",
+    "practiceFlashcards": "Practice Flashcards",
+    "chatWithAI": "Chat with AI Mentor",
+    "takeTest": "Take Placement Test",
+    "noActivity": "No recent activity. Start a lesson to begin!",
+    "levelProgress": "Level Progress"
+  },
+  "placementTest": {
+    "title": "Placement Test",
+    "subtitle": "Let's determine your Croatian language level",
+    "description": "This test consists of multiple-choice questions covering grammar and vocabulary from A1 to C2 levels. Answer as many as you can!",
+    "start": "Start Test",
+    "question": "Question",
+    "of": "of",
+    "timeRemaining": "Time Remaining",
+    "results": {
+      "title": "Test Complete!",
+      "yourLevel": "Your Level",
+      "score": "Your Score",
+      "description": "Based on your answers, we've determined your Croatian proficiency level.",
+      "goToDashboard": "Go to Dashboard",
+      "retake": "Retake Test"
+    }
+  },
+  "lessons": {
+    "title": "Lessons",
+    "subtitle": "Structured Croatian language learning",
+    "filterByType": "Filter by Type",
+    "filterByLevel": "Filter by Level",
+    "all": "All",
+    "grammar": "Grammar",
+    "reading": "Reading",
+    "dictation": "Dictation",
+    "communication": "Communication",
+    "startLesson": "Start Lesson",
+    "completed": "Completed",
+    "exercise": "Exercise",
+    "checkAnswer": "Check Answer",
+    "nextExercise": "Next Exercise",
+    "lessonComplete": "Lesson Complete!",
+    "xpEarned": "XP Earned",
+    "dictationInstructions": "Listen to the audio and type what you hear in Croatian.",
+    "play": "Play",
+    "pause": "Pause",
+    "replay": "Replay",
+    "yourAnswer": "Your answer",
+    "correctAnswer": "Correct answer"
+  },
+  "games": {
+    "title": "Mini-Games",
+    "subtitle": "Learn Croatian through fun games",
+    "wordMatch": {
+      "title": "Word Match",
+      "description": "Match Croatian words with their translations. Test your vocabulary knowledge!",
+      "play": "Play Word Match",
+      "instructions": "Click on a Croatian word, then click its translation to make a match.",
+      "matched": "Matched!",
+      "tryAgain": "Try Again",
+      "congratulations": "Congratulations!",
+      "allMatched": "You matched all words!",
+      "timeElapsed": "Time",
+      "moves": "Moves"
+    },
+    "fillBlanks": {
+      "title": "Fill in the Blanks",
+      "description": "Complete Croatian sentences by choosing the correct word for each blank.",
+      "play": "Play Fill in the Blanks",
+      "instructions": "Select the correct word to complete each sentence.",
+      "checkAll": "Check All Answers",
+      "complete": "All Complete!",
+      "scoreMessage": "You scored {score} out of {total}"
+    }
+  },
+  "aiChat": {
+    "title": "AI Croatian Mentor",
+    "subtitle": "Practice Croatian with your AI language tutor",
+    "placeholder": "Type a message in Croatian or ask a question...",
+    "send": "Send",
+    "thinking": "Thinking...",
+    "suggestedTopics": "Suggested Topics",
+    "topics": {
+      "greet": "How to greet someone in Croatian",
+      "order": "Order food at a pekara in Zagreb",
+      "apartment": "Rent an apartment in Split",
+      "directions": "Ask for directions in Dubrovnik",
+      "introduce": "Introduce yourself at a party",
+      "shopping": "Go shopping at Dolac market"
+    },
+    "systemMessage": "I'm your Croatian language mentor! I'll help you practice Croatian, correct your mistakes, and explain grammar rules. What would you like to practice today?"
+  },
+  "media": {
+    "title": "Cultural Corner",
+    "subtitle": "Learn vocabulary through Croatian culture",
+    "watchClip": "Watch Clip",
+    "learnWord": "Learn Word",
+    "example": "Example Sentence",
+    "translation": "Translation"
+  },
+  "footer": {
+    "description": "Your AI-powered Croatian language learning companion.",
+    "links": "Quick Links",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "copyright": "© 2026 Croatia Mentor. All rights reserved."
+  }
+}
