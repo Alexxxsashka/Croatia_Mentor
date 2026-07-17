@@ -10,11 +10,11 @@ export interface GlossaryExample {
 }
 
 export interface GlossaryTableRow {
-  cells: string[];
+  cells: (string | LocalizedString)[];
 }
 
 export interface GlossaryTable {
-  headers: string[];
+  headers: (string | LocalizedString)[];
   rows: GlossaryTableRow[];
 }
 
@@ -660,15 +660,15 @@ export const glossaryData: GlossaryCategory[] = [
               ua: "Важливі фрази для покупок у Хорватії — на ринку, у магазинах тощо."
             },
             table: {
-              headers: ["Croatian", "English", "Russian"],
+              headers: ["Croatian", "English", { en: "Translation", ru: "Перевод", ua: "Переклад" }],
               rows: [
-                { cells: ["Koliko to košta?", "How much does it cost?", "Сколько это стоит?"] },
-                { cells: ["Imate li...?", "Do you have...?", "У вас есть...?"] },
-                { cells: ["Htio/Htjela bih...", "I would like...", "Я бы хотел(а)..."] },
-                { cells: ["Mogu li platiti karticom?", "Can I pay by card?", "Можно картой?"] },
-                { cells: ["Dajte mi kilu...", "Give me a kilo of...", "Дайте мне кило..."] },
-                { cells: ["Je li to na akciji?", "Is it on sale?", "Это по акции?"] },
-                { cells: ["Hvala, to je sve.", "Thanks, that's all.", "Спасибо, это всё."] },
+                { cells: ["Koliko to košta?", "How much does it cost?", { en: "Сколько это стоит?", ru: "Сколько это стоит?", ua: "Скільки це коштує?" }] },
+                { cells: ["Imate li...?", "Do you have...?", { en: "У вас есть...?", ru: "У вас есть...?", ua: "Чи є у вас...?" }] },
+                { cells: ["Htio/Htjela bih...", "I would like...", { en: "Я бы хотел(а)...", ru: "Я бы хотел(а)...", ua: "Я б хотів/хотіла..." }] },
+                { cells: ["Mogu li platiti karticom?", "Can I pay by card?", { en: "Можно картой?", ru: "Можно картой?", ua: "Чи можу я розплатитися карткою?" }] },
+                { cells: ["Dajte mi kilu...", "Give me a kilo of...", { en: "Дайте мне килограмм...", ru: "Дайте мне килограмм...", ua: "Дайте мені кілограм..." }] },
+                { cells: ["Je li to na akciji?", "Is it on sale?", { en: "Это по акции?", ru: "Это по акции?", ua: "Це по акції?" }] },
+                { cells: ["Hvala, to je sve.", "Thanks, that's all.", { en: "Спасибо, это всё.", ru: "Спасибо, это всё.", ua: "Дякую, це все." }] },
               ]
             }
           }
@@ -687,14 +687,14 @@ export const glossaryData: GlossaryCategory[] = [
               ua: "Ключові фрази для користування громадським транспортом та визначення шляху в Хорватії."
             },
             table: {
-              headers: ["Croatian", "English", "Russian"],
+              headers: ["Croatian", "English", { en: "Translation", ru: "Перевод", ua: "Переклад" }],
               rows: [
-                { cells: ["Gdje je stanica?", "Where is the station?", "Где станция?"] },
-                { cells: ["Koliko košta karta?", "How much is a ticket?", "Сколько стоит билет?"] },
-                { cells: ["Skrenite lijevo/desno", "Turn left/right", "Поверните налево/направо"] },
-                { cells: ["Idite ravno", "Go straight", "Идите прямо"] },
-                { cells: ["Je li to daleko?", "Is it far?", "Это далеко?"] },
-                { cells: ["Kako mogu doći do...?", "How can I get to...?", "Как добраться до...?"] },
+                { cells: ["Gdje je stanica?", "Where is the station?", { en: "Где станция?", ru: "Где станция?", ua: "Де станція?" }] },
+                { cells: ["Koliko košta karta?", "How much is a ticket?", { en: "Сколько стоит билет?", ru: "Сколько стоит билет?", ua: "Скільки коштує квиток?" }] },
+                { cells: ["Skrenite lijevo/desno", "Turn left/right", { en: "Поверните налево/направо", ru: "Поверните налево/направо", ua: "Поверніть ліворуч/праворуч" }] },
+                { cells: ["Idite ravno", "Go straight", { en: "Идите прямо", ru: "Идите прямо", ua: "Йдіть прямо" }] },
+                { cells: ["Je li to daleko?", "Is it far?", { en: "Это далеко?", ru: "Это далеко?", ua: "Це далеко?" }] },
+                { cells: ["Kako mogu doći do...?", "How can I get to...?", { en: "Как добраться до...?", ru: "Как добраться до...?", ua: "Як дістатися до...?" }] },
               ]
             }
           }
@@ -713,14 +713,14 @@ export const glossaryData: GlossaryCategory[] = [
               ua: "Важлива лексика та фрази для візиту до лікаря в Хорватії."
             },
             table: {
-              headers: ["Croatian", "English", "Russian"],
+              headers: ["Croatian", "English", { en: "Translation", ru: "Перевод", ua: "Переклад" }],
               rows: [
-                { cells: ["Boli me glava.", "I have a headache.", "У меня болит голова."] },
-                { cells: ["Imam temperaturu.", "I have a fever.", "У меня температура."] },
-                { cells: ["Trebam liječnika.", "I need a doctor.", "Мне нужен врач."] },
-                { cells: ["Alergičan/na sam na...", "I'm allergic to...", "У меня аллергия на..."] },
-                { cells: ["Ljekarna", "Pharmacy", "Аптека"] },
-                { cells: ["Hitna pomoć", "Emergency", "Скорая помощь"] },
+                { cells: ["Boli me glava.", "I have a headache.", { en: "У меня болит голова.", ru: "У меня болит голова.", ua: "У мене болить голова." }] },
+                { cells: ["Imam temperaturu.", "I have a fever.", { en: "У меня температура.", ru: "У меня температура.", ua: "У мене температура." }] },
+                { cells: ["Trebam liječnika.", "I need a doctor.", { en: "Мне нужен врач.", ru: "Мне нужен врач.", ua: "Мені потрібен лікар." }] },
+                { cells: ["Alergičan/na sam na...", "I'm allergic to...", { en: "У меня аллергия на...", ru: "У меня аллергия на...", ua: "Я алергік на..." }] },
+                { cells: ["Ljekarna", "Pharmacy", { en: "Аптека", ru: "Аптека", ua: "Аптека" }] },
+                { cells: ["Hitna pomoć", "Emergency", { en: "Скорая помощь", ru: "Скорая помощь", ua: "Швидка допомога" }] },
               ]
             }
           }
@@ -739,21 +739,21 @@ export const glossaryData: GlossaryCategory[] = [
               ua: "Хорватські терміни спорідненості — необхідна лексика для представлення сім'ї."
             },
             table: {
-              headers: ["Croatian", "English", "Russian"],
+              headers: ["Croatian", "English", { en: "Translation", ru: "Перевод", ua: "Переклад" }],
               rows: [
-                { cells: ["otac / tata", "father / dad", "отец / папа"] },
-                { cells: ["majka / mama", "mother / mom", "мать / мама"] },
-                { cells: ["brat", "brother", "брат"] },
-                { cells: ["sestra", "sister", "сестра"] },
-                { cells: ["sin", "son", "сын"] },
-                { cells: ["kći / kćer", "daughter", "дочь"] },
-                { cells: ["djed / deda", "grandfather", "дедушка"] },
-                { cells: ["baka", "grandmother", "бабушка"] },
-                { cells: ["muž / suprug", "husband", "муж / супруг"] },
-                { cells: ["žena / supruga", "wife", "жена / супруга"] },
-                { cells: ["ujak", "uncle (mother's side)", "дядя (по маме)"] },
-                { cells: ["stric", "uncle (father's side)", "дядя (по папе)"] },
-                { cells: ["teta / tetka", "aunt", "тётя"] },
+                { cells: ["otac / tata", "father / dad", { en: "отец / папа", ru: "отец / папа", ua: "батько / тато" }] },
+                { cells: ["majka / mama", "mother / mom", { en: "мать / мама", ru: "мать / мама", ua: "мати / мама" }] },
+                { cells: ["brat", "brother", { en: "брат", ru: "brat", ua: "брат" }] },
+                { cells: ["sestra", "sister", { en: "сестра", ru: "сестра", ua: "сестра" }] },
+                { cells: ["sin", "son", { en: "сын", ru: "сын", ua: "син" }] },
+                { cells: ["kći / kćer", "daughter", { en: "дочь", ru: "донька", ua: "донька" }] },
+                { cells: ["djed / deda", "grandfather", { en: "дедушка", ru: "дедушка", ua: "дідусь" }] },
+                { cells: ["baka", "grandmother", { en: "бабушка", ru: "бабушка", ua: "бабуся" }] },
+                { cells: ["muž / suprug", "husband", { en: "муж / супруг", ru: "муж / супруг", ua: "чоловік / чоловік" }] },
+                { cells: ["žena / supruga", "wife", { en: "жена / супруга", ru: "жена / супруга", ua: "дружина" }] },
+                { cells: ["ujak", "uncle (mother's side)", { en: "дядя (по маме)", ru: "дядя (по маме)", ua: "дядько (по мамі)" }] },
+                { cells: ["stric", "uncle (father's side)", { en: "дядя (по папе)", ru: "дядя (по папе)", ua: "дядько (по татові)" }] },
+                { cells: ["teta / tetka", "aunt", { en: "тётя", ru: "тётя", ua: "тітка" }] },
               ]
             }
           }

@@ -176,7 +176,7 @@ export default function GlossaryPage() {
                                       key={i}
                                       className="text-left px-3 py-2 border-b border-white/10 text-xs font-semibold text-muted-foreground uppercase tracking-wider bg-white/5"
                                     >
-                                      {h}
+                                      {typeof h === "string" ? h : getLocalized(h, locale)}
                                     </th>
                                   ))}
                                 </tr>
@@ -189,7 +189,7 @@ export default function GlossaryPage() {
                                   >
                                     {row.cells.map((cell, ci) => (
                                       <td key={ci} className="px-3 py-2 text-foreground">
-                                        {cell}
+                                        {typeof cell === "string" ? cell : getLocalized(cell, locale)}
                                       </td>
                                     ))}
                                   </tr>
