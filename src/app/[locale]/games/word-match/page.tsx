@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import {
@@ -26,14 +26,22 @@ const wordPairs: WordPair[] = [
   { id: 6, croatian: "Sunce", english: "Sun" },
   { id: 7, croatian: "More", english: "Sea" },
   { id: 8, croatian: "Škola", english: "School" },
-];
+]
+function shuffleArray<T>(arr: T[]): T[] {
+  const shuffled = [...arr];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
 
 export default function WordMatchPage() {
   const t = useTranslations("games.wordMatch");
   const router = useRouter();
 
-  const [shuffledCroatian, setShuffledCroatian] = useState<WordPair[]>([]);
-  const [shuffledEnglish, setShuffledEnglish] = useState<WordPair[]>([]);
+  const [shuffledCroatian, setShuffledCroatian] = useState<WordPair[]>(() => shuffleArray(wordPairs));
+  const [shuffledEnglish, setShuffledEnglish] = useState<WordPair[]>(() => shuffleArray(wordPairs));
   const [selectedCroatian, setSelectedCroatian] = useState<number | null>(null);
   const [selectedEnglish, setSelectedEnglish] = useState<number | null>(null);
   const [matchedIds, setMatchedIds] = useState<Set<number>>(new Set());
@@ -45,18 +53,9 @@ export default function WordMatchPage() {
   }>({ croatian: null, english: null });
   const [gameComplete, setGameComplete] = useState(false);
 
-  const shuffle = useCallback(<T,>(arr: T[]): T[] => {
-    const shuffled = [...arr];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-  }, []);
-
-  const initGame = useCallback(() => {
-    setShuffledCroatian(shuffle(wordPairs));
-    setShuffledEnglish(shuffle(wordPairs));
+  const initGame = () => {
+    setShuffledCroatian(shuffleArray(wordPairs));
+    setShuffledEnglish(shuffleArray(wordPairs));
     setSelectedCroatian(null);
     setSelectedEnglish(null);
     setMatchedIds(new Set());
@@ -64,11 +63,7 @@ export default function WordMatchPage() {
     setSeconds(0);
     setWrongPair({ croatian: null, english: null });
     setGameComplete(false);
-  }, [shuffle]);
-
-  useEffect(() => {
-    initGame();
-  }, [initGame]);
+  };
 
   useEffect(() => {
     if (gameComplete) return;
@@ -76,12 +71,14 @@ export default function WordMatchPage() {
     return () => clearInterval(interval);
   }, [gameComplete]);
 
-  useEffect(() => {
-    if (selectedCroatian !== null && selectedEnglish !== null) {
+  const selectCroatian = (id: number) => {
+    if (wrongPair.croatian !== null || wrongPair.english !== null) return;
+    setSelectedCroatian(id);
+    if (selectedEnglish !== null) {
       setMoves((m) => m + 1);
-      if (selectedCroatian === selectedEnglish) {
+      if (id === selectedEnglish) {
         const newMatched = new Set(matchedIds);
-        newMatched.add(selectedCroatian);
+        newMatched.add(id);
         setMatchedIds(newMatched);
         setSelectedCroatian(null);
         setSelectedEnglish(null);
@@ -90,7 +87,7 @@ export default function WordMatchPage() {
         }
       } else {
         setWrongPair({
-          croatian: selectedCroatian,
+          croatian: id,
           english: selectedEnglish,
         });
         setTimeout(() => {
@@ -100,7 +97,35 @@ export default function WordMatchPage() {
         }, 800);
       }
     }
-  }, [selectedCroatian, selectedEnglish, matchedIds]);
+  };
+
+  const selectEnglish = (id: number) => {
+    if (wrongPair.croatian !== null || wrongPair.english !== null) return;
+    setSelectedEnglish(id);
+    if (selectedCroatian !== null) {
+      setMoves((m) => m + 1);
+      if (id === selectedCroatian) {
+        const newMatched = new Set(matchedIds);
+        newMatched.add(id);
+        setMatchedIds(newMatched);
+        setSelectedCroatian(null);
+        setSelectedEnglish(null);
+        if (newMatched.size === wordPairs.length) {
+          setGameComplete(true);
+        }
+      } else {
+        setWrongPair({
+          croatian: selectedCroatian,
+          english: id,
+        });
+        setTimeout(() => {
+          setSelectedCroatian(null);
+          setSelectedEnglish(null);
+          setWrongPair({ croatian: null, english: null });
+        }, 800);
+      }
+    }
+  };
 
   const formatTime = (s: number) =>
     `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, "0")}`;
@@ -189,7 +214,7 @@ export default function WordMatchPage() {
               <button
                 key={`hr-${word.id}`}
                 onClick={() =>
-                  !isMatched && setSelectedCroatian(word.id)
+                  !isMatched && selectCroatian(word.id)
                 }
                 disabled={isMatched}
                 className={`w-full p-4 rounded-xl text-left font-medium transition-all duration-300 ${
@@ -222,7 +247,7 @@ export default function WordMatchPage() {
               <button
                 key={`en-${word.id}`}
                 onClick={() =>
-                  !isMatched && setSelectedEnglish(word.id)
+                  !isMatched && selectEnglish(word.id)
                 }
                 disabled={isMatched}
                 className={`w-full p-4 rounded-xl text-left font-medium transition-all duration-300 ${

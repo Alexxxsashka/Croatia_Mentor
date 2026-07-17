@@ -105,7 +105,7 @@ export function DictationPlayer({ text }: DictationPlayerProps) {
               key={i}
               className="w-1 bg-blue-400 rounded-full animate-pulse"
               style={{
-                height: `${Math.random() * 24 + 8}px`,
+                height: `${((i * 7) % 24) + 8}px`,
                 animationDelay: `${i * 0.05}s`,
               }}
             />

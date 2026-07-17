@@ -1123,5 +1123,237 @@ export const lessonsData: LessonData[] = [
         }
       ]
     }
+  },
+  // C1 Level Lesson 1 — Advanced Subordinate Clauses
+  {
+    id: "c1-grammar-1",
+    type: "grammar",
+    level: "C1",
+    title: {
+      en: "Složene rečenice i veznici (Complex Sentences & Conjunctions)",
+      ru: "Сложные предложения и союзы (Složene rečenice)",
+      ua: "Складні речення та сполучники (Složene rečenice)"
+    },
+    content: {
+      description: {
+        en: "Master complex sentence structures, conditional clauses, concessive conjunctions, and logical sentence flow at a professional level.",
+        ru: "Освойте сложные синтаксические структуры, условные предложения, уступительные союзы на профессиональном уровне.",
+        ua: "Опануйте складні синтаксичні структури, умовні речення, допустові сполучники на професійному рівні."
+      },
+      sections: [
+        {
+          title: {
+            en: "Concessive Clauses (Dopunske rečenice)",
+            ru: "Уступительные предложения",
+            ua: "Допустові речення"
+          },
+          text: {
+            en: "Concessive clauses express an action that happens despite an obstacle. The main conjunctions used are: iako (although), premda (albeit / although), mada (even though), makar (at least / even if). Note that 'iako' is the most common and neutral, whereas 'premda' is highly stylistic.",
+            ru: "Уступительные предложения выражают действие, происходящее вопреки препятствию. Основные союзы: iako (хотя), premda (хотя), mada (хотя/даже если), makar (хотя бы/пусть даже).",
+            ua: "Допустові речення виражають дію, що відбувається всупереч перешкоді. Основні сполучники: iako (хоча), premda (хоча), mada (хоча/навіть якщо), makar (хоча б/хай навіть)."
+          },
+          examples: [
+            "Iako je padala jaka kiša, odlučili smo prošetati gradom. (Although it was raining hard...)",
+            "Premda su pregovori bili teški, postigli smo dogovor. (Albeit the negotiations were hard...)"
+          ]
+        },
+        {
+          title: {
+            en: "Conditional Clauses with 'da' vs 'ako'",
+            ru: "Условные предложения с 'da' и 'ako'",
+            ua: "Умовні речення з 'da' та 'ako'"
+          },
+          text: {
+            en: "In C1, understanding hypothetical vs real conditions is crucial. 'Ako' presents real/possible conditions (Ako budeš učio, položit ćeš - If you study, you will pass). 'Da' + present or perfect expresses highly hypothetical or impossible/past conditions (Da sam znao, došao bih - If I had known, I would have come).",
+            ru: "В C1 важно понимать разницу между реальными и нереальными условиями. 'Ako' — для реальных/возможных (Ako budeš učio, položit ćeš). 'Da' + настоящее или прошедшее время выражает гипотетическое/невозможное условие (Da sam znao, došao bih).",
+            ua: "У C1 важливо розуміти різницю між реальними та нереальними умовами. 'Ako' — для реальних/можливих (Ako budeš učio, položit ćeš). 'Da' + теперішній або минулий час виражає гіпотетичну/неможливу умову (Da sam znao, došao bih)."
+          },
+          examples: [
+            "Ako kupiš kartu na vrijeme, proći ćeš jeftinije. (If you buy the ticket on time...)",
+            "Da imam više slobodnog vremena, upisao bih tečaj slikanja. (If I had more free time...)"
+          ]
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: {
+            en: "Choose the correct concessive conjunction: _____ nismo imali mnogo vremena, uspjeli smo dovršiti projekt.",
+            ru: "Выберите союз: _____ nismo imali mnogo vremena, uspjeli smo dovršiti projekt.",
+            ua: "Оберіть сполучник: _____ nismo imali mnogo vremena, uspjeli smo dovršiti projekt."
+          },
+          options: ["Iako", "Zato što", "Kao da", "Tijekom"],
+          correctAnswer: "Iako"
+        },
+        {
+          type: "fill-blank",
+          question: {
+            en: "Complete the hypothetical clause: Da sam _____ (znati, past active participle masculine) za sastanak, došao bih.",
+            ru: "Заполните гипотетическое условие: Da sam _____ (znati, причастие м.р.) za sastanak, došao bih.",
+            ua: "Заповніть гіпотетичну умову: Da sam _____ (znati, дієприкметник ч.р.) za sastanak, došao bih."
+          },
+          correctAnswer: "znao",
+          hint: {
+            en: "Past active participle of 'znati' for 'ja' (masculine)",
+            ru: "Причастие прошедшего времени глагола 'znati' для м.р.",
+            ua: "Дієприкметник минулого часу дієслова 'znati' для ч.р."
+          }
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "What does the conjunction 'premda' mean?",
+            ru: "Что означает союз 'premda'?",
+            ua: "Що означає сполучник 'premda'?"
+          },
+          options: ["although", "because", "therefore", "unless"],
+          correctAnswer: "although"
+        },
+        {
+          type: "translation",
+          question: {
+            en: "Translate: 'Da imam novca, kupio bih auto.'",
+            ru: "Переведите: 'Da imam novca, kupio bih auto.'",
+            ua: "Перекладіть: 'Da imam novca, kupio bih auto.'"
+          },
+          correctAnswer: "If I had money, I would buy a car"
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "Complete: Ako _____ (biti, future II) gladan, skuhaj nešto.",
+            ru: "Заполните: Ako _____ (biti, будущ. II) gladan, skuhaj nešto.",
+            ua: "Заповніть: Ako _____ (biti, майбут. II) gladan, skuhaj nešto."
+          },
+          options: ["budeš", "jesi", "sam", "bude"],
+          correctAnswer: "budeš"
+        },
+        {
+          type: "fill-blank",
+          question: {
+            en: "Translate 'even though' using a 4-letter Croatian word beginning with 'm':",
+            ru: "Переведите 'хотя/даже хотя' 4-буквенным хорватским словом на 'm':",
+            ua: "Перекладіть 'хоча/навіть хоча' 4-літерним хорватським словом на 'm':"
+          },
+          correctAnswer: "mada"
+        }
+      ]
+    }
+  },
+  // C2 Level Lesson 1 — Advanced Expression, Nuances and Idioms
+  {
+    id: "c2-communication-1",
+    type: "communication",
+    level: "C2",
+    title: {
+      en: "Stilske nijanse i frazeologija (Stylistic Nuances & Idioms)",
+      ru: "Стилистические нюансы и фразеология",
+      ua: "Стилістичні нюанси та фразеологія"
+    },
+    content: {
+      description: {
+        en: "Learn to recognize advanced rhetoric, literary devices, and expressions used by native speakers in academic, literary, or political discourse.",
+        ru: "Научитесь распознавать сложную риторику, литературные приёмы и фразеологизмы, используемые носителями языка.",
+        ua: "Навчіться розпізнавати складну риторику, літературні прийоми та фразеологізми, які використовують носії мови."
+      },
+      sections: [
+        {
+          title: {
+            en: "Croatian Idioms (Frazemi)",
+            ru: "Хорватские фразеологизмы",
+            ua: "Хорватські фразеологізми"
+          },
+          text: {
+            en: "C2 fluency requires a deep grasp of idiomatic expressions. Examples: 'Bogu iza nogu' (literally 'behind God's legs', meaning extremely far away / in the middle of nowhere). 'Mlatiti praznu slamu' (literally 'to beat empty straw', meaning to talk nonsense / waste time). 'Prodavati maglu' (literally 'to sell fog', meaning to deceive or mislead people).",
+            ru: "Свободное владение на уровне C2 требует глубокого понимания идиоматических выражений. Примеры: 'Bogu iza nogu' (у чёрта на куличках). 'Mlatiti praznu slamu' (переливать из пустого в порожнее). 'Prodavati maglu' (вешать лапшу на уши / пускать пыль в глаза).",
+            ua: "Вільне володіння на рівні C2 вимагає глибокого розуміння ідіоматичних виразів. Приклади: 'Bogu iza nogu' (у біса на болоті / дуже далеко). 'Mlatiti praznu slamu' (толокти воду в ступі). 'Prodavati maglu' (замилювати очі / дурити)."
+          },
+          examples: [
+            "Njegovo selo nalazi se Bogu iza nogu. (His village is located in the middle of nowhere.)",
+            "Nemoj mi prodavati maglu, znam pravu istinu. (Don't sell me fog, I know the real truth.)"
+          ]
+        },
+        {
+          title: {
+            en: "Double Negatives in Formal Discourse",
+            ru: "Двойное отрицание",
+            ua: "Подвійне заперечення"
+          },
+          text: {
+            en: "Unlike English but similar to Russian and Ukrainian, Croatian requires double negatives when negative pronouns or adverbs are used (e.g. Nitko ne zna - Nobody knows; Nikada nismo išli - We never went). However, in C2 contexts, watch for advanced rhetorical structures combining negation to express subtle affirmation or emphasis.",
+            ru: "В хорватском языке требуется двойное отрицание при использовании отрицательных местоимений или наречий (Nitko ne zna - Никто не знает).",
+            ua: "У хорватській мові потрібне подвійне заперечення при використанні заперечних займенників або прислівників (Nitko ne zna - Ніхто не знає)."
+          },
+          examples: [
+            "Nikada nikome ništa ne govori. (He never tells anyone anything.)",
+            "Nema toga tko ne bi poželio uspjeh. (There is nobody who wouldn't wish for success.)"
+          ]
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: {
+            en: "What does the idiom 'Bogu iza nogu' mean?",
+            ru: "Что означает фразеологизм 'Bogu iza nogu'?",
+            ua: "Що означає фразеологізм 'Bogu iza nogu'?"
+          },
+          options: ["Very far away / middle of nowhere", "Close to church", "Immediately", "Blessed situation"],
+          correctAnswer: "Very far away / middle of nowhere"
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "What does the idiom 'mlatiti praznu slamu' translate to metaphorically?",
+            ru: "Чему метафорически соответствует фразеологизм 'mlatiti praznu slamu'?",
+            ua: "Чому метафорично відповідає фразеологізм 'mlatiti praznu slamu'?"
+          },
+          options: ["To talk nonsense / waste breath", "To work hard on a field", "To build a straw house", "To sleep deeply"],
+          correctAnswer: "To talk nonsense / waste breath"
+        },
+        {
+          type: "fill-blank",
+          question: {
+            en: "Complete the idiom 'to deceive/mislead': prodavati _____.",
+            ru: "Дополните фразеологизм 'вешать лапшу / обманывать': prodavati _____.",
+            ua: "Доповніть фразеологізм 'замилювати очі / дурити': prodavati _____."
+          },
+          correctAnswer: "maglu"
+        },
+        {
+          type: "translation",
+          question: {
+            en: "Translate: 'Nitko nije došao.'",
+            ru: "Переведите: 'Nitko nije došao.'",
+            ua: "Перекладіть: 'Nitko nije došao.'"
+          },
+          correctAnswer: "Nobody came"
+        },
+        {
+          type: "multiple-choice",
+          question: {
+            en: "Which sentence correctly demonstrates a double negative in Croatian?",
+            ru: "Какое предложение грамматически правильно выражает двойное отрицание?",
+            ua: "Яке речення граматично правильно виражає подвійне заперечення?"
+          },
+          options: [
+            "Nikad nisam vidio more.",
+            "Nikad sam vidio more.",
+            "Ja ne vidio more nikad.",
+            "Nisam nikad vidio ništa more."
+          ],
+          correctAnswer: "Nikad nisam vidio more."
+        },
+        {
+          type: "fill-blank",
+          question: {
+            en: "Complete the double negative: Nikome _____ (prijati, present negative 3rd sing) hladnoća.",
+            ru: "Заполните отрицание: Nikome _____ (prijati, отрицат. наст. вр. 3-е л. ед.ч.) hladnoća. (Никому не нравится холод.)",
+            ua: "Заповніть заперечення: Nikome _____ (prijati, запереч. тепер. ч. 3-я ос. одн.) hladnoća. (Нікому не подобається холод.)"
+          },
+          correctAnswer: "ne prija"
+        }
+      ]
+    }
   }
 ];

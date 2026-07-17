@@ -10,7 +10,7 @@ import { toast } from "sonner";
 export default function SignInPage() {
   const t = useTranslations("auth.signIn");
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });

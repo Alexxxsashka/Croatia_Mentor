@@ -16,7 +16,7 @@ import {
   RotateCcw,
   Target,
 } from "lucide-react";
-import { toast } from "sonner";
+
 
 type TestState = "intro" | "testing" | "results";
 

@@ -50,35 +50,7 @@ export default function LessonDetailPage({
       .catch(console.error);
   }, [id]);
 
-  // Save progress when completed
-  useEffect(() => {
-    if (completed && !xpAdded) {
-      setXpAdded(true);
-      
-      fetch("/api/progress")
-        .then((res) => res.json())
-        .then((data) => {
-          const currentProgress = data.progress || {};
-          const currentCompleted = currentProgress.completedLessons || [];
-          const currentXP = currentProgress.totalXP || 0;
-          
-          const isNewCompletion = !currentCompleted.includes(id);
-          const newCompleted = isNewCompletion ? [...currentCompleted, id] : currentCompleted;
-          const xpEarned = isNewCompletion ? (correctCount * 15) : 0;
-          const newXP = currentXP + xpEarned;
-          
-          fetch("/api/progress", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              completedLessons: newCompleted,
-              totalXP: newXP
-            })
-          }).catch(console.error);
-        })
-        .catch(console.error);
-    }
-  }, [completed, correctCount, id, xpAdded]);
+
 
   if (!lesson) {
     return (
@@ -124,6 +96,31 @@ export default function LessonDetailPage({
       setShowResult(false);
     } else {
       setCompleted(true);
+      if (!xpAdded) {
+        setXpAdded(true);
+        fetch("/api/progress")
+          .then((res) => res.json())
+          .then((data) => {
+            const currentProgress = data.progress || {};
+            const currentCompleted = currentProgress.completedLessons || [];
+            const currentXP = currentProgress.totalXP || 0;
+            
+            const isNewCompletion = !currentCompleted.includes(id);
+            const newCompleted = isNewCompletion ? [...currentCompleted, id] : currentCompleted;
+            const xpEarned = isNewCompletion ? (correctCount * 15) : 0;
+            const newXP = currentXP + xpEarned;
+            
+            fetch("/api/progress", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                completedLessons: newCompleted,
+                totalXP: newXP
+              })
+            }).catch(console.error);
+          })
+          .catch(console.error);
+      }
     }
   };
 

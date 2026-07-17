@@ -19,9 +19,16 @@ import { toast } from "sonner";
 export default function SignUpPage() {
   const t = useTranslations("auth.signUp");
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    nativeLanguage: "en",
+  });
 
   useEffect(() => {
     if (status === "authenticated") {
@@ -36,13 +43,6 @@ export default function SignUpPage() {
       </div>
     );
   }
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    nativeLanguage: "en",
-  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

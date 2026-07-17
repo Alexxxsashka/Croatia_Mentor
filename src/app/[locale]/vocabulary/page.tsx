@@ -1,14 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
-import { useSession } from "next-auth/react";
-import { useRouter } from "@/i18n/navigation";
+import { useTranslations, useLocale } from "next-intl";
+
+import {
+  vocabularyWords,
+  vocabularyCategories,
+  categoryLabels,
+  type VocabWord,
+} from "@/lib/vocabulary-data";
 import {
   Search,
-  Languages,
   Volume2,
-  BookOpen,
   Trophy,
   Check,
   X,
@@ -16,6 +19,7 @@ import {
   Bookmark,
   Loader2,
   RefreshCw,
+  FolderOpen,
 } from "lucide-react";
 
 interface Flashcard {
@@ -30,14 +34,14 @@ interface Flashcard {
 
 export default function VocabularyPortal() {
   const t = useTranslations("vocabulary");
-  const tCommon = useTranslations("common");
-  const { data: session } = useSession();
-  const router = useRouter();
+  const locale = useLocale();
+
 
   const [loading, setLoading] = useState(true);
-  const [words, setWords] = useState<Flashcard[]>([]);
-  const [activeTab, setActiveTab] = useState<"flashcards" | "quiz" | "dictionary">("flashcards");
+  const [dbWords, setDbWords] = useState<Flashcard[]>([]);
+  const [activeTab, setActiveTab] = useState<"categories" | "flashcards" | "quiz" | "dictionary">("categories");
   const [selectedLevel, setSelectedLevel] = useState<string>("all");
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
   
   // Flashcard states
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -49,62 +53,79 @@ export default function VocabularyPortal() {
 
   // Quiz states
   const [quizStarted, setQuizStarted] = useState(false);
-  const [quizQuestions, setQuizQuestions] = useState<{ word: Flashcard; options: string[]; answer: string }[]>([]);
+  const [quizQuestions, setQuizQuestions] = useState<{ word: VocabWord; options: string[]; answer: string }[]>([]);
   const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
   const [quizScore, setQuizScore] = useState(0);
   const [selectedQuizOption, setSelectedQuizOption] = useState<string | null>(null);
   const [quizAnswered, setQuizAnswered] = useState(false);
   const [quizComplete, setQuizComplete] = useState(false);
 
-  const nativeLanguage = (session?.user as any)?.nativeLanguage || "english";
-
   useEffect(() => {
     fetch("/api/vocabulary")
       .then((res) => res.json())
       .then((data) => {
         if (data.flashcards) {
-          setWords(data.flashcards);
+          setDbWords(data.flashcards);
         }
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Failed to load vocabulary:", err);
+        console.error("Failed to load DB vocabulary:", err);
         setLoading(false);
       });
   }, []);
 
-  // Filter words by level
-  const filteredWords = words.filter((w) => {
-    if (selectedLevel === "all") return true;
-    return w.level.toLowerCase() === selectedLevel.toLowerCase();
+  // Merge static vocabulary words with database words
+  const allMergedWords: VocabWord[] = [...vocabularyWords];
+  dbWords.forEach((dw) => {
+    if (!allMergedWords.some((w) => w.hr.toLowerCase() === dw.wordHr.toLowerCase())) {
+      allMergedWords.push({
+        hr: dw.wordHr,
+        en: dw.translationEng,
+        ru: dw.translationRu,
+        ua: dw.translationUa,
+        level: dw.level || "A1",
+        category: dw.category || "general",
+      });
+    }
   });
 
-  // Get translation based on user's native language config
-  const getTranslation = (word: Flashcard) => {
-    if (nativeLanguage.toLowerCase() === "russian" || nativeLanguage.toLowerCase() === "ru") {
-      return word.translationRu;
+  // Filter words
+  const filteredWords = allMergedWords.filter((w) => {
+    const levelMatch = selectedLevel === "all" || w.level.toLowerCase() === selectedLevel.toLowerCase();
+    const categoryMatch = selectedCategory === "all" || w.category === selectedCategory;
+    return levelMatch && categoryMatch;
+  });
+
+  const getTranslation = (word: VocabWord) => {
+    if (locale === "ru") return word.ru;
+    if (locale === "ua") return word.ua;
+    return word.en;
+  };
+
+  const getCategoryLabel = (cat: string) => {
+    const found = vocabularyCategories.find((c) => c === cat);
+    if (found) {
+      const labelObj = categoryLabels[found];
+      if (locale === "ru") return labelObj.ru;
+      if (locale === "ua") return labelObj.ua;
+      return labelObj.en;
     }
-    if (nativeLanguage.toLowerCase() === "ukrainian" || nativeLanguage.toLowerCase() === "ua") {
-      return word.translationUa;
-    }
-    return word.translationEng;
+    return cat.charAt(0).toUpperCase() + cat.slice(1);
   };
 
   // TTS Pronunciation
   const speakWord = (text: string) => {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      // Cancel any ongoing speech
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = "hr-HR";
       
-      // Try to find a Croatian voice
       const voices = window.speechSynthesis.getVoices();
       const hrVoice = voices.find(voice => voice.lang.includes("hr") || voice.lang.includes("HR"));
       if (hrVoice) {
         utterance.voice = hrVoice;
       }
-      
       window.speechSynthesis.speak(utterance);
     }
   };
@@ -112,16 +133,15 @@ export default function VocabularyPortal() {
   // Generate Quiz
   const startQuiz = () => {
     if (filteredWords.length < 4) {
-      alert("Please select a level with at least 4 words to start the quiz.");
+      alert("Please select a level/category with at least 4 words to start the quiz.");
       return;
     }
 
     const shuffled = [...filteredWords].sort(() => 0.5 - Math.random());
-    const questions = shuffled.slice(0, 5).map((word) => {
+    const questions = shuffled.slice(0, 8).map((word) => {
       const correctTranslation = getTranslation(word);
-      // Get 3 incorrect options from other words
-      const incorrects = words
-        .filter((w) => w.id !== word.id)
+      const incorrects = allMergedWords
+        .filter((w) => w.hr !== word.hr)
         .map((w) => getTranslation(w))
         .filter((t, index, self) => self.indexOf(t) === index && t !== correctTranslation)
         .sort(() => 0.5 - Math.random())
@@ -162,7 +182,6 @@ export default function VocabularyPortal() {
       setQuizAnswered(false);
     } else {
       setQuizComplete(true);
-      // Award XP
       const earnedXP = quizScore * 10;
       if (earnedXP > 0) {
         fetch("/api/progress", {
@@ -190,11 +209,10 @@ export default function VocabularyPortal() {
     );
   }
 
-  // Active word (flashcards mode)
   const activeWord = filteredWords[currentCardIndex];
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Header */}
       <div className="text-center mb-8 animate-fade-in">
         <h1 className="text-4xl font-extrabold tracking-tight">
@@ -207,7 +225,15 @@ export default function VocabularyPortal() {
 
       {/* Tabs */}
       <div className="flex justify-center mb-8 border-b border-white/10 pb-px">
-        <div className="flex gap-2 p-1 glass rounded-xl">
+        <div className="flex gap-2 p-1 glass rounded-xl flex-wrap justify-center">
+          <button
+            onClick={() => setActiveTab("categories")}
+            className={`px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 ${
+              activeTab === "categories" ? "bg-blue-600 text-white shadow-md" : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            {t("categoriesTab") || "Themes"}
+          </button>
           <button
             onClick={() => { setActiveTab("flashcards"); setIsFlipped(false); }}
             className={`px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 ${
@@ -235,31 +261,55 @@ export default function VocabularyPortal() {
         </div>
       </div>
 
-      {/* Filters (Skip for quiz active state to avoid resetting mid-quiz) */}
+      {/* Filters (skip during active quiz) */}
       {!(activeTab === "quiz" && quizStarted && !quizComplete) && (
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-6 animate-fade-in">
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
-              {t("levelFilter")}:
-            </span>
-            <div className="flex gap-1">
-              {["all", "A1", "A2", "B1", "B2"].map((lvl) => (
-                <button
-                  key={lvl}
-                  onClick={() => {
-                    setSelectedLevel(lvl);
-                    setCurrentCardIndex(0);
-                    setIsFlipped(false);
-                  }}
-                  className={`px-3 py-1 text-xs font-semibold rounded-full border transition-all ${
-                    selectedLevel.toLowerCase() === lvl.toLowerCase()
-                      ? "bg-blue-500/10 text-blue-400 border-blue-500/30"
-                      : "border-white/5 text-muted-foreground hover:text-foreground hover:bg-white/5"
-                  }`}
-                >
-                  {lvl === "all" ? t("all") : lvl}
-                </button>
-              ))}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 bg-white/5 p-4 rounded-2xl border border-white/10 animate-fade-in">
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
+                {t("levelFilter")}:
+              </span>
+              <div className="flex gap-1">
+                {["all", "A1", "A2", "B1", "B2"].map((lvl) => (
+                  <button
+                    key={lvl}
+                    onClick={() => {
+                      setSelectedLevel(lvl);
+                      setCurrentCardIndex(0);
+                      setIsFlipped(false);
+                    }}
+                    className={`px-3 py-1 text-xs font-semibold rounded-full border transition-all ${
+                      selectedLevel.toLowerCase() === lvl.toLowerCase()
+                        ? "bg-blue-500/10 text-blue-400 border-blue-500/30"
+                        : "border-white/5 text-muted-foreground hover:text-foreground hover:bg-white/5"
+                    }`}
+                  >
+                    {lvl === "all" ? t("all") : lvl}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
+                {t("categoryFilter") || "Category"}:
+              </span>
+              <select
+                value={selectedCategory}
+                onChange={(e) => {
+                  setSelectedCategory(e.target.value);
+                  setCurrentCardIndex(0);
+                  setIsFlipped(false);
+                }}
+                className="bg-transparent text-xs font-semibold text-foreground border border-white/10 rounded-xl px-2 py-1 focus:outline-none focus:border-blue-500"
+              >
+                <option value="all" className="bg-slate-900 text-foreground">{t("allCategories") || "All categories"}</option>
+                {vocabularyCategories.map((cat) => (
+                  <option key={cat} value={cat} className="bg-slate-900 text-foreground">
+                    {getCategoryLabel(cat)}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
 
@@ -269,12 +319,96 @@ export default function VocabularyPortal() {
         </div>
       )}
 
+      {/* Categories View */}
+      {activeTab === "categories" && (
+        <div className="space-y-8 animate-fade-in">
+          {/* Main Category Cards */}
+          {selectedCategory === "all" ? (
+            <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 stagger-children">
+              {vocabularyCategories.map((cat) => {
+                const catWords = allMergedWords.filter((w) => w.category === cat);
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setSelectedCategory(cat)}
+                    className="glass p-5 rounded-2xl text-center border border-white/5 card-hover flex flex-col items-center justify-center"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-3">
+                      <FolderOpen className="w-6 h-6" />
+                    </div>
+                    <h3 className="font-bold text-sm text-foreground mb-1">
+                      {getCategoryLabel(cat)}
+                    </h3>
+                    <span className="text-xs text-muted-foreground">
+                      {catWords.length} {t("words") || "words"}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          ) : (
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-bold text-foreground">
+                  {getCategoryLabel(selectedCategory)}
+                </h2>
+                <button
+                  onClick={() => setSelectedCategory("all")}
+                  className="text-xs text-blue-400 font-semibold flex items-center gap-1 hover:underline"
+                >
+                  {t("backToAll") || "← Back to all themes"}
+                </button>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 stagger-children">
+                {filteredWords.map((word, i) => (
+                  <div
+                    key={i}
+                    className="glass p-5 rounded-2xl border border-white/10 flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-blue-500/10 text-blue-400">
+                          {word.level}
+                        </span>
+                        <button
+                          onClick={() => speakWord(word.hr)}
+                          className="p-1 rounded bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                          <Volume2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                      <h3 className="text-xl font-black text-foreground mb-1 select-all">
+                        {word.hr}
+                      </h3>
+                      <p className="text-sm font-semibold text-blue-400 mb-3">
+                        {getTranslation(word)}
+                      </p>
+                    </div>
+
+                    {word.example && (
+                      <div className="mt-3 pt-3 border-t border-white/5">
+                        <p className="text-xs italic text-muted-foreground leading-relaxed">
+                          &quot;{word.example.hr}&quot;
+                        </p>
+                        <p className="text-[10px] text-muted-foreground/60 mt-1 leading-relaxed">
+                          {locale === "ru" ? word.example.ru : locale === "ua" ? word.example.ua : word.example.en}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Flashcards View */}
       {activeTab === "flashcards" && (
         <div className="space-y-6 animate-fade-in">
           {filteredWords.length > 0 ? (
             <div className="flex flex-col items-center">
-              {/* Card Flip Wrapper */}
               <div 
                 onClick={() => setIsFlipped(!isFlipped)}
                 className="w-full max-w-md h-64 cursor-pointer relative perspective"
@@ -290,7 +424,7 @@ export default function VocabularyPortal() {
                       {activeWord.level}
                     </span>
                     <h2 className="text-4xl font-extrabold text-foreground tracking-tight select-none">
-                      {activeWord.wordHr}
+                      {activeWord.hr}
                     </h2>
                     <p className="text-xs text-muted-foreground mt-4 select-none">
                       {t("revealTranslation")}
@@ -300,16 +434,16 @@ export default function VocabularyPortal() {
                   {/* Back Side */}
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-6 backface-hidden rotate-y-180">
                     <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 uppercase tracking-wider mb-2 border border-emerald-500/20">
-                      {activeWord.category || t("general")}
+                      {getCategoryLabel(activeWord.category)}
                     </span>
-                    <h3 className="text-3xl font-extrabold text-foreground">
+                    <h3 className="text-3xl font-extrabold text-foreground text-center">
                       {getTranslation(activeWord)}
                     </h3>
                     
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        speakWord(activeWord.wordHr);
+                        speakWord(activeWord.hr);
                       }}
                       className="mt-6 p-2 rounded-full bg-blue-600/10 text-blue-400 border border-blue-500/20 hover:bg-blue-600 hover:text-white transition-all flex items-center gap-1.5 text-xs font-medium"
                     >
@@ -403,7 +537,7 @@ export default function VocabularyPortal() {
               {/* Question word */}
               <div className="text-center py-6">
                 <h3 className="text-3xl font-black text-foreground">
-                  {quizQuestions[currentQuizIndex].word.wordHr}
+                  {quizQuestions[currentQuizIndex].word.hr}
                 </h3>
                 <p className="text-sm text-muted-foreground mt-1">
                   {t("chooseCorrectTranslation")}
@@ -478,15 +612,15 @@ export default function VocabularyPortal() {
             {/* List */}
             <div className="grid gap-3 sm:grid-cols-2 max-h-96 overflow-y-auto pr-1">
               {filteredWords
-                .filter((w) => w.wordHr.toLowerCase().includes(searchQuery.toLowerCase()))
-                .map((word) => (
+                .filter((w) => w.hr.toLowerCase().includes(searchQuery.toLowerCase()))
+                .map((word, index) => (
                   <div
-                    key={word.id}
+                    key={index}
                     className="p-3.5 rounded-xl border border-white/5 bg-white/5 flex items-center justify-between"
                   >
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-foreground">{word.wordHr}</span>
+                        <span className="font-bold text-foreground">{word.hr}</span>
                         <span className="text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400">
                           {word.level}
                         </span>
@@ -496,7 +630,7 @@ export default function VocabularyPortal() {
 
                     <div className="flex gap-2">
                       <button
-                        onClick={() => speakWord(word.wordHr)}
+                        onClick={() => speakWord(word.hr)}
                         className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
                         title="Pronounce"
                       >
@@ -513,7 +647,7 @@ export default function VocabularyPortal() {
                   </div>
                 ))}
 
-              {filteredWords.filter((w) => w.wordHr.toLowerCase().includes(searchQuery.toLowerCase())).length === 0 && (
+              {filteredWords.filter((w) => w.hr.toLowerCase().includes(searchQuery.toLowerCase())).length === 0 && (
                 <p className="text-xs text-muted-foreground col-span-2 text-center py-4">
                   {t("noWordsFound")}
                 </p>

@@ -31,6 +31,7 @@ export function Navbar() {
         },
         { href: "/lessons", label: t("lessons"), icon: BookOpen },
         { href: "/vocabulary", label: t("vocabulary"), icon: Languages },
+        { href: "/glossary", label: t("glossary"), icon: GraduationCap },
         { href: "/games", label: t("games"), icon: Gamepad2 },
         { href: "/ai-chat", label: t("aiChat"), icon: MessageCircle },
       ]

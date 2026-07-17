@@ -39,8 +39,8 @@ export default function DashboardPage() {
   const t = useTranslations("dashboard");
   const { data: session, status } = useSession();
 
-  const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState<UserProgress | null>(null);
+  const [progressLoaded, setProgressLoaded] = useState(false);
 
   useEffect(() => {
     if (status === "authenticated") {
@@ -65,16 +65,16 @@ export default function DashboardPage() {
               testScores: parsedScores,
             });
           }
-          setLoading(false);
+          setProgressLoaded(true);
         })
         .catch((err) => {
           console.error("Failed to load progress:", err);
-          setLoading(false);
+          setProgressLoaded(true);
         });
-    } else if (status === "unauthenticated") {
-      setLoading(false);
     }
   }, [status]);
+
+  const loading = (status as string) === "loading" || (status === "authenticated" && !progressLoaded);
 
   const user = session?.user as Record<string, unknown> | undefined;
   const userName = (user?.name as string) || "Learner";
@@ -151,7 +151,7 @@ export default function DashboardPage() {
     },
   ];
 
-  if (loading || status === "loading") {
+  if (loading) {
     return (
       <div className="flex-1 flex items-center justify-center min-h-[50vh]">
         <div className="flex flex-col items-center gap-3">
