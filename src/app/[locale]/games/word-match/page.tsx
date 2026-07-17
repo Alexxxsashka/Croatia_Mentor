@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
+import { Flag } from "@/components/flag";
 import {
   ArrowLeft,
   Trophy,
@@ -202,8 +203,9 @@ export default function WordMatchPage() {
       <div className="grid md:grid-cols-2 gap-8 animate-slide-up">
         {/* Croatian words */}
         <div className="space-y-3">
-          <h3 className="text-sm font-semibold text-center text-blue-400 mb-4">
-            🇭🇷 Hrvatski
+          <h3 className="text-sm font-semibold text-center text-blue-400 mb-4 flex items-center justify-center gap-1.5">
+            <Flag countryCode="hr" className="w-5 h-3.5 rounded-[2px]" />
+            Hrvatski
           </h3>
           {shuffledCroatian.map((word) => {
             const isMatched = matchedIds.has(word.id);

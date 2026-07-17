@@ -154,7 +154,7 @@ export default function LessonsPage() {
       const correct = promoAnswers.filter(
         (ans, idx) => ans === test.questions[idx].correctAnswer
       ).length;
-      const passed = correct >= 4; // 80% to pass (4 out of 5)
+      const passed = correct >= 8; // 80% to pass (8 out of 10)
       
       setPromoPassed(passed);
       setPromoFinished(true);
@@ -477,7 +477,7 @@ export default function LessonsPage() {
                     </p>
 
                     <div className="grid gap-3">
-                      {activePromoQuestionObj.options.map((option, idx) => {
+                      {activePromoQuestionObj.options.map((optionObj, idx) => {
                         let btnStyle = "glass hover:bg-black/5 dark:hover:bg-white/5 text-left border-black/5 dark:border-white/10";
                         if (showPromoFeedback) {
                           if (idx === activePromoQuestionObj.correctAnswer) {
@@ -498,7 +498,7 @@ export default function LessonsPage() {
                             onClick={() => handlePromoAnswer(idx)}
                             className={`w-full p-4 rounded-xl text-sm font-semibold transition-all flex items-center justify-between ${btnStyle}`}
                           >
-                            <span>{option}</span>
+                            <span>{getLocalizedText(optionObj, locale)}</span>
                             {showPromoFeedback && idx === activePromoQuestionObj.correctAnswer && (
                               <CheckCircle2 className="w-4 h-4 text-green-400 shrink-0 ml-2" />
                             )}

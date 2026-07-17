@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import { Link } from "@/i18n/navigation";
+import { Flag } from "@/components/flag";
 import {
   MessageCircle,
   BookOpen,
@@ -114,8 +115,9 @@ export default function HomePage() {
 
         {/* Floating badges */}
         <div className="hidden lg:block">
-          <div className="absolute top-32 left-10 animate-float glass px-4 py-2 rounded-xl text-sm font-medium">
-            🇭🇷 Dobar dan!
+          <div className="absolute top-32 left-10 animate-float glass px-4 py-2 rounded-xl text-sm font-medium flex items-center gap-1.5">
+            <Flag countryCode="hr" className="w-5 h-3.5 rounded-[2px]" />
+            Dobar dan!
           </div>
           <div
             className="absolute top-48 right-16 animate-float glass px-4 py-2 rounded-xl text-sm font-medium"
@@ -169,8 +171,9 @@ export default function HomePage() {
       {/* CTA Section */}
       <section className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
         <div className="text-center p-12 rounded-3xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 glass">
-          <h2 className="text-3xl font-bold mb-4">
-            Počnimo učiti hrvatski! 🇭🇷
+          <h2 className="text-3xl font-bold mb-4 flex items-center justify-center gap-2 flex-wrap">
+            Počnimo učiti hrvatski!
+            <Flag countryCode="hr" className="w-7 h-5 rounded-[3px] shadow" />
           </h2>
           <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
             Let&apos;s start learning Croatian! Join thousands of learners
