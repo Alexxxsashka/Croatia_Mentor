@@ -109,9 +109,13 @@
     "recentActivity": "Recent Activity",
     "quickActions": "Quick Actions",
     "continueLearning": "Continue Learning",
+    "continueLearningDesc": "Continue where you left off",
     "practiceFlashcards": "Practice Flashcards",
+    "practiceFlashcardsDesc": "Play vocabulary games",
     "chatWithAI": "Chat with AI Mentor",
+    "chatWithAIDesc": "Practice conversation",
     "takeTest": "Take Placement Test",
+    "takeTestDesc": "Test your level",
     "noActivity": "No recent activity. Start a lesson to begin!",
     "levelProgress": "Level Progress"
   },
@@ -344,7 +348,8 @@
     "categoryFilter": "Theme",
     "allCategories": "All themes",
     "backToAll": "← Back to all themes",
-    "words": "words"
+    "words": "words",
+    "start": "Start Quiz"
   },
   "glossary": {
     "title": "Grammar Glossary & Book Theory",

@@ -109,9 +109,13 @@
     "recentActivity": "Остання активність",
     "quickActions": "Швидкі дії",
     "continueLearning": "Продовжити навчання",
+    "continueLearningDesc": "Продовжуйте навчання з того місця, де зупинилися",
     "practiceFlashcards": "Картки",
+    "practiceFlashcardsDesc": "Грайте в словникові ігри з картками",
     "chatWithAI": "Чат з ШІ-наставником",
+    "chatWithAIDesc": "Практикуйте спілкування з віртуальним наставником",
     "takeTest": "Пройти тест рівня",
+    "takeTestDesc": "Визначте свій рівень володіння мовою",
     "noActivity": "Немає активності. Розпочніть урок!",
     "levelProgress": "Прогрес рівня"
   },
@@ -344,7 +348,8 @@
     "categoryFilter": "Тема",
     "allCategories": "Всі теми",
     "backToAll": "← Назад до всіх тем",
-    "words": "слів"
+    "words": "слів",
+    "start": "Почати тест"
   },
   "glossary": {
     "title": "Граматичний глосарій та теорія",

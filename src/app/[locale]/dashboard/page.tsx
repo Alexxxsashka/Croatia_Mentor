@@ -188,28 +188,28 @@ export default function DashboardPage() {
       icon: BookOpen,
       label: t("continueLearning"),
       gradient: "from-blue-500 to-cyan-400",
-      description: "Continue where you left off",
+      description: t("continueLearningDesc"),
     },
     {
       href: "/games",
       icon: Gamepad2,
       label: t("practiceFlashcards"),
       gradient: "from-orange-500 to-yellow-400",
-      description: "Play vocabulary games",
+      description: t("practiceFlashcardsDesc"),
     },
     {
       href: "/ai-chat",
       icon: MessageCircle,
       label: t("chatWithAI"),
       gradient: "from-purple-500 to-pink-400",
-      description: "Practice conversation",
+      description: t("chatWithAIDesc"),
     },
     {
       href: "/placement-test",
       icon: Target,
       label: t("takeTest"),
       gradient: "from-green-500 to-emerald-400",
-      description: "Test your level",
+      description: t("takeTestDesc"),
     },
   ];
 

@@ -109,9 +109,13 @@
     "recentActivity": "Недавняя активность",
     "quickActions": "Быстрые действия",
     "continueLearning": "Продолжить обучение",
+    "continueLearningDesc": "Продолжайте обучение с того места, где остановились",
     "practiceFlashcards": "Карточки",
+    "practiceFlashcardsDesc": "Играйте в словарные игры с карточками",
     "chatWithAI": "Чат с ИИ-наставником",
+    "chatWithAIDesc": "Практикуйте общение с виртуальным наставником",
     "takeTest": "Пройти тест уровня",
+    "takeTestDesc": "Определите свой уровень владения языком",
     "noActivity": "Нет активности. Начните урок!",
     "levelProgress": "Прогресс уровня"
   },
@@ -344,7 +348,8 @@
     "categoryFilter": "Тема",
     "allCategories": "Все темы",
     "backToAll": "← Назад ко всем темам",
-    "words": "слов"
+    "words": "слов",
+    "start": "Начать тест"
   },
   "glossary": {
     "title": "Грамматический глоссарий и теория",
