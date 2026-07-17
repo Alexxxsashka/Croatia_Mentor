@@ -1,9 +1,10 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useSession } from "next-auth/react";
 import { Link } from "@/i18n/navigation";
 import { useState, useEffect } from "react";
+import { lessonsData } from "@/lib/lessons-data";
 import {
   Trophy,
   Flame,
@@ -83,6 +84,16 @@ export default function DashboardPage() {
   const totalXP = progress?.totalXP ?? 0;
   const streak = progress?.currentStreak ?? 0;
   const completedCount = progress?.completedLessons?.length ?? 0;
+  const locale = useLocale();
+
+  // Level progress calculations
+  const lessonsInCurrentLevel = lessonsData.filter((l) => l.level === currentLevel);
+  const currentLevelTotal = lessonsInCurrentLevel.length;
+  const currentLevelCompleted = lessonsInCurrentLevel.filter((l) =>
+    progress?.completedLessons?.includes(l.id)
+  ).length;
+  const currentLevelPercent =
+    currentLevelTotal > 0 ? (currentLevelCompleted / currentLevelTotal) * 100 : 0;
 
   // Calculate success rate based on real placement/test scores
   let successRate = 0;
@@ -277,22 +288,45 @@ export default function DashboardPage() {
 
           {/* Lessons Completed */}
           <div className="glass rounded-2xl p-6">
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between mb-2">
               <h3 className="font-semibold">{t("lessonsCompleted")}</h3>
-              <span className="text-2xl font-black text-blue-400">
+              <span className="text-xl font-black text-blue-400">
                 {completedCount}
               </span>
             </div>
-            <div className="h-3 rounded-full bg-white/5 overflow-hidden">
+            <div className="flex items-center justify-between mb-3 text-xs text-muted-foreground">
+              <span>
+                {locale === "ua" 
+                  ? `Прогрес рівня ${currentLevel}` 
+                  : locale === "ru" 
+                  ? `Прогресс уровня ${currentLevel}` 
+                  : `Level ${currentLevel} progress`}
+              </span>
+              <span className="font-bold text-foreground">
+                {currentLevelCompleted} / {currentLevelTotal}
+              </span>
+            </div>
+            <div className="h-3 rounded-full bg-black/20 dark:bg-white/5 overflow-hidden">
               <div
                 className="h-full rounded-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-1000"
                 style={{
-                  width: `${Math.min((completedCount / 50) * 100, 100)}%`,
+                  width: `${currentLevelPercent}%`,
                 }}
               />
             </div>
             <p className="text-xs text-muted-foreground mt-2">
-              {completedCount} / 50 lessons to next level
+              {currentLevelPercent === 100 
+                ? (locale === "ua" 
+                    ? "Рівень повністю пройдено! Складіть іспит у розділі уроків." 
+                    : locale === "ru" 
+                    ? "Уровень полностью пройден! Сдайте экзамен в разделе уроков." 
+                    : "Level fully completed! Take the exam in the lessons section.")
+                : (locale === "ua"
+                    ? `Залишилося пройти ще ${currentLevelTotal - currentLevelCompleted} уроків на рівні ${currentLevel}`
+                    : locale === "ru"
+                    ? `Осталось пройти еще ${currentLevelTotal - currentLevelCompleted} уроков на уровне ${currentLevel}`
+                    : `${currentLevelTotal - currentLevelCompleted} more lessons on level ${currentLevel} to complete the section`)
+              }
             </p>
           </div>
         </div>
