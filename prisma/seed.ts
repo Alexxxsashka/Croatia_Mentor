@@ -140,13 +140,13 @@ const lessons = [
             ua: "Ключові слова з діалогу:"
           },
           examples: [
-            "konobar — waiter / официант / офіціант",
-            "kava — coffee / кофе / кава",
-            "mlijeko — milk / молоко / молоко",
-            "molim — please / пожалуйста / будь ласка",
-            "hvala — thank you / спасибо / дякую",
-            "koliko — how much / сколько / скільки",
-            "doviđenja — goodbye / до свидания / до побачення"
+            { en: "konobar — waiter", ru: "konobar — официант", ua: "konobar — офіціант" },
+            { en: "kava — coffee", ru: "kava — кофе", ua: "kava — кава" },
+            { en: "mlijeko — milk", ru: "mlijeko — молоко", ua: "mlijeko — молоко" },
+            { en: "molim — please", ru: "molim — пожалуйста", ua: "molim — будь ласка" },
+            { en: "hvala — thank you", ru: "hvala — спасибо", ua: "hvala — дякую" },
+            { en: "koliko — how much", ru: "koliko — сколько", ua: "koliko — скільки" },
+            { en: "doviđenja — goodbye", ru: "doviđenja — до свидания", ua: "doviđenja — до побачення" }
           ]
         }
       ],
@@ -281,10 +281,10 @@ const lessons = [
             ua: "Знахідний відмінок використовується для прямого додатка — предмета чи особи, на яку безпосередньо спрямована дія глагола."
           },
           examples: [
-            "Vidim kuću. (I see a house / Я вижу дом) — kuća → kuću",
-            "Čitam knjigu. (I read a book / Я читаю книгу) — knjiga → knjigu",
-            "Volim Hrvatsku. (I love Croatia / Я люблю Хорватию) — Hrvatska → Hrvatsku",
-            "Jedem jabuku. (I eat an apple / Я ем яблоко) — jabuka → jabuku"
+            { en: "Vidim kuću. (I see a house) — kuća → kuću", ru: "Vidim kuću. (Я вижу дом) — kuća → kuću", ua: "Vidim kuću. (Я бачу будинок) — kuća → kuću" },
+            { en: "Čitam knjigu. (I read a book) — knjiga → knjigu", ru: "Čitam knjigu. (Я читаю книгу) — knjiga → knjigu", ua: "Čitam knjigu. (Я читаю книгу) — knjiga → knjigu" },
+            { en: "Volim Hrvatsku. (I love Croatia) — Hrvatska → Hrvatsku", ru: "Volim Hrvatsku. (Я люблю Хорватию) — Hrvatska → Hrvatsku", ua: "Volim Hrvatsku. (Я люблю Хорватію) — Hrvatska → Hrvatsku" },
+            { en: "Jedem jabuku. (I eat an apple) — jabuka → jabuku", ru: "Jedem jabuku. (Я ем яблоко) — jabuka → jabuku", ua: "Jedem jabuku. (Я їм яблуко) — jabuka → jabuku" }
           ]
         },
         {
@@ -299,9 +299,9 @@ const lessons = [
             ua: "Іменники жіночого роду, що закінчуються на -a, змінюють закінчення на -u у знахідному відмінку."
           },
           examples: [
-            "žena → ženu (woman / женщина)",
-            "škola → školu (school / школа)",
-            "ulica → ulicu (street / улица)"
+            { en: "žena → ženu (woman)", ru: "žena → ženu (женщина)", ua: "žena → ženu (жінка)" },
+            { en: "škola → školu (school)", ru: "škola → školu (школа)", ua: "škola → školu (школа)" },
+            { en: "ulica → ulicu (street)", ru: "ulica → ulicu (улица)", ua: "ulica → ulicu (вулиця)" }
           ]
         }
       ],
@@ -396,11 +396,11 @@ const lessons = [
             ua: "Ключові фрази для походу в ресторан у Хорватії:"
           },
           examples: [
-            "Mogu li dobiti jelovnik? — Can I get the menu? / Можно меню?",
-            "Što preporučujete? — What do you recommend? / Что вы порекомендуете?",
-            "Želim naručiti... — I would like to order... / Я хочу заказать...",
-            "Račun, molim. — The bill, please. / Счет, пожалуйста.",
-            "Bilo je izvrsno! — It was excellent! / Было великолепно!"
+            { en: "Mogu li dobiti jelovnik? — Can I get the menu?", ru: "Mogu li dobiti jelovnik? — Можно меню?", ua: "Mogu li dobiti jelovnik? — Можна меню?" },
+            { en: "Što preporučujete? — What do you recommend?", ru: "Što preporučujete? — Что вы порекомендуете?", ua: "Što preporučujete? — Що ви порадите?" },
+            { en: "Želim naručiti... — I would like to order...", ru: "Želim naručiti... — Я хочу заказать...", ua: "Želim naručiti... — Я хочу замовити..." },
+            { en: "Račun, molim. — The bill, please.", ru: "Račun, molim. — Счет, пожалуйста.", ua: "Račun, molim. — Рахунок, будь ласка." },
+            { en: "Bilo je izvrsno! — It was excellent!", ru: "Bilo je izvrsno! — Было великолепно!", ua: "Bilo je izvrsno! — Було чудово!" }
           ]
         }
       ],
@@ -495,10 +495,10 @@ const lessons = [
             ua: "Хорватські дієслова утворюють видові пари: недоконаний вид (тривала/повторювана дія) та доконаний (завершена/одноразова)."
           },
           examples: [
-            "pisati (impf. | нсв) / napisati (pf. | св) — to write / написать",
-            "čitati (impf. | нсв) / pročitati (pf. | св) — to read / прочитать",
-            "učiti (impf. | нсв) / naučiti (pf. | св) — to learn / выучить",
-            "govoriti (impf. | нсв) / reći (pf. | св) — to speak / сказать"
+            { en: "pisati (impf.) / napisati (pf.) — to write", ru: "pisati (нсв) / napisati (св) — писать / написать", ua: "pisati (нсв) / napisati (св) — писати / написати" },
+            { en: "čitati (impf.) / pročitati (pf.) — to read", ru: "čitati (нсв) / pročitati (св) — читать / прочитать", ua: "čitati (нсв) / pročitati (св) — читати / прочитати" },
+            { en: "učiti (impf.) / naučiti (pf.) — to learn", ru: "učiti (нсв) / naučiti (св) — учить / выучить", ua: "učiti (нсв) / naučiti (св) — вчити / вивчити" },
+            { en: "govoriti (impf.) / reći (pf.) — to speak", ru: "govoriti (нсв) / reći (св) — говорить / сказать", ua: "govoriti (нсв) / reći (св) — говорити / сказати" }
           ]
         }
       ],
@@ -610,9 +610,21 @@ const lessons = [
             ua: "Futur II використовується в підрядних реченнях (найчастіше після слів 'ako' або 'kad') для вираження дії, яка відбудеться РАНІШЕ за іншу дію в майбутньому."
           },
           examples: [
-            "Form: auxiliary verb 'biti' in present (budem, budeš...) + active verbal adjective (-o, -la...).",
-            "Ako budem učio, položit ću ispit. (If I study/have studied, I will pass the exam.)",
-            "Kad budete stigli u Zagreb, nazovite me. (When you arrive in Zagreb, call me.)"
+            {
+              en: "Form: auxiliary verb 'biti' in present (budem, budeš...) + active verbal adjective (-o, -la...).",
+              ru: "Образование: вспомогательный глагол 'biti' в настоящем времени (budem, budeš...) + активное причастие (-o, -la...).",
+              ua: "Утворення: допоміжне дієслово 'biti' у теперішньому часі (budem, budeš...) + активний дієприкметник (-o, -la...)."
+            },
+            {
+              en: "Ako budem učio, položit ću ispit. (If I study/have studied, I will pass the exam.)",
+              ru: "Ako budem učio, položit ću ispit. (Если я буду учиться, я сдам экзамен.)",
+              ua: "Ako budem učio, položit ću ispit. (Якщо я буду вчитися, я здам іспит.)"
+            },
+            {
+              en: "Kad budete stigli u Zagreb, nazovite me. (When you arrive in Zagreb, call me.)",
+              ru: "Kad budete stigli u Zagreb, nazovite me. (Когда приедете в Загреб, позвоните мне.)",
+              ua: "Kad budete stigli u Zagreb, nazovite me. (Коли приїдете до Загреба, зателефонуйте мені.)"
+            }
           ]
         }
       ],
@@ -720,12 +732,12 @@ const lessons = [
             ua: "Ключова лексика з тексту:"
           },
           examples: [
-            "otpad — waste / отходы / відходи",
-            "razvrstavanje — sorting / сортировка / сортування",
-            "okoliš — environment / окружающая среда / довкілля",
-            "zelene površine — green spaces / зеленые зоны / зелені зони",
-            "biootpad — bio-waste / биоотходы / біовідходи",
-            "sačuvati — to preserve / сохранить / зберегти"
+            { en: "otpad — waste", ru: "otpad — отходы", ua: "otpad — відходи" },
+            { en: "razvrstavanje — sorting", ru: "razvrstavanje — сортировка", ua: "razvrstavanje — сортування" },
+            { en: "okoliš — environment", ru: "okoliš — окружающая среда", ua: "okoliš — довкілля" },
+            { en: "zelene površine — green spaces", ru: "zelene površine — зеленые зоны", ua: "zelene površine — зелені зони" },
+            { en: "biootpad — bio-waste", ru: "biootpad — биоотходы", ua: "biootpad — біовідходи" },
+            { en: "sačuvati — to preserve", ru: "sačuvati — сохранить", ua: "sačuvati — зберегти" }
           ]
         }
       ],
@@ -815,8 +827,16 @@ const lessons = [
             ua: "Іспити B1 перевіряють розуміння прийменників, видів дієслова, відносних займенників та відмінкових закінчень. Зверніть увагу на керування дієслів (родовий, давальний, місцевий відмінки)."
           },
           examples: [
-            "Zadovoljan sam svojim poslom. (I am satisfied with my job...)",
-            "Čestitam ti na uspjehu. (I congratulate you on your success...)"
+            {
+              en: "Zadovoljan sam svojim poslom. (I am satisfied with my job.)",
+              ru: "Zadovoljan sam своим poslom. (Я доволен своей работой.)",
+              ua: "Zadovoljan sam svojim poslom. (Я задоволений своєю роботою.)"
+            },
+            {
+              en: "Čestitam ti na uspjehu. (I congratulate you on your success.)",
+              ru: "Čestitam ti na uspjehu. (Поздравляю тебя с успехом.)",
+              ua: "Čestitam ti na uspjehu. (Вітаю тебе з успіхом.)"
+            }
           ]
         }
       ],
@@ -921,8 +941,16 @@ const lessons = [
             ua: "На рівні B2 пасивний стан часто зустрічається в офіційному та письмовому стилях. Він утворюється за допомогою дієслова 'biti' або 'bivati' + пасивний дієприкметник, або через зворотну частку 'se'."
           },
           examples: [
-            "Knjiga je napisana prošle godine. (The book was written last year.)",
-            "Odluka se donosi na sastanku. (The decision is being made...)"
+            {
+              en: "Knjiga je napisana prošle godine. (The book was written last year.)",
+              ru: "Knjiga je napisana prošle godine. (Книга была написана в прошлом году.)",
+              ua: "Knjiga je napisana prošle godine. (Книга була написана минулого року.)"
+            },
+            {
+              en: "Odluka se donosi na sastanku. (The decision is being made at the meeting.)",
+              ru: "Odluka se donosi na sastanku. (Решение принимается на собрании.)",
+              ua: "Odluka se donosi na sastanku. (Рішення приймається на зборах.)"
+            }
           ]
         },
         {
@@ -937,8 +965,8 @@ const lessons = [
             ua: "Віддієслівні іменники, що закінчуються на -nje, утворюються від дієслів (найчастіше недоконаного виду) і виражають процес або дію."
           },
           examples: [
-            "učiti → učenje (learning / обучение)",
-            "putovati → putovanje (traveling / путешествие)"
+            { en: "učiti → učenje (learning)", ru: "učiti → učenje (обучение)", ua: "učiti → učenje (навчання)" },
+            { en: "putovati → putovanje (traveling)", ru: "putovati → putovanje (путешествие)", ua: "putovati → putovanje (подорож)" }
           ]
         }
       ],
@@ -1029,8 +1057,16 @@ const lessons = [
             ua: "Обговорення кар'єрного шляху, професійних цілей та співбесід у Хорватії. Поняття: zapošljavanje (працевлаштування), životopis (резюме), razgovor za posao (співбесіда), prekovremeni rad (понаднормова робота)."
           },
           examples: [
-            "Poslao sam svoj životopis na natječaj za posao programera. (I sent my resume...)",
-            "Radna atmosfera u našem uredu je izuzetno motivirajuća. (The working atmosphere...)"
+            {
+              en: "Poslao sam svoj životopis na natječaj za posao programera. (I sent my resume for the programmer job opening.)",
+              ru: "Poslao sam svoj životopis na natječaj za posao programera. (Я отправил свое резюме на вакансию программиста.)",
+              ua: "Poslao sam svoj životopis na natječaj za posao programera. (Я надіслав своє резюме на вакансію програміста.)"
+            },
+            {
+              en: "Radna atmosfera u našem uredu je izuzetno motivirajuća. (The working atmosphere in our office is extremely motivating.)",
+              ru: "Radna atmosfera u našem uredu je izuzetno motivirajuća. (Рабочая атмосфера в нашем офисе очень мотивирующая.)",
+              ua: "Radna atmosfera u našem uredu je izuzetno motivirajuća. (Робоча атмосфера в нашому офісі надзвичайно мотивує.)"
+            }
           ]
         }
       ],
