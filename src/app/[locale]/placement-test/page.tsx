@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { useSession } from "next-auth/react";
 import {
@@ -22,6 +22,7 @@ type TestState = "intro" | "testing" | "results";
 
 export default function PlacementTestPage() {
   const t = useTranslations("placementTest");
+  const locale = useLocale();
   const { data: session } = useSession();
   const router = useRouter();
   const [state, setState] = useState<TestState>("intro");
@@ -230,7 +231,7 @@ export default function PlacementTestPage() {
         </h2>
 
         <div className="grid gap-3">
-          {question.options.map((option, i) => {
+          {question.options.map((optionObj, i) => {
             let optionStyle = "glass hover:bg-white/10 hover:border-blue-500/30";
 
             if (showFeedback) {
@@ -257,7 +258,9 @@ export default function PlacementTestPage() {
                   <span className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-sm font-semibold shrink-0">
                     {String.fromCharCode(65 + i)}
                   </span>
-                  <span className="font-medium">{option}</span>
+                  <span className="font-medium">
+                    {optionObj[locale as "en" | "ru" | "ua"] || optionObj.en}
+                  </span>
                   {showFeedback && i === question.correctAnswer && (
                     <CheckCircle2 className="w-5 h-5 text-green-400 ml-auto" />
                   )}

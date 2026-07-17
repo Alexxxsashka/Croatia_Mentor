@@ -2,7 +2,7 @@ export interface PlacementQuestion {
   id: number;
   level: string;
   question: string;
-  options: string[];
+  options: { en: string; ru: string; ua: string }[];
   correctAnswer: number;
   explanation: {
     en: string;
@@ -19,7 +19,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 1,
     level: "A1",
     question: 'Što na hrvatskom jeziku znači riječ "obitelj"?',
-    options: ["Family", "Friend", "Work", "House"],
+    options: [
+      { en: "Family", ru: "Семья", ua: "Сім'я" },
+      { en: "Friend", ru: "Друг", ua: "Друг" },
+      { en: "Work", ru: "Работа", ua: "Робота" },
+      { en: "House", ru: "Дом", ua: "Будинок" }
+    ],
     correctAnswer: 0,
     explanation: {
       en: '"Obitelj" is the Croatian word for family.',
@@ -31,7 +36,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 2,
     level: "A2",
     question: 'Koji je suprotan smjer od riječi "lijevo"?',
-    options: ["ravno", "desno", "natrag", "gore"],
+    options: [
+      { en: "ravno", ru: "ravno", ua: "ravno" },
+      { en: "desno", ru: "desno", ua: "desno" },
+      { en: "natrag", ru: "natrag", ua: "natrag" },
+      { en: "gore", ru: "gore", ua: "gore" }
+    ],
     correctAnswer: 1,
     explanation: {
       en: '"Lijevo" means left, and its opposite is "desno" (right).',
@@ -43,7 +53,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 3,
     level: "B1",
     question: "Osoba koja profesionalno popravlja vodovodne cijevi i slavine je:",
-    options: ["električar", "stolar", "zidar", "vodoinstalater"],
+    options: [
+      { en: "električar", ru: "električar", ua: "električar" },
+      { en: "stolar", ru: "stolar", ua: "stolar" },
+      { en: "zidar", ru: "zidar", ua: "zidar" },
+      { en: "vodoinstalater", ru: "vodoinstalater", ua: "vodoinstalater" }
+    ],
     correctAnswer: 3,
     explanation: {
       en: '"Vodoinstalater" means plumber.',
@@ -55,7 +70,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 4,
     level: "B2",
     question: 'Što točno znači veznik "unatoč"?',
-    options: ["despite / in spite of", "because of / due to", "instead of", "during"],
+    options: [
+      { en: "despite / in spite of", ru: "вопреки / несмотря на", ua: "всупереч / незважаючи на" },
+      { en: "because of / due to", ru: "из-за / по причине", ua: "через / з причини" },
+      { en: "instead of", ru: "вместо", ua: "замість" },
+      { en: "during", ru: "во время", ua: "під час" }
+    ],
     correctAnswer: 0,
     explanation: {
       en: '"Unatoč" is a concessive preposition meaning "despite" or "in spite of".',
@@ -67,7 +87,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 5,
     level: "C1",
     question: 'Riječ "protuurječnost" je u književnom jeziku sinonim za:',
-    options: ["suradnju", "kontradikciju", "suglasnost", "potporu"],
+    options: [
+      { en: "suradnju", ru: "suradnju", ua: "suradnju" },
+      { en: "kontradikciju", ru: "kontradikciju", ua: "kontradikciju" },
+      { en: "suglasnost", ru: "suglasnost", ua: "suglasnost" },
+      { en: "potporu", ru: "potporu", ua: "potporu" }
+    ],
     correctAnswer: 1,
     explanation: {
       en: '"Protuurječnost" means contradiction or inconsistency.',
@@ -79,7 +104,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 6,
     level: "C2",
     question: "Koji frazem označava uzaludan posao ili prazno pričanje bez rezultata?",
-    options: ["mlatiti praznu slamu", "obrati bostan", "trčati pred rudo", "baciti koplje u trnje"],
+    options: [
+      { en: "mlatiti praznu slamu", ru: "mlatiti praznu slamu", ua: "mlatiti praznu slamu" },
+      { en: "obrati bostan", ru: "obrati bostan", ua: "obrati bostan" },
+      { en: "trčati pred rudo", ru: "trčati pred rudo", ua: "trčati pred rudo" },
+      { en: "baciti koplje u trnje", ru: "baciti koplje u trnje", ua: "baciti koplje u trnje" }
+    ],
     correctAnswer: 0,
     explanation: {
       en: '"Mlatiti praznu slamu" means to thrash empty straw, an idiom for doing futile work or talking in vain.',
@@ -95,7 +125,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 7,
     level: "A1",
     question: "Danas radim u _____ (Zagreb - locative singular).",
-    options: ["Zagrebu", "Zagreb", "Zagreba", "Zagrebom"],
+    options: [
+      { en: "Zagrebu", ru: "Zagrebu", ua: "Zagrebu" },
+      { en: "Zagreb", ru: "Zagreb", ua: "Zagreb" },
+      { en: "Zagreba", ru: "Zagreba", ua: "Zagreba" },
+      { en: "Zagrebom", ru: "Zagrebom", ua: "Zagrebom" }
+    ],
     correctAnswer: 0,
     explanation: {
       en: "Locative case (u + place) for masculine nouns ends in -u.",
@@ -107,7 +142,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 8,
     level: "A2",
     question: "Kupio sam prekrasan poklon za svoju _____ (majka - accusative singular).",
-    options: ["majke", "majci", "majku", "majkom"],
+    options: [
+      { en: "majke", ru: "majke", ua: "majke" },
+      { en: "majci", ru: "majci", ua: "majci" },
+      { en: "majku", ru: "majku", ua: "majku" },
+      { en: "majkom", ru: "majkom", ua: "majkom" }
+    ],
     correctAnswer: 2,
     explanation: {
       en: "The preposition 'za' (for) requires the accusative case. 'Majka' (feminine) becomes 'majku'.",
@@ -119,7 +159,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 9,
     level: "B1",
     question: "Jučer smo dugo razgovarali s novim _____ (predsjednik - instrumental singular).",
-    options: ["predsjedniku", "predsjednika", "predsjednikom", "predsjednik"],
+    options: [
+      { en: "predsjedniku", ru: "predsjedniku", ua: "predsjedniku" },
+      { en: "predsjednika", ru: "predsjednika", ua: "predsjednika" },
+      { en: "predsjednikom", ru: "predsjednikom", ua: "predsjednikom" },
+      { en: "predsjednik", ru: "predsjednik", ua: "predsjednik" }
+    ],
     correctAnswer: 2,
     explanation: {
       en: "Preposition 's/sa' indicating accompaniment requires the instrumental case ending in -om for masculine nouns.",
@@ -131,7 +176,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 10,
     level: "B2",
     question: "U dvorani je bilo prisutno nekoliko _____ (predsjednik - genitive plural).",
-    options: ["predsjednici", "predsjednika", "predsjednike", "predsjednicima"],
+    options: [
+      { en: "predsjednici", ru: "predsjednici", ua: "predsjednici" },
+      { en: "predsjednika", ru: "predsjednika", ua: "predsjednika" },
+      { en: "predsjednike", ru: "predsjednike", ua: "predsjednike" },
+      { en: "predsjednicima", ru: "predsjednicima", ua: "predsjednicima" }
+    ],
     correctAnswer: 1,
     explanation: {
       en: "Quantifiers like 'nekoliko' require the genitive plural, which for masculine nouns has a long -a ending.",
@@ -143,7 +193,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 11,
     level: "C1",
     question: "Odluku o imenovanju trebate poslati gospodinu _____ (Kovačić - dative singular).",
-    options: ["Kovačiću", "Kovačića", "Kovačićem", "Kovačiće"],
+    options: [
+      { en: "Kovačiću", ru: "Kovačiću", ua: "Kovačiću" },
+      { en: "Kovačića", ru: "Kovačića", ua: "Kovačića" },
+      { en: "Kovačićem", ru: "Kovačićem", ua: "Kovačićem" },
+      { en: "Kovačiće", ru: "Kovačiće", ua: "Kovačiće" }
+    ],
     correctAnswer: 0,
     explanation: {
       en: "Addresses/recipients take the dative case. 'Kovačić' ends in -u.",
@@ -155,7 +210,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 12,
     level: "C2",
     question: "Pjesnik je ostao zadivljen iskonskom ljepotom _____ (te daleke gore - genitive plural agreement).",
-    options: ["tih dalekih gora", "tim dalekim gorama", "te daleke gore", "tima dalekima gorama"],
+    options: [
+      { en: "tih dalekih gora", ru: "tih dalekih gora", ua: "tih dalekih gora" },
+      { en: "tim dalekim gorama", ru: "tim dalekim gorama", ua: "tim dalekim gorama" },
+      { en: "te daleke gore", ru: "te daleke gore", ua: "te daleke gore" },
+      { en: "tima dalekima gorama", ru: "tima dalekima gorama", ua: "tima dalekima gorama" }
+    ],
     correctAnswer: 0,
     explanation: {
       en: "Genitive plural of feminine 'gora' is 'gora' with a long -a. 'Tih dalekih gora' matches in case and plural number.",
@@ -171,7 +231,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 13,
     level: "A1",
     question: "Ja _____ (past tense of 'ići' - masculine singular) u kino jučer navečer.",
-    options: ["sam išao", "idem", "ću ići", "bih išao"],
+    options: [
+      { en: "sam išao", ru: "sam išao", ua: "sam išao" },
+      { en: "idem", ru: "idem", ua: "idem" },
+      { en: "ću ići", ru: "ću ići", ua: "ću ići" },
+      { en: "bih išao", ru: "bih išao", ua: "bih išao" }
+    ],
     correctAnswer: 0,
     explanation: {
       en: "Past tense (perfect) is formed with the short present of 'biti' + active verbal adjective.",
@@ -183,7 +248,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 14,
     level: "A2",
     question: "Mi _____ (future tense of 'putovati') u Split sljedeći tjedan.",
-    options: ["putovali smo", "ćemo putovati", "putujemo", "bismo putovali"],
+    options: [
+      { en: "putovali smo", ru: "putovali smo", ua: "putovali smo" },
+      { en: "ćemo putovati", ru: "ćemo putovati", ua: "ćemo putovati" },
+      { en: "putujemo", ru: "putujemo", ua: "putujemo" },
+      { en: "bismo putovali", ru: "bismo putovali", ua: "bismo putovali" }
+    ],
     correctAnswer: 1,
     explanation: {
       en: "Future I is formed with the clitic form of 'htjeti' (ću, ćeš, će, ćemo...) + infinitive.",
@@ -195,7 +265,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 15,
     level: "B1",
     question: "Ako _____ (future II of 'učiti') redovito, lako ćeš položiti ovaj ispit.",
-    options: ["učiš", "budeš učio", "ćeš učiti", "jesi učio"],
+    options: [
+      { en: "učiš", ru: "učiš", ua: "učiš" },
+      { en: "budeš učio", ru: "budeš učio", ua: "budeš učio" },
+      { en: "ćeš učiti", ru: "ćeš učiti", ua: "ćeš učiti" },
+      { en: "jesi učio", ru: "jesi učio", ua: "jesi učio" }
+    ],
     correctAnswer: 1,
     explanation: {
       en: "Future II (budeš učio) is required in conditional clauses expressing future conditions.",
@@ -207,7 +282,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 16,
     level: "B2",
     question: "Da smo znali za gužvu u prometu, _____ (conditional II of 'krenuti') ranije.",
-    options: ["bili bismo krenuli", "krenuli bismo", "krenut ćemo", "krenuli smo"],
+    options: [
+      { en: "bili bismo krenuli", ru: "bili bismo krenuli", ua: "bili bismo krenuli" },
+      { en: "krenuli bismo", ru: "krenuli bismo", ua: "krenuli bismo" },
+      { en: "krenut ćemo", ru: "krenut ćemo", ua: "krenut ćemo" },
+      { en: "krenuli smo", ru: "krenuli smo", ua: "krenuli smo" }
+    ],
     correctAnswer: 0,
     explanation: {
       en: "Unreal past conditions require Conditional II (bili bismo krenuli).",
@@ -219,7 +299,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 17,
     level: "C1",
     question: "Odjednom se začu strašan prasak, zemlja se zatrese i iz dubine _____ (aorist of 'izaći') plameni jezici.",
-    options: ["izađoše", "izašli su", "izaći će", "izlažahu"],
+    options: [
+      { en: "izađoše", ru: "izađoše", ua: "izađoše" },
+      { en: "izašli su", ru: "izašli su", ua: "izašli su" },
+      { en: "izaći će", ru: "izaći će", ua: "izaći će" },
+      { en: "izlažahu", ru: "izlažahu", ua: "izlažahu" }
+    ],
     correctAnswer: 0,
     explanation: {
       en: "Aorist is used in literary contexts to express sudden, successive past actions. 'Izađoše' is the 3rd person plural aorist.",
@@ -231,7 +316,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 18,
     level: "C2",
     question: "Da _____ (pluperfect of 'biti') više slušao savjete stručnjaka, izbjegao bi ove poteškoće.",
-    options: ["bijaše", "si bio", "bi bio", "budeš bio"],
+    options: [
+      { en: "bijaše", ru: "bijaše", ua: "bijaše" },
+      { en: "si bio", ru: "si bio", ua: "si bio" },
+      { en: "bi bio", ru: "bi bio", ua: "bi bio" },
+      { en: "budeš bio", ru: "budeš bio", ua: "budeš bio" }
+    ],
     correctAnswer: 0,
     explanation: {
       en: "The pluperfect (bijaše/bio je bio) is used here in formal literary conditional syntax to describe actions prior to other past events.",
@@ -247,7 +337,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 19,
     level: "A1",
     question: "Ovo je _____ (possessive pronoun 'my' - feminine singular) torba.",
-    options: ["moj", "moja", "moje", "moju"],
+    options: [
+      { en: "moj", ru: "moj", ua: "moj" },
+      { en: "moja", ru: "moja", ua: "moja" },
+      { en: "moje", ru: "moje", ua: "moje" },
+      { en: "moju", ru: "moju", ua: "moju" }
+    ],
     correctAnswer: 1,
     explanation: {
       en: "'Torba' is feminine singular, so the possessive pronoun is 'moja'.",
@@ -259,7 +354,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 20,
     level: "A2",
     question: "Jako _____ (short dative pronoun 'me') se sviđa tvoja nova kuća.",
-    options: ["me", "mi", "mene", "meni"],
+    options: [
+      { en: "me", ru: "me", ua: "me" },
+      { en: "mi", ru: "mi", ua: "mi" },
+      { en: "mene", ru: "mene", ua: "mene" },
+      { en: "meni", ru: "meni", ua: "meni" }
+    ],
     correctAnswer: 1,
     explanation: {
       en: "The reflexive expression 'sviđati se' requires dative. The short form is 'mi'.",
@@ -272,10 +372,10 @@ export const placementQuestions: PlacementQuestion[] = [
     level: "B1",
     question: "Koji je gramatički ispravan redoslijed zamjenica u rečenici?",
     options: [
-      "Jučer su mi ga dali na poslu.",
-      "Jučer mi su ga dali na poslu.",
-      "Jučer ga mi su dali na poslu.",
-      "Jučer dali su mi ga na poslu."
+      { en: "Jučer su mi ga dali na poslu.", ru: "Jučer su mi ga dali na poslu.", ua: "Jučer su mi ga dali na poslu." },
+      { en: "Jučer mi su ga dali na poslu.", ru: "Jučer mi su ga dali na poslu.", ua: "Jučer mi su ga dali na poslu." },
+      { en: "Jučer ga mi su dali na poslu.", ru: "Jučer ga mi su dali na poslu.", ua: "Jučer ga mi su dali na poslu." },
+      { en: "Jučer dali su mi ga na poslu.", ru: "Jučer dali su mi ga na poslu.", ua: "Jučer dali su mi ga na poslu." }
     ],
     correctAnswer: 0,
     explanation: {
@@ -288,7 +388,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 22,
     level: "B2",
     question: "U trgovini nismo zatekli _____ (double negation requirement: 'no one').",
-    options: ["nekoga", "nikoga", "ikoga", "tko"],
+    options: [
+      { en: "nekoga", ru: "nekoga", ua: "nekoga" },
+      { en: "nikoga", ru: "nikoga", ua: "nikoga" },
+      { en: "ikoga", ru: "ikoga", ua: "ikoga" },
+      { en: "tko", ru: "tko", ua: "tko" }
+    ],
     correctAnswer: 1,
     explanation: {
       en: "Croatian grammar requires double negation: 'nismo' (not) + 'nikoga' (no one).",
@@ -300,7 +405,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 23,
     level: "C1",
     question: "Upoznao sam znanstvenika _____ (whose - genitive masculine singular relative pronoun) rad iznimno cijenim.",
-    options: ["kojeg", "čiji", "čiji je", "čijega"],
+    options: [
+      { en: "kojeg", ru: "kojeg", ua: "kojeg" },
+      { en: "čiji", ru: "čiji", ua: "čiji" },
+      { en: "čiji je", ru: "čiji je", ua: "čiji je" },
+      { en: "čijega", ru: "čijega", ua: "čijega" }
+    ],
     correctAnswer: 3,
     explanation: {
       en: "The relative possessive pronoun 'čiji' (whose) in genitive masculine singular takes the form 'čijega' or 'čijeg'.",
@@ -312,7 +422,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 24,
     level: "C2",
     question: "Ovaj se problem tiče svih zaposlenika, s _____ (whoever - instrumental plural relative pronoun) od njih razgovarali.",
-    options: ["kojima god", "kime god", "s kime", "kojim god"],
+    options: [
+      { en: "kojima god", ru: "kojima god", ua: "kojima god" },
+      { en: "kime god", ru: "kime god", ua: "kime god" },
+      { en: "s kime", ru: "s kime", ua: "s kime" },
+      { en: "kojim god", ru: "kojim god", ua: "kojim god" }
+    ],
     correctAnswer: 0,
     explanation: {
       en: "Relative pronoun 'tko god' or 'koji god' after preposition 's' in instrumental plural becomes 'kojima god'.",
@@ -328,7 +443,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 25,
     level: "A1",
     question: "Svako jutro pijem čaj _____ (preposition 'with') medom.",
-    options: ["s", "bez", "iz", "kod"],
+    options: [
+      { en: "s", ru: "s", ua: "s" },
+      { en: "bez", ru: "bez", ua: "bez" },
+      { en: "iz", ru: "iz", ua: "iz" },
+      { en: "kod", ru: "kod", ua: "kod" }
+    ],
     correctAnswer: 0,
     explanation: {
       en: "Preposition 's' (with) indicates accompaniment and triggers the instrumental case.",
@@ -340,7 +460,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 26,
     level: "A2",
     question: "Ja obično _____ (imperfective aspect of 'čitati') vijesti na internetu dok pijem kavu.",
-    options: ["pročitam", "pročitati", "čitam", "sam pročitao"],
+    options: [
+      { en: "pročitam", ru: "pročitam", ua: "pročitam" },
+      { en: "pročitati", ru: "pročitati", ua: "pročitati" },
+      { en: "čitam", ru: "čitam", ua: "čitam" },
+      { en: "sam pročitao", ru: "sam pročitao", ua: "sam pročitao" }
+    ],
     correctAnswer: 2,
     explanation: {
       en: "For habitual, ongoing actions, the imperfective aspect ('čitam') is used.",
@@ -352,7 +477,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 27,
     level: "B1",
     question: "Moram pod hitno _____ (perfective aspect of 'napisati') ovaj službeni izvještaj.",
-    options: ["pisati", "napisati", "napišem", "napisao"],
+    options: [
+      { en: "pisati", ru: "pisati", ua: "pisati" },
+      { en: "napisati", ru: "napisati", ua: "napisati" },
+      { en: "napišem", ru: "napišem", ua: "napišem" },
+      { en: "napisao", ru: "napisao", ua: "napisao" }
+    ],
     correctAnswer: 1,
     explanation: {
       en: "An action that needs to be completed as a single whole requires the perfective infinitive ('napisati').",
@@ -364,7 +494,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 28,
     level: "B2",
     question: "Otišao je na spavanje tek _____ (prepositional phrase 'after') je završio sve obaveze.",
-    options: ["nakon što", "prije nego što", "tijekom", "dok"],
+    options: [
+      { en: "nakon što", ru: "nakon što", ua: "nakon što" },
+      { en: "prije nego što", ru: "prije nego što", ua: "prije nego što" },
+      { en: "tijekom", ru: "tijekom", ua: "tijekom" },
+      { en: "dok", ru: "dok", ua: "dok" }
+    ],
     correctAnswer: 0,
     explanation: {
       en: '"Nakon što" translates to "after" when introducing a clause.',
@@ -376,7 +511,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 29,
     level: "C1",
     question: "Novi je zakon usvojen _____ (despite - preposition requiring dative case) brojnim prosvjedima građana.",
-    options: ["usprkos", "radi", "zbog", "tijekom"],
+    options: [
+      { en: "usprkos", ru: "usprkos", ua: "usprkos" },
+      { en: "radi", ru: "radi", ua: "radi" },
+      { en: "zbog", ru: "zbog", ua: "zbog" },
+      { en: "tijekom", ru: "tijekom", ua: "tijekom" }
+    ],
     correctAnswer: 0,
     explanation: {
       en: '"Usprkos" (despite) requires the dative case (brojnim prosvjedima).',
@@ -388,7 +528,12 @@ export const placementQuestions: PlacementQuestion[] = [
     id: 30,
     level: "C2",
     question: "Nemojte brzati s donošenjem zaključaka i _____ (to guess/speculate - imperfective aspect) o njegovim skrivenim namjerama.",
-    options: ["nagađati", "nagoditi", "nagađivati", "ugoditi"],
+    options: [
+      { en: "nagađati", ru: "nagađati", ua: "nagađati" },
+      { en: "nagoditi", ru: "nagoditi", ua: "nagoditi" },
+      { en: "nagađivati", ru: "nagađivati", ua: "nagađivati" },
+      { en: "ugoditi", ru: "ugoditi", ua: "ugoditi" }
+    ],
     correctAnswer: 0,
     explanation: {
       en: '"Nagađati" is the correct imperfective verb meaning to guess, speculate or surmise.',
