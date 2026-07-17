@@ -71,7 +71,7 @@ export default function HomePage() {
         <div className="text-center space-y-8 animate-fade-in">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-medium text-blue-400">
             <Sparkles className="w-4 h-4" />
-            AI-Powered Language Learning
+            Immersive Croatian Academy
           </div>
 
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight">
@@ -174,7 +174,7 @@ export default function HomePage() {
           </h2>
           <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
             Let&apos;s start learning Croatian! Join thousands of learners
-            mastering Croatian with AI.
+            mastering Croatian through cultural immersion.
           </p>
           <Link
             href={session ? "/dashboard" : "/sign-up"}

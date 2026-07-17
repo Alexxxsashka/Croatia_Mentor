@@ -35,37 +35,37 @@
   "landing": {
     "hero": {
       "title": "Master Croatian",
-      "titleHighlight": "with AI",
-      "subtitle": "Your personal AI-powered Croatian language tutor. Learn grammar, practice conversations, and immerse yourself in Croatian culture.",
-      "cta": "Start Learning Free",
+      "titleHighlight": "Through Immersion",
+      "subtitle": "Your premium, structured path to Croatian fluency. Master the language through real-life scenarios, cultural context, pop music, and conversational simulation.",
+      "cta": "Start Journey Free",
       "ctaSecondary": "Take Placement Test",
       "goToDashboard": "Go to Dashboard"
     },
     "features": {
-      "title": "Why Croatia Mentor?",
+      "title": "A Smarter Way to Learn Croatian",
       "ai": {
-        "title": "AI-Powered Tutoring",
-        "description": "Chat with an intelligent AI mentor that adapts to your level and corrects your mistakes in real-time."
+        "title": "Simulated Conversations",
+        "description": "Practice dialogues with an interactive speaking assistant that adapts to your level and guides you to natural fluency."
       },
       "structured": {
-        "title": "Structured Lessons",
-        "description": "Grammar, reading, dictation, and communication lessons aligned to CEFR levels A1 through C2."
+        "title": "Structured Curriculum",
+        "description": "Comprehensive lessons covering grammar, vocabulary, and active listening from A1 (Beginner) to C2 (Mastery)."
       },
       "games": {
-        "title": "Fun Mini-Games",
-        "description": "Learn through play with word matching, fill-in-the-blanks, and more interactive exercises."
+        "title": "Active Play",
+        "description": "Reinforce your learning with interactive mini-games like Word Match, Scramble, and Speed Quiz."
       },
       "media": {
-        "title": "Cultural Immersion",
-        "description": "Learn vocabulary through memes, movie clips, and music from Croatian pop culture."
+        "title": "Pop-Culture Immersion",
+        "description": "Learn from authentic materials including popular music, local media, and cultural context."
       },
       "tracking": {
-        "title": "Progress Tracking",
-        "description": "Track your streak, XP, and level progression with detailed statistics and insights."
+        "title": "Gamified Progress",
+        "description": "Stay motivated with daily streaks, XP points, and structured level progression tracking."
       },
       "multilingual": {
-        "title": "Multilingual Support",
-        "description": "Interface available in English, Russian, and Ukrainian with translations in all three languages."
+        "title": "Tailored for You",
+        "description": "Fully translated explanations in English, Russian, and Ukrainian to match your native language."
       }
     }
   },
@@ -353,5 +353,10 @@
     "categories": "Glossary Categories",
     "noResults": "No matching topics found.",
     "examples": "Examples"
+  },
+  "meta": {
+    "title": "Croatia Mentor - Immersive Croatian Language & Culture Academy",
+    "description": "Master Croatian naturally through cultural immersion, pop music, interactive speaking dialogues, and structured lessons from A1 to C2. Step into Croatian culture today.",
+    "keywords": "learn croatian, croatian language course, study croatian, croata, croatian grammar, croatian phrases, croatian lessons, CEFR, speak croatian, croatia mentor"
   }
 }
