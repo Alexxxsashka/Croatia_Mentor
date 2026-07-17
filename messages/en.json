@@ -117,7 +117,9 @@
     "takeTest": "Take Placement Test",
     "takeTestDesc": "Test your level",
     "noActivity": "No recent activity. Start a lesson to begin!",
-    "levelProgress": "Level Progress"
+    "levelProgress": "Level Progress",
+    "keepLearningXp": "Keep learning to get more XP",
+    "days": "days"
   },
   "placementTest": {
     "title": "Placement Test",

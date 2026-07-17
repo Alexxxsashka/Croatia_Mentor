@@ -171,11 +171,22 @@ export default function DashboardPage() {
       const date = new Date(score.date);
       const diffMs = new Date().getTime() - date.getTime();
       const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-      const timeStr = diffHours < 1 ? "Just now" : diffHours < 24 ? `${diffHours}h ago` : `${Math.floor(diffHours / 24)}d ago`;
+      
+      let timeStr = "";
+      if (diffHours < 1) {
+        timeStr = locale === "ua" ? "Щойно" : locale === "ru" ? "Только что" : "Just now";
+      } else if (diffHours < 24) {
+        timeStr = locale === "ua" ? `${diffHours} год. тому` : locale === "ru" ? `${diffHours} ч. назад` : `${diffHours}h ago`;
+      } else {
+        const days = Math.floor(diffHours / 24);
+        timeStr = locale === "ua" ? `${days} дн. тому` : locale === "ru" ? `${days} дн. назад` : `${days}d ago`;
+      }
       
       recentActivity.push({
         type: "test",
-        title: score.type === "placement" ? "Placement Test" : "Level Quiz",
+        title: score.type === "placement" 
+          ? (locale === "ua" ? "Тест рівня" : locale === "ru" ? "Тест уровня" : "Placement Test") 
+          : (locale === "ua" ? "Тест підвищення" : locale === "ru" ? "Тест повышения" : "Level Quiz"),
         xp: score.score * 10,
         time: timeStr,
       });
@@ -283,7 +294,7 @@ export default function DashboardPage() {
             {totalXP.toLocaleString()}
           </div>
           <div className="text-xs text-muted-foreground mt-1">
-            Keep learning to get more XP
+            {t("keepLearningXp")}
           </div>
         </div>
 
