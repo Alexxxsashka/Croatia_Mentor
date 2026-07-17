@@ -162,19 +162,36 @@ export default function ListeningPage() {
       {/* Listen phase */}
       {phase === "listen" && (
         <div className="space-y-6 animate-slide-up">
-          {/* Audio player placeholder with TTS */}
+          {/* Audio player placeholder with YouTube or TTS */}
           <div className="glass rounded-2xl p-6 text-center">
-            <Headphones className="w-12 h-12 text-blue-400 mx-auto mb-4" />
-            <p className="text-sm text-muted-foreground mb-4">{t("listening.listenCarefully")}</p>
-            <button
-              onClick={() => {
-                const fullText = item.subtitles.map((s) => s.hr).join(". ");
-                speakText(fullText);
-              }}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 shadow-lg"
-            >
-              <Play className="w-5 h-5" /> {t("listening.play")}
-            </button>
+            {item.youtubeId ? (
+              <div className="mb-2">
+                <iframe
+                  className="w-full aspect-video rounded-xl shadow-lg border-0"
+                  src={`https://www.youtube.com/embed/${item.youtubeId}`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  title={getLocalized(item.title, locale)}
+                />
+                <p className="text-xs text-muted-foreground mt-3">
+                  {t("listening.listenCarefully") || "Listen to the audio above to prepare for the questions."}
+                </p>
+              </div>
+            ) : (
+              <>
+                <Headphones className="w-12 h-12 text-blue-400 mx-auto mb-4" />
+                <p className="text-sm text-muted-foreground mb-4">{t("listening.listenCarefully")}</p>
+                <button
+                  onClick={() => {
+                    const fullText = item.subtitles.map((s) => s.hr).join(". ");
+                    speakText(fullText);
+                  }}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 shadow-lg"
+                >
+                  <Play className="w-5 h-5" /> {t("listening.play")}
+                </button>
+              </>
+            )}
           </div>
 
           {/* Subtitles toggle */}

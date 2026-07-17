@@ -24,7 +24,7 @@ export const listeningData: ListeningItem[] = [
     title: { en: "Croatian Children's Song: Ide maca oko tebe", ru: "Детская песня: Ide maca oko tebe", ua: "Дитяча пісня: Ide maca oko tebe" },
     type: "song",
     level: "A1",
-    youtubeId: "dQw4w9WgXcQ",
+    youtubeId: "gT8-X21L5H0",
     description: {
       en: "A popular Croatian children's song about a cat. Great for learning basic vocabulary and practicing listening.",
       ru: "Популярная хорватская детская песня о кошке. Отлично подходит для изучения базовой лексики и аудирования.",
@@ -99,7 +99,7 @@ export const listeningData: ListeningItem[] = [
     title: { en: "Croatian National Anthem", ru: "Гимн Хорватии", ua: "Гімн Хорватії" },
     type: "song",
     level: "B1",
-    youtubeId: "",
+    youtubeId: "UoY15055R0U",
     description: {
       en: "Listen to the Croatian national anthem 'Lijepa naša domovino' (Our Beautiful Homeland) and learn key vocabulary about patriotism and nature.",
       ru: "Послушайте гимн Хорватии 'Lijepa naša domovino' (Наша прекрасная родина) и выучите ключевую лексику о патриотизме и природе.",
