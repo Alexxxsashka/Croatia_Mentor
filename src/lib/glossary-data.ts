@@ -44,30 +44,30 @@ export const glossaryData: GlossaryCategory[] = [
     "id": "phonetics",
     "title": {
       "en": "Phonetics & Alphabet",
-      "ru": "╨д╨╛╨╜╨╡╤В╨╕╨║╨░ ╨╕ ╨░╨╗╤Д╨░╨▓╨╕╤В",
-      "ua": "╨д╨╛╨╜╨╡╤В╨╕╨║╨░ ╤В╨░ ╨░╨╗╤Д╨░╨▓╤Ц╤В"
+      "ru": "Фонетика и алфавит",
+      "ua": "Фонетика та алфавіт"
     },
-    "icon": "ЁЯФд",
+    "icon": "🔤",
     "sections": [
       {
         "id": "alphabet",
         "title": {
           "en": "Croatian Alphabet (Abeceda)",
-          "ru": "╨е╨╛╤А╨▓╨░╤В╤Б╨║╨╕╨╣ ╨░╨╗╤Д╨░╨▓╨╕╤В (Abeceda)",
-          "ua": "╨е╨╛╤А╨▓╨░╤В╤Б╤М╨║╨╕╨╣ ╨░╨╗╤Д╨░╨▓╤Ц╤В (Abeceda)"
+          "ru": "Хорватский алфавит (Abeceda)",
+          "ua": "Хорватський алфавіт (Abeceda)"
         },
-        "icon": "ЁЯУЦ",
+        "icon": "📖",
         "subsections": [
           {
             "title": {
               "en": "The Alphabet",
-              "ru": "╨Р╨╗╤Д╨░╨▓╨╕╤В",
-              "ua": "╨Р╨╗╤Д╨░╨▓╤Ц╤В"
+              "ru": "Алфавит",
+              "ua": "Алфавіт"
             },
             "text": {
-              "en": "Croatian uses the Latin alphabet with 30 letters. Each letter corresponds to exactly one sound тАФ Croatian spelling is fully phonetic. There are no silent letters.",
-              "ru": "╨е╨╛╤А╨▓╨░╤В╤Б╨║╨╕╨╣ ╤П╨╖╤Л╨║ ╨╕╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╤В ╨╗╨░╤В╨╕╨╜╤Б╨║╨╕╨╣ ╨░╨╗╤Д╨░╨▓╨╕╤В ╨╕╨╖ 30 ╨▒╤Г╨║╨▓. ╨Ъ╨░╨╢╨┤╨░╤П ╨▒╤Г╨║╨▓╨░ ╤Б╨╛╨╛╤В╨▓╨╡╤В╤Б╤В╨▓╤Г╨╡╤В ╤А╨╛╨▓╨╜╨╛ ╨╛╨┤╨╜╨╛╨╝╤Г ╨╖╨▓╤Г╨║╤Г тАФ ╤Е╨╛╤А╨▓╨░╤В╤Б╨║╨░╤П ╨╛╤А╤Д╨╛╨│╤А╨░╤Д╨╕╤П ╨┐╨╛╨╗╨╜╨╛╤Б╤В╤М╤О ╤Д╨╛╨╜╨╡╤В╨╕╤З╨╡╤Б╨║╨░╤П. ╨Э╨╡╤В ╨╜╨╡╨╝╤Л╤Е ╨▒╤Г╨║╨▓.",
-              "ua": "╨е╨╛╤А╨▓╨░╤В╤Б╤М╨║╨░ ╨╝╨╛╨▓╨░ ╨▓╨╕╨║╨╛╤А╨╕╤Б╤В╨╛╨▓╤Г╤Ф ╨╗╨░╤В╨╕╨╜╤Б╤М╨║╨╕╨╣ ╨░╨╗╤Д╨░╨▓╤Ц╤В ╤Ц╨╖ 30 ╨╗╤Ц╤В╨╡╤А. ╨Ъ╨╛╨╢╨╜╨░ ╨╗╤Ц╤В╨╡╤А╨░ ╨▓╤Ц╨┤╨┐╨╛╨▓╤Ц╨┤╨░╤Ф ╤А╤Ц╨▓╨╜╨╛ ╨╛╨┤╨╜╨╛╨╝╤Г ╨╖╨▓╤Г╨║╤Г тАФ ╤Е╨╛╤А╨▓╨░╤В╤Б╤М╨║╨░ ╨╛╤А╤Д╨╛╨│╤А╨░╤Д╤Ц╤П ╨┐╨╛╨▓╨╜╤Ц╤Б╤В╤О ╤Д╨╛╨╜╨╡╤В╨╕╤З╨╜╨░. ╨Э╨╡╨╝╨░╤Ф ╨╜╤Ц╨╝╨╕╤Е ╨╗╤Ц╤В╨╡╤А."
+              "en": "Croatian uses the Latin alphabet with 30 letters. Each letter corresponds to exactly one sound — Croatian spelling is fully phonetic. There are no silent letters.",
+              "ru": "Хорватский язык использует латинский алфавит из 30 букв. Каждая буква соответствует ровно одному звуку — хорватская орфография полностью фонетическая. Нет немых букв.",
+              "ua": "Хорватська мова використовує латинський алфавіт із 30 літер. Кожна літера відповідає рівно одному звуку — хорватська орфографія повністю фонетична. Немає німих літер."
             },
             "table": {
               "headers": [
@@ -103,18 +103,18 @@ export const glossaryData: GlossaryCategory[] = [
                 },
                 {
                   "cells": [
-                    "─М ─Н",
-                    "─Нe",
-                    "/t╩Г/",
-                    "─Нovjek (person)"
+                    "Č č",
+                    "če",
+                    "/tʃ/",
+                    "čovjek (person)"
                   ]
                 },
                 {
                   "cells": [
-                    "─Ж ─З",
-                    "─Зe",
-                    "/t╔Х/",
-                    "─Зevapi (─Зevapi)"
+                    "Ć ć",
+                    "će",
+                    "/tɕ/",
+                    "ćevapi (ćevapi)"
                   ]
                 },
                 {
@@ -127,18 +127,18 @@ export const glossaryData: GlossaryCategory[] = [
                 },
                 {
                   "cells": [
-                    "D┼╛ d┼╛",
-                    "d┼╛e",
-                    "/d╩Т/",
-                    "d┼╛em (jam)"
+                    "Dž dž",
+                    "dže",
+                    "/dʒ/",
+                    "džem (jam)"
                   ]
                 },
                 {
                   "cells": [
-                    "─Р ─С",
-                    "─Сe",
-                    "/d╩С/",
-                    "─Сak (pupil)"
+                    "Đ đ",
+                    "đe",
+                    "/dʑ/",
+                    "đak (pupil)"
                   ]
                 },
                 {
@@ -161,7 +161,7 @@ export const glossaryData: GlossaryCategory[] = [
                   "cells": [
                     "G g",
                     "ge",
-                    "/╔б/",
+                    "/ɡ/",
                     "grad (city)"
                   ]
                 },
@@ -194,7 +194,7 @@ export const glossaryData: GlossaryCategory[] = [
                     "K k",
                     "ka",
                     "/k/",
-                    "ku─Зa (house)"
+                    "kuća (house)"
                   ]
                 },
                 {
@@ -209,7 +209,7 @@ export const glossaryData: GlossaryCategory[] = [
                   "cells": [
                     "Lj lj",
                     "elj",
-                    "/╩О/",
+                    "/ʎ/",
                     "ljubav (love)"
                   ]
                 },
@@ -233,7 +233,7 @@ export const glossaryData: GlossaryCategory[] = [
                   "cells": [
                     "Nj nj",
                     "enj",
-                    "/╔▓/",
+                    "/ɲ/",
                     "njega (him)"
                   ]
                 },
@@ -271,10 +271,10 @@ export const glossaryData: GlossaryCategory[] = [
                 },
                 {
                   "cells": [
-                    "┼а ┼б",
-                    "e┼б",
-                    "/╩Г/",
-                    "┼бkola (school)"
+                    "Š š",
+                    "eš",
+                    "/ʃ/",
+                    "škola (school)"
                   ]
                 },
                 {
@@ -297,7 +297,7 @@ export const glossaryData: GlossaryCategory[] = [
                   "cells": [
                     "V v",
                     "ve",
-                    "/╩Л/",
+                    "/ʋ/",
                     "voda (water)"
                   ]
                 },
@@ -311,10 +311,10 @@ export const glossaryData: GlossaryCategory[] = [
                 },
                 {
                   "cells": [
-                    "┼╜ ┼╛",
-                    "┼╛e",
-                    "/╩Т/",
-                    "┼╛ena (woman)"
+                    "Ž ž",
+                    "že",
+                    "/ʒ/",
+                    "žena (woman)"
                   ]
                 }
               ]
@@ -323,29 +323,29 @@ export const glossaryData: GlossaryCategory[] = [
           {
             "title": {
               "en": "Special Letters",
-              "ru": "╨Ю╤Б╨╛╨▒╤Л╨╡ ╨▒╤Г╨║╨▓╤Л",
-              "ua": "╨Ю╤Б╨╛╨▒╨╗╨╕╨▓╤Ц ╨╗╤Ц╤В╨╡╤А╨╕"
+              "ru": "Особые буквы",
+              "ua": "Особливі літери"
             },
             "text": {
-              "en": "Croatian has several unique letters: ─М, ─Ж, ─Р, D┼╛, Lj, Nj, ┼а, ┼╜. The digraphs D┼╛, Lj, Nj are each considered single letters. ─М vs ─Ж: ─М is a 'hard' ch (like English 'church'), while ─Ж is a 'soft' ch (palatalized, similar to Italian 'ci').",
-              "ru": "╨Т ╤Е╨╛╤А╨▓╨░╤В╤Б╨║╨╛╨╝ ╨╜╨╡╤Б╨║╨╛╨╗╤М╨║╨╛ ╤Г╨╜╨╕╨║╨░╨╗╤М╨╜╤Л╤Е ╨▒╤Г╨║╨▓: ─М, ─Ж, ─Р, D┼╛, Lj, Nj, ┼а, ┼╜. ╨Ф╨╕╨│╤А╨░╤Д╤Л D┼╛, Lj, Nj ╤Б╤З╨╕╤В╨░╤О╤В╤Б╤П ╨╛╨┤╨╜╨╛╨╣ ╨▒╤Г╨║╨▓╨╛╨╣. ─М vs ─Ж: ─М тАФ ┬л╤В╨▓╤С╤А╨┤╤Л╨╣┬╗ ╨╖╨▓╤Г╨║ (╨║╨░╨║ ╨░╨╜╨│╨╗. 'church'), ╨░ ─Ж тАФ ┬л╨╝╤П╨│╨║╨╕╨╣┬╗ (╨┐╨░╨╗╨░╤В╨░╨╗╨╕╨╖╨╛╨▓╨░╨╜╨╜╤Л╨╣, ╨┐╨╛╤Е╨╛╨╢ ╨╜╨░ ╨╕╤В╨░╨╗╤М╤П╨╜╤Б╨║╨╛╨╡ 'ci').",
-              "ua": "╨г ╤Е╨╛╤А╨▓╨░╤В╤Б╤М╨║╤Ц╨╣ ╨║╤Ц╨╗╤М╨║╨░ ╤Г╨╜╤Ц╨║╨░╨╗╤М╨╜╨╕╤Е ╨╗╤Ц╤В╨╡╤А: ─М, ─Ж, ─Р, D┼╛, Lj, Nj, ┼а, ┼╜. ╨Ф╨╕╨│╤А╨░╤Д╨╕ D┼╛, Lj, Nj ╨▓╨▓╨░╨╢╨░╤О╤В╤М╤Б╤П ╨╛╨┤╨╜╤Ц╤Ф╤О ╨╗╤Ц╤В╨╡╤А╨╛╤О. ─М vs ─Ж: ─М тАФ ┬л╤В╨▓╨╡╤А╨┤╨╕╨╣┬╗ ╨╖╨▓╤Г╨║ (╤П╨║ ╨░╨╜╨│╨╗. 'church'), ╨░ ─Ж тАФ ┬л╨╝'╤П╨║╨╕╨╣┬╗ (╨┐╨░╨╗╨░╤В╨░╨╗╤Ц╨╖╨╛╨▓╨░╨╜╨╕╨╣, ╤Б╤Е╨╛╨╢╨╕╨╣ ╨╜╨░ ╤Ц╤В╨░╨╗╤Ц╨╣╤Б╤М╨║╨╡ 'ci')."
+              "en": "Croatian has several unique letters: Č, Ć, Đ, Dž, Lj, Nj, Š, Ž. The digraphs Dž, Lj, Nj are each considered single letters. Č vs Ć: Č is a 'hard' ch (like English 'church'), while Ć is a 'soft' ch (palatalized, similar to Italian 'ci').",
+              "ru": "В хорватском несколько уникальных букв: Č, Ć, Đ, Dž, Lj, Nj, Š, Ž. Диграфы Dž, Lj, Nj считаются одной буквой. Č vs Ć: Č — «твёрдый» звук (как англ. 'church'), а Ć — «мягкий» (палатализованный, похож на итальянское 'ci').",
+              "ua": "У хорватській кілька унікальних літер: Č, Ć, Đ, Dž, Lj, Nj, Š, Ž. Диграфи Dž, Lj, Nj вважаються однією літерою. Č vs Ć: Č — «твердий» звук (як англ. 'church'), а Ć — «м'який» (палаталізований, схожий на італійське 'ci')."
             },
             "examples": [
               {
-                "hr": "─Мovjek je dobar.",
+                "hr": "Čovjek je dobar.",
                 "translation": {
                   "en": "The person is good.",
-                  "ru": "╨з╨╡╨╗╨╛╨▓╨╡╨║ ╤Е╨╛╤А╨╛╤И╨╕╨╣.",
-                  "ua": "╨Ы╤О╨┤╨╕╨╜╨░ ╨┤╨╛╨▒╤А╨░."
+                  "ru": "Человек хороший.",
+                  "ua": "Людина добра."
                 }
               },
               {
-                "hr": "No─З je lijepa.",
+                "hr": "Noć je lijepa.",
                 "translation": {
                   "en": "The night is beautiful.",
-                  "ru": "╨Э╨╛╤З╤М ╨║╤А╨░╤Б╨╕╨▓╨░.",
-                  "ua": "╨Э╤Ц╤З ╨│╨░╤А╨╜╨░."
+                  "ru": "Ночь красива.",
+                  "ua": "Ніч гарна."
                 }
               }
             ]
@@ -356,37 +356,37 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "pronunciation",
         "title": {
           "en": "Pronunciation Rules",
-          "ru": "╨Я╤А╨░╨▓╨╕╨╗╨░ ╨┐╤А╨╛╨╕╨╖╨╜╨╛╤И╨╡╨╜╨╕╤П",
-          "ua": "╨Я╤А╨░╨▓╨╕╨╗╨░ ╨▓╨╕╨╝╨╛╨▓╨╕"
+          "ru": "Правила произношения",
+          "ua": "Правила вимови"
         },
-        "icon": "ЁЯЧгя╕П",
+        "icon": "🗣️",
         "subsections": [
           {
             "title": {
               "en": "Stress and Intonation",
-              "ru": "╨г╨┤╨░╤А╨╡╨╜╨╕╨╡ ╨╕ ╨╕╨╜╤В╨╛╨╜╨░╤Ж╨╕╤П",
-              "ua": "╨Э╨░╨│╨╛╨╗╨╛╤Б ╤В╨░ ╤Ц╨╜╤В╨╛╨╜╨░╤Ж╤Ц╤П"
+              "ru": "Ударение и интонация",
+              "ua": "Наголос та інтонація"
             },
             "text": {
               "en": "Croatian has a pitch accent system with four types of stress: short falling, short rising, long falling, long rising. Stress never falls on the last syllable (except in some monosyllabic words). In standard speech, stress tends to be on the first or second syllable.",
-              "ru": "╨Т ╤Е╨╛╤А╨▓╨░╤В╤Б╨║╨╛╨╝ ╤П╨╖╤Л╨║╨╡ ╨╡╤Б╤В╤М ╤В╨╛╨╜╨░╨╗╤М╨╜╨░╤П ╤Б╨╕╤Б╤В╨╡╨╝╨░ ╤Г╨┤╨░╤А╨╡╨╜╨╕╤П ╤Б ╤З╨╡╤В╤Л╤А╤М╨╝╤П ╤В╨╕╨┐╨░╨╝╨╕: ╨║╤А╨░╤В╨║╨╛╨╡ ╨╜╨╕╤Б╤Е╨╛╨┤╤П╤Й╨╡╨╡, ╨║╤А╨░╤В╨║╨╛╨╡ ╨▓╨╛╤Б╤Е╨╛╨┤╤П╤Й╨╡╨╡, ╨┤╨╛╨╗╨│╨╛╨╡ ╨╜╨╕╤Б╤Е╨╛╨┤╤П╤Й╨╡╨╡, ╨┤╨╛╨╗╨│╨╛╨╡ ╨▓╨╛╤Б╤Е╨╛╨┤╤П╤Й╨╡╨╡. ╨г╨┤╨░╤А╨╡╨╜╨╕╨╡ ╨╜╨╕╨║╨╛╨│╨┤╨░ ╨╜╨╡ ╨┐╨░╨┤╨░╨╡╤В ╨╜╨░ ╨┐╨╛╤Б╨╗╨╡╨┤╨╜╨╕╨╣ ╤Б╨╗╨╛╨│ (╨║╤А╨╛╨╝╨╡ ╨╜╨╡╨║╨╛╤В╨╛╤А╤Л╤Е ╨╛╨┤╨╜╨╛╤Б╨╗╨╛╨╢╨╜╤Л╤Е ╤Б╨╗╨╛╨▓).",
-              "ua": "╨г ╤Е╨╛╤А╨▓╨░╤В╤Б╤М╨║╤Ц╨╣ ╨╝╨╛╨▓╤Ц ╤Ф ╤В╨╛╨╜╨░╨╗╤М╨╜╨░ ╤Б╨╕╤Б╤В╨╡╨╝╨░ ╨╜╨░╨│╨╛╨╗╨╛╤Б╤Г ╨╖ ╤З╨╛╤В╨╕╤А╨╝╨░ ╤В╨╕╨┐╨░╨╝╨╕: ╨║╨╛╤А╨╛╤В╨║╨╕╨╣ ╤Б╨┐╨░╨┤╨╜╨╕╨╣, ╨║╨╛╤А╨╛╤В╨║╨╕╨╣ ╨▓╨╕╤Б╤Е╤Ц╨┤╨╜╨╕╨╣, ╨┤╨╛╨▓╨│╨╕╨╣ ╤Б╨┐╨░╨┤╨╜╨╕╨╣, ╨┤╨╛╨▓╨│╨╕╨╣ ╨▓╨╕╤Б╤Е╤Ц╨┤╨╜╨╕╨╣. ╨Э╨░╨│╨╛╨╗╨╛╤Б ╨╜╤Ц╨║╨╛╨╗╨╕ ╨╜╨╡ ╨┐╨░╨┤╨░╤Ф ╨╜╨░ ╨╛╤Б╤В╨░╨╜╨╜╤Ц╨╣ ╤Б╨║╨╗╨░╨┤ (╨║╤А╤Ц╨╝ ╨┤╨╡╤П╨║╨╕╤Е ╨╛╨┤╨╜╨╛╤Б╨║╨╗╨░╨┤╨╛╨▓╨╕╤Е ╤Б╨╗╤Ц╨▓)."
+              "ru": "В хорватском языке есть тональная система ударения с четырьмя типами: краткое нисходящее, краткое восходящее, долгое нисходящее, долгое восходящее. Ударение никогда не падает на последний слог (кроме некоторых односложных слов).",
+              "ua": "У хорватській мові є тональна система наголосу з чотирма типами: короткий спадний, короткий висхідний, довгий спадний, довгий висхідний. Наголос ніколи не падає на останній склад (крім деяких односкладових слів)."
             },
             "examples": [
               {
-                "hr": "v├▓da",
+                "hr": "vòda",
                 "translation": {
                   "en": "water (short rising)",
-                  "ru": "╨▓╨╛╨┤╨░ (╨║╤А╨░╤В╨║╨╛╨╡ ╨▓╨╛╤Б╤Е╨╛╨┤╤П╤Й╨╡╨╡)",
-                  "ua": "╨▓╨╛╨┤╨░ (╨║╨╛╤А╨╛╤В╨║╨╕╨╣ ╨▓╨╕╤Б╤Е╤Ц╨┤╨╜╨╕╨╣)"
+                  "ru": "вода (краткое восходящее)",
+                  "ua": "вода (короткий висхідний)"
                 }
               },
               {
-                "hr": "gl├вva",
+                "hr": "glâva",
                 "translation": {
                   "en": "head (long falling)",
-                  "ru": "╨│╨╛╨╗╨╛╨▓╨░ (╨┤╨╛╨╗╨│╨╛╨╡ ╨╜╨╕╤Б╤Е╨╛╨┤╤П╤Й╨╡╨╡)",
-                  "ua": "╨│╨╛╨╗╨╛╨▓╨░ (╨┤╨╛╨▓╨│╨╕╨╣ ╤Б╨┐╨░╨┤╨╜╨╕╨╣)"
+                  "ru": "голова (долгое нисходящее)",
+                  "ua": "голова (довгий спадний)"
                 }
               }
             ]
@@ -394,45 +394,45 @@ export const glossaryData: GlossaryCategory[] = [
           {
             "title": {
               "en": "Syllabic R",
-              "ru": "╨б╨╗╨╛╨│╨╛╨▓╨╛╨╡ R",
-              "ua": "╨б╨║╨╗╨░╨┤╨╛╨▓╨╡ R"
+              "ru": "Слоговое R",
+              "ua": "Складове R"
             },
             "text": {
               "en": "In Croatian, the letter R can function as a vowel and form its own syllable. This is called 'syllabic R' (slogovno R). It appears in many common words.",
-              "ru": "╨Т ╤Е╨╛╤А╨▓╨░╤В╤Б╨║╨╛╨╝ ╨▒╤Г╨║╨▓╨░ R ╨╝╨╛╨╢╨╡╤В ╨▓╤Л╤Б╤В╤Г╨┐╨░╤В╤М ╨▓ ╤А╨╛╨╗╨╕ ╨│╨╗╨░╤Б╨╜╨╛╨│╨╛ ╨╕ ╨╛╨▒╤А╨░╨╖╨╛╨▓╤Л╨▓╨░╤В╤М ╤Б╨╛╨▒╤Б╤В╨▓╨╡╨╜╨╜╤Л╨╣ ╤Б╨╗╨╛╨│. ╨н╤В╨╛ ╨╜╨░╨╖╤Л╨▓╨░╨╡╤В╤Б╤П ┬л╤Б╨╗╨╛╨│╨╛╨▓╨╛╨╡ R┬╗ (slogovno R). ╨Т╤Б╤В╤А╨╡╤З╨░╨╡╤В╤Б╤П ╨▓╨╛ ╨╝╨╜╨╛╨│╨╕╤Е ╤А╨░╤Б╨┐╤А╨╛╤Б╤В╤А╨░╨╜╤С╨╜╨╜╤Л╤Е ╤Б╨╗╨╛╨▓╨░╤Е.",
-              "ua": "╨г ╤Е╨╛╤А╨▓╨░╤В╤Б╤М╨║╤Ц╨╣ ╨╗╤Ц╤В╨╡╤А╨░ R ╨╝╨╛╨╢╨╡ ╨▓╨╕╤Б╤В╤Г╨┐╨░╤В╨╕ ╨▓ ╤А╨╛╨╗╤Ц ╨│╨╛╨╗╨╛╤Б╨╜╨╛╨│╨╛ ╤В╨░ ╤Г╤В╨▓╨╛╤А╤О╨▓╨░╤В╨╕ ╨▓╨╗╨░╤Б╨╜╨╕╨╣ ╤Б╨║╨╗╨░╨┤. ╨ж╨╡ ╨╜╨░╨╖╨╕╨▓╨░╤Ф╤В╤М╤Б╤П ┬л╤Б╨║╨╗╨░╨┤╨╛╨▓╨╡ R┬╗ (slogovno R). ╨Ч╤Г╤Б╤В╤А╤Ц╤З╨░╤Ф╤В╤М╤Б╤П ╨▓ ╨▒╨░╨│╨░╤В╤М╨╛╤Е ╨┐╨╛╤И╨╕╤А╨╡╨╜╨╕╤Е ╤Б╨╗╨╛╨▓╨░╤Е."
+              "ru": "В хорватском буква R может выступать в роли гласного и образовывать собственный слог. Это называется «слоговое R» (slogovno R). Встречается во многих распространённых словах.",
+              "ua": "У хорватській літера R може виступати в ролі голосного та утворювати власний склад. Це називається «складове R» (slogovno R). Зустрічається в багатьох поширених словах."
             },
             "examples": [
               {
                 "hr": "krv",
                 "translation": {
                   "en": "blood",
-                  "ru": "╨║╤А╨╛╨▓╤М",
-                  "ua": "╨║╤А╨╛╨▓"
+                  "ru": "кровь",
+                  "ua": "кров"
                 }
               },
               {
                 "hr": "prst",
                 "translation": {
                   "en": "finger",
-                  "ru": "╨┐╨░╨╗╨╡╤Ж",
-                  "ua": "╨┐╨░╨╗╨╡╤Ж╤М"
+                  "ru": "палец",
+                  "ua": "палець"
                 }
               },
               {
                 "hr": "trg",
                 "translation": {
                   "en": "square (plaza)",
-                  "ru": "╨┐╨╗╨╛╤Й╨░╨┤╤М",
-                  "ua": "╨┐╨╗╨╛╤Й╨░"
+                  "ru": "площадь",
+                  "ua": "площа"
                 }
               },
               {
                 "hr": "crn",
                 "translation": {
                   "en": "black",
-                  "ru": "╤З╤С╤А╨╜╤Л╨╣",
-                  "ua": "╤З╨╛╤А╨╜╨╕╨╣"
+                  "ru": "чёрный",
+                  "ua": "чорний"
                 }
               }
             ]
@@ -638,47 +638,47 @@ export const glossaryData: GlossaryCategory[] = [
   {
     "id": "cases",
     "title": {
-      "en": "Noun Cases (Pade┼╛i)",
-      "ru": "╨Я╨░╨┤╨╡╨╢╨╕ (Pade┼╛i)",
-      "ua": "╨Т╤Ц╨┤╨╝╤Ц╨╜╨║╨╕ (Pade┼╛i)"
+      "en": "Noun Cases (Padeži)",
+      "ru": "Падежи (Padeži)",
+      "ua": "Відмінки (Padeži)"
     },
-    "icon": "ЁЯУЭ",
+    "icon": "📝",
     "sections": [
       {
         "id": "nominativ",
         "title": {
           "en": "Nominative (Nominativ)",
-          "ru": "╨Ш╨╝╨╡╨╜╨╕╤В╨╡╨╗╤М╨╜╤Л╨╣ (Nominativ)",
-          "ua": "╨Э╨░╨╖╨╕╨▓╨╜╨╕╨╣ (Nominativ)"
+          "ru": "Именительный (Nominativ)",
+          "ua": "Називний (Nominativ)"
         },
-        "icon": "1я╕ПтГг",
+        "icon": "1️⃣",
         "subsections": [
           {
             "title": {
               "en": "Usage",
-              "ru": "╨Ш╤Б╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╨╜╨╕╨╡",
-              "ua": "╨Т╨╕╨║╨╛╤А╨╕╤Б╤В╨░╨╜╨╜╤П"
+              "ru": "Использование",
+              "ua": "Використання"
             },
             "text": {
-              "en": "The nominative case is the basic, dictionary form of a noun. It answers the questions 'Tko?' (Who?) and '┼аto?' (What?). It is used for the subject of a sentence.",
-              "ru": "╨Ш╨╝╨╡╨╜╨╕╤В╨╡╨╗╤М╨╜╤Л╨╣ ╨┐╨░╨┤╨╡╨╢ тАФ ╨▒╨░╨╖╨╛╨▓╨░╤П, ╤Б╨╗╨╛╨▓╨░╤А╨╜╨░╤П ╤Д╨╛╤А╨╝╨░ ╤Б╤Г╤Й╨╡╤Б╤В╨▓╨╕╤В╨╡╨╗╤М╨╜╨╛╨│╨╛. ╨Ю╤В╨▓╨╡╤З╨░╨╡╤В ╨╜╨░ ╨▓╨╛╨┐╤А╨╛╤Б╤Л 'Tko?' (╨Ъ╤В╨╛?) ╨╕ '┼аto?' (╨з╤В╨╛?). ╨Ш╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╤В╤Б╤П ╨┤╨╗╤П ╨┐╨╛╨┤╨╗╨╡╨╢╨░╤Й╨╡╨│╨╛.",
-              "ua": "╨Э╨░╨╖╨╕╨▓╨╜╨╕╨╣ ╨▓╤Ц╨┤╨╝╤Ц╨╜╨╛╨║ тАФ ╨▒╨░╨╖╨╛╨▓╨░, ╤Б╨╗╨╛╨▓╨╜╨╕╨║╨╛╨▓╨░ ╤Д╨╛╤А╨╝╨░ ╤Ц╨╝╨╡╨╜╨╜╨╕╨║╨░. ╨Т╤Ц╨┤╨┐╨╛╨▓╤Ц╨┤╨░╤Ф ╨╜╨░ ╨┐╨╕╤В╨░╨╜╨╜╤П 'Tko?' (╨е╤В╨╛?) ╤Ц '┼аto?' (╨й╨╛?). ╨Т╨╕╨║╨╛╤А╨╕╤Б╤В╨╛╨▓╤Г╤Ф╤В╤М╤Б╤П ╨┤╨╗╤П ╨┐╤Ц╨┤╨╝╨╡╤В╨░."
+              "en": "The nominative case is the basic, dictionary form of a noun. It answers the questions 'Tko?' (Who?) and 'Što?' (What?). It is used for the subject of a sentence.",
+              "ru": "Именительный падеж — базовая, словарная форма существительного. Отвечает на вопросы 'Tko?' (Кто?) и 'Što?' (Что?). Используется для подлежащего.",
+              "ua": "Називний відмінок — базова, словникова форма іменника. Відповідає на питання 'Tko?' (Хто?) і 'Što?' (Що?). Використовується для підмета."
             },
             "examples": [
               {
-                "hr": "┼╜ena ─Нita knjigu.",
+                "hr": "Žena čita knjigu.",
                 "translation": {
                   "en": "The woman reads a book.",
-                  "ru": "╨Ц╨╡╨╜╤Й╨╕╨╜╨░ ╤З╨╕╤В╨░╨╡╤В ╨║╨╜╨╕╨│╤Г.",
-                  "ua": "╨Ц╤Ц╨╜╨║╨░ ╤З╨╕╤В╨░╤Ф ╨║╨╜╨╕╨│╤Г."
+                  "ru": "Женщина читает книгу.",
+                  "ua": "Жінка читає книгу."
                 }
               },
               {
                 "hr": "Grad je lijep.",
                 "translation": {
                   "en": "The city is beautiful.",
-                  "ru": "╨У╨╛╤А╨╛╨┤ ╨║╤А╨░╤Б╨╕╨▓╤Л╨╣.",
-                  "ua": "╨Ь╤Ц╤Б╤В╨╛ ╨│╨░╤А╨╜╨╡."
+                  "ru": "Город красивый.",
+                  "ua": "Місто гарне."
                 }
               }
             ]
@@ -686,13 +686,13 @@ export const glossaryData: GlossaryCategory[] = [
           {
             "title": {
               "en": "Noun Genders",
-              "ru": "╨а╨╛╨┤╤Л ╤Б╤Г╤Й╨╡╤Б╤В╨▓╨╕╤В╨╡╨╗╤М╨╜╤Л╤Е",
-              "ua": "╨а╨╛╨┤╨╕ ╤Ц╨╝╨╡╨╜╨╜╨╕╨║╤Ц╨▓"
+              "ru": "Роды существительных",
+              "ua": "Роди іменників"
             },
             "text": {
-              "en": "Croatian has three genders: masculine (mu┼бki rod), feminine (┼╛enski rod), neuter (srednji rod). Masculine nouns typically end in a consonant, feminine in -a, neuter in -o or -e.",
-              "ru": "╨Т ╤Е╨╛╤А╨▓╨░╤В╤Б╨║╨╛╨╝ ╤В╤А╨╕ ╤А╨╛╨┤╨░: ╨╝╤Г╨╢╤Б╨║╨╛╨╣ (mu┼бki rod), ╨╢╨╡╨╜╤Б╨║╨╕╨╣ (┼╛enski rod), ╤Б╤А╨╡╨┤╨╜╨╕╨╣ (srednji rod). ╨Ь╤Г╨╢╤Б╨║╨╛╨╣ ╤А╨╛╨┤ ╨╛╨▒╤Л╤З╨╜╨╛ ╨╛╨║╨░╨╜╤З╨╕╨▓╨░╨╡╤В╤Б╤П ╨╜╨░ ╤Б╨╛╨│╨╗╨░╤Б╨╜╤Г╤О, ╨╢╨╡╨╜╤Б╨║╨╕╨╣ ╨╜╨░ -a, ╤Б╤А╨╡╨┤╨╜╨╕╨╣ ╨╜╨░ -o ╨╕╨╗╨╕ -e.",
-              "ua": "╨г ╤Е╨╛╤А╨▓╨░╤В╤Б╤М╨║╤Ц╨╣ ╤В╤А╨╕ ╤А╨╛╨┤╨╕: ╤З╨╛╨╗╨╛╨▓╤Ц╤З╨╕╨╣ (mu┼бki rod), ╨╢╤Ц╨╜╨╛╤З╨╕╨╣ (┼╛enski rod), ╤Б╨╡╤А╨╡╨┤╨╜╤Ц╨╣ (srednji rod). ╨з╨╛╨╗╨╛╨▓╤Ц╤З╨╕╨╣ ╤А╤Ц╨┤ ╨╖╨░╨╖╨▓╨╕╤З╨░╨╣ ╨╖╨░╨║╤Ц╨╜╤З╤Г╤Ф╤В╤М╤Б╤П ╨╜╨░ ╨┐╤А╨╕╨│╨╛╨╗╨╛╤Б╨╜╤Г, ╨╢╤Ц╨╜╨╛╤З╨╕╨╣ ╨╜╨░ -a, ╤Б╨╡╤А╨╡╨┤╨╜╤Ц╨╣ ╨╜╨░ -o ╨░╨▒╨╛ -e."
+              "en": "Croatian has three genders: masculine (muški rod), feminine (ženski rod), neuter (srednji rod). Masculine nouns typically end in a consonant, feminine in -a, neuter in -o or -e.",
+              "ru": "В хорватском три рода: мужской (muški rod), женский (ženski rod), средний (srednji rod). Мужской род обычно оканчивается на согласную, женский на -a, средний на -o или -e.",
+              "ua": "У хорватській три роди: чоловічий (muški rod), жіночий (ženski rod), середній (srednji rod). Чоловічий рід зазвичай закінчується на приголосну, жіночий на -a, середній на -o або -e."
             },
             "table": {
               "headers": [
@@ -722,7 +722,7 @@ export const glossaryData: GlossaryCategory[] = [
                   "cells": [
                     "Feminine",
                     "-a",
-                    "┼╛ena",
+                    "žena",
                     "woman"
                   ]
                 },
@@ -759,21 +759,21 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "genitiv",
         "title": {
           "en": "Genitive (Genitiv)",
-          "ru": "╨а╨╛╨┤╨╕╤В╨╡╨╗╤М╨╜╤Л╨╣ (Genitiv)",
-          "ua": "╨а╨╛╨┤╨╛╨▓╨╕╨╣ (Genitiv)"
+          "ru": "Родительный (Genitiv)",
+          "ua": "Родовий (Genitiv)"
         },
-        "icon": "2я╕ПтГг",
+        "icon": "2️⃣",
         "subsections": [
           {
             "title": {
               "en": "Usage & Formation",
-              "ru": "╨Ш╤Б╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╨╜╨╕╨╡ ╨╕ ╨╛╨▒╤А╨░╨╖╨╛╨▓╨░╨╜╨╕╨╡",
-              "ua": "╨Т╨╕╨║╨╛╤А╨╕╤Б╤В╨░╨╜╨╜╤П ╤В╨░ ╤Г╤В╨▓╨╛╤А╨╡╨╜╨╜╤П"
+              "ru": "Использование и образование",
+              "ua": "Використання та утворення"
             },
             "text": {
-              "en": "The genitive answers 'Koga?' (Whom?) and '─Мega?' (Of what?). It expresses possession, origin, part of a whole, and is used after many prepositions (iz, od, do, bez, kod, blizu, ispred, iza, ispod, iznad, oko, protiv, nakon, prije, tijekom).",
-              "ru": "╨а╨╛╨┤╨╕╤В╨╡╨╗╤М╨╜╤Л╨╣ ╨┐╨░╨┤╨╡╨╢ ╨╛╤В╨▓╨╡╤З╨░╨╡╤В ╨╜╨░ ╨▓╨╛╨┐╤А╨╛╤Б╤Л 'Koga?' (╨Ъ╨╛╨│╨╛?) ╨╕ '─Мega?' (╨з╨╡╨│╨╛?). ╨Т╤Л╤А╨░╨╢╨░╨╡╤В ╨┐╤А╨╕╨╜╨░╨┤╨╗╨╡╨╢╨╜╨╛╤Б╤В╤М, ╨┐╤А╨╛╨╕╤Б╤Е╨╛╨╢╨┤╨╡╨╜╨╕╨╡, ╤З╨░╤Б╤В╤М ╤Ж╨╡╨╗╨╛╨│╨╛. ╨Ш╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╤В╤Б╤П ╨┐╨╛╤Б╨╗╨╡ ╨┐╤А╨╡╨┤╨╗╨╛╨│╨╛╨▓: iz, od, do, bez, kod, blizu, ispred, iza, ispod, iznad, oko, protiv, nakon, prije, tijekom.",
-              "ua": "╨а╨╛╨┤╨╛╨▓╨╕╨╣ ╨▓╤Ц╨┤╨╝╤Ц╨╜╨╛╨║ ╨▓╤Ц╨┤╨┐╨╛╨▓╤Ц╨┤╨░╤Ф ╨╜╨░ ╨┐╨╕╤В╨░╨╜╨╜╤П 'Koga?' (╨Ъ╨╛╨│╨╛?) ╤Ц '─Мega?' (╨з╨╛╨│╨╛?). ╨Т╨╕╤А╨░╨╢╨░╤Ф ╨╜╨░╨╗╨╡╨╢╨╜╤Ц╤Б╤В╤М, ╨┐╨╛╤Е╨╛╨┤╨╢╨╡╨╜╨╜╤П, ╤З╨░╤Б╤В╨╕╨╜╤Г ╤Ж╤Ц╨╗╨╛╨│╨╛. ╨Т╨╕╨║╨╛╤А╨╕╤Б╤В╨╛╨▓╤Г╤Ф╤В╤М╤Б╤П ╨┐╤Ц╤Б╨╗╤П ╨┐╤А╨╕╨╣╨╝╨╡╨╜╨╜╨╕╨║╤Ц╨▓: iz, od, do, bez, kod, blizu, ispred, iza, ispod, iznad, oko, protiv, nakon, prije, tijekom."
+              "en": "The genitive answers 'Koga?' (Whom?) and 'Čega?' (Of what?). It expresses possession, origin, part of a whole, and is used after many prepositions (iz, od, do, bez, kod, blizu, ispred, iza, ispod, iznad, oko, protiv, nakon, prije, tijekom).",
+              "ru": "Родительный падеж отвечает на вопросы 'Koga?' (Кого?) и 'Čega?' (Чего?). Выражает принадлежность, происхождение, часть целого. Используется после предлогов: iz, od, do, bez, kod, blizu, ispred, iza, ispod, iznad, oko, protiv, nakon, prije, tijekom.",
+              "ua": "Родовий відмінок відповідає на питання 'Koga?' (Кого?) і 'Čega?' (Чого?). Виражає належність, походження, частину цілого. Використовується після прийменників: iz, od, do, bez, kod, blizu, ispred, iza, ispod, iznad, oko, protiv, nakon, prije, tijekom."
             },
             "table": {
               "headers": [
@@ -802,9 +802,9 @@ export const glossaryData: GlossaryCategory[] = [
                 {
                   "cells": [
                     "Fem.",
-                    "┼╛ena",
-                    "┼╛ene",
-                    "┼╛ena"
+                    "žena",
+                    "žene",
+                    "žena"
                   ]
                 },
                 {
@@ -835,27 +835,27 @@ export const glossaryData: GlossaryCategory[] = [
             },
             "examples": [
               {
-                "hr": "To je ku─Зa moga oca.",
+                "hr": "To je kuća moga oca.",
                 "translation": {
                   "en": "That is my father's house.",
-                  "ru": "╨н╤В╨╛ ╨┤╨╛╨╝ ╨╝╨╛╨╡╨│╨╛ ╨╛╤В╤Ж╨░.",
-                  "ua": "╨ж╨╡ ╨┤╤Ц╨╝ ╨╝╨╛╨│╨╛ ╨▒╨░╤В╤М╨║╨░."
+                  "ru": "Это дом моего отца.",
+                  "ua": "Це дім мого батька."
                 }
               },
               {
-                "hr": "─Мa┼бa vode, molim.",
+                "hr": "Čaša vode, molim.",
                 "translation": {
                   "en": "A glass of water, please.",
-                  "ru": "╨б╤В╨░╨║╨░╨╜ ╨▓╨╛╨┤╤Л, ╨┐╨╛╨╢╨░╨╗╤Г╨╣╤Б╤В╨░.",
-                  "ua": "╨б╨║╨╗╤П╨╜╨║╤Г ╨▓╨╛╨┤╨╕, ╨▒╤Г╨┤╤М ╨╗╨░╤Б╨║╨░."
+                  "ru": "Стакан воды, пожалуйста.",
+                  "ua": "Склянку води, будь ласка."
                 }
               },
               {
                 "hr": "Dolazim iz Zagreba.",
                 "translation": {
                   "en": "I come from Zagreb.",
-                  "ru": "╨п ╨╕╨╖ ╨Ч╨░╨│╤А╨╡╨▒╨░.",
-                  "ua": "╨п ╤Ц╨╖ ╨Ч╨░╨│╤А╨╡╨▒╨░."
+                  "ru": "Я из Загреба.",
+                  "ua": "Я із Загреба."
                 }
               }
             ]
@@ -866,21 +866,21 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "dativ",
         "title": {
           "en": "Dative (Dativ)",
-          "ru": "╨Ф╨░╤В╨╡╨╗╤М╨╜╤Л╨╣ (Dativ)",
-          "ua": "╨Ф╨░╨▓╨░╨╗╤М╨╜╨╕╨╣ (Dativ)"
+          "ru": "Дательный (Dativ)",
+          "ua": "Давальний (Dativ)"
         },
-        "icon": "3я╕ПтГг",
+        "icon": "3️⃣",
         "subsections": [
           {
             "title": {
               "en": "Usage & Formation",
-              "ru": "╨Ш╤Б╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╨╜╨╕╨╡ ╨╕ ╨╛╨▒╤А╨░╨╖╨╛╨▓╨░╨╜╨╕╨╡",
-              "ua": "╨Т╨╕╨║╨╛╤А╨╕╤Б╤В╨░╨╜╨╜╤П ╤В╨░ ╤Г╤В╨▓╨╛╤А╨╡╨╜╨╜╤П"
+              "ru": "Использование и образование",
+              "ua": "Використання та утворення"
             },
             "text": {
-              "en": "The dative answers 'Komu?' (To whom?) and '─Мemu?' (To what?). It expresses the indirect object тАФ the recipient of an action. Used after prepositions: k/ka (towards), prema (towards), usprkos/unato─Н (despite).",
-              "ru": "╨Ф╨░╤В╨╡╨╗╤М╨╜╤Л╨╣ ╨┐╨░╨┤╨╡╨╢ ╨╛╤В╨▓╨╡╤З╨░╨╡╤В ╨╜╨░ ╨▓╨╛╨┐╤А╨╛╤Б╤Л 'Komu?' (╨Ъ╨╛╨╝╤Г?) ╨╕ '─Мemu?' (╨з╨╡╨╝╤Г?). ╨Т╤Л╤А╨░╨╢╨░╨╡╤В ╨║╨╛╤Б╨▓╨╡╨╜╨╜╨╛╨╡ ╨┤╨╛╨┐╨╛╨╗╨╜╨╡╨╜╨╕╨╡. ╨Ш╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╤В╤Б╤П ╨┐╨╛╤Б╨╗╨╡ ╨┐╤А╨╡╨┤╨╗╨╛╨│╨╛╨▓: k/ka (╨║), prema (╨║, ╨┐╨╛ ╨╜╨░╨┐╤А╨░╨▓╨╗╨╡╨╜╨╕╤О), usprkos/unato─Н (╨╜╨╡╤Б╨╝╨╛╤В╤А╤П ╨╜╨░).",
-              "ua": "╨Ф╨░╨▓╨░╨╗╤М╨╜╨╕╨╣ ╨▓╤Ц╨┤╨╝╤Ц╨╜╨╛╨║ ╨▓╤Ц╨┤╨┐╨╛╨▓╤Ц╨┤╨░╤Ф ╨╜╨░ ╨┐╨╕╤В╨░╨╜╨╜╤П 'Komu?' (╨Ъ╨╛╨╝╤Г?) ╤Ц '─Мemu?' (╨з╨╛╨╝╤Г?). ╨Т╨╕╤А╨░╨╢╨░╤Ф ╨╜╨╡╨┐╤А╤П╨╝╨╕╨╣ ╨┤╨╛╨┤╨░╤В╨╛╨║. ╨Т╨╕╨║╨╛╤А╨╕╤Б╤В╨╛╨▓╤Г╤Ф╤В╤М╤Б╤П ╨┐╤Ц╤Б╨╗╤П ╨┐╤А╨╕╨╣╨╝╨╡╨╜╨╜╨╕╨║╤Ц╨▓: k/ka (╨┤╨╛), prema (╨┤╨╛, ╤Г ╨╜╨░╨┐╤А╤П╨╝╨║╤Г), usprkos/unato─Н (╨╜╨╡╨╖╨▓╨░╨╢╨░╤О╤З╨╕ ╨╜╨░)."
+              "en": "The dative answers 'Komu?' (To whom?) and 'Čemu?' (To what?). It expresses the indirect object — the recipient of an action. Used after prepositions: k/ka (towards), prema (towards), usprkos/unatoč (despite).",
+              "ru": "Дательный падеж отвечает на вопросы 'Komu?' (Кому?) и 'Čemu?' (Чему?). Выражает косвенное дополнение. Используется после предлогов: k/ka (к), prema (к, по направлению), usprkos/unatoč (несмотря на).",
+              "ua": "Давальний відмінок відповідає на питання 'Komu?' (Кому?) і 'Čemu?' (Чому?). Виражає непрямий додаток. Використовується після прийменників: k/ka (до), prema (до, у напрямку), usprkos/unatoč (незважаючи на)."
             },
             "table": {
               "headers": [
@@ -895,7 +895,7 @@ export const glossaryData: GlossaryCategory[] = [
                     "Masc.",
                     "brat",
                     "bratu",
-                    "bra─Зi"
+                    "braći"
                   ]
                 },
                 {
@@ -937,16 +937,16 @@ export const glossaryData: GlossaryCategory[] = [
                 "hr": "Dajem poklon bratu.",
                 "translation": {
                   "en": "I give a gift to my brother.",
-                  "ru": "╨п ╨┤╨░╤А╤О ╨┐╨╛╨┤╨░╤А╨╛╨║ ╨▒╤А╨░╤В╤Г.",
-                  "ua": "╨п ╨┤╨░╤О ╨┐╨╛╨┤╨░╤А╤Г╨╜╨╛╨║ ╨▒╤А╨░╤В╤Г."
+                  "ru": "Я дарю подарок брату.",
+                  "ua": "Я даю подарунок брату."
                 }
               },
               {
-                "hr": "Pi┼бem pismo prijatelju.",
+                "hr": "Pišem pismo prijatelju.",
                 "translation": {
                   "en": "I write a letter to a friend.",
-                  "ru": "╨п ╨┐╨╕╤И╤Г ╨┐╨╕╤Б╤М╨╝╨╛ ╨┤╤А╤Г╨│╤Г.",
-                  "ua": "╨п ╨┐╨╕╤И╤Г ╨╗╨╕╤Б╤В╨░ ╨┤╤А╤Г╨│╤Г."
+                  "ru": "Я пишу письмо другу.",
+                  "ua": "Я пишу листа другу."
                 }
               }
             ]
@@ -957,21 +957,21 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "akuzativ",
         "title": {
           "en": "Accusative (Akuzativ)",
-          "ru": "╨Т╨╕╨╜╨╕╤В╨╡╨╗╤М╨╜╤Л╨╣ (Akuzativ)",
-          "ua": "╨Ч╨╜╨░╤Е╤Ц╨┤╨╜╨╕╨╣ (Akuzativ)"
+          "ru": "Винительный (Akuzativ)",
+          "ua": "Знахідний (Akuzativ)"
         },
-        "icon": "4я╕ПтГг",
+        "icon": "4️⃣",
         "subsections": [
           {
             "title": {
               "en": "Usage & Formation",
-              "ru": "╨Ш╤Б╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╨╜╨╕╨╡ ╨╕ ╨╛╨▒╤А╨░╨╖╨╛╨▓╨░╨╜╨╕╨╡",
-              "ua": "╨Т╨╕╨║╨╛╤А╨╕╤Б╤В╨░╨╜╨╜╤П ╤В╨░ ╤Г╤В╨▓╨╛╤А╨╡╨╜╨╜╤П"
+              "ru": "Использование и образование",
+              "ua": "Використання та утворення"
             },
             "text": {
-              "en": "The accusative answers 'Koga?' (Whom?) and '┼аto?' (What?). It marks the direct object. Used after prepositions: u (into), na (onto), za (for), kroz (through), po (for/to fetch). Key rule: feminine nouns ending in -a change to -u.",
-              "ru": "╨Т╨╕╨╜╨╕╤В╨╡╨╗╤М╨╜╤Л╨╣ ╨┐╨░╨┤╨╡╨╢ ╨╛╤В╨▓╨╡╤З╨░╨╡╤В ╨╜╨░ ╨▓╨╛╨┐╤А╨╛╤Б╤Л 'Koga?' (╨Ъ╨╛╨│╨╛?) ╨╕ '┼аto?' (╨з╤В╨╛?). ╨Ю╨▒╨╛╨╖╨╜╨░╤З╨░╨╡╤В ╨┐╤А╤П╨╝╨╛╨╡ ╨┤╨╛╨┐╨╛╨╗╨╜╨╡╨╜╨╕╨╡. ╨Ш╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╤В╤Б╤П ╨┐╨╛╤Б╨╗╨╡ ╨┐╤А╨╡╨┤╨╗╨╛╨│╨╛╨▓: u (╨▓), na (╨╜╨░), za (╨┤╨╗╤П), kroz (╤З╨╡╤А╨╡╨╖), po (╨╖╨░). ╨Ъ╨╗╤О╤З╨╡╨▓╨╛╨╡ ╨┐╤А╨░╨▓╨╕╨╗╨╛: ╨╢╨╡╨╜╤Б╨║╨╕╨╣ ╤А╨╛╨┤ ╨╜╨░ -a ╨╝╨╡╨╜╤П╨╡╤В ╨╜╨░ -u.",
-              "ua": "╨Ч╨╜╨░╤Е╤Ц╨┤╨╜╨╕╨╣ ╨▓╤Ц╨┤╨╝╤Ц╨╜╨╛╨║ ╨▓╤Ц╨┤╨┐╨╛╨▓╤Ц╨┤╨░╤Ф ╨╜╨░ ╨┐╨╕╤В╨░╨╜╨╜╤П 'Koga?' (╨Ъ╨╛╨│╨╛?) ╤Ц '┼аto?' (╨й╨╛?). ╨Я╨╛╨╖╨╜╨░╤З╨░╤Ф ╨┐╤А╤П╨╝╨╕╨╣ ╨┤╨╛╨┤╨░╤В╨╛╨║. ╨Т╨╕╨║╨╛╤А╨╕╤Б╤В╨╛╨▓╤Г╤Ф╤В╤М╤Б╤П ╨┐╤Ц╤Б╨╗╤П ╨┐╤А╨╕╨╣╨╝╨╡╨╜╨╜╨╕╨║╤Ц╨▓: u (╤Г, ╨▓), na (╨╜╨░), za (╨┤╨╗╤П), kroz (╤З╨╡╤А╨╡╨╖), po (╨╖╨░). ╨Ъ╨╗╤О╤З╨╛╨▓╨╡ ╨┐╤А╨░╨▓╨╕╨╗╨╛: ╨╢╤Ц╨╜╨╛╤З╨╕╨╣ ╤А╤Ц╨┤ ╨╜╨░ -a ╨╖╨╝╤Ц╨╜╤О╤Ф ╨╜╨░ -u."
+              "en": "The accusative answers 'Koga?' (Whom?) and 'Što?' (What?). It marks the direct object. Used after prepositions: u (into), na (onto), za (for), kroz (through), po (for/to fetch). Key rule: feminine nouns ending in -a change to -u.",
+              "ru": "Винительный падеж отвечает на вопросы 'Koga?' (Кого?) и 'Što?' (Что?). Обозначает прямое дополнение. Используется после предлогов: u (в), na (на), za (для), kroz (через), po (за). Ключевое правило: женский род на -a меняет на -u.",
+              "ua": "Знахідний відмінок відповідає на питання 'Koga?' (Кого?) і 'Što?' (Що?). Позначає прямий додаток. Використовується після прийменників: u (у, в), na (на), za (для), kroz (через), po (за). Ключове правило: жіночий рід на -a змінює на -u."
             },
             "table": {
               "headers": [
@@ -1000,9 +1000,9 @@ export const glossaryData: GlossaryCategory[] = [
                 {
                   "cells": [
                     "Feminine",
-                    "┼╛ena",
-                    "┼╛enu",
-                    "-a тЖТ -u"
+                    "žena",
+                    "ženu",
+                    "-a → -u"
                   ]
                 },
                 {
@@ -1010,7 +1010,7 @@ export const glossaryData: GlossaryCategory[] = [
                     "Feminine",
                     "knjiga",
                     "knjigu",
-                    "-a тЖТ -u"
+                    "-a → -u"
                   ]
                 },
                 {
@@ -1028,24 +1028,24 @@ export const glossaryData: GlossaryCategory[] = [
                 "hr": "Vidim more.",
                 "translation": {
                   "en": "I see the sea.",
-                  "ru": "╨п ╨▓╨╕╨╢╤Г ╨╝╨╛╤А╨╡.",
-                  "ua": "╨п ╨▒╨░╤З╤Г ╨╝╨╛╤А╨╡."
+                  "ru": "Я вижу море.",
+                  "ua": "Я бачу море."
                 }
               },
               {
-                "hr": "─Мitam knjigu.",
+                "hr": "Čitam knjigu.",
                 "translation": {
                   "en": "I read a book.",
-                  "ru": "╨п ╤З╨╕╤В╨░╤О ╨║╨╜╨╕╨│╤Г.",
-                  "ua": "╨п ╤З╨╕╤В╨░╤О ╨║╨╜╨╕╨│╤Г."
+                  "ru": "Я читаю книгу.",
+                  "ua": "Я читаю книгу."
                 }
               },
               {
                 "hr": "Volim brata.",
                 "translation": {
                   "en": "I love my brother.",
-                  "ru": "╨п ╨╗╤О╨▒╨╗╤О ╨▒╤А╨░╤В╨░.",
-                  "ua": "╨п ╨╗╤О╨▒╨╗╤О ╨▒╤А╨░╤В╨░."
+                  "ru": "Я люблю брата.",
+                  "ua": "Я люблю брата."
                 }
               }
             ]
@@ -1056,45 +1056,45 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "vokativ",
         "title": {
           "en": "Vocative (Vokativ)",
-          "ru": "╨Ч╨▓╨░╤В╨╡╨╗╤М╨╜╤Л╨╣ (Vokativ)",
-          "ua": "╨Ъ╨╗╨╕╤З╨╜╨╕╨╣ (Vokativ)"
+          "ru": "Звательный (Vokativ)",
+          "ua": "Кличний (Vokativ)"
         },
-        "icon": "5я╕ПтГг",
+        "icon": "5️⃣",
         "subsections": [
           {
             "title": {
               "en": "Usage & Formation",
-              "ru": "╨Ш╤Б╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╨╜╨╕╨╡ ╨╕ ╨╛╨▒╤А╨░╨╖╨╛╨▓╨░╨╜╨╕╨╡",
-              "ua": "╨Т╨╕╨║╨╛╤А╨╕╤Б╤В╨░╨╜╨╜╤П ╤В╨░ ╤Г╤В╨▓╨╛╤А╨╡╨╜╨╜╤П"
+              "ru": "Использование и образование",
+              "ua": "Використання та утворення"
             },
             "text": {
-              "en": "The vocative is used for direct address тАФ calling someone by name. Masculine nouns add -e or -u, feminine nouns change -a to -o, neuter nouns stay the same.",
-              "ru": "╨Ч╨▓╨░╤В╨╡╨╗╤М╨╜╤Л╨╣ ╨┐╨░╨┤╨╡╨╢ ╨╕╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╤В╤Б╤П ╨┤╨╗╤П ╨┐╤А╤П╨╝╨╛╨│╨╛ ╨╛╨▒╤А╨░╤Й╨╡╨╜╨╕╤П тАФ ╨║╨╛╨│╨┤╨░ ╨╖╨╛╨▓╤С╤В╨╡ ╨║╨╛╨│╨╛-╤В╨╛ ╨┐╨╛ ╨╕╨╝╨╡╨╜╨╕. ╨Ь╤Г╨╢╤Б╨║╨╛╨╣ ╤А╨╛╨┤ ╨┤╨╛╨▒╨░╨▓╨╗╤П╨╡╤В -e ╨╕╨╗╨╕ -u, ╨╢╨╡╨╜╤Б╨║╨╕╨╣ ╨╝╨╡╨╜╤П╨╡╤В -a ╨╜╨░ -o, ╤Б╤А╨╡╨┤╨╜╨╕╨╣ ╨╜╨╡ ╨╝╨╡╨╜╤П╨╡╤В╤Б╤П.",
-              "ua": "╨Ъ╨╗╨╕╤З╨╜╨╕╨╣ ╨▓╤Ц╨┤╨╝╤Ц╨╜╨╛╨║ ╨▓╨╕╨║╨╛╤А╨╕╤Б╤В╨╛╨▓╤Г╤Ф╤В╤М╤Б╤П ╨┤╨╗╤П ╨┐╤А╤П╨╝╨╛╨│╨╛ ╨╖╨▓╨╡╤А╤В╨░╨╜╨╜╤П. ╨з╨╛╨╗╨╛╨▓╤Ц╤З╨╕╨╣ ╤А╤Ц╨┤ ╨┤╨╛╨┤╨░╤Ф -e ╨░╨▒╨╛ -u, ╨╢╤Ц╨╜╨╛╤З╨╕╨╣ ╨╖╨╝╤Ц╨╜╤О╤Ф -a ╨╜╨░ -o, ╤Б╨╡╤А╨╡╨┤╨╜╤Ц╨╣ ╨╜╨╡ ╨╖╨╝╤Ц╨╜╤О╤Ф╤В╤М╤Б╤П."
+              "en": "The vocative is used for direct address — calling someone by name. Masculine nouns add -e or -u, feminine nouns change -a to -o, neuter nouns stay the same.",
+              "ru": "Звательный падеж используется для прямого обращения — когда зовёте кого-то по имени. Мужской род добавляет -e или -u, женский меняет -a на -o, средний не меняется.",
+              "ua": "Кличний відмінок використовується для прямого звертання. Чоловічий рід додає -e або -u, жіночий змінює -a на -o, середній не змінюється."
             },
             "examples": [
               {
-                "hr": "Ivane, do─Сi ovamo!",
+                "hr": "Ivane, dođi ovamo!",
                 "translation": {
                   "en": "Ivan, come here!",
-                  "ru": "╨Ш╨▓╨░╨╜, ╨╕╨┤╨╕ ╤Б╤О╨┤╨░!",
-                  "ua": "╨Ж╨▓╨░╨╜╨╡, ╤Ц╨┤╨╕ ╤Б╤О╨┤╨╕!"
+                  "ru": "Иван, иди сюда!",
+                  "ua": "Іване, іди сюди!"
                 }
               },
               {
                 "hr": "Ano, jesi li tu?",
                 "translation": {
                   "en": "Ana, are you there?",
-                  "ru": "╨Р╨╜╨░, ╤В╤Л ╨╖╨┤╨╡╤Б╤М?",
-                  "ua": "╨Р╨╜╨╛, ╤В╨╕ ╤В╤Г╤В?"
+                  "ru": "Ана, ты здесь?",
+                  "ua": "Ано, ти тут?"
                 }
               },
               {
                 "hr": "Profesore, imam pitanje.",
                 "translation": {
                   "en": "Professor, I have a question.",
-                  "ru": "╨Я╤А╨╛╤Д╨╡╤Б╤Б╨╛╤А, ╤Г ╨╝╨╡╨╜╤П ╨▓╨╛╨┐╤А╨╛╤Б.",
-                  "ua": "╨Я╤А╨╛╤Д╨╡╤Б╨╛╤А╨╡, ╤Г ╨╝╨╡╨╜╨╡ ╨┐╨╕╤В╨░╨╜╨╜╤П."
+                  "ru": "Профессор, у меня вопрос.",
+                  "ua": "Професоре, у мене питання."
                 }
               }
             ]
@@ -1105,45 +1105,45 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "lokativ",
         "title": {
           "en": "Locative (Lokativ)",
-          "ru": "╨Ь╨╡╤Б╤В╨╜╤Л╨╣ (Lokativ)",
-          "ua": "╨Ь╤Ц╤Б╤Ж╨╡╨▓╨╕╨╣ (Lokativ)"
+          "ru": "Местный (Lokativ)",
+          "ua": "Місцевий (Lokativ)"
         },
-        "icon": "6я╕ПтГг",
+        "icon": "6️⃣",
         "subsections": [
           {
             "title": {
               "en": "Usage & Formation",
-              "ru": "╨Ш╤Б╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╨╜╨╕╨╡ ╨╕ ╨╛╨▒╤А╨░╨╖╨╛╨▓╨░╨╜╨╕╨╡",
-              "ua": "╨Т╨╕╨║╨╛╤А╨╕╤Б╤В╨░╨╜╨╜╤П ╤В╨░ ╤Г╤В╨▓╨╛╤А╨╡╨╜╨╜╤П"
+              "ru": "Использование и образование",
+              "ua": "Використання та утворення"
             },
             "text": {
-              "en": "The locative answers 'O komu?' (About whom?) and 'O ─Нemu?' (About what?), and 'Gdje?' (Where?). Always used with prepositions: u (in), na (on), o (about), po (around/on), pri (at, near). Endings are the same as dative.",
-              "ru": "╨Ь╨╡╤Б╤В╨╜╤Л╨╣ ╨┐╨░╨┤╨╡╨╢ ╨╛╤В╨▓╨╡╤З╨░╨╡╤В ╨╜╨░ ╨▓╨╛╨┐╤А╨╛╤Б╤Л 'O komu?' (╨Ю ╨║╨╛╨╝?) ╨╕ 'O ─Нemu?' (╨Ю ╤З╤С╨╝?), 'Gdje?' (╨У╨┤╨╡?). ╨Т╤Б╨╡╨│╨┤╨░ ╨╕╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╤В╤Б╤П ╤Б ╨┐╤А╨╡╨┤╨╗╨╛╨│╨░╨╝╨╕: u (╨▓), na (╨╜╨░), o (╨╛), po (╨┐╨╛), pri (╨┐╤А╨╕). ╨Ю╨║╨╛╨╜╤З╨░╨╜╨╕╤П ╤Б╨╛╨▓╨┐╨░╨┤╨░╤О╤В ╤Б ╨┤╨░╤В╨╡╨╗╤М╨╜╤Л╨╝.",
-              "ua": "╨Ь╤Ц╤Б╤Ж╨╡╨▓╨╕╨╣ ╨▓╤Ц╨┤╨╝╤Ц╨╜╨╛╨║ ╨▓╤Ц╨┤╨┐╨╛╨▓╤Ц╨┤╨░╤Ф ╨╜╨░ ╨┐╨╕╤В╨░╨╜╨╜╤П 'O komu?' (╨Я╤А╨╛ ╨║╨╛╨│╨╛?) ╤Ц 'O ─Нemu?' (╨Я╤А╨╛ ╤Й╨╛?), 'Gdje?' (╨Ф╨╡?). ╨Ч╨░╨▓╨╢╨┤╨╕ ╨▓╨╕╨║╨╛╤А╨╕╤Б╤В╨╛╨▓╤Г╤Ф╤В╤М╤Б╤П ╨╖ ╨┐╤А╨╕╨╣╨╝╨╡╨╜╨╜╨╕╨║╨░╨╝╨╕: u (╤Г), na (╨╜╨░), o (╨┐╤А╨╛), po (╨┐╨╛), pri (╨┐╤А╨╕). ╨Ч╨░╨║╤Ц╨╜╤З╨╡╨╜╨╜╤П ╨╖╨▒╤Ц╨│╨░╤О╤В╤М╤Б╤П ╨╖ ╨┤╨░╨▓╨░╨╗╤М╨╜╨╕╨╝."
+              "en": "The locative answers 'O komu?' (About whom?) and 'O čemu?' (About what?), and 'Gdje?' (Where?). Always used with prepositions: u (in), na (on), o (about), po (around/on), pri (at, near). Endings are the same as dative.",
+              "ru": "Местный падеж отвечает на вопросы 'O komu?' (О ком?) и 'O čemu?' (О чём?), 'Gdje?' (Где?). Всегда используется с предлогами: u (в), na (на), o (о), po (по), pri (при). Окончания совпадают с дательным.",
+              "ua": "Місцевий відмінок відповідає на питання 'O komu?' (Про кого?) і 'O čemu?' (Про що?), 'Gdje?' (Де?). Завжди використовується з прийменниками: u (у), na (на), o (про), po (по), pri (при). Закінчення збігаються з давальним."
             },
             "examples": [
               {
-                "hr": "┼╜ivim u Zagrebu.",
+                "hr": "Živim u Zagrebu.",
                 "translation": {
                   "en": "I live in Zagreb.",
-                  "ru": "╨п ╨╢╨╕╨▓╤Г ╨▓ ╨Ч╨░╨│╤А╨╡╨▒╨╡.",
-                  "ua": "╨п ╨╢╨╕╨▓╤Г ╨▓ ╨Ч╨░╨│╤А╨╡╨▒╤Ц."
+                  "ru": "Я живу в Загребе.",
+                  "ua": "Я живу в Загребі."
                 }
               },
               {
                 "hr": "Knjiga je na stolu.",
                 "translation": {
                   "en": "The book is on the table.",
-                  "ru": "╨Ъ╨╜╨╕╨│╨░ ╨╜╨░ ╤Б╤В╨╛╨╗╨╡.",
-                  "ua": "╨Ъ╨╜╨╕╨│╨░ ╨╜╨░ ╤Б╤В╨╛╨╗╤Ц."
+                  "ru": "Книга на столе.",
+                  "ua": "Книга на столі."
                 }
               },
               {
-                "hr": "Pri─Нamo o filmu.",
+                "hr": "Pričamo o filmu.",
                 "translation": {
                   "en": "We're talking about the movie.",
-                  "ru": "╨Ь╤Л ╨│╨╛╨▓╨╛╤А╨╕╨╝ ╨╛ ╤Д╨╕╨╗╤М╨╝╨╡.",
-                  "ua": "╨Ь╨╕ ╨│╨╛╨▓╨╛╤А╨╕╨╝╨╛ ╨┐╤А╨╛ ╤Д╤Ц╨╗╤М╨╝."
+                  "ru": "Мы говорим о фильме.",
+                  "ua": "Ми говоримо про фільм."
                 }
               }
             ]
@@ -1154,21 +1154,21 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "instrumental",
         "title": {
           "en": "Instrumental (Instrumental)",
-          "ru": "╨в╨▓╨╛╤А╨╕╤В╨╡╨╗╤М╨╜╤Л╨╣ (Instrumental)",
-          "ua": "╨Ю╤А╤Г╨┤╨╜╨╕╨╣ (Instrumental)"
+          "ru": "Творительный (Instrumental)",
+          "ua": "Орудний (Instrumental)"
         },
-        "icon": "7я╕ПтГг",
+        "icon": "7️⃣",
         "subsections": [
           {
             "title": {
               "en": "Usage & Formation",
-              "ru": "╨Ш╤Б╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╨╜╨╕╨╡ ╨╕ ╨╛╨▒╤А╨░╨╖╨╛╨▓╨░╨╜╨╕╨╡",
-              "ua": "╨Т╨╕╨║╨╛╤А╨╕╤Б╤В╨░╨╜╨╜╤П ╤В╨░ ╤Г╤В╨▓╨╛╤А╨╡╨╜╨╜╤П"
+              "ru": "Использование и образование",
+              "ua": "Використання та утворення"
             },
             "text": {
-              "en": "The instrumental answers 'S kim?' (With whom?) and '─Мime?' (With what?). Expresses instrument/means or accompaniment. Used with prepositions: s/sa (with), pred (in front of), za (behind), nad (above), pod (under), me─Сu (between/among).",
-              "ru": "╨в╨▓╨╛╤А╨╕╤В╨╡╨╗╤М╨╜╤Л╨╣ ╨┐╨░╨┤╨╡╨╢ ╨╛╤В╨▓╨╡╤З╨░╨╡╤В ╨╜╨░ ╨▓╨╛╨┐╤А╨╛╤Б╤Л 'S kim?' (╨б ╨║╨╡╨╝?) ╨╕ '─Мime?' (╨з╨╡╨╝?). ╨Т╤Л╤А╨░╨╢╨░╨╡╤В ╨╕╨╜╤Б╤В╤А╤Г╨╝╨╡╨╜╤В/╤Б╤А╨╡╨┤╤Б╤В╨▓╨╛ ╨╕╨╗╨╕ ╤Б╨╛╨┐╤А╨╛╨▓╨╛╨╢╨┤╨╡╨╜╨╕╨╡. ╨Я╤А╨╡╨┤╨╗╨╛╨│╨╕: s/sa (╤Б), pred (╨┐╨╡╤А╨╡╨┤), za (╨╖╨░), nad (╨╜╨░╨┤), pod (╨┐╨╛╨┤), me─Сu (╨╝╨╡╨╢╨┤╤Г).",
-              "ua": "╨Ю╤А╤Г╨┤╨╜╨╕╨╣ ╨▓╤Ц╨┤╨╝╤Ц╨╜╨╛╨║ ╨▓╤Ц╨┤╨┐╨╛╨▓╤Ц╨┤╨░╤Ф ╨╜╨░ ╨┐╨╕╤В╨░╨╜╨╜╤П 'S kim?' (╨Ч ╨║╨╕╨╝?) ╤Ц '─Мime?' (╨з╨╕╨╝?). ╨Т╨╕╤А╨░╨╢╨░╤Ф ╤Ц╨╜╤Б╤В╤А╤Г╨╝╨╡╨╜╤В/╨╖╨░╤Б╤Ц╨▒ ╨░╨▒╨╛ ╤Б╤Г╨┐╤А╨╛╨▓╤Ц╨┤. ╨Я╤А╨╕╨╣╨╝╨╡╨╜╨╜╨╕╨║╨╕: s/sa (╨╖), pred (╨┐╨╡╤А╨╡╨┤), za (╨╖╨░), nad (╨╜╨░╨┤), pod (╨┐╤Ц╨┤), me─Сu (╨╝╤Ц╨╢)."
+              "en": "The instrumental answers 'S kim?' (With whom?) and 'Čime?' (With what?). Expresses instrument/means or accompaniment. Used with prepositions: s/sa (with), pred (in front of), za (behind), nad (above), pod (under), među (between/among).",
+              "ru": "Творительный падеж отвечает на вопросы 'S kim?' (С кем?) и 'Čime?' (Чем?). Выражает инструмент/средство или сопровождение. Предлоги: s/sa (с), pred (перед), za (за), nad (над), pod (под), među (между).",
+              "ua": "Орудний відмінок відповідає на питання 'S kim?' (З ким?) і 'Čime?' (Чим?). Виражає інструмент/засіб або супровід. Прийменники: s/sa (з), pred (перед), za (за), nad (над), pod (під), među (між)."
             },
             "table": {
               "headers": [
@@ -1183,7 +1183,7 @@ export const glossaryData: GlossaryCategory[] = [
                     "Masc.",
                     "brat",
                     "bratom",
-                    "bra─Зom"
+                    "braćom"
                   ]
                 },
                 {
@@ -1197,9 +1197,9 @@ export const glossaryData: GlossaryCategory[] = [
                 {
                   "cells": [
                     "Fem.",
-                    "┼╛ena",
-                    "┼╛enom",
-                    "┼╛enama"
+                    "žena",
+                    "ženom",
+                    "ženama"
                   ]
                 },
                 {
@@ -1222,27 +1222,27 @@ export const glossaryData: GlossaryCategory[] = [
             },
             "examples": [
               {
-                "hr": "Pi┼бem olovkom.",
+                "hr": "Pišem olovkom.",
                 "translation": {
                   "en": "I write with a pencil.",
-                  "ru": "╨п ╨┐╨╕╤И╤Г ╨║╨░╤А╨░╨╜╨┤╨░╤И╨╛╨╝.",
-                  "ua": "╨п ╨┐╨╕╤И╤Г ╨╛╨╗╤Ц╨▓╤Ж╨╡╨╝."
+                  "ru": "Я пишу карандашом.",
+                  "ua": "Я пишу олівцем."
                 }
               },
               {
                 "hr": "Idem s prijateljem.",
                 "translation": {
                   "en": "I go with a friend.",
-                  "ru": "╨п ╨╕╨┤╤Г ╤Б ╨┤╤А╤Г╨│╨╛╨╝.",
-                  "ua": "╨п ╨╣╨┤╤Г ╨╖ ╨┤╤А╤Г╨│╨╛╨╝."
+                  "ru": "Я иду с другом.",
+                  "ua": "Я йду з другом."
                 }
               },
               {
                 "hr": "Putujem vlakom.",
                 "translation": {
                   "en": "I travel by train.",
-                  "ru": "╨п ╨┐╤Г╤В╨╡╤И╨╡╤Б╤В╨▓╤Г╤О ╨┐╨╛╨╡╨╖╨┤╨╛╨╝.",
-                  "ua": "╨п ╨┐╨╛╨┤╨╛╤А╨╛╨╢╤Г╤О ╨┐╨╛╤В╤П╨│╨╛╨╝."
+                  "ru": "Я путешествую поездом.",
+                  "ua": "Я подорожую потягом."
                 }
               }
             ]
@@ -1253,21 +1253,21 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "cases-summary",
         "title": {
           "en": "Noun Cases Summary",
-          "ru": "╨б╨▓╨╛╨┤╨╜╨░╤П ╤В╨░╨▒╨╗╨╕╤Ж╨░ ╨┐╨░╨┤╨╡╨╢╨╡╨╣",
-          "ua": "╨Ч╨▓╨╡╨┤╨╡╨╜╨░ ╤В╨░╨▒╨╗╨╕╤Ж╤П ╨▓╤Ц╨┤╨╝╤Ц╨╜╨║╤Ц╨▓"
+          "ru": "Сводная таблица падежей",
+          "ua": "Зведена таблиця відмінків"
         },
-        "icon": "ЁЯУК",
+        "icon": "📊",
         "subsections": [
           {
             "title": {
               "en": "Summary of Endings",
-              "ru": "╨б╨▓╨╛╨┤╨║╨░ ╨╛╨║╨╛╨╜╤З╨░╨╜╨╕╨╣",
-              "ua": "╨Ч╨▓╨╡╨┤╨╡╨╜╨╜╤П ╨╖╨░╨║╤Ц╨╜╤З╨╡╨╜╤М"
+              "ru": "Сводка окончаний",
+              "ua": "Зведення закінчень"
             },
             "text": {
               "en": "Here is a quick overview of the standard singular and plural endings for masculine, feminine, and neuter nouns across all seven cases in Croatian.",
-              "ru": "╨Т╨╛╤В ╨║╤А╨░╤В╨║╨╕╨╣ ╨╛╨▒╨╖╨╛╤А ╤Б╤В╨░╨╜╨┤╨░╤А╤В╨╜╤Л╤Е ╨╛╨║╨╛╨╜╤З╨░╨╜╨╕╨╣ ╨╡╨┤╨╕╨╜╤Б╤В╨▓╨╡╨╜╨╜╨╛╨│╨╛ ╨╕ ╨╝╨╜╨╛╨╢╨╡╤Б╤В╨▓╨╡╨╜╨╜╨╛╨│╨╛ ╤З╨╕╤Б╨╗╨░ ╨┤╨╗╤П ╤Б╤Г╤Й╨╡╤Б╤В╨▓╨╕╤В╨╡╨╗╤М╨╜╤Л╤Е ╨╝╤Г╨╢╤Б╨║╨╛╨│╨╛, ╨╢╨╡╨╜╤Б╨║╨╛╨│╨╛ ╨╕ ╤Б╤А╨╡╨┤╨╜╨╡╨│╨╛ ╤А╨╛╨┤╨░ ╨▓╨╛ ╨▓╤Б╨╡╤Е ╤Б╨╡╨╝╨╕ ╨┐╨░╨┤╨╡╨╢╨░╤Е ╤Е╨╛╤А╨▓╨░╤В╤Б╨║╨╛╨│╨╛ ╤П╨╖╤Л╨║╨░.",
-              "ua": "╨Ю╤Б╤М ╨║╨╛╤А╨╛╤В╨║╨╕╨╣ ╨╛╨│╨╗╤П╨┤ ╤Б╤В╨░╨╜╨┤╨░╤А╤В╨╜╨╕╤Е ╨╖╨░╨║╤Ц╨╜╤З╨╡╨╜╤М ╨╛╨┤╨╜╨╕╨╜╨╕ ╤В╨░ ╨╝╨╜╨╛╨╢╨╕╨╜╨╕ ╨┤╨╗╤П ╤Ц╨╝╨╡╨╜╨╜╨╕╨║╤Ц╨▓ ╤З╨╛╨╗╨╛╨▓╤Ц╤З╨╛╨│╨╛, ╨╢╤Ц╨╜╨╛╤З╨╛╨│╨╛ ╤В╨░ ╤Б╨╡╤А╨╡╨┤╨╜╤М╨╛╨│╨╛ ╤А╨╛╨┤╤Г ╤Г ╨▓╤Б╤Ц╤Е ╤Б╨╡╨╝╨╕ ╨▓╤Ц╨┤╨╝╤Ц╨╜╨║╨░╤Е ╤Е╨╛╤А╨▓╨░╤В╤Б╤М╨║╨╛╤Ч ╨╝╨╛╨▓╨╕."
+              "ru": "Вот краткий обзор стандартных окончаний единственного и множественного числа для существительных мужского, женского и среднего рода во всех семи падежах хорватского языка.",
+              "ua": "Ось короткий огляд стандартних закінчень однини та множини для іменників чоловічого, жіночого та середнього роду у всіх семи відмінках хорватської мови."
             },
             "table": {
               "headers": [
@@ -1283,7 +1283,7 @@ export const glossaryData: GlossaryCategory[] = [
                 {
                   "cells": [
                     "Nominativ",
-                    "├Ш (no ending)",
+                    "Ø (no ending)",
                     "-i / -ovi",
                     "-a",
                     "-e",
@@ -1316,7 +1316,7 @@ export const glossaryData: GlossaryCategory[] = [
                 {
                   "cells": [
                     "Akuzativ",
-                    "├Ш (inanim.) / -a (anim.)",
+                    "Ø (inanim.) / -a (anim.)",
                     "-e",
                     "-u",
                     "-e",
@@ -1366,45 +1366,45 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "vokativ",
         "title": {
           "en": "Vocative (Vokativ)",
-          "ru": "╨Ч╨▓╨░╤В╨╡╨╗╤М╨╜╤Л╨╣ ╨┐╨░╨┤╨╡╨╢ (Vokativ)",
-          "ua": "╨Ъ╨╗╨╕╤З╨╜╨╕╨╣ ╨▓╤Ц╨┤╨╝╤Ц╨╜╨╛╨║ (Vokativ)"
+          "ru": "Звательный падеж (Vokativ)",
+          "ua": "Кличний відмінок (Vokativ)"
         },
-        "icon": "ЁЯЧгя╕П",
+        "icon": "🗣️",
         "subsections": [
           {
             "title": {
               "en": "Usage",
-              "ru": "╨Ш╤Б╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╨╜╨╕╨╡",
-              "ua": "╨Т╨╕╨║╨╛╤А╨╕╤Б╤В╨░╨╜╨╜╤П"
+              "ru": "Использование",
+              "ua": "Використання"
             },
             "text": {
-              "en": "The Vocative is used for addressing or calling someone directly. Standard endings: masculine singular ends in -e or -u (e.g. prijatelju, profesore), feminine singular ends in -o or -a (e.g. ┼╛eno, mama). Plural forms are identical to the Nominative.",
-              "ru": "╨Ч╨▓╨░╤В╨╡╨╗╤М╨╜╤Л╨╣ ╨┐╨░╨┤╨╡╨╢ ╨╕╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╤В╤Б╤П ╨┐╤А╨╕ ╨┐╤А╤П╨╝╨╛╨╝ ╨╛╨▒╤А╨░╤Й╨╡╨╜╨╕╨╕ ╨║ ╨║╨╛╨╝╤Г-╨╗╨╕╨▒╨╛. ╨Ю╨║╨╛╨╜╤З╨░╨╜╨╕╤П: ╨╝╤Г╨╢╤Б╨║╨╛╨╣ ╤А╨╛╨┤ ╨╡╨┤. ╤З. ╨╛╨║╨░╨╜╤З╨╕╨▓╨░╨╡╤В╤Б╤П ╨╜╨░ -e ╨╕╨╗╨╕ -u (prijatelju, profesore), ╨╢╨╡╨╜╤Б╨║╨╕╨╣ ╤А╨╛╨┤ ╨╡╨┤. ╤З. ╨╛╨║╨░╨╜╤З╨╕╨▓╨░╨╡╤В╤Б╤П ╨╜╨░ -o ╨╕╨╗╨╕ -a (┼╛eno, mama). ╨д╨╛╤А╨╝╤Л ╨╝╨╜. ╤З. ╤Б╨╛╨▓╨┐╨░╨┤╨░╤О╤В ╤Б ╨╕╨╝╨╡╨╜╨╕╤В╨╡╨╗╤М╨╜╤Л╨╝.",
-              "ua": "╨Ъ╨╗╨╕╤З╨╜╨╕╨╣ ╨▓╤Ц╨┤╨╝╤Ц╨╜╨╛╨║ ╨▓╨╕╨║╨╛╤А╨╕╤Б╤В╨╛╨▓╤Г╤Ф╤В╤М╤Б╤П ╨┤╨╗╤П ╨╖╨▓╨╡╤А╨╜╨╡╨╜╨╜╤П ╨░╨▒╨╛ ╨╖╨░╨║╨╗╨╕╨║╤Г. ╨Ч╨░╨║╤Ц╨╜╤З╨╡╨╜╨╜╤П: ╤З╨╛╨╗╨╛╨▓╤Ц╤З╨╕╨╣ ╤А╤Ц╨┤ ╨╛╨┤╨╜╨╕╨╜╨╕ ╨╖╨░╨║╤Ц╨╜╤З╤Г╤Ф╤В╤М╤Б╤П ╨╜╨░ -e ╨░╨▒╨╛ -u (prijatelju, profesore), ╨╢╤Ц╨╜╨╛╤З╨╕╨╣ ╤А╤Ц╨┤ ╨╛╨┤╨╜╨╕╨╜╨╕ ╨╖╨░╨║╤Ц╨╜╤З╤Г╤Ф╤В╤М╤Б╤П ╨╜╨░ -o ╨░╨▒╨╛ -a (┼╛eno, mama). ╨д╨╛╤А╨╝╨╕ ╨╝╨╜╨╛╨╢╨╕╨╜╨╕ ╨╖╨▒╤Ц╨│╨░╤О╤В╤М╤Б╤П ╨╖ ╨╜╨░╨╖╨╕╨▓╨╜╨╕╨╝ ╨▓╤Ц╨┤╨╝╤Ц╨╜╨║╨╛╨╝."
+              "en": "The Vocative is used for addressing or calling someone directly. Standard endings: masculine singular ends in -e or -u (e.g. prijatelju, profesore), feminine singular ends in -o or -a (e.g. ženo, mama). Plural forms are identical to the Nominative.",
+              "ru": "Звательный падеж используется при прямом обращении к кому-либо. Окончания: мужской род ед. ч. оканчивается на -e или -u (prijatelju, profesore), женский род ед. ч. оканчивается на -o или -a (ženo, mama). Формы мн. ч. совпадают с именительным.",
+              "ua": "Кличний відмінок використовується для звернення або заклику. Закінчення: чоловічий рід однини закінчується на -e або -u (prijatelju, profesore), жіночий рід однини закінчується на -o або -a (ženo, mama). Форми множини збігаються з називним відмінком."
             },
             "examples": [
               {
                 "hr": "Dobar dan, profesore!",
                 "translation": {
                   "en": "Good day, professor!",
-                  "ru": "╨Ф╨╛╨▒╤А╤Л╨╣ ╨┤╨╡╨╜╤М, ╨┐╤А╨╛╤Д╨╡╤Б╤Б╨╛╤А!",
-                  "ua": "╨Ф╨╛╨▒╤А╨╛╨│╨╛ ╨┤╨╜╤П, ╨┐╤А╨╛╤Д╨╡╤Б╨╛╤А╨╡!"
+                  "ru": "Добрый день, профессор!",
+                  "ua": "Доброго дня, професоре!"
                 }
               },
               {
                 "hr": "Hej, prijatelju!",
                 "translation": {
                   "en": "Hey, friend!",
-                  "ru": "╨н╨╣, ╨┤╤А╤Г╨│!",
-                  "ua": "╨У╨╡╨╣, ╨┤╤А╤Г╨╢╨╡!"
+                  "ru": "Эй, друг!",
+                  "ua": "Гей, друже!"
                 }
               },
               {
                 "hr": "Mama, gdje si?",
                 "translation": {
                   "en": "Mom, where are you?",
-                  "ru": "╨Ь╨░╨╝╨░, ╨│╨┤╨╡ ╤В╤Л?",
-                  "ua": "╨Ь╨░╨╝╨╛, ╨┤╨╡ ╤В╨╕?"
+                  "ru": "Мама, где ты?",
+                  "ua": "Мамо, де ти?"
                 }
               }
             ]
@@ -1414,46 +1414,46 @@ export const glossaryData: GlossaryCategory[] = [
       {
         "id": "plurality",
         "title": {
-          "en": "Singular & Plural (Jednina i mno┼╛ina)",
-          "ru": "╨з╨╕╤Б╨╗╨╛ (Jednina ╨╕ mno┼╛ina)",
-          "ua": "╨з╨╕╤Б╨╗╨╛ (Jednina ╤В╨░ mno┼╛ina)"
+          "en": "Singular & Plural (Jednina i množina)",
+          "ru": "Число (Jednina и množina)",
+          "ua": "Число (Jednina та množina)"
         },
-        "icon": "ЁЯСе",
+        "icon": "👥",
         "subsections": [
           {
             "title": {
               "en": "Grammatical Number",
-              "ru": "╨У╤А╨░╨╝╨╝╨░╤В╨╕╤З╨╡╤Б╨║╨╛╨╡ ╤З╨╕╤Б╨╗╨╛",
-              "ua": "╨У╤А╨░╨╝╨░╤В╨╕╤З╨╜╨╡ ╤З╨╕╤Б╨╗╨╛"
+              "ru": "Грамматическое число",
+              "ua": "Граматичне число"
             },
             "text": {
-              "en": "Croatian nouns have two numbers: Singular (Jednina) and Plural (Mno┼╛ina). Plural masculine nouns can undergo stem changes, such as adding the infix '-ov-' or '-ev-' for short monosyllabic words (e.g., grad тЖТ gradovi, stol тЖТ stolovi).",
-              "ru": "╨е╨╛╤А╨▓╨░╤В╤Б╨║╨╕╨╡ ╤Б╤Г╤Й╨╡╤Б╤В╨▓╨╕╤В╨╡╨╗╤М╨╜╤Л╨╡ ╨╕╨╝╨╡╤О╤В ╨┤╨▓╨░ ╤З╨╕╤Б╨╗╨░: ╨Х╨┤╨╕╨╜╤Б╤В╨▓╨╡╨╜╨╜╨╛╨╡ (Jednina) ╨╕ ╨Ь╨╜╨╛╨╢╨╡╤Б╤В╨▓╨╡╨╜╨╜╨╛╨╡ (Mno┼╛ina). ╨б╤Г╤Й╨╡╤Б╤В╨▓╨╕╤В╨╡╨╗╤М╨╜╤Л╨╡ ╨╝╤Г╨╢╤Б╨║╨╛╨│╨╛ ╤А╨╛╨┤╨░ ╨▓╨╛ ╨╝╨╜╨╛╨╢╨╡╤Б╤В╨▓╨╡╨╜╨╜╨╛╨╝ ╤З╨╕╤Б╨╗╨╡ ╨╝╨╛╨│╤Г╤В ╨╕╨╖╨╝╨╡╨╜╤П╤В╤М ╨╛╤Б╨╜╨╛╨▓╤Г, ╨┤╨╛╨▒╨░╨▓╨╗╤П╤П ╤Б╤Г╤Д╤Д╨╕╨║╤Б '-ov-' ╨╕╨╗╨╕ '-ev-' ╨┤╨╗╤П ╨║╨╛╤А╨╛╤В╨║╨╕╤Е ╨╛╨┤╨╜╨╛╤Б╨╗╨╛╨╢╨╜╤Л╤Е ╤Б╨╗╨╛╨▓ (╨╜╨░╨┐╤А╨╕╨╝╨╡╤А, grad тЖТ gradovi, stol тЖТ stolovi).",
-              "ua": "╨е╨╛╤А╨▓╨░╤В╤Б╤М╨║╤Ц ╤Ц╨╝╨╡╨╜╨╜╨╕╨║╨╕ ╨╝╨░╤О╤В╤М ╨┤╨▓╨░ ╤З╨╕╤Б╨╗╨░: ╨Ю╨┤╨╜╨╕╨╜╤Г (Jednina) ╤В╨░ ╨Ь╨╜╨╛╨╢╨╕╨╜╤Г (Mno┼╛ina). ╨Ж╨╝╨╡╨╜╨╜╨╕╨║╨╕ ╤З╨╛╨╗╨╛╨▓╤Ц╤З╨╛╨│╨╛ ╤А╨╛╨┤╤Г ╤Г ╨╝╨╜╨╛╨╢╨╕╨╜╤Ц ╨╝╨╛╨╢╤Г╤В╤М ╨╖╨╝╤Ц╨╜╤О╨▓╨░╤В╨╕ ╨╛╤Б╨╜╨╛╨▓╤Г, ╨┤╨╛╨┤╨░╤О╤З╨╕ ╤Б╤Г╤Д╤Ц╨║╤Б '-ov-' ╨░╨▒╨╛ '-ev-' ╨┤╨╗╤П ╨║╨╛╤А╨╛╤В╨║╨╕╤Е ╨╛╨┤╨╜╨╛╤Б╨║╨╗╨░╨┤╨╛╨▓╨╕╤Е ╤Б╨╗╤Ц╨▓ (╨╜╨░╨┐╤А╨╕╨║╨╗╨░╨┤, grad тЖТ gradovi, stol тЖТ stolovi)."
+              "en": "Croatian nouns have two numbers: Singular (Jednina) and Plural (Množina). Plural masculine nouns can undergo stem changes, such as adding the infix '-ov-' or '-ev-' for short monosyllabic words (e.g., grad → gradovi, stol → stolovi).",
+              "ru": "Хорватские существительные имеют два числа: Единственное (Jednina) и Множественное (Množina). Существительные мужского рода во множественном числе могут изменять основу, добавляя суффикс '-ov-' или '-ev-' для коротких односложных слов (например, grad → gradovi, stol → stolovi).",
+              "ua": "Хорватські іменники мають два числа: Однину (Jednina) та Множину (Množina). Іменники чоловічого роду у множині можуть змінювати основу, додаючи суфікс '-ov-' або '-ev-' для коротких односкладових слів (наприклад, grad → gradovi, stol → stolovi)."
             },
             "examples": [
               {
-                "hr": "grad (singular) тЖТ gradovi (plural)",
+                "hr": "grad (singular) → gradovi (plural)",
                 "translation": {
-                  "en": "city тЖТ cities",
-                  "ru": "╨│╨╛╤А╨╛╨┤ тЖТ ╨│╨╛╤А╨╛╨┤╨░",
-                  "ua": "╨╝╤Ц╤Б╤В╨╛ тЖТ ╨╝╤Ц╤Б╤В╨░"
+                  "en": "city → cities",
+                  "ru": "город → города",
+                  "ua": "місто → міста"
                 }
               },
               {
-                "hr": "┼╛ena (singular) тЖТ ┼╛ene (plural)",
+                "hr": "žena (singular) → žene (plural)",
                 "translation": {
-                  "en": "woman тЖТ women",
-                  "ru": "╨╢╨╡╨╜╤Й╨╕╨╜╨░ тЖТ ╨╢╨╡╨╜╤Й╨╕╨╜╤Л",
-                  "ua": "╨╢╤Ц╨╜╨║╨░ тЖТ ╨╢╤Ц╨╜╨║╨╕"
+                  "en": "woman → women",
+                  "ru": "женщина → женщины",
+                  "ua": "жінка → жінки"
                 }
               },
               {
-                "hr": "selo (singular) тЖТ sela (plural)",
+                "hr": "selo (singular) → sela (plural)",
                 "translation": {
-                  "en": "village тЖТ villages",
-                  "ru": "╨┤╨╡╤А╨╡╨▓╨╜╤П тЖТ ╨┤╨╡╤А╨╡╨▓╨╜╨╕",
-                  "ua": "╤Б╨╡╨╗╨╛ тЖТ ╤Б╨╡╨╗╨░"
+                  "en": "village → villages",
+                  "ru": "деревня → деревни",
+                  "ua": "село → села"
                 }
               }
             ]
@@ -1464,29 +1464,29 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "articles",
         "title": {
           "en": "Absence of Articles",
-          "ru": "╨Ю╤В╤Б╤Г╤В╤Б╤В╨▓╨╕╨╡ ╨░╤А╤В╨╕╨║╨╗╨╡╨╣",
-          "ua": "╨Т╤Ц╨┤╤Б╤Г╤В╨╜╤Ц╤Б╤В╤М ╨░╤А╤В╨╕╨║╨╗╤Ц╨▓"
+          "ru": "Отсутствие артиклей",
+          "ua": "Відсутність артиклів"
         },
-        "icon": "тЭМ",
+        "icon": "❌",
         "subsections": [
           {
             "title": {
               "en": "Grammatical Note",
-              "ru": "╨У╤А╨░╨╝╨╝╨░╤В╨╕╤З╨╡╤Б╨║╨░╤П ╨╖╨░╨╝╨╡╤В╨║╨░",
-              "ua": "╨У╤А╨░╨╝╨░╤В╨╕╤З╨╜╨░ ╨┐╤А╨╕╨╝╤Ц╤В╨║╨░"
+              "ru": "Грамматическая заметка",
+              "ua": "Граматична примітка"
             },
             "text": {
               "en": "Croatian does not have articles (like 'a', 'an', or 'the'). Nouns are used on their own, and definiteness is conveyed by context, word order, or demonstrative pronouns (e.g. ovaj, taj).",
-              "ru": "╨Т ╤Е╨╛╤А╨▓╨░╤В╤Б╨║╨╛╨╝ ╤П╨╖╤Л╨║╨╡ ╨╜╨╡╤В ╨░╤А╤В╨╕╨║╨╗╨╡╨╣ (╤В╨░╨║╨╕╤Е ╨║╨░╨║ ╨░╨╜╨│╨╗╨╕╨╣╤Б╨║╨╕╨╡ 'a' ╨╕╨╗╨╕ 'the'). ╨б╤Г╤Й╨╡╤Б╤В╨▓╨╕╤В╨╡╨╗╤М╨╜╤Л╨╡ ╨╕╤Б╨┐╨╛╨╗╤М╨╖╤Г╤О╤В╤Б╤П ╤Б╨░╨╝╨╕ ╨┐╨╛ ╤Б╨╡╨▒╨╡, ╨░ ╨╛╨┐╤А╨╡╨┤╨╡╨╗╨╡╨╜╨╜╨╛╤Б╤В╤М ╨┐╨╡╤А╨╡╨┤╨░╨╡╤В╤Б╤П ╨║╨╛╨╜╤В╨╡╨║╤Б╤В╨╛╨╝, ╨┐╨╛╤А╤П╨┤╨║╨╛╨╝ ╤Б╨╗╨╛╨▓ ╨╕╨╗╨╕ ╤Г╨║╨░╨╖╨░╤В╨╡╨╗╤М╨╜╤Л╨╝╨╕ ╨╝╨╡╤Б╤В╨╛╨╕╨╝╨╡╨╜╨╕╤П╨╝╨╕ (ovaj, taj).",
-              "ua": "╨г ╤Е╨╛╤А╨▓╨░╤В╤Б╤М╨║╤Ц╨╣ ╨╝╨╛╨▓╤Ц ╨╜╨╡╨╝╨░╤Ф ╨░╤А╤В╨╕╨║╨╗╤Ц╨▓ (╤В╨░╨║╨╕╤Е ╤П╨║ ╨░╨╜╨│╨╗╤Ц╨╣╤Б╤М╨║╤Ц 'a' ╨░╨▒╨╛ 'the'). ╨Ж╨╝╨╡╨╜╨╜╨╕╨║╨╕ ╨▓╨╕╨║╨╛╤А╨╕╤Б╤В╨╛╨▓╤Г╤О╤В╤М╤Б╤П ╤Б╨░╨╝╤Ц ╨┐╨╛ ╤Б╨╛╨▒╤Ц, ╨░ ╨▓╨╕╨╖╨╜╨░╤З╨╡╨╜╤Ц╤Б╤В╤М ╨┐╨╡╤А╨╡╨┤╨░╤Ф╤В╤М╤Б╤П ╨║╨╛╨╜╤В╨╡╨║╤Б╤В╨╛╨╝, ╨┐╨╛╤А╤П╨┤╨║╨╛╨╝ ╤Б╨╗╤Ц╨▓ ╨░╨▒╨╛ ╨▓╨║╨░╨╖╤Ц╨▓╨╜╨╕╨╝╨╕ ╨╖╨░╨╣╨╝╨╡╨╜╨╜╨╕╨║╨░╨╝╨╕ (ovaj, taj)."
+              "ru": "В хорватском языке нет артиклей (таких как английские 'a' или 'the'). Существительные используются сами по себе, а определенность передается контекстом, порядком слов или указательными местоимениями (ovaj, taj).",
+              "ua": "У хорватській мові немає артиклів (таких як англійські 'a' або 'the'). Іменники використовуються самі по собі, а визначеність передається контекстом, порядком слів або вказівними займенниками (ovaj, taj)."
             },
             "examples": [
               {
                 "hr": "Knjiga je na stolu.",
                 "translation": {
                   "en": "The book is on the table. (or 'A book is on a table.')",
-                  "ru": "╨Ъ╨╜╨╕╨│╨░ ╨╜╨░ ╤Б╤В╨╛╨╗╨╡.",
-                  "ua": "╨Ъ╨╜╨╕╨│╨░ ╨╜╨░ ╤Б╤В╨╛╨╗╤Ц."
+                  "ru": "Книга на столе.",
+                  "ua": "Книга на столі."
                 }
               }
             ]
@@ -1499,35 +1499,35 @@ export const glossaryData: GlossaryCategory[] = [
     "id": "verbs",
     "title": {
       "en": "Verbs (Glagoli)",
-      "ru": "╨У╨╗╨░╨│╨╛╨╗╤Л (Glagoli)",
-      "ua": "╨Ф╤Ц╤Ф╤Б╨╗╨╛╨▓╨░ (Glagoli)"
+      "ru": "Глаголы (Glagoli)",
+      "ua": "Дієслова (Glagoli)"
     },
-    "icon": "ЁЯФД",
+    "icon": "🔄",
     "sections": [
       {
         "id": "present",
         "title": {
           "en": "Present Tense (Prezent)",
-          "ru": "╨Э╨░╤Б╤В╨╛╤П╤Й╨╡╨╡ ╨▓╤А╨╡╨╝╤П (Prezent)",
-          "ua": "╨в╨╡╨┐╨╡╤А╤Ц╤И╨╜╤Ц╨╣ ╤З╨░╤Б (Prezent)"
+          "ru": "Настоящее время (Prezent)",
+          "ua": "Теперішній час (Prezent)"
         },
-        "icon": "тП░",
+        "icon": "⏰",
         "subsections": [
           {
             "title": {
               "en": "Conjugation Groups",
-              "ru": "╨У╤А╤Г╨┐╨┐╤Л ╤Б╨┐╤А╤П╨╢╨╡╨╜╨╕╤П",
-              "ua": "╨У╤А╤Г╨┐╨╕ ╨┤╤Ц╤Ф╨▓╤Ц╨┤╨╝╤Ц╨╜╤О╨▓╨░╨╜╨╜╤П"
+              "ru": "Группы спряжения",
+              "ua": "Групи дієвідмінювання"
             },
             "text": {
-              "en": "Croatian verbs in present tense are conjugated based on the vowel before the personal ending. The three main conjugation groups are: -a- conjugation (e.g. ─Нitati тЖТ ─Нitam), -i- conjugation (e.g. govoriti тЖТ govorim), -e- conjugation (e.g. pisati тЖТ pi┼бem).",
-              "ru": "╨е╨╛╤А╨▓╨░╤В╤Б╨║╨╕╨╡ ╨│╨╗╨░╨│╨╛╨╗╤Л ╨▓ ╨╜╨░╤Б╤В╨╛╤П╤Й╨╡╨╝ ╨▓╤А╨╡╨╝╨╡╨╜╨╕ ╤Б╨┐╤А╤П╨│╨░╤О╤В╤Б╤П ╨┐╨╛ ╨│╨╗╨░╤Б╨╜╨╛╨╝╤Г ╨┐╨╡╤А╨╡╨┤ ╨╗╨╕╤З╨╜╤Л╨╝ ╨╛╨║╨╛╨╜╤З╨░╨╜╨╕╨╡╨╝. ╨в╤А╨╕ ╨╛╤Б╨╜╨╛╨▓╨╜╤Л╨╡ ╨│╤А╤Г╨┐╨┐╤Л: ╨╜╨░ -a- (─Нitati тЖТ ─Нitam), ╨╜╨░ -i- (govoriti тЖТ govorim), ╨╜╨░ -e- (pisati тЖТ pi┼бem).",
-              "ua": "╨е╨╛╤А╨▓╨░╤В╤Б╤М╨║╤Ц ╨┤╤Ц╤Ф╤Б╨╗╨╛╨▓╨░ ╤Г ╤В╨╡╨┐╨╡╤А╤Ц╤И╨╜╤М╨╛╨╝╤Г ╤З╨░╤Б╤Ц ╨┤╤Ц╤Ф╨▓╤Ц╨┤╨╝╤Ц╨╜╤О╤О╤В╤М╤Б╤П ╨╖╨░ ╨│╨╛╨╗╨╛╤Б╨╜╨╕╨╝ ╨┐╨╡╤А╨╡╨┤ ╨╛╤Б╨╛╨▒╨╛╨▓╨╕╨╝ ╨╖╨░╨║╤Ц╨╜╤З╨╡╨╜╨╜╤П╨╝. ╨в╤А╨╕ ╨╛╤Б╨╜╨╛╨▓╨╜╤Ц ╨│╤А╤Г╨┐╨╕: ╨╜╨░ -a- (─Нitati тЖТ ─Нitam), ╨╜╨░ -i- (govoriti тЖТ govorim), ╨╜╨░ -e- (pisati тЖТ pi┼бem)."
+              "en": "Croatian verbs in present tense are conjugated based on the vowel before the personal ending. The three main conjugation groups are: -a- conjugation (e.g. čitati → čitam), -i- conjugation (e.g. govoriti → govorim), -e- conjugation (e.g. pisati → pišem).",
+              "ru": "Хорватские глаголы в настоящем времени спрягаются по гласному перед личным окончанием. Три основные группы: на -a- (čitati → čitam), на -i- (govoriti → govorim), на -e- (pisati → pišem).",
+              "ua": "Хорватські дієслова у теперішньому часі дієвідмінюються за голосним перед особовим закінченням. Три основні групи: на -a- (čitati → čitam), на -i- (govoriti → govorim), на -e- (pisati → pišem)."
             },
             "table": {
               "headers": [
                 "Person",
-                "─Нitati (read)",
+                "čitati (read)",
                 "govoriti (speak)",
                 "pisati (write)"
               ],
@@ -1535,49 +1535,49 @@ export const glossaryData: GlossaryCategory[] = [
                 {
                   "cells": [
                     "ja",
-                    "─Нitam",
+                    "čitam",
                     "govorim",
-                    "pi┼бem"
+                    "pišem"
                   ]
                 },
                 {
                   "cells": [
                     "ti",
-                    "─Нita┼б",
-                    "govori┼б",
-                    "pi┼бe┼б"
+                    "čitaš",
+                    "govoriš",
+                    "pišeš"
                   ]
                 },
                 {
                   "cells": [
                     "on/ona/ono",
-                    "─Нita",
+                    "čita",
                     "govori",
-                    "pi┼бe"
+                    "piše"
                   ]
                 },
                 {
                   "cells": [
                     "mi",
-                    "─Нitamo",
+                    "čitamo",
                     "govorimo",
-                    "pi┼бemo"
+                    "pišemo"
                   ]
                 },
                 {
                   "cells": [
                     "vi",
-                    "─Нitate",
+                    "čitate",
                     "govorite",
-                    "pi┼бete"
+                    "pišete"
                   ]
                 },
                 {
                   "cells": [
                     "oni/one/ona",
-                    "─Нitaju",
+                    "čitaju",
                     "govore",
-                    "pi┼бu"
+                    "pišu"
                   ]
                 }
               ]
@@ -1586,13 +1586,13 @@ export const glossaryData: GlossaryCategory[] = [
           {
             "title": {
               "en": "Verb 'biti' (to be)",
-              "ru": "╨У╨╗╨░╨│╨╛╨╗ 'biti' (╨▒╤Л╤В╤М)",
-              "ua": "╨Ф╤Ц╤Ф╤Б╨╗╨╛╨▓╨╛ 'biti' (╨▒╤Г╤В╨╕)"
+              "ru": "Глагол 'biti' (быть)",
+              "ua": "Дієслово 'biti' (бути)"
             },
             "text": {
               "en": "The verb 'biti' is the most important verb in Croatian. It has both long (stressed) and short (enclitic) forms. Short forms are used more commonly.",
-              "ru": "╨У╨╗╨░╨│╨╛╨╗ 'biti' тАФ ╤Б╨░╨╝╤Л╨╣ ╨▓╨░╨╢╨╜╤Л╨╣ ╨│╨╗╨░╨│╨╛╨╗ ╨▓ ╤Е╨╛╤А╨▓╨░╤В╤Б╨║╨╛╨╝. ╨Ш╨╝╨╡╨╡╤В ╨┤╨╗╨╕╨╜╨╜╤Л╨╡ (╤Г╨┤╨░╤А╨╜╤Л╨╡) ╨╕ ╨║╨╛╤А╨╛╤В╨║╨╕╨╡ (╤Н╨╜╨║╨╗╨╕╤В╨╕╤З╨╡╤Б╨║╨╕╨╡) ╤Д╨╛╤А╨╝╤Л. ╨Ъ╨╛╤А╨╛╤В╨║╨╕╨╡ ╤Д╨╛╤А╨╝╤Л ╨╕╤Б╨┐╨╛╨╗╤М╨╖╤Г╤О╤В╤Б╤П ╤З╨░╤Й╨╡.",
-              "ua": "╨Ф╤Ц╤Ф╤Б╨╗╨╛╨▓╨╛ 'biti' тАФ ╨╜╨░╨╣╨▓╨░╨╢╨╗╨╕╨▓╤Ц╤И╨╡ ╨┤╤Ц╤Ф╤Б╨╗╨╛╨▓╨╛ ╨▓ ╤Е╨╛╤А╨▓╨░╤В╤Б╤М╨║╤Ц╨╣. ╨Ь╨░╤Ф ╨┤╨╛╨▓╨│╤Ц (╨╜╨░╨│╨╛╨╗╨╛╤И╨╡╨╜╤Ц) ╤В╨░ ╨║╨╛╤А╨╛╤В╨║╤Ц (╨╡╨╜╨║╨╗╤Ц╤В╨╕╤З╨╜╤Ц) ╤Д╨╛╤А╨╝╨╕. ╨Ъ╨╛╤А╨╛╤В╨║╤Ц ╤Д╨╛╤А╨╝╨╕ ╨▓╨╕╨║╨╛╤А╨╕╤Б╤В╨╛╨▓╤Г╤О╤В╤М╤Б╤П ╤З╨░╤Б╤В╤Ц╤И╨╡."
+              "ru": "Глагол 'biti' — самый важный глагол в хорватском. Имеет длинные (ударные) и короткие (энклитические) формы. Короткие формы используются чаще.",
+              "ua": "Дієслово 'biti' — найважливіше дієслово в хорватській. Має довгі (наголошені) та короткі (енклітичні) форми. Короткі форми використовуються частіше."
             },
             "table": {
               "headers": [
@@ -1659,10 +1659,10 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "past",
         "title": {
           "en": "Past Tense (Perfekt)",
-          "ru": "╨Я╤А╨╛╤И╨╡╨┤╤И╨╡╨╡ ╨▓╤А╨╡╨╝╤П (Perfekt)",
-          "ua": "╨Ь╨╕╨╜╤Г╨╗╨╕╨╣ ╤З╨░╤Б (Perfekt)"
+          "ru": "Прошедшее время (Perfekt)",
+          "ua": "Минулий час (Perfekt)"
         },
-        "icon": "тПк",
+        "icon": "⏪",
         "subsections": [
           {
             "title": {
@@ -1791,10 +1791,10 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "future",
         "title": {
           "en": "Future Tense (Futur I & II)",
-          "ru": "╨С╤Г╨┤╤Г╤Й╨╡╨╡ ╨▓╤А╨╡╨╝╤П (Futur I ╨╕ II)",
-          "ua": "╨Ь╨░╨╣╨▒╤Г╤В╨╜╤Ц╨╣ ╤З╨░╤Б (Futur I ╤В╨░ II)"
+          "ru": "Будущее время (Futur I и II)",
+          "ua": "Майбутній час (Futur I та II)"
         },
-        "icon": "тПй",
+        "icon": "⏩",
         "subsections": [
           {
             "title": {
@@ -1803,68 +1803,68 @@ export const glossaryData: GlossaryCategory[] = [
               "ua": "Futur I"
             },
             "text": {
-              "en": "Future I is formed with short forms of 'htjeti' (will) + infinitive. Short forms: ─Зu, ─Зe┼б, ─Зe, ─Зemo, ─Зete, ─Зe. When the infinitive ends in -ti and is placed before the auxiliary, the -i is dropped.",
-              "ru": "Futur I ╨╛╨▒╤А╨░╨╖╤Г╨╡╤В╤Б╤П ╤Б ╨┐╨╛╨╝╨╛╤Й╤М╤О ╨║╤А╨░╤В╨║╨╕╤Е ╤Д╨╛╤А╨╝ ╨│╨╗╨░╨│╨╛╨╗╨░ 'htjeti' + ╨╕╨╜╤Д╨╕╨╜╨╕╤В╨╕╨▓. ╨Ъ╤А╨░╤В╨║╨╕╨╡ ╤Д╨╛╤А╨╝╤Л: ─Зu, ─Зe┼б, ─Зe, ─Зemo, ─Зete, ─Зe. ╨Х╤Б╨╗╨╕ ╨╕╨╜╤Д╨╕╨╜╨╕╤В╨╕╨▓ ╨╜╨░ -ti ╤Б╤В╨╛╨╕╤В ╨┐╨╡╤А╨╡╨┤ ╨▓╤Б╨┐╨╛╨╝╨╛╨│╨░╤В╨╡╨╗╤М╨╜╤Л╨╝ ╨│╨╗╨░╨│╨╛╨╗╨╛╨╝, -i ╨╛╤В╨▒╤А╨░╤Б╤Л╨▓╨░╨╡╤В╤Б╤П.",
-              "ua": "Futur I ╤Г╤В╨▓╨╛╤А╤О╤Ф╤В╤М╤Б╤П ╨╖╨░ ╨┤╨╛╨┐╨╛╨╝╨╛╨│╨╛╤О ╨║╨╛╤А╨╛╤В╨║╨╕╤Е ╤Д╨╛╤А╨╝ ╨┤╤Ц╤Ф╤Б╨╗╨╛╨▓╨░ 'htjeti' + ╤Ц╨╜╤Д╤Ц╨╜╤Ц╤В╨╕╨▓. ╨Ъ╨╛╤А╨╛╤В╨║╤Ц ╤Д╨╛╤А╨╝╨╕: ─Зu, ─Зe┼б, ─Зe, ─Зemo, ─Зete, ─Зe. ╨п╨║╤Й╨╛ ╤Ц╨╜╤Д╤Ц╨╜╤Ц╤В╨╕╨▓ ╨╜╨░ -ti ╤Б╤В╨╛╤Ч╤В╤М ╨┐╨╡╤А╨╡╨┤ ╨┤╨╛╨┐╨╛╨╝╤Ц╨╢╨╜╨╕╨╝ ╨┤╤Ц╤Ф╤Б╨╗╨╛╨▓╨╛╨╝, -i ╨▓╤Ц╨┤╨║╨╕╨┤╨░╤Ф╤В╤М╤Б╤П."
+              "en": "Future I is formed with short forms of 'htjeti' (will) + infinitive. Short forms: ću, ćeš, će, ćemo, ćete, će. When the infinitive ends in -ti and is placed before the auxiliary, the -i is dropped.",
+              "ru": "Futur I образуется с помощью кратких форм глагола 'htjeti' + инфинитив. Краткие формы: ću, ćeš, će, ćemo, ćete, će. Если инфинитив на -ti стоит перед вспомогательным глаголом, -i отбрасывается.",
+              "ua": "Futur I утворюється за допомогою коротких форм дієслова 'htjeti' + інфінітив. Короткі форми: ću, ćeš, će, ćemo, ćete, će. Якщо інфінітив на -ti стоїть перед допоміжним дієсловом, -i відкидається."
             },
             "table": {
               "headers": [
                 "Person",
-                "─Нitati",
+                "čitati",
                 "govoriti"
               ],
               "rows": [
                 {
                   "cells": [
                     "ja",
-                    "─Нitat ─Зu",
-                    "govorit ─Зu"
+                    "čitat ću",
+                    "govorit ću"
                   ]
                 },
                 {
                   "cells": [
                     "ti",
-                    "─Нitat ─Зe┼б",
-                    "govorit ─Зe┼б"
+                    "čitat ćeš",
+                    "govorit ćeš"
                   ]
                 },
                 {
                   "cells": [
                     "on/ona",
-                    "─Нitat ─Зe",
-                    "govorit ─Зe"
+                    "čitat će",
+                    "govorit će"
                   ]
                 },
                 {
                   "cells": [
                     "mi",
-                    "─Нitat ─Зemo",
-                    "govorit ─Зemo"
+                    "čitat ćemo",
+                    "govorit ćemo"
                   ]
                 },
                 {
                   "cells": [
                     "vi",
-                    "─Нitat ─Зete",
-                    "govorit ─Зete"
+                    "čitat ćete",
+                    "govorit ćete"
                   ]
                 },
                 {
                   "cells": [
                     "oni",
-                    "─Нitat ─Зe",
-                    "govorit ─Зe"
+                    "čitat će",
+                    "govorit će"
                   ]
                 }
               ]
             },
             "examples": [
               {
-                "hr": "Sutra ─Зu u─Нiti hrvatski.",
+                "hr": "Sutra ću učiti hrvatski.",
                 "translation": {
                   "en": "Tomorrow I will study Croatian.",
-                  "ru": "╨Ч╨░╨▓╤В╤А╨░ ╤П ╨▒╤Г╨┤╤Г ╤Г╤З╨╕╤В╤М ╤Е╨╛╤А╨▓╨░╤В╤Б╨║╨╕╨╣.",
-                  "ua": "╨Ч╨░╨▓╤В╤А╨░ ╤П ╨▒╤Г╨┤╤Г ╨▓╤З╨╕╤В╨╕ ╤Е╨╛╤А╨▓╨░╤В╤Б╤М╨║╤Г."
+                  "ru": "Завтра я буду учить хорватский.",
+                  "ua": "Завтра я буду вчити хорватську."
                 }
               }
             ]
@@ -1876,25 +1876,25 @@ export const glossaryData: GlossaryCategory[] = [
               "ua": "Futur II"
             },
             "text": {
-              "en": "Future II is used in conditional/temporal subordinate clauses (with 'ako', 'kad'). Formed with present tense of 'biti' (budem, bude┼б...) + active past participle.",
-              "ru": "Futur II ╨╕╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╤В╤Б╤П ╨▓ ╤Г╤Б╨╗╨╛╨▓╨╜╤Л╤Е/╨▓╤А╨╡╨╝╨╡╨╜╨╜╤Л╤Е ╨┐╤А╨╕╨┤╨░╤В╨╛╤З╨╜╤Л╤Е ╨┐╤А╨╡╨┤╨╗╨╛╨╢╨╡╨╜╨╕╤П╤Е (╨┐╨╛╤Б╨╗╨╡ 'ako', 'kad'). ╨Ю╨▒╤А╨░╨╖╤Г╨╡╤В╤Б╤П ╤Д╨╛╤А╨╝╨░╨╝╨╕ ╨╜╨░╤Б╤В╨╛╤П╤Й╨╡╨│╨╛ ╨▓╤А╨╡╨╝╨╡╨╜╨╕ 'biti' (budem, bude┼б...) + ╨┐╤А╨╕╤З╨░╤Б╤В╨╕╨╡ ╨┐╤А╨╛╤И╨╡╨┤╤И╨╡╨│╨╛ ╨▓╤А╨╡╨╝╨╡╨╜╨╕.",
-              "ua": "Futur II ╨▓╨╕╨║╨╛╤А╨╕╤Б╤В╨╛╨▓╤Г╤Ф╤В╤М╤Б╤П ╨▓ ╤Г╨╝╨╛╨▓╨╜╨╕╤Е/╤З╨░╤Б╨╛╨▓╨╕╤Е ╨┐╤Ц╨┤╤А╤П╨┤╨╜╨╕╤Е ╤А╨╡╤З╨╡╨╜╨╜╤П╤Е (╨┐╤Ц╤Б╨╗╤П 'ako', 'kad'). ╨г╤В╨▓╨╛╤А╤О╤Ф╤В╤М╤Б╤П ╤Д╨╛╤А╨╝╨░╨╝╨╕ ╤В╨╡╨┐╨╡╤А╤Ц╤И╨╜╤М╨╛╨│╨╛ ╤З╨░╤Б╤Г 'biti' (budem, bude┼б...) + ╨┤╤Ц╤Ф╨┐╤А╨╕╨║╨╝╨╡╤В╨╜╨╕╨║ ╨╝╨╕╨╜╤Г╨╗╨╛╨│╨╛ ╤З╨░╤Б╤Г."
+              "en": "Future II is used in conditional/temporal subordinate clauses (with 'ako', 'kad'). Formed with present tense of 'biti' (budem, budeš...) + active past participle.",
+              "ru": "Futur II используется в условных/временных придаточных предложениях (после 'ako', 'kad'). Образуется формами настоящего времени 'biti' (budem, budeš...) + причастие прошедшего времени.",
+              "ua": "Futur II використовується в умовних/часових підрядних реченнях (після 'ako', 'kad'). Утворюється формами теперішнього часу 'biti' (budem, budeš...) + дієприкметник минулого часу."
             },
             "examples": [
               {
-                "hr": "Ako budem imao vremena, do─Зi ─Зu.",
+                "hr": "Ako budem imao vremena, doći ću.",
                 "translation": {
                   "en": "If I have time, I'll come.",
-                  "ru": "╨Х╤Б╨╗╨╕ ╤Г ╨╝╨╡╨╜╤П ╨▒╤Г╨┤╨╡╤В ╨▓╤А╨╡╨╝╤П, ╤П ╨┐╤А╨╕╨┤╤Г.",
-                  "ua": "╨п╨║╤Й╨╛ ╤Г ╨╝╨╡╨╜╨╡ ╨▒╤Г╨┤╨╡ ╤З╨░╤Б, ╤П ╨┐╤А╨╕╨╣╨┤╤Г."
+                  "ru": "Если у меня будет время, я приду.",
+                  "ua": "Якщо у мене буде час, я прийду."
                 }
               },
               {
                 "hr": "Kad budete stigli, javite mi.",
                 "translation": {
                   "en": "When you arrive, let me know.",
-                  "ru": "╨Ъ╨╛╨│╨┤╨░ ╨┐╤А╨╕╨╡╨┤╨╡╤В╨╡, ╨┤╨░╨╣╤В╨╡ ╨╝╨╜╨╡ ╨╖╨╜╨░╤В╤М.",
-                  "ua": "╨Ъ╨╛╨╗╨╕ ╨┐╤А╨╕╤Ч╨┤╨╡╤В╨╡, ╨┤╨░╨╣╤В╨╡ ╨╝╨╡╨╜╤Ц ╨╖╨╜╨░╤В╨╕."
+                  "ru": "Когда приедете, дайте мне знать.",
+                  "ua": "Коли приїдете, дайте мені знати."
                 }
               }
             ]
@@ -1905,21 +1905,21 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "aspect",
         "title": {
           "en": "Verb Aspect (Glagolski aspekt)",
-          "ru": "╨Т╨╕╨┤ ╨│╨╗╨░╨│╨╛╨╗╨░",
-          "ua": "╨Т╨╕╨┤ ╨┤╤Ц╤Ф╤Б╨╗╨╛╨▓╨░"
+          "ru": "Вид глагола",
+          "ua": "Вид дієслова"
         },
-        "icon": "ЁЯФА",
+        "icon": "🔀",
         "subsections": [
           {
             "title": {
               "en": "Perfective vs Imperfective",
-              "ru": "╨б╨╛╨▓╨╡╤А╤И╨╡╨╜╨╜╤Л╨╣ vs ╨Э╨╡╤Б╨╛╨▓╨╡╤А╤И╨╡╨╜╨╜╤Л╨╣",
-              "ua": "╨Ф╨╛╨║╨╛╨╜╨░╨╜╨╕╨╣ vs ╨Э╨╡╨┤╨╛╨║╨╛╨╜╨░╨╜╨╕╨╣"
+              "ru": "Совершенный vs Несовершенный",
+              "ua": "Доконаний vs Недоконаний"
             },
             "text": {
               "en": "Like Slavic languages, Croatian verbs have aspects. Imperfective verbs express ongoing, repeated, or habitual actions. Perfective verbs express completed, one-time actions. Most verbs form pairs.",
-              "ru": "╨Ъ╨░╨║ ╨╕ ╨▓ ╤Б╨╗╨░╨▓╤П╨╜╤Б╨║╨╕╤Е ╤П╨╖╤Л╨║╨░╤Е, ╤Е╨╛╤А╨▓╨░╤В╤Б╨║╨╕╨╡ ╨│╨╗╨░╨│╨╛╨╗╤Л ╨╕╨╝╨╡╤О╤В ╨▓╨╕╨┤╤Л. ╨Э╨╡╤Б╨╛╨▓╨╡╤А╤И╨╡╨╜╨╜╤Л╨╣ ╨▓╨╕╨┤ ╨▓╤Л╤А╨░╨╢╨░╨╡╤В ╨┤╨╗╤П╤Й╨╡╨╡╤Б╤П, ╨┐╨╛╨▓╤В╨╛╤А╤П╤О╤Й╨╡╨╡╤Б╤П ╨╕╨╗╨╕ ╨┐╤А╨╕╨▓╤Л╤З╨╜╨╛╨╡ ╨┤╨╡╨╣╤Б╤В╨▓╨╕╨╡. ╨б╨╛╨▓╨╡╤А╤И╨╡╨╜╨╜╤Л╨╣ тАФ ╨╖╨░╨▓╨╡╤А╤И╤С╨╜╨╜╨╛╨╡, ╨╛╨┤╨╜╨╛╨║╤А╨░╤В╨╜╨╛╨╡. ╨С╨╛╨╗╤М╤И╨╕╨╜╤Б╤В╨▓╨╛ ╨│╨╗╨░╨│╨╛╨╗╨╛╨▓ ╨╛╨▒╤А╨░╨╖╤Г╤О╤В ╨┐╨░╤А╤Л.",
-              "ua": "╨п╨║ ╤Ц ╨▓ ╤Б╨╗╨╛╨▓'╤П╨╜╤Б╤М╨║╨╕╤Е ╨╝╨╛╨▓╨░╤Е, ╤Е╨╛╤А╨▓╨░╤В╤Б╤М╨║╤Ц ╨┤╤Ц╤Ф╤Б╨╗╨╛╨▓╨░ ╨╝╨░╤О╤В╤М ╨▓╨╕╨┤╨╕. ╨Э╨╡╨┤╨╛╨║╨╛╨╜╨░╨╜╨╕╨╣ ╨▓╨╕╨┤ ╨▓╨╕╤А╨░╨╢╨░╤Ф ╤В╤А╨╕╨▓╨░╨╗╤Г, ╨┐╨╛╨▓╤В╨╛╤А╤О╨▓╨░╨╜╤Г ╨░╨▒╨╛ ╨╖╨▓╨╕╤З╨╜╤Г ╨┤╤Ц╤О. ╨Ф╨╛╨║╨╛╨╜╨░╨╜╨╕╨╣ тАФ ╨╖╨░╨▓╨╡╤А╤И╨╡╨╜╤Г, ╨╛╨┤╨╜╨╛╤А╨░╨╖╨╛╨▓╤Г. ╨С╤Ц╨╗╤М╤И╤Ц╤Б╤В╤М ╨┤╤Ц╤Ф╤Б╨╗╤Ц╨▓ ╤Г╤В╨▓╨╛╤А╤О╤О╤В╤М ╨┐╨░╤А╨╕."
+              "ru": "Как и в славянских языках, хорватские глаголы имеют виды. Несовершенный вид выражает длящееся, повторяющееся или привычное действие. Совершенный — завершённое, однократное. Большинство глаголов образуют пары.",
+              "ua": "Як і в слов'янських мовах, хорватські дієслова мають види. Недоконаний вид виражає тривалу, повторювану або звичну дію. Доконаний — завершену, одноразову. Більшість дієслів утворюють пари."
             },
             "table": {
               "headers": [
@@ -1930,8 +1930,8 @@ export const glossaryData: GlossaryCategory[] = [
               "rows": [
                 {
                   "cells": [
-                    "─Нitati",
-                    "pro─Нitati",
+                    "čitati",
+                    "pročitati",
                     "to read"
                   ]
                 },
@@ -1944,15 +1944,15 @@ export const glossaryData: GlossaryCategory[] = [
                 },
                 {
                   "cells": [
-                    "u─Нiti",
-                    "nau─Нiti",
+                    "učiti",
+                    "naučiti",
                     "to learn"
                   ]
                 },
                 {
                   "cells": [
                     "govoriti",
-                    "re─Зi",
+                    "reći",
                     "to speak/say"
                   ]
                 },
@@ -1980,14 +1980,14 @@ export const glossaryData: GlossaryCategory[] = [
                 {
                   "cells": [
                     "dolaziti",
-                    "do─Зi",
+                    "doći",
                     "to come"
                   ]
                 },
                 {
                   "cells": [
                     "odlaziti",
-                    "oti─Зi",
+                    "otići",
                     "to leave"
                   ]
                 }
@@ -2000,21 +2000,21 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "imperative",
         "title": {
           "en": "Imperative (Imperativ)",
-          "ru": "╨Я╨╛╨▓╨╡╨╗╨╕╤В╨╡╨╗╤М╨╜╨╛╨╡ ╨╜╨░╨║╨╗╨╛╨╜╨╡╨╜╨╕╨╡ (Imperativ)",
-          "ua": "╨Э╨░╨║╨░╨╖╨╛╨▓╨╕╨╣ ╤Б╨┐╨╛╤Б╤Ц╨▒ (Imperativ)"
+          "ru": "Повелительное наклонение (Imperativ)",
+          "ua": "Наказовий спосіб (Imperativ)"
         },
-        "icon": "тЭЧ",
+        "icon": "❗",
         "subsections": [
           {
             "title": {
               "en": "Formation",
-              "ru": "╨Ю╨▒╤А╨░╨╖╨╛╨▓╨░╨╜╨╕╨╡",
-              "ua": "╨г╤В╨▓╨╛╤А╨╡╨╜╨╜╤П"
+              "ru": "Образование",
+              "ua": "Утворення"
             },
             "text": {
               "en": "The imperative is formed from the 3rd person plural present tense stem. Endings: -j/-i (2nd sing.), -jmo/-imo (1st pl.), -jte/-ite (2nd pl.).",
-              "ru": "╨Я╨╛╨▓╨╡╨╗╨╕╤В╨╡╨╗╤М╨╜╨╛╨╡ ╨╜╨░╨║╨╗╨╛╨╜╨╡╨╜╨╕╨╡ ╨╛╨▒╤А╨░╨╖╤Г╨╡╤В╤Б╤П ╨╛╤В ╨╛╤Б╨╜╨╛╨▓╤Л 3-╨│╨╛ ╨╗╨╕╤Ж╨░ ╨╝╨╜.╤З. ╨╜╨░╤Б╤В╨╛╤П╤Й╨╡╨│╨╛ ╨▓╤А╨╡╨╝╨╡╨╜╨╕. ╨Ю╨║╨╛╨╜╤З╨░╨╜╨╕╤П: -j/-i (2 ╨╗. ╨╡╨┤.╤З.), -jmo/-imo (1 ╨╗. ╨╝╨╜.╤З.), -jte/-ite (2 ╨╗. ╨╝╨╜.╤З.).",
-              "ua": "╨Э╨░╨║╨░╨╖╨╛╨▓╨╕╨╣ ╤Б╨┐╨╛╤Б╤Ц╨▒ ╤Г╤В╨▓╨╛╤А╤О╤Ф╤В╤М╤Б╤П ╨▓╤Ц╨┤ ╨╛╤Б╨╜╨╛╨▓╨╕ 3-╤Ч ╨╛╤Б╨╛╨▒╨╕ ╨╝╨╜.╤З. ╤В╨╡╨┐╨╡╤А╤Ц╤И╨╜╤М╨╛╨│╨╛ ╤З╨░╤Б╤Г. ╨Ч╨░╨║╤Ц╨╜╤З╨╡╨╜╨╜╤П: -j/-i (2 ╨╛╤Б. ╨╛╨┤╨╜.), -jmo/-imo (1 ╨╛╤Б. ╨╝╨╜.), -jte/-ite (2 ╨╛╤Б. ╨╝╨╜.)."
+              "ru": "Повелительное наклонение образуется от основы 3-го лица мн.ч. настоящего времени. Окончания: -j/-i (2 л. ед.ч.), -jmo/-imo (1 л. мн.ч.), -jte/-ite (2 л. мн.ч.).",
+              "ua": "Наказовий спосіб утворюється від основи 3-ї особи мн.ч. теперішнього часу. Закінчення: -j/-i (2 ос. одн.), -jmo/-imo (1 ос. мн.), -jte/-ite (2 ос. мн.)."
             },
             "table": {
               "headers": [
@@ -2026,10 +2026,10 @@ export const glossaryData: GlossaryCategory[] = [
               "rows": [
                 {
                   "cells": [
-                    "─Нitati",
-                    "─Нitaj",
-                    "─Нitajmo",
-                    "─Нitajte"
+                    "čitati",
+                    "čitaj",
+                    "čitajmo",
+                    "čitajte"
                   ]
                 },
                 {
@@ -2043,14 +2043,14 @@ export const glossaryData: GlossaryCategory[] = [
                 {
                   "cells": [
                     "pisati",
-                    "pi┼бi",
-                    "pi┼бimo",
-                    "pi┼бite"
+                    "piši",
+                    "pišimo",
+                    "pišite"
                   ]
                 },
                 {
                   "cells": [
-                    "i─Зi",
+                    "ići",
                     "idi",
                     "idimo",
                     "idite"
@@ -2058,29 +2058,29 @@ export const glossaryData: GlossaryCategory[] = [
                 },
                 {
                   "cells": [
-                    "do─Зi",
-                    "do─Сi",
-                    "do─Сimo",
-                    "do─Сite"
+                    "doći",
+                    "dođi",
+                    "dođimo",
+                    "dođite"
                   ]
                 }
               ]
             },
             "examples": [
               {
-                "hr": "─Мitaj polako!",
+                "hr": "Čitaj polako!",
                 "translation": {
                   "en": "Read slowly!",
-                  "ru": "╨з╨╕╤В╨░╨╣ ╨╝╨╡╨┤╨╗╨╡╨╜╨╜╨╛!",
-                  "ua": "╨з╨╕╤В╨░╨╣ ╨┐╨╛╨▓╤Ц╨╗╤М╨╜╨╛!"
+                  "ru": "Читай медленно!",
+                  "ua": "Читай повільно!"
                 }
               },
               {
-                "hr": "Do─Сite ovamo, molim vas!",
+                "hr": "Dođite ovamo, molim vas!",
                 "translation": {
                   "en": "Come here, please!",
-                  "ru": "╨Ш╨┤╨╕╤В╨╡ ╤Б╤О╨┤╨░, ╨┐╨╛╨╢╨░╨╗╤Г╨╣╤Б╤В╨░!",
-                  "ua": "╨Ж╨┤╤Ц╤В╤М ╤Б╤О╨┤╨╕, ╨▒╤Г╨┤╤М ╨╗╨░╤Б╨║╨░!"
+                  "ru": "Идите сюда, пожалуйста!",
+                  "ua": "Ідіть сюди, будь ласка!"
                 }
               }
             ]
@@ -2091,37 +2091,37 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "verb-conjugation",
         "title": {
           "en": "Common Verbs Conjugation",
-          "ru": "╨б╨┐╤А╤П╨╢╨╡╨╜╨╕╨╡ ╤З╨░╤Б╤В╤Л╤Е ╨│╨╗╨░╨│╨╛╨╗╨╛╨▓",
-          "ua": "╨Т╤Ц╨┤╨╝╤Ц╨╜╤О╨▓╨░╨╜╨╜╤П ╨┐╨╛╤И╨╕╤А╨╡╨╜╨╕╤Е ╨┤╤Ц╤Ф╤Б╨╗╤Ц╨▓"
+          "ru": "Спряжение частых глаголов",
+          "ua": "Відмінювання поширених дієслів"
         },
-        "icon": "ЁЯУЛ",
+        "icon": "📋",
         "subsections": [
           {
             "title": {
               "en": "Present Tense of Essential Verbs",
-              "ru": "╨Э╨░╤Б╤В╨╛╤П╤Й╨╡╨╡ ╨▓╤А╨╡╨╝╤П ╨║╨╗╤О╤З╨╡╨▓╤Л╤Е ╨│╨╗╨░╨│╨╛╨╗╨╛╨▓",
-              "ua": "╨в╨╡╨┐╨╡╤А╤Ц╤И╨╜╤Ц╨╣ ╤З╨░╤Б ╨║╨╗╤О╤З╨╛╨▓╨╕╤Е ╨┤╤Ц╤Ф╤Б╨╗╤Ц╨▓"
+              "ru": "Настоящее время ключевых глаголов",
+              "ua": "Теперішній час ключових дієслів"
             },
             "text": {
-              "en": "Here is the present tense conjugation for essential auxiliary and modal verbs in Croatian: biti (to be), htjeti (to want), mo─Зi (to be able to), morati (must/have to), i─Зi (to go).",
-              "ru": "╨Т╨╛╤В ╤Б╨┐╤А╤П╨╢╨╡╨╜╨╕╨╡ ╨▓ ╨╜╨░╤Б╤В╨╛╤П╤Й╨╡╨╝ ╨▓╤А╨╡╨╝╨╡╨╜╨╕ ╨┤╨╗╤П ╨▓╨░╨╢╨╜╨╡╨╣╤И╨╕╤Е ╨▓╤Б╨┐╨╛╨╝╨╛╨│╨░╤В╨╡╨╗╤М╨╜╤Л╤Е ╨╕ ╨╝╨╛╨┤╨░╨╗╤М╨╜╤Л╤Е ╨│╨╗╨░╨│╨╛╨╗╨╛╨▓: biti (╨▒╤Л╤В╤М), htjeti (╤Е╨╛╤В╨╡╤В╤М), mo─Зi (╨╝╨╛╤З╤М), morati (╨┤╨╛╨╗╨╢╨╡╨╜╤Б╤В╨▓╨╛╨▓╨░╤В╤М), i─Зi (╨╕╨┤╤В╨╕).",
-              "ua": "╨Ю╤Б╤М ╨▓╤Ц╨┤╨╝╤Ц╨╜╤О╨▓╨░╨╜╨╜╤П ╨▓ ╤В╨╡╨┐╨╡╤А╤Ц╤И╨╜╤М╨╛╨╝╤Г ╤З╨░╤Б╤Ц ╨┤╨╗╤П ╨╜╨░╨╣╨▓╨░╨╢╨╗╨╕╨▓╤Ц╤И╨╕╤Е ╨┤╨╛╨┐╨╛╨╝╤Ц╨╢╨╜╨╕╤Е ╤В╨░ ╨╝╨╛╨┤╨░╨╗╤М╨╜╨╕╤Е ╨┤╤Ц╤Ф╤Б╨╗╤Ц╨▓: biti (╨▒╤Г╤В╨╕), htjeti (╤Е╨╛╤В╤Ц╤В╨╕), mo─Зi (╨╝╨╛╨│╤В╨╕), morati (╨╝╤Г╤Б╨╕╤В╨╕), i─Зi (╨╣╤В╨╕)."
+              "en": "Here is the present tense conjugation for essential auxiliary and modal verbs in Croatian: biti (to be), htjeti (to want), moći (to be able to), morati (must/have to), ići (to go).",
+              "ru": "Вот спряжение в настоящем времени для важнейших вспомогательных и модальных глаголов: biti (быть), htjeti (хотеть), moći (мочь), morati (долженствовать), ići (идти).",
+              "ua": "Ось відмінювання в теперішньому часі для найважливіших допоміжних та модальних дієслів: biti (бути), htjeti (хотіти), moći (могти), morati (мусити), ići (йти)."
             },
             "table": {
               "headers": [
                 "Pronoun",
                 "biti (to be)",
                 "htjeti (to want)",
-                "mo─Зi (can)",
+                "moći (can)",
                 "morati (must)",
-                "i─Зi (to go)"
+                "ići (to go)"
               ],
               "rows": [
                 {
                   "cells": [
                     "ja (I)",
                     "sam / jesam",
-                    "─Зu / ho─Зu",
+                    "ću / hoću",
                     "mogu",
                     "moram",
                     "idem"
@@ -2131,18 +2131,18 @@ export const glossaryData: GlossaryCategory[] = [
                   "cells": [
                     "ti (you)",
                     "si / jesi",
-                    "─Зe┼б / ho─Зe┼б",
-                    "mo┼╛e┼б",
-                    "mora┼б",
-                    "ide┼б"
+                    "ćeš / hoćeš",
+                    "možeš",
+                    "moraš",
+                    "ideš"
                   ]
                 },
                 {
                   "cells": [
                     "on/ona/ono",
                     "je / jest",
-                    "─Зe / ho─Зe",
-                    "mo┼╛e",
+                    "će / hoće",
+                    "može",
                     "mora",
                     "ide"
                   ]
@@ -2151,8 +2151,8 @@ export const glossaryData: GlossaryCategory[] = [
                   "cells": [
                     "mi (we)",
                     "smo / jesmo",
-                    "─Зemo / ho─Зemo",
-                    "mo┼╛emo",
+                    "ćemo / hoćemo",
+                    "možemo",
                     "moramo",
                     "idemo"
                   ]
@@ -2161,8 +2161,8 @@ export const glossaryData: GlossaryCategory[] = [
                   "cells": [
                     "vi (you pl./formal)",
                     "ste / jeste",
-                    "─Зete / ho─Зete",
-                    "mo┼╛ete",
+                    "ćete / hoćete",
+                    "možete",
                     "morate",
                     "idete"
                   ]
@@ -2171,7 +2171,7 @@ export const glossaryData: GlossaryCategory[] = [
                   "cells": [
                     "oni/one/ona (they)",
                     "su / jesu",
-                    "─Зe / ho─Зe",
+                    "će / hoće",
                     "mogu",
                     "moraju",
                     "idu"
@@ -2186,29 +2186,29 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "reflexive-verbs",
         "title": {
           "en": "Reflexive Verbs (Povratni glagoli)",
-          "ru": "╨Т╨╛╨╖╨▓╤А╨░╤В╨╜╤Л╨╡ ╨│╨╗╨░╨│╨╛╨╗╤Л",
-          "ua": "╨Ч╨▓╨╛╤А╨╛╤В╨╜╤Ц ╨┤╤Ц╤Ф╤Б╨╗╨╛╨▓╨░"
+          "ru": "Возвратные глаголы",
+          "ua": "Зворотні дієслова"
         },
-        "icon": "ЁЯФД",
+        "icon": "🔄",
         "subsections": [
           {
             "title": {
               "en": "Reflexive Particle 'se'",
-              "ru": "╨Т╨╛╨╖╨▓╤А╨░╤В╨╜╨░╤П ╤З╨░╤Б╤В╨╕╤Ж╨░ 'se'",
-              "ua": "╨Ч╨▓╨╛╤А╨╛╤В╨╜╨░ ╤З╨░╤Б╤В╨║╨░ 'se'"
+              "ru": "Возвратная частица 'se'",
+              "ua": "Зворотна частка 'se'"
             },
             "text": {
-              "en": "Reflexive verbs in Croatian are accompanied by the reflexive pronoun/particle 'se' (equivalent to Russian '-╤Б╤П' or Ukrainian '-╤Б╤П'). The position of 'se' follows the enclitic rules (usually placed in the second position of the sentence).",
-              "ru": "╨Т╨╛╨╖╨▓╤А╨░╤В╨╜╤Л╨╡ ╨│╨╗╨░╨│╨╛╨╗╤Л ╨▓ ╤Е╨╛╤А╨▓╨░╤В╤Б╨║╨╛╨╝ ╤П╨╖╤Л╨║╨╡ ╤Б╨╛╨┐╤А╨╛╨▓╨╛╨╢╨┤╨░╤О╤В╤Б╤П ╨▓╨╛╨╖╨▓╤А╨░╤В╨╜╤Л╨╝ ╨╝╨╡╤Б╤В╨╛╨╕╨╝╨╡╨╜╨╕╨╡╨╝/╤З╨░╤Б╤В╨╕╤Ж╨╡╨╣ 'se' (╤Н╨║╨▓╨╕╨▓╨░╨╗╨╡╨╜╤В ╤А╤Г╤Б╤Б╨║╨╛╨│╨╛ ╨╕╨╗╨╕ ╤Г╨║╤А╨░╨╕╨╜╤Б╨║╨╛╨│╨╛ '-╤Б╤П'). ╨Я╨╛╨╗╨╛╨╢╨╡╨╜╨╕╨╡ 'se' ╨┐╨╛╨┤╤З╨╕╨╜╤П╨╡╤В╤Б╤П ╨┐╤А╨░╨▓╨╕╨╗╨░╨╝ ╤Н╨╜╨║╨╗╨╕╤В╨╕╨║ (╨╛╨▒╤Л╤З╨╜╨╛ ╤Б╤В╨░╨▓╨╕╤В╤Б╤П ╨╜╨░ ╨▓╤В╨╛╤А╨╛╨╡ ╨╝╨╡╤Б╤В╨╛ ╨▓ ╨┐╤А╨╡╨┤╨╗╨╛╨╢╨╡╨╜╨╕╨╕).",
-              "ua": "╨Ч╨▓╨╛╤А╨╛╤В╨╜╤Ц ╨┤╤Ц╤Ф╤Б╨╗╨╛╨▓╨░ ╨▓ ╤Е╨╛╤А╨▓╨░╤В╤Б╤М╨║╤Ц╨╣ ╨╝╨╛╨▓╤Ц ╤Б╤Г╨┐╤А╨╛╨▓╨╛╨┤╨╢╤Г╤О╤В╤М╤Б╤П ╨╖╨▓╨╛╤А╨╛╤В╨╜╨╕╨╝ ╨╖╨░╨╣╨╝╨╡╨╜╨╜╨╕╨║╨╛╨╝/╤З╨░╤Б╤В╨║╨╛╤О 'se' (╨╡╨║╨▓╤Ц╨▓╨░╨╗╨╡╨╜╤В ╤Г╨║╤А╨░╤Ч╨╜╤Б╤М╨║╨╛╨│╨╛ '-╤Б╤П'). ╨Я╨╛╨╗╨╛╨╢╨╡╨╜╨╜╤П 'se' ╨┐╤Ц╨┤╨┐╨╛╤А╤П╨┤╨║╨╛╨▓╤Г╤Ф╤В╤М╤Б╤П ╨┐╤А╨░╨▓╨╕╨╗╨░╨╝ ╨╡╨╜╨║╨╗╤Ц╤В╨╕╨║ (╨╖╨░╨╖╨▓╨╕╤З╨░╨╣ ╤Б╤В╨░╨▓╨╕╤В╤М╤Б╤П ╨╜╨░ ╨┤╤А╤Г╨│╨╡ ╨╝╤Ц╤Б╤Ж╨╡ ╨▓ ╤А╨╡╤З╨╡╨╜╨╜╤Ц)."
+              "en": "Reflexive verbs in Croatian are accompanied by the reflexive pronoun/particle 'se' (equivalent to Russian '-ся' or Ukrainian '-ся'). The position of 'se' follows the enclitic rules (usually placed in the second position of the sentence).",
+              "ru": "Возвратные глаголы в хорватском языке сопровождаются возвратным местоимением/частицей 'se' (эквивалент русского или украинского '-ся'). Положение 'se' подчиняется правилам энклитик (обычно ставится на второе место в предложении).",
+              "ua": "Зворотні дієслова в хорватській мові супроводжуються зворотним займенником/часткою 'se' (еквівалент українського '-ся'). Положення 'se' підпорядковується правилам енклітик (зазвичай ставиться на друге місце в реченні)."
             },
             "table": {
               "headers": [
                 "Verb",
                 {
                   "en": "English",
-                  "ru": "╨Я╨╡╤А╨╡╨▓╨╛╨┤",
-                  "ua": "╨Я╨╡╤А╨╡╨║╨╗╨░╨┤"
+                  "ru": "Перевод",
+                  "ua": "Переклад"
                 },
                 "Present Conjugation (ja)",
                 "Example"
@@ -2232,10 +2232,10 @@ export const glossaryData: GlossaryCategory[] = [
                 },
                 {
                   "cells": [
-                    "tu┼бirati se",
+                    "tuširati se",
                     "to shower",
-                    "tu┼бiram se",
-                    "Tu┼бiram se ujutro. (I shower in the morning.)"
+                    "tuširam se",
+                    "Tuširam se ujutro. (I shower in the morning.)"
                   ]
                 },
                 {
@@ -2257,30 +2257,30 @@ export const glossaryData: GlossaryCategory[] = [
     "id": "numbers",
     "title": {
       "en": "Numbers (Brojevi)",
-      "ru": "╨з╨╕╤Б╨╗╨╕╤В╨╡╨╗╤М╨╜╤Л╨╡ (Brojevi)",
-      "ua": "╨з╨╕╤Б╨╗╤Ц╨▓╨╜╨╕╨║╨╕ (Brojevi)"
+      "ru": "Числительные (Brojevi)",
+      "ua": "Числівники (Brojevi)"
     },
-    "icon": "ЁЯФв",
+    "icon": "🔢",
     "sections": [
       {
         "id": "cardinal",
         "title": {
           "en": "Cardinal Numbers",
-          "ru": "╨Ъ╨╛╨╗╨╕╤З╨╡╤Б╤В╨▓╨╡╨╜╨╜╤Л╨╡ ╤З╨╕╤Б╨╗╨╕╤В╨╡╨╗╤М╨╜╤Л╨╡",
-          "ua": "╨Ъ╤Ц╨╗╤М╨║╤Ц╤Б╨╜╤Ц ╤З╨╕╤Б╨╗╤Ц╨▓╨╜╨╕╨║╨╕"
+          "ru": "Количественные числительные",
+          "ua": "Кількісні числівники"
         },
-        "icon": "ЁЯФв",
+        "icon": "🔢",
         "subsections": [
           {
             "title": {
-              "en": "Numbers 0тАУ100",
-              "ru": "╨з╨╕╤Б╨╗╨░ 0тАУ100",
-              "ua": "╨з╨╕╤Б╨╗╨░ 0тАУ100"
+              "en": "Numbers 0–100",
+              "ru": "Числа 0–100",
+              "ua": "Числа 0–100"
             },
             "text": {
               "en": "Croatian numbers are important for everyday situations: shopping, telling time, giving your phone number.",
-              "ru": "╨е╨╛╤А╨▓╨░╤В╤Б╨║╨╕╨╡ ╤З╨╕╤Б╨╗╨░ ╨▓╨░╨╢╨╜╤Л ╨┤╨╗╤П ╨┐╨╛╨▓╤Б╨╡╨┤╨╜╨╡╨▓╨╜╤Л╤Е ╤Б╨╕╤В╤Г╨░╤Ж╨╕╨╣: ╨┐╨╛╨║╤Г╨┐╨║╨╕, ╨╛╨┐╤А╨╡╨┤╨╡╨╗╨╡╨╜╨╕╨╡ ╨▓╤А╨╡╨╝╨╡╨╜╨╕, ╨╜╨╛╨╝╨╡╤А ╤В╨╡╨╗╨╡╤Д╨╛╨╜╨░.",
-              "ua": "╨е╨╛╤А╨▓╨░╤В╤Б╤М╨║╤Ц ╤З╨╕╤Б╨╗╨░ ╨▓╨░╨╢╨╗╨╕╨▓╤Ц ╨┤╨╗╤П ╨┐╨╛╨▓╤Б╤П╨║╨┤╨╡╨╜╨╜╨╕╤Е ╤Б╨╕╤В╤Г╨░╤Ж╤Ц╨╣: ╨┐╨╛╨║╤Г╨┐╨║╨╕, ╨▓╨╕╨╖╨╜╨░╤З╨╡╨╜╨╜╤П ╤З╨░╤Б╤Г, ╨╜╨╛╨╝╨╡╤А ╤В╨╡╨╗╨╡╤Д╨╛╨╜╤Г."
+              "ru": "Хорватские числа важны для повседневных ситуаций: покупки, определение времени, номер телефона.",
+              "ua": "Хорватські числа важливі для повсякденних ситуацій: покупки, визначення часу, номер телефону."
             },
             "table": {
               "headers": [
@@ -2325,9 +2325,9 @@ export const glossaryData: GlossaryCategory[] = [
                 {
                   "cells": [
                     "4",
-                    "─Нetiri",
+                    "četiri",
                     "14",
-                    "─Нetrnaest"
+                    "četrnaest"
                   ]
                 },
                 {
@@ -2341,7 +2341,7 @@ export const glossaryData: GlossaryCategory[] = [
                 {
                   "cells": [
                     "6",
-                    "┼бest",
+                    "šest",
                     "20",
                     "dvadeset"
                   ]
@@ -2379,21 +2379,21 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "ordinal",
         "title": {
           "en": "Ordinal Numbers",
-          "ru": "╨Я╨╛╤А╤П╨┤╨║╨╛╨▓╤Л╨╡ ╤З╨╕╤Б╨╗╨╕╤В╨╡╨╗╤М╨╜╤Л╨╡",
-          "ua": "╨Я╨╛╤А╤П╨┤╨║╨╛╨▓╤Ц ╤З╨╕╤Б╨╗╤Ц╨▓╨╜╨╕╨║╨╕"
+          "ru": "Порядковые числительные",
+          "ua": "Порядкові числівники"
         },
-        "icon": "ЁЯПЖ",
+        "icon": "🏆",
         "subsections": [
           {
             "title": {
               "en": "Formation",
-              "ru": "╨Ю╨▒╤А╨░╨╖╨╛╨▓╨░╨╜╨╕╨╡",
-              "ua": "╨г╤В╨▓╨╛╤А╨╡╨╜╨╜╤П"
+              "ru": "Образование",
+              "ua": "Утворення"
             },
             "text": {
               "en": "Ordinal numbers are adjectives and must agree in gender with the noun they describe: prvi/prva/prvo (first), drugi/druga/drugo (second), etc.",
-              "ru": "╨Я╨╛╤А╤П╨┤╨║╨╛╨▓╤Л╨╡ ╤З╨╕╤Б╨╗╨╕╤В╨╡╨╗╤М╨╜╤Л╨╡ тАФ ╤Н╤В╨╛ ╨┐╤А╨╕╨╗╨░╨│╨░╤В╨╡╨╗╤М╨╜╤Л╨╡ ╨╕ ╨┤╨╛╨╗╨╢╨╜╤Л ╤Б╨╛╨│╨╗╨░╤Б╨╛╨▓╨░╤В╤М╤Б╤П ╨▓ ╤А╨╛╨┤╨╡: prvi/prva/prvo (╨┐╨╡╤А╨▓╤Л╨╣), drugi/druga/drugo (╨▓╤В╨╛╤А╨╛╨╣) ╨╕ ╤В.╨┤.",
-              "ua": "╨Я╨╛╤А╤П╨┤╨║╨╛╨▓╤Ц ╤З╨╕╤Б╨╗╤Ц╨▓╨╜╨╕╨║╨╕ тАФ ╤Ж╨╡ ╨┐╤А╨╕╨║╨╝╨╡╤В╨╜╨╕╨║╨╕ ╤Ц ╨╝╨░╤О╤В╤М ╤Г╨╖╨│╨╛╨┤╨╢╤Г╨▓╨░╤В╨╕╤Б╤П ╨▓ ╤А╨╛╨┤╤Ц: prvi/prva/prvo (╨┐╨╡╤А╤И╨╕╨╣), drugi/druga/drugo (╨┤╤А╤Г╨│╨╕╨╣) ╤В╨╛╤Й╨╛."
+              "ru": "Порядковые числительные — это прилагательные и должны согласоваться в роде: prvi/prva/prvo (первый), drugi/druga/drugo (второй) и т.д.",
+              "ua": "Порядкові числівники — це прикметники і мають узгоджуватися в роді: prvi/prva/prvo (перший), drugi/druga/drugo (другий) тощо."
             },
             "table": {
               "headers": [
@@ -2422,17 +2422,17 @@ export const glossaryData: GlossaryCategory[] = [
                 {
                   "cells": [
                     "3rd",
-                    "tre─Зi",
-                    "tre─Зa",
-                    "tre─Зe"
+                    "treći",
+                    "treća",
+                    "treće"
                   ]
                 },
                 {
                   "cells": [
                     "4th",
-                    "─Нetvrti",
-                    "─Нetvrta",
-                    "─Нetvrto"
+                    "četvrti",
+                    "četvrta",
+                    "četvrto"
                   ]
                 },
                 {
@@ -2462,30 +2462,30 @@ export const glossaryData: GlossaryCategory[] = [
     "id": "topics",
     "title": {
       "en": "Everyday Topics",
-      "ru": "╨Я╨╛╨▓╤Б╨╡╨┤╨╜╨╡╨▓╨╜╤Л╨╡ ╤В╨╡╨╝╤Л",
-      "ua": "╨Я╨╛╨▓╤Б╤П╨║╨┤╨╡╨╜╨╜╤Ц ╤В╨╡╨╝╨╕"
+      "ru": "Повседневные темы",
+      "ua": "Повсякденні теми"
     },
-    "icon": "ЁЯТм",
+    "icon": "💬",
     "sections": [
       {
         "id": "greetings",
         "title": {
           "en": "Greetings & Farewells",
-          "ru": "╨Я╤А╨╕╨▓╨╡╤В╤Б╤В╨▓╨╕╤П ╨╕ ╨┐╤А╨╛╤Й╨░╨╜╨╕╤П",
-          "ua": "╨Я╤А╨╕╨▓╤Ц╤В╨░╨╜╨╜╤П ╤В╨░ ╨┐╤А╨╛╤Й╨░╨╜╨╜╤П"
+          "ru": "Приветствия и прощания",
+          "ua": "Привітання та прощання"
         },
-        "icon": "ЁЯСЛ",
+        "icon": "👋",
         "subsections": [
           {
             "title": {
               "en": "Basic Greetings",
-              "ru": "╨Ю╤Б╨╜╨╛╨▓╨╜╤Л╨╡ ╨┐╤А╨╕╨▓╨╡╤В╤Б╤В╨▓╨╕╤П",
-              "ua": "╨Ю╤Б╨╜╨╛╨▓╨╜╤Ц ╨┐╤А╨╕╨▓╤Ц╤В╨░╨╜╨╜╤П"
+              "ru": "Основные приветствия",
+              "ua": "Основні привітання"
             },
             "text": {
               "en": "Croatian greetings depend on the time of day and the formality of the situation.",
-              "ru": "╨е╨╛╤А╨▓╨░╤В╤Б╨║╨╕╨╡ ╨┐╤А╨╕╨▓╨╡╤В╤Б╤В╨▓╨╕╤П ╨╖╨░╨▓╨╕╤Б╤П╤В ╨╛╤В ╨▓╤А╨╡╨╝╨╡╨╜╨╕ ╤Б╤Г╤В╨╛╨║ ╨╕ ╤Б╤В╨╡╨┐╨╡╨╜╨╕ ╤Д╨╛╤А╨╝╨░╨╗╤М╨╜╨╛╤Б╤В╨╕.",
-              "ua": "╨е╨╛╤А╨▓╨░╤В╤Б╤М╨║╤Ц ╨┐╤А╨╕╨▓╤Ц╤В╨░╨╜╨╜╤П ╨╖╨░╨╗╨╡╨╢╨░╤В╤М ╨▓╤Ц╨┤ ╤З╨░╤Б╤Г ╨┤╨╛╨▒╨╕ ╤В╨░ ╤Б╤В╤Г╨┐╨╡╨╜╤П ╤Д╨╛╤А╨╝╨░╨╗╤М╨╜╨╛╤Б╤В╤Ц."
+              "ru": "Хорватские приветствия зависят от времени суток и степени формальности.",
+              "ua": "Хорватські привітання залежать від часу доби та ступеня формальності."
             },
             "table": {
               "headers": [
@@ -2510,7 +2510,7 @@ export const glossaryData: GlossaryCategory[] = [
                 },
                 {
                   "cells": [
-                    "Dobra ve─Нer!",
+                    "Dobra večer!",
                     "Good evening!",
                     "Evening"
                   ]
@@ -2545,14 +2545,14 @@ export const glossaryData: GlossaryCategory[] = [
                 },
                 {
                   "cells": [
-                    "Dovi─Сenja!",
+                    "Doviđenja!",
                     "Goodbye!",
                     "Formal"
                   ]
                 },
                 {
                   "cells": [
-                    "Laku no─З!",
+                    "Laku noć!",
                     "Good night!",
                     "Evening farewell"
                   ]
@@ -2561,11 +2561,11 @@ export const glossaryData: GlossaryCategory[] = [
             },
             "examples": [
               {
-                "hr": "Bok! Kako si? тАФ Dobro sam, hvala!",
+                "hr": "Bok! Kako si? — Dobro sam, hvala!",
                 "translation": {
-                  "en": "Hi! How are you? тАФ I'm fine, thanks!",
-                  "ru": "╨Я╤А╨╕╨▓╨╡╤В! ╨Ъ╨░╨║ ╨┤╨╡╨╗╨░? тАФ ╨е╨╛╤А╨╛╤И╨╛, ╤Б╨┐╨░╤Б╨╕╨▒╨╛!",
-                  "ua": "╨Я╤А╨╕╨▓╤Ц╤В! ╨п╨║ ╤Б╨┐╤А╨░╨▓╨╕? тАФ ╨Ф╨╛╨▒╤А╨╡, ╨┤╤П╨║╤Г╤О!"
+                  "en": "Hi! How are you? — I'm fine, thanks!",
+                  "ru": "Привет! Как дела? — Хорошо, спасибо!",
+                  "ua": "Привіт! Як справи? — Добре, дякую!"
                 }
               }
             ]
@@ -2576,21 +2576,21 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "shopping",
         "title": {
           "en": "Shopping & Market",
-          "ru": "╨Я╨╛╨║╤Г╨┐╨║╨╕ ╨╕ ╤А╤Л╨╜╨╛╨║",
-          "ua": "╨Я╨╛╨║╤Г╨┐╨║╨╕ ╤В╨░ ╤А╨╕╨╜╨╛╨║"
+          "ru": "Покупки и рынок",
+          "ua": "Покупки та ринок"
         },
-        "icon": "ЁЯЫТ",
+        "icon": "🛒",
         "subsections": [
           {
             "title": {
               "en": "Useful Phrases",
-              "ru": "╨Я╨╛╨╗╨╡╨╖╨╜╤Л╨╡ ╤Д╤А╨░╨╖╤Л",
-              "ua": "╨Ъ╨╛╤А╨╕╤Б╨╜╤Ц ╤Д╤А╨░╨╖╨╕"
+              "ru": "Полезные фразы",
+              "ua": "Корисні фрази"
             },
             "text": {
-              "en": "Essential phrases for shopping in Croatia тАФ at the market, in stores, and more.",
-              "ru": "╨Т╨░╨╢╨╜╤Л╨╡ ╤Д╤А╨░╨╖╤Л ╨┤╨╗╤П ╨┐╨╛╨║╤Г╨┐╨╛╨║ ╨▓ ╨е╨╛╤А╨▓╨░╤В╨╕╨╕ тАФ ╨╜╨░ ╤А╤Л╨╜╨║╨╡, ╨▓ ╨╝╨░╨│╨░╨╖╨╕╨╜╨░╤Е ╨╕ ╤В.╨┤.",
-              "ua": "╨Т╨░╨╢╨╗╨╕╨▓╤Ц ╤Д╤А╨░╨╖╨╕ ╨┤╨╗╤П ╨┐╨╛╨║╤Г╨┐╨╛╨║ ╤Г ╨е╨╛╤А╨▓╨░╤В╤Ц╤Ч тАФ ╨╜╨░ ╤А╨╕╨╜╨║╤Г, ╤Г ╨╝╨░╨│╨░╨╖╨╕╨╜╨░╤Е ╤В╨╛╤Й╨╛."
+              "en": "Essential phrases for shopping in Croatia — at the market, in stores, and more.",
+              "ru": "Важные фразы для покупок в Хорватии — на рынке, в магазинах и т.д.",
+              "ua": "Важливі фрази для покупок у Хорватії — на ринку, у магазинах тощо."
             },
             "table": {
               "headers": [
@@ -2598,19 +2598,19 @@ export const glossaryData: GlossaryCategory[] = [
                 "English",
                 {
                   "en": "Translation",
-                  "ru": "╨Я╨╡╤А╨╡╨▓╨╛╨┤",
-                  "ua": "╨Я╨╡╤А╨╡╨║╨╗╨░╨┤"
+                  "ru": "Перевод",
+                  "ua": "Переклад"
                 }
               ],
               "rows": [
                 {
                   "cells": [
-                    "Koliko to ko┼бta?",
+                    "Koliko to košta?",
                     "How much does it cost?",
                     {
-                      "en": "╨б╨║╨╛╨╗╤М╨║╨╛ ╤Н╤В╨╛ ╤Б╤В╨╛╨╕╤В?",
-                      "ru": "╨б╨║╨╛╨╗╤М╨║╨╛ ╤Н╤В╨╛ ╤Б╤В╨╛╨╕╤В?",
-                      "ua": "╨б╨║╤Ц╨╗╤М╨║╨╕ ╤Ж╨╡ ╨║╨╛╤И╤В╤Г╤Ф?"
+                      "en": "Сколько это стоит?",
+                      "ru": "Сколько это стоит?",
+                      "ua": "Скільки це коштує?"
                     }
                   ]
                 },
@@ -2619,9 +2619,9 @@ export const glossaryData: GlossaryCategory[] = [
                     "Imate li...?",
                     "Do you have...?",
                     {
-                      "en": "╨г ╨▓╨░╤Б ╨╡╤Б╤В╤М...?",
-                      "ru": "╨г ╨▓╨░╤Б ╨╡╤Б╤В╤М...?",
-                      "ua": "╨з╨╕ ╤Ф ╤Г ╨▓╨░╤Б...?"
+                      "en": "У вас есть...?",
+                      "ru": "У вас есть...?",
+                      "ua": "Чи є у вас...?"
                     }
                   ]
                 },
@@ -2630,9 +2630,9 @@ export const glossaryData: GlossaryCategory[] = [
                     "Htio/Htjela bih...",
                     "I would like...",
                     {
-                      "en": "╨п ╨▒╤Л ╤Е╨╛╤В╨╡╨╗(╨░)...",
-                      "ru": "╨п ╨▒╤Л ╤Е╨╛╤В╨╡╨╗(╨░)...",
-                      "ua": "╨п ╨▒ ╤Е╨╛╤В╤Ц╨▓/╤Е╨╛╤В╤Ц╨╗╨░..."
+                      "en": "Я бы хотел(а)...",
+                      "ru": "Я бы хотел(а)...",
+                      "ua": "Я б хотів/хотіла..."
                     }
                   ]
                 },
@@ -2641,9 +2641,9 @@ export const glossaryData: GlossaryCategory[] = [
                     "Mogu li platiti karticom?",
                     "Can I pay by card?",
                     {
-                      "en": "╨Ь╨╛╨╢╨╜╨╛ ╨║╨░╤А╤В╨╛╨╣?",
-                      "ru": "╨Ь╨╛╨╢╨╜╨╛ ╨║╨░╤А╤В╨╛╨╣?",
-                      "ua": "╨з╨╕ ╨╝╨╛╨╢╤Г ╤П ╤А╨╛╨╖╨┐╨╗╨░╤В╨╕╤В╨╕╤Б╤П ╨║╨░╤А╤В╨║╨╛╤О?"
+                      "en": "Можно картой?",
+                      "ru": "Можно картой?",
+                      "ua": "Чи можу я розплатитися карткою?"
                     }
                   ]
                 },
@@ -2652,9 +2652,9 @@ export const glossaryData: GlossaryCategory[] = [
                     "Dajte mi kilu...",
                     "Give me a kilo of...",
                     {
-                      "en": "╨Ф╨░╨╣╤В╨╡ ╨╝╨╜╨╡ ╨║╨╕╨╗╨╛╨│╤А╨░╨╝╨╝...",
-                      "ru": "╨Ф╨░╨╣╤В╨╡ ╨╝╨╜╨╡ ╨║╨╕╨╗╨╛╨│╤А╨░╨╝╨╝...",
-                      "ua": "╨Ф╨░╨╣╤В╨╡ ╨╝╨╡╨╜╤Ц ╨║╤Ц╨╗╨╛╨│╤А╨░╨╝..."
+                      "en": "Дайте мне килограмм...",
+                      "ru": "Дайте мне килограмм...",
+                      "ua": "Дайте мені кілограм..."
                     }
                   ]
                 },
@@ -2663,9 +2663,9 @@ export const glossaryData: GlossaryCategory[] = [
                     "Je li to na akciji?",
                     "Is it on sale?",
                     {
-                      "en": "╨н╤В╨╛ ╨┐╨╛ ╨░╨║╤Ж╨╕╨╕?",
-                      "ru": "╨н╤В╨╛ ╨┐╨╛ ╨░╨║╤Ж╨╕╨╕?",
-                      "ua": "╨ж╨╡ ╨┐╨╛ ╨░╨║╤Ж╤Ц╤Ч?"
+                      "en": "Это по акции?",
+                      "ru": "Это по акции?",
+                      "ua": "Це по акції?"
                     }
                   ]
                 },
@@ -2674,9 +2674,9 @@ export const glossaryData: GlossaryCategory[] = [
                     "Hvala, to je sve.",
                     "Thanks, that's all.",
                     {
-                      "en": "╨б╨┐╨░╤Б╨╕╨▒╨╛, ╤Н╤В╨╛ ╨▓╤Б╤С.",
-                      "ru": "╨б╨┐╨░╤Б╨╕╨▒╨╛, ╤Н╤В╨╛ ╨▓╤Б╤С.",
-                      "ua": "╨Ф╤П╨║╤Г╤О, ╤Ж╨╡ ╨▓╤Б╨╡."
+                      "en": "Спасибо, это всё.",
+                      "ru": "Спасибо, это всё.",
+                      "ua": "Дякую, це все."
                     }
                   ]
                 }
@@ -2689,21 +2689,21 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "transport",
         "title": {
           "en": "Transport & Directions",
-          "ru": "╨в╤А╨░╨╜╤Б╨┐╨╛╤А╤В ╨╕ ╨╜╨░╨┐╤А╨░╨▓╨╗╨╡╨╜╨╕╤П",
-          "ua": "╨в╤А╨░╨╜╤Б╨┐╨╛╤А╤В ╤В╨░ ╨╜╨░╨┐╤А╤П╨╝╨║╨╕"
+          "ru": "Транспорт и направления",
+          "ua": "Транспорт та напрямки"
         },
-        "icon": "ЁЯЪМ",
+        "icon": "🚌",
         "subsections": [
           {
             "title": {
               "en": "Getting Around",
-              "ru": "╨Ъ╨░╨║ ╨┤╨╛╨▒╤А╨░╤В╤М╤Б╤П",
-              "ua": "╨п╨║ ╨┤╤Ц╤Б╤В╨░╤В╨╕╤Б╤П"
+              "ru": "Как добраться",
+              "ua": "Як дістатися"
             },
             "text": {
               "en": "Key phrases for navigating public transport and asking for directions in Croatia.",
-              "ru": "╨Ъ╨╗╤О╤З╨╡╨▓╤Л╨╡ ╤Д╤А╨░╨╖╤Л ╨┤╨╗╤П ╨╕╤Б╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╨╜╨╕╤П ╨╛╨▒╤Й╨╡╤Б╤В╨▓╨╡╨╜╨╜╨╛╨│╨╛ ╤В╤А╨░╨╜╤Б╨┐╨╛╤А╤В╨░ ╨╕ ╨╛╨┐╤А╨╡╨┤╨╡╨╗╨╡╨╜╨╕╤П ╨┐╤Г╤В╨╕ ╨▓ ╨е╨╛╤А╨▓╨░╤В╨╕╨╕.",
-              "ua": "╨Ъ╨╗╤О╤З╨╛╨▓╤Ц ╤Д╤А╨░╨╖╨╕ ╨┤╨╗╤П ╨║╨╛╤А╨╕╤Б╤В╤Г╨▓╨░╨╜╨╜╤П ╨│╤А╨╛╨╝╨░╨┤╤Б╤М╨║╨╕╨╝ ╤В╤А╨░╨╜╤Б╨┐╨╛╤А╤В╨╛╨╝ ╤В╨░ ╨▓╨╕╨╖╨╜╨░╤З╨╡╨╜╨╜╤П ╤И╨╗╤П╤Е╤Г ╨▓ ╨е╨╛╤А╨▓╨░╤В╤Ц╤Ч."
+              "ru": "Ключевые фразы для использования общественного транспорта и определения пути в Хорватии.",
+              "ua": "Ключові фрази для користування громадським транспортом та визначення шляху в Хорватії."
             },
             "table": {
               "headers": [
@@ -2711,8 +2711,8 @@ export const glossaryData: GlossaryCategory[] = [
                 "English",
                 {
                   "en": "Translation",
-                  "ru": "╨Я╨╡╤А╨╡╨▓╨╛╨┤",
-                  "ua": "╨Я╨╡╤А╨╡╨║╨╗╨░╨┤"
+                  "ru": "Перевод",
+                  "ua": "Переклад"
                 }
               ],
               "rows": [
@@ -2721,20 +2721,20 @@ export const glossaryData: GlossaryCategory[] = [
                     "Gdje je stanica?",
                     "Where is the station?",
                     {
-                      "en": "╨У╨┤╨╡ ╤Б╤В╨░╨╜╤Ж╨╕╤П?",
-                      "ru": "╨У╨┤╨╡ ╤Б╤В╨░╨╜╤Ж╨╕╤П?",
-                      "ua": "╨Ф╨╡ ╤Б╤В╨░╨╜╤Ж╤Ц╤П?"
+                      "en": "Где станция?",
+                      "ru": "Где станция?",
+                      "ua": "Де станція?"
                     }
                   ]
                 },
                 {
                   "cells": [
-                    "Koliko ko┼бta karta?",
+                    "Koliko košta karta?",
                     "How much is a ticket?",
                     {
-                      "en": "╨б╨║╨╛╨╗╤М╨║╨╛ ╤Б╤В╨╛╨╕╤В ╨▒╨╕╨╗╨╡╤В?",
-                      "ru": "╨б╨║╨╛╨╗╤М╨║╨╛ ╤Б╤В╨╛╨╕╤В ╨▒╨╕╨╗╨╡╤В?",
-                      "ua": "╨б╨║╤Ц╨╗╤М╨║╨╕ ╨║╨╛╤И╤В╤Г╤Ф ╨║╨▓╨╕╤В╨╛╨║?"
+                      "en": "Сколько стоит билет?",
+                      "ru": "Сколько стоит билет?",
+                      "ua": "Скільки коштує квиток?"
                     }
                   ]
                 },
@@ -2743,9 +2743,9 @@ export const glossaryData: GlossaryCategory[] = [
                     "Skrenite lijevo/desno",
                     "Turn left/right",
                     {
-                      "en": "╨Я╨╛╨▓╨╡╤А╨╜╨╕╤В╨╡ ╨╜╨░╨╗╨╡╨▓╨╛/╨╜╨░╨┐╤А╨░╨▓╨╛",
-                      "ru": "╨Я╨╛╨▓╨╡╤А╨╜╨╕╤В╨╡ ╨╜╨░╨╗╨╡╨▓╨╛/╨╜╨░╨┐╤А╨░╨▓╨╛",
-                      "ua": "╨Я╨╛╨▓╨╡╤А╨╜╤Ц╤В╤М ╨╗╤Ц╨▓╨╛╤А╤Г╤З/╨┐╤А╨░╨▓╨╛╤А╤Г╤З"
+                      "en": "Поверните налево/направо",
+                      "ru": "Поверните налево/направо",
+                      "ua": "Поверніть ліворуч/праворуч"
                     }
                   ]
                 },
@@ -2754,9 +2754,9 @@ export const glossaryData: GlossaryCategory[] = [
                     "Idite ravno",
                     "Go straight",
                     {
-                      "en": "╨Ш╨┤╨╕╤В╨╡ ╨┐╤А╤П╨╝╨╛",
-                      "ru": "╨Ш╨┤╨╕╤В╨╡ ╨┐╤А╤П╨╝╨╛",
-                      "ua": "╨Щ╨┤╤Ц╤В╤М ╨┐╤А╤П╨╝╨╛"
+                      "en": "Идите прямо",
+                      "ru": "Идите прямо",
+                      "ua": "Йдіть прямо"
                     }
                   ]
                 },
@@ -2765,20 +2765,20 @@ export const glossaryData: GlossaryCategory[] = [
                     "Je li to daleko?",
                     "Is it far?",
                     {
-                      "en": "╨н╤В╨╛ ╨┤╨░╨╗╨╡╨║╨╛?",
-                      "ru": "╨н╤В╨╛ ╨┤╨░╨╗╨╡╨║╨╛?",
-                      "ua": "╨ж╨╡ ╨┤╨░╨╗╨╡╨║╨╛?"
+                      "en": "Это далеко?",
+                      "ru": "Это далеко?",
+                      "ua": "Це далеко?"
                     }
                   ]
                 },
                 {
                   "cells": [
-                    "Kako mogu do─Зi do...?",
+                    "Kako mogu doći do...?",
                     "How can I get to...?",
                     {
-                      "en": "╨Ъ╨░╨║ ╨┤╨╛╨▒╤А╨░╤В╤М╤Б╤П ╨┤╨╛...?",
-                      "ru": "╨Ъ╨░╨║ ╨┤╨╛╨▒╤А╨░╤В╤М╤Б╤П ╨┤╨╛...?",
-                      "ua": "╨п╨║ ╨┤╤Ц╤Б╤В╨░╤В╨╕╤Б╤П ╨┤╨╛...?"
+                      "en": "Как добраться до...?",
+                      "ru": "Как добраться до...?",
+                      "ua": "Як дістатися до...?"
                     }
                   ]
                 }
@@ -2791,21 +2791,21 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "doctor",
         "title": {
           "en": "At the Doctor",
-          "ru": "╨г ╨▓╤А╨░╤З╨░",
-          "ua": "╨г ╨╗╤Ц╨║╨░╤А╤П"
+          "ru": "У врача",
+          "ua": "У лікаря"
         },
-        "icon": "ЁЯПе",
+        "icon": "🏥",
         "subsections": [
           {
             "title": {
               "en": "Medical Vocabulary",
-              "ru": "╨Ь╨╡╨┤╨╕╤Ж╨╕╨╜╤Б╨║╨░╤П ╨╗╨╡╨║╤Б╨╕╨║╨░",
-              "ua": "╨Ь╨╡╨┤╨╕╤З╨╜╨░ ╨╗╨╡╨║╤Б╨╕╨║╨░"
+              "ru": "Медицинская лексика",
+              "ua": "Медична лексика"
             },
             "text": {
               "en": "Important vocabulary and phrases for visiting a doctor in Croatia.",
-              "ru": "╨Т╨░╨╢╨╜╨░╤П ╨╗╨╡╨║╤Б╨╕╨║╨░ ╨╕ ╤Д╤А╨░╨╖╤Л ╨┤╨╗╤П ╨▓╨╕╨╖╨╕╤В╨░ ╨║ ╨▓╤А╨░╤З╤Г ╨▓ ╨е╨╛╤А╨▓╨░╤В╨╕╨╕.",
-              "ua": "╨Т╨░╨╢╨╗╨╕╨▓╨░ ╨╗╨╡╨║╤Б╨╕╨║╨░ ╤В╨░ ╤Д╤А╨░╨╖╨╕ ╨┤╨╗╤П ╨▓╤Ц╨╖╨╕╤В╤Г ╨┤╨╛ ╨╗╤Ц╨║╨░╤А╤П ╨▓ ╨е╨╛╤А╨▓╨░╤В╤Ц╤Ч."
+              "ru": "Важная лексика и фразы для визита к врачу в Хорватии.",
+              "ua": "Важлива лексика та фрази для візиту до лікаря в Хорватії."
             },
             "table": {
               "headers": [
@@ -2813,8 +2813,8 @@ export const glossaryData: GlossaryCategory[] = [
                 "English",
                 {
                   "en": "Translation",
-                  "ru": "╨Я╨╡╤А╨╡╨▓╨╛╨┤",
-                  "ua": "╨Я╨╡╤А╨╡╨║╨╗╨░╨┤"
+                  "ru": "Перевод",
+                  "ua": "Переклад"
                 }
               ],
               "rows": [
@@ -2823,9 +2823,9 @@ export const glossaryData: GlossaryCategory[] = [
                     "Boli me glava.",
                     "I have a headache.",
                     {
-                      "en": "╨г ╨╝╨╡╨╜╤П ╨▒╨╛╨╗╨╕╤В ╨│╨╛╨╗╨╛╨▓╨░.",
-                      "ru": "╨г ╨╝╨╡╨╜╤П ╨▒╨╛╨╗╨╕╤В ╨│╨╛╨╗╨╛╨▓╨░.",
-                      "ua": "╨г ╨╝╨╡╨╜╨╡ ╨▒╨╛╨╗╨╕╤В╤М ╨│╨╛╨╗╨╛╨▓╨░."
+                      "en": "У меня болит голова.",
+                      "ru": "У меня болит голова.",
+                      "ua": "У мене болить голова."
                     }
                   ]
                 },
@@ -2834,31 +2834,31 @@ export const glossaryData: GlossaryCategory[] = [
                     "Imam temperaturu.",
                     "I have a fever.",
                     {
-                      "en": "╨г ╨╝╨╡╨╜╤П ╤В╨╡╨╝╨┐╨╡╤А╨░╤В╤Г╤А╨░.",
-                      "ru": "╨г ╨╝╨╡╨╜╤П ╤В╨╡╨╝╨┐╨╡╤А╨░╤В╤Г╤А╨░.",
-                      "ua": "╨г ╨╝╨╡╨╜╨╡ ╤В╨╡╨╝╨┐╨╡╤А╨░╤В╤Г╤А╨░."
+                      "en": "У меня температура.",
+                      "ru": "У меня температура.",
+                      "ua": "У мене температура."
                     }
                   ]
                 },
                 {
                   "cells": [
-                    "Trebam lije─Нnika.",
+                    "Trebam liječnika.",
                     "I need a doctor.",
                     {
-                      "en": "╨Ь╨╜╨╡ ╨╜╤Г╨╢╨╡╨╜ ╨▓╤А╨░╤З.",
-                      "ru": "╨Ь╨╜╨╡ ╨╜╤Г╨╢╨╡╨╜ ╨▓╤А╨░╤З.",
-                      "ua": "╨Ь╨╡╨╜╤Ц ╨┐╨╛╤В╤А╤Ц╨▒╨╡╨╜ ╨╗╤Ц╨║╨░╤А."
+                      "en": "Мне нужен врач.",
+                      "ru": "Мне нужен врач.",
+                      "ua": "Мені потрібен лікар."
                     }
                   ]
                 },
                 {
                   "cells": [
-                    "Alergi─Нan/na sam na...",
+                    "Alergičan/na sam na...",
                     "I'm allergic to...",
                     {
-                      "en": "╨г ╨╝╨╡╨╜╤П ╨░╨╗╨╗╨╡╤А╨│╨╕╤П ╨╜╨░...",
-                      "ru": "╨г ╨╝╨╡╨╜╤П ╨░╨╗╨╗╨╡╤А╨│╨╕╤П ╨╜╨░...",
-                      "ua": "╨п ╨░╨╗╨╡╤А╨│╤Ц╨║ ╨╜╨░..."
+                      "en": "У меня аллергия на...",
+                      "ru": "У меня аллергия на...",
+                      "ua": "Я алергік на..."
                     }
                   ]
                 },
@@ -2867,20 +2867,20 @@ export const glossaryData: GlossaryCategory[] = [
                     "Ljekarna",
                     "Pharmacy",
                     {
-                      "en": "╨Р╨┐╤В╨╡╨║╨░",
-                      "ru": "╨Р╨┐╤В╨╡╨║╨░",
-                      "ua": "╨Р╨┐╤В╨╡╨║╨░"
+                      "en": "Аптека",
+                      "ru": "Аптека",
+                      "ua": "Аптека"
                     }
                   ]
                 },
                 {
                   "cells": [
-                    "Hitna pomo─З",
+                    "Hitna pomoć",
                     "Emergency",
                     {
-                      "en": "╨б╨║╨╛╤А╨░╤П ╨┐╨╛╨╝╨╛╤Й╤М",
-                      "ru": "╨б╨║╨╛╤А╨░╤П ╨┐╨╛╨╝╨╛╤Й╤М",
-                      "ua": "╨и╨▓╨╕╨┤╨║╨░ ╨┤╨╛╨┐╨╛╨╝╨╛╨│╨░"
+                      "en": "Скорая помощь",
+                      "ru": "Скорая помощь",
+                      "ua": "Швидка допомога"
                     }
                   ]
                 }
@@ -2893,21 +2893,21 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "family",
         "title": {
           "en": "Family Members",
-          "ru": "╨з╨╗╨╡╨╜╤Л ╤Б╨╡╨╝╤М╨╕",
-          "ua": "╨з╨╗╨╡╨╜╨╕ ╤Б╤Ц╨╝'╤Ч"
+          "ru": "Члены семьи",
+          "ua": "Члени сім'ї"
         },
-        "icon": "ЁЯСитАНЁЯСйтАНЁЯСзтАНЁЯСж",
+        "icon": "👨‍👩‍👧‍👦",
         "subsections": [
           {
             "title": {
               "en": "Family Vocabulary",
-              "ru": "╨б╨╡╨╝╨╡╨╣╨╜╨░╤П ╨╗╨╡╨║╤Б╨╕╨║╨░",
-              "ua": "╨б╤Ц╨╝╨╡╨╣╨╜╨░ ╨╗╨╡╨║╤Б╨╕╨║╨░"
+              "ru": "Семейная лексика",
+              "ua": "Сімейна лексика"
             },
             "text": {
-              "en": "Croatian family terms тАФ essential vocabulary for introducing your family.",
-              "ru": "╨е╨╛╤А╨▓╨░╤В╤Б╨║╨╕╨╡ ╤В╨╡╤А╨╝╨╕╨╜╤Л ╤А╨╛╨┤╤Б╤В╨▓╨░ тАФ ╨╜╨╡╨╛╨▒╤Е╨╛╨┤╨╕╨╝╨░╤П ╨╗╨╡╨║╤Б╨╕╨║╨░ ╨┤╨╗╤П ╨┐╤А╨╡╨┤╤Б╤В╨░╨▓╨╗╨╡╨╜╨╕╤П ╤Б╨╡╨╝╤М╨╕.",
-              "ua": "╨е╨╛╤А╨▓╨░╤В╤Б╤М╨║╤Ц ╤В╨╡╤А╨╝╤Ц╨╜╨╕ ╤Б╨┐╨╛╤А╤Ц╨┤╨╜╨╡╨╜╨╛╤Б╤В╤Ц тАФ ╨╜╨╡╨╛╨▒╤Е╤Ц╨┤╨╜╨░ ╨╗╨╡╨║╤Б╨╕╨║╨░ ╨┤╨╗╤П ╨┐╤А╨╡╨┤╤Б╤В╨░╨▓╨╗╨╡╨╜╨╜╤П ╤Б╤Ц╨╝'╤Ч."
+              "en": "Croatian family terms — essential vocabulary for introducing your family.",
+              "ru": "Хорватские термины родства — необходимая лексика для представления семьи.",
+              "ua": "Хорватські терміни спорідненості — необхідна лексика для представлення сім'ї."
             },
             "table": {
               "headers": [
@@ -2915,8 +2915,8 @@ export const glossaryData: GlossaryCategory[] = [
                 "English",
                 {
                   "en": "Translation",
-                  "ru": "╨Я╨╡╤А╨╡╨▓╨╛╨┤",
-                  "ua": "╨Я╨╡╤А╨╡╨║╨╗╨░╨┤"
+                  "ru": "Перевод",
+                  "ua": "Переклад"
                 }
               ],
               "rows": [
@@ -2925,9 +2925,9 @@ export const glossaryData: GlossaryCategory[] = [
                     "otac / tata",
                     "father / dad",
                     {
-                      "en": "╨╛╤В╨╡╤Ж / ╨┐╨░╨┐╨░",
-                      "ru": "╨╛╤В╨╡╤Ж / ╨┐╨░╨┐╨░",
-                      "ua": "╨▒╨░╤В╤М╨║╨╛ / ╤В╨░╤В╨╛"
+                      "en": "отец / папа",
+                      "ru": "отец / папа",
+                      "ua": "батько / тато"
                     }
                   ]
                 },
@@ -2936,9 +2936,9 @@ export const glossaryData: GlossaryCategory[] = [
                     "majka / mama",
                     "mother / mom",
                     {
-                      "en": "╨╝╨░╤В╤М / ╨╝╨░╨╝╨░",
-                      "ru": "╨╝╨░╤В╤М / ╨╝╨░╨╝╨░",
-                      "ua": "╨╝╨░╤В╨╕ / ╨╝╨░╨╝╨░"
+                      "en": "мать / мама",
+                      "ru": "мать / мама",
+                      "ua": "мати / мама"
                     }
                   ]
                 },
@@ -2947,9 +2947,9 @@ export const glossaryData: GlossaryCategory[] = [
                     "brat",
                     "brother",
                     {
-                      "en": "╨▒╤А╨░╤В",
+                      "en": "брат",
                       "ru": "brat",
-                      "ua": "╨▒╤А╨░╤В"
+                      "ua": "брат"
                     }
                   ]
                 },
@@ -2958,9 +2958,9 @@ export const glossaryData: GlossaryCategory[] = [
                     "sestra",
                     "sister",
                     {
-                      "en": "╤Б╨╡╤Б╤В╤А╨░",
-                      "ru": "╤Б╨╡╤Б╤В╤А╨░",
-                      "ua": "╤Б╨╡╤Б╤В╤А╨░"
+                      "en": "сестра",
+                      "ru": "сестра",
+                      "ua": "сестра"
                     }
                   ]
                 },
@@ -2969,20 +2969,20 @@ export const glossaryData: GlossaryCategory[] = [
                     "sin",
                     "son",
                     {
-                      "en": "╤Б╤Л╨╜",
-                      "ru": "╤Б╤Л╨╜",
-                      "ua": "╤Б╨╕╨╜"
+                      "en": "сын",
+                      "ru": "сын",
+                      "ua": "син"
                     }
                   ]
                 },
                 {
                   "cells": [
-                    "k─Зi / k─Зer",
+                    "kći / kćer",
                     "daughter",
                     {
-                      "en": "╨┤╨╛╤З╤М",
-                      "ru": "╨┤╨╛╨╜╤М╨║╨░",
-                      "ua": "╨┤╨╛╨╜╤М╨║╨░"
+                      "en": "дочь",
+                      "ru": "донька",
+                      "ua": "донька"
                     }
                   ]
                 },
@@ -2991,9 +2991,9 @@ export const glossaryData: GlossaryCategory[] = [
                     "djed / deda",
                     "grandfather",
                     {
-                      "en": "╨┤╨╡╨┤╤Г╤И╨║╨░",
-                      "ru": "╨┤╨╡╨┤╤Г╤И╨║╨░",
-                      "ua": "╨┤╤Ц╨┤╤Г╤Б╤М"
+                      "en": "дедушка",
+                      "ru": "дедушка",
+                      "ua": "дідусь"
                     }
                   ]
                 },
@@ -3002,31 +3002,31 @@ export const glossaryData: GlossaryCategory[] = [
                     "baka",
                     "grandmother",
                     {
-                      "en": "╨▒╨░╨▒╤Г╤И╨║╨░",
-                      "ru": "╨▒╨░╨▒╤Г╤И╨║╨░",
-                      "ua": "╨▒╨░╨▒╤Г╤Б╤П"
+                      "en": "бабушка",
+                      "ru": "бабушка",
+                      "ua": "бабуся"
                     }
                   ]
                 },
                 {
                   "cells": [
-                    "mu┼╛ / suprug",
+                    "muž / suprug",
                     "husband",
                     {
-                      "en": "╨╝╤Г╨╢ / ╤Б╤Г╨┐╤А╤Г╨│",
-                      "ru": "╨╝╤Г╨╢ / ╤Б╤Г╨┐╤А╤Г╨│",
-                      "ua": "╤З╨╛╨╗╨╛╨▓╤Ц╨║ / ╤З╨╛╨╗╨╛╨▓╤Ц╨║"
+                      "en": "муж / супруг",
+                      "ru": "муж / супруг",
+                      "ua": "чоловік / чоловік"
                     }
                   ]
                 },
                 {
                   "cells": [
-                    "┼╛ena / supruga",
+                    "žena / supruga",
                     "wife",
                     {
-                      "en": "╨╢╨╡╨╜╨░ / ╤Б╤Г╨┐╤А╤Г╨│╨░",
-                      "ru": "╨╢╨╡╨╜╨░ / ╤Б╤Г╨┐╤А╤Г╨│╨░",
-                      "ua": "╨┤╤А╤Г╨╢╨╕╨╜╨░"
+                      "en": "жена / супруга",
+                      "ru": "жена / супруга",
+                      "ua": "дружина"
                     }
                   ]
                 },
@@ -3035,9 +3035,9 @@ export const glossaryData: GlossaryCategory[] = [
                     "ujak",
                     "uncle (mother's side)",
                     {
-                      "en": "╨┤╤П╨┤╤П (╨┐╨╛ ╨╝╨░╨╝╨╡)",
-                      "ru": "╨┤╤П╨┤╤П (╨┐╨╛ ╨╝╨░╨╝╨╡)",
-                      "ua": "╨┤╤П╨┤╤М╨║╨╛ (╨┐╨╛ ╨╝╨░╨╝╤Ц)"
+                      "en": "дядя (по маме)",
+                      "ru": "дядя (по маме)",
+                      "ua": "дядько (по мамі)"
                     }
                   ]
                 },
@@ -3046,9 +3046,9 @@ export const glossaryData: GlossaryCategory[] = [
                     "stric",
                     "uncle (father's side)",
                     {
-                      "en": "╨┤╤П╨┤╤П (╨┐╨╛ ╨┐╨░╨┐╨╡)",
-                      "ru": "╨┤╤П╨┤╤П (╨┐╨╛ ╨┐╨░╨┐╨╡)",
-                      "ua": "╨┤╤П╨┤╤М╨║╨╛ (╨┐╨╛ ╤В╨░╤В╨╛╨▓╤Ц)"
+                      "en": "дядя (по папе)",
+                      "ru": "дядя (по папе)",
+                      "ua": "дядько (по татові)"
                     }
                   ]
                 },
@@ -3057,9 +3057,9 @@ export const glossaryData: GlossaryCategory[] = [
                     "teta / tetka",
                     "aunt",
                     {
-                      "en": "╤В╤С╤В╤П",
-                      "ru": "╤В╤С╤В╤П",
-                      "ua": "╤В╤Ц╤В╨║╨░"
+                      "en": "тётя",
+                      "ru": "тётя",
+                      "ua": "тітка"
                     }
                   ]
                 }
@@ -3074,30 +3074,30 @@ export const glossaryData: GlossaryCategory[] = [
     "id": "pronouns_prepositions",
     "title": {
       "en": "Pronouns & Prepositions",
-      "ru": "╨Ь╨╡╤Б╤В╨╛╨╕╨╝╨╡╨╜╨╕╤П ╨╕ ╨┐╤А╨╡╨┤╨╗╨╛╨│╨╕",
-      "ua": "╨Ч╨░╨╣╨╝╨╡╨╜╨╜╨╕╨║╨╕ ╤В╨░ ╨┐╤А╨╕╨╣╨╝╨╡╨╜╨╜╨╕╨║╨╕"
+      "ru": "Местоимения и предлоги",
+      "ua": "Займенники та прийменники"
     },
-    "icon": "ЁЯФЧ",
+    "icon": "🔗",
     "sections": [
       {
         "id": "pronoun_cases",
         "title": {
           "en": "Personal Pronouns Declension",
-          "ru": "╨б╨║╨╗╨╛╨╜╨╡╨╜╨╕╨╡ ╨╝╨╡╤Б╤В╨╛╨╕╨╝╨╡╨╜╨╕╨╣",
-          "ua": "╨Т╤Ц╨┤╨╝╤Ц╨╜╤О╨▓╨░╨╜╨╜╤П ╨╖╨░╨╣╨╝╨╡╨╜╨╜╨╕╨║╤Ц╨▓"
+          "ru": "Склонение местоимений",
+          "ua": "Відмінювання займенників"
         },
-        "icon": "ЁЯСе",
+        "icon": "👥",
         "subsections": [
           {
             "title": {
               "en": "Personal Pronouns Cases",
-              "ru": "╨Я╨░╨┤╨╡╨╢╨╕ ╨╗╨╕╤З╨╜╤Л╤Е ╨╝╨╡╤Б╤В╨╛╨╕╨╝╨╡╨╜╨╕╨╣",
-              "ua": "╨Т╤Ц╨┤╨╝╤Ц╨╜╨║╨╕ ╨╛╤Б╨╛╨▒╨╛╨▓╨╕╤Е ╨╖╨░╨╣╨╝╨╡╨╜╨╜╨╕╨║╤Ц╨▓"
+              "ru": "Падежи личных местоимений",
+              "ua": "Відмінки особових займенників"
             },
             "text": {
               "en": "Declension of personal pronouns (ja, ti, on, ona, ono, mi, vi, oni) across all cases. Short forms (enclitics) are listed first, followed by long forms in parentheses.",
-              "ru": "╨б╨║╨╗╨╛╨╜╨╡╨╜╨╕╨╡ ╨╗╨╕╤З╨╜╤Л╤Е ╨╝╨╡╤Б╤В╨╛╨╕╨╝╨╡╨╜╨╕╨╣ ╨┐╨╛ ╨┐╨░╨┤╨╡╨╢╨░╨╝. ╨Ъ╤А╨░╤В╨║╨╕╨╡ (╤Н╨╜╨║╨╗╨╕╤В╨╕╨║╨╕) ╤Д╨╛╤А╨╝╤Л ╤Г╨║╨░╨╖╨░╨╜╤Л ╨┐╨╡╤А╨▓╤Л╨╝╨╕, ╨┤╨╗╨╕╨╜╨╜╤Л╨╡ ╤Д╨╛╤А╨╝╤Л ╨┐╤А╨╕╨▓╨╡╨┤╨╡╨╜╤Л ╨▓ ╤Б╨║╨╛╨▒╨║╨░╤Е.",
-              "ua": "╨Т╤Ц╨┤╨╝╤Ц╨╜╤О╨▓╨░╨╜╨╜╤П ╨╛╤Б╨╛╨▒╨╛╨▓╨╕╤Е ╨╖╨░╨╣╨╝╨╡╨╜╨╜╨╕╨║╤Ц╨▓ ╨╖╨░ ╨▓╤Ц╨┤╨╝╤Ц╨╜╨║╨░╨╝╨╕. ╨Ъ╤А╨░╤В╨║╤Ц (╨╡╨╜╨║╨╗╤Ц╤В╨╕╤З╨╜╤Ц) ╤Д╨╛╤А╨╝╨╕ ╨▓╨║╨░╨╖╨░╨╜╤Ц ╨┐╨╡╤А╤И╨╕╨╝╨╕, ╨┤╨╛╨▓╨│╤Ц ╤Д╨╛╤А╨╝╨╕ ╨╜╨░╨▓╨╡╨┤╨╡╨╜╤Ц ╨▓ ╨┤╤Г╨╢╨║╨░╤Е."
+              "ru": "Склонение личных местоимений по падежам. Краткие (энклитики) формы указаны первыми, длинные формы приведены в скобках.",
+              "ua": "Відмінювання особових займенників за відмінками. Краткі (енклітичні) форми вказані першими, довгі форми наведені в дужках."
             },
             "table": {
               "headers": [
@@ -3192,21 +3192,21 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "prepositions",
         "title": {
           "en": "Prepositions and Cases",
-          "ru": "╨Я╤А╨╡╨┤╨╗╨╛╨│╨╕ ╨╕ ╨┐╨░╨┤╨╡╨╢╨╕",
-          "ua": "╨Я╤А╨╕╨╣╨╝╨╡╨╜╨╜╨╕╨║╨╕ ╤В╨░ ╨▓╤Ц╨┤╨╝╤Ц╨╜╨║╨╕"
+          "ru": "Предлоги и падежи",
+          "ua": "Прийменники та відмінки"
         },
-        "icon": "ЁЯЧ║я╕П",
+        "icon": "🗺️",
         "subsections": [
           {
             "title": {
               "en": "Prepositions Chart",
-              "ru": "╨в╨░╨▒╨╗╨╕╤Ж╨░ ╨┐╤А╨╡╨┤╨╗╨╛╨│╨╛╨▓",
-              "ua": "╨в╨░╨▒╨╗╨╕╤Ж╤П ╨┐╤А╨╕╨╣╨╝╨╡╨╜╨╜╨╕╨║╤Ц╨▓"
+              "ru": "Таблица предлогов",
+              "ua": "Таблиця прийменників"
             },
             "text": {
               "en": "In Croatian, each preposition requires a specific noun case. Below is a summary of the most common prepositions grouped by the case they govern.",
-              "ru": "╨Т ╤Е╨╛╤А╨▓╨░╤В╤Б╨║╨╛╨╝ ╤П╨╖╤Л╨║╨╡ ╨║╨░╨╢╨┤╤Л╨╣ ╨┐╤А╨╡╨┤╨╗╨╛╨│ ╤В╤А╨╡╨▒╤Г╨╡╤В ╨╛╨┐╤А╨╡╨┤╨╡╨╗╨╡╨╜╨╜╨╛╨│╨╛ ╨┐╨░╨┤╨╡╨╢╨░. ╨Э╨╕╨╢╨╡ ╨┐╤А╨╕╨▓╨╡╨┤╨╡╨╜╨░ ╤В╨░╨▒╨╗╨╕╤Ж╨░ ╨╜╨░╨╕╨▒╨╛╨╗╨╡╨╡ ╤Г╨┐╨╛╤В╤А╨╡╨▒╨╗╤П╨╡╨╝╤Л╤Е ╨┐╤А╨╡╨┤╨╗╨╛╨│╨╛╨▓, ╤Б╨│╤А╤Г╨┐╨┐╨╕╤А╨╛╨▓╨░╨╜╨╜╤Л╤Е ╨┐╨╛ ╨┐╨░╨┤╨╡╨╢╨░╨╝.",
-              "ua": "╨Т ╤Е╨╛╤А╨▓╨░╤В╤Б╤М╨║╤Ц╨╣ ╨╝╨╛╨▓╤Ц ╨║╨╛╨╢╨╡╨╜ ╨┐╤А╨╕╨╣╨╝╨╡╨╜╨╜╨╕╨║ ╨▓╨╕╨╝╨░╨│╨░╤Ф ╨┐╨╡╨▓╨╜╨╛╨│╨╛ ╨▓╤Ц╨┤╨╝╤Ц╨╜╨║╨░. ╨Э╨╕╨╢╤З╨╡ ╨╜╨░╨▓╨╡╨┤╨╡╨╜╨░ ╤В╨░╨▒╨╗╨╕╤Ж╤П ╨╜╨░╨╣╤Г╨╢╨╕╨▓╨░╨╜╤Ц╤И╨╕╤Е ╨┐╤А╨╕╨╣╨╝╨╡╨╜╨╜╨╕╨║╤Ц╨▓, ╨╖╨│╤А╤Г╨┐╨╛╨▓╨░╨╜╨╕╤Е ╨╖╨░ ╨▓╤Ц╨┤╨╝╤Ц╨╜╨║╨░╨╝╨╕."
+              "ru": "В хорватском языке каждый предлог требует определенного падежа. Ниже приведена таблица наиболее употребляемых предлогов, сгруппированных по падежам.",
+              "ua": "В хорватській мові кожен прийменник вимагає певного відмінка. Нижче наведена таблиця найуживаніших прийменників, згрупованих за відмінками."
             },
             "table": {
               "headers": [
@@ -3214,8 +3214,8 @@ export const glossaryData: GlossaryCategory[] = [
                 "Prepositions",
                 {
                   "en": "English Meaning",
-                  "ru": "╨Ч╨╜╨░╤З╨╡╨╜╨╕╨╡",
-                  "ua": "╨Ч╨╜╨░╤З╨╡╨╜╨╜╤П"
+                  "ru": "Значение",
+                  "ua": "Значення"
                 },
                 "Examples"
               ],
@@ -3226,10 +3226,10 @@ export const glossaryData: GlossaryCategory[] = [
                     "bez, kod, iz, blizu, do, od",
                     {
                       "en": "without, at, from, near, to, from",
-                      "ru": "╨▒╨╡╨╖, ╤Г, ╨╕╨╖, ╨▒╨╗╨╕╨╖╨║╨╛, ╨┤╨╛, ╨╛╤В",
-                      "ua": "╨▒╨╡╨╖, ╤Г, ╨╖, ╨▒╨╗╨╕╨╖╤М╨║╨╛, ╨┤╨╛, ╨▓╤Ц╨┤"
+                      "ru": "без, у, из, близко, до, от",
+                      "ua": "без, у, з, близько, до, від"
                     },
-                    "bez ┼бe─Зera, kod prijatelja, iz ureda"
+                    "bez šećera, kod prijatelja, iz ureda"
                   ]
                 },
                 {
@@ -3238,10 +3238,10 @@ export const glossaryData: GlossaryCategory[] = [
                     "k / ka, prema",
                     {
                       "en": "towards, according to",
-                      "ru": "╨║, ╨┐╨╛ ╨╜╨░╨┐╤А╨░╨▓╨╗╨╡╨╜╨╕╤О ╨║",
-                      "ua": "╨┤╨╛, ╤Г ╨╜╨░╨┐╤А╤П╨╝╨║╤Г ╨┤╨╛"
+                      "ru": "к, по направлению к",
+                      "ua": "до, у напрямку до"
                     },
-                    "idem k lije─Нniku, prema gradu"
+                    "idem k liječniku, prema gradu"
                   ]
                 },
                 {
@@ -3250,10 +3250,10 @@ export const glossaryData: GlossaryCategory[] = [
                     "u, na (motion), kroz, za",
                     {
                       "en": "into, onto, through, for",
-                      "ru": "╨▓, ╨╜╨░ (╨┤╨▓╨╕╨╢╨╡╨╜╨╕╨╡), ╤З╨╡╤А╨╡╨╖, ╨┤╨╗╤П",
-                      "ua": "╨▓, ╨╜╨░ (╤А╤Г╤Е), ╤З╨╡╤А╨╡╨╖, ╨┤╨╗╤П"
+                      "ru": "в, на (движение), через, для",
+                      "ua": "в, на (рух), через, для"
                     },
-                    "idem u ╤И╨║╨╛╨╗╤Г, stavi na stol, za tebe"
+                    "idem u школу, stavi na stol, za tebe"
                   ]
                 },
                 {
@@ -3262,10 +3262,10 @@ export const glossaryData: GlossaryCategory[] = [
                     "u, na (location), o, po",
                     {
                       "en": "in, on (static), about, along",
-                      "ru": "╨▓, ╨╜╨░ (╨╝╨╡╤Б╤В╨╛), ╨╛, ╨┐╨╛",
-                      "ua": "╨▓, ╨╜╨░ (╨╝╤Ц╤Б╤Ж╨╡), ╨┐╤А╨╛, ╨┐╨╛"
+                      "ru": "в, на (место), о, по",
+                      "ua": "в, на (місце), про, по"
                     },
-                    "┼╛ivim u Zagrebu, na stolu, o knjizi"
+                    "živim u Zagrebu, na stolu, o knjizi"
                   ]
                 },
                 {
@@ -3274,10 +3274,10 @@ export const glossaryData: GlossaryCategory[] = [
                     "s / sa, pod, nad, pred",
                     {
                       "en": "with, under, above, in front of",
-                      "ru": "╤Б, ╨┐╨╛╨┤, ╨╜╨░╨┤, ╨┐╨╡╤А╨╡╨┤",
-                      "ua": "╨╖, ╨┐╤Ц╨┤, ╨╜╨░╨┤, ╨┐╨╡╤А╨╡╨┤"
+                      "ru": "с, под, над, перед",
+                      "ua": "з, під, над, перед"
                     },
-                    "s bratom, pod stolom, pred ku─Зom"
+                    "s bratom, pod stolom, pred kućom"
                   ]
                 }
               ]
@@ -3291,30 +3291,30 @@ export const glossaryData: GlossaryCategory[] = [
     "id": "advanced_grammar",
     "title": {
       "en": "Advanced Grammar",
-      "ru": "╨Я╤А╨╛╨┤╨▓╨╕╨╜╤Г╤В╨░╤П ╨│╤А╨░╨╝╨╝╨░╤В╨╕╨║╨░",
-      "ua": "╨Я╤А╨╛╤Б╤Г╨╜╤Г╤В╨░ ╨│╤А╨░╨╝╨░╤В╨╕╨║╨░"
+      "ru": "Продвинутая грамматика",
+      "ua": "Просунута граматика"
     },
-    "icon": "ЁЯОУ",
+    "icon": "🎓",
     "sections": [
       {
         "id": "adjective_declension",
         "title": {
           "en": "Adjective Declension",
-          "ru": "╨б╨║╨╗╨╛╨╜╨╡╨╜╨╕╨╡ ╨┐╤А╨╕╨╗╨░╨│╨░╤В╨╡╨╗╤М╨╜╤Л╤Е",
-          "ua": "╨Т╤Ц╨┤╨╝╤Ц╨╜╤О╨▓╨░╨╜╨╜╤П ╨┐╤А╨╕╨║╨╝╨╡╤В╨╜╨╕╨║╤Ц╨▓"
+          "ru": "Склонение прилагательных",
+          "ua": "Відмінювання прикметників"
         },
-        "icon": "ЁЯОи",
+        "icon": "🎨",
         "subsections": [
           {
             "title": {
               "en": "Definite vs Indefinite",
-              "ru": "╨Ю╨┐╤А╨╡╨┤╨╡╨╗╨╡╨╜╨╜╤Л╨╡ ╨╕ ╨╜╨╡╨╛╨┐╤А╨╡╨┤╨╡╨╗╨╡╨╜╨╜╤Л╨╡",
-              "ua": "╨Т╨╕╨╖╨╜╨░╤З╨╡╨╜╤Ц ╤В╨░ ╨╜╨╡╨▓╨╕╨╖╨╜╨░╤З╨╡╨╜╤Ц"
+              "ru": "Определенные и неопределенные",
+              "ua": "Визначені та невизначені"
             },
             "text": {
-              "en": "Croatian adjectives have two forms: Indefinite (Neodre─Сeni - answers 'kakav?' / what kind of?) and Definite (Odre─Сeni - answers 'koji?' / which one?). Here are their nominative endings:",
-              "ru": "╨е╨╛╤А╨▓╨░╤В╤Б╨║╨╕╨╡ ╨┐╤А╨╕╨╗╨░╨│╨░╤В╨╡╨╗╤М╨╜╤Л╨╡ ╨╕╨╝╨╡╤О╤В ╨┤╨▓╨╡ ╤Д╨╛╤А╨╝╤Л: ╨Э╨╡╨╛╨┐╤А╨╡╨┤╨╡╨╗╤С╨╜╨╜╤Г╤О (╨╛╤В╨▓╨╡╤З╨░╨╡╤В ╨╜╨░ ╨▓╨╛╨┐╤А╨╛╤Б 'kakav?' / ╨║╨░╨║╨╛╨╣?) ╨╕ ╨Ю╨┐╤А╨╡╨┤╨╡╨╗╤С╨╜╨╜╤Г╤О (╨╛╤В╨▓╨╡╤З╨░╨╡╤В ╨╜╨░ 'koji?' / ╨║╨░╨║╨╛╨╣ ╨╕╨╝╨╡╨╜╨╜╨╛?). ╨Т╨╛╤В ╨╛╨║╨╛╨╜╤З╨░╨╜╨╕╤П ╨▓ ╨╕╨╝╨╡╨╜╨╕╤В╨╡╨╗╤М╨╜╨╛╨╝ ╨┐╨░╨┤╨╡╨╢╨╡:",
-              "ua": "╨е╨╛╤А╨▓╨░╤В╤Б╤М╨║╤Ц ╨┐╤А╨╕╨║╨╝╨╡╤В╨╜╨╕╨║╨╕ ╨╝╨░╤О╤В╤М ╨┤╨▓╤Ц ╤Д╨╛╤А╨╝╨╕: ╨Э╨╡╨▓╨╕╨╖╨╜╨░╤З╨╡╨╜╤Г (╨▓╤Ц╨┤╨┐╨╛╨▓╤Ц╨┤╨░╤Ф ╨╜╨░ ╨┐╨╕╤В╨░╨╜╨╜╤П 'kakav?' / ╤П╨║╨╕╨╣?) ╤В╨░ ╨Т╨╕╨╖╨╜╨░╤З╨╡╨╜╤Г (╨▓╤Ц╨┤╨┐╨╛╨▓╤Ц╨┤╨░╤Ф ╨╜╨░ 'koji?' / ╤П╨║╨╕╨╣ ╤Б╨░╨╝╨╡?). ╨Ю╤Б╤М ╨╖╨░╨║╤Ц╨╜╤З╨╡╨╜╨╜╤П ╨▓ ╨╜╨░╨╖╨╕╨▓╨╜╨╛╨╝╤Г ╨▓╤Ц╨┤╨╝╤Ц╨╜╨║╤Г:"
+              "en": "Croatian adjectives have two forms: Indefinite (Neodređeni - answers 'kakav?' / what kind of?) and Definite (Određeni - answers 'koji?' / which one?). Here are their nominative endings:",
+              "ru": "Хорватские прилагательные имеют две формы: Неопределённую (отвечает на вопрос 'kakav?' / какой?) и Определённую (отвечает на 'koji?' / какой именно?). Вот окончания в именительном падеже:",
+              "ua": "Хорватські прикметники мають дві форми: Невизначену (відповідає на питання 'kakav?' / який?) та Визначену (відповідає на 'koji?' / який саме?). Ось закінчення в називному відмінку:"
             },
             "table": {
               "headers": [
@@ -3339,8 +3339,8 @@ export const glossaryData: GlossaryCategory[] = [
                     "Fem.",
                     "-a (nova)",
                     "-a (nova)",
-                    "nova ku─Зa (a new house)",
-                    "nova ku─Зa (the new house)"
+                    "nova kuća (a new house)",
+                    "nova kuća (the new house)"
                   ]
                 },
                 {
@@ -3361,21 +3361,21 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "verbal_aspect",
         "title": {
           "en": "Verbal Aspect (Glagolski vid)",
-          "ru": "╨У╨╗╨░╨│╨╛╨╗╤М╨╜╤Л╨╣ ╨▓╨╕╨┤",
-          "ua": "╨Ф╤Ц╤Ф╤Б╨╗╤Ц╨▓╨╜╨╕╨╣ ╨▓╨╕╨┤"
+          "ru": "Глагольный вид",
+          "ua": "Дієслівний вид"
         },
-        "icon": "тП│",
+        "icon": "⏳",
         "subsections": [
           {
             "title": {
               "en": "Aspectual Pairs",
-              "ru": "╨Т╨╕╨┤╨╛╨▓╤Л╨╡ ╨┐╨░╤А╤Л ╨│╨╗╨░╨│╨╛╨╗╨╛╨▓",
-              "ua": "╨Т╨╕╨┤╨╛╨▓╤Ц ╨┐╨░╤А╨╕ ╨┤╤Ц╤Ф╤Б╨╗╤Ц╨▓"
+              "ru": "Видовые пары глаголов",
+              "ua": "Видові пари дієслів"
             },
             "text": {
-              "en": "Croatian verbs are either Imperfective (Nesvr┼бeni - ongoing actions) or Perfective (Svr┼бeni - completed actions). Many verbs form pairs by changing prefixes or suffixes:",
-              "ru": "╨е╨╛╤А╨▓╨░╤В╤Б╨║╨╕╨╡ ╨│╨╗╨░╨│╨╛╨╗╤Л ╨▒╤Л╨▓╨░╤О╤В ╨╜╨╡╤Б╨╛╨▓╨╡╤А╤И╨╡╨╜╨╜╨╛╨│╨╛ ╨▓╨╕╨┤╨░ (Nesvr┼бeni - ╨┤╨╗╨╕╤В╨╡╨╗╤М╨╜╨╛╨╡ ╨┤╨╡╨╣╤Б╤В╨▓╨╕╨╡) ╨╕╨╗╨╕ ╤Б╨╛╨▓╨╡╤А╤И╨╡╨╜╨╜╨╛╨│╨╛ ╨▓╨╕╨┤╨░ (Svr┼бeni - ╨╖╨░╨▓╨╡╤А╤И╨╡╨╜╨╜╨╛╨╡ ╨┤╨╡╨╣╤Б╤В╨▓╨╕╨╡). ╨Ь╨╜╨╛╨│╨╕╨╡ ╨│╨╗╨░╨│╨╛╨╗╤Л ╨╛╨▒╤А╨░╨╖╤Г╤О╤В ╨▓╨╕╨┤╨╛╨▓╤Л╨╡ ╨┐╨░╤А╤Л ╤Б ╨┐╨╛╨╝╨╛╤Й╤М╤О ╨╕╨╖╨╝╨╡╨╜╨╡╨╜╨╕╤П ╨┐╤А╨╕╤Б╤В╨░╨▓╨╛╨║ ╨╕╨╗╨╕ ╤Б╤Г╤Д╤Д╨╕╨║╤Б╨╛╨▓:",
-              "ua": "╨е╨╛╤А╨▓╨░╤В╤Б╤М╨║╤Ц ╨┤╤Ц╤Ф╤Б╨╗╨╛╨▓╨░ ╨▒╤Г╨▓╨░╤О╤В╤М ╨╜╨╡╨┤╨╛╨║╨╛╨╜╨░╨╜╨╛╨│╨╛ ╨▓╨╕╨┤╤Г (Nesvr┼бeni - ╤В╤А╨╕╨▓╨░╨╗╨░ ╨┤╤Ц╤П) ╨░╨▒╨╛ ╨┤╨╛╨║╨╛╨╜╨░╨╜╨╛╨│╨╛ ╨▓╨╕╨┤╤Г (Svr┼бeni - ╨╖╨░╨▓╨╡╤А╤И╨╡╨╜╨░ ╨┤╤Ц╤П). ╨С╨░╨│╨░╤В╨╛ ╨┤╤Ц╤Ф╤Б╨╗╤Ц╨▓ ╤Г╤В╨▓╨╛╤А╤О╤О╤В╤М ╨▓╨╕╨┤╨╛╨▓╤Ц ╨┐╨░╤А╨╕ ╨╖╨░ ╨┤╨╛╨┐╨╛╨╝╨╛╨│╨╛╤О ╨╖╨╝╤Ц╨╜╨╕ ╨┐╤А╨╡╤Д╤Ц╨║╤Б╤Ц╨▓ ╨░╨▒╨╛ ╤Б╤Г╤Д╤Ц╨║╤Б╤Ц╨▓:"
+              "en": "Croatian verbs are either Imperfective (Nesvršeni - ongoing actions) or Perfective (Svršeni - completed actions). Many verbs form pairs by changing prefixes or suffixes:",
+              "ru": "Хорватские глаголы бывают несовершенного вида (Nesvršeni - длительное действие) или совершенного вида (Svršeni - завершенное действие). Многие глаголы образуют видовые пары с помощью изменения приставок или суффиксов:",
+              "ua": "Хорватські дієслова бувають недоконаного виду (Nesvršeni - тривала дія) або доконаного виду (Svršeni - завершена дія). Багато дієслів утворюють видові пари за допомогою зміни префіксів або суфіксів:"
             },
             "table": {
               "headers": [
@@ -3383,8 +3383,8 @@ export const glossaryData: GlossaryCategory[] = [
                 "Perfective Verb",
                 {
                   "en": "English Meaning",
-                  "ru": "╨Ч╨╜╨░╤З╨╡╨╜╨╕╨╡",
-                  "ua": "╨Ч╨╜╨░╤З╨╡╨╜╨╜╤П"
+                  "ru": "Значение",
+                  "ua": "Значення"
                 },
                 "Type of Change"
               ],
@@ -3395,8 +3395,8 @@ export const glossaryData: GlossaryCategory[] = [
                     "napisati",
                     {
                       "en": "to write",
-                      "ru": "╨┐╨╕╤Б╨░╤В╤М / ╨╜╨░╨┐╨╕╤Б╨░╤В╤М",
-                      "ua": "╨┐╨╕╤Б╨░╤В╨╕ / ╨╜╨░╨┐╨╕╤Б╨░╤В╨╕"
+                      "ru": "писать / написать",
+                      "ua": "писати / написати"
                     },
                     "Prefix addition (na-)"
                   ]
@@ -3407,8 +3407,8 @@ export const glossaryData: GlossaryCategory[] = [
                     "kupiti",
                     {
                       "en": "to buy",
-                      "ru": "╨┐╨╛╨║╤Г╨┐╨░╤В╤М / ╨║╤Г╨┐╨╕╤В╤М",
-                      "ua": "╨║╤Г╨┐╤Г╨▓╨░╤В╨╕ / ╨║╤Г╨┐╨╕╤В╨╕"
+                      "ru": "покупать / купить",
+                      "ua": "купувати / купити"
                     },
                     "Suffix change (-ovati -> -iti)"
                   ]
@@ -3416,11 +3416,11 @@ export const glossaryData: GlossaryCategory[] = [
                 {
                   "cells": [
                     "dolaziti",
-                    "do─Зi",
+                    "doći",
                     {
                       "en": "to come",
-                      "ru": "╨┐╤А╨╕╤Е╨╛╨┤╨╕╤В╤М / ╨┐╤А╨╕╨╣╤В╨╕",
-                      "ua": "╨┐╤А╨╕╤Е╨╛╨┤╨╕╤В╨╕ / ╨┐╤А╨╕╨╣╤В╨╕"
+                      "ru": "приходить / прийти",
+                      "ua": "приходити / прийти"
                     },
                     "Suppletive / Irregular stem"
                   ]
@@ -3431,8 +3431,8 @@ export const glossaryData: GlossaryCategory[] = [
                     "otvoriti",
                     {
                       "en": "to open",
-                      "ru": "╨╛╤В╨║╤А╤Л╨▓╨░╤В╤М / ╨╛╤В╨║╤А╤Л╤В╤М",
-                      "ua": "╨▓╤Ц╨┤╨║╤А╨╕╨▓╨░╤В╨╕ / ╨▓╤Ц╨┤╨║╤А╨╕╤В╨╕"
+                      "ru": "открывать / открыть",
+                      "ua": "відкривати / відкрити"
                     },
                     "Vowel change in stem"
                   ]
@@ -3446,21 +3446,21 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "subordinate_clauses",
         "title": {
           "en": "Subordinate Clauses",
-          "ru": "╨Я╤А╨╕╨┤╨░╤В╨╛╤З╨╜╤Л╨╡ ╨┐╤А╨╡╨┤╨╗╨╛╨╢╨╡╨╜╨╕╤П",
-          "ua": "╨Я╤Ц╨┤╤А╤П╨┤╨╜╤Ц ╤А╨╡╤З╨╡╨╜╨╜╤П"
+          "ru": "Придаточные предложения",
+          "ua": "Підрядні речення"
         },
-        "icon": "тЫУя╕П",
+        "icon": "⛓️",
         "subsections": [
           {
             "title": {
               "en": "Types of Clauses",
-              "ru": "╨в╨╕╨┐╤Л ╨┐╤А╨╕╨┤╨░╤В╨╛╤З╨╜╤Л╤Е",
-              "ua": "╨в╨╕╨┐╨╕ ╨┐╤Ц╨┤╤А╤П╨┤╨╜╨╕╤Е ╤А╨╡╤З╨╡╨╜╤М"
+              "ru": "Типы придаточных",
+              "ua": "Типи підрядних речень"
             },
             "text": {
               "en": "Subordinate clauses are introduced by specific conjunctions. Here is a summary of the main types:",
-              "ru": "╨Я╤А╨╕╨┤╨░╤В╨╛╤З╨╜╤Л╨╡ ╨┐╤А╨╡╨┤╨╗╨╛╨╢╨╡╨╜╨╕╤П ╨▓╨▓╨╛╨┤╤П╤В╤Б╤П ╨╛╨┐╤А╨╡╨┤╨╡╨╗╨╡╨╜╨╜╤Л╨╝╨╕ ╤Б╨╛╤О╨╖╨░╨╝╨╕. ╨Т╨╛╤В ╨╛╤Б╨╜╨╛╨▓╨╜╤Л╨╡ ╤В╨╕╨┐╤Л:",
-              "ua": "╨Я╤Ц╨┤╤А╤П╨┤╨╜╤Ц ╤А╨╡╤З╨╡╨╜╨╜╤П ╨▓╨▓╨╛╨┤╤П╤В╤М╤Б╤П ╨┐╨╡╨▓╨╜╨╕╨╝╨╕ ╤Б╨┐╨╛╨╗╤Г╤З╨╜╨╕╨║╨░╨╝╨╕. ╨Ю╤Б╤М ╨╛╤Б╨╜╨╛╨▓╨╜╤Ц ╤В╨╕╨┐╨╕:"
+              "ru": "Придаточные предложения вводятся определенными союзами. Вот основные типы:",
+              "ua": "Підрядні речення вводяться певними сполучниками. Ось основні типи:"
             },
             "table": {
               "headers": [
@@ -3468,8 +3468,8 @@ export const glossaryData: GlossaryCategory[] = [
                 "Conjunctions",
                 {
                   "en": "Meaning",
-                  "ru": "╨Ч╨╜╨░╤З╨╡╨╜╨╕╨╡",
-                  "ua": "╨Ч╨╜╨░╤З╨╡╨╜╨╜╤П"
+                  "ru": "Значение",
+                  "ua": "Значення"
                 },
                 "Example"
               ],
@@ -3480,20 +3480,20 @@ export const glossaryData: GlossaryCategory[] = [
                     "ako, kad, da",
                     {
                       "en": "if / when",
-                      "ru": "╨╡╤Б╨╗╨╕ / ╨║╨╛╨│╨┤╨░",
-                      "ua": "╤П╨║╤Й╨╛ / ╨║╨╛╨╗╨╕"
+                      "ru": "если / когда",
+                      "ua": "якщо / коли"
                     },
-                    "Ako bude padala ki┼бa, ne─Зemo i─Зi."
+                    "Ako bude padala kiša, nećemo ići."
                   ]
                 },
                 {
                   "cells": [
-                    "Causal (Uzro─Нne)",
-                    "jer, zato ┼бto, budu─Зi da",
+                    "Causal (Uzročne)",
+                    "jer, zato što, budući da",
                     {
                       "en": "because / since",
-                      "ru": "╨┐╨╛╤В╨╛╨╝╤Г ╤З╤В╨╛ / ╤В╨░╨║ ╨║╨░╨║",
-                      "ua": "╤В╨╛╨╝╤Г ╤Й╨╛ / ╨╛╤Б╨║╤Ц╨╗╤М╨║╨╕"
+                      "ru": "потому что / так как",
+                      "ua": "тому що / оскільки"
                     },
                     "Ne idem jer sam umoran."
                   ]
@@ -3501,13 +3501,13 @@ export const glossaryData: GlossaryCategory[] = [
                 {
                   "cells": [
                     "Temporal (Vremenske)",
-                    "kad, dok, nakon ┼бto",
+                    "kad, dok, nakon što",
                     {
                       "en": "when / while / after",
-                      "ru": "╨║╨╛╨│╨┤╨░ / ╨┐╨╛╨║╨░ / ╨┐╨╛╤Б╨╗╨╡ ╤В╨╛╨│╨╛ ╨║╨░╨║",
-                      "ua": "╨║╨╛╨╗╨╕ / ╨┐╨╛╨║╨╕ / ╨┐╤Ц╤Б╨╗╤П ╤В╨╛╨│╨╛ ╤П╨║"
+                      "ru": "когда / пока / после того как",
+                      "ua": "коли / поки / після того як"
                     },
-                    "Dok ─Нitam, pijem kavu."
+                    "Dok čitam, pijem kavu."
                   ]
                 },
                 {
@@ -3516,10 +3516,10 @@ export const glossaryData: GlossaryCategory[] = [
                     "iako, premda, makar",
                     {
                       "en": "although / even if",
-                      "ru": "╤Е╨╛╤В╤П / ╨┐╤Г╤Б╤В╤М ╨┤╨░╨╢╨╡",
-                      "ua": "╤Е╨╛╤З╨░ / ╨╜╨░╨▓╤Ц╤В╤М ╤П╨║╤Й╨╛"
+                      "ru": "хотя / пусть даже",
+                      "ua": "хоча / навіть якщо"
                     },
-                    "Iako je hladno, ┼бetamo."
+                    "Iako je hladno, šetamo."
                   ]
                 }
               ]
@@ -3531,21 +3531,21 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "passive_voice",
         "title": {
           "en": "Passive Voice (Pasiv)",
-          "ru": "╨Я╨░╤Б╤Б╨╕╨▓╨╜╤Л╨╣ ╨╖╨░╨╗╨╛╨│",
-          "ua": "╨Я╨░╤Б╨╕╨▓╨╜╨╕╨╣ ╤Б╤В╨░╨╜"
+          "ru": "Пассивный залог",
+          "ua": "Пасивний стан"
         },
-        "icon": "ЁЯФТ",
+        "icon": "🔒",
         "subsections": [
           {
             "title": {
               "en": "Passive Construction",
-              "ru": "╨Ъ╨╛╨╜╤Б╤В╤А╤Г╨║╤Ж╨╕╤П ╨┐╨░╤Б╤Б╨╕╨▓╨░",
-              "ua": "╨Ъ╨╛╨╜╤Б╤В╤А╤Г╨║╤Ж╤Ц╤П ╨┐╨░╤Б╨╕╨▓╤Г"
+              "ru": "Конструкция пассива",
+              "ua": "Конструкція пасиву"
             },
             "text": {
               "en": "Passive voice is constructed either with the verb 'biti' and the passive participle, or using the reflexive particle 'se':",
-              "ru": "╨Я╨░╤Б╤Б╨╕╨▓╨╜╤Л╨╣ ╨╖╨░╨╗╨╛╨│ ╨╛╨▒╤А╨░╨╖╤Г╨╡╤В╤Б╤П ╨╗╨╕╨▒╨╛ ╤Б ╨┐╨╛╨╝╨╛╤Й╤М╤О ╨│╨╗╨░╨│╨╛╨╗╨░ 'biti' ╨╕ ╤Б╤В╤А╨░╨┤╨░╤В╨╡╨╗╤М╨╜╨╛╨│╨╛ ╨┐╤А╨╕╤З╨░╤Б╤В╨╕╤П, ╨╗╨╕╨▒╨╛ ╤Б ╨┐╨╛╨╝╨╛╤Й╤М╤О ╨▓╨╛╨╖╨▓╤А╨░╤В╨╜╨╛╨╣ ╤З╨░╤Б╤В╨╕╤Ж╤Л 'se':",
-              "ua": "╨Я╨░╤Б╨╕╨▓╨╜╨╕╨╣ ╤Б╤В╨░╨╜ ╤Г╤В╨▓╨╛╤А╤О╤Ф╤В╤М╤Б╤П ╨░╨▒╨╛ ╨╖╨░ ╨┤╨╛╨┐╨╛╨╝╨╛╨│╨╛╤О ╨┤╤Ц╤Ф╤Б╨╗╨╛╨▓╨░ 'biti' ╤В╨░ ╨┐╨░╤Б╨╕╨▓╨╜╨╛╨│╨╛ ╨┤╤Ц╤Ф╨┐╤А╨╕╨║╨╝╨╡╤В╨╜╨╕╨║╨░, ╨░╨▒╨╛ ╨╖╨░ ╨┤╨╛╨┐╨╛╨╝╨╛╨│╨╛╤О ╨╖╨▓╨╛╤А╨╛╤В╨╜╨╛╤Ч ╤З╨░╤Б╤В╨║╨╕ 'se':"
+              "ru": "Пассивный залог образуется либо с помощью глагола 'biti' и страдательного причастия, либо с помощью возвратной частицы 'se':",
+              "ua": "Пасивний стан утворюється або за допомогою дієслова 'biti' та пасивного дієприкметника, або за допомогою зворотної частки 'se':"
             },
             "table": {
               "headers": [
@@ -3554,8 +3554,8 @@ export const glossaryData: GlossaryCategory[] = [
                 "Example",
                 {
                   "en": "Translation",
-                  "ru": "╨Я╨╡╤А╨╡╨▓╨╛╨┤",
-                  "ua": "╨Я╨╡╤А╨╡╨║╨╗╨░╨┤"
+                  "ru": "Перевод",
+                  "ua": "Переклад"
                 }
               ],
               "rows": [
@@ -3566,8 +3566,8 @@ export const glossaryData: GlossaryCategory[] = [
                     "Knjiga je napisana.",
                     {
                       "en": "The book is written.",
-                      "ru": "╨Ъ╨╜╨╕╨│╨░ ╨╜╨░╨┐╨╕╤Б╨░╨╜╨░.",
-                      "ua": "╨Ъ╨╜╨╕╨│╨░ ╨╜╨░╨┐╨╕╤Б╨░╨╜╨░."
+                      "ru": "Книга написана.",
+                      "ua": "Книга написана."
                     }
                   ]
                 },
@@ -3575,11 +3575,11 @@ export const glossaryData: GlossaryCategory[] = [
                   "cells": [
                     "Reflexive Passive",
                     "verb + reflexive 'se'",
-                    "Ku─Зa se gradi.",
+                    "Kuća se gradi.",
                     {
                       "en": "The house is being built.",
-                      "ru": "╨Ф╨╛╨╝ ╤Б╤В╤А╨╛╨╕╤В╤Б╤П.",
-                      "ua": "╨С╤Г╨┤╨╕╨╜╨╛╨║ ╨▒╤Г╨┤╤Г╤Ф╤В╤М╤Б╤П."
+                      "ru": "Дом строится.",
+                      "ua": "Будинок будується."
                     }
                   ]
                 }
@@ -3592,21 +3592,21 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "adjective_comparison",
         "title": {
           "en": "Comparison of Adjectives",
-          "ru": "╨б╤В╨╡╨┐╨╡╨╜╨╕ ╤Б╤А╨░╨▓╨╜╨╡╨╜╨╕╤П ╨┐╤А╨╕╨╗╨░╨│╨░╤В╨╡╨╗╤М╨╜╤Л╤Е",
-          "ua": "╨б╤В╤Г╨┐╨╡╨╜╤Ц ╨┐╨╛╤А╤Ц╨▓╨╜╤П╨╜╨╜╤П ╨┐╤А╨╕╨║╨╝╨╡╤В╨╜╨╕╨║╤Ц╨▓"
+          "ru": "Степени сравнения прилагательных",
+          "ua": "Ступені порівняння прикметників"
         },
-        "icon": "ЁЯУИ",
+        "icon": "📈",
         "subsections": [
           {
             "title": {
               "en": "Positive, Comparative, Superlative",
-              "ru": "╨Я╨╛╨╗╨╛╨╢╨╕╤В╨╡╨╗╤М╨╜╨░╤П, ╤Б╤А╨░╨▓╨╜╨╕╤В╨╡╨╗╤М╨╜╨░╤П, ╨┐╤А╨╡╨▓╨╛╤Б╤Е╨╛╨┤╨╜╨░╤П",
-              "ua": "╨Ч╨▓╨╕╤З╨░╨╣╨╜╨╕╨╣, ╨▓╨╕╤Й╨╕╨╣, ╨╜╨░╨╣╨▓╨╕╤Й╨╕╨╣ ╤Б╤В╤Г╨┐╨╡╨╜╤Ц"
+              "ru": "Положительная, сравнительная, превосходная",
+              "ua": "Звичайний, вищий, найвищий ступені"
             },
             "text": {
-              "en": "Adjectives have three degrees of comparison. The comparative is formed with suffixes like -iji, -ji, or -┼бi. The superlative is extremely easy as it simply adds the prefix 'naj-' to the comparative form:",
-              "ru": "╨Я╤А╨╕╨╗╨░╨│╨░╤В╨╡╨╗╤М╨╜╤Л╨╡ ╨╕╨╝╨╡╤О╤В ╤В╤А╨╕ ╤Б╤В╨╡╨┐╨╡╨╜╨╕ ╤Б╤А╨░╨▓╨╜╨╡╨╜╨╕╤П. ╨б╤А╨░╨▓╨╜╨╕╤В╨╡╨╗╤М╨╜╨░╤П ╤Б╤В╨╡╨┐╨╡╨╜╤М ╨╛╨▒╤А╨░╨╖╤Г╨╡╤В╤Б╤П ╤Б╤Г╤Д╤Д╨╕╨║╤Б╨░╨╝╨╕ -iji, -ji ╨╕╨╗╨╕ -┼бi. ╨Я╤А╨╡╨▓╨╛╤Б╤Е╨╛╨┤╨╜╨░╤П ╤Б╤В╨╡╨┐╨╡╨╜╤М ╨╛╨▒╤А╨░╨╖╤Г╨╡╤В╤Б╤П ╨╛╤З╨╡╨╜╤М ╨┐╤А╨╛╤Б╤В╨╛ тАФ ╨┤╨╛╨▒╨░╨▓╨╗╨╡╨╜╨╕╨╡╨╝ ╨┐╤А╨╕╤Б╤В╨░╨▓╨║╨╕ 'naj-' ╨║ ╤Д╨╛╤А╨╝╨╡ ╤Б╤А╨░╨▓╨╜╨╕╤В╨╡╨╗╤М╨╜╨╛╨╣ ╤Б╤В╨╡╨┐╨╡╨╜╨╕:",
-              "ua": "╨Я╤А╨╕╨║╨╝╨╡╤В╨╜╨╕╨║╨╕ ╨╝╨░╤О╤В╤М ╤В╤А╨╕ ╤Б╤В╤Г╨┐╨╡╨╜╤Ц ╨┐╨╛╤А╤Ц╨▓╨╜╤П╨╜╨╜╤П. ╨Т╨╕╤Й╨╕╨╣ ╤Б╤В╤Г╨┐╤Ц╨╜╤М ╤Г╤В╨▓╨╛╤А╤О╤Ф╤В╤М╤Б╤П ╤Б╤Г╤Д╤Ц╨║╤Б╨░╨╝╨╕ -iji, -ji ╨░╨▒╨╛ -┼бi. ╨Э╨░╨╣╨▓╨╕╤Й╨╕╨╣ ╤Б╤В╤Г╨┐╤Ц╨╜╤М ╤Г╤В╨▓╨╛╤А╤О╤Ф╤В╤М╤Б╤П ╨╜╨░╨┤╨╖╨▓╨╕╤З╨░╨╣╨╜╨╛ ╨┐╤А╨╛╤Б╤В╨╛ тАФ ╨┤╨╛╨┤╨░╨▓╨░╨╜╨╜╤П╨╝ ╨┐╤А╨╡╤Д╤Ц╨║╤Б╨░ 'naj-' ╨┤╨╛ ╤Д╨╛╤А╨╝╨╕ ╨▓╨╕╤Й╨╛╨│╨╛ ╤Б╤В╤Г╨┐╨╡╨╜╤П:"
+              "en": "Adjectives have three degrees of comparison. The comparative is formed with suffixes like -iji, -ji, or -ši. The superlative is extremely easy as it simply adds the prefix 'naj-' to the comparative form:",
+              "ru": "Прилагательные имеют три степени сравнения. Сравнительная степень образуется суффиксами -iji, -ji или -ši. Превосходная степень образуется очень просто — добавлением приставки 'naj-' к форме сравнительной степени:",
+              "ua": "Прикметники мають три ступені порівняння. Вищий ступінь утворюється суфіксами -iji, -ji або -ši. Найвищий ступінь утворюється надзвичайно просто — додаванням префікса 'naj-' до форми вищого ступеня:"
             },
             "table": {
               "headers": [
@@ -3615,8 +3615,8 @@ export const glossaryData: GlossaryCategory[] = [
                 "Superlative (Superlativ)",
                 {
                   "en": "English Meaning",
-                  "ru": "╨Ч╨╜╨░╤З╨╡╨╜╨╕╨╡",
-                  "ua": "╨Ч╨╜╨░╤З╨╡╨╜╨╜╤П"
+                  "ru": "Значение",
+                  "ua": "Значення"
                 }
               ],
               "rows": [
@@ -3626,9 +3626,9 @@ export const glossaryData: GlossaryCategory[] = [
                     "noviji",
                     "najnoviji",
                     {
-                      "en": "new тЖТ newer тЖТ newest",
-                      "ru": "╨╜╨╛╨▓╤Л╨╣ тЖТ ╨╜╨╛╨▓╨╡╨╡ тЖТ ╨╜╨╛╨▓╨╡╨╣╤И╨╕╨╣",
-                      "ua": "╨╜╨╛╨▓╨╕╨╣ тЖТ ╨╜╨╛╨▓╤Ц╤И╨╕╨╣ тЖТ ╨╜╨░╨╣╨╜╨╛╨▓╤Ц╤И╨╕╨╣"
+                      "en": "new → newer → newest",
+                      "ru": "новый → новее → новейший",
+                      "ua": "новий → новіший → найновіший"
                     }
                   ]
                 },
@@ -3638,21 +3638,21 @@ export const glossaryData: GlossaryCategory[] = [
                     "stariji",
                     "najstariji",
                     {
-                      "en": "old тЖТ older тЖТ oldest",
-                      "ru": "╤Б╤В╨░╤А╤Л╨╣ тЖТ ╤Б╤В╨░╤А╤И╨╡ тЖТ ╤Б╤В╨░╤А╨╡╨╣╤И╨╕╨╣",
-                      "ua": "╤Б╤В╨░╤А╨╕╨╣ тЖТ ╤Б╤В╨░╤А╤И╨╕╨╣ тЖТ ╨╜╨░╨╣╤Б╤В╨░╤А╤И╨╕╨╣"
+                      "en": "old → older → oldest",
+                      "ru": "старый → старше → старейший",
+                      "ua": "старий → старший → найстарший"
                     }
                   ]
                 },
                 {
                   "cells": [
                     "lak (easy / light)",
-                    "lak┼бi",
-                    "najlak┼бi",
+                    "lakši",
+                    "najlakši",
                     {
-                      "en": "easy тЖТ easier тЖТ easiest",
-                      "ru": "╨╗╨╡╨│╨║╨╕╨╣ тЖТ ╨╗╨╡╨│╤З╨╡ тЖТ ╨╗╨╡╨│╤З╨░╨╣╤И╨╕╨╣",
-                      "ua": "╨╗╨╡╨│╨║╨╕╨╣ тЖТ ╨╗╨╡╨│╤И╨╕╨╣ тЖТ ╨╜╨░╨╣╨╗╨╡╨│╤И╨╕╨╣"
+                      "en": "easy → easier → easiest",
+                      "ru": "легкий → легче → легчайший",
+                      "ua": "легкий → легший → найлегший"
                     }
                   ]
                 },
@@ -3662,9 +3662,9 @@ export const glossaryData: GlossaryCategory[] = [
                     "bolji",
                     "najbolji",
                     {
-                      "en": "good тЖТ better тЖТ best",
-                      "ru": "╤Е╨╛╤А╨╛╤И╨╕╨╣ тЖТ ╨╗╤Г╤З╤И╨╡ тЖТ ╨╗╤Г╤З╤И╨╕╨╣",
-                      "ua": "╨┤╨╛╨▒╤А╨╕╨╣ тЖТ ╨║╤А╨░╤Й╨╕╨╣ тЖТ ╨╜╨░╨╣╨║╤А╨░╤Й╨╕╨╣"
+                      "en": "good → better → best",
+                      "ru": "хороший → лучше → лучший",
+                      "ua": "добрий → кращий → найкращий"
                     }
                   ]
                 }
@@ -3677,53 +3677,53 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "adjective_agreement",
         "title": {
           "en": "Adjective-Noun Agreement",
-          "ru": "╨б╨╛╨│╨╗╨░╤Б╨╛╨▓╨░╨╜╨╕╨╡ ╨┐╤А╨╕╨╗╨░╨│╨░╤В╨╡╨╗╤М╨╜╤Л╤Е",
-          "ua": "╨г╨╖╨│╨╛╨┤╨╢╨╡╨╜╨╜╤П ╨┐╤А╨╕╨║╨╝╨╡╤В╨╜╨╕╨║╤Ц╨▓"
+          "ru": "Согласование прилагательных",
+          "ua": "Узгодження прикметників"
         },
-        "icon": "ЁЯдЭ",
+        "icon": "🤝",
         "subsections": [
           {
             "title": {
               "en": "Gender, Number, Case",
-              "ru": "╨а╨╛╨┤, ╤З╨╕╤Б╨╗╨╛, ╨┐╨░╨┤╨╡╨╢",
-              "ua": "╨а╤Ц╨┤, ╤З╨╕╤Б╨╗╨╛, ╨▓╤Ц╨┤╨╝╤Ц╨╜╨╛╨║"
+              "ru": "Род, число, падеж",
+              "ua": "Рід, число, відмінок"
             },
             "text": {
               "en": "Adjectives must agree with the nouns they modify in gender (masculine, feminine, neuter), number (singular, plural), and case (Nominative, Genitive, etc.). Endings change accordingly.",
-              "ru": "╨Я╤А╨╕╨╗╨░╨│╨░╤В╨╡╨╗╤М╨╜╤Л╨╡ ╨╛╨▒╤П╨╖╨░╤В╨╡╨╗╤М╨╜╨╛ ╤Б╨╛╨│╨╗╨░╤Б╤Г╤О╤В╤Б╤П ╤Б ╤Б╤Г╤Й╨╡╤Б╤В╨▓╨╕╤В╨╡╨╗╤М╨╜╤Л╨╝╨╕, ╨║ ╨║╨╛╤В╨╛╤А╤Л╨╝ ╨╛╨╜╨╕ ╨╛╤В╨╜╨╛╤Б╤П╤В╤Б╤П, ╨▓ ╤А╨╛╨┤╨╡, ╤З╨╕╤Б╨╗╨╡ ╨╕ ╨┐╨░╨┤╨╡╨╢╨╡. ╨Ю╨║╨╛╨╜╤З╨░╨╜╨╕╤П ╨╕╨╖╨╝╨╡╨╜╤П╤О╤В╤Б╤П ╤Б╨╛╨╛╤В╨▓╨╡╤В╤Б╤В╨▓╤Г╤О╤Й╨╕╨╝ ╨╛╨▒╤А╨░╨╖╨╛╨╝.",
-              "ua": "╨Я╤А╨╕╨║╨╝╨╡╤В╨╜╨╕╨║╨╕ ╨╛╨▒╨╛╨▓'╤П╨╖╨║╨╛╨▓╨╛ ╤Г╨╖╨│╨╛╨┤╨╢╤Г╤О╤В╤М╤Б╤П ╨╖ ╤Ц╨╝╨╡╨╜╨╜╨╕╨║╨░╨╝╨╕, ╨┤╨╛ ╤П╨║╨╕╤Е ╨▓╨╛╨╜╨╕ ╨▓╤Ц╨┤╨╜╨╛╤Б╤П╤В╤М╤Б╤П, ╤Г ╤А╨╛╨┤╤Ц, ╤З╨╕╤Б╨╗╤Ц ╤В╨░ ╨▓╤Ц╨┤╨╝╤Ц╨╜╨║╤Г. ╨Ч╨░╨║╤Ц╨╜╤З╨╡╨╜╨╜╤П ╨╖╨╝╤Ц╨╜╤О╤О╤В╤М╤Б╤П ╨▓╤Ц╨┤╨┐╨╛╨▓╤Ц╨┤╨╜╨╕╨╝ ╤З╨╕╨╜╨╛╨╝."
+              "ru": "Прилагательные обязательно согласуются с существительными, к которым они относятся, в роде, числе и падеже. Окончания изменяются соответствующим образом.",
+              "ua": "Прикметники обов'язково узгоджуються з іменниками, до яких вони відносяться, у роді, числі та відмінку. Закінчення змінюються відповідним чином."
             },
             "examples": [
               {
                 "hr": "lijep pas (Masc. Sing. Nom.)",
                 "translation": {
                   "en": "beautiful dog",
-                  "ru": "╨║╤А╨░╤Б╨╕╨▓╨░╤П ╤Б╨╛╨▒╨░╨║╨░",
-                  "ua": "╨║╤А╨░╤Б╨╕╨▓╨╕╨╣ ╤Б╨╛╨▒╨░╨║╨░"
+                  "ru": "красивая собака",
+                  "ua": "красивий собака"
                 }
               },
               {
-                "hr": "lijepa ma─Нka (Fem. Sing. Nom.)",
+                "hr": "lijepa mačka (Fem. Sing. Nom.)",
                 "translation": {
                   "en": "beautiful cat",
-                  "ru": "╨║╤А╨░╤Б╨╕╨▓╨░╤П ╨║╨╛╤И╨║╨░",
-                  "ua": "╨║╤А╨░╤Б╨╕╨▓╨░ ╨║╤Ц╤И╨║╨░"
+                  "ru": "красивая кошка",
+                  "ua": "красива кішка"
                 }
               },
               {
                 "hr": "lijepo selo (Neut. Sing. Nom.)",
                 "translation": {
                   "en": "beautiful village",
-                  "ru": "╨║╤А╨░╤Б╨╕╨▓╨░╤П ╨┤╨╡╤А╨╡╨▓╨╜╤П",
-                  "ua": "╨║╤А╨░╤Б╨╕╨▓╨╡ ╤Б╨╡╨╗╨╛"
+                  "ru": "красивая деревня",
+                  "ua": "красиве село"
                 }
               },
               {
                 "hr": "Vidim lijepog psa. (Masc. Sing. Acc.)",
                 "translation": {
                   "en": "I see a beautiful dog.",
-                  "ru": "╨п ╨▓╨╕╨╢╤Г ╨║╤А╨░╤Б╨╕╨▓╤Г╤О ╤Б╨╛╨▒╨░╨║╤Г.",
-                  "ua": "╨п ╨▒╨░╤З╤Г ╨║╤А╨░╤Б╨╕╨▓╨╛╨│╨╛ ╤Б╨╛╨▒╨░╨║╤Г."
+                  "ru": "Я вижу красивую собаку.",
+                  "ua": "Я бачу красивого собаку."
                 }
               }
             ]
@@ -3734,21 +3734,21 @@ export const glossaryData: GlossaryCategory[] = [
         "id": "numeral_agreement",
         "title": {
           "en": "Numeral Agreement",
-          "ru": "╨б╨╛╨│╨╗╨░╤Б╨╛╨▓╨░╨╜╨╕╨╡ ╤З╨╕╤Б╨╗╨╕╤В╨╡╨╗╤М╨╜╤Л╤Е",
-          "ua": "╨г╨╖╨│╨╛╨┤╨╢╨╡╨╜╨╜╤П ╤З╨╕╤Б╨╗╤Ц╨▓╨╜╨╕╨║╤Ц╨▓"
+          "ru": "Согласование числительных",
+          "ua": "Узгодження числівників"
         },
-        "icon": "ЁЯФв",
+        "icon": "🔢",
         "subsections": [
           {
             "title": {
               "en": "The 1, 2, 3, 4 Rule",
-              "ru": "╨Я╤А╨░╨▓╨╕╨╗╨╛ 1, 2, 3, 4",
-              "ua": "╨Я╤А╨░╨▓╨╕╨╗╨╛ 1, 2, 3, 4"
+              "ru": "Правило 1, 2, 3, 4",
+              "ua": "Правило 1, 2, 3, 4"
             },
             "text": {
               "en": "In Croatian, numbers govern the case of the noun that follows them:\n- Number 1 requires Nominative Singular.\n- Numbers 2, 3, 4 require Genitive Singular.\n- Numbers 5 and above require Genitive Plural.",
-              "ru": "╨Т ╤Е╨╛╤А╨▓╨░╤В╤Б╨║╨╛╨╝ ╤З╨╕╤Б╨╗╨╕╤В╨╡╨╗╤М╨╜╤Л╨╡ ╤Г╨┐╤А╨░╨▓╨╗╤П╤О╤В ╨┐╨░╨┤╨╡╨╢╨╛╨╝ ╤Б╨╗╨╡╨┤╤Г╤О╤Й╨╡╨│╨╛ ╨╖╨░ ╨╜╨╕╨╝╨╕ ╤Б╤Г╤Й╨╡╤Б╤В╨▓╨╕╤В╨╡╨╗╤М╨╜╨╛╨│╨╛:\n- ╨з╨╕╤Б╨╗╨╛ 1 ╤В╤А╨╡╨▒╤Г╨╡╤В ╨╕╨╝╨╡╨╜╨╕╤В╨╡╨╗╤М╨╜╨╛╨│╨╛ ╨┐╨░╨┤╨╡╨╢╨░ ╨╡╨┤╨╕╨╜╤Б╤В╨▓╨╡╨╜╨╜╨╛╨│╨╛ ╤З╨╕╤Б╨╗╨░ (Nom. Sing.).\n- ╨з╨╕╤Б╨╗╨░ 2, 3, 4 ╤В╤А╨╡╨▒╤Г╤О╤В ╤А╨╛╨┤╨╕╤В╨╡╨╗╤М╨╜╨╛╨│╨╛ ╨┐╨░╨┤╨╡╨╢╨░ ╨╡╨┤╨╕╨╜╤Б╤В╨▓╨╡╨╜╨╜╨╛╨│╨╛ ╤З╨╕╤Б╨╗╨░ (Gen. Sing.).\n- ╨з╨╕╤Б╨╗╨░ 5 ╨╕ ╨▓╤Л╤И╨╡ ╤В╤А╨╡╨▒╤Г╤О╤В ╤А╨╛╨┤╨╕╤В╨╡╨╗╤М╨╜╨╛╨│╨╛ ╨┐╨░╨┤╨╡╨╢╨░ ╨╝╨╜╨╛╨╢╨╡╤Б╤В╨▓╨╡╨╜╨╜╨╛╨│╨╛ ╤З╨╕╤Б╨╗╨░ (Gen. Plural).",
-              "ua": "╨г ╤Е╨╛╤А╨▓╨░╤В╤Б╤М╨║╤Ц╨╣ ╨╝╨╛╨▓╤Ц ╤З╨╕╤Б╨╗╤Ц╨▓╨╜╨╕╨║╨╕ ╨║╨╡╤А╤Г╤О╤В╤М ╨▓╤Ц╨┤╨╝╤Ц╨╜╨║╨╛╨╝ ╤Ц╨╝╨╡╨╜╨╜╨╕╨║╨░, ╤Й╨╛ ╤Б╤В╨╛╤Ч╤В╤М ╨┐╤Ц╤Б╨╗╤П ╨╜╨╕╤Е:\n- ╨з╨╕╤Б╨╗╨╛ 1 ╨▓╨╕╨╝╨░╨│╨░╤Ф ╨╜╨░╨╖╨╕╨▓╨╜╨╛╨│╨╛ ╨▓╤Ц╨┤╨╝╤Ц╨╜╨║╨░ ╨╛╨┤╨╜╨╕╨╜╨╕ (Nom. Sing.).\n- ╨з╨╕╤Б╨╗╨░ 2, 3, 4 ╨▓╨╕╨╝╨░╨│╨░╤О╤В╤М ╤А╨╛╨┤╨╛╨▓╨╛╨│╨╛ ╨▓╤Ц╨┤╨╝╤Ц╨╜╨║╨░ ╨╛╨┤╨╜╨╕╨╜╨╕ (Gen. Sing.).\n- ╨з╨╕╤Б╨╗╨░ 5 ╤Ц ╨▒╤Ц╨╗╤М╤И╨╡ ╨▓╨╕╨╝╨░╨│╨░╤О╤В╤М ╤А╨╛╨┤╨╛╨▓╨╛╨│╨╛ ╨▓╤Ц╨┤╨╝╤Ц╨╜╨║╨░ ╨╝╨╜╨╛╨╢╨╕╨╜╨╕ (Gen. Plural)."
+              "ru": "В хорватском числительные управляют падежом следующего за ними существительного:\n- Число 1 требует именительного падежа единственного числа (Nom. Sing.).\n- Числа 2, 3, 4 требуют родительного падежа единственного числа (Gen. Sing.).\n- Числа 5 и выше требуют родительного падежа множественного числа (Gen. Plural).",
+              "ua": "У хорватській мові числівники керують відмінком іменника, що стоїть після них:\n- Число 1 вимагає називного відмінка однини (Nom. Sing.).\n- Числа 2, 3, 4 вимагають родового відмінка однини (Gen. Sing.).\n- Числа 5 і більше вимагають родового відмінка множини (Gen. Plural)."
             },
             "table": {
               "headers": [
@@ -3770,14 +3770,14 @@ export const glossaryData: GlossaryCategory[] = [
                   "cells": [
                     "2, 3, 4",
                     "Genitiv Jednina",
-                    "dva prozora / ─Нetiri prozora",
+                    "dva prozora / četiri prozora",
                     "two windows / four windows"
                   ]
                 },
                 {
                   "cells": [
                     "5+",
-                    "Genitiv Mno┼╛ina",
+                    "Genitiv Množina",
                     "pet prozora / deset prozora",
                     "five windows / ten windows"
                   ]
@@ -3790,46 +3790,46 @@ export const glossaryData: GlossaryCategory[] = [
       {
         "id": "word_order",
         "title": {
-          "en": "Word Order (Red rije─Нi)",
-          "ru": "╨Я╨╛╤А╤П╨┤╨╛╨║ ╤Б╨╗╨╛╨▓",
-          "ua": "╨Я╨╛╤А╤П╨┤╨╛╨║ ╤Б╨╗╤Ц╨▓"
+          "en": "Word Order (Red riječi)",
+          "ru": "Порядок слов",
+          "ua": "Порядок слів"
         },
-        "icon": "тЖФя╕П",
+        "icon": "↔️",
         "subsections": [
           {
             "title": {
               "en": "Free Word Order",
-              "ru": "╨б╨▓╨╛╨▒╨╛╨┤╨╜╤Л╨╣ ╨┐╨╛╤А╤П╨┤╨╛╨║ ╤Б╨╗╨╛╨▓",
-              "ua": "╨Т╤Ц╨╗╤М╨╜╨╕╨╣ ╨┐╨╛╤А╤П╨┤╨╛╨║ ╤Б╨╗╤Ц╨▓"
+              "ru": "Свободный порядок слов",
+              "ua": "Вільний порядок слів"
             },
             "text": {
               "en": "Croatian has a free word order due to its rich case system (meaning the subject, verb, and object can swap places without changing the fundamental meaning). However, standard neutral word order is Subject-Verb-Object (SVO). Enclitics (short pronouns/verbs) must always stand in the second grammatical position.",
-              "ru": "╨е╨╛╤А╨▓╨░╤В╤Б╨║╨╕╨╣ ╤П╨╖╤Л╨║ ╨╕╨╝╨╡╨╡╤В ╤Б╨▓╨╛╨▒╨╛╨┤╨╜╤Л╨╣ ╨┐╨╛╤А╤П╨┤╨╛╨║ ╤Б╨╗╨╛╨▓ ╨▒╨╗╨░╨│╨╛╨┤╨░╤А╤П ╨▒╨╛╨│╨░╤В╨╛╨╣ ╤Б╨╕╤Б╤В╨╡╨╝╨╡ ╨┐╨░╨┤╨╡╨╢╨╡╨╣ (╨┐╨╛╨┤╨╗╨╡╨╢╨░╤Й╨╡╨╡, ╤Б╨║╨░╨╖╤Г╨╡╨╝╨╛╨╡ ╨╕ ╨┤╨╛╨┐╨╛╨╗╨╜╨╡╨╜╨╕╨╡ ╨╝╨╛╨│╤Г╤В ╨╝╨╡╨╜╤П╤В╤М╤Б╤П ╨╝╨╡╤Б╤В╨░╨╝╨╕ ╨▒╨╡╨╖ ╨┐╨╛╤В╨╡╤А╨╕ ╨╛╤Б╨╜╨╛╨▓╨╜╨╛╨│╨╛ ╤Б╨╝╤Л╤Б╨╗╨░). ╨Ю╨┤╨╜╨░╨║╨╛ ╤Б╤В╨░╨╜╨┤╨░╤А╤В╨╜╤Л╨╝ ╨╜╨╡╨╣╤В╤А╨░╨╗╤М╨╜╤Л╨╝ ╨┐╨╛╤А╤П╨┤╨║╨╛╨╝ ╤П╨▓╨╗╤П╨╡╤В╤Б╤П SVO. ╨н╨╜╨║╨╗╨╕╤В╨╕╨║╨╕ (╨║╤А╨░╤В╨║╨╕╨╡ ╨╝╨╡╤Б╤В╨╛╨╕╨╝╨╡╨╜╨╕╤П/╨│╨╗╨░╨│╨╛╨╗╤Л) ╨▓╤Б╨╡╨│╨┤╨░ ╨┤╨╛╨╗╨╢╨╜╤Л ╤Б╤В╨╛╤П╤В╤М ╨╜╨░ ╨▓╤В╨╛╤А╨╛╨╣ ╨┐╨╛╨╖╨╕╤Ж╨╕╨╕.",
-              "ua": "╨е╨╛╤А╨▓╨░╤В╤Б╤М╨║╨░ ╨╝╨╛╨▓╨░ ╨╝╨░╤Ф ╨▓╤Ц╨╗╤М╨╜╨╕╨╣ ╨┐╨╛╤А╤П╨┤╨╛╨║ ╤Б╨╗╤Ц╨▓ ╨╖╨░╨▓╨┤╤П╨║╨╕ ╨▒╨░╨│╨░╤В╤Ц╨╣ ╤Б╨╕╤Б╤В╨╡╨╝╤Ц ╨▓╤Ц╨┤╨╝╤Ц╨╜╨║╤Ц╨▓ (╨┐╤Ц╨┤╨╝╨╡╤В, ╨┐╤А╨╕╤Б╤Г╨┤╨╛╨║ ╤Ц ╨┤╨╛╨┤╨░╤В╨╛╨║ ╨╝╨╛╨╢╤Г╤В╤М ╨╝╤Ц╨╜╤П╤В╨╕╤Б╤П ╨╝╤Ц╤Б╤Ж╤П╨╝╨╕ ╨▒╨╡╨╖ ╨▓╤В╤А╨░╤В╨╕ ╨╛╤Б╨╜╨╛╨▓╨╜╨╛╨│╨╛ ╨╖╨╝╤Ц╤Б╤В╤Г). ╨Я╤А╨╛╤В╨╡ ╤Б╤В╨░╨╜╨┤╨░╤А╤В╨╜╨╕╨╝ ╨╜╨╡╨╣╤В╤А╨░╨╗╤М╨╜╨╕╨╝ ╨┐╨╛╤А╤П╨┤╨║╨╛╨╝ ╤Ф SVO. ╨Х╨╜╨║╨╗╤Ц╤В╨╕╨║╨╕ (╨║╨╛╤А╨╛╤В╨║╤Ц ╨╖╨░╨╣╨╝╨╡╨╜╨╜╨╕╨║╨╕/╨┤╤Ц╤Ф╤Б╨╗╨╛╨▓╨░) ╨╖╨░╨▓╨╢╨┤╨╕ ╨┐╨╛╨▓╨╕╨╜╨╜╤Ц ╤Б╤В╨╛╤П╤В╨╕ ╨╜╨░ ╨┤╤А╤Г╨│╤Ц╨╣ ╨┐╨╛╨╖╨╕╤Ж╤Ц╤Ч."
+              "ru": "Хорватский язык имеет свободный порядок слов благодаря богатой системе падежей (подлежащее, сказуемое и дополнение могут меняться местами без потери основного смысла). Однако стандартным нейтральным порядком является SVO. Энклитики (краткие местоимения/глаголы) всегда должны стоять на второй позиции.",
+              "ua": "Хорватська мова має вільний порядок слів завдяки багатій системі відмінків (підмет, присудок і додаток можуть мінятися місцями без втрати основного змісту). Проте стандартним нейтральним порядком є SVO. Енклітики (короткі займенники/дієслова) завжди повинні стояти на другій позиції."
             },
             "examples": [
               {
-                "hr": "Ivan ─Нita knjigu. (SVO - Neutral)",
+                "hr": "Ivan čita knjigu. (SVO - Neutral)",
                 "translation": {
                   "en": "Ivan reads a book.",
-                  "ru": "╨Ш╨▓╨░╨╜ ╤З╨╕╤В╨░╨╡╤В ╨║╨╜╨╕╨│╤Г.",
-                  "ua": "╨Ж╨▓╨░╨╜ ╤З╨╕╤В╨░╤Ф ╨║╨╜╨╕╨│╤Г."
+                  "ru": "Иван читает книгу.",
+                  "ua": "Іван читає книгу."
                 }
               },
               {
-                "hr": "Knjigu ─Нita Ivan. (OVS - Emphasizes book)",
+                "hr": "Knjigu čita Ivan. (OVS - Emphasizes book)",
                 "translation": {
                   "en": "Ivan reads the book.",
-                  "ru": "╨Ъ╨╜╨╕╨│╤Г ╤З╨╕╤В╨░╨╡╤В ╨Ш╨▓╨░╨╜.",
-                  "ua": "╨Ъ╨╜╨╕╨│╤Г ╤З╨╕╤В╨░╤Ф ╨Ж╨▓╨░╨╜."
+                  "ru": "Книгу читает Иван.",
+                  "ua": "Книгу читає Іван."
                 }
               },
               {
                 "hr": "Ja mu je dajem. (Enclitics 'mu' and 'je' in 2nd position)",
                 "translation": {
                   "en": "I give it to him.",
-                  "ru": "╨п ╨┤╨░╤О ╨╡╤С ╨╡╨╝╤Г.",
-                  "ua": "╨п ╨┤╨░╤О ╤Ч╤Ч ╨╣╨╛╨╝╤Г."
+                  "ru": "Я даю её ему.",
+                  "ua": "Я даю її йому."
                 }
               }
             ]
