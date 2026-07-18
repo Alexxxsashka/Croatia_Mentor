@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { Flag } from "@/components/flag";
 import {
@@ -14,20 +14,24 @@ import {
 
 interface WordPair {
   croatian: string;
-  english: string;
+  translation: {
+    en: string;
+    ru: string;
+    ua: string;
+  };
   id: number;
 }
 
 const wordPairs: WordPair[] = [
-  { id: 1, croatian: "Kuća", english: "House" },
-  { id: 2, croatian: "Pas", english: "Dog" },
-  { id: 3, croatian: "Mačka", english: "Cat" },
-  { id: 4, croatian: "Knjiga", english: "Book" },
-  { id: 5, croatian: "Voda", english: "Water" },
-  { id: 6, croatian: "Sunce", english: "Sun" },
-  { id: 7, croatian: "More", english: "Sea" },
-  { id: 8, croatian: "Škola", english: "School" },
-]
+  { id: 1, croatian: "Kuća", translation: { en: "House", ru: "Дом", ua: "Будинок" } },
+  { id: 2, croatian: "Pas", translation: { en: "Dog", ru: "Собака", ua: "Собака" } },
+  { id: 3, croatian: "Mačka", translation: { en: "Cat", ru: "Кошка", ua: "Кішка" } },
+  { id: 4, croatian: "Knjiga", translation: { en: "Book", ru: "Книга", ua: "Книга" } },
+  { id: 5, croatian: "Voda", translation: { en: "Water", ru: "Вода", ua: "Вода" } },
+  { id: 6, croatian: "Sunce", translation: { en: "Sun", ru: "Солнце", ua: "Сонце" } },
+  { id: 7, croatian: "More", translation: { en: "Sea", ru: "Море", ua: "Море" } },
+  { id: 8, croatian: "Škola", translation: { en: "School", ru: "Школа", ua: "Школа" } },
+];
 function shuffleArray<T>(arr: T[]): T[] {
   const shuffled = [...arr];
   for (let i = shuffled.length - 1; i > 0; i--) {
@@ -39,6 +43,8 @@ function shuffleArray<T>(arr: T[]): T[] {
 
 export default function WordMatchPage() {
   const t = useTranslations("games.wordMatch");
+  const tRoot = useTranslations("games");
+  const locale = useLocale();
   const router = useRouter();
 
   const [shuffledCroatian, setShuffledCroatian] = useState<WordPair[]>(() => shuffleArray(wordPairs));
@@ -161,7 +167,7 @@ export default function WordMatchPage() {
             onClick={() => router.push("/games")}
             className="px-6 py-3 rounded-xl font-semibold glass hover:bg-white/10 transition-all"
           >
-            Back
+            {tRoot("backToGames") || "Back"}
           </button>
         </div>
       </div>
@@ -235,10 +241,11 @@ export default function WordMatchPage() {
           })}
         </div>
 
-        {/* English words */}
+        {/* Translation words */}
         <div className="space-y-3">
-          <h3 className="text-sm font-semibold text-center text-purple-400 mb-4">
-            🇬🇧 English
+          <h3 className="text-sm font-semibold text-center text-purple-400 mb-4 flex items-center justify-center gap-1.5">
+            <Flag countryCode={locale} className="w-5 h-3.5 rounded-[2px]" />
+            {locale === "ua" ? "Переклад (Укр)" : locale === "ru" ? "Перевод (Рус)" : "Translation (Eng)"}
           </h3>
           {shuffledEnglish.map((word) => {
             const isMatched = matchedIds.has(word.id);
@@ -262,7 +269,7 @@ export default function WordMatchPage() {
                         : "glass hover:bg-white/10 cursor-pointer"
                 }`}
               >
-                {word.english}
+                {word.translation[locale as "en" | "ru" | "ua"] || word.translation.en}
               </button>
             );
           })}
