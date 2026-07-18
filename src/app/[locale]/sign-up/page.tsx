@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
+import { Flag } from "@/components/flag";
 import {
   Mail,
   Lock,
@@ -22,6 +23,9 @@ export default function SignUpPage() {
   const { status } = useSession();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
+  const langDropdownRef = useRef<HTMLDivElement>(null);
+  
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -29,6 +33,19 @@ export default function SignUpPage() {
     confirmPassword: "",
     nativeLanguage: "en",
   });
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        langDropdownRef.current &&
+        !langDropdownRef.current.contains(event.target as Node)
+      ) {
+        setLangDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   useEffect(() => {
     if (status === "authenticated") {
@@ -81,9 +98,9 @@ export default function SignUpPage() {
   };
 
   const languages = [
-    { code: "en", label: "English", flag: "🇬🇧" },
-    { code: "ru", label: "Русский", flag: "🇷🇺" },
-    { code: "ua", label: "Українська", flag: "🇺🇦" },
+    { code: "en", label: "English", countryCode: "gb" },
+    { code: "ru", label: "Русский", countryCode: "ru" },
+    { code: "ua", label: "Українська", countryCode: "ua" },
   ];
 
   return (
@@ -195,25 +212,45 @@ export default function SignUpPage() {
               <label className="text-sm font-medium">
                 {t("nativeLanguage")}
               </label>
-              <div className="relative">
-                <Languages className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <select
-                  value={form.nativeLanguage}
-                  onChange={(e) =>
-                    setForm({ ...form, nativeLanguage: e.target.value })
-                  }
-                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all appearance-none cursor-pointer"
+              <div className="relative" ref={langDropdownRef}>
+                <Languages className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground z-10" />
+                <button
+                  type="button"
+                  onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                  className="w-full pl-10 pr-10 py-3 rounded-xl bg-white/5 border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all flex items-center justify-between text-left cursor-pointer text-foreground"
                 >
-                  {languages.map((lang) => (
-                    <option
-                      key={lang.code}
-                      value={lang.code}
-                      className="bg-zinc-900"
-                    >
-                      {lang.flag} {lang.label}
-                    </option>
-                  ))}
-                </select>
+                  <div className="flex items-center gap-2">
+                    <Flag countryCode={languages.find((l) => l.code === form.nativeLanguage)?.countryCode || "gb"} className="w-5 h-3.5 rounded-[2px] shadow-sm shrink-0" />
+                    <span>{languages.find((l) => l.code === form.nativeLanguage)?.label || "English"}</span>
+                  </div>
+                  {/* Arrow Icon */}
+                  <svg className={`w-4 h-4 text-muted-foreground transition-transform duration-200 ${langDropdownOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+
+                {langDropdownOpen && (
+                  <div className="absolute left-0 right-0 mt-1 rounded-xl glass shadow-2xl border border-black/5 dark:border-white/10 overflow-hidden animate-fade-in z-50">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        type="button"
+                        onClick={() => {
+                          setForm({ ...form, nativeLanguage: lang.code });
+                          setLangDropdownOpen(false);
+                        }}
+                        className={`w-full flex items-center gap-3 px-4 py-3 text-sm text-left transition-colors ${
+                          form.nativeLanguage === lang.code
+                            ? "bg-purple-500/10 text-purple-400 font-semibold"
+                            : "text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5"
+                        }`}
+                      >
+                        <Flag countryCode={lang.countryCode} className="w-5 h-3.5 rounded-[2px] shadow-sm shrink-0" />
+                        <span>{lang.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
 
