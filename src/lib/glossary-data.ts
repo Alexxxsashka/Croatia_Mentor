@@ -1363,55 +1363,6 @@ export const glossaryData: GlossaryCategory[] = [
         ]
       },
       {
-        "id": "vokativ",
-        "title": {
-          "en": "Vocative (Vokativ)",
-          "ru": "Звательный падеж (Vokativ)",
-          "ua": "Кличний відмінок (Vokativ)"
-        },
-        "icon": "🗣️",
-        "subsections": [
-          {
-            "title": {
-              "en": "Usage",
-              "ru": "Использование",
-              "ua": "Використання"
-            },
-            "text": {
-              "en": "The Vocative is used for addressing or calling someone directly. Standard endings: masculine singular ends in -e or -u (e.g. prijatelju, profesore), feminine singular ends in -o or -a (e.g. ženo, mama). Plural forms are identical to the Nominative.",
-              "ru": "Звательный падеж используется при прямом обращении к кому-либо. Окончания: мужской род ед. ч. оканчивается на -e или -u (prijatelju, profesore), женский род ед. ч. оканчивается на -o или -a (ženo, mama). Формы мн. ч. совпадают с именительным.",
-              "ua": "Кличний відмінок використовується для звернення або заклику. Закінчення: чоловічий рід однини закінчується на -e або -u (prijatelju, profesore), жіночий рід однини закінчується на -o або -a (ženo, mama). Форми множини збігаються з називним відмінком."
-            },
-            "examples": [
-              {
-                "hr": "Dobar dan, profesore!",
-                "translation": {
-                  "en": "Good day, professor!",
-                  "ru": "Добрый день, профессор!",
-                  "ua": "Доброго дня, професоре!"
-                }
-              },
-              {
-                "hr": "Hej, prijatelju!",
-                "translation": {
-                  "en": "Hey, friend!",
-                  "ru": "Эй, друг!",
-                  "ua": "Гей, друже!"
-                }
-              },
-              {
-                "hr": "Mama, gdje si?",
-                "translation": {
-                  "en": "Mom, where are you?",
-                  "ru": "Мама, где ты?",
-                  "ua": "Мамо, де ти?"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      {
         "id": "plurality",
         "title": {
           "en": "Singular & Plural (Jednina i množina)",
