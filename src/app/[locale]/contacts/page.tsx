@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useLocale } from "next-intl";
+import { Flag } from "@/components/flag";
 import {
   Mail,
   Copy,
@@ -142,7 +143,7 @@ export default function ContactsPage() {
             <div className="glass rounded-2xl p-5 hover:border-white/20 transition-all flex flex-col justify-between h-40">
               <div>
                 <span className="text-xs text-muted-foreground font-semibold uppercase tracking-wider flex items-center gap-1.5">
-                  <span className="text-base">🇺🇦</span> {t.phoneUa}
+                  <Flag countryCode="ua" className="w-5 h-3.5 object-cover rounded-[3px] shadow-[0_1px_2px_rgba(0,0,0,0.15)]" /> {t.phoneUa}
                 </span>
                 <p className="text-lg font-bold mt-2">+380 93 041 0268</p>
                 <p className="text-xs text-muted-foreground mt-0.5">Telegram / WhatsApp</p>
@@ -169,7 +170,7 @@ export default function ContactsPage() {
             <div className="glass rounded-2xl p-5 hover:border-white/20 transition-all flex flex-col justify-between h-40">
               <div>
                 <span className="text-xs text-muted-foreground font-semibold uppercase tracking-wider flex items-center gap-1.5">
-                  <span className="text-base">🇭🇷</span> {t.phoneHr}
+                  <Flag countryCode="hr" className="w-5 h-3.5 object-cover rounded-[3px] shadow-[0_1px_2px_rgba(0,0,0,0.15)]" /> {t.phoneHr}
                 </span>
                 <p className="text-lg font-bold mt-2">+385 91 790 6136</p>
               </div>
