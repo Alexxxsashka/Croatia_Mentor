@@ -704,50 +704,110 @@ export const glossaryData: GlossaryCategory[] = [
               "rows": [
                 {
                   "cells": [
-                    "Masculine",
-                    "consonant",
+                    {
+                      "en": "Masculine",
+                      "ru": "Мужской",
+                      "ua": "Чоловічий"
+                    },
+                    {
+                      "en": "consonant",
+                      "ru": "согласный",
+                      "ua": "приголосна"
+                    },
                     "grad",
-                    "city"
+                    {
+                      "en": "city",
+                      "ru": "город",
+                      "ua": "місто"
+                    }
                   ]
                 },
                 {
                   "cells": [
-                    "Masculine",
-                    "consonant",
-                    "student",
-                    "student"
+                    {
+                      "en": "Masculine",
+                      "ru": "Мужской",
+                      "ua": "Чоловічий"
+                    },
+                    {
+                      "en": "consonant",
+                      "ru": "согласный",
+                      "ua": "приголосна"
+                    },
+                    {
+                      "en": "student",
+                      "ru": "студент",
+                      "ua": "студент"
+                    },
+                    {
+                      "en": "student",
+                      "ru": "студент",
+                      "ua": "студент"
+                    }
                   ]
                 },
                 {
                   "cells": [
-                    "Feminine",
+                    {
+                      "en": "Feminine",
+                      "ru": "Женский",
+                      "ua": "Жіночий"
+                    },
                     "-a",
                     "žena",
-                    "woman"
+                    {
+                      "en": "woman",
+                      "ru": "женщина",
+                      "ua": "жінка"
+                    }
                   ]
                 },
                 {
                   "cells": [
-                    "Feminine",
+                    {
+                      "en": "Feminine",
+                      "ru": "Женский",
+                      "ua": "Жіночий"
+                    },
                     "-a",
                     "knjiga",
-                    "book"
+                    {
+                      "en": "book",
+                      "ru": "книга",
+                      "ua": "книга"
+                    }
                   ]
                 },
                 {
                   "cells": [
-                    "Neuter",
+                    {
+                      "en": "Neuter",
+                      "ru": "Средний",
+                      "ua": "Середній"
+                    },
                     "-o / -e",
                     "selo",
-                    "village"
+                    {
+                      "en": "village",
+                      "ru": "деревня",
+                      "ua": "село"
+                    }
                   ]
                 },
                 {
                   "cells": [
-                    "Neuter",
+                    {
+                      "en": "Neuter",
+                      "ru": "Средний",
+                      "ua": "Середній"
+                    },
                     "-o / -e",
                     "more",
-                    "sea"
+                    {
+                      "en": "sea",
+                      "ru": "море",
+                      "ua": "море"
+                    }
                   ]
                 }
               ]
@@ -794,7 +854,11 @@ export const glossaryData: GlossaryCategory[] = [
                 {
                   "cells": [
                     "Masc.",
-                    "student",
+                    {
+                      "en": "student",
+                      "ru": "студент",
+                      "ua": "студент"
+                    },
                     "studenta",
                     "studenata"
                   ]
@@ -983,23 +1047,43 @@ export const glossaryData: GlossaryCategory[] = [
               "rows": [
                 {
                   "cells": [
-                    "Masc. inanimate",
+                    {
+                      "en": "Masc. inanimate",
+                      "ru": "Муж. неодуш.",
+                      "ua": "Чол. неживе"
+                    },
                     "grad",
                     "grad",
-                    "= Nominative"
+                    {
+                      "en": "= Nominative",
+                      "ru": "= Именительный",
+                      "ua": "= Називний"
+                    }
                   ]
                 },
                 {
                   "cells": [
-                    "Masc. animate",
+                    {
+                      "en": "Masc. animate",
+                      "ru": "Муж. одуш.",
+                      "ua": "Чол. живе"
+                    },
                     "brat",
                     "brata",
-                    "= Genitive"
+                    {
+                      "en": "= Genitive",
+                      "ru": "= Родительный",
+                      "ua": "= Родовий"
+                    }
                   ]
                 },
                 {
                   "cells": [
-                    "Feminine",
+                    {
+                      "en": "Feminine",
+                      "ru": "Женский",
+                      "ua": "Жіночий"
+                    },
                     "žena",
                     "ženu",
                     "-a → -u"
@@ -1007,7 +1091,11 @@ export const glossaryData: GlossaryCategory[] = [
                 },
                 {
                   "cells": [
-                    "Feminine",
+                    {
+                      "en": "Feminine",
+                      "ru": "Женский",
+                      "ua": "Жіночий"
+                    },
                     "knjiga",
                     "knjigu",
                     "-a → -u"
@@ -1015,10 +1103,18 @@ export const glossaryData: GlossaryCategory[] = [
                 },
                 {
                   "cells": [
-                    "Neuter",
+                    {
+                      "en": "Neuter",
+                      "ru": "Средний",
+                      "ua": "Середній"
+                    },
                     "selo",
                     "selo",
-                    "= Nominative"
+                    {
+                      "en": "= Nominative",
+                      "ru": "= Именительный",
+                      "ua": "= Називний"
+                    }
                   ]
                 }
               ]
@@ -1883,63 +1979,99 @@ export const glossaryData: GlossaryCategory[] = [
                   "cells": [
                     "čitati",
                     "pročitati",
-                    "to read"
+                    {
+                      "en": "to read",
+                      "ru": "читать",
+                      "ua": "читати"
+                    }
                   ]
                 },
                 {
                   "cells": [
                     "pisati",
                     "napisati",
-                    "to write"
+                    {
+                      "en": "to write",
+                      "ru": "писать",
+                      "ua": "писати"
+                    }
                   ]
                 },
                 {
                   "cells": [
                     "učiti",
                     "naučiti",
-                    "to learn"
+                    {
+                      "en": "to learn",
+                      "ru": "учить",
+                      "ua": "вчити"
+                    }
                   ]
                 },
                 {
                   "cells": [
                     "govoriti",
                     "reći",
-                    "to speak/say"
+                    {
+                      "en": "to speak/say",
+                      "ru": "говорить / сказать",
+                      "ua": "говорити / сказати"
+                    }
                   ]
                 },
                 {
                   "cells": [
                     "kupovati",
                     "kupiti",
-                    "to buy"
+                    {
+                      "en": "to buy",
+                      "ru": "покупать",
+                      "ua": "купувати"
+                    }
                   ]
                 },
                 {
                   "cells": [
                     "jesti",
                     "pojesti",
-                    "to eat"
+                    {
+                      "en": "to eat",
+                      "ru": "есть",
+                      "ua": "їсти"
+                    }
                   ]
                 },
                 {
                   "cells": [
                     "piti",
                     "popiti",
-                    "to drink"
+                    {
+                      "en": "to drink",
+                      "ru": "пить",
+                      "ua": "пити"
+                    }
                   ]
                 },
                 {
                   "cells": [
                     "dolaziti",
                     "doći",
-                    "to come"
+                    {
+                      "en": "to come",
+                      "ru": "приходить",
+                      "ua": "приходити"
+                    }
                   ]
                 },
                 {
                   "cells": [
                     "odlaziti",
                     "otići",
-                    "to leave"
+                    {
+                      "en": "to leave",
+                      "ru": "уходить",
+                      "ua": "йти"
+                    }
                   ]
                 }
               ]
@@ -2168,7 +2300,11 @@ export const glossaryData: GlossaryCategory[] = [
                 {
                   "cells": [
                     "smijati se",
-                    "to laugh",
+                    {
+                      "en": "to laugh",
+                      "ru": "смеяться",
+                      "ua": "сміятися"
+                    },
                     "smijem se",
                     "Ja se smijem. (I am laughing.)"
                   ]
@@ -2176,7 +2312,11 @@ export const glossaryData: GlossaryCategory[] = [
                 {
                   "cells": [
                     "zvati se",
-                    "to be named",
+                    {
+                      "en": "to be named",
+                      "ru": "называться",
+                      "ua": "називатися"
+                    },
                     "zovem se",
                     "Zovem se Ivan. (My name is Ivan.)"
                   ]
@@ -2184,7 +2324,11 @@ export const glossaryData: GlossaryCategory[] = [
                 {
                   "cells": [
                     "tuširati se",
-                    "to shower",
+                    {
+                      "en": "to shower",
+                      "ru": "принимать душ",
+                      "ua": "приймати душ"
+                    },
                     "tuširam se",
                     "Tuširam se ujutro. (I shower in the morning.)"
                   ]
@@ -2192,7 +2336,11 @@ export const glossaryData: GlossaryCategory[] = [
                 {
                   "cells": [
                     "brinuti se",
-                    "to worry",
+                    {
+                      "en": "to worry",
+                      "ru": "беспокоиться",
+                      "ua": "турбуватися"
+                    },
                     "brinem se",
                     "Ne brini se. (Do not worry.)"
                   ]
@@ -3714,7 +3862,11 @@ export const glossaryData: GlossaryCategory[] = [
                     "1 (jedan)",
                     "Nominativ Jednina",
                     "jedan prozor",
-                    "one window"
+                    {
+                      "en": "one window",
+                      "ru": "одно окно",
+                      "ua": "одне вікно"
+                    }
                   ]
                 },
                 {
@@ -3722,7 +3874,11 @@ export const glossaryData: GlossaryCategory[] = [
                     "2, 3, 4",
                     "Genitiv Jednina",
                     "dva prozora / četiri prozora",
-                    "two windows / four windows"
+                    {
+                      "en": "two windows / four windows",
+                      "ru": "два окна / четыре окна",
+                      "ua": "два вікна / чотири вікна"
+                    }
                   ]
                 },
                 {
@@ -3730,7 +3886,11 @@ export const glossaryData: GlossaryCategory[] = [
                     "5+",
                     "Genitiv Množina",
                     "pet prozora / deset prozora",
-                    "five windows / ten windows"
+                    {
+                      "en": "five windows / ten windows",
+                      "ru": "пять окон / десять окон",
+                      "ua": "п'ять вікон / десять вікон"
+                    }
                   ]
                 }
               ]
