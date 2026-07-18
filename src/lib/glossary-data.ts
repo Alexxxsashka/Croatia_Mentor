@@ -351,6 +351,33 @@ export const glossaryData: GlossaryCategory[] = [
             ]
           }
         ]
+      },
+      {
+        id: "cases-summary",
+        title: { en: "Noun Cases Summary", ru: "Сводная таблица падежей", ua: "Зведена таблиця відмінків" },
+        icon: "📊",
+        subsections: [
+          {
+            title: { en: "Summary of Endings", ru: "Сводка окончаний", ua: "Зведення закінчень" },
+            text: {
+              en: "Here is a quick overview of the standard singular and plural endings for masculine, feminine, and neuter nouns across all seven cases in Croatian.",
+              ru: "Вот краткий обзор стандартных окончаний единственного и множественного числа для существительных мужского, женского и среднего рода во всех семи падежах хорватского языка.",
+              ua: "Ось короткий огляд стандартних закінчень однини та множини для іменників чоловічого, жіночого та середнього роду у всіх семи відмінках хорватської мови."
+            },
+            table: {
+              headers: ["Case / Pad", "Masc. Sing.", "Masc. Plur.", "Fem. Sing.", "Fem. Plur.", "Neut. Sing.", "Neut. Plur."],
+              rows: [
+                { cells: ["Nominativ", "Ø (no ending)", "-i / -ovi", "-a", "-e", "-o / -e", "-a"] },
+                { cells: ["Genitiv", "-a", "-a", "-e", "-a", "-a", "-a"] },
+                { cells: ["Dativ", "-u", "-ima", "-i", "-ama", "-u", "-ima"] },
+                { cells: ["Akuzativ", "Ø (inanim.) / -a (anim.)", "-e", "-u", "-e", "-o / -e", "-a"] },
+                { cells: ["Vokativ", "-e / -u", "-i", "-o / -e", "-e", "-o / -e", "-a"] },
+                { cells: ["Lokativ", "-u", "-ima", "-i", "-ama", "-u", "-ima"] },
+                { cells: ["Instrumental", "-om / -em", "-ima", "-om", "-ama", "-om / -em", "-ima"] }
+              ]
+            }
+          }
+        ]
       }
     ]
   },
@@ -534,6 +561,32 @@ export const glossaryData: GlossaryCategory[] = [
               { hr: "Čitaj polako!", translation: { en: "Read slowly!", ru: "Читай медленно!", ua: "Читай повільно!" } },
               { hr: "Dođite ovamo, molim vas!", translation: { en: "Come here, please!", ru: "Идите сюда, пожалуйста!", ua: "Ідіть сюди, будь ласка!" } },
             ]
+          }
+        ]
+      },
+      {
+        id: "verb-conjugation",
+        title: { en: "Common Verbs Conjugation", ru: "Спряжение частых глаголов", ua: "Відмінювання поширених дієслів" },
+        icon: "📋",
+        subsections: [
+          {
+            title: { en: "Present Tense of Essential Verbs", ru: "Настоящее время ключевых глаголов", ua: "Теперішній час ключових дієслів" },
+            text: {
+              en: "Here is the present tense conjugation for essential auxiliary and modal verbs in Croatian: biti (to be), htjeti (to want), moći (to be able to), morati (must/have to), ići (to go).",
+              ru: "Вот спряжение в настоящем времени для важнейших вспомогательных и модальных глаголов: biti (быть), htjeti (хотеть), moći (мочь), morati (долженствовать), ići (идти).",
+              ua: "Ось відмінювання в теперішньому часі для найважливіших допоміжних та модальних дієслів: biti (бути), htjeti (хотіти), moći (могти), morati (мусити), ići (йти)."
+            },
+            table: {
+              headers: ["Pronoun", "biti (to be)", "htjeti (to want)", "moći (can)", "morati (must)", "ići (to go)"],
+              rows: [
+                { cells: ["ja (I)", "sam / jesam", "ću / hoću", "mogu", "moram", "idem"] },
+                { cells: ["ti (you)", "si / jesi", "ćeš / hoćeš", "možeš", "moraš", "ideš"] },
+                { cells: ["on/ona/ono", "je / jest", "će / hoće", "može", "mora", "ide"] },
+                { cells: ["mi (we)", "smo / jesmo", "ćemo / hoćemo", "možemo", "moramo", "idemo"] },
+                { cells: ["vi (you pl./formal)", "ste / jeste", "ćete / hoćete", "možete", "morate", "idete"] },
+                { cells: ["oni/one/ona (they)", "su / jesu", "će / hoće", "mogu", "moraju", "idu"] }
+              ]
+            }
           }
         ]
       }

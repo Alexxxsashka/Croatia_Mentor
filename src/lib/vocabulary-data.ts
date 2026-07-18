@@ -253,4 +253,104 @@ export const vocabularyWords: VocabWord[] = [
   { hr: "rezervacija", en: "reservation", ru: "бронирование", ua: "бронювання", level: "B1", category: "travel" },
   { hr: "suvenir", en: "souvenir", ru: "сувенир", ua: "сувенір", level: "A2", category: "travel" },
   { hr: "razgledavanje", en: "sightseeing", ru: "осмотр достопримечательностей", ua: "огляд визначних місць", level: "B1", category: "travel" },
+
+  // ══════ NEW EXPANDED WORDS ══════
+  // FOOD
+  { hr: "krumpir", en: "potato", ru: "картофель", ua: "картопля", level: "A1", category: "food" },
+  { hr: "mrkva", en: "carrot", ru: "морковь", ua: "морква", level: "A1", category: "food" },
+  { hr: "rajčica", en: "tomato", ru: "помидор", ua: "помідор", level: "A1", category: "food" },
+  { hr: "paprika", en: "pepper", ru: "перец", ua: "перець", level: "A1", category: "food" },
+  { hr: "maslina", en: "olive", ru: "оливка", ua: "оливка", level: "A2", category: "food" },
+
+  // FAMILY
+  { hr: "rođak", en: "relative/cousin", ru: "родственник/двоюродный брат", ua: "родич/двоюрідний брат", level: "A2", category: "family" },
+  { hr: "nećak", en: "nephew", ru: "племянник", ua: "племінник", level: "B1", category: "family" },
+  { hr: "nećakinja", en: "niece", ru: "племянница", ua: "племінниця", level: "B1", category: "family" },
+  { hr: "unuk", en: "grandson", ru: "внук", ua: "онук", level: "A2", category: "family" },
+  { hr: "unuka", en: "granddaughter", ru: "внучка", ua: "онучка", level: "A2", category: "family" },
+
+  // TRANSPORT
+  { hr: "motocikl", en: "motorcycle", ru: "мотоцикл", ua: "мотоцикл", level: "A2", category: "transport" },
+  { hr: "kamion", en: "truck", ru: "грузовик", ua: "вантажівка", level: "A2", category: "transport" },
+  { hr: "helikopter", en: "helicopter", ru: "вертолёт", ua: "гелікоптер", level: "B1", category: "transport" },
+  { hr: "trajekt", en: "ferry", ru: "паром", ua: "паром", level: "A2", category: "transport" },
+  { hr: "autoput", en: "highway", ru: "шоссе/автомагистраль", ua: "шосе/автомагістраль", level: "B1", category: "transport" },
+
+  // WORK
+  { hr: "zaposlenik", en: "employee", ru: "сотрудник", ua: "співробітник", level: "B1", category: "work" },
+  { hr: "poslodavac", en: "employer", ru: "работодатель", ua: "роботодавець", level: "B1", category: "work" },
+  { hr: "tvrtka", en: "company", ru: "компания/фирма", ua: "компанія/фірма", level: "A2", category: "work" },
+  { hr: "ugovor", en: "contract", ru: "договор/контракт", ua: "договір/контракт", level: "B1", category: "work" },
+  { hr: "radno vrijeme", en: "working hours", ru: "рабочее время", ua: "робочий час", level: "A2", category: "work" },
+
+  // HOME
+  { hr: "dnevni boravak", en: "living room", ru: "гостиная", ua: "вітальня", level: "A1", category: "home" },
+  { hr: "spavaća soba", en: "bedroom", ru: "спальня", ua: "спальня", level: "A1", category: "home" },
+  { hr: "kuhinja", en: "kitchen", ru: "кухня", ua: "кухня", level: "A1", category: "home" },
+  { hr: "kupaonica", en: "bathroom", ru: "ванная комната", ua: "ванна кімната", level: "A1", category: "home" },
+  { hr: "namještaj", en: "furniture", ru: "мебель", ua: "меблі", level: "A2", category: "home" },
+
+  // NATURE
+  { hr: "šuma", en: "forest", ru: "лес", ua: "ліс", level: "A1", category: "nature" },
+  { hr: "planina", en: "mountain", ru: "гора", ua: "гора", level: "A2", category: "nature" },
+  { hr: "rijeka", en: "river", ru: "река", ua: "річка", level: "A1", category: "nature" },
+  { hr: "jezero", en: "lake", ru: "озеро", ua: "озеро", level: "A2", category: "nature" },
+  { hr: "vjetar", en: "wind", ru: "ветер", ua: "вітер", level: "A2", category: "nature" },
+
+  // CITY
+  { hr: "trg", en: "square", ru: "площадь", ua: "площа перед", level: "A1", category: "city" },
+  { hr: "kazalište", en: "theater", ru: "театр", ua: "театр", level: "A2", category: "city" },
+  { hr: "knjižnica", en: "library", ru: "библиотека", ua: "бібліотека", level: "A2", category: "city" },
+  { hr: "muzej", en: "museum", ru: "музей", ua: "музей", level: "A2", category: "city" },
+  { hr: "crkva", en: "church", ru: "церковь", ua: "церква", level: "A2", category: "city" },
+
+  // BODY
+  { hr: "vrat", en: "neck", ru: "шея", ua: "шия", level: "A2", category: "body" },
+  { hr: "ramena", en: "shoulders", ru: "плечи", ua: "плечі", level: "A2", category: "body" },
+  { hr: "koljeno", en: "knee", ru: "колено", ua: "коліно", level: "A2", category: "body" },
+  { hr: "trbuh", en: "stomach", ru: "живот", ua: "живіт", level: "A2", category: "body" },
+  { hr: "krv", en: "blood", ru: "кровь", ua: "кров", level: "B1", category: "body" },
+
+  // CLOTHES
+  { hr: "rukavice", en: "gloves", ru: "перчатки", ua: "рукавички", level: "A2", category: "clothes" },
+  { hr: "šal", en: "scarf", ru: "шарф", ua: "шарф", level: "A1", category: "clothes" },
+  { hr: "naočale", en: "glasses", ru: "очки", ua: "окуляри", level: "A2", category: "clothes" },
+  { hr: "remen", en: "belt", ru: "ремень", ua: "ремінь", level: "A2", category: "clothes" },
+  { hr: "odijelo", en: "suit", ru: "костюм", ua: "костюм", level: "B1", category: "clothes" },
+
+  // COLORS
+  { hr: "zlatni", en: "golden", ru: "золотой", ua: "золотий", level: "A2", category: "colors" },
+  { hr: "srebrni", en: "silver", ru: "серебряный", ua: "срібний", level: "A2", category: "colors" },
+  { hr: "tamnoplav", en: "dark blue", ru: "тёмно-синий", ua: "темно-синій", level: "A2", category: "colors" },
+  { hr: "svijetlozelen", en: "light green", ru: "светло-зелёный", ua: "світло-зелений", level: "A2", category: "colors" },
+
+  // TIME
+  { hr: "prošlost", en: "past", ru: "прошлое", ua: "минуле", level: "B1", category: "time" },
+  { hr: "budućnost", en: "future", ru: "будущее", ua: "майбутнє", level: "B1", category: "time" },
+  { hr: "sekunda", en: "second", ru: "секунда", ua: "секунда", level: "A1", category: "time" },
+  { hr: "minuta", en: "minute", ru: "минута", ua: "хвилина", level: "A1", category: "time" },
+
+  // SCHOOL
+  { hr: "ravnatelj", en: "principal/director", ru: "директор", ua: "директор", level: "B1", category: "school" },
+  { hr: "predavanje", en: "lecture", ru: "лекция", ua: "лекція", level: "B1", category: "school" },
+  { hr: "učionica", en: "classroom", ru: "класс/аудитория", ua: "клас/аудиторія", level: "A1", category: "school" },
+  { hr: "znanost", en: "science", ru: "наука", ua: "наука", level: "B1", category: "school" },
+
+  // EMOTIONS
+  { hr: "strah", en: "fear", ru: "страх", ua: "страх", level: "B1", category: "emotions" },
+  { hr: "sreća", en: "happiness", ru: "счастье", ua: "щастя", level: "A2", category: "emotions" },
+  { hr: "ljubomora", en: "jealousy", ru: "ревность/зависть", ua: "ревнощі/заздрість", level: "B1", category: "emotions" },
+  { hr: "dosada", en: "boredom", ru: "скука", ua: "нудьга", level: "B1", category: "emotions" },
+
+  // SPORTS
+  { hr: "odbojka", en: "volleyball", ru: "волейбол", ua: "волейбол", level: "A2", category: "sports" },
+  { hr: "rukomet", en: "handball", ru: "гандбол", ua: "гандбол", level: "A2", category: "sports" },
+  { hr: "atletika", en: "athletics", ru: "атлетика", ua: "атлетика", level: "B1", category: "sports" },
+  { hr: "gimnastika", en: "gimnastics", ru: "гимнастика", ua: "гімнастика", level: "B1", category: "sports" },
+
+  // TRAVEL
+  { hr: "prtljaga", en: "luggage", ru: "багаж", ua: "багаж", level: "A2", category: "travel" },
+  { hr: "karta grada", en: "city map", ru: "карта города", ua: "карта міста", level: "A1", category: "travel" },
+  { hr: "granični prijelaz", en: "border crossing", ru: "пограничный переход", ua: "прикордонний перехід", level: "B1", category: "travel" },
+  { hr: "smještaj", en: "accommodation", ru: "жилье/размещение", ua: "житло/розміщення", level: "B1", category: "travel" },
 ];

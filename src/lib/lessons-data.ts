@@ -20,7 +20,7 @@ export interface LessonData {
       type: "multiple-choice" | "fill-blank" | "translation" | "dictation";
       question: string | LocalizedString;
       options?: string[];
-      correctAnswer: string;
+      correctAnswer: string | LocalizedString;
       hint?: string | LocalizedString;
     }[];
     dictationText?: string;
@@ -182,7 +182,7 @@ export const lessonsData: LessonData[] = [
         {
           type: "translation",
           question: { en: "Translate: 'Ja sam iz Kijeva.'", ru: "Переведите: 'Ja sam iz Kijeva.'", ua: "Перекладіть: 'Ja sam iz Kijeva.'" },
-          correctAnswer: "I am from Kyiv."
+          correctAnswer: { en: "I am from Kyiv.", ru: "Я из Киева.", ua: "Я з Києва." }
         },
         {
           type: "multiple-choice",
@@ -270,7 +270,7 @@ export const lessonsData: LessonData[] = [
         {
           type: "translation",
           question: { en: "Translate: 'Dobar dan! Izvolite.'", ru: "Переведите: 'Dobar dan! Izvolite.'", ua: "Перекладіть: 'Dobar dan! Izvolite.'" },
-          correctAnswer: "Good day! Here you go."
+          correctAnswer: { en: "Good day! Here you go.", ru: "Добрый день! Пожалуйста.", ua: "Добрий день! Прошу." }
         },
         {
           type: "multiple-choice",
@@ -416,7 +416,7 @@ export const lessonsData: LessonData[] = [
         {
           type: "translation",
           question: { en: "Translate: 'Vidim brata.'", ru: "Переведите: 'Vidim brata.'", ua: "Перекладіть: 'Vidim brata.'" },
-          correctAnswer: "I see my brother."
+          correctAnswer: { en: "I see my brother.", ru: "Я вижу брата.", ua: "Я бачу брата." }
         },
         {
           type: "multiple-choice",
@@ -497,7 +497,7 @@ export const lessonsData: LessonData[] = [
         {
           type: "translation",
           question: { en: "Translate: 'On je u Zagrebu.'", ru: "Переведите: 'On je u Zagrebu.'", ua: "Перекладіть: 'On je u Zagrebu.'" },
-          correctAnswer: "He is in Zagreb."
+          correctAnswer: { en: "He is in Zagreb.", ru: "Он в Загребе.", ua: "Він у Загребі." }
         },
         {
           type: "multiple-choice",
@@ -665,7 +665,7 @@ export const lessonsData: LessonData[] = [
         {
           type: "translation",
           question: { en: "Translate: 'Oni uvijek piju kavu.'", ru: "Переведите: 'Oni uvijek piju kavu.'", ua: "Перекладіть: 'Oni uvijek piju kavu.'" },
-          correctAnswer: "They always drink coffee."
+          correctAnswer: { en: "They always drink coffee.", ru: "Они всегда пьют кофе.", ua: "Вони завжди п'ють каву." }
         },
         {
           type: "multiple-choice",
@@ -745,7 +745,7 @@ export const lessonsData: LessonData[] = [
         {
           type: "translation",
           question: { en: "Translate: 'Ako budemo znali odgovor, reći ćemo vam.'", ru: "Переведите: 'Ako budemo znali odgovor, reći ćemo vam.'", ua: "Перекладіть: 'Ako budemo znali odgovor, reći ćemo vam.'" },
-          correctAnswer: "If we know the answer, we will tell you."
+          correctAnswer: { en: "If we know the answer, we will tell you.", ru: "Если мы будем знать ответ, мы скажем вам.", ua: "Якщо ми будемо знати відповідь, ми скажемо вам." }
         },
         {
           type: "multiple-choice",
@@ -825,7 +825,7 @@ export const lessonsData: LessonData[] = [
         {
           type: "translation",
           question: { en: "Translate: 'Kava bez mlijeka, molim.'", ru: "Переведите: 'Kava bez mlijeka, molim.'", ua: "Перекладіть: 'Kava bez mlijeka, molim.'" },
-          correctAnswer: "Coffee without milk, please."
+          correctAnswer: { en: "Coffee without milk, please.", ru: "Кофе без молока, пожалуйста.", ua: "Кава без молока, будь ласка." }
         },
         {
           type: "multiple-choice",
@@ -901,7 +901,7 @@ export const lessonsData: LessonData[] = [
         {
           type: "translation",
           question: { en: "Translate: 'očuvanje prirode'", ru: "Переведите: 'očuvanje prirode'", ua: "Перекладіть: 'očuvanje prirode'" },
-          correctAnswer: "preservation of nature"
+          correctAnswer: { en: "preservation of nature", ru: "сохранение природы", ua: "збереження природи" }
         },
         {
           type: "multiple-choice",
@@ -977,7 +977,7 @@ export const lessonsData: LessonData[] = [
         {
           type: "translation",
           question: { en: "Translate: 'Oni su u kući.'", ru: "Переведите: 'Oni su u kući.'", ua: "Перекладіть: 'Oni su u kući.'" },
-          correctAnswer: "They are in the house."
+          correctAnswer: { en: "They are in the house.", ru: "Они в доме.", ua: "Вони в будинку." }
         },
         {
           type: "multiple-choice",
@@ -1061,7 +1061,7 @@ export const lessonsData: LessonData[] = [
         {
           type: "translation",
           question: { en: "Translate: 'Čitanje knjiga je korisno.'", ru: "Переведите: 'Čitanje knjiga je korisno.'", ua: "Перекладіть: 'Čitanje knjiga je korisno.'" },
-          correctAnswer: "Reading books is useful."
+          correctAnswer: { en: "Reading books is useful.", ru: "Чтение книг полезно.", ua: "Читання книг корисне." }
         },
         {
           type: "multiple-choice",
@@ -1141,7 +1141,7 @@ export const lessonsData: LessonData[] = [
         {
           type: "translation",
           question: { en: "Translate: 'Kupio bih auto.'", ru: "Переведите: 'Kupio bih auto.'", ua: "Перекладіть: 'Kupio bih auto.'" },
-          correctAnswer: "I would buy a car."
+          correctAnswer: { en: "I would buy a car.", ru: "Я бы купил машину.", ua: "Я б купив машину." }
         },
         {
           type: "multiple-choice",
@@ -1191,7 +1191,7 @@ export const lessonsData: LessonData[] = [
         {
           type: "translation",
           question: { en: "Translate: 'Tražim novi posao.'", ru: "Переведите: 'Tražim novi posao.'", ua: "Перекладіть: 'Tražim novi posao.'" },
-          correctAnswer: "I am looking for a new job."
+          correctAnswer: { en: "I am looking for a new job.", ru: "Я ищу новую работу.", ua: "Я шукаю нову роботу." }
         },
         {
           type: "multiple-choice",
@@ -1303,7 +1303,7 @@ export const lessonsData: LessonData[] = [
         {
           type: "translation",
           question: { en: "Translate: 'Ukoliko ne dođete, javite nam.'", ru: "Переведите: 'Ukoliko ne dođete, javite nam.'", ua: "Перекладіть: 'Ukoliko ne dođete, javite nam.'" },
-          correctAnswer: "If you do not come, let us know."
+          correctAnswer: { en: "If you do not come, let us know.", ru: "Если вы не придете, дайте нам знать.", ua: "Якщо ви не прийдете, дайте нам знати." }
         },
         {
           type: "multiple-choice",
@@ -1383,7 +1383,7 @@ export const lessonsData: LessonData[] = [
         {
           type: "translation",
           question: { en: "Translate: 'Znam ženu čija kćer živi u Londonu.'", ru: "Переведите: 'Znam ženu čija kćer živi u Londonu.'", ua: "Перекладіть: 'Znam ženu čija kćer živi u Londonu.'" },
-          correctAnswer: "I know the woman whose daughter lives in London."
+          correctAnswer: { en: "I know the woman whose daughter lives in London.", ru: "Я знаю женщину, чья дочь живет в Лондоне.", ua: "Я знаю жінку, чия дочка живе в Лондоні." }
         },
         {
           type: "multiple-choice",
@@ -1482,7 +1482,7 @@ export const lessonsData: LessonData[] = [
         {
           type: "translation",
           question: { en: "Translate: 'Oni žive Bogu iza nogu.'", ru: "Переведите: 'Oni žive Bogu iza nogu.'", ua: "Перекладіть: 'Oni žive Bogu iza nogu.'" },
-          correctAnswer: "They live in the middle of nowhere."
+          correctAnswer: { en: "They live in the middle of nowhere.", ru: "Они живут у черта на куличках.", ua: "Вони живуть у біса на болоті." }
         },
         {
           type: "multiple-choice",
@@ -1536,7 +1536,7 @@ export const lessonsData: LessonData[] = [
         {
           type: "translation",
           question: { en: "Translate: 'Ne slažem se s tim stajalištem.'", ru: "Переведите: 'Ne slažem se s tim stajalištem.'", ua: "Перекладіть: 'Ne slažem se s tim stajalištem.'" },
-          correctAnswer: "I do not agree with that stance."
+          correctAnswer: { en: "I do not agree with that stance.", ru: "Я не согласен с этой точкой зрения.", ua: "Я не згоden з цією точкою зору." }
         },
         {
           type: "multiple-choice",
@@ -1571,6 +1571,104 @@ export const lessonsData: LessonData[] = [
           type: "translation",
           question: { en: "Translate to Croatian: 'We must preserve cultural heritage.'", ru: "Переведите на хорватский: 'Мы должны сохранить культурное наследие.'", ua: "Перекладіть на хорватську: 'Ми повинні зберегти культурну спадщину.'" },
           correctAnswer: "Moramo očuvati kulturnu baštinu."
+        }
+      ]
+    }
+  },
+  {
+    id: "a1-grammar-5",
+    type: "grammar",
+    level: "A1",
+    title: {
+      en: "Rod imenica (Gender of Nouns)",
+      ru: "Род существительных (Rod imenica)",
+      ua: "Рід іменників (Rod imenica)"
+    },
+    content: {
+      description: {
+        en: "Learn how to identify masculine, feminine, and neuter nouns in Croatian.",
+        ru: "Узнайте, как определять мужской, женский и средний род существительных в хорватском.",
+        ua: "Дізнайтеся, як визначати чоловічий, жіночий та середній рід іменників у хорватській."
+      },
+      sections: [
+        {
+          title: { en: "Noun Gender Rules", ru: "Правила рода существительных", ua: "Правила роду іменників" },
+          text: {
+            en: "In Croatian, nouns can be masculine, feminine, or neuter. You can usually tell the gender by the final letter of the noun in the nominative singular:\n- Masculine (muški rod): end in a consonant (e.g. prozor - window, stol - table).\n- Feminine (ženski rod): end in '-a' (e.g. knjiga - book, ruka - hand).\n- Neuter (srednji rod): end in '-o' or '-e' (e.g. selo - village, sunce - sun).",
+            ru: "В хорватском существительные бывают мужского, женского или среднего рода. Род обычно определяется по последней букве в именительном падеже:\n- Мужской род: оканчиваются на согласную (prozor - окно, stol - стол).\n- Женский род: оканчиваются на '-a' (knjiga - книга, ruka - рука).\n- Средний род: оканчиваются на '-o' или '-e' (selo - деревня, sunce - солнце).",
+            ua: "У хорватській мові іменники бувають чоловічого, жіночого або середнього роду. Рід зазвичай визначається за останньою літерою у називному відмінку:\n- Чоловічий рід: закінчуються на приголосну (prozor - вікно, stol - стіл).\n- Жіночий рід: закінчуються на '-a' (knjiga - книга, ruka - рука).\n- Середній рід: закінчуються на '-o' або '-e' (selo - село, sunce - сонце)."
+          }
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: { en: "What gender is the noun 'prozor' (window)?", ru: "Какого рода существительное 'prozor'?", ua: "Якого роду іменник 'prozor'?" },
+          options: ["muški rod (masculine)", "ženski rod (feminine)", "srednji rod (neuter)"],
+          correctAnswer: "muški rod (masculine)"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What gender is the noun 'pismo' (letter)?", ru: "Какого рода существительное 'pismo'?", ua: "Якого роду іменник 'pismo'?" },
+          options: ["muški rod (masculine)", "ženski rod (feminine)", "srednji rod (neuter)"],
+          correctAnswer: "srednji rod (neuter)"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: 'Knjiga' ends in -a, so it is in _____ rod.", ru: "Заполните: 'Knjiga' заканчивается на -a, значит это _____ род.", ua: "Заповніть: 'Knjiga' закінчується на -a, отже це _____ рід." },
+          correctAnswer: "ženski",
+          hint: { en: "feminine", ru: "женский (ženski)", ua: "жіночий (ženski)" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Kuća je velika.'", ru: "Переведите: 'Kuća je velika.'", ua: "Перекладіть: 'Kuća je velika.'" },
+          correctAnswer: { en: "The house is big.", ru: "Дом большой.", ua: "Будинок великий." }
+        }
+      ]
+    }
+  },
+  {
+    id: "a2-communication-2",
+    type: "communication",
+    level: "A2",
+    title: {
+      en: "Trgovina i kupovina (Shopping & Store)",
+      ru: "Магазин и покупки (Trgovina i kupovina)",
+      ua: "Магазин та покупки (Trgovina i kupovina)"
+    },
+    content: {
+      description: {
+        en: "Learn how to ask for prices, pay, and converse in a Croatian shop.",
+        ru: "Научитесь спрашивать цены, платить и общаться в хорватском магазине.",
+        ua: "Навчіться запитувати ціни, платити та спілкуватися в хорватському магазині."
+      },
+      sections: [
+        {
+          title: { en: "Useful Shopping Phrases", ru: "Полезные фразы для покупок", ua: "Корисні фрази для покупок" },
+          text: {
+            en: "Key expressions in a shop:\n- Koliko košta ovo? (How much does this cost?)\n- Mogu li platiti karticom? (Can I pay by card?)\n- Samo gledam, hvala. (I am just looking, thank you.)\n- Trebam vrećicu, molim. (I need a bag, please.)",
+            ru: "Ключевые выражения в магазине:\n- Koliko košta ovo? (Сколько это стоит?)\n- Mogu li platiti karticom? (Можно заплатить картой?)\n- Samo gledam, hvala. (Я просто смотрю, спасибо.)\n- Trebam vrećicu, molim. (Мне нужен пакет, пожалуйста.)",
+            ua: "Ключові вирази в магазине:\n- Koliko košta ovo? (Скільки це коштує?)\n- Mogu li platiti karticom? (Можна заплатити карткою?)\n- Samo gledam, hvala. (Я просто дивлюся, дякую.)\n- Trebam vrećicu, molim. (Мне потрібен пакет, будь ласка.)"
+          }
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: { en: "How do you say 'How much does this cost?' in Croatian?", ru: "Как спросить 'Сколько это стоит?' по-хорватски?", ua: "Як запитати 'Скільки це коштує?' хорватською?" },
+          options: ["Koliko košta ovo?", "Mogu li platiti?", "Gdje je trgovina?", "Dobar dan!"],
+          correctAnswer: "Koliko košta ovo?"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Mogu li platiti _____ (by card)?", ru: "Заполните: Mogu li platiti _____ (картой)?", ua: "Заповніть: Mogu li platiti _____ (карткою)?" },
+          correctAnswer: "karticom",
+          hint: { en: "with card (instrumental)", ru: "картой (karticom)", ua: "карткою (karticom)" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Trebam vrećicu, molim.'", ru: "Переведите: 'Trebam vrećicu, molim.'", ua: "Перекладіть: 'Trebam vrećicu, molim.'" },
+          correctAnswer: { en: "I need a bag, please.", ru: "Мне нужен пакет, пожалуйста.", ua: "Мені потрібен пакет, будь ласка." }
         }
       ]
     }

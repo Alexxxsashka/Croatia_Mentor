@@ -76,14 +76,24 @@ export default function LessonDetailPage({
         ? fillAnswer.trim()
         : selectedAnswer;
 
-    const isCorrect =
-      userAnswer?.toLowerCase() === exercise.correctAnswer.toLowerCase();
+    const expectedAnswer = getLocalizedText(exercise.correctAnswer, locale);
+
+    const normalize = (str: string | null | undefined) => {
+      if (!str) return "";
+      return str
+        .toLowerCase()
+        .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    };
+
+    const isCorrect = normalize(userAnswer) === normalize(expectedAnswer);
 
     if (isCorrect) {
       setCorrectCount(correctCount + 1);
       toast.success(t("correct") || "Correct! ✓");
     } else {
-      toast.error(`${t("incorrect") || "Incorrect"}: ${exercise.correctAnswer}`);
+      toast.error(`${t("incorrect") || "Incorrect"}: ${expectedAnswer}`);
     }
     setShowResult(true);
   };
@@ -317,7 +327,7 @@ export default function LessonDetailPage({
                   {t("correctAnswer")}:{" "}
                 </span>
                 <span className="text-green-400 font-medium">
-                  {exercise.correctAnswer}
+                  {getLocalizedText(exercise.correctAnswer, locale)}
                 </span>
               </p>
             )}
