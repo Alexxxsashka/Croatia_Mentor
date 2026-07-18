@@ -55,6 +55,12 @@ export function Footer() {
               >
                 {nav("aiChat")}
               </Link>
+              <Link
+                href="/contacts"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors font-medium text-blue-400 dark:text-blue-400"
+              >
+                {nav("contacts")}
+              </Link>
             </div>
           </div>
 
