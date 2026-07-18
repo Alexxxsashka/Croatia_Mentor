@@ -871,5 +871,105 @@ export const glossaryData: GlossaryCategory[] = [
         ]
       }
     ]
+  },
+  {
+    id: "advanced_grammar",
+    title: { en: "Advanced Grammar", ru: "Продвинутая грамматика", ua: "Просунута граматика" },
+    icon: "🎓",
+    sections: [
+      {
+        id: "adjective_declension",
+        title: { en: "Adjective Declension", ru: "Склонение прилагательных", ua: "Відмінювання прикметників" },
+        icon: "🎨",
+        subsections: [
+          {
+            title: { en: "Definite vs Indefinite", ru: "Определенные и неопределенные", ua: "Визначені та невизначені" },
+            text: {
+              en: "Croatian adjectives have two forms: Indefinite (Neodređeni - answers 'kakav?' / what kind of?) and Definite (Određeni - answers 'koji?' / which one?). Here are their nominative endings:",
+              ru: "Хорватские прилагательные имеют две формы: Неопределённую (отвечает на вопрос 'kakav?' / какой?) и Определённую (отвечает на 'koji?' / какой именно?). Вот окончания в именительном падеже:",
+              ua: "Хорватські прикметники мають дві форми: Невизначену (відповідає на питання 'kakav?' / який?) та Визначену (відповідає на 'koji?' / який саме?). Ось закінчення в називному відмінку:"
+            },
+            table: {
+              headers: ["Gender", "Indefinite Ending", "Definite Ending", "Example (Indefinite)", "Example (Definite)"],
+              rows: [
+                { cells: ["Masc.", "Consonant (nov)", "-i (novi)", "nov kaput (a new coat)", "novi kaput (the new coat)"] },
+                { cells: ["Fem.", "-a (nova)", "-a (nova)", "nova kuća (a new house)", "nova kuća (the new house)"] },
+                { cells: ["Neut.", "-o / -e (novo)", "-o / -e (novo)", "novo auto (a new car)", "novo auto (the new car)"] }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        id: "verbal_aspect",
+        title: { en: "Verbal Aspect (Glagolski vid)", ru: "Глагольный вид", ua: "Дієслівний вид" },
+        icon: "⏳",
+        subsections: [
+          {
+            title: { en: "Aspectual Pairs", ru: "Видовые пары глаголов", ua: "Видові пари дієслів" },
+            text: {
+              en: "Croatian verbs are either Imperfective (Nesvršeni - ongoing actions) or Perfective (Svršeni - completed actions). Many verbs form pairs by changing prefixes or suffixes:",
+              ru: "Хорватские глаголы бывают несовершенного вида (Nesvršeni - длительное действие) или совершенного вида (Svršeni - завершенное действие). Многие глаголы образуют видовые пары с помощью изменения приставок или суффиксов:",
+              ua: "Хорватські дієслова бувають недоконаного виду (Nesvršeni - тривала дія) або доконаного виду (Svršeni - завершена дія). Багато дієслів утворюють видові пари за допомогою зміни префіксів або суфіксів:"
+            },
+            table: {
+              headers: ["Imperfective Verb", "Perfective Verb", { en: "English Meaning", ru: "Значение", ua: "Значення" }, "Type of Change"],
+              rows: [
+                { cells: ["pisati", "napisati", { en: "to write", ru: "писать / написать", ua: "писати / написати" }, "Prefix addition (na-)"] },
+                { cells: ["kupovati", "kupiti", { en: "to buy", ru: "покупать / купить", ua: "купувати / купити" }, "Suffix change (-ovati -> -iti)"] },
+                { cells: ["dolaziti", "doći", { en: "to come", ru: "приходить / прийти", ua: "приходити / прийти" }, "Suppletive / Irregular stem"] },
+                { cells: ["otvarati", "otvoriti", { en: "to open", ru: "открывать / открыть", ua: "відкривати / відкрити" }, "Vowel change in stem"] }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        id: "subordinate_clauses",
+        title: { en: "Subordinate Clauses", ru: "Придаточные предложения", ua: "Підрядні речення" },
+        icon: "⛓️",
+        subsections: [
+          {
+            title: { en: "Types of Clauses", ru: "Типы придаточных", ua: "Типи підрядних речень" },
+            text: {
+              en: "Subordinate clauses are introduced by specific conjunctions. Here is a summary of the main types:",
+              ru: "Придаточные предложения вводятся определенными союзами. Вот основные типы:",
+              ua: "Підрядні речення вводяться певними сполучниками. Ось основні типи:"
+            },
+            table: {
+              headers: ["Clause Type", "Conjunctions", { en: "Meaning", ru: "Значение", ua: "Значення" }, "Example"],
+              rows: [
+                { cells: ["Conditional (Uvjetne)", "ako, kad, da", { en: "if / when", ru: "если / когда", ua: "якщо / коли" }, "Ako bude padala kiša, nećemo ići."] },
+                { cells: ["Causal (Uzročne)", "jer, zato što, budući da", { en: "because / since", ru: "потому что / так как", ua: "тому що / оскільки" }, "Ne idem jer sam umoran."] },
+                { cells: ["Temporal (Vremenske)", "kad, dok, nakon što", { en: "when / while / after", ru: "когда / пока / после того как", ua: "коли / поки / після того як" }, "Dok čitam, pijem kavu."] },
+                { cells: ["Concessive (Dopusne)", "iako, premda, makar", { en: "although / even if", ru: "хотя / пусть даже", ua: "хоча / навіть якщо" }, "Iako je hladno, šetamo."] }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        id: "passive_voice",
+        title: { en: "Passive Voice (Pasiv)", ru: "Пассивный залог", ua: "Пасивний стан" },
+        icon: "🔒",
+        subsections: [
+          {
+            title: { en: "Passive Construction", ru: "Конструкция пассива", ua: "Конструкція пасиву" },
+            text: {
+              en: "Passive voice is constructed either with the verb 'biti' and the passive participle, or using the reflexive particle 'se':",
+              ru: "Пассивный залог образуется либо с помощью глагола 'biti' и страдательного причастия, либо с помощью возвратной частицы 'se':",
+              ua: "Пасивний стан утворюється або за допомогою дієслова 'biti' та пасивного дієприкметника, або за допомогою зворотної частки 'se':"
+            },
+            table: {
+              headers: ["Type", "Construction", "Example", { en: "Translation", ru: "Перевод", ua: "Переклад" }],
+              rows: [
+                { cells: ["Participle Passive", "biti + past participle", "Knjiga je napisana.", { en: "The book is written.", ru: "Книга написана.", ua: "Книга написана." }] },
+                { cells: ["Reflexive Passive", "verb + reflexive 'se'", "Kuća se gradi.", { en: "The house is being built.", ru: "Дом строится.", ua: "Будинок будується." }] }
+              ]
+            }
+          }
+        ]
+      }
+    ]
   }
 ];
