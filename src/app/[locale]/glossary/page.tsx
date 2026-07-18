@@ -82,6 +82,10 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     "Conjunctions": "Сполучники",
     "Meaning": "Значення",
     "Construction": "Конструкція",
+    "Positive (Pozitiv)": "Звичайний ступінь (Pozitiv)",
+    "Comparative (Komparativ)": "Вищий ступінь (Komparativ)",
+    "Superlative (Superlativ)": "Найвищий ступінь (Superlativ)",
+    "Required Case": "Необхідний відмінок",
 
     // Common cell contents
     "ja (I)": "ja (я)",
@@ -162,6 +166,10 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     "Conjunctions": "Союзы",
     "Meaning": "Значение",
     "Construction": "Конструкция",
+    "Positive (Pozitiv)": "Положительная степень (Pozitiv)",
+    "Comparative (Komparativ)": "Сравнительная степень (Komparativ)",
+    "Superlative (Superlativ)": "Превосходная степень (Superlativ)",
+    "Required Case": "Необходимый падеж",
 
     // Common cell contents
     "ja (I)": "ja (я)",

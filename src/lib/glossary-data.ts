@@ -378,6 +378,64 @@ export const glossaryData: GlossaryCategory[] = [
             }
           }
         ]
+      },
+      {
+        id: "vokativ",
+        title: { en: "Vocative (Vokativ)", ru: "Звательный падеж (Vokativ)", ua: "Кличний відмінок (Vokativ)" },
+        icon: "🗣️",
+        subsections: [
+          {
+            title: { en: "Usage", ru: "Использование", ua: "Використання" },
+            text: {
+              en: "The Vocative is used for addressing or calling someone directly. Standard endings: masculine singular ends in -e or -u (e.g. prijatelju, profesore), feminine singular ends in -o or -a (e.g. ženo, mama). Plural forms are identical to the Nominative.",
+              ru: "Звательный падеж используется при прямом обращении к кому-либо. Окончания: мужской род ед. ч. оканчивается на -e или -u (prijatelju, profesore), женский род ед. ч. оканчивается на -o или -a (ženo, mama). Формы мн. ч. совпадают с именительным.",
+              ua: "Кличний відмінок використовується для звернення або заклику. Закінчення: чоловічий рід однини закінчується на -e або -u (prijatelju, profesore), жіночий рід однини закінчується на -o або -a (ženo, mama). Форми множини збігаються з називним відмінком."
+            },
+            examples: [
+              { hr: "Dobar dan, profesore!", translation: { en: "Good day, professor!", ru: "Добрый день, профессор!", ua: "Доброго дня, професоре!" } },
+              { hr: "Hej, prijatelju!", translation: { en: "Hey, friend!", ru: "Эй, друг!", ua: "Гей, друже!" } },
+              { hr: "Mama, gdje si?", translation: { en: "Mom, where are you?", ru: "Мама, где ты?", ua: "Мамо, де ти?" } }
+            ]
+          }
+        ]
+      },
+      {
+        id: "plurality",
+        title: { en: "Singular & Plural (Jednina i množina)", ru: "Число (Jednina и množina)", ua: "Число (Jednina та množina)" },
+        icon: "👥",
+        subsections: [
+          {
+            title: { en: "Grammatical Number", ru: "Грамматическое число", ua: "Граматичне число" },
+            text: {
+              en: "Croatian nouns have two numbers: Singular (Jednina) and Plural (Množina). Plural masculine nouns can undergo stem changes, such as adding the infix '-ov-' or '-ev-' for short monosyllabic words (e.g., grad → gradovi, stol → stolovi).",
+              ru: "Хорватские существительные имеют два числа: Единственное (Jednina) и Множественное (Množina). Существительные мужского рода во множественном числе могут изменять основу, добавляя суффикс '-ov-' или '-ev-' для коротких односложных слов (например, grad → gradovi, stol → stolovi).",
+              ua: "Хорватські іменники мають два числа: Однину (Jednina) та Множину (Množina). Іменники чоловічого роду у множині можуть змінювати основу, додаючи суфікс '-ov-' або '-ev-' для коротких односкладових слів (наприклад, grad → gradovi, stol → stolovi)."
+            },
+            examples: [
+              { hr: "grad (singular) → gradovi (plural)", translation: { en: "city → cities", ru: "город → города", ua: "місто → міста" } },
+              { hr: "žena (singular) → žene (plural)", translation: { en: "woman → women", ru: "женщина → женщины", ua: "жінка → жінки" } },
+              { hr: "selo (singular) → sela (plural)", translation: { en: "village → villages", ru: "деревня → деревни", ua: "село → села" } }
+            ]
+          }
+        ]
+      },
+      {
+        id: "articles",
+        title: { en: "Absence of Articles", ru: "Отсутствие артиклей", ua: "Відсутність артиклів" },
+        icon: "❌",
+        subsections: [
+          {
+            title: { en: "Grammatical Note", ru: "Грамматическая заметка", ua: "Граматична примітка" },
+            text: {
+              en: "Croatian does not have articles (like 'a', 'an', or 'the'). Nouns are used on their own, and definiteness is conveyed by context, word order, or demonstrative pronouns (e.g. ovaj, taj).",
+              ru: "В хорватском языке нет артиклей (таких как английские 'a' или 'the'). Существительные используются сами по себе, а определенность передается контекстом, порядком слов или указательными местоимениями (ovaj, taj).",
+              ua: "У хорватській мові немає артиклів (таких як англійські 'a' або 'the'). Іменники використовуються самі по собі, а визначеність передається контекстом, порядком слів або вказівними займенниками (ovaj, taj)."
+            },
+            examples: [
+              { hr: "Knjiga je na stolu.", translation: { en: "The book is on the table. (or 'A book is on a table.')", ru: "Книга на столе.", ua: "Книга на столі." } }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -585,6 +643,30 @@ export const glossaryData: GlossaryCategory[] = [
                 { cells: ["mi (we)", "smo / jesmo", "ćemo / hoćemo", "možemo", "moramo", "idemo"] },
                 { cells: ["vi (you pl./formal)", "ste / jeste", "ćete / hoćete", "možete", "morate", "idete"] },
                 { cells: ["oni/one/ona (they)", "su / jesu", "će / hoće", "mogu", "moraju", "idu"] }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        id: "reflexive-verbs",
+        title: { en: "Reflexive Verbs (Povratni glagoli)", ru: "Возвратные глаголы", ua: "Зворотні дієслова" },
+        icon: "🔄",
+        subsections: [
+          {
+            title: { en: "Reflexive Particle 'se'", ru: "Возвратная частица 'se'", ua: "Зворотна частка 'se'" },
+            text: {
+              en: "Reflexive verbs in Croatian are accompanied by the reflexive pronoun/particle 'se' (equivalent to Russian '-ся' or Ukrainian '-ся'). The position of 'se' follows the enclitic rules (usually placed in the second position of the sentence).",
+              ru: "Возвратные глаголы в хорватском языке сопровождаются возвратным местоимением/частицей 'se' (эквивалент русского или украинского '-ся'). Положение 'se' подчиняется правилам энклитик (обычно ставится на второе место в предложении).",
+              ua: "Зворотні дієслова в хорватській мові супроводжуються зворотним займенником/часткою 'se' (еквівалент українського '-ся'). Положення 'se' підпорядковується правилам енклітик (зазвичай ставиться на друге місце в реченні)."
+            },
+            table: {
+              headers: ["Verb", { en: "English", ru: "Перевод", ua: "Переклад" }, "Present Conjugation (ja)", "Example"],
+              rows: [
+                { cells: ["smijati se", "to laugh", "smijem se", "Ja se smijem. (I am laughing.)"] },
+                { cells: ["zvati se", "to be named", "zovem se", "Zovem se Ivan. (My name is Ivan.)"] },
+                { cells: ["tuširati se", "to shower", "tuširam se", "Tuširam se ujutro. (I shower in the morning.)"] },
+                { cells: ["brinuti se", "to worry", "brinem se", "Ne brini se. (Do not worry.)"] }
               ]
             }
           }
@@ -967,6 +1049,94 @@ export const glossaryData: GlossaryCategory[] = [
                 { cells: ["Reflexive Passive", "verb + reflexive 'se'", "Kuća se gradi.", { en: "The house is being built.", ru: "Дом строится.", ua: "Будинок будується." }] }
               ]
             }
+          }
+        ]
+      },
+      {
+        id: "adjective_comparison",
+        title: { en: "Comparison of Adjectives", ru: "Степени сравнения прилагательных", ua: "Ступені порівняння прикметників" },
+        icon: "📈",
+        subsections: [
+          {
+            title: { en: "Positive, Comparative, Superlative", ru: "Положительная, сравнительная, превосходная", ua: "Звичайний, вищий, найвищий ступені" },
+            text: {
+              en: "Adjectives have three degrees of comparison. The comparative is formed with suffixes like -iji, -ji, or -ši. The superlative is extremely easy as it simply adds the prefix 'naj-' to the comparative form:",
+              ru: "Прилагательные имеют три степени сравнения. Сравнительная степень образуется суффиксами -iji, -ji или -ši. Превосходная степень образуется очень просто — добавлением приставки 'naj-' к форме сравнительной степени:",
+              ua: "Прикметники мають три ступені порівняння. Вищий ступінь утворюється суфіксами -iji, -ji або -ši. Найвищий ступінь утворюється надзвичайно просто — додаванням префікса 'naj-' до форми вищого ступеня:"
+            },
+            table: {
+              headers: ["Positive (Pozitiv)", "Comparative (Komparativ)", "Superlative (Superlativ)", { en: "English Meaning", ru: "Значение", ua: "Значення" }],
+              rows: [
+                { cells: ["nov (new)", "noviji", "najnoviji", { en: "new → newer → newest", ru: "новый → новее → новейший", ua: "новий → новіший → найновіший" }] },
+                { cells: ["star (old)", "stariji", "najstariji", { en: "old → older → oldest", ru: "старый → старше → старейший", ua: "старий → старший → найстарший" }] },
+                { cells: ["lak (easy / light)", "lakši", "najlakši", { en: "easy → easier → easiest", ru: "легкий → легче → легчайший", ua: "легкий → легший → найлегший" }] },
+                { cells: ["dobar (good - irregular)", "bolji", "najbolji", { en: "good → better → best", ru: "хороший → лучше → лучший", ua: "добрий → кращий → найкращий" }] }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        id: "adjective_agreement",
+        title: { en: "Adjective-Noun Agreement", ru: "Согласование прилагательных", ua: "Узгодження прикметників" },
+        icon: "🤝",
+        subsections: [
+          {
+            title: { en: "Gender, Number, Case", ru: "Род, число, падеж", ua: "Рід, число, відмінок" },
+            text: {
+              en: "Adjectives must agree with the nouns they modify in gender (masculine, feminine, neuter), number (singular, plural), and case (Nominative, Genitive, etc.). Endings change accordingly.",
+              ru: "Прилагательные обязательно согласуются с существительными, к которым они относятся, в роде, числе и падеже. Окончания изменяются соответствующим образом.",
+              ua: "Прикметники обов'язково узгоджуються з іменниками, до яких вони відносяться, у роді, числі та відмінку. Закінчення змінюються відповідним чином."
+            },
+            examples: [
+              { hr: "lijep pas (Masc. Sing. Nom.)", translation: { en: "beautiful dog", ru: "красивая собака", ua: "красивий собака" } },
+              { hr: "lijepa mačka (Fem. Sing. Nom.)", translation: { en: "beautiful cat", ru: "красивая кошка", ua: "красива кішка" } },
+              { hr: "lijepo selo (Neut. Sing. Nom.)", translation: { en: "beautiful village", ru: "красивая деревня", ua: "красиве село" } },
+              { hr: "Vidim lijepog psa. (Masc. Sing. Acc.)", translation: { en: "I see a beautiful dog.", ru: "Я вижу красивую собаку.", ua: "Я бачу красивого собаку." } }
+            ]
+          }
+        ]
+      },
+      {
+        id: "numeral_agreement",
+        title: { en: "Numeral Agreement", ru: "Согласование числительных", ua: "Узгодження числівників" },
+        icon: "🔢",
+        subsections: [
+          {
+            title: { en: "The 1, 2, 3, 4 Rule", ru: "Правило 1, 2, 3, 4", ua: "Правило 1, 2, 3, 4" },
+            text: {
+              en: "In Croatian, numbers govern the case of the noun that follows them:\n- Number 1 requires Nominative Singular.\n- Numbers 2, 3, 4 require Genitive Singular.\n- Numbers 5 and above require Genitive Plural.",
+              ru: "В хорватском числительные управляют падежом следующего за ними существительного:\n- Число 1 требует именительного падежа единственного числа (Nom. Sing.).\n- Числа 2, 3, 4 требуют родительного падежа единственного числа (Gen. Sing.).\n- Числа 5 и выше требуют родительного падежа множественного числа (Gen. Plural).",
+              ua: "У хорватській мові числівники керують відмінком іменника, що стоїть після них:\n- Число 1 вимагає називного відмінка однини (Nom. Sing.).\n- Числа 2, 3, 4 вимагають родового відмінка однини (Gen. Sing.).\n- Числа 5 і більше вимагають родового відмінка множини (Gen. Plural)."
+            },
+            table: {
+              headers: ["Number", "Required Case", "Example", "Translation"],
+              rows: [
+                { cells: ["1 (jedan)", "Nominativ Jednina", "jedan prozor", "one window"] },
+                { cells: ["2, 3, 4", "Genitiv Jednina", "dva prozora / četiri prozora", "two windows / four windows"] },
+                { cells: ["5+", "Genitiv Množina", "pet prozora / deset prozora", "five windows / ten windows"] }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        id: "word_order",
+        title: { en: "Word Order (Red riječi)", ru: "Порядок слов", ua: "Порядок слів" },
+        icon: "↔️",
+        subsections: [
+          {
+            title: { en: "Free Word Order", ru: "Свободный порядок слов", ua: "Вільний порядок слів" },
+            text: {
+              en: "Croatian has a free word order due to its rich case system (meaning the subject, verb, and object can swap places without changing the fundamental meaning). However, standard neutral word order is Subject-Verb-Object (SVO). Enclitics (short pronouns/verbs) must always stand in the second grammatical position.",
+              ru: "Хорватский язык имеет свободный порядок слов благодаря богатой системе падежей (подлежащее, сказуемое и дополнение могут меняться местами без потери основного смысла). Однако стандартным нейтральным порядком является SVO. Энклитики (краткие местоимения/глаголы) всегда должны стоять на второй позиции.",
+              ua: "Хорватська мова має вільний порядок слів завдяки багатій системі відмінків (підмет, присудок і додаток можуть мінятися місцями без втрати основного змісту). Проте стандартним нейтральним порядком є SVO. Енклітики (короткі займенники/дієслова) завжди повинні стояти на другій позиції."
+            },
+            examples: [
+              { hr: "Ivan čita knjigu. (SVO - Neutral)", translation: { en: "Ivan reads a book.", ru: "Иван читает книгу.", ua: "Іван читає книгу." } },
+              { hr: "Knjigu čita Ivan. (OVS - Emphasizes book)", translation: { en: "Ivan reads the book.", ru: "Книгу читает Иван.", ua: "Книгу читає Іван." } },
+              { hr: "Ja mu je dajem. (Enclitics 'mu' and 'je' in 2nd position)", translation: { en: "I give it to him.", ru: "Я даю её ему.", ua: "Я даю її йому." } }
+            ]
           }
         ]
       }
