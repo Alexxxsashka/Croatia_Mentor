@@ -68,12 +68,22 @@ export function Footer() {
           <div>
             <h3 className="text-sm font-semibold mb-4">{t("legal")}</h3>
             <div className="flex flex-col gap-2">
-              <span className="text-sm text-muted-foreground cursor-pointer hover:text-foreground transition-colors">
+              <a
+                href="/privacy_policy.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
                 {t("privacy")}
-              </span>
-              <span className="text-sm text-muted-foreground cursor-pointer hover:text-foreground transition-colors">
+              </a>
+              <a
+                href="/terms_of_service.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
                 {t("terms")}
-              </span>
+              </a>
             </div>
           </div>
         </div>
