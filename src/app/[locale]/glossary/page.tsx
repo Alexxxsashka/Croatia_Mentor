@@ -18,6 +18,140 @@ function getLocalized(obj: { en: string; ru: string; ua: string }, locale: strin
   return obj.en;
 }
 
+const TRANSLATIONS: Record<string, Record<string, string>> = {
+  ua: {
+    // Headers
+    "Letter": "Літера",
+    "Name": "Назва",
+    "Sound (IPA)": "Звук (МФА)",
+    "Example": "Приклад",
+    "Gender": "Рід",
+    "Ending": "Закінчення",
+    "Translation": "Переклад",
+    "Nom. Sing.": "Наз. одн.",
+    "Gen. Sing.": "Род. одн.",
+    "Gen. Plural": "Род. мн.",
+    "Dat. Sing.": "Дав. одн.",
+    "Dat. Plural": "Дав. мн.",
+    "Acc. Sing.": "Знах. одн.",
+    "Rule": "Правило",
+    "Instr. Sing.": "Оруд. одн.",
+    "Instr. Plural": "Оруд. мн.",
+    "Case / Pad": "Відмінок / Pad",
+    "Masc. Sing.": "Чол. одн.",
+    "Masc. Plur.": "Чол. мн.",
+    "Fem. Sing.": "Жін. одн.",
+    "Fem. Plur.": "Жін. мн.",
+    "Neut. Sing.": "Сер. одн.",
+    "Neut. Plur.": "Сер. мн.",
+    "Person": "Особа",
+    "čitati (read)": "čitati (читати)",
+    "govoriti (speak)": "govoriti (говорити)",
+    "pisati (write)": "pisati (писати)",
+    "Long form": "Повна форма",
+    "Short form": "Коротка форма",
+    "Negative": "Заперечна форма",
+    "Imperfective": "Недоконаний",
+    "Perfective": "Доконаний",
+    "Verb": "Дієслово",
+    "Pronoun": "Займенник",
+    "biti (to be)": "biti (бути)",
+    "htjeti (to want)": "htjeti (хотіти)",
+    "moći (can)": "moći (могти)",
+    "morati (must)": "morati (мусити)",
+    "ići (to go)": "ići (йти)",
+    "Number": "Число / Номер",
+    "Croatian": "Хорватська",
+    "Masc.": "Чол.",
+    "Fem.": "Жін.",
+    "Neut.": "Сер.",
+    "English": "Англійська",
+    "Usage": "Вживання",
+
+    // Common cell contents
+    "ja (I)": "ja (я)",
+    "ti (you)": "ti (ти)",
+    "on/ona/ono (he/she/it)": "on/ona/ono (він/вона/воно)",
+    "on/ona/ono": "on/ona/ono (він/вона/воно)",
+    "mi (we)": "mi (ми)",
+    "vi (you pl./formal)": "vi (ви)",
+    "oni/one/ona (they)": "oni/one/ona (вони)",
+    "oni/one/ona": "oni/one/ona (вони)",
+    "Ø (no ending)": "Ø (без закінчення)",
+    "Ø (inanim.) / -a (anim.)": "Ø (неживе) / -a (живе)",
+  },
+  ru: {
+    // Headers
+    "Letter": "Буква",
+    "Name": "Название",
+    "Sound (IPA)": "Звук (МФА)",
+    "Example": "Пример",
+    "Gender": "Род",
+    "Ending": "Окончание",
+    "Translation": "Перевод",
+    "Nom. Sing.": "Им. ед.",
+    "Gen. Sing.": "Род. ед.",
+    "Gen. Plural": "Род. мн.",
+    "Dat. Sing.": "Дат. ед.",
+    "Dat. Plural": "Дат. мн.",
+    "Acc. Sing.": "Вин. ед.",
+    "Rule": "Правило",
+    "Instr. Sing.": "Твор. ед.",
+    "Instr. Plural": "Твор. мн.",
+    "Case / Pad": "Падеж / Pad",
+    "Masc. Sing.": "Муж. ед.",
+    "Masc. Plur.": "Муж. мн.",
+    "Fem. Sing.": "Жен. ед.",
+    "Fem. Plur.": "Жен. мн.",
+    "Neut. Sing.": "Ср. ед.",
+    "Neut. Plur.": "Ср. мн.",
+    "Person": "Лицо",
+    "čitati (read)": "čitati (читать)",
+    "govoriti (speak)": "govoriti (говорить)",
+    "pisati (write)": "pisati (писать)",
+    "Long form": "Полная форма",
+    "Short form": "Краткая форма",
+    "Negative": "Отрицание",
+    "Imperfective": "Несовершенный",
+    "Perfective": "Совершенный",
+    "Verb": "Глагол",
+    "Pronoun": "Местоимение",
+    "biti (to be)": "biti (быть)",
+    "htjeti (to want)": "htjeti (хотеть)",
+    "moći (can)": "moći (мочь)",
+    "morati (must)": "morati (долженствовать)",
+    "ići (to go)": "ići (идти)",
+    "Number": "Число / Номер",
+    "Croatian": "Хорватский",
+    "Masc.": "Муж.",
+    "Fem.": "Жен.",
+    "Neut.": "Ср.",
+    "English": "Английский",
+    "Usage": "Употребление",
+
+    // Common cell contents
+    "ja (I)": "ja (я)",
+    "ti (you)": "ti (ты)",
+    "on/ona/ono (he/she/it)": "on/ona/ono (он/она/оно)",
+    "on/ona/ono": "on/ona/ono (он/она/оно)",
+    "mi (we)": "mi (мы)",
+    "vi (you pl./formal)": "vi (вы)",
+    "oni/one/ona (they)": "oni/one/ona (они)",
+    "oni/one/ona": "oni/one/ona (они)",
+    "Ø (no ending)": "Ø (без окончания)",
+    "Ø (inanim.) / -a (anim.)": "Ø (неодуш.) / -a (одуш.)",
+  }
+};
+
+function translateText(text: string, locale: string): string {
+  const normLocale = locale.toLowerCase();
+  const dict = TRANSLATIONS[normLocale];
+  if (dict && dict[text]) {
+    return dict[text];
+  }
+  return text;
+}
+
 export default function GlossaryPage() {
   const t = useTranslations("glossary");
   const locale = useLocale();
@@ -176,7 +310,7 @@ export default function GlossaryPage() {
                                       key={i}
                                       className="text-left px-3 py-2 border-b border-white/10 text-xs font-semibold text-muted-foreground uppercase tracking-wider bg-white/5"
                                     >
-                                      {typeof h === "string" ? h : getLocalized(h, locale)}
+                                      {typeof h === "string" ? translateText(h, locale) : getLocalized(h, locale)}
                                     </th>
                                   ))}
                                 </tr>
@@ -189,7 +323,7 @@ export default function GlossaryPage() {
                                   >
                                     {row.cells.map((cell, ci) => (
                                       <td key={ci} className="px-3 py-2 text-foreground">
-                                        {typeof cell === "string" ? cell : getLocalized(cell, locale)}
+                                        {typeof cell === "string" ? translateText(cell, locale) : getLocalized(cell, locale)}
                                       </td>
                                     ))}
                                   </tr>
