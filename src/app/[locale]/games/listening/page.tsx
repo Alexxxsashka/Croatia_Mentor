@@ -32,41 +32,48 @@ export default function ListeningPage() {
   const item = listeningData.find((d) => d.id === selectedItem);
 
   const speakText = (text: string) => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      
-      const voices = window.speechSynthesis.getVoices();
-      let selectedVoice = voices.find(
-        (v) => v.lang === "hr-HR" || v.lang.startsWith("hr-")
-      );
-      if (!selectedVoice) {
-        selectedVoice = voices.find(
-          (v) =>
-            v.name.toLowerCase().includes("croatian") ||
-            v.name.toLowerCase().includes("hrvatski")
-        );
-      }
-      if (!selectedVoice) {
-        // Fallback to Serbian/Slovenian/Bosnian (Slavic pronunciation match)
-        selectedVoice = voices.find(
-          (v) =>
-            v.lang.startsWith("sr") ||
-            v.lang.startsWith("sl") ||
-            v.lang.startsWith("bs")
-        );
-      }
+    if (typeof window === "undefined") return;
 
-      if (selectedVoice) {
-        utterance.voice = selectedVoice;
-        utterance.lang = selectedVoice.lang;
-      } else {
+    // Clean speaker labels (e.g. "Gospon Fulir: Gospođo Ana..." -> "Gospođo Ana...") for cleaner audio
+    const cleanText = text.replace(/^[A-Za-z\sčćžšđČĆŽŠĐ]+:\s*/, "");
+
+    const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=hr&client=tw-ob&q=${encodeURIComponent(cleanText)}`;
+    const audio = new Audio(url);
+    
+    audio.play().catch((err) => {
+      console.warn("Google TTS failed, falling back to Web Speech Synthesis:", err);
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(cleanText);
         utterance.lang = "hr-HR";
+        
+        const voices = window.speechSynthesis.getVoices();
+        let selectedVoice = voices.find(
+          (v) => v.lang === "hr-HR" || v.lang.startsWith("hr-")
+        );
+        if (!selectedVoice) {
+          selectedVoice = voices.find(
+            (v) =>
+              v.name.toLowerCase().includes("croatian") ||
+              v.name.toLowerCase().includes("hrvatski")
+          );
+        }
+        if (!selectedVoice) {
+          selectedVoice = voices.find(
+            (v) =>
+              v.lang.startsWith("sr") ||
+              v.lang.startsWith("sl") ||
+              v.lang.startsWith("bs")
+          );
+        }
+        if (selectedVoice) {
+          utterance.voice = selectedVoice;
+          utterance.lang = selectedVoice.lang;
+        }
+        utterance.rate = 0.8;
+        window.speechSynthesis.speak(utterance);
       }
-
-      utterance.rate = 0.8;
-      window.speechSynthesis.speak(utterance);
-    }
+    });
   };
 
   const handleAnswer = (option: string) => {
