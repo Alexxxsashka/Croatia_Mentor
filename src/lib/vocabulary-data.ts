@@ -353,4 +353,89 @@ export const vocabularyWords: VocabWord[] = [
   { hr: "karta grada", en: "city map", ru: "карта города", ua: "карта міста", level: "A1", category: "travel" },
   { hr: "granični prijelaz", en: "border crossing", ru: "пограничный переход", ua: "прикордонний перехід", level: "B1", category: "travel" },
   { hr: "smještaj", en: "accommodation", ru: "жилье/размещение", ua: "житло/розміщення", level: "B1", category: "travel" },
+
+  // ══════ MASSIVE EXPANSION WORDS ══════
+  // FAMILY
+  { hr: "roditelji", en: "parents", ru: "родители", ua: "батьки", level: "A1", category: "family" },
+  { hr: "djeca", en: "children", ru: "дети", ua: "діти", level: "A1", category: "family" },
+  { hr: "blizanci", en: "twins", ru: "близнецы", ua: "близнюки", level: "A2", category: "family" },
+  { hr: "zet", en: "son-in-law", ru: "зять", ua: "зять", level: "B1", category: "family" },
+  { hr: "snaha", en: "daughter-in-law", ru: "сноха/невестка", ua: "невістка", level: "B1", category: "family" },
+  { hr: "kum", en: "godfather / best man", ru: "крёстный / свидетель", ua: "хресний / свідок", level: "A2", category: "family" },
+  { hr: "kuma", en: "godmother / maid of honor", ru: "крёстная / свидетельница", ua: "хресна / свідок (жінка)", level: "A2", category: "family" },
+
+  // TRAVEL & ENVIRONMENT
+  { hr: "putnik", en: "passenger", ru: "пассажир", ua: "пасажир", level: "A2", category: "travel" },
+  { hr: "carina", en: "customs", ru: "таможня", ua: "митниця", level: "B1", category: "travel" },
+  { hr: "odlazak", en: "departure", ru: "отправление/вылет", ua: "відправлення/виліт", level: "A2", category: "travel" },
+  { hr: "dolazak", en: "arrival", ru: "прибытие", ua: "прибуття", level: "A2", category: "travel" },
+  { hr: "kašnjenje", en: "delay", ru: "задержка", ua: "затримка", level: "B1", category: "travel" },
+  { hr: "plaža", en: "beach", ru: "пляж", ua: "пляж", level: "A1", category: "travel" },
+  { hr: "otok", en: "island", ru: "остров", ua: "острів", level: "A2", category: "travel" },
+  { hr: "poluotok", en: "peninsula", ru: "полуостров", ua: "півострів", level: "B2", category: "travel" },
+
+  // NATURE & GEOGRAPHY
+  { hr: "ocean", en: "ocean", ru: "океан", ua: "океан", level: "A2", category: "nature" },
+  { hr: "pijesak", en: "sand", ru: "песок", ua: "пісок", level: "A2", category: "nature" },
+  { hr: "stijena", en: "rock / cliff", ru: "скала/утес", ua: "скеля", level: "B1", category: "nature" },
+  { hr: "val", en: "wave", ru: "волна", ua: "хвиля", level: "A2", category: "nature" },
+  { hr: "nebo", en: "sky", ru: "небо", ua: "небо", level: "A1", category: "nature" },
+  { hr: "zvijezda", en: "star", ru: "звезда", ua: "зірка", level: "A2", category: "nature" },
+  { hr: "mjesec", en: "moon / month", ru: "луна/месяц", ua: "місяць", level: "A1", category: "nature" },
+  { hr: "sunce", en: "sun", ru: "солнце", ua: "сонце", level: "A1", category: "nature" },
+
+  // TIME & SEASONS
+  { hr: "stoljeće", en: "century", ru: "век/столетие", ua: "століття", level: "B1", category: "time" },
+  { hr: "desetljeće", en: "decade", ru: "десятилетие", ua: "десятиліття", level: "B2", category: "time" },
+  { hr: "godišnje doba", en: "season", ru: "время года", ua: "пора року", level: "A2", category: "time" },
+  { hr: "proljeće", en: "spring", ru: "весна", ua: "весна", level: "A1", category: "time" },
+  { hr: "ljeto", en: "summer", ru: "лето", ua: "літо", level: "A1", category: "time" },
+  { hr: "jesen", en: "autumn", ru: "осень", ua: "осінь", level: "A1", category: "time" },
+  { hr: "zima", en: "winter", ru: "зима", ua: "зима", level: "A1", category: "time" },
+  { hr: "vikend", en: "weekend", ru: "выходные", ua: "вихідні", level: "A1", category: "time" },
+  { hr: "praznik", en: "holiday", ru: "праздник", ua: "свято", level: "A2", category: "time" },
+  { hr: "radni dan", en: "workday", ru: "рабочий день", ua: "робочий день", level: "A2", category: "time" },
+
+  // HOME
+  { hr: "ogledalo", en: "mirror", ru: "зеркало", ua: "дзеркало", level: "A2", category: "home" },
+  { hr: "ormar", en: "wardrobe/closet", ru: "шкаф", ua: "шафа", level: "A1", category: "home" },
+  { hr: "polica", en: "shelf", ru: "полка", ua: "полиця", level: "A2", category: "home" },
+  { hr: "tepih", en: "carpet", ru: "ковёр", ua: "килим", level: "A2", category: "home" },
+  { hr: "zavjese", en: "curtains", ru: "шторы", ua: "штори", level: "A2", category: "home" },
+  { hr: "jastuk", en: "pillow", ru: "подушка", ua: "подушка", level: "A2", category: "home" },
+  { hr: "pokrivač", en: "blanket", ru: "одеяло", ua: "ковдра", level: "A2", category: "home" },
+  { hr: "ručnik", en: "towel", ru: "полотенце", ua: "рушник", level: "A2", category: "home" },
+  { hr: "sapun", en: "soap", ru: "мыло", ua: "мило", level: "A1", category: "home" },
+  { hr: "četkica za zube", en: "toothbrush", ru: "зубная щётка", ua: "зубна щітка", level: "A1", category: "home" },
+
+  // FOOD
+  { hr: "marenda", en: "brunch / snack", ru: "перекус", ua: "перекус", level: "A2", category: "food" },
+  { hr: "predjelo", en: "appetizer", ru: "закуска", ua: "закуска", level: "B1", category: "food" },
+  { hr: "glavno jelo", en: "main course", ru: "главное блюдо", ua: "головна страва", level: "B1", category: "food" },
+  { hr: "desert", en: "dessert", ru: "десерт", ua: "десерт", level: "A2", category: "food" },
+  { hr: "tjestenina", en: "pasta", ru: "паста/макароны", ua: "паста/макарони", level: "A2", category: "food" },
+  { hr: "riža", en: "rice", ru: "рис", ua: "рис", level: "A1", category: "food" },
+  { hr: "ulje", en: "oil", ru: "масло/растительное масло", ua: "олія", level: "A2", category: "food" },
+  { hr: "ocat", en: "vinegar", ru: "уксус", ua: "оцет", level: "B1", category: "food" },
+  { hr: "papar", en: "pepper (spice)", ru: "перец (приправа)", ua: "перець (приправа)", level: "A2", category: "food" },
+  { hr: "češnjak", en: "garlic", ru: "чеснок", ua: "часник", level: "A2", category: "food" },
+  { hr: "luk", en: "onion", ru: "лук", ua: "цибуля", level: "A2", category: "food" },
+
+  // EMOTIONS
+  { hr: "tuga", en: "sadness", ru: "грусть", ua: "сум", level: "B1", category: "emotions" },
+  { hr: "radost", en: "joy", ru: "радость", ua: "радість", level: "B1", category: "emotions" },
+  { hr: "panika", en: "panic", ru: "паника", ua: "паніка", level: "B1", category: "emotions" },
+  { hr: "stres", en: "stress", ru: "стресс", ua: "стрес", level: "A2", category: "emotions" },
+  { hr: "mir", en: "peace / calm", ru: "мир/спокойствие", ua: "мир/спокій", level: "A2", category: "emotions" },
+  { hr: "mržnja", en: "hatred", ru: "ненависть", ua: "ненависть", level: "B2", category: "emotions" },
+  { hr: "ljubav", en: "love", ru: "любовь", ua: "любов", level: "A1", category: "emotions" },
+
+  // BODY & HEALTH
+  { hr: "lice", en: "face", ru: "лицо", ua: "обличчя", level: "A1", category: "body" },
+  { hr: "čelo", en: "forehead", ru: "лоб", ua: "лоб", level: "A2", category: "body" },
+  { hr: "obrve", en: "eyebrows", ru: "брови", ua: "брови", level: "B1", category: "body" },
+  { hr: "trepavice", en: "eyelashes", ru: "ресницы", ua: "вії", level: "B2", category: "body" },
+  { hr: "usne", en: "lips", ru: "губы", ua: "губи", level: "A2", category: "body" },
+  { hr: "jezik", en: "tongue / language", ru: "язык", ua: "язик / мова", level: "A1", category: "body" },
+  { hr: "grlo", en: "throat", ru: "горло", ua: "горло", level: "A2", category: "body" },
 ];

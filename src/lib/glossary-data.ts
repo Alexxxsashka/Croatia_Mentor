@@ -813,5 +813,63 @@ export const glossaryData: GlossaryCategory[] = [
         ]
       }
     ]
+  },
+  {
+    id: "pronouns_prepositions",
+    title: { en: "Pronouns & Prepositions", ru: "Местоимения и предлоги", ua: "Займенники та прийменники" },
+    icon: "🔗",
+    sections: [
+      {
+        id: "pronoun_cases",
+        title: { en: "Personal Pronouns Declension", ru: "Склонение местоимений", ua: "Відмінювання займенників" },
+        icon: "👥",
+        subsections: [
+          {
+            title: { en: "Personal Pronouns Cases", ru: "Падежи личных местоимений", ua: "Відмінки особових займенників" },
+            text: {
+              en: "Declension of personal pronouns (ja, ti, on, ona, ono, mi, vi, oni) across all cases. Short forms (enclitics) are listed first, followed by long forms in parentheses.",
+              ru: "Склонение личных местоимений по падежам. Краткие (энклитики) формы указаны первыми, длинные формы приведены в скобках.",
+              ua: "Відмінювання особових займенників за відмінками. Краткі (енклітичні) форми вказані першими, довгі форми наведені в дужках."
+            },
+            table: {
+              headers: ["Case", "ja (I)", "ti (you)", "on / ono (he/it)", "ona (she)", "mi (we)", "vi (you pl.)", "oni (they)"],
+              rows: [
+                { cells: ["Nominativ", "ja", "ti", "on / ono", "ona", "mi", "vi", "oni"] },
+                { cells: ["Genitiv", "me (mene)", "te (tebe)", "ga (njega)", "je (nje)", "nas", "vas", "ih (njih)"] },
+                { cells: ["Dativ", "mi (meni)", "ti (tebi)", "mu (njemu)", "joj (njoj)", "nam", "vam", "im (njima)"] },
+                { cells: ["Akuzativ", "me (mene)", "te (tebe)", "ga (njega)", "ju / je (nju)", "nas", "vas", "ih (njih)"] },
+                { cells: ["Lokativ", "meni", "tebi", "njemu", "njoj", "nama", "vama", "njima"] },
+                { cells: ["Instrumental", "mnom (mnome)", "tobom", "njim (njime)", "njom (njome)", "nama", "vama", "njima"] }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        id: "prepositions",
+        title: { en: "Prepositions and Cases", ru: "Предлоги и падежи", ua: "Прийменники та відмінки" },
+        icon: "🗺️",
+        subsections: [
+          {
+            title: { en: "Prepositions Chart", ru: "Таблица предлогов", ua: "Таблиця прийменників" },
+            text: {
+              en: "In Croatian, each preposition requires a specific noun case. Below is a summary of the most common prepositions grouped by the case they govern.",
+              ru: "В хорватском языке каждый предлог требует определенного падежа. Ниже приведена таблица наиболее употребляемых предлогов, сгруппированных по падежам.",
+              ua: "В хорватській мові кожен прийменник вимагає певного відмінка. Нижче наведена таблиця найуживаніших прийменників, згрупованих за відмінками."
+            },
+            table: {
+              headers: ["Case", "Prepositions", { en: "English Meaning", ru: "Значение", ua: "Значення" }, "Examples"],
+              rows: [
+                { cells: ["Genitiv", "bez, kod, iz, blizu, do, od", { en: "without, at, from, near, to, from", ru: "без, у, из, близко, до, от", ua: "без, у, з, близько, до, від" }, "bez šećera, kod prijatelja, iz ureda"] },
+                { cells: ["Dativ", "k / ka, prema", { en: "towards, according to", ru: "к, по направлению к", ua: "до, у напрямку до" }, "idem k liječniku, prema gradu"] },
+                { cells: ["Akuzativ", "u, na (motion), kroz, za", { en: "into, onto, through, for", ru: "в, на (движение), через, для", ua: "в, на (рух), через, для" }, "idem u школу, stavi na stol, za tebe"] },
+                { cells: ["Lokativ", "u, na (location), o, po", { en: "in, on (static), about, along", ru: "в, на (место), о, по", ua: "в, на (місце), про, по" }, "živim u Zagrebu, na stolu, o knjizi"] },
+                { cells: ["Instrumental", "s / sa, pod, nad, pred", { en: "with, under, above, in front of", ru: "с, под, над, перед", ua: "з, під, над, перед" }, "s bratom, pod stolom, pred kućom"] }
+              ]
+            }
+          }
+        ]
+      }
+    ]
   }
 ];
