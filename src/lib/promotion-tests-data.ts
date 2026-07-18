@@ -36,9 +36,9 @@ export const promotionTests: Record<string, {
       {
         id: 2,
         question: {
-          en: "Complete the sentence: Oni _____ učenici. (They are students.)",
-          ru: "Завершите предложение: Oni _____ učenici. (Они ученики.)",
-          ua: "Завершіть речення: Oni _____ učenici. (Вони учні.)"
+          en: "Complete: Oni _____ učenici. (They are students.)",
+          ru: "Заполните: Oni _____ učenici. (Они ученики.)",
+          ua: "Заповніть: Oni _____ učenici. (Вони учні.)"
         },
         options: [
           { en: "sam", ru: "sam", ua: "sam" },
@@ -48,9 +48,9 @@ export const promotionTests: Record<string, {
         ],
         correctAnswer: 3,
         explanation: {
-          en: '"su" is the 3rd person plural form of "biti" (to be) for they (oni).',
-          ru: '"su" — форма 3-го лица множественного числа глагола "biti" (быть) для местоимения они (oni).',
-          ua: '"su" — форма 3-ї особи множини дієслова "biti" (бути) для займенника вони (oni).'
+          en: '"su" is the 3rd person plural form of "biti" (to be).',
+          ru: '"su" — форма 3-го лица мн.ч. глагола "biti" (быть).',
+          ua: '"su" — форма 3-ї особи множини дієслова "biti" (бути).'
         }
       },
       {
@@ -61,7 +61,7 @@ export const promotionTests: Record<string, {
           ua: "Що означає слово 'Molim' у діалозі?"
         },
         options: [
-          { en: "Please / You are welcome", ru: "Пожалуйста / Не за что", ua: "Будь ласка / Прошу" },
+          { en: "Please / You're welcome", ru: "Пожалуйста / Не за что", ua: "Будь ласка / Прошу" },
           { en: "Thank you", ru: "Спасибо", ua: "Дякую" },
           { en: "Sorry", ru: "Извините", ua: "Вибачте" },
           { en: "Hello", ru: "Здравствуйте", ua: "Вітаю" }
@@ -69,16 +69,16 @@ export const promotionTests: Record<string, {
         correctAnswer: 0,
         explanation: {
           en: '"Molim" translates to "Please" or "You\'re welcome" in reply to thank you.',
-          ru: '"Molim" переводится как "Пожалуйста" или "Не за что" в ответ на спасибо.',
-          ua: '"Molim" перекладається як "Будь ласка" або "Нема за що" у відповідь на дякую.'
+          ru: '"Molim" переводится как "Пожалуйста" или "Не за что".',
+          ua: '"Molim" перекладається як "Будь ласка" або "Нема за що".'
         }
       },
       {
         id: 4,
         question: {
-          en: "Complete the sentence: Mi _____ kavu. (We drink coffee.)",
-          ru: "Завершите предложение: Mi _____ kavu. (Мы пьем кофе.)",
-          ua: "Завершіть речення: Mi _____ kavu. (Ми п'ємо каву.)"
+          en: "Complete: Mi _____ kavu. (We drink coffee.)",
+          ru: "Заполните: Mi _____ kavu. (Мы пьем кофе.)",
+          ua: "Заповніть: Mi _____ kavu. (Ми п'ємо каву.)"
         },
         options: [
           { en: "pijem", ru: "pijem", ua: "pijem" },
@@ -89,128 +89,329 @@ export const promotionTests: Record<string, {
         correctAnswer: 1,
         explanation: {
           en: '"Pijemo" is the 1st person plural form of "piti" (to drink).',
-          ru: '"Pijemo" — форма 1-го лица множественного числа глагола "piti" (пить).',
-          ua: '"Pijemo" — форма 1-ї особи множини дієслова "piti" (пити).'
+          ru: '"Pijemo" — форма 1-го лица мн.ч. глагола "piti".',
+          ua: '"Pijemo" — форма 1-ї особи множини дієслова "piti".'
         }
       },
       {
         id: 5,
         question: {
-          en: "Complete the sentence: Idem u _____ (school - škola - accusative singular).",
-          ru: "Завершите предложение: Idem u _____ (школа - škola - винительный падеж).",
-          ua: "Завершіть речення: Idem u _____ (школа - škola - знахідний відмінок)."
+          en: "Complete: Idem u _____ (school - škola - accusative).",
+          ru: "Заполните: Idem u _____ (школа - škola - винительный падеж).",
+          ua: "Заповніть: Idem u _____ (школа - škola - знахідний відмінок)."
         },
         options: [
-          { en: "školu", ru: "školu", ua: "školu" },
           { en: "škola", ru: "škola", ua: "škola" },
           { en: "školi", ru: "školi", ua: "školi" },
-          { en: "školom", ru: "školom", ua: "školom" }
+          { en: "škole", ru: "škole", ua: "škole" },
+          { en: "škou", ru: "škou", ua: "škou" },
+          { en: "školu", ru: "školu", ua: "školu" }
         ],
-        correctAnswer: 0,
+        correctAnswer: 4,
         explanation: {
-          en: "Preposition 'u' indicating direction requires the accusative case ('školu').",
-          ru: "Предлог 'u', указывающий на направление движения, требует винительного падежа ('školu').",
-          ua: "Прийменник 'u', що вказує на напрямок руху, вимагає знахідного відмінника ('školu')."
+          en: 'Feminine singular nouns change ending from -a to -u in the accusative case.',
+          ru: 'Существительные женского рода ед.ч. меняют окончание с -a на -u в винительном падеже.',
+          ua: 'Іменники жіночого роду однини змінюють закінчення з -a на -u у знахідному відмінку.'
         }
       },
       {
         id: 6,
         question: {
-          en: "Which day comes after Tuesday (utorak)?",
-          ru: "Какой день недели идет после вторника (utorak)?",
-          ua: "Який день тижня йде після вівторка (utorak)?"
+          en: "Which form of 'to be' goes with 'ti'?",
+          ru: "Какая форма глагола 'быть' сочетается с 'ti'?",
+          ua: "Яка форма дієслова 'бути' поєднується з 'ti'?"
         },
         options: [
-          { en: "ponedjeljak (Monday)", ru: "ponedjeljak (понедельник)", ua: "ponedjeljak (понеділок)" },
-          { en: "srijeda (Wednesday)", ru: "srijeda (среда)", ua: "srijeda (середа)" },
-          { en: "četvrtak (Thursday)", ru: "četvrtak (четверг)", ua: "četvrtak (четвер)" },
-          { en: "petak (Friday)", ru: "petak (пятница)", ua: "petak (п'ятниця)" }
+          { en: "sam", ru: "sam", ua: "sam" },
+          { en: "si", ru: "si", ua: "si" },
+          { en: "je", ru: "je", ua: "je" },
+          { en: "ste", ru: "ste", ua: "ste" }
         ],
         correctAnswer: 1,
         explanation: {
-          en: '"Srijeda" is Wednesday, the day after Tuesday (utorak).',
-          ru: '"Srijeda" — это среда, следующий день после вторника (utorak).',
-          ua: '"Srijeda" — це середа, наступний день після вівторка (utorak).'
+          en: '"Ti si" is the present form of "biti" for the 2nd person singular.',
+          ru: '"Ti si" — форма настоящего времени глагола "biti" для 2-го лица ед.ч.',
+          ua: '"Ti si" — форма теперішнього часу дієслова "biti" для 2-ї особи однини.'
         }
       },
       {
         id: 7,
         question: {
-          en: "Math check: koliko je dva + tri?",
-          ru: "Математика: сколько будет dva + tri?",
-          ua: "Математика: скільки буде dva + tri?"
+          en: "What is the accusative singular of 'kava'?",
+          ru: "Какова форма винительного падежа ед.ч. для 'kava'?",
+          ua: "Яка форма знахідного відмінка однини для 'kava'?"
         },
         options: [
-          { en: "četiri", ru: "četiri", ua: "četiri" },
-          { en: "pet", ru: "pet", ua: "pet" },
-          { en: "šest", ru: "šest", ua: "šest" },
-          { en: "tri", ru: "tri", ua: "tri" }
+          { en: "kavi", ru: "kavi", ua: "kavi" },
+          { en: "kavu", ru: "kavu", ua: "kavu" },
+          { en: "kave", ru: "kave", ua: "kave" },
+          { en: "kavom", ru: "kavom", ua: "kavom" }
         ],
         correctAnswer: 1,
         explanation: {
-          en: 'Dva (2) + tri (3) = pet (5).',
-          ru: 'Dva (2) + tri (3) = pet (5).',
-          ua: 'Dva (2) + tri (3) = pet (5).'
+          en: '"Kavu" is the accusative singular of "kava".',
+          ru: '"Kavu" — форма винительного падежа для "kava".',
+          ua: '"Kavu" — форма знахідного відмінка для "kava".'
         }
       },
       {
         id: 8,
         question: {
-          en: "Complete: Moja braća _____ ovdje. (My brothers are here.)",
-          ru: "Завершите: Moja braća _____ ovdje. (Мои братья здесь.)",
-          ua: "Завершіть: Moja braća _____ ovdje. (Мої брати тут.)"
+          en: "What does 'Hvala lijepa' mean?",
+          ru: "Что означает 'Hvala lijepa'?",
+          ua: "Що означає 'Hvala lijepa'?"
         },
         options: [
-          { en: "sam", ru: "sam", ua: "sam" },
-          { en: "je", ru: "je", ua: "je" },
-          { en: "su", ru: "su", ua: "su" },
-          { en: "si", ru: "si", ua: "si" }
+          { en: "Thank you very much", ru: "Большое спасибо", ua: "Дуже дякую" },
+          { en: "Goodbye", ru: "До свидания", ua: "До побачення" },
+          { en: "Good morning", ru: "Доброе утро", ua: "Доброго ранку" },
+          { en: "Please", ru: "Пожалуйста", ua: "Будь ласка" }
         ],
-        correctAnswer: 2,
+        correctAnswer: 0,
         explanation: {
-          en: '"Braća" is a collective noun acting as plural, requiring the plural verb "su".',
-          ru: '"Braća" — собирательное существительное, согласуемое во множественном числе, требует глагола "su".',
-          ua: '"Braća" — збірний іменник, що узгоджується у множині, вимагає дієслова "su".'
+          en: '"Hvala lijepa" means "Thank you very much".',
+          ru: '"Hvala lijepa" означает "Большое спасибо".',
+          ua: '"Hvala lijepa" означає "Дуже дякую".'
         }
       },
       {
         id: 9,
         question: {
-          en: "Complete: To je _____ kuća. (This is our house.)",
-          ru: "Завершите: To je _____ kuća. (Это наш дом.)",
-          ua: "Завершіть: To je _____ kuća. (Це наш будинок.)"
+          en: "How do you say 'I am from Ukraine' in Croatian?",
+          ru: "Как сказать 'Я из Украины' по-хорватски?",
+          ua: "Як сказати 'Я з України' хорватською?"
         },
         options: [
-          { en: "naš", ru: "naš", ua: "naš" },
-          { en: "naša", ru: "naša", ua: "naša" },
-          { en: "naše", ru: "naše", ua: "naše" },
-          { en: "naši", ru: "naši", ua: "naši" }
+          { en: "Ja sam iz Ukrajine.", ru: "Ja sam iz Ukrajine.", ua: "Ja sam iz Ukrajine." },
+          { en: "Ja sam u Ukrajini.", ru: "Ja sam u Ukrajini.", ua: "Ja sam u Ukrajini." },
+          { en: "Ja idem u Ukrajinu.", ru: "Ja idem u Ukrajinu.", ua: "Ja idem u Ukrajinu." },
+          { en: "Ja volim Ukrajina.", ru: "Ja volim Ukrajina.", ua: "Ja volim Ukrajina." }
         ],
-        correctAnswer: 1,
+        correctAnswer: 0,
         explanation: {
-          en: '"Kuća" is feminine singular, so the possessive pronoun is "naša".',
-          ru: '"Kuća" — женского рода единственного числа, поэтому притяжательное местоимение — "naša".',
-          ua: '"Kuća" — жіночого роду однини, тому присвійний займенник — "naša".'
+          en: '"Ja sam iz Ukrajine" uses the preposition "iz" (from) requiring Genitive.',
+          ru: '"Ja sam iz Ukrajine" использует предлог "iz" (из) с родительным падежом.',
+          ua: '"Ja sam iz Ukrajine" використовує прийменник "iz" (з) з родовим відмінком.'
         }
       },
       {
         id: 10,
         question: {
-          en: "Complete: Živim u _____ (Zagreb - locative singular).",
-          ru: "Завершите: Živim u _____ (Загреб - locative).",
-          ua: "Завершіть: Živim u _____ (Загреб - locative)."
+          en: "Conjugate 'zvati se' (to be called) for 'ti' (you singular):",
+          ru: "Спрягайте 'zvati se' для местоимения 'ti':",
+          ua: "Відміняйте 'zvati se' для займенника 'ti':"
         },
         options: [
-          { en: "Zagrebu", ru: "Zagrebu", ua: "Zagrebu" },
-          { en: "Zagreb", ru: "Zagreb", ua: "Zagreb" },
-          { en: "Zagreba", ru: "Zagreba", ua: "Zagreba" },
-          { en: "Zagrebom", ru: "Zagrebom", ua: "Zagrebom" }
+          { en: "zovem se", ru: "zovem se", ua: "zovem se" },
+          { en: "zoveš se", ru: "zoveš se", ua: "zoveš se" },
+          { en: "zove se", ru: "zove se", ua: "zove se" },
+          { en: "zovemo se", ru: "zovemo se", ua: "zovemo se" }
+        ],
+        correctAnswer: 1,
+        explanation: {
+          en: '"zoveš se" is the correct 2nd person singular form.',
+          ru: '"zoveš se" — форма 2-го лица ед.ч. настоящего времени.',
+          ua: '"zoveš se" — форма 2-ї особи однини теперішнього часу.'
+        }
+      },
+      {
+        id: 11,
+        question: {
+          en: "What is the nominative plural of 'dječak' (boy)?",
+          ru: "Каков именительный падеж мн.ч. от 'dječak'?",
+          ua: "Який називний відмінок множини від 'dječak'?"
+        },
+        options: [
+          { en: "dječaki", ru: "dječaki", ua: "dječaki" },
+          { en: "dječake", ru: "dječake", ua: "dječake" },
+          { en: "dječaci", ru: "dječaci", ua: "dječaci" },
+          { en: "dječakov", ru: "dječakov", ua: "dječakov" }
+        ],
+        correctAnswer: 2,
+        explanation: {
+          en: 'Nouns ending in -k undergo sibilarization in nominative plural (k -> ci).',
+          ru: 'Существительные на -k претерпевают сибиляризацию во мн.ч. (k -> ci).',
+          ua: 'Іменники на -k зазнають сибіляризації у множині (k -> ci).'
+        }
+      },
+      {
+        id: 12,
+        question: {
+          en: "What is the nominative plural of 'knjiga' (book)?",
+          ru: "Каков именительный падеж мн.ч. от 'knjiga'?",
+          ua: "Який називний відмінок множини від 'knjiga'?"
+        },
+        options: [
+          { en: "knjige", ru: "knjige", ua: "knjige" },
+          { en: "knjigi", ru: "knjigi", ua: "knjigi" },
+          { en: "knjiga", ru: "knjiga", ua: "knjiga" },
+          { en: "knjigom", ru: "knjigom", ua: "knjigom" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: "Locative case ending for masculine town names is -u: 'Zagrebu'.",
-          ru: "Окончание местного падежа для названий городов мужского рода — -u: 'Zagrebu'.",
-          ua: "Закінчення місцевого відмінка для назв міст чоловічого роду — -u: 'Zagrebu'."
+          en: 'Feminine nouns ending in -a have the ending -e in nominative plural.',
+          ru: 'Существительные женского рода на -a имеют окончание -e во мн.ч.',
+          ua: 'Іменники жіночого роду на -a мають закінчення -e у множині.'
+        }
+      },
+      {
+        id: 13,
+        question: {
+          en: "Complete: Ja _____ (have) trideset godina. (I am 30 years old.)",
+          ru: "Заполните: Ja _____ trideset godina. (Мне 30 лет.)",
+          ua: "Заповніть: Ja _____ trideset godina. (Мені 30 років.)"
+        },
+        options: [
+          { en: "imam", ru: "imam", ua: "imam" },
+          { en: "imaš", ru: "imaš", ua: "imaš" },
+          { en: "ima", ru: "ima", ua: "ima" },
+          { en: "imamo", ru: "imamo", ua: "imamo" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: '"Imam" is the 1st person singular form of "imati".',
+          ru: '"Imam" — форма 1-го лица ед.ч. глагола "imati" (иметь).',
+          ua: '"Imam" — форма 1-ї особи однини дієслова "imati" (мати).'
+        }
+      },
+      {
+        id: 14,
+        question: {
+          en: "Which question word asks about target destination (to where)?",
+          ru: "Какое вопросительное слово спрашивает о пункте назначения (куда)?",
+          ua: "Яке питальне слово запитує про напрямок руху (куди)?"
+        },
+        options: [
+          { en: "Gdje", ru: "Gdje", ua: "Gdje" },
+          { en: "Kamo", ru: "Kamo", ua: "Kamo" },
+          { en: "Tko", ru: "Tko", ua: "Tko" },
+          { en: "Kada", ru: "Kada", ua: "Kada" }
+        ],
+        correctAnswer: 1,
+        explanation: {
+          en: '"Kamo" asks about target movement destination, whereas "Gdje" asks about static location.',
+          ru: '"Kamo" спрашивает о направлении движения (куда), а "Gdje" — о месте (где).',
+          ua: '"Kamo" запитує про напрямок руху (куди), а "Gdje" — про місцезнаходження (де).'
+        }
+      },
+      {
+        id: 15,
+        question: {
+          en: "What day comes after Monday (ponedjeljak)?",
+          ru: "Какой день идет за понедельником (ponedjeljak)?",
+          ua: "Який день йде після понеділка (ponedjeljak)?"
+        },
+        options: [
+          { en: "srijeda", ru: "srijeda", ua: "srijeda" },
+          { en: "utorak", ru: "utorak", ua: "utorak" },
+          { en: "četvrtak", ru: "četvrtak", ua: "četvrtak" },
+          { en: "petak", ru: "petak", ua: "petak" }
+        ],
+        correctAnswer: 1,
+        explanation: {
+          en: '"Utorak" means Tuesday in Croatian.',
+          ru: '"Utorak" — это вторник.',
+          ua: '"Utorak" — це вівторок.'
+        }
+      },
+      {
+        id: 16,
+        question: {
+          en: "What is the meaning of the color 'crveno'?",
+          ru: "Каково значение цвета 'crveno'?",
+          ua: "Яке значення кольору 'crveno'?"
+        },
+        options: [
+          { en: "blue", ru: "синий", ua: "синій" },
+          { en: "red", ru: "красный", ua: "червоний" },
+          { en: "green", ru: "зеленый", ua: "зелений" },
+          { en: "yellow", ru: "желтый", ua: "жовтий" }
+        ],
+        correctAnswer: 1,
+        explanation: {
+          en: '"Crveno" means red.',
+          ru: '"Crveno" означает красный.',
+          ua: '"Crveno" означає червоний.'
+        }
+      },
+      {
+        id: 17,
+        question: {
+          en: "How do you write the number 15 in Croatian?",
+          ru: "Как пишется число 15 по-хорватски?",
+          ua: "Як пишеться число 15 хорватською?"
+        },
+        options: [
+          { en: "petnaest", ru: "petnaest", ua: "petnaest" },
+          { en: "pedeset", ru: "pedeset", ua: "pedeset" },
+          { en: "petnaestak", ru: "petnaestak", ua: "petnaestak" },
+          { en: "pet", ru: "pet", ua: "pet" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: '"Petnaest" is 15. "Pedeset" is 50.',
+          ru: '"Petnaest" — это 15. "Pedeset" — это 50.',
+          ua: '"Petnaest" — це 15. "Pedeset" — це 50.'
+        }
+      },
+      {
+        id: 18,
+        question: {
+          en: "What does the word 'kruh' mean?",
+          ru: "Что означает слово 'kruh'?",
+          ua: "Що означає слово 'kruh'?"
+        },
+        options: [
+          { en: "bread", ru: "хлеб", ua: "хліб" },
+          { en: "water", ru: "вода", ua: "вода" },
+          { en: "milk", ru: "молоко", ua: "молоко" },
+          { en: "sugar", ru: "сахар", ua: "цукор" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: '"Kruh" means bread in Croatian.',
+          ru: '"Kruh" переводится как хлеб.',
+          ua: '"Kruh" перекладається як хліб.'
+        }
+      },
+      {
+        id: 19,
+        question: {
+          en: "Complete: Oni _____ (have) auto. (They have a car.)",
+          ru: "Заполните: Oni _____ auto. (У них есть машина.)",
+          ua: "Заповніть: Oni _____ auto. (У них є машина.)"
+        },
+        options: [
+          { en: "imaju", ru: "imaju", ua: "imaju" },
+          { en: "imamo", ru: "imamo", ua: "imamo" },
+          { en: "imaš", ru: "imaš", ua: "imaš" },
+          { en: "imate", ru: "imate", ua: "imate" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: '"Imaju" is the 3rd person plural of "imati".',
+          ru: '"Imaju" — форма 3-го лица мн.ч. от "imati".',
+          ua: '"Imaju" — форма 3-ї особи множини від "imati".'
+        }
+      },
+      {
+        id: 20,
+        question: {
+          en: "What is the accusative singular form of 'čaj' (tea - inanimate masculine)?",
+          ru: "Какова форма винительного падежа ед.ч. для 'čaj'?",
+          ua: "Яка форма знахідного відмінка однини для 'čaj'?"
+        },
+        options: [
+          { en: "čaja", ru: "čaja", ua: "čaja" },
+          { en: "čaj", ru: "čaj", ua: "čaj" },
+          { en: "čaju", ru: "čaju", ua: "čaju" },
+          { en: "čajom", ru: "čajom", ua: "čajom" }
+        ],
+        correctAnswer: 1,
+        explanation: {
+          en: 'Inanimate masculine nouns do not change in the accusative case.',
+          ru: 'Неодушевленные существительные мужского рода не изменяются в винительном падеже.',
+          ua: 'Неживі іменники чоловічого роду не змінюються у знахідному відмінку.'
         }
       }
     ]
@@ -221,201 +422,401 @@ export const promotionTests: Record<string, {
       {
         id: 1,
         question: {
-          en: "Complete: Idem u _____ (store - trgovina - accusative singular).",
-          ru: "Завершите: Idem u _____ (магазин - trgovina - винительный падеж).",
-          ua: "Завершіть: Idem u _____ (магазин - trgovina - знахідний відмінок)."
+          en: "Complete: Jučer je on _____ (raditi, past tense). (Yesterday he worked.)",
+          ru: "Заполните: Jučer je on _____ (raditi, прош. вр.). (Вчера он работал.)",
+          ua: "Заповніть: Jučer je on _____ (raditi, мин. ч.). (Вчора він працював.)"
         },
         options: [
-          { en: "trgovinu", ru: "trgovinu", ua: "trgovinu" },
-          { en: "trgovina", ru: "trgovina", ua: "trgovina" },
-          { en: "trgovini", ru: "trgovini", ua: "trgovini" },
-          { en: "trgovine", ru: "trgovine", ua: "trgovine" }
+          { en: "radila", ru: "radila", ua: "radila" },
+          { en: "radio", ru: "radio", ua: "radio" },
+          { en: "radili", ru: "radili", ua: "radili" },
+          { en: "radit", ru: "radit", ua: "radit" }
         ],
-        correctAnswer: 0,
+        correctAnswer: 1,
         explanation: {
-          en: "Preposition 'u' indicating destination requires accusative ('trgovinu').",
-          ru: "Предлог 'u' с направлением движения требует винительного падежа ('trgovinu').",
-          ua: "Прийменник 'u' з напрямком руху вимагає знахідного відмінка ('trgovinu')."
+          en: '"radio" is the masculine singular past participle of "raditi".',
+          ru: '"radio" — причастие прош. вр. мужского рода ед.ч. от "raditi".',
+          ua: '"radio" — дієприкметник мин. ч. чоловічого роду однини від "raditi".'
         }
       },
       {
         id: 2,
         question: {
-          en: "Complete: Radim u _____ (office - ured - locative singular).",
-          ru: "Завершите: Radim u _____ (офис - ured - местный падеж).",
-          ua: "Завершіть: Radim u _____ (офіс - ured - місцевий відмінок)."
+          en: "Which preposition fits: Mi smo _____ uredu. (We are in the office.)",
+          ru: "Какой предлог подходит: Mi smo _____ uredu. (Мы в офисе.)",
+          ua: "Який прийменник підходить: Mi smo _____ uredu. (Ми в офісі.)"
         },
         options: [
-          { en: "uredu", ru: "uredu", ua: "uredu" },
-          { en: "ured", ru: "ured", ua: "ured" },
-          { en: "ureda", ru: "ureda", ua: "ureda" },
-          { en: "uredom", ru: "uredom", ua: "uredom" }
+          { en: "u", ru: "u", ua: "u" },
+          { en: "na", ru: "na", ua: "na" },
+          { en: "o", ru: "o", ua: "o" },
+          { en: "kod", ru: "kod", ua: "kod" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: "Locative case of masculine 'ured' ends in -u: 'uredu'.",
-          ru: "Местный падеж для неодушевленного существительного мужского рода 'ured' оканчивается на -u: 'uredu'.",
-          ua: "Місцевий відмінок для неживого іменника чоловічого роду 'ured' закінчується на -u: 'uredu'."
+          en: 'The preposition "u" (in) + Locative indicates static location inside.',
+          ru: 'Предлог "u" (в) + предложный падеж выражает нахождение внутри.',
+          ua: 'Прийменник "u" (в) + місцевий відмінок виражає перебування всередині.'
         }
       },
       {
         id: 3,
         question: {
-          en: "Complete: Jučer smo _____ (watched - masculine plural) odličan film.",
-          ru: "Завершите: Jučer smo _____ (смотрели - м.р. мн.ч.) odličan film.",
-          ua: "Завершіть: Jučer smo _____ (дивилися - ч.р. мн.) odličan film."
+          en: "What is the dative pronoun for 'to me' in Croatian (short form)?",
+          ru: "Каково дательное местоимение 'мне' в хорватском (краткая форма)?",
+          ua: "Який давальний займенник 'мені' в хорватській (коротка форма)?"
         },
         options: [
-          { en: "gledali", ru: "gledali", ua: "gledali" },
-          { en: "gledao", ru: "gledao", ua: "gledao" },
-          { en: "gledala", ru: "gledala", ua: "gledala" },
-          { en: "gledati", ru: "gledati", ua: "gledati" }
+          { en: "me", ru: "me", ua: "me" },
+          { en: "mi", ru: "mi", ua: "mi" },
+          { en: "meni", ru: "meni", ua: "meni" },
+          { en: "mne", ru: "mne", ua: "mne" }
         ],
-        correctAnswer: 0,
+        correctAnswer: 1,
         explanation: {
-          en: '"Gledali" is the past active participle for masculine plural (mi - we).',
-          ru: '"Gledali" — причастие прошедшего времени для мужского рода множественного числа.',
-          ua: '"Gledali" — дієприкметник минулого часу для чоловічого роду множини.'
+          en: '"mi" is the clitic (short form) dative pronoun for ja (me/to me).',
+          ru: '"mi" — краткая форма дательного падежа местоимения ja.',
+          ua: '"mi" — коротка форма давального відмінка займенника ja.'
         }
       },
       {
         id: 4,
         question: {
-          en: "Who professionaly works in a restaurant serving guests?",
-          ru: "Кто профессионально работает в ресторане, обслуживая гостей?",
-          ua: "Хто професійно працює в ресторані, обслуговуючи гостей?"
+          en: "What is the genitive singular ending for masculine nouns?",
+          ru: "Каково окончание родительного падежа ед.ч. для мужского рода?",
+          ua: "Яке закінчення родового відмінка однини для чоловічого роду?"
         },
         options: [
-          { en: "konobar (waiter)", ru: "konobar (официант)", ua: "konobar (офіціант)" },
-          { en: "kuhar (chef)", ru: "kuhar (повар)", ua: "kuhar (кухар)" },
-          { en: "liječnik (doctor)", ru: "liječnik (врач)", ua: "liječnik (лікар)" },
-          { en: "učitelj (teacher)", ru: "učitelj (учитель)", ua: "učitelj (вчитель)" }
+          { en: "-u", ru: "-u", ua: "-u" },
+          { en: "-a", ru: "-a", ua: "-a" },
+          { en: "-e", ru: "-e", ua: "-e" },
+          { en: "-i", ru: "-i", ua: "-i" }
         ],
-        correctAnswer: 0,
+        correctAnswer: 1,
         explanation: {
-          en: '"Konobar" is the Croatian word for waiter.',
-          ru: '"Konobar" означает официант по-хорватски.',
-          ua: '"Konobar" означає офіціант хорватською.'
+          en: 'Masculine nouns end in -a in the genitive singular (eg. stol -> stola).',
+          ru: 'Существительные мужского рода оканчиваются на -a в родительном падеже ед.ч.',
+          ua: 'Іменники чоловічого роду закінчуються на -a в родовому відмінку однини.'
         }
       },
       {
         id: 5,
         question: {
-          en: "Complete: Putujem _____ (by train - vlak - instrumental singular).",
-          ru: "Завершите: Putujem _____ (поездом - vlak - творительный падеж).",
-          ua: "Завершіть: Putujem _____ (поїздом - vlak - орудний відмінок)."
+          en: "How do you say 'I wash myself' in Croatian using the reflexive pronoun?",
+          ru: "Как сказать 'Я моюсь' по-хорватски, используя возвратное местоимение?",
+          ua: "Як сказати 'Я миюся' хорватською, використовуючи зворотний займенник?"
         },
         options: [
-          { en: "vlakom", ru: "vlakom", ua: "vlakom" },
-          { en: "s vlakom", ru: "s vlakom", ua: "s vlakom" },
-          { en: "u vlaku", ru: "u vlaku", ua: "u vlaku" },
-          { en: "na vlak", ru: "na vlak", ua: "na vlak" }
+          { en: "Ja perem se.", ru: "Ja perem se.", ua: "Ja perem se." },
+          { en: "Ja se perem.", ru: "Ja se perem.", ua: "Ja se perem." },
+          { en: "Ja sam perem.", ru: "Ja sam perem.", ua: "Ja sam perem." },
+          { en: "Ja perem mene.", ru: "Ja perem mene.", ua: "Ja perem mene." }
         ],
-        correctAnswer: 0,
+        correctAnswer: 1,
         explanation: {
-          en: "When describing a means of transport, use the instrumental case without prepositions ('vlakom').",
-          ru: "Для выражения средства передвижения используется творительный падеж без предлога ('vlakom').",
-          ua: "Для вираження засобу пересування використовується орудний відмінок без прийменника ('vlakom')."
+          en: 'The clitic reflexive pronoun "se" must be placed in the second syntactic position.',
+          ru: 'Возвратная частица "se" должна занимать вторую позицию в предложении.',
+          ua: 'Зворотна частка "se" має займати другу позицію в реченні.'
         }
       },
       {
         id: 6,
         question: {
-          en: "Complete: Nažalost, nemam _____ (money - novac - genitive singular).",
-          ru: "Завершите: Nažalost, nemam _____ (денег - novac - родительный падеж).",
-          ua: "Завершіть: Nažalost, nemam _____ (грошей - novac - родовий відмінок)."
+          en: "Complete: Oni _____ (ići, past plural) u Split. (They went to Split.)",
+          ru: "Заполните: Oni _____ u Split. (Они ездили в Сплит.)",
+          ua: "Заповніть: Oni _____ u Split. (Вони їздили до Спліта.)"
         },
         options: [
-          { en: "novca", ru: "novca", ua: "novca" },
-          { en: "novac", ru: "novac", ua: "novac" },
-          { en: "novcu", ru: "novcu", ua: "novcu" },
-          { en: "novcem", ru: "novcem", ua: "novcem" }
+          { en: "su išli", ru: "su išli", ua: "su išli" },
+          { en: "su išle", ru: "su išle", ua: "su išle" },
+          { en: "su išla", ru: "su išla", ua: "su išla" },
+          { en: "su išao", ru: "su išao", ua: "su išao" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: "Negative statements (nemam) require the genitive case of the object ('novca').",
-          ru: "Отрицания (nemam) требуют родительного падежа для дополнения ('novca').",
-          ua: "Заперечення (nemam) вимагають родового відмінка для додатка ('novca')."
+          en: '"išli" is the masculine plural past participle of "ići".',
+          ru: '"išli" — причастие прош. вр. мн.ч. мужского рода от "ići".',
+          ua: '"išli" — дієприкметник мин. ч. множини чоловічого роду від "ići".'
         }
       },
       {
         id: 7,
         question: {
-          en: "Which adverb correctly answers 'Kamo ideš?' (Where are you going?)?",
-          ru: "На какой вопрос правильно отвечает наречие 'tamo' (туда)?",
-          ua: "Яке прислівник правильно відповідає на питання 'Kamo ideš?' (Куди ти йдеш?)?"
+          en: "Complete: Putujem s _____ (brat - instrumental). (I travel with my brother.)",
+          ru: "Заполните: Putujem s _____ (brat). (Я путешествую с братом.)",
+          ua: "Заповніть: Putujem s _____ (brat). (Я подорожую з братом.)"
         },
         options: [
-          { en: "tamo (there - direction)", ru: "tamo (туда - направление)", ua: "tamo (туди - напрямок)" },
-          { en: "ovdje (here - location)", ru: "ovdje (тут - место)", ua: "ovdje (тут - місце)" },
-          { en: "gdje (where - location)", ru: "gdje (где - место)", ua: "gdje (де - місце)" },
-          { en: "nikamo (nowhere - location)", ru: "nikamo (никуда - место)", ua: "nikamo (нікуди - місце)" }
+          { en: "bratom", ru: "bratom", ua: "bratom" },
+          { en: "brata", ru: "brata", ua: "brata" },
+          { en: "bratu", ru: "bratu", ua: "bratu" },
+          { en: "brate", ru: "brate", ua: "brate" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: '"Kamo" asks about direction, so the answer must be "tamo" (there/thither).',
-          ru: '"Kamo" спрашивает о направлении движения, поэтому ответом является "tamo" (туда).',
-          ua: '"Kamo" запитує про напрямок руху, тому відповіддю є "tamo" (туди).'
+          en: 'The preposition "s" requires the instrumental case. Masculine singular ending is -om.',
+          ru: 'Предлог "s" (с) требует творительного падежа. Окончание м.р. ед.ч. — -om.',
+          ua: 'Прийменник "s" (з) вимагає орудного відмінка. Закінчення ч.р. однини — -om.'
         }
       },
       {
         id: 8,
         question: {
-          en: "Complete: Ujutro se ustajem _____ (myself - reflexive pronoun).",
-          ru: "Завершите: Ujutro se ustajem _____ (себя - возвратная частица).",
-          ua: "Завершіть: Ujutro se ustajem _____ (себе - зворотна частка)."
+          en: "Complete: Mi _____ (biti, past plural) sretni. (We were happy.)",
+          ru: "Заполните: Mi _____ sretni. (Мы были счастливы.)",
+          ua: "Заповніть: Mi _____ sretni. (Ми були щасливі.)"
         },
         options: [
-          { en: "se (already included)", ru: "se (уже включено)", ua: "se (вже включено)" },
-          { en: "si", ru: "si", ua: "si" },
-          { en: "me", ru: "me", ua: "me" },
-          { en: "mi", ru: "mi", ua: "mi" }
+          { en: "smo bili", ru: "smo bili", ua: "smo bili" },
+          { en: "ste bili", ru: "ste bili", ua: "ste bili" },
+          { en: "su bili", ru: "su bili", ua: "su bili" },
+          { en: "sam bio", ru: "sam bio", ua: "sam bio" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: '"Ustajati se" is a reflexive verb containing the particle "se".',
-          ru: '"Ustajati se" (вставать) — возвратный глагол с частицей "se".',
-          ua: '"Ustajati se" (вставати) — зворотне дієслово з часткою "se".'
+          en: '"Mi smo bili" is the past tense of "biti" for the 1st person plural.',
+          ru: '"Mi smo bili" — прошедшее время глагола "biti" для 1-го лица мн.ч.',
+          ua: '"Mi smo bili" — минулий час дієслова "biti" для 1-ї особи множини.'
         }
       },
       {
         id: 9,
         question: {
-          en: "Complete: Sutra _____ u Dubrovnik. (Tomorrow we will travel to Dubrovnik.)",
-          ru: "Завершите: Sutra _____ u Dubrovnik. (Завтра мы поедем в Дубровник.)",
-          ua: "Завершіть: Sutra _____ u Dubrovnik. (Завтра ми поїдемо в Дубровник.)"
+          en: "Select correct: Idem u _____ (destination), a sada sam u _____ (static location).",
+          ru: "Выберите верно: Idem u _____ (куда), а сейчас я в _____ (где).",
+          ua: "Виберіть правильно: Idem u _____ (куди), а зараз я в _____ (де)."
         },
         options: [
-          { en: "ćemo putovati", ru: "ćemo putovati", ua: "ćemo putovati" },
-          { en: "putovali smo", ru: "putovali smo", ua: "putovali smo" },
-          { en: "putujemo", ru: "putujemo", ua: "putujemo" },
-          { en: "bismo putovali", ru: "bismo putovali", ua: "bismo putovali" }
+          { en: "Zagrebu / Zagreb", ru: "Zagrebu / Zagreb", ua: "Zagrebu / Zagreb" },
+          { en: "Zagreb / Zagrebu", ru: "Zagreb / Zagrebu", ua: "Zagreb / Zagrebu" },
+          { en: "Zagrebu / Zagrebu", ru: "Zagrebu / Zagrebu", ua: "Zagrebu / Zagrebu" },
+          { en: "Zagreb / Zagreb", ru: "Zagreb / Zagreb", ua: "Zagreb / Zagreb" }
         ],
-        correctAnswer: 0,
+        correctAnswer: 1,
         explanation: {
-          en: "Future I is formed with 'ćemo' + infinitive 'putovati'.",
-          ru: "Будущее время I образуется с помощью вспомогательного глагола 'ćemo' + инфинитив 'putovati'.",
-          ua: "Майбутній час I утворюється за допомогою допоміжного дієслова 'ćemo' + інфінітив 'putovati'."
+          en: 'Destination requires Accusative ("u Zagreb"), while location requires Locative ("u Zagrebu").',
+          ru: 'Направление требует винительного падежа ("u Zagreb"), а нахождение — местного ("u Zagrebu").',
+          ua: 'Напрямок вимагає знахідного відмінка ("u Zagreb"), а місцезнаходження — місцевого ("u Zagrebu").'
         }
       },
       {
         id: 10,
         question: {
-          en: "Complete: Danas idem kod _____ (doctor - liječnik - genitive singular).",
-          ru: "Завершите: Danas idem kod _____ (врач - liječnik - родительный падеж).",
-          ua: "Завершіть: Danas idem kod _____ (лікар - liječnik - родовий відмінок)."
+          en: "Complete: Ja _____ (must) učiti. (I must study.)",
+          ru: "Заполните: Ja _____ učiti. (Я должен учиться.)",
+          ua: "Заповніть: Ja _____ učiti. (Я мушу вчитися.)"
         },
         options: [
-          { en: "liječnika", ru: "liječnika", ua: "liječnika" },
-          { en: "liječniku", ru: "liječniku", ua: "liječniku" },
-          { en: "liječnikom", ru: "liječnikom", ua: "liječnikom" },
-          { en: "liječnik", ru: "liječnik", ua: "liječnik" }
+          { en: "moram", ru: "moram", ua: "moram" },
+          { en: "moraš", ru: "moraš", ua: "moraš" },
+          { en: "mora", ru: "mora", ua: "mora" },
+          { en: "moraju", ru: "moraju", ua: "moraju" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: "Preposition 'kod' (at / to someone's place) requires the genitive case ('liječnika').",
-          ru: "Предлог 'kod' (у / к кому-то) требует родительного падежа ('liječnika').",
-          ua: "Прийменник 'kod' (у / до когось) вимагає родового відмінка ('liječnika')."
+          en: '"Moram" is the 1st person singular form of "morati".',
+          ru: '"Moram" — форма 1-го лица ед.ч. глагола "morati".',
+          ua: '"Moram" — форма 1-ї особи однини дієслова "morati".'
+        }
+      },
+      {
+        id: 11,
+        question: {
+          en: "How is the future tense 'I will write' formed in Croatian?",
+          ru: "Как образуется будущее время 'я буду писать' в хорватском?",
+          ua: "Як утворюється майбутній час 'я буду писати' хорватською?"
+        },
+        options: [
+          { en: "Pisat ću", ru: "Pisat ću", ua: "Pisat ću" },
+          { en: "Pisati ću", ru: "Pisati ću", ua: "Pisati ću" },
+          { en: "Ja ću pisati", ru: "Ja ću pisati", ua: "Ja ću pisati" },
+          { en: "Both A and C are correct", ru: "И А, и С верны", ua: "І А, і С правильні" }
+        ],
+        correctAnswer: 3,
+        explanation: {
+          en: 'Both "Pisat ću" (with infinitive truncated) and "Ja ću pisati" are grammatically correct.',
+          ru: 'И "Pisat ću", и "Ja ću pisati" грамматически верны.',
+          ua: 'І "Pisat ću", і "Ja ću pisati" граматично правильні.'
+        }
+      },
+      {
+        id: 12,
+        question: {
+          en: "What is the partitive genitive expression for 'some water'?",
+          ru: "Каково партитивное (количественное) выражение для 'немного воды'?",
+          ua: "Який партитивний (кількісний) вираз для 'трохи води'?"
+        },
+        options: [
+          { en: "čaša vode", ru: "čaša vode", ua: "čaša vode" },
+          { en: "malo vode", ru: "malo vode", ua: "malo vode" },
+          { en: "piti vodu", ru: "piti vodu", ua: "piti vodu" },
+          { en: "Both A and B use Genitive", ru: "И А, и В используют род.п.", ua: "І А, і В використовують род.в." }
+        ],
+        correctAnswer: 3,
+        explanation: {
+          en: 'Both expressions use the Genitive singular of "voda" ("vode") for quantities.',
+          ru: 'Оба выражения используют родительный падеж ("vode") для выражения количества.',
+          ua: 'Обидва вирази використовують родовий відмінок ("vode") для вираження кількості.'
+        }
+      },
+      {
+        id: 13,
+        question: {
+          en: "What does the word 'trgovina' mean?",
+          ru: "Что означает слово 'trgovina'?",
+          ua: "Что означает слово 'trgovina'?"
+        },
+        options: [
+          { en: "store / shop", ru: "магазин", ua: "магазин" },
+          { en: "market", ru: "рынок", ua: "ринок" },
+          { en: "office", ru: "офис", ua: "офіс" },
+          { en: "station", ru: "вокзал / станция", ua: "вокзал / станція" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: '"Trgovina" means shop or store.',
+          ru: '"Trgovina" переводится как магазин.',
+          ua: '"Trgovina" перекладається як магазин.'
+        }
+      },
+      {
+        id: 14,
+        question: {
+          en: "Match adjective with feminine noun: '_____ kuća' (beautiful house).",
+          ru: "Согласуйте прилагательное с женским родом: '_____ kuća'.",
+          ua: "Узгодьте прикметник з жіночим родом: '_____ kuća'."
+        },
+        options: [
+          { en: "Lijep", ru: "Lijep", ua: "Lijep" },
+          { en: "Lijepa", ru: "Lijepa", ua: "Lijepa" },
+          { en: "Lijepo", ru: "Lijepo", ua: "Lijepo" },
+          { en: "Lijepe", ru: "Lijepe", ua: "Lijepe" }
+        ],
+        correctAnswer: 1,
+        explanation: {
+          en: 'Feminine adjectives end in -a to agree with feminine nouns (lijepa kuća).',
+          ru: 'Прилагательные женского рода оканчиваются на -a (lijepa kuća).',
+          ua: 'Прикметники жіночого роду закінчуються на -a (lijepa kuća).'
+        }
+      },
+      {
+        id: 15,
+        question: {
+          en: "What is the negation of 'ja sam' (I am)?",
+          ru: "Каково отрицание формы 'ja sam'?",
+          ua: "Яке заперечення форми 'ja sam'?"
+        },
+        options: [
+          { en: "ja ne sam", ru: "ja ne sam", ua: "ja ne sam" },
+          { en: "ja nisam", ru: "ja nisam", ua: "ja nisam" },
+          { en: "ja neću", ru: "ja neću", ua: "ja neću" },
+          { en: "ja nemam", ru: "ja nemam", ua: "ja nemam" }
+        ],
+        correctAnswer: 1,
+        explanation: {
+          en: '"Nisam" is the negative present form of "biti" for the 1st person singular.',
+          ru: '"Nisam" — отрицательная форма глагола "biti" для 1-го лица ед.ч.',
+          ua: '"Nisam" — заперечна форма дієслова "biti" для 1-ї особи однини.'
+        }
+      },
+      {
+        id: 16,
+        question: {
+          en: "Complete: Ovo je _____ (your - informal singular feminine) knjiga.",
+          ru: "Заполните: Ovo je _____ knjiga. (Это твоя книга.)",
+          ua: "Заповніть: Ovo je _____ knjiga. (Це твоя книга.)"
+        },
+        options: [
+          { en: "tvoj", ru: "tvoj", ua: "tvoj" },
+          { en: "tvoja", ru: "tvoja", ua: "tvoja" },
+          { en: "tvoje", ru: "tvoje", ua: "tvoje" },
+          { en: "tvoji", ru: "tvoji", ua: "tvoji" }
+        ],
+        correctAnswer: 1,
+        explanation: {
+          en: 'Possessive pronoun "tvoja" agrees with the feminine noun "knjiga".',
+          ru: 'Притяжательное местоимение "tvoja" согласуется с женским родом "knjiga".',
+          ua: 'Присвійний займенник "tvoja" узгоджується з жіночим родом "knjiga".'
+        }
+      },
+      {
+        id: 17,
+        question: {
+          en: "What is the plural of the masculine noun 'stan' (apartment)?",
+          ru: "Каков именительный падеж мн.ч. от 'stan'?",
+          ua: "Який називний відмінок множини від 'stan'?"
+        },
+        options: [
+          { en: "stani", ru: "stani", ua: "stani" },
+          { en: "stane", ru: "stane", ua: "stane" },
+          { en: "stanovi", ru: "stanovi", ua: "stanovi" },
+          { en: "stanove", ru: "stanove", ua: "stanove" }
+        ],
+        correctAnswer: 2,
+        explanation: {
+          en: 'Monosyllabic masculine nouns get the plural insert -ov- (stan -> stanovi).',
+          ru: 'Односложные существительные мужского рода получают суффикс -ov- во мн.ч.',
+          ua: 'Односкладові іменники чоловічого роду отримують суфікс -ov- у множині.'
+        }
+      },
+      {
+        id: 18,
+        question: {
+          en: "Complete: Ja _____ (love) glazbu.",
+          ru: "Заполните: Ja _____ glazbu. (Я люблю музыку.)",
+          ua: "Заповніть: Ja _____ glazbu. (Я люблю музику.)"
+        },
+        options: [
+          { en: "volim", ru: "volim", ua: "volim" },
+          { en: "voliš", ru: "voliš", ua: "voliš" },
+          { en: "voli", ru: "voli", ua: "voli" },
+          { en: "volimo", ru: "volimo", ua: "volimo" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: '"Volim" is the 1st person present form of "voljeti".',
+          ru: '"Volim" — форма настоящего времени 1-го лица ед.ч. от "voljeti".',
+          ua: '"Volim" — форма теперішнього часу 1-ї особи однини від "voljeti".'
+        }
+      },
+      {
+        id: 19,
+        question: {
+          en: "What does the word 'glava' mean?",
+          ru: "Что означает слово 'glava'?",
+          ua: "Что означает слово 'glava'?"
+        },
+        options: [
+          { en: "head", ru: "голова", ua: "голова" },
+          { en: "hand", ru: "рука", ua: "рука" },
+          { en: "foot", ru: "нога", ua: "нога" },
+          { en: "eye", ru: "глаз", ua: "око" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: '"Glava" means head.',
+          ru: '"Glava" означает голова.',
+          ua: '"Glava" означає голова.'
+        }
+      },
+      {
+        id: 20,
+        question: {
+          en: "How do you ask 'What time is it?' in Croatian?",
+          ru: "Как спросить 'Который час?' по-хорватски?",
+          ua: "Як запитати 'Котра година?' хорватською?"
+        },
+        options: [
+          { en: "Koliko je sati?", ru: "Koliko je sati?", ua: "Koliko je sati?" },
+          { en: "Koje je vrijeme?", ru: "Koje je vrijeme?", ua: "Koje je vrijeme?" },
+          { en: "Koliko sati imaš?", ru: "Koliko sati imaš?", ua: "Koliko sati imaš?" },
+          { en: "Gdje je sat?", ru: "Gdje je sat?", ua: "Gdje je sat?" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: '"Koliko je sati?" is the standard way to ask for the time.',
+          ru: '"Koliko je sati?" — стандартный вопрос о времени.',
+          ua: '"Koliko je sati?" — стандартне запитання про час.'
         }
       }
     ]
@@ -426,201 +827,401 @@ export const promotionTests: Record<string, {
       {
         id: 1,
         question: {
-          en: "Complete: Moram pod hitno _____ (finish - perfective infinitive) ovaj projekt.",
-          ru: "Завершите: Moram pod hitno _____ (закончить - совершенный вид) ovaj projekt.",
-          ua: "Завершіть: Moram pod hitno _____ (закінчити - доконаний вид) ovaj projekt."
+          en: "Which verb aspect form is used for a completed action: 'Jučer sam _____ pismo.' (I wrote a letter.)",
+          ru: "Какая видовая форма используется для завершенного действия: 'Jučer sam _____ pismo.' (Я написал письмо.)",
+          ua: "Яка видова форма використовується для завершеної дії: 'Jučer sam _____ pismo.' (Я написав листа.)"
         },
         options: [
-          { en: "završiti", ru: "završiti", ua: "završiti" },
-          { en: "završavati", ru: "završavati", ua: "završavati" },
-          { en: "završim", ru: "završim", ua: "završim" },
-          { en: "završio", ru: "završio", ua: "završio" }
+          { en: "pisao", ru: "pisao", ua: "pisao" },
+          { en: "napisao", ru: "napisao", ua: "napisao" },
+          { en: "pišem", ru: "pišem", ua: "pišem" },
+          { en: "napišem", ru: "napišem", ua: "napišem" }
         ],
-        correctAnswer: 0,
+        correctAnswer: 1,
         explanation: {
-          en: "For a single completed action in the future, the perfective infinitive 'završiti' is used.",
-          ru: "Для единичного законченного действия в инфинитиве используется совершенный вид 'završiti'.",
-          ua: "Для одиничної завершеної дії в інфінітиві використовується доконаний вид 'završiti'."
+          en: '"Napisao" is the perfective past participle, showing a completed action.',
+          ru: '"Napisao" — причастие прош. вр. совершенного вида, выражает завершенное действие.',
+          ua: '"Napisao" — дієприкметник мин. ч. доконаного виду, виражає завершену дію.'
         }
       },
       {
         id: 2,
         question: {
-          en: "Complete: Ako _____ (future II of 'imati') vremena, svakako dođi.",
-          ru: "Завершите: Ako _____ (будущее II от 'imati') vremena, svakako dođi.",
-          ua: "Завершіть: Ako _____ (майбутній II від 'imati') vremena, svakako dođi."
+          en: "Complete with Future II: Kad _____ (you arrive), javi mi se.",
+          ru: "Заполните с Future II: Kad _____ (ты приедешь), javi mi se.",
+          ua: "Заповніть з Future II: Kad _____ (ти приїдеш), javi mi se."
         },
         options: [
-          { en: "budem imao", ru: "budem imao", ua: "budem imao" },
-          { en: "ću imati", ru: "ću imati", ua: "ću imati" },
-          { en: "bih imao", ru: "bih imao", ua: "bih imao" },
-          { en: "imam", ru: "imam", ua: "imam" }
+          { en: "budeš stigao", ru: "budeš stigao", ua: "budeš stigao" },
+          { en: "ćeš stići", ru: "ćeš stići", ua: "ćeš stići" },
+          { en: "stigneš", ru: "stigneš", ua: "stigneš" },
+          { en: "bi stigao", ru: "bi stigao", ua: "bi stigao" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: "Future II is used in conditional sentences that express conditions prior to another future action.",
-          ru: "Будущее время II (budem imao) используется в придаточных условных предложениях будущего времени.",
-          ua: "Майбутній час II (budem imao) використовується в підрядних умовних реченнях майбутнього часу."
+          en: 'Future II is formed with budem/budeš... + participle for pre-actions in future clauses.',
+          ru: 'Future II образуется с помощью будешь + причастие для предшествующих действий.',
+          ua: 'Future II утворюється за допомогою будеш + дієприкметник для передуючих дій.'
         }
       },
       {
         id: 3,
         question: {
-          en: "Complete: Pomažem _____ (friend - prijatelj - dative singular).",
-          ru: "Завершите: Pomažem _____ (друг - prijatelj - дательный падеж).",
-          ua: "Завершіть: Pomažem _____ (друг - prijatelj - давальний відмінок)."
+          en: "Which preposition requires the Genitive case?",
+          ru: "Какой предлог требует родительного падежа?",
+          ua: "Який прийменник вимагає родового відмінка?"
         },
         options: [
-          { en: "prijatelju", ru: "prijatelju", ua: "prijatelju" },
-          { en: "prijatelja", ru: "prijatelja", ua: "prijatelja" },
-          { en: "prijateljem", ru: "prijateljem", ua: "prijateljem" },
-          { en: "prijatelje", ru: "prijatelje", ua: "prijatelje" }
+          { en: "bez", ru: "bez", ua: "bez" },
+          { en: "u", ru: "u", ua: "u" },
+          { en: "s / sa", ru: "s / sa", ua: "s / sa" },
+          { en: "o", ru: "o", ua: "o" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: "The verb 'pomagati' (to help) requires the dative case ('prijatelju').",
-          ru: "Глагол 'pomagati' (помогать) управляет дательным падежом ('prijatelju').",
-          ua: "Дієслово 'pomagati' (допомагати) керує давальним відмінком ('prijatelju')."
+          en: '"bez" (without) always requires the Genitive case.',
+          ru: 'Предлог "bez" (без) всегда требует родительного падежа.',
+          ua: 'Прийменник "bez" (без) завжди вимагає родового відмінка.'
         }
       },
       {
         id: 4,
         question: {
-          en: "What does 'razvrstavanje otpada' refer to?",
-          ru: "Что означает выражение 'razvrstavanje otpada'?",
-          ua: "Що означає вираз 'razvrstavanje otpada'?"
+          en: "What is the comparative form of the adjective 'dobar' (good)?",
+          ru: "Какова сравнительная степень прилагательного 'dobar'?",
+          ua: "Який вищий ступінь порівняння прикметника 'dobar'?"
         },
         options: [
-          { en: "sorting waste", ru: "сортировка отходов", ua: "сортування сміття" },
-          { en: "saving money", ru: "экономия денег", ua: "економія грошей" },
-          { en: "buying furniture", ru: "покупка мебели", ua: "купівля меблів" },
-          { en: "cooking food", ru: "приготовление еды", ua: "приготування їжі" }
+          { en: "dobriji", ru: "dobriji", ua: "dobriji" },
+          { en: "bolji", ru: "bolji", ua: "bolji" },
+          { en: "najbolji", ru: "najbolji", ua: "najbolji" },
+          { en: "dobro", ru: "dobro", ua: "dobro" }
         ],
-        correctAnswer: 0,
+        correctAnswer: 1,
         explanation: {
-          en: "'Razvrstavanje' means sorting/separating, and 'otpad' means waste/refuse.",
-          ru: "'Razvrstavanje' означает сортировку, а 'otpad' — отходы.",
-          ua: "'Razvrstavanje' означає сортування, а 'otpad' — відходи."
+          en: '"bolji" is the irregular comparative form of "dobar".',
+          ru: '"bolji" — неправильная сравнительная степень от "dobar".',
+          ua: '"bolji" — неправильний вищий ступінь від "dobar".'
         }
       },
       {
         id: 5,
         question: {
-          en: "Choose the grammatically correct clitic order:",
-          ru: "Выберите грамматически верный порядок энклитик:",
-          ua: "Оберіть граматично правильний порядок енклітик:"
+          en: "Choose the correct clitic pronoun order: 'On _____ (it to me) je dao.'",
+          ru: "Выберите верный порядок местоимений-энклитик: 'On _____ je dao.' (Он дал это мне.)",
+          ua: "Виберіть правильний порядок займенників-енклітик: 'On _____ je dao.' (Він дав це мені.)"
         },
         options: [
-          { en: "Jučer su mi ga dali.", ru: "Jučer su mi ga dali.", ua: "Jučer su mi ga dali." },
-          { en: "Jučer mi su ga dali.", ru: "Jučer mi su ga dali.", ua: "Jučer mi su ga dali." },
-          { en: "Jučer ga mi su dali.", ru: "Jučer ga mi su dali.", ua: "Jučer ga mi su dali." },
-          { en: "Jučer dali su mi ga.", ru: "Jučer dali su mi ga.", ua: "Jučer dali su mi ga." }
+          { en: "ga mi", ru: "ga mi", ua: "ga mi" },
+          { en: "mi ga", ru: "mi ga", ua: "mi ga" },
+          { en: "mi je ga", ru: "mi je ga", ua: "mi je ga" },
+          { en: "ga je mi", ru: "ga je mi", ua: "ga je mi" }
         ],
-        correctAnswer: 0,
+        correctAnswer: 1,
         explanation: {
-          en: "The correct order of clitics: verbal auxiliary ('su') + dative pronoun ('mi') + accusative pronoun ('ga').",
-          ru: "Правильный порядок энклитик: глагол-связка ('su') + дательный падеж ('mi') + винительный падеж ('ga').",
-          ua: "Правильний порядок енклітик: дієслово-зв'язка ('su') + давальний відмінок ('mi') + знахідний відмінок ('ga')."
+          en: 'Dative clitics (mi) always precede accusative clitics (ga) (mi ga).',
+          ru: 'Дательные энклитики (mi) всегда предшествуют винительным (ga) (mi ga).',
+          ua: 'Давальні енклітики (mi) завжди передують знахідним (ga) (mi ga).'
         }
       },
       {
         id: 6,
         question: {
-          en: "Complete: Često razgovaramo o _____ (new plans - locative plural).",
-          ru: "Завершите: Često razgovaramo o _____ (новые планы - locative plural).",
-          ua: "Завершіть: Često razgovaramo o _____ (нові плани - locative plural)."
+          en: "What is the perfective counterpart of 'pisati'?",
+          ru: "Каков совершенный вид глагола 'pisati'?",
+          ua: "Який доконаний вид дієслова 'pisati'?"
         },
         options: [
-          { en: "novim planovima", ru: "novim planovima", ua: "novim planovima" },
-          { en: "novi planovi", ru: "novi planovi", ua: "novi planovi" },
-          { en: "novih planova", ru: "novih planova", ua: "novih planova" },
-          { en: "novim planom", ru: "novim planom", ua: "novim planom" }
+          { en: "prepisati", ru: "prepisati", ua: "prepisati" },
+          { en: "napisati", ru: "napisati", ua: "napisati" },
+          { en: "zapisati", ru: "zapisati", ua: "zapisati" },
+          { en: "upisati", ru: "upisati", ua: "upisati" }
         ],
-        correctAnswer: 0,
+        correctAnswer: 1,
         explanation: {
-          en: "Preposition 'o' (about) requires locative plural ending in -ima for adjectives and masculine nouns.",
-          ru: "Предлог 'o' (о) требует предложного падежа во множественном числе с окончанием -ima.",
-          ua: "Прийменник 'o' (про) вимагає місцевого відмінка у множині із закінченням -ima."
+          en: '"napisati" is the basic perfective pair for "pisati".',
+          ru: '"napisati" — основная пара совершенного вида для "pisati".',
+          ua: '"napisati" — основна пара доконаного виду для "pisati".'
         }
       },
       {
         id: 7,
         question: {
-          en: "Complete: Znam ženu _____ sin studira u Zagrebu. (I know the woman whose son is studying...)",
-          ru: "Завершите: Znam ženu _____ sin studira u Zagrebu. (Я знаю женщину, чей сын...)",
-          ua: "Завершіть: Znam ženu _____ sin studira u Zagrebu. (Я знаю жінку, чий син...)"
+          en: "Which case ending follows the numbers 2, 3, and 4 in Croatian?",
+          ru: "Какой падеж используется после числительных 2, 3 и 4?",
+          ua: "Який відмінок використовується після числівників 2, 3 та 4?"
         },
         options: [
-          { en: "čiji", ru: "čiji", ua: "čiji" },
-          { en: "kojeg", ru: "kojeg", ua: "kojeg" },
-          { en: "čijeg", ru: "čijeg", ua: "čijeg" },
-          { en: "čijem", ru: "čijem", ua: "čijem" }
+          { en: "Nominative plural", ru: "Именительный мн.ч.", ua: "Називний множини" },
+          { en: "Genitive singular", ru: "Родительный ед.ч.", ua: "Родовий однини" },
+          { en: "Genitive plural", ru: "Родительный мн.ч.", ua: "Родовий множини" },
+          { en: "Dative plural", ru: "Дательный мн.ч.", ua: "Давальний множини" }
         ],
-        correctAnswer: 0,
+        correctAnswer: 1,
         explanation: {
-          en: "Relative pronoun 'čiji' (whose) must agree with the masculine singular noun 'sin' in nominative.",
-          ru: "Относительное притяжательное местоимение 'čiji' (чей) согласуется с определяемым существительным 'sin' (мужской род, именительный падеж).",
-          ua: "Відносний присвійний займенник 'čiji' (чий) узгоджується з означуваним іменником 'sin' (чоловічий рід, називний відмінок)."
+          en: 'Nouns after 2, 3, 4 require Genitive singular form (eg. tri brata, četiri stola).',
+          ru: 'После 2, 3, 4 требуется родительный падеж ед.ч. (паукальный).',
+          ua: 'Після 2, 3, 4 потрібен родовий відмінок однини.'
         }
       },
       {
         id: 8,
         question: {
-          en: "Complete: Kupio _____ (conditional auxiliary 'I would') novi auto da imam novca.",
-          ru: "Завершите: Kupio _____ (условная частица 'я бы') novi auto da imam novca.",
-          ua: "Завершіть: Kupio _____ (умовна частка 'я б') novi auto da imam novca."
+          en: "Complete with relative pronoun: To je žena _____ (who) je vidjela nesreću.",
+          ru: "Заполните относительным местоимением: To je žena _____ je vidjela nesreću.",
+          ua: "Заповніть відносним займенником: To je žena _____ je vidjela nesreću."
         },
         options: [
-          { en: "bih", ru: "bih", ua: "bih" },
-          { en: "bi", ru: "bi", ua: "bi" },
-          { en: "bismo", ru: "bismo", ua: "bismo" },
-          { en: "su", ru: "su", ua: "su" }
+          { en: "koja", ru: "koja", ua: "koja" },
+          { en: "koju", ru: "koju", ua: "koju" },
+          { en: "koje", ru: "koje", ua: "koje" },
+          { en: "kojem", ru: "kojem", ua: "kojem" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: "Conditional clause for the 1st person singular requires the auxiliary 'bih' (I would).",
-          ru: "Для сослагательного наклонения 1-го лица единственного числа требуется частица 'bih' (я бы).",
-          ua: "Для умовного способу 1-ї особи однини потрібна частка 'bih' (я б)."
+          en: '"koja" is the feminine nominative singular relative pronoun.',
+          ru: '"koja" — относительное местоимение ж.р. именительного падежа ед.ч.',
+          ua: '"koja" — відносний займенник ж.р. називного відмінка однини.'
         }
       },
       {
         id: 9,
         question: {
-          en: "Which word is the verbal noun (gerund) of 'učiti' (to learn)?",
-          ru: "Какое слово является отглагольным существительным от 'učiti' (учить)?",
-          ua: "Яке слово є віддієслівним іменником від 'učiti' (вчити)?"
+          en: "What does the preposition 'kod' mean in: 'Danas sam kod Ivana.'?",
+          ru: "Что означает предлог 'kod' в предложении 'Danas sam kod Ivana.'?",
+          ua: "Що означає прийменник 'kod' у реченні 'Danas sam kod Ivana.'?"
         },
         options: [
-          { en: "učenje (learning)", ru: "učenje (обучение)", ua: "učenje (навчання)" },
-          { en: "učiti (to learn)", ru: "učiti (учить)", ua: "učiti (вчити)" },
-          { en: "učenik (student)", ru: "učenik (ученик)", ua: "učenik (учень)" },
-          { en: "učenost (erudition)", ru: "učenost (ученость)", ua: "učenost (вченість)" }
+          { en: "at Ivan's place", ru: "у Ивана дома / в гости у", ua: "у Івана вдома / в гостях у" },
+          { en: "with Ivan in town", ru: "с Иваном в городе", ua: "з Іваном у місті" },
+          { en: "to Ivan's place (movement)", ru: "к Ивану (направление)", ua: "до Івана (напрямок)" },
+          { en: "under Ivan", ru: "под Иваном", ua: "під Іваном" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: "Croatian verbal nouns are formed with the suffix -nje: 'učenje'.",
-          ru: "Отглагольные существительные образуются с суффиксом -nje: 'učenje'.",
-          ua: "Віддієслівні іменники утворюються із суфіксом -nje: 'učenje'."
+          en: '"kod" + Genitive indicates location at someone\'s place or home.',
+          ru: '"kod" + родительный падеж выражает местонахождение у кого-то дома.',
+          ua: '"kod" + родовий відмінок виражає перебування у когось вдома.'
         }
       },
       {
         id: 10,
         question: {
-          en: "Complete: Pijem kavu bez _____ (sugar - šećer - genitive singular).",
-          ru: "Завершите: Pijem kavu bez _____ (сахар - šećer - родительный падеж).",
-          ua: "Завершіть: Pijem kavu bez _____ (цукор - šećer - родовий відмінок)."
+          en: "Compare the adverb 'brzo' (quickly):",
+          ru: "Образуйте сравнительную степень наречия 'brzo':",
+          ua: "Утворіть вищий ступінь порівняння прислівника 'brzo':"
         },
         options: [
-          { en: "šećera", ru: "šećera", ua: "šećera" },
-          { en: "šećeru", ru: "šećeru", ua: "šećeru" },
-          { en: "šećerom", ru: "šećerom", ua: "šećerom" },
-          { en: "šećera", ru: "šećera", ua: "šećera" }
+          { en: "brzije", ru: "brzije", ua: "brzije" },
+          { en: "brže", ru: "brže", ua: "brže" },
+          { en: "najbrže", ru: "najbrže", ua: "najbrže" },
+          { en: "brzo", ru: "brzo", ua: "brzo" }
+        ],
+        correctAnswer: 1,
+        explanation: {
+          en: '"brže" is the comparative form of "brzo" (quickly).',
+          ru: '"brže" — сравнительная степень наречия "brzo".',
+          ua: '"brže" — вищий ступінь прислівника "brzo".'
+        }
+      },
+      {
+        id: 11,
+        question: {
+          en: "What is the genitive plural ending of feminine nouns ending in -a?",
+          ru: "Каково окончание родительного падежа мн.ч. существительных ж.р. на -a?",
+          ua: "Яке закінчення родового відмінка множини іменників ж.р. на -a?"
+        },
+        options: [
+          { en: "-a (long vowel)", ru: "-a (долгий гласный)", ua: "-a (довгий голосний)" },
+          { en: "-e", ru: "-e", ua: "-e" },
+          { en: "-i", ru: "-i", ua: "-i" },
+          { en: "-u", ru: "-u", ua: "-u" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: "Preposition 'bez' (without) requires the genitive case ('šećera').",
-          ru: "Предлог 'bez' (без) требует родительного падежа ('šećera').",
-          ua: "Прийменник 'bez' (без) вимагає родового відмінка ('šećera')."
+          en: 'Feminine nouns ending in -a have the ending -a with a long vowel in Genitive plural (eg. žena -> žena).',
+          ru: 'Существительные ж.р. на -a во мн.ч. родительного падежа имеют окончание -a.',
+          ua: 'Іменники ж.р. на -a у множині родового відмінка мають закінчення -a.'
+        }
+      },
+      {
+        id: 12,
+        question: {
+          en: "What is the past tense form of 'reći' (to say) for 'on' (he)?",
+          ru: "Какова форма прошедшего времени глагола 'reći' для местоимения 'on'?",
+          ua: "Яка форма минулого часу дієслова 'reći' для займенника 'on'?"
+        },
+        options: [
+          { en: "rekao je", ru: "rekao je", ua: "rekao je" },
+          { en: "reći je", ru: "reći je", ua: "reći je" },
+          { en: "reče je", ru: "reče je", ua: "reče je" },
+          { en: "reko je", ru: "reko je", ua: "reko je" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: '"rekao je" is the past tense form of the irregular verb "reći".',
+          ru: '"rekao je" — прошедшее время глагола "reći".',
+          ua: '"rekao je" — минулий час дієслова "reći".'
+        }
+      },
+      {
+        id: 13,
+        question: {
+          en: "Choose the correct pairing for location vs movement verbs:",
+          ru: "Выберите правильную пару глаголов местонахождения и движения:",
+          ua: "Виберіть правильну пару дієслів місцезнаходження та руху:"
+        },
+        options: [
+          { en: "leži / leže", ru: "leži / leže", ua: "leži / leže" },
+          { en: "stoji / stavlja", ru: "stoji / stavlja", ua: "stoji / stavlja" },
+          { en: "sjedi / sjeda", ru: "sjedi / sjeda", ua: "sjedi / sjeda" },
+          { en: "All of the above show location vs placement", ru: "Все вышеперечисленное верно", ua: "Все вищезазначене правильно" }
+        ],
+        correctAnswer: 3,
+        explanation: {
+          en: 'Croatian distinguishes between state of being (sjedi, stoji) and action/placement (sjeda, stavlja).',
+          ru: 'Хорватский различает статическое состояние и динамическое действие.',
+          ua: 'Хорватська розрізняє статичний стан та динамічну дію.'
+        }
+      },
+      {
+        id: 14,
+        question: {
+          en: "Is double negation allowed in Croatian ('I don't know anything')?",
+          ru: "Разрешено ли двойное отрицание в хорватском языке ('Я ничего не знаю')?",
+          ua: "Чи дозволено подвійне заперечення в хорватській мові ('Я нічого не знаю')?"
+        },
+        options: [
+          { en: "Yes: Ne znam ništa.", ru: "Да: Ne znam ništa.", ua: "Так: Ne znam ništa." },
+          { en: "No: Znam ništa.", ru: "Нет: Znam ništa.", ua: "Ні: Znam ništa." },
+          { en: "No: Ne znam nešto.", ru: "Нет: Ne znam nešto.", ua: "Ні: Ne znam nešto." },
+          { en: "Only in dialects", ru: "Только в диалектах", ua: "Тільки в діалектах" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: 'Double (and multiple) negation is standard in Croatian syntax.',
+          ru: 'Двойное отрицание является нормой в хорватском синтаксисе.',
+          ua: 'Подвійне заперечення є нормою в хорватському синтаксисі.'
+        }
+      },
+      {
+        id: 15,
+        question: {
+          en: "What is the reflexive pronoun 'sebe/se' used for?",
+          ru: "Для чего используется возвратное местоимение 'sebe/se'?",
+          ua: "Для чого використовується зворотний займенник 'sebe/se'?"
+        },
+        options: [
+          { en: "To direct action back to subject", ru: "Для возвращения действия на субъект", ua: "Для повернення дії на суб'єкт" },
+          { en: "To form passive sentences", ru: "Для образования пассива", ua: "Для утворення пасиву" },
+          { en: "To express reciprocal actions", ru: "Для взаимных действий (друг друга)", ua: "Для взаємних дій (один одного)" },
+          { en: "All of the above", ru: "Все вышеперечисленное", ua: "Все вищезазначене" }
+        ],
+        correctAnswer: 3,
+        explanation: {
+          en: '"se" serves reflexivity, reciprocal meanings, and passive formations.',
+          ru: '"se" обслуживает возвратность, взаимность и пассивный залог.',
+          ua: '"se" обслуговує зворотність, взаємність та пасивний стан.'
+        }
+      },
+      {
+        id: 16,
+        question: {
+          en: "Complete: Sutra _____ (we will watch) utakmicu.",
+          ru: "Заполните: Sutra _____ utakmicu. (Завтра мы будем смотреть матч.)",
+          ua: "Заповніть: Sutra _____ utakmicu. (Завтра ми будемо дивитися матч.)"
+        },
+        options: [
+          { en: "ćemo gledati", ru: "ćemo gledati", ua: "ćemo gledati" },
+          { en: "gledat ćemo", ru: "gledat ćemo", ua: "gledat ćemo" },
+          { en: "bismo gledali", ru: "bismo gledali", ua: "bismo gledali" },
+          { en: "Both A and B are correct", ru: "И А, и В верны", ua: "І А, і В правильні" }
+        ],
+        correctAnswer: 3,
+        explanation: {
+          en: 'Future I clitics can be placed after infinitive (gledat ćemo) or after subject/adverb (ćemo gledati).',
+          ru: 'Энклитики будущего времени могут следовать за инфинитивом или за наречием.',
+          ua: 'Енклітики майбутнього часу можуть йти за інфінітивом або за прислівником.'
+        }
+      },
+      {
+        id: 17,
+        question: {
+          en: "What case follows negation: 'Nemam _____ (novac)?'",
+          ru: "Какой падеж следует за отрицанием: 'Nemam _____ (novac)?'",
+          ua: "Який відмінок йде після заперечення: 'Nemam _____ (novac)?'"
+        },
+        options: [
+          { en: "Genitive: novca", ru: "Родительный: novca", ua: "Родовий: novca" },
+          { en: "Accusative: novac", ru: "Винительный: novac", ua: "Знахідний: novac" },
+          { en: "Dative: novcu", ru: "Дательный: novcu", ua: "Давальний: novcu" },
+          { en: "Nominative: novac", ru: "Именительный: novac", ua: "Називний: novac" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: 'Negation takes Genitive (genitiv slavenski) in Croatian (eg. nemam novca, nema problema).',
+          ru: 'Отрицание часто требует родительного падежа (славянский генитив).',
+          ua: 'Заперечення часто вимагає родового відмінка (слов\'янський генітив).'
+        }
+      },
+      {
+        id: 18,
+        question: {
+          en: "Which preposition requires Instrumental case?",
+          ru: "Какой предлог требует творительного падежа?",
+          ua: "Який прийменник вимагає орудного відмінка?"
+        },
+        options: [
+          { en: "s / sa (with)", ru: "s / sa (с)", ua: "s / sa (з)" },
+          { en: "kod", ru: "kod", ua: "kod" },
+          { en: "k", ru: "k", ua: "k" },
+          { en: "iz", ru: "iz", ua: "iz" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: '"s/sa" (with) requires the Instrumental case (eg. sa mnom - with me).',
+          ru: 'Предлог "s/sa" (с) требует творительного падежа.',
+          ua: 'Прийменник "s/sa" (з) вимагає орудного відмінка.'
+        }
+      },
+      {
+        id: 19,
+        question: {
+          en: "What is the superlative form of 'loš' (bad)?",
+          ru: "Какова превосходная степень от 'loš'?",
+          ua: "Який найвищий ступінь порівняння від 'loš'?"
+        },
+        options: [
+          { en: "lošiji", ru: "lošiji", ua: "lošiji" },
+          { en: "najlošiji", ru: "najlošiji", ua: "najlošiji" },
+          { en: "gori", ru: "gori", ua: "gori" },
+          { en: "najgori", ru: "najgori", ua: "najgori" }
+        ],
+        correctAnswer: 3,
+        explanation: {
+          en: '"najgori" is the irregular superlative of "loš" (bad -> worse -> worst).',
+          ru: '"najgori" — превосходная степень от "loš" (loš -> gori -> najgori).',
+          ua: '"najgori" — найвищий ступінь від "loš" (loš -> gori -> najgori).'
+        }
+      },
+      {
+        id: 20,
+        question: {
+          en: "What is the meaning of the word 'svaki'?",
+          ru: "Что означает слово 'svaki'?",
+          ua: "Что означает слово 'svaki'?"
+        },
+        options: [
+          { en: "every / each", ru: "каждый", ua: "кожен" },
+          { en: "someone", ru: "кто-то", ua: "хтось" },
+          { en: "never", ru: "никогда", ua: "ніколи" },
+          { en: "always", ru: "всегда", ua: "завжди" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: '"svaki" means every or each in Croatian.',
+          ru: '"svaki" переводится как каждый.',
+          ua: '"svaki" перекладається як кожен.'
         }
       }
     ]
@@ -631,201 +1232,401 @@ export const promotionTests: Record<string, {
       {
         id: 1,
         question: {
-          en: "Complete: Tamo na trgu ima puno _____ (people - genitive plural).",
-          ru: "Завершите: Tamo na trgu ima puno _____ (людей - родительный падеж).",
-          ua: "Завершіть: Tamo na trgu ima puno _____ (людей - родовий відмінок)."
+          en: "How do you form Conditional I (present hypothetical) for 'ja'?",
+          ru: "Как образуется условное наклонение I (настоящее) для 'ja'?",
+          ua: "Як утворюється умовний спосіб I (теперішнє) для 'ja'?"
         },
         options: [
-          { en: "ljudi", ru: "ljudi", ua: "ljudi" },
-          { en: "ljudima", ru: "ljudima", ua: "ljudima" },
-          { en: "čovjeka", ru: "čovjeka", ua: "čovjeka" },
-          { en: "ljudih", ru: "ljudih", ua: "ljudih" }
+          { en: "bih + active participle", ru: "bih + причастие", ua: "bih + дієприкметник" },
+          { en: "bi + active participle", ru: "bi + причастие", ua: "bi + дієприкметник" },
+          { en: "sam + active participle", ru: "sam + причастие", ua: "sam + дієприкметник" },
+          { en: "budem + active participle", ru: "budem + причастие", ua: "budem + дієприкметник" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: "Quantifier 'puno' requires genitive plural, which is 'ljudi' for people.",
-          ru: "Количественное слово 'puno' требует родительного падежа множественного числа, форма которого — 'ljudi'.",
-          ua: "Кількісне слово 'puno' вимагає родового відмінка множини, форма якого — 'ljudi'."
+          en: 'Conditional I for 1st person singular uses clitic "bih" + participle (eg. ja bih išao).',
+          ru: 'Conditional I для 1-го лица ед.ч. использует частицу "bih" + причастие.',
+          ua: 'Conditional I для 1-ї особи однини використовує частку "bih" + дієприкметник.'
         }
       },
       {
         id: 2,
         question: {
-          en: "Complete: Da sam to znao ranije, _____ (conditional II of 'doći').",
-          ru: "Завершите: Da sam to znao ranije, _____ (условное II от 'doći' - я бы пришел).",
-          ua: "Завершіть: Da sam to znao ranije, _____ (умовний II від 'doći' - я б прийшов)."
+          en: "Formulate Conditional II (past hypothetical) for 'on': 'He would have come.'",
+          ru: "Сформулируйте условное наклонение II (прошедшее) для 'on': 'Он бы пришел.'",
+          ua: "Сформулюйте умовний спосіб II (минуле) для 'on': 'Він би прийшов.'"
         },
         options: [
+          { en: "bio bi došao", ru: "bio bi došao", ua: "bio bi došao" },
           { en: "bio bih došao", ru: "bio bih došao", ua: "bio bih došao" },
-          { en: "došao bih", ru: "došao bih", ua: "došao bih" },
-          { en: "doći ću", ru: "doći ću", ua: "doći ću" },
-          { en: "došao sam", ru: "došao sam", ua: "došao sam" }
+          { en: "bude došao", ru: "bude došao", ua: "bude došao" },
+          { en: "bi došao", ru: "bi došao", ua: "bi došao" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: "Past hypothetical conditions require Conditional II: 'bio bih došao'.",
-          ru: "Нереальное условие в прошлом выражается сослагательным наклонением II: 'bio bih došao'.",
-          ua: "Нереальна умова в минулому виражається умовним способом II: 'bio bih došao'."
+          en: 'Conditional II is formed with Conditional I of "biti" (bio bi) + participle (došao).',
+          ru: 'Conditional II образуется с помощью условного наклонения глагола "biti" + причастие.',
+          ua: 'Conditional II утворюється за допомогою умовного способу дієслова "biti" + дієприкметник.'
         }
       },
       {
         id: 3,
         question: {
-          en: "Complete: U ovom trenutku nova zgrada se _____ (passive - is being built).",
-          ru: "Завершите: U ovom trenutku nova zgrada se _____ (пассив - строится).",
-          ua: "Завершіть: U ovom trenutku nova zgrada se _____ (пасив - будується)."
+          en: "What is the passive reflexive structure of 'The house is being built'?",
+          ru: "Какова пассивно-возвратная структура для 'Дом строится'?",
+          ua: "Яка пасивно-зворотна структура для 'Будинок будується'?"
         },
         options: [
-          { en: "gradi", ru: "gradi", ua: "gradi" },
-          { en: "gradila", ru: "gradila", ua: "gradila" },
-          { en: "graditi", ru: "graditi", ua: "graditi" },
-          { en: "grade", ru: "grade", ua: "grade" }
+          { en: "Kuća se gradi.", ru: "Kuća se gradi.", ua: "Kuća se gradi." },
+          { en: "Kuća je građena.", ru: "Kuća je građena.", ua: "Kuća je građena." },
+          { en: "Kuću grade.", ru: "Kuću grade.", ua: "Kuću grade." },
+          { en: "Both A and B are passive forms", ru: "И А, и В являются формами пассива", ua: "І А, і В є формами пасиву" }
         ],
-        correctAnswer: 0,
+        correctAnswer: 3,
         explanation: {
-          en: "Reflexive passive is formed with 'se' + 3rd person singular present active verb: 'se gradi'.",
-          ru: "Возвратный пассив образуется с помощью 'se' + глагол в 3-м лице единственного числа: 'se gradi'.",
-          ua: "Зворотний пасив утворюється за допомогою 'se' + дієслово у 3-й особі однини: 'se gradi'."
+          en: 'Both reflexive "se" passive and descriptive participle passive exist in Croatian.',
+          ru: 'Как возвратный пассив с "se", так и страдательное причастие выражают пассив.',
+          ua: 'Як зворотний пасив із "se", так і пасивний дієприкметник виражають пасив.'
         }
       },
       {
         id: 4,
         question: {
-          en: "Complete: Usprkos _____ (difficulties - poteškoće - dative plural) završili smo projekt.",
-          ru: "Завершите: Usprkos _____ (трудности - poteškoće - дательный падеж).",
-          ua: "Завершіть: Usprkos _____ (труднощі - poteškoće - давальний відмінок)."
+          en: "Complete with verbal noun: _____ (writing) pisama je staromodno.",
+          ru: "Заполните отглагольным именем: _____ (написание) pisama je staromodno.",
+          ua: "Заповніть віддієслівним іменником: _____ (написання) pisama je staromodno."
         },
         options: [
-          { en: "poteškoćama", ru: "poteškoćama", ua: "poteškoćama" },
-          { en: "poteškoća", ru: "poteškoća", ua: "poteškoća" },
-          { en: "poteškoćama", ru: "poteškoćama", ua: "poteškoćama" },
-          { en: "poteškoće", ru: "poteškoće", ua: "poteškoće" }
+          { en: "Pisati", ru: "Pisati", ua: "Pisati" },
+          { en: "Pisanje", ru: "Pisanje", ua: "Pisanje" },
+          { en: "Pisan", ru: "Pisan", ua: "Pisan" },
+          { en: "Pisac", ru: "Pisac", ua: "Pisac" }
         ],
-        correctAnswer: 0,
+        correctAnswer: 1,
         explanation: {
-          en: "Preposition 'usprkos' (despite) requires the dative case ('poteškoćama').",
-          ru: "Предлог 'usprkos' (вопреки) управляет дательным падежом ('poteškoćama').",
-          ua: "Прийменник 'usprkos' (всупереч) керує давальним відмінком ('poteškoćama')."
+          en: 'Verbal nouns (glagolske imenice) are formed using the suffix -nje (pisanje).',
+          ru: 'Отглагольные имена образуются с помощью суффикса -nje (pisanje).',
+          ua: 'Віддієслівні іменники утворюються за допомогою суфікса -nje (pisanje).'
         }
       },
       {
         id: 5,
         question: {
-          en: "Complete: Moje _____ (children - djeca - collective plural agreement) su u školi.",
-          ru: "Завершите: Moje _____ (дети - djeca - собирательное соглашение) su u školi.",
-          ua: "Завершіть: Moje _____ (діти - djeca - збірне узгодження) su u školi."
+          en: "Which case ending is used after number 5 (pet) and above?",
+          ru: "Какой падеж используется после числительного 5 и выше?",
+          ua: "Який відмінок використовується після числівника 5 і вище?"
         },
         options: [
-          { en: "djeca", ru: "djeca", ua: "djeca" },
-          { en: "dijete", ru: "dijete", ua: "dijete" },
-          { en: "djece", ru: "djece", ua: "djece" },
-          { en: "djeci", ru: "djeci", ua: "djeci" }
+          { en: "Genitive singular", ru: "Родительный ед.ч.", ua: "Родовий однини" },
+          { en: "Genitive plural", ru: "Родительный мн.ч.", ua: "Родовий множини" },
+          { en: "Nominative plural", ru: "Именительный мн.ч.", ua: "Називний множини" },
+          { en: "Dative plural", ru: "Дательный мн.ч.", ua: "Давальний множини" }
         ],
-        correctAnswer: 0,
+        correctAnswer: 1,
         explanation: {
-          en: '"Djeca" is a collective feminine singular grammatically but behaves as plural in meaning, taking feminine plural adjectives ("moje").',
-          ru: '"Djeca" грамматически является собирательным существительным женского рода, согласуется с притяжательным местоимением во множественном числе ("moje").',
-          ua: '"Djeca" граматично є збірним іменником жіночого роду, узгоджується з присвійним займенником у множині ("moje").'
+          en: 'Numbers 5 and above take Genitive plural (eg. pet učenika, deset stolova).',
+          ru: 'Числительные от 5 и выше требуют родительного падежа мн.ч.',
+          ua: 'Числівники від 5 і вище вимагають родового відмінка множини.'
         }
       },
       {
         id: 6,
         question: {
-          en: "In literary Croatian, what is 'protuurječnost' a synonym for?",
-          ru: "В литературном хорватском языке, синонимом какого слова является 'protuurječnost'?",
-          ua: "У літературній хорватській мові, синонімом якого слова є 'protuurječnost'?"
+          en: "What is the instrumental singular of the pronoun 'ja'?",
+          ru: "Каков творительный падеж ед.ч. от местоимения 'ja'?",
+          ua: "Який орудний відмінок однини від займенника 'ja'?"
         },
         options: [
-          { en: "kontradikciju (contradiction)", ru: "kontradikciju (противоречие)", ua: "kontradikciju (суперечність)" },
-          { en: "suglasnost (agreement)", ru: "suglasnost (согласие)", ua: "suglasnost (згода)" },
-          { en: "suradnju (cooperation)", ru: "suradnju (сотрудничество)", ua: "suradnju (співпраця)" },
-          { en: "potporu (support)", ru: "potporu (поддержку)", ua: "potporu (підтримка)" }
+          { en: "sa mnom", ru: "sa mnom", ua: "sa mnom" },
+          { en: "s me", ru: "s me", ua: "s me" },
+          { en: "sa mene", ru: "sa mene", ua: "sa mene" },
+          { en: "sa meni", ru: "sa meni", ua: "sa meni" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: '"Protuurječnost" and "kontradikcija" both mean contradiction or discrepancy.',
-          ru: '"Protuurječnost" и "kontradikcija" означают противоречие.',
-          ua: '"Protuurječnost" та "kontradikcija" означають суперечність.'
+          en: '"sa mnom" is the irregular instrumental form of the pronoun ja.',
+          ru: '"sa mnom" — форма творительного падежа местоимения ja.',
+          ua: '"sa mnom" — форма орудного відмінка займенника ja.'
         }
       },
       {
         id: 7,
         question: {
-          en: "Complete: Čim _____ (future II of 'stići' - plural) na kolodvor, javite nam se.",
-          ru: "Завершите: Čim _____ (будущее II от 'stići' - они прибудут), javite nam se.",
-          ua: "Завершіть: Čim _____ (майбутній II від 'stići' - вони прибудуть), javite nam se."
+          en: "What is the genitive plural of 'tjedan' (week)?",
+          ru: "Каков родительный падеж мн.ч. от 'tjedan'?",
+          ua: "Який родовий відмінок множини від 'tjedan'?"
         },
         options: [
-          { en: "budu stigli", ru: "budu stigli", ua: "budu stigli" },
-          { en: "stignu", ru: "stignu", ua: "stignu" },
-          { en: "će stići", ru: "će stići", ua: "će stići" },
-          { en: "stizali su", ru: "stizali su", ua: "stizali su" }
+          { en: "tjedana", ru: "tjedana", ua: "tjedana" },
+          { en: "tjedni", ru: "tjedni", ua: "tjedni" },
+          { en: "tjedna", ru: "tjedna", ua: "tjedna" },
+          { en: "tjedanaom", ru: "tjedanaom", ua: "tjedanaom" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: "Conjunction 'čim' (as soon as) expressing future action requires Future II ('budu stigli').",
-          ru: "Союз 'čim' (как только) для будущего времени требует будущего II ('budu stigli').",
-          ua: "Сполучник 'čim' (як тільки) для майбутнього часу вимагає майбутнього II ('budu stigli')."
+          en: '"tjedana" contains the fleeting "a" and has the genitive plural ending -a.',
+          ru: '"tjedana" — родительный мн.ч. с беглым "a".',
+          ua: '"tjedana" — родовий множини із біглим "a".'
         }
       },
       {
         id: 8,
         question: {
-          en: "Complete: Nije došao na predavanje _____ (because) je bio bolestan.",
-          ru: "Завершите: Nije došao na predavanje _____ (потому что) je bio bolestan.",
-          ua: "Завершіть: Nije došao na predavanje _____ (тому що) je bio bolestan."
+          en: "Translate: 'whose book' (with relative pronoun 'čiji'):",
+          ru: "Переведите: 'чья книга' (с относительным местоимением 'čiji'):",
+          ua: "Перекладіть: 'чия книга' (з відносним займенником 'čiji'):"
         },
         options: [
-          { en: "jer", ru: "jer", ua: "jer" },
-          { en: "iako", ru: "iako", ua: "iako" },
-          { en: "premda", ru: "premda", ua: "premda" },
-          { en: "dok", ru: "dok", ua: "dok" }
+          { en: "čija knjiga", ru: "čija knjiga", ua: "čija knjiga" },
+          { en: "čije knjiga", ru: "čije knjiga", ua: "čije knjiga" },
+          { en: "čiji knjiga", ru: "čiji knjiga", ua: "čiji knjiga" },
+          { en: "čiju knjiga", ru: "čiju knjiga", ua: "čiju knjiga" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: '"Jer" is the standard causal conjunction meaning "because".',
-          ru: '"Jer" — стандартный союз причины, переводящийся как "потому что".',
-          ua: '"Jer" — стандартний сполучник причини, що перекладається як "тому що".'
+          en: '"čija" agrees in gender (feminine) and number with "knjiga".',
+          ru: '"čija" согласуется в женском роде с "knjiga".',
+          ua: '"čija" узгоджується в жіночому роді з "knjiga".'
         }
       },
       {
         id: 9,
         question: {
-          en: "Complete: Cijeli tekst pišem _____ (with a pen - olovka - instrumental singular).",
-          ru: "Завершите: Cijeli tekst pišem _____ (карандашом/ручкой - olovka - творительный падеж).",
-          ua: "Завершіть: Cijeli tekst pišem _____ (олівцем/ручкою - olovka - орудний відмінок)."
+          en: "What is the collective plural of 'brat'?",
+          ru: "Каково собирательное множественное число от 'brat'?",
+          ua: "Яке збірне множинне число від 'brat'?"
         },
         options: [
-          { en: "olovkom", ru: "olovkom", ua: "olovkom" },
-          { en: "s olovkom", ru: "s olovkom", ua: "s olovkom" },
-          { en: "olovku", ru: "olovku", ua: "olovku" },
-          { en: "olovci", ru: "olovci", ua: "olovci" }
+          { en: "braća (behaves as feminine singular in grammar)", ru: "braća (грамматически ж.р. ед.ч.)", ua: "braća (граматично ж.р. однини)" },
+          { en: "brati", ru: "brati", ua: "brati" },
+          { en: "bratovi", ru: "bratovi", ua: "bratovi" },
+          { en: "brate", ru: "brate", ua: "brate" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: "Instrumental of tool/instrument is used without preposition 's' ('olovkom'). Using 's' would imply accompaniment (writing along with the pen).",
-          ru: "Инструментальный творительный падеж (орудие действия) употребляется без предлога ('olovkom').",
-          ua: "Орудний відмінок інструмента (знаряддя дії) вживається без прийменника ('olovkom')."
+          en: '"braća" is grammatically feminine singular, but semantically plural.',
+          ru: '"braća" — собирательное существительное, грамматически женского рода.',
+          ua: '"braća" — збірний іменник, граматично жіночого роду.'
         }
       },
       {
         id: 10,
         question: {
-          en: "Complete: Danas nisam vidio _____ (nothing - double negation).",
-          ru: "Завершите: Danas nisam vidio _____ (ничего - двойное отрицание).",
-          ua: "Завершіть: Danas nisam vidio _____ (нічого - подвійне заперечення)."
+          en: "What sound change happens in: 'platiti' -> 'plaćen' (paid)?",
+          ru: "Какое звуковое изменение происходит в паре: 'platiti' -> 'plaćen'?",
+          ua: "Яке звукове чергування відбувається в парі: 'platiti' -> 'plaćen'?"
         },
         options: [
-          { en: "ništa", ru: "ništa", ua: "ništa" },
-          { en: "nešto", ru: "nešto", ua: "nešto" },
-          { en: "išta", ru: "išta", ua: "išta" },
-          { en: "sve", ru: "sve", ua: "sve" }
+          { en: "Jotacija (Jotation: t + j -> ć)", ru: "Jotacija (Йотация: t + j -> ć)", ua: "Jotacija (Йотація: t + j -> ć)" },
+          { en: "Palatalizacija (k -> č)", ru: "Palatalizacija", ua: "Palatalizacija" },
+          { en: "Sibilarizacija (k -> c)", ru: "Sibilarizacija", ua: "Sibilarizacija" },
+          { en: "Fleeting A", ru: "Беглая А", ua: "Бігла А" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: "Double negation requirement: negative verb 'nisam' + negative pronoun 'ništa'.",
-          ru: "Правило двойного отрицания: отрицательный глагол 'nisam' + отрицательное местоимение 'ništa'.",
-          ua: "Правило подвійного заперечення: заперечне дієслово 'nisam' + заперечний займенник 'ništa'."
+          en: 'Jotation (jotacija) causes dental consonant "t" to merge with "j" into "ć".',
+          ru: 'Йотация соединяет согласный "t" с "j" в звук "ć".',
+          ua: 'Йотація поєднує приголосний "t" з "j" у звук "ć".'
+        }
+      },
+      {
+        id: 11,
+        question: {
+          en: "What does 'poslodavac' mean in a business context?",
+          ru: "Что означает 'poslodavac' в бизнесе?",
+          ua: "Что означает 'poslodavac' в бизнесе?"
+        },
+        options: [
+          { en: "employer", ru: "работодатель", ua: "роботодавець" },
+          { en: "employee", ru: "наемный работник", ua: "найнятий працівник" },
+          { en: "client", ru: "клиент", ua: "клієнт" },
+          { en: "job center", ru: "биржа труда", ua: "біржа праці" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: '"poslodavac" is the employer (one who gives work).',
+          ru: '"poslodavac" — это работодатель.',
+          ua: '"poslodavac" — це роботодавець.'
+        }
+      },
+      {
+        id: 12,
+        question: {
+          en: "Which preposition fits: 'Ovisno _____ (about) odluci.'",
+          ru: "Какой предлог подходит: 'Ovisno _____ odluci.' (В зависимости от решения.)",
+          ua: "Який прийменник підходить: 'Ovisno _____ odluci.' (Залежно від рішення.)"
+        },
+        options: [
+          { en: "o", ru: "o", ua: "o" },
+          { en: "na", ru: "na", ua: "na" },
+          { en: "od", ru: "od", ua: "od" },
+          { en: "u", ru: "u", ua: "u" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: 'The phrase is "ovisno o" + Locative.',
+          ru: 'Устойчивое сочетание "ovisno o" + предложный падеж.',
+          ua: 'Стійке сполучення "ovisno o" + місцевий відмінок.'
+        }
+      },
+      {
+        id: 13,
+        question: {
+          en: "What is the definite form of the adjective 'nov' (new)?",
+          ru: "Какова определенная форма прилагательного 'nov'?",
+          ua: "Яка визначена форма прикметника 'nov'?"
+        },
+        options: [
+          { en: "novi", ru: "novi", ua: "novi" },
+          { en: "novog", ru: "novog", ua: "novog" },
+          { en: "novom", ru: "novom", ua: "novom" },
+          { en: "noviom", ru: "noviom", ua: "noviom" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: 'Definite adjectives add the ending -i in nominative masculine singular (eg. novi grad).',
+          ru: 'Определенная форма прилагательного мужского рода получает окончание -i.',
+          ua: 'Визначена форма прикметника чоловічого роду отримує закінчення -i.'
+        }
+      },
+      {
+        id: 14,
+        question: {
+          en: "Complete: Prije nego što _____ (I speak), razmislim.",
+          ru: "Заполните: Prije nego što _____ (я скажу), razmislim.",
+          ua: "Заповніть: Prije nego što _____ (я скажу), razmislim."
+        },
+        options: [
+          { en: "progovorim", ru: "progovorim", ua: "progovorim" },
+          { en: "govorim", ru: "govorim", ua: "govorim" },
+          { en: "budem govorio", ru: "budem govorio", ua: "budem govorio" },
+          { en: "bi govorio", ru: "bi govorio", ua: "bi govorio" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: 'Present perfective "progovorim" is used after temporal "prije nego što".',
+          ru: 'Презенс совершенного вида используется после союза "prije nego što".',
+          ua: 'Теперішній час доконаного виду використовується після сполучника "prije nego što".'
+        }
+      },
+      {
+        id: 15,
+        question: {
+          en: "What is the dative plural ending for all genders in adjectives?",
+          ru: "Каково окончание дательного падежа мн.ч. для прилагательных всех родов?",
+          ua: "Яке закінчення давального відмінка множини для прикметників усіх родів?"
+        },
+        options: [
+          { en: "-ima / -ima / -ima", ru: "-ima", ua: "-ima" },
+          { en: "-ima / -ima / -ima or -ima", ru: "-ima", ua: "-ima" },
+          { en: "-im", ru: "-im", ua: "-im" },
+          { en: "-ima / -ima / -ima (same as Locative/Instrumental)", ru: "одинаково для D/L/I", ua: "однаково для D/L/I" }
+        ],
+        correctAnswer: 3,
+        explanation: {
+          en: 'Dative, Locative, and Instrumental plural share the ending -ima (or -im for adjectives).',
+          ru: 'Дательный, предложный и творительный падежи мн.ч. имеют одинаковые окончания.',
+          ua: 'Давальний, місцевий та орудний відмінки множини мають однакові закінчення.'
+        }
+      },
+      {
+        id: 16,
+        question: {
+          en: "What sound change happens in: 'ruka' -> 'ruci' (in hand)?",
+          ru: "Какое звуковое изменение происходит в паре: 'ruka' -> 'ruci'?",
+          ua: "Яке звукове чергування відбувається в парі: 'ruka' -> 'ruci'?"
+        },
+        options: [
+          { en: "Sibilarizacija (k -> c)", ru: "Sibilarizacija (k -> c)", ua: "Sibilarizacija (k -> c)" },
+          { en: "Palatalizacija (k -> č)", ru: "Palatalizacija", ua: "Palatalizacija" },
+          { en: "Jotacija", ru: "Jotacija", ua: "Jotacija" },
+          { en: "Vowel lengthening", ru: "Удлинение гласного", ua: "Подовження голосного" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: 'Sibilarization (sibilarizacija) turns k -> c before locative ending -i.',
+          ru: 'Сибиляризация переводит "k" в "c" перед гласным "i".',
+          ua: 'Сибіляризація переводить "k" в "c" перед голосним "i".'
+        }
+      },
+      {
+        id: 17,
+        question: {
+          en: "Select correct preposition: 'Brod plovi _____ (under) mostom.'",
+          ru: "Выберите правильный предлог: 'Brod plovi _____ mostom.' (Корабль плывет под мостом.)",
+          ua: "Виберіть правильний прийменник: 'Brod plovi _____ mostom.' (Корабель пливе під мостом.)"
+        },
+        options: [
+          { en: "pod", ru: "pod", ua: "pod" },
+          { en: "nad", ru: "nad", ua: "nad" },
+          { en: "pred", ru: "pred", ua: "pred" },
+          { en: "za", ru: "za", ua: "za" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: '"pod" + Instrumental expresses location underneath.',
+          ru: '"pod" + творительный падеж выражает нахождение снизу.',
+          ua: '"pod" + орудний відмінок виражає знаходження знизу.'
+        }
+      },
+      {
+        id: 18,
+        question: {
+          en: "What does particle 'zar' express?",
+          ru: "Что выражает частица 'zar'?",
+          ua: "Що виражає частка 'zar'?"
+        },
+        options: [
+          { en: "disbelief / surprise (really?)", ru: "неверие / удивление (неужели?)", ua: "зневіру / здивування (невже?)" },
+          { en: "politeness", ru: "вежливость", ua: "ввічливість" },
+          { en: "negation", ru: "отрицание", ua: "заперечення" },
+          { en: "obligation", ru: "обязанность", ua: "обов'язок" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: '"Zar" is used to ask questions expressing doubt or surprise.',
+          ru: '"Zar" используется для выражения сомнения или удивления.',
+          ua: '"Zar" використовується для вираження сумніву або здивування.'
+        }
+      },
+      {
+        id: 19,
+        question: {
+          en: "What is the collective plural of 'djete' (child)?",
+          ru: "Каково собирательное множественное число от 'dijete'?",
+          ua: "Яке збірне множинне число від 'dijete'?"
+        },
+        options: [
+          { en: "djeca (feminine singular endings in grammar)", ru: "djeca (ж.р. ед.ч. грамматически)", ua: "djeca (ж.р. однини граматично)" },
+          { en: "djeteta", ru: "djeteta", ua: "djeteta" },
+          { en: "djeteti", ru: "djeteti", ua: "djeteti" },
+          { en: "dječaci", ru: "dječaci", ua: "dječaci" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: '"djeca" is grammatically feminine singular, representing children collectively.',
+          ru: '"djeca" — собирательное существительное, грамматически ж.р. ед.ч.',
+          ua: '"djeca" — збірний іменник, граматично жіночого роду однини.'
+        }
+      },
+      {
+        id: 20,
+        question: {
+          en: "Complete: Da imam krila, _____ (I would fly - Conditional I masc).",
+          ru: "Заполните: Da imam krila, _____ (я бы полетел - Conditional I м.р.).",
+          ua: "Заповніть: Da imam krila, _____ (я б полетів - Conditional I ч.р.)."
+        },
+        options: [
+          { en: "letio bih", ru: "letio bih", ua: "letio bih" },
+          { en: "letio bi", ru: "letio bi", ua: "letio bi" },
+          { en: "sam letio", ru: "sam letio", ua: "sam letio" },
+          { en: "budem letio", ru: "budem letio", ua: "budem letio" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: '"letio bih" is the 1st person singular Conditional I form.',
+          ru: '"letio bih" — форма условного наклонения для 1-го лица ед.ч.',
+          ua: '"letio bih" — форма умовного способу для 1-ї особи однини.'
         }
       }
     ]
@@ -836,201 +1637,401 @@ export const promotionTests: Record<string, {
       {
         id: 1,
         question: {
-          en: "What does the colloquial idiom 'Bogu iza nogu' mean?",
-          ru: "Что означает разговорная идиома 'Bogu iza nogu'?",
-          ua: "Що означає розмовна ідіома 'Bogu iza nogu'?"
+          en: "Which concessive conjunction fits best: '_____ je bio umoran, završio je izvještaj.' (Although he was tired...)",
+          ru: "Какой уступительный союз подходит лучше: '_____ je bio umoran, završio je izvještaj.' (Хотя он устал...)",
+          ua: "Який допустовий сполучник підходить найкраще: '_____ je bio umoran, završio je izvještaj.' (Хоча він втомився...)"
         },
         options: [
-          { en: "in the middle of nowhere / very far away", ru: "у черта на куличках / очень далеко", ua: "у біса на болоті / дуже далеко" },
-          { en: "blessed by God / highly successful", ru: "благословенный Богом / успешный", ua: "благословенний Богом / успішний" },
-          { en: "close by / just around the corner", ru: "совсем близко / под носом", ua: "зовсім поруч / під носом" },
-          { en: "in the town square / very crowded", ru: "в центре города / людно", ua: "в центрі міста / людно" }
+          { en: "Iako", ru: "Iako", ua: "Iako" },
+          { en: "Budući da", ru: "Budući da", ua: "Budući da" },
+          { en: "Stoga", ru: "Stoga", ua: "Stoga" },
+          { en: "Zato što", ru: "Zato što", ua: "Zato što" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: '"Bogu iza nogu" (literally "behind God\'s legs") is an idiom for a very remote, hard-to-reach place.',
-          ru: '"Bogu iza nogu" (дословно "у Бога за ногами") означает глухое, труднодоступное или очень отдаленное место.',
-          ua: '"Bogu iza nogu" (дослівно "у Бога за ногами") означає глухе, важкодоступне або дуже віддалене місце.'
+          en: '"Iako" is the most common concessive conjunction meaning "although".',
+          ru: '"Iako" — уступительный союз "хотя".',
+          ua: '"Iako" — допустовий сполучник "хоча".'
         }
       },
       {
         id: 2,
         question: {
-          en: "Which concessive conjunction translates to 'although'?",
-          ru: "Какой уступительный союз переводится как 'хотя / несмотря на то, что'?",
-          ua: "Який допустовий сполучник перекладається як 'хоча / незважаючи на те, що'?"
+          en: "Which conjunction is a formal synonym of 'iako'?",
+          ru: "Какой союз является книжным синонимом 'iako'?",
+          ua: "Який сполучник є книжковим синонімом 'iako'?"
         },
         options: [
-          { en: "iako / premda", ru: "iako / premda", ua: "iako / premda" },
+          { en: "premda", ru: "premda", ua: "premda" },
+          { en: "jer", ru: "jer", ua: "jer" },
           { en: "zato što", ru: "zato što", ua: "zato što" },
-          { en: "kako god", ru: "kako god", ua: "kako god" },
-          { en: "budući da", ru: "budući da", ua: "budući da" }
+          { en: "čim", ru: "čim", ua: "čim" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: '"Iako" and "premda" are standard concessive conjunctions meaning "although".',
-          ru: '"Iako" и "premda" — уступительные союзы со значением "хотя".',
-          ua: '"Iako" та "premda" — допустові сполучники зі значенням "хоча".'
+          en: '"premda" is the formal concessive conjunction meaning "although".',
+          ru: '"premda" — книжный уступительный союз "хотя/несмотря на".',
+          ua: '"premda" — книжковий допустовий сполучник "хоча/незважаючи на".'
         }
       },
       {
         id: 3,
         question: {
-          en: "Complete: Preporučujem da detaljno _____ (you review - present subjunctive equivalent) ove materijale.",
-          ru: "Завершите: Preporučujem da detaljno _____ (вы просмотрите - настоящее время).",
-          ua: "Завершіть: Preporučujem da detaljno _____ (ви переглянете - теперішній час)."
+          en: "Complete with manner conjunction: 'Gleda me _____ (as if) sam kriv za sve.'",
+          ru: "Заполните союзом образа действия: 'Gleda me _____ sam kriv za sve.' (Смотрит на меня так, будто...)",
+          ua: "Заповніть сполучником способу дії: 'Gleda me _____ sam kriv za sve.' (Дивиться на мене так, ніби...)"
         },
         options: [
-          { en: "pogledate", ru: "pogledate", ua: "pogledate" },
-          { en: "pogledati", ru: "pogledati", ua: "pogledati" },
-          { en: "ćete pogledati", ru: "ćete pogledati", ua: "ćete pogledati" },
-          { en: "pogledali biste", ru: "pogledali biste", ua: "pogledali biste" }
+          { en: "kao da", ru: "kao da", ua: "kao da" },
+          { en: "tako da", ru: "tako da", ua: "tako da" },
+          { en: "nakon što", ru: "nakon što", ua: "nakon što" },
+          { en: "budući da", ru: "budući da", ua: "budući da" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: "Subordinate recommendation clauses with 'da' require the present tense indicative ('pogledate').",
-          ru: "После союза 'da' в изъяснительных предложениях рекомендации используется настоящее время глагола ('pogledate').",
-          ua: "Після сполучника 'da' у з'ясувальних реченнях рекомендації використовується теперішній час дієслова ('pogledate')."
+          en: '"kao da" translates to "as if" or "as though" (expressing hypothetical manners).',
+          ru: '"kao da" переводится как "будто / как будто".',
+          ua: '"kao da" перекладається як "ніби / наче".'
         }
       },
       {
         id: 4,
         question: {
-          en: "What does the term 'dvojezičnost' mean?",
-          ru: "Что означает термин 'dvojezičnost'?",
-          ua: "Що означає термін 'dvojezičnost'?"
+          en: "Select correct relative structure: 'Djevojka _____ (whose) majka radi ovdje.'",
+          ru: "Выберите правильную относительную структуру: 'Djevojka _____ majka radi ovdje.' (Чья мать...)",
+          ua: "Виберіть правильну відносну структуру: 'Djevojka _____ majka radi ovdje.' (Чия мати...)"
         },
         options: [
-          { en: "bilingualism", ru: "двуязычие", ua: "двомовність" },
-          { en: "linguistic translation", ru: "языковой перевод", ua: "мовний переклад" },
-          { en: "general linguistics", ru: "языкознание", ua: "мовознавство" },
-          { en: "speech pathology", ru: "логопедия", ua: "логопедія" }
+          { en: "čiji", ru: "čiji", ua: "čiji" },
+          { en: "čija", ru: "čija", ua: "čija" },
+          { en: "čije", ru: "čije", ua: "čije" },
+          { en: "čijoj", ru: "čijoj", ua: "čijoj" }
         ],
-        correctAnswer: 0,
+        correctAnswer: 1,
         explanation: {
-          en: '"Dvojezičnost" refers to the ability to speak two languages fluently (bilingualism).',
-          ru: '"Dvojezičnost" означает владение двумя языками (двуязычие).',
-          ua: '"Dvojezičnost" означає володіння двома мовами (двомовність).'
+          en: '"čija" agrees with the feminine singular noun "majka".',
+          ru: '"čija" согласуется с существительным женского рода "majka".',
+          ua: '"čija" узгоджується з іменником жіночого роду "majka".'
         }
       },
       {
         id: 5,
         question: {
-          en: "Complete the triple negation: On nikada nikome ništa _____ (does not say).",
-          ru: "Завершите тройное отрицание: On nikada nikome ništa _____ (не говорит).",
-          ua: "Завершіть потрійне заперечення: On nikada nikome ništa _____ (не говорить)."
+          en: "What is the genitive singular of the irregular noun 'kći' (daughter)?",
+          ru: "Каков родительный падеж ед.ч. от 'kći'?",
+          ua: "Який родовий відмінок однини від 'kći'?"
         },
         options: [
-          { en: "ne govori", ru: "ne govori", ua: "ne govori" },
-          { en: "govori", ru: "govori", ua: "govori" },
-          { en: "ne govore", ru: "ne govore", ua: "ne govore" },
-          { en: "govorio", ru: "govorio", ua: "govorio" }
+          { en: "kćeri", ru: "kćeri", ua: "kćeri" },
+          { en: "kći", ru: "kći", ua: "kći" },
+          { en: "kćer", ru: "kćer", ua: "kćer" },
+          { en: "kćerom", ru: "kćerom", ua: "kćerom" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: "Even with multiple negative adverbs/pronouns, the verb itself must be negative ('ne govori').",
-          ru: "В хорватском языке отрицательная частица 'ne' обязательна у глагола даже при наличии других отрицательных слов.",
-          ua: "У хорватській мові заперечна частка 'ne' є обов'язковою біля дієслова навіть за наявності інших заперечних слів."
+          en: 'The noun "kći" expands its stem in oblique cases (Genitive: kćeri, Accusative: kćer).',
+          ru: 'Существительное "kći" расширяет основу в косвенных падежах (Р.п.: kćeri).',
+          ua: 'Іменник "kći" розширює основу в непрямих відмінках (Р.в.: kćeri).'
         }
       },
       {
         id: 6,
         question: {
-          en: "Complete: Ispred zgrade okupila su se dvadeset i dva _____ (citizen - građanin - case after 22).",
-          ru: "Завершите: Ispred zgrade okupila su se dvadeset i dva _____ (гражданина - падеж после 22).",
-          ua: "Завершіть: Ispred zgrade okupila su se dvadeset i dva _____ (громадянина - відмінок після 22)."
+          en: "Nouns ending in -ost (eg. radost, mladost) belong to which gender?",
+          ru: "К какому роду относятся существительные на -ost (напр. radost, mladost)?",
+          ua: "До якого роду належать іменники на -ost (напр. radost, mladost)?"
         },
         options: [
-          { en: "građanina (genitive singular)", ru: "građanina (родительный ед.ч.)", ua: "građanina (родовий однини)" },
-          { en: "građana (genitive plural)", ru: "građana (родительный мн.ч.)", ua: "građana (родовий множини)" },
-          { en: "građani (nominative plural)", ru: "građani (именительный мн.ч.)", ua: "građani (називний множини)" },
-          { en: "građanima (dative plural)", ru: "građanima (дательный мн.ч.)", ua: "građanima (давальний множини)" }
+          { en: "Feminine (i-declension)", ru: "Женский (i-склонение)", ua: "Жіночий (i-відміна)" },
+          { en: "Masculine", ru: "Мужской", ua: "Чоловічий" },
+          { en: "Neuter", ru: "Средний", ua: "Середній" },
+          { en: "Varies depending on dialect", ru: "Зависит от диалекта", ua: "Залежить від діалекту" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: "Numbers ending in 2, 3, 4 (like 22) require the genitive singular ('građanina'), whereas numbers 5-20 require the genitive plural ('građana').",
-          ru: "Числительные, оканчивающиеся на 2, 3, 4 (например, 22), требуют родительного падежа единственного числа ('građanina').",
-          ua: "Числівники, що закінчуються на 2, 3, 4 (наприклад, 22), вимагають родового відмінка однини ('građanina')."
+          en: 'Nouns ending in -ost are abstract feminine nouns belonging to the i-declension.',
+          ru: 'Существительные на -ost — это абстрактные имена женского рода (i-склонение).',
+          ua: 'Іменники на -ost — це абстрактні назви жіночого роду (i-відміна).'
         }
       },
       {
         id: 7,
         question: {
-          en: "Complete: Cijeli dan smo proveli u _____ (living room - dnevni boravak - locative singular).",
-          ru: "Завершите: Cijeli dan smo proveli u _____ (гостиная - locative singular).",
-          ua: "Завершіть: Cijeli dan smo proveli u _____ (вітальня - locative singular)."
+          en: "What is the meaning of the idiom 'mlatiti praznu slamu'?",
+          ru: "Каково значение фразеологизма 'mlatiti praznu slamu'?",
+          ua: "Яке значення фразеологізму 'mlatiti praznu slamu'?"
         },
         options: [
-          { en: "dnevnom boravku", ru: "dnevnom boravku", ua: "dnevnom boravku" },
-          { en: "dnevni boravak", ru: "dnevni boravak", ua: "dnevni boravak" },
-          { en: "dnevnog boravka", ru: "dnevnog boravka", ua: "dnevnog boravka" },
-          { en: "dnevnim boravkom", ru: "dnevnim boravkom", ua: "dnevnim boravkom" }
+          { en: "to talk in vain / waste time", ru: "переливать из пустого в порожнее / пустословить", ua: "товкти воду в ступі / базікати марно" },
+          { en: "to work hard in the field", ru: "тяжело работать в поле", ua: "важко працювати в полі" },
+          { en: "to argue about money", ru: "спорить о деньгах", ua: "сперечатися про гроші" },
+          { en: "to sleep all day", ru: "спать весь день", ua: "спати весь день" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: "Substantive adjective + noun in locative masculine singular ends in -om and -u: 'dnevnom boravku'.",
-          ru: "Сочетание прилагательного и существительного в предложном падеже мужского рода: 'dnevnom boravku'.",
-          ua: "Поєднання прикметника та іменника у місцевому відмінку чоловічого роду: 'dnevnom boravku'."
+          en: '"mlatiti praznu slamu" means to speak without purpose or waste time talking.',
+          ru: '"mlatiti praznu slamu" означает вести пустые, бесполезные разговоры.',
+          ua: '"mlatiti praznu slamu" означає вести порожні, марні розмови.'
         }
       },
       {
         id: 8,
         question: {
-          en: "What is the meaning of the prefixed verb 'preletjeti'?",
-          ru: "Каково значение приставочного глагола 'preletjeti'?",
-          ua: "Яке значення префіксального дієслова 'preletjeti'?"
+          en: "Complete with the correct participle of manner: '_____ (reading) knjigu, zaspao sam.'",
+          ru: "Заполните деепричастием настоящего времени: '_____ (читая) knjigu, zaspao sam.'",
+          ua: "Заповніть дієприслівником теперішнього часу: '_____ (читаючи) knjigu, zaspao sam.'"
         },
         options: [
-          { en: "to fly over / fly across", ru: "перелететь / пролететь над чем-то", ua: "перелетіти / пролетіти над чимось" },
-          { en: "to fly into / enter flying", ru: "влететь / залететь внутрь", ua: "влетіти / залетіти всередину" },
-          { en: "to fly away / escape flying", ru: "улететь / скрыться в полете", ua: "полетіти геть / втекти в польоті" },
-          { en: "to stop flying / land", ru: "приземлиться / прекратить полет", ua: "приземлитися / припинити політ" }
+          { en: "Čitajući", ru: "Čitajući", ua: "Čitajući" },
+          { en: "Čitan", ru: "Čitan", ua: "Čitan" },
+          { en: "Čitavši", ru: "Čitavši", ua: "Čitavši" },
+          { en: "Pročitan", ru: "Pročitan", ua: "Pročitan" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: "Prefix 'pre-' indicates movement over, across or transition. 'Preletjeti' is to fly over/across.",
-          ru: "Префикс 'pre-' означает движение через, над или переход. 'Preletjeti' — перелететь.",
-          ua: "Префікс 'pre-' означає рух через, над або перехід. 'Preletjeti' — перелетіти."
+          en: 'The present verbal adverb (participle of manner) is formed with -ći (čitajući).',
+          ru: 'Деепричастие настоящего времени образуется суффиксом -ći (čitajući).',
+          ua: 'Дієприслівник теперішнього часу утворюється суфіксом -ći (čitajući).'
         }
       },
       {
         id: 9,
         question: {
-          en: "What is the correct vocative address for 'gospodin Kovačić'?",
-          ru: "Какое правильное звательное обращение (Vocative) для 'gospodin Kovačić'?",
-          ua: "Яке правильне кличне звертання (Vocative) для 'gospodin Kovačić'?"
+          en: "Which preposition requires the Dative case?",
+          ru: "Какой предлог требует дательного падежа?",
+          ua: "Який прийменник вимагає давального відмінка?"
         },
         options: [
-          { en: "gospodine Kovačiću", ru: "gospodine Kovačiću", ua: "gospodine Kovačiću" },
-          { en: "gospodin Kovačić", ru: "gospodin Kovačić", ua: "gospodin Kovačić" },
-          { en: "gospodina Kovačića", ru: "gospodina Kovačića", ua: "gospodina Kovačića" },
-          { en: "gospodinom Kovačićem", ru: "gospodinom Kovačićem", ua: "gospodinom Kovačićem" }
+          { en: "unatoč (despite)", ru: "unatoč (вопреки)", ua: "unatoč (всупереч)" },
+          { en: "tijekom (during)", ru: "tijekom (в течение)", ua: "tijekom (протягом)" },
+          { en: "bez (without)", ru: "bez (без)", ua: "bez (без)" },
+          { en: "blizu (near)", ru: "blizu (около)", ua: "blizu (поблизу)" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: "Vocative of 'gospodin' is 'gospodine', and 'Kovačić' ending in palatal sound gets -u ending: 'Kovačiću'.",
-          ru: "Звательный падеж для 'gospodin' — 'gospodine', а фамилия на шипящий/мягкий согласный получает окончание -u: 'Kovačiću'.",
-          ua: "Кличний відмінок для 'gospodin' — 'gospodine', а прізвище на шиплячий/м'який приголосний набуває закінчення -u: 'Kovačiću'."
+          en: '"unatoč" (despite/contrary to) is one of the few prepositions requiring the Dative case.',
+          ru: 'Предлог "unatoč" (вопреки) требует дательного падежа.',
+          ua: 'Прийменник "unatoč" (всупереч) вимагає давального відмінка.'
         }
       },
       {
         id: 10,
         question: {
-          en: "Identify the stylistic figure in the sentence: 'Tisuću puta sam ti rekao da šutiš!' (I told you a thousand times...)",
-          ru: "Определите стилистическую фигуру в предложении: 'Tisuću puta sam ti rekao...'",
-          ua: "Визначте стилістичну фігуру в реченні: 'Tisuću puta sam ti rekao...'"
+          en: "What does the idiom 'Bogu iza nogu' refer to?",
+          ru: "К чему относится выражение 'Bogu iza nogu'?",
+          ua: "До чого відноситься вираз 'Bogu iza nogu'?"
         },
         options: [
-          { en: "hiperbola (hyperbole)", ru: "hiperbola (гипербола)", ua: "hiperbola (гіпербола)" },
-          { en: "metafora (metaphor)", ru: "metafora (метафора)", ua: "metafora (метафора)" },
-          { en: "alegorija (allegory)", ru: "alegorija (аллегория)", ua: "alegorija (алегорія)" },
-          { en: "ironija (irony)", ru: "ironija (ирония)", ua: "ironija (іронія)" }
+          { en: "a place in the middle of nowhere / very remote", ru: "у черта на куличках / очень глухое место", ua: "у біса на болоті / дуже глухе місце" },
+          { en: "a church sanctuary", ru: "священное место", ua: "священне місце" },
+          { en: "a crowded city market", ru: "людный городской рынок", ua: "людне міське місце" },
+          { en: "a mountain shelter", ru: "горный приют", ua: "гірський притулок" }
         ],
         correctAnswer: 0,
         explanation: {
-          en: '"Tisuću puta" (a thousand times) is an extreme exaggeration for stylistic emphasis, which is hyperbole.',
-          ru: '"Tisuću puta" (тысячу раз) — стилистическое преувеличение, то есть гипербола.',
-          ua: '"Tisuću puta" (тисячу разів) — стилістичне перебільшення, тобто гіпербола.'
+          en: '"Bogu iza nogu" is an idiom describing a very remote place (in the middle of nowhere).',
+          ru: '"Bogu iza nogu" описывает очень далекое, глухое место.',
+          ua: '"Bogu iza nogu" описує дуже далеке, глухе місце.'
+        }
+      },
+      {
+        id: 11,
+        question: {
+          en: "What is the correct clitic order: 'Pitao sam se _____ (will he to him it) dati.'",
+          ru: "Выберите правильный порядок энклитик: 'Pitao sam se _____ dati.' (Подарит ли он ему это.)",
+          ua: "Виберіть правильний порядок енклітик: 'Pitao sam se _____ dati.' (Чи подарує він йому це.)"
+        },
+        options: [
+          { en: "hoće li mu ga", ru: "hoće li mu ga", ua: "hoće li mu ga" },
+          { en: "li mu ga hoće", ru: "li mu ga hoće", ua: "li mu ga hoće" },
+          { en: "mu ga li hoće", ru: "mu ga li hoće", ua: "mu ga li hoće" },
+          { en: "hoće mu ga li", ru: "hoće mu ga li", ua: "hoće mu ga li" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: 'Verbal clitic (hoće) + interrogative (li) + Dative (mu) + Accusative (ga) is the correct sequence.',
+          ru: 'Глагол (hoće) + ли (li) + Дательный (mu) + Винительный (ga) — правильный порядок.',
+          ua: 'Дієслово (hoće) + чи (li) + Давальний (mu) + Знахідний (ga) — правильний порядок.'
+        }
+      },
+      {
+        id: 12,
+        question: {
+          en: "Which verbal aspect suffix represents continuous habituality: 'prepisati' -> '_____'",
+          ru: "Какой видовой суффикс выражает длительную регулярность: 'prepisati' -> '_____'",
+          ua: "Який видовий суфікс виражає тривалу регулярність: 'prepisati' -> '_____'"
+        },
+        options: [
+          { en: "prepisivati", ru: "prepisivati", ua: "prepisivati" },
+          { en: "prepisati", ru: "prepisati", ua: "prepisati" },
+          { en: "prepisan", ru: "prepisan", ua: "prepisan" },
+          { en: "prepišem", ru: "prepišem", ua: "prepišem" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: 'Suffix -ivati (prepisivati) converts perfective verbs to imperfective iterative forms.',
+          ru: 'Суффикс -ivati переводит глагол совершенного вида в многократный несовершенный.',
+          ua: 'Суфікс -ivati переводить дієслово доконаного виду в багаторазове недоконане.'
+        }
+      },
+      {
+        id: 13,
+        question: {
+          en: "What sound change is present in the genitive plural: 'tjedan' -> 'tjedana'?",
+          ru: "Какое звуковое явление присутствует в родительном мн.ч.: 'tjedan' -> 'tjedana'?",
+          ua: "Яке звукове явище наявне в родовому множини: 'tjedan' -> 'tjedana'?"
+        },
+        options: [
+          { en: "nepostojano a (fleeting A)", ru: "nepostojano a (беглая А)", ua: "nepostojano a (бігла А)" },
+          { en: "jotacija", ru: "jotacija", ua: "jotacija" },
+          { en: "palatalizacija", ru: "palatalizacija", ua: "palatalizacija" },
+          { en: "sibilarizacija", ru: "sibilarizacija", ua: "sibilarizacija" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: 'The fleeting "a" (nepostojano a) disappears in singular oblique cases (tjedna) but appears in genitive plural (tjedana).',
+          ru: 'Беглая "a" исчезает в косвенных падежах ед.ч. (tjedna), но появляется в родительном мн.ч. (tjedana).',
+          ua: 'Бігла "a" зникає в непрямих відмінках однини (tjedna), але з\'являється в родовому множини (tjedana).'
+        }
+      },
+      {
+        id: 14,
+        question: {
+          en: "Form the participle of manner for 'raditi' (while working):",
+          ru: "Образуйте деепричастие настоящего времени для 'raditi':",
+          ua: "Утворіть дієприслівник теперішнього часу для 'raditi':"
+        },
+        options: [
+          { en: "radeći", ru: "radeći", ua: "radeći" },
+          { en: "radivši", ru: "radivši", ua: "radivši" },
+          { en: "rađen", ru: "rađen", ua: "rađen" },
+          { en: "raditi", ru: "raditi", ua: "raditi" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: '"radeći" is the present verbal adverb of "raditi".',
+          ru: '"radeći" — деепричастие настоящего времени.',
+          ua: '"radeći" — дієприслівник теперішнього часу.'
+        }
+      },
+      {
+        id: 15,
+        question: {
+          en: "What does the idiom 'baciti koplje u trnje' mean?",
+          ru: "Что означает идиома 'baciti koplje u trnje'?",
+          ua: "Що означає ідіома 'baciti koplje u trnje'?"
+        },
+        options: [
+          { en: "to give up / surrender", ru: "опустить руки / сдаться", ua: "опустити руки / здатися" },
+          { en: "to attack an enemy", ru: "напасть на врага", ua: "напасти на ворога" },
+          { en: "to go hunting", ru: "отправиться на охоту", ua: "відправитися на полювання" },
+          { en: "to clean the garden", ru: "навести порядок в саду", ua: "навести лад у саду" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: '"baciti koplje u trnje" (throw the spear into the thorns) means to surrender or give up.',
+          ru: '"baciti koplje u trnje" означает сдаться или отказаться от борьбы.',
+          ua: '"baciti koplje u trnje" означає здатися або відмовитися від боротьби.'
+        }
+      },
+      {
+        id: 16,
+        question: {
+          en: "Which relative pronoun is used in: 'To je projekt _____ (about which - locative masculine) raspravljamo.'",
+          ru: "Какое относительное местоимение подходит: 'To je projekt _____ raspravljamo.' (Это проект, о котором...)",
+          ua: "Який відносний займенник підходить: 'To je projekt _____ raspravljamo.' (Це проєкт, про який...)"
+        },
+        options: [
+          { en: "o kojemu", ru: "o kojemu", ua: "o kojemu" },
+          { en: "o kojoj", ru: "o kojoj", ua: "o kojoj" },
+          { en: "o kojih", ru: "o kojih", ua: "o kojih" },
+          { en: "o kojima", ru: "o kojima", ua: "o kojima" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: '"o kojemu" is the locative singular masculine relative pronoun.',
+          ru: '"o kojemu" — форма местного падежа ед.ч. мужского рода.',
+          ua: '"o kojemu" — форма місцевого відмінка однини чоловічого роду.'
+        }
+      },
+      {
+        id: 17,
+        question: {
+          en: "What does the word 'dvosmislen' mean in a text?",
+          ru: "Что означает слово 'dvosmislen' в тексте?",
+          ua: "Что означает слово 'dvosmislen' в тексте?"
+        },
+        options: [
+          { en: "ambiguous / double-meaning", ru: "двусмысленный", ua: "двозначний" },
+          { en: "clear / direct", ru: "ясный", ua: "ясний" },
+          { en: "short", ru: "короткий", ua: "короткий" },
+          { en: "translated", ru: "переведенный", ua: "перекладений" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: '"dvosmislen" means ambiguous (having two meanings).',
+          ru: '"dvosmislen" означает двусмысленный.',
+          ua: '"dvosmislen" означає двозначний.'
+        }
+      },
+      {
+        id: 18,
+        question: {
+          en: "Identify the correct relative clause structure for 'whose book':",
+          ru: "Выберите правильную относительную придаточную структуру для 'книга которой/чьей':",
+          ua: "Виберіть правильну відносну підрядну структуру для 'книга якої/чиєї':"
+        },
+        options: [
+          { en: "žena čiju sam knjigu čitao", ru: "žena čiju sam knjigu čitao", ua: "žena čiju sam knjigu čitao" },
+          { en: "žena čije sam knjigu čitao", ru: "žena čije sam knjigu čitao", ua: "žena čije sam knjigu čitao" },
+          { en: "žena čiji sam knjigu čitao", ru: "žena čiji sam knjigu čitao", ua: "žena čiji sam knjigu čitao" },
+          { en: "žena čijoj sam knjigu čitao", ru: "žena čijoj sam knjigu čitao", ua: "žena čijoj sam knjigu čitao" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: '"čiju" is accusative singular feminine, agreeing with "knjigu" (direct object).',
+          ru: '"čiju" согласуется в винительном падеже ж.р. с существительным "knjigu".',
+          ua: '"čiju" узгоджується в знахідному відмінку ж.р. з іменником "knjigu".'
+        }
+      },
+      {
+        id: 19,
+        question: {
+          en: "Which suffix forms abstract nouns from adjectives (eg. 'lijep' -> '_____')?",
+          ru: "Какой суффикс образует абстрактные имена от прилагательных (напр., 'lijep' -> '_____')?",
+          ua: "Який суфікс утворює абстрактні іменники від прикметників (напр., 'lijep' -> '_____')?"
+        },
+        options: [
+          { en: "-ost (ljepota is standard, but also -ost)", ru: "-ost (ljepota - стандарт, но также -ost)", ua: "-ost (ljepota - стандарт, але також -ost)" },
+          { en: "-ost / -ota (ljepota, nježnost)", ru: "-ost / -ota", ua: "-ost / -ota" },
+          { en: "-ost is the most productive", ru: "-ost наиболее продуктивный", ua: "-ost найпродуктивніший" },
+          { en: "Both B and C are correct", ru: "И В, и С верны", ua: "І В, і С правильні" }
+        ],
+        correctAnswer: 3,
+        explanation: {
+          en: 'Abstract nouns are frequently formed using -ost (nježnost) or -ota (ljepota).',
+          ru: 'Абстрактные имена образуются с помощью суффиксов -ost и -ota.',
+          ua: 'Абстрактні іменники утворюються за допомогою суфіксів -ost та -ota.'
+        }
+      },
+      {
+        id: 20,
+        question: {
+          en: "What does the prefix 'raz-' indicate in verbs like 'razdijeliti' or 'razbiti'?",
+          ru: "Что означает приставка 'raz-' в глаголах?",
+          ua: "Що означає префікс 'raz-' у дієсловах?"
+        },
+        options: [
+          { en: "separation / dispersion / destruction", ru: "разделение / разрушение / дисперсия", ua: "розділення / руйнування / дисперсія" },
+          { en: "repetition", ru: "повторение", ua: "повторення" },
+          { en: "location", ru: "местонахождение", ua: "місцезнаходження" },
+          { en: "negation", ru: "отрицание", ua: "заперечення" }
+        ],
+        correctAnswer: 0,
+        explanation: {
+          en: 'The prefix "raz-" indicates division, scattering, or disintegration.',
+          ru: 'Приставка "raz-" указывает на разделение, разброс или разрушение.',
+          ua: 'Префікс "raz-" вказує на розділення, розкидання або руйнування.'
         }
       }
     ]

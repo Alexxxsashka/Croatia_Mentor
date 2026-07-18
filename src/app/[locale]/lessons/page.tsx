@@ -154,7 +154,7 @@ export default function LessonsPage() {
       const correct = promoAnswers.filter(
         (ans, idx) => ans === test.questions[idx].correctAnswer
       ).length;
-      const passed = correct >= 8; // 80% to pass (8 out of 10)
+      const passed = correct >= 16; // 80% to pass (16 out of 20)
       
       setPromoPassed(passed);
       setPromoFinished(true);
@@ -570,10 +570,10 @@ export default function LessonsPage() {
                     </h3>
                     <p className="text-muted-foreground text-sm max-w-sm mx-auto leading-relaxed">
                       {locale === "ua"
-                        ? `Ви правильно відповіли на ${promoCorrectCount} з ${activeTest.questions.length} питань. Для успішного переходу потрібно щонайменше 4 правильні відповіді. Спробуйте ще раз!`
+                        ? `Ви правильно відповіли на ${promoCorrectCount} з ${activeTest.questions.length} питань. Для успішного переходу потрібно щонайменше 16 правильних відповідей. Спробуйте ще раз!`
                         : locale === "ru"
-                        ? `Вы правильно ответили на ${promoCorrectCount} из ${activeTest.questions.length} вопросов. Для успешного перехода требуется минимум 4 правильных ответа. Попробуйте еще раз!`
-                        : `You answered ${promoCorrectCount} out of ${activeTest.questions.length} questions correctly. You need at least 4 correct answers to unlock the next level. Try again!`
+                        ? `Вы правильно ответили на ${promoCorrectCount} из ${activeTest.questions.length} вопросов. Для успешного перехода требуется минимум 16 правильных ответов. Попробуйте еще раз!`
+                        : `You answered ${promoCorrectCount} out of ${activeTest.questions.length} questions correctly. You need at least 16 correct answers to unlock the next level. Try again!`
                       }
                     </p>
                   </>

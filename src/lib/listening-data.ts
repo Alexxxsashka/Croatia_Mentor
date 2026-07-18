@@ -85,7 +85,7 @@ export const listeningData: ListeningItem[] = [
     title: { en: "Movie Scene: Wednesday or Thursday?", ru: "Сцена из фильма: Среда или четверг?", ua: "Сцена з фільму: Середа чи четвер?" },
     type: "dialogue",
     level: "A2",
-    youtubeId: "R9K1G3b8W4c",
+    youtubeId: "",
     description: {
       en: "A classic dialogue from the famous Croatian film 'Tko pjeva zlo ne misli' (1970). Practice days of the week and polite conversation.",
       ru: "Классический диалог из знаменитого хорватского фильма 'Tko pjeva zlo ne misli' (1970). Учите дни недели и вежливую речь.",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useSession, signOut } from "next-auth/react";
 import { Link } from "@/i18n/navigation";
 import { LanguageSwitcher } from "./language-switcher";
@@ -48,6 +48,8 @@ export function Navbar() {
     }
   };
 
+  const locale = useLocale();
+
   const navLinks = session
     ? [
         {
@@ -59,7 +61,7 @@ export function Navbar() {
         { href: "/vocabulary", label: t("vocabulary"), icon: Languages },
         { href: "/glossary", label: t("glossary"), icon: GraduationCap },
         { href: "/games", label: t("games"), icon: Gamepad2 },
-        { href: "/ai-chat", label: t("aiChat"), icon: MessageCircle },
+        { href: "/ai-chat", label: t("aiChat"), icon: MessageCircle, disabled: true },
       ]
     : [];
 
@@ -82,16 +84,30 @@ export function Navbar() {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-200"
-              >
-                <link.icon className="w-4 h-4" />
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              if (link.disabled) {
+                return (
+                  <span
+                    key={link.href}
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground/40 cursor-not-allowed bg-transparent"
+                    title={locale === "ua" ? "Тимчасово недоступно" : locale === "ru" ? "Временно недоступно" : "Temporarily unavailable"}
+                  >
+                    <link.icon className="w-4 h-4" />
+                    {link.label}
+                  </span>
+                );
+              }
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-200"
+                >
+                  <link.icon className="w-4 h-4" />
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Right side */}
@@ -165,17 +181,31 @@ export function Navbar() {
       {mobileOpen && (
         <div className="md:hidden pb-4 pt-2 border-t border-black/5 dark:border-white/5 animate-fade-in">
           <div className="flex flex-col gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-all"
-              >
-                <link.icon className="w-4 h-4" />
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              if (link.disabled) {
+                return (
+                  <span
+                    key={link.href}
+                    className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground/40 cursor-not-allowed"
+                    title={locale === "ua" ? "Тимчасово недоступно" : locale === "ru" ? "Временно недоступно" : "Temporarily unavailable"}
+                  >
+                    <link.icon className="w-4 h-4" />
+                    {link.label}
+                  </span>
+                );
+              }
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-all"
+                >
+                  <link.icon className="w-4 h-4" />
+                  {link.label}
+                </Link>
+              );
+            })}
             {session ? (
               <button
                 onClick={() => {

@@ -7,8 +7,7 @@ import { useState, useEffect } from "react";
 import { lessonsData } from "@/lib/lessons-data";
 import {
   Trophy,
-  Flame,
-  Star,
+  Sparkles,
   BookOpen,
   Target,
   MessageCircle,
@@ -214,6 +213,7 @@ export default function DashboardPage() {
       label: t("chatWithAI"),
       gradient: "from-purple-500 to-pink-400",
       description: t("chatWithAIDesc"),
+      disabled: true,
     },
     {
       href: "/placement-test",
@@ -288,13 +288,11 @@ export default function DashboardPage() {
             <span className="text-sm text-muted-foreground">
               {t("totalXP")}
             </span>
-            <Star className="w-5 h-5 text-blue-400" />
+            <Sparkles className="w-5 h-5 text-blue-400 animate-pulse" />
           </div>
-          <div className="text-3xl font-black">
-            {totalXP.toLocaleString()}
-          </div>
-          <div className="text-xs text-muted-foreground mt-1">
-            {t("keepLearningXp")}
+          <div className="flex items-baseline gap-1">
+            <span className="text-3xl font-black">{totalXP}</span>
+            <span className="text-xs text-muted-foreground font-semibold">XP</span>
           </div>
         </div>
 
@@ -302,13 +300,13 @@ export default function DashboardPage() {
         <div className="glass rounded-2xl p-5 card-hover">
           <div className="flex items-center justify-between mb-3">
             <span className="text-sm text-muted-foreground">
-              {t("dailyStreak")}
+              {t("streak")}
             </span>
-            <Flame className="w-5 h-5 text-orange-400" />
+            <span className="text-lg">🔥</span>
           </div>
           <div className="flex items-baseline gap-1">
             <span className="text-3xl font-black">{streak}</span>
-            <span className="text-sm text-muted-foreground">
+            <span className="text-xs text-muted-foreground font-semibold">
               {t("days")}
             </span>
           </div>
@@ -339,28 +337,53 @@ export default function DashboardPage() {
         <div className="lg:col-span-2 space-y-6">
           <h2 className="text-xl font-bold">{t("quickActions")}</h2>
           <div className="grid sm:grid-cols-2 gap-4 stagger-children">
-            {quickActions.map((action) => (
-              <Link
-                key={action.href}
-                href={action.href}
-                className="group glass rounded-2xl p-5 card-hover flex items-start gap-4"
-              >
-                <div
-                  className={`w-12 h-12 rounded-xl bg-gradient-to-br ${action.gradient} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
+            {quickActions.map((action) => {
+              if (action.disabled) {
+                return (
+                  <span
+                    key={action.href}
+                    className="group glass rounded-2xl p-5 opacity-40 cursor-not-allowed flex items-start gap-4 text-left"
+                    title={locale === "ua" ? "Тимчасово недоступно" : locale === "ru" ? "Временно недоступно" : "Temporarily unavailable"}
+                  >
+                    <div
+                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${action.gradient} flex items-center justify-center shrink-0 shadow-lg`}
+                    >
+                      <action.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-sm">
+                        {action.label}
+                      </h3>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {action.description}
+                      </p>
+                    </div>
+                  </span>
+                );
+              }
+              return (
+                <Link
+                  key={action.href}
+                  href={action.href}
+                  className="group glass rounded-2xl p-5 card-hover flex items-start gap-4"
                 >
-                  <action.icon className="w-6 h-6 text-white" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-sm group-hover:text-blue-400 transition-colors">
-                    {action.label}
-                  </h3>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {action.description}
-                  </p>
-                </div>
-                <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all shrink-0 mt-1" />
-              </Link>
-            ))}
+                  <div
+                    className={`w-12 h-12 rounded-xl bg-gradient-to-br ${action.gradient} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
+                  >
+                    <action.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1 min-w-0 text-left">
+                    <h3 className="font-semibold text-sm group-hover:text-blue-400 transition-colors">
+                      {action.label}
+                    </h3>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {action.description}
+                    </p>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all shrink-0 mt-1" />
+                </Link>
+              );
+            })}
           </div>
 
           {/* Lessons Completed */}

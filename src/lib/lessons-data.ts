@@ -41,7 +41,9 @@ export function getLocalizedText(
 }
 
 export const lessonsData: LessonData[] = [
-  // A1 Grammar
+  // ==========================================
+  // LEVEL A1
+  // ==========================================
   {
     id: "a1-grammar-1",
     type: "grammar",
@@ -59,212 +61,226 @@ export const lessonsData: LessonData[] = [
       },
       sections: [
         {
-          title: {
-            en: "Personal Pronouns",
-            ru: "Личные местоимения",
-            ua: "Особові займенники"
-          },
+          title: { en: "Personal Pronouns", ru: "Личные местоимения", ua: "Особові займенники" },
           text: {
             en: "In Croatian, personal pronouns change based on their function in the sentence. Here are the basic nominative forms:",
             ru: "В хорватском языке личные местоимения изменяются в зависимости от их функции в предложении. Вот основные формы в именительном падеже:",
             ua: "У хорватській мові особові займенники змінюються залежно від їхньої функції в реченні. Ось основні форми в називному відмінку:"
           },
           examples: [
-            {
-              en: "ja (I) — Ja sam student. (I am a student)",
-              ru: "ja (я) — Ja sam student. (Я студент)",
-              ua: "ja (я) — Ja sam student. (Я студент)"
-            },
-            {
-              en: "ti (you) — Ti si učenik. (You are a pupil)",
-              ru: "ti (ты) — Ti si učenik. (Ты ученик)",
-              ua: "ti (ти) — Ti si učenik. (Ти учень)"
-            },
-            {
-              en: "on/ona/ono (he/she/it) — On je dobar. (He is good)",
-              ru: "on/ona/ono (он/она/оно) — On je dobar. (Он хороший)",
-              ua: "on/ona/ono (він/вона/воно) — On je dobar. (Він добрий)"
-            },
-            {
-              en: "mi (we) — Mi smo prijatelji. (We are friends)",
-              ru: "mi (мы) — Mi smo prijatelji. (Мы друзья)",
-              ua: "mi (ми) — Mi smo prijatelji. (Ми друзі)"
-            },
-            {
-              en: "vi (you pl./formal) — Vi ste profesori. (You are professors)",
-              ru: "vi (вы) — Vi ste profesori. (Вы профессора)",
-              ua: "vi (ви) — Vi ste profesori. (Ви професори)"
-            },
-            {
-              en: "oni/one/ona (they) — Oni su ovdje. (They are here)",
-              ru: "oni/one/ona (они) — Oni su ovdje. (Они здесь)",
-              ua: "oni/one/ona (вони) — Oni su ovdje. (Вони тут)"
-            }
+            { en: "ja (I) — Ja sam student. (I am a student)", ru: "ja (я) — Ja sam student. (Я студент)", ua: "ja (я) — Ja sam student. (Я студент)" },
+            { en: "ti (you) — Ti si učenik. (You are a pupil)", ru: "ti (ты) — Ti si učenik. (Ты ученик)", ua: "ti (ти) — Ti si učenik. (Ти учень)" },
+            { en: "on/ona/ono (he/she/it) — On je dobar. (He is good)", ru: "on/ona/ono (он/она/оно) — On je dobar. (Он хороший)", ua: "on/ona/ono (він/вона/воно) — On je dobar. (Він добрий)" }
           ]
         }
       ],
       exercises: [
         {
           type: "multiple-choice",
-          question: {
-            en: "_____ sam iz Hrvatske. (I am from Croatia.)",
-            ru: "_____ sam iz Hrvatske. (Я из Хорватии.)",
-            ua: "_____ sam iz Hrvatske. (Я з Хорватії.)"
-          },
+          question: { en: "_____ sam iz Hrvatske. (I am from Croatia.)", ru: "_____ sam iz Hrvatske. (Я из Хорватии.)", ua: "_____ sam iz Hrvatske. (Я з Хорватії.)" },
           options: ["Ja", "Ti", "On", "Mi"],
           correctAnswer: "Ja"
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "_____ ste lijepi. (You [formal] are beautiful.)",
-            ru: "_____ ste lijepi. (Вы [вежливо] красивы.)",
-            ua: "_____ ste lijepi. (Ви [ввічливо] красиві.)"
-          },
+          question: { en: "_____ ste lijepi. (You [formal] are beautiful.)", ru: "_____ ste lijepi. (Вы [вежливо] красивы.)", ua: "_____ ste lijepi. (Ви [ввічливо] красиві.)" },
           options: ["Vi", "Ti", "Oni", "Ja"],
           correctAnswer: "Vi"
         },
         {
           type: "fill-blank",
-          question: {
-            en: "Complete: _____ je profesorica. (She is a professor.)",
-            ru: "Заполните: _____ je profesorica. (Она преподаватель.)",
-            ua: "Заповніть: _____ je profesorica. (Вона викладач.)"
-          },
+          question: { en: "Complete: _____ je profesorica. (She is a professor.)", ru: "Заполните: _____ je profesorica. (Она преподаватель.)", ua: "Заповніть: _____ je profesorica. (Вона викладач.)" },
           correctAnswer: "Ona",
-          hint: {
-            en: "Think about the feminine 3rd person pronoun",
-            ru: "Подумайте о местоимении 3-го лица женского рода (Она)",
-            ua: "Подумайте про займенник 3-ї особи жіночого роду (Вона)"
-          }
+          hint: { en: "Think about the feminine 3rd person pronoun", ru: "Подумайте о местоимении 3-го лица женского рода (Она)", ua: "Подумайте про займенник 3-ї особи жіночого роду (Вона)" }
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "Kako ste _____? (How are you [plural/formal]?)",
-            ru: "Kako ste _____? (Как у вас дела? / Как вы [мн.ч./вежл.]?)",
-            ua: "Kako ste _____? (Як ваші справи? / Як ви [мн.ч./ввічл.]?)"
-          },
+          question: { en: "Kako ste _____? (How are you [plural/formal]?)", ru: "Kako ste _____? (Как у вас дела? / Как вы [мн.ч./вежл.]?)", ua: "Kako ste _____? (Як ваші справи? / Як ви [мн.ч./ввічл.]?)" },
           options: ["vi", "ja", "ti", "ona"],
           correctAnswer: "vi"
         },
         {
           type: "fill-blank",
-          question: {
-            en: "Complete: _____ smo sretni. (We are happy.)",
-            ru: "Заполните: _____ smo sretni. (Мы счастливы.)",
-            ua: "Заповніть: _____ smo sretni. (Ми щасливі.)"
-          },
+          question: { en: "Complete: _____ smo sretni. (We are happy.)", ru: "Заполните: _____ smo sretni. (Мы счастливы.)", ua: "Заповніть: _____ smo sretni. (Ми щасливі.)" },
           correctAnswer: "Mi",
-          hint: {
-            en: "Think of first person plural pronoun",
-            ru: "Подумайте о местоимении 1-го лица множественного числа (Мы)",
-            ua: "Подумайте про займенник 1-ї особи множини (Ми)"
-          }
+          hint: { en: "1st person plural pronoun", ru: "Местоимение 1-го лица мн. ч. (Мы)", ua: "Займенник 1-ї особи мн. ч. (Ми)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "_____ su u uredu. (They [masc.] are in the office.)", ru: "_____ su u uredu. (Они [м.р.] в офисе.)", ua: "_____ su u uredu. (Вони [ч.р.] в офісі.)" },
+          options: ["Oni", "One", "Ona", "Vi"],
+          correctAnswer: "Oni"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate to Croatian: 'You (informal, singular) are'", ru: "Переведите на хорватский: 'Ты есть'", ua: "Перекладіть на хорватську: 'Ти є'" },
+          correctAnswer: "Ti si"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "_____ čitaš knjigu. (You are reading a book.)", ru: "_____ čitaš knjigu. (Ты читаешь книгу.)", ua: "_____ čitaš knjigu. (Ти читаєш книгу.)" },
+          options: ["Ti", "Ja", "On", "Mi"],
+          correctAnswer: "Ti"
         }
       ]
     }
   },
-  // A1 Reading
   {
-    id: "a1-reading-1",
-    type: "reading",
+    id: "a1-grammar-2",
+    type: "grammar",
     level: "A1",
     title: {
-      en: "U kafiću (At the café)",
-      ru: "В кафе (U kafiću)",
-      ua: "У кафе (U kafiću)"
+      en: "Glagol 'biti' i predstavljanje (Verb 'to be' & introductions)",
+      ru: "Глагол 'biti' и знакомство (Verb 'biti')",
+      ua: "Дієслово 'biti' та знайомство (Verb 'biti')"
     },
     content: {
       description: {
-        en: "Read a simple dialogue at a Croatian café and answer comprehension questions.",
-        ru: "Прочитайте простой диалог в хорватском кафе и ответьте на вопросы.",
-        ua: "Прочитайте простий діалог у хорватському кафе та дайте відповіді."
+        en: "Master the present tense of the verb 'biti' (to be) and learn to introduce yourself.",
+        ru: "Освойте настоящее время глагола 'biti' (быть) и научитесь представляться.",
+        ua: "Опануйте теперішній час дієслова 'biti' (бути) та навчіться представлятися."
       },
       sections: [
         {
-          title: {
-            en: "Dialogue",
-            ru: "Диалог",
-            ua: "Діалог"
-          },
-          text: "Konobar: Dobar dan! Što želite?\nAna: Dobar dan! Jednu kavu, molim.\nKonobar: S mlijekom ili bez?\nAna: S mlijekom, hvala.\nKonobar: Želite li još nešto?\nAna: Ne, hvala. Koliko je to?\nKonobar: Dva eura.\nAna: Izvolite. Hvala!\nKonobar: Hvala vama. Doviđenja!"
-        },
-        {
-          title: {
-            en: "Vocabulary",
-            ru: "Словарь",
-            ua: "Словник"
-          },
+          title: { en: "Present of Biti", ru: "Настоящее время глагола Biti", ua: "Теперішній час дієслова Biti" },
           text: {
-            en: "Key words from the dialogue:",
-            ru: "Ключевые слова из диалога:",
-            ua: "Ключові слова з діалогу:"
+            en: "The short (clitic) forms of 'biti' are: sam, si, je, smo, ste, su. To make questions, we use 'Li' (e.g. Jesi li...?). To introduce yourself: 'Ja sam Marko' or 'Zovem se Marko'.",
+            ru: "Краткие формы глагола 'biti': sam, si, je, smo, ste, su. Для вопросов используется частица 'li'. Представление: 'Ja sam Marko' или 'Zovem se Marko'.",
+            ua: "Короткі форми дієслова 'biti': sam, si, je, smo, ste, su. Для запитань використовується частка 'li'. Представлення: 'Ja sam Marko' або 'Zovem se Marko'."
           },
           examples: [
-            { en: "konobar — waiter", ru: "konobar — официант", ua: "konobar — офіціант" },
-            { en: "kava — coffee", ru: "kava — кофе", ua: "kava — кава" },
-            { en: "mlijeko — milk", ru: "mlijeko — молоко", ua: "mlijeko — молоко" },
-            { en: "molim — please", ru: "molim — пожалуйста", ua: "molim — будь ласка" },
-            { en: "hvala — thank you", ru: "hvala — спасибо", ua: "hvala — дякую" },
-            { en: "koliko — how much", ru: "koliko — сколько", ua: "koliko — скільки" },
-            { en: "doviđenja — goodbye", ru: "doviđenja — до свидания", ua: "doviđenja — до побачення" }
+            { en: "Kako se zoveš? — Zovem se Ana. (What is your name? — My name is Ana.)", ru: "Kako se zoveš? — Zovem se Ana. (Как тебя зовут? — Меня зовут Ана.)", ua: "Kako se zoveš? — Zovem se Ana. (Як тебе звати? — Мене звати Ана.)" },
+            { en: "Odakle si? — Ja sam iz Ukrajine. (Where are you from? — I am from Ukraine.)", ru: "Odakle si? — Ja sam iz Ukrajine. (Откуда ты? — Я из Украины.)", ua: "Odakle si? — Ja sam iz Ukrajine. (Звідки ти? — Я з України.)" }
           ]
         }
       ],
       exercises: [
         {
           type: "multiple-choice",
-          question: {
-            en: "What does Ana order?",
-            ru: "Что заказывает Ана?",
-            ua: "Що замовляє Ана?"
-          },
-          options: ["Coffee with milk", "Tea", "Juice", "Water"],
-          correctAnswer: "Coffee with milk"
+          question: { en: "Kako _____ zoveš? (What is your name?)", ru: "Kako _____ zoveš? (Как тебя зовут?)", ua: "Kako _____ zoveš? (Як тебе звати?)" },
+          options: ["se", "si", "sam", "je"],
+          correctAnswer: "se"
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "How much does the coffee cost?",
-            ru: "Сколько стоит кофе?",
-            ua: "Скільки коштует кава?"
-          },
-          options: ["2 euros", "3 euros", "1 euro", "5 euros"],
-          correctAnswer: "2 euros"
+          question: { en: "Ja _____ Marko. (I am Marko.)", ru: "Ja _____ Marko. (Я Марко.)", ua: "Ja _____ Marko. (Я Марко.)" },
+          options: ["sam", "si", "je", "su"],
+          correctAnswer: "sam"
         },
         {
-          type: "translation",
-          question: {
-            en: "Translate to Croatian: \"Thank you\"",
-            ru: "Переведите на хорватский: \"Спасибо\"",
-            ua: "Перекладіть на хорватську: \"Дякую\""
-          },
-          correctAnswer: "Hvala"
+          type: "fill-blank",
+          question: { en: "Complete: Odakle _____ ti? (Where are you from?)", ru: "Заполните: Odakle _____ ti? (Откуда ты?)", ua: "Заповніть: Odakle _____ ti? (Звідки ти?)" },
+          correctAnswer: "si",
+          hint: { en: "Use present form of 'biti' for 'ti'", ru: "Используйте форму глагола 'biti' для 'ti'", ua: "Використовуйте форму дієслова 'biti' для 'ti'" }
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "What does the waiter ask after Ana orders a coffee?",
-            ru: "Что спрашивает официант после заказа Аны?",
-            ua: "Що запитує офіціант після замовлення Ани?"
-          },
-          options: ["S mlijekom ili bez?", "Kava ili čaj?", "Toplo ili hladno?", "Sada ili kasnije?"],
-          correctAnswer: "S mlijekom ili bez?"
+          question: { en: "Oni _____ iz Hrvatske. (They are from Croatia.)", ru: "Oni _____ iz Hrvatske. (Они из Хорватии.)", ua: "Oni _____ iz Hrvatske. (Вони з Хорватії.)" },
+          options: ["su", "smo", "ste", "je"],
+          correctAnswer: "su"
         },
         {
           type: "translation",
-          question: {
-            en: "Translate to Croatian: \"Goodbye\"",
-            ru: "Переведите на хорватский: \"До свидания\"",
-            ua: "Перекладіть на хорватську: \"До побачення\""
-          },
-          correctAnswer: "Doviđenja"
+          question: { en: "Translate: 'Ja sam iz Kijeva.'", ru: "Переведите: 'Ja sam iz Kijeva.'", ua: "Перекладіть: 'Ja sam iz Kijeva.'" },
+          correctAnswer: "I am from Kyiv."
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Jeste _____ li umorni? (Are you [plural/formal] tired?)", ru: "Jeste _____ li umorni? (Вы устали?)", ua: "Jeste _____ li umorni? (Ви втомилися?)" },
+          options: ["ste", "smo", "su", "si"],
+          correctAnswer: "ste"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Mi _____ studenti. (We are students.)", ru: "Заполните: Mi _____ studenti. (Мы студенты.)", ua: "Заповніть: Mi _____ studenti. (Ми студенти.)" },
+          correctAnswer: "smo",
+          hint: { en: "We are", ru: "Мы есть (smo)", ua: "Ми є (smo)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Kako se _____ ona? (What is her name?)", ru: "Kako se _____ ona? (Как её зовут?)", ua: "Kako se _____ ona? (Як її звати?)" },
+          options: ["zove", "zovem", "zoveš", "zovu"],
+          correctAnswer: "zove"
         }
       ]
     }
   },
-  // A1 Dictation
+  {
+    id: "a1-reading-1",
+    type: "reading",
+    level: "A1",
+    title: {
+      en: "U kafiću (At the Cafe)",
+      ru: "В кафе (U kafiću)",
+      ua: "У кафе (U kafiću)"
+    },
+    content: {
+      description: {
+        en: "Read a simple dialogue in a Croatian cafe and answer comprehension questions.",
+        ru: "Прочитайте простой диалог в хорватском кафе и ответьте на вопросы.",
+        ua: "Прочитайте простий діалог у хорватському кафе та дайте відповіді."
+      },
+      sections: [
+        {
+          title: { en: "Dialogue", ru: "Диалог", ua: "Діалог" },
+          text: {
+            en: "Konobar: Dobar dan! Izvolite.\nAna: Dobar dan. Mogu li dobiti kavu s mlijekom?\nKonobar: Naravno. A za Vas?\nIvan: Ja ću čaj s limunom, molim.\nKonobar: U redu. Kava s mlijekom i čaj s limunom. Želite li vodu?\nAna: Da, gaziranu vodu, molim.\nIvan: Za mene negaziranu vodu.\nKonobar: Hvala, stiže odmah.",
+            ru: "Официант: Добрый день! Пожалуйста.\nАна: Добрый день. Можно мне кофе с молоком?\nОфициант: Конечно. А для Вас?\nИван: Мне чай с лимоном, пожалуйста.\nОфициант: Хорошо. Кофе с молоком и чай с лимоном. Желаете воду?\nАна: Да, газированную воду, пожалуйста.\nИван: Мне негазированную воду.\nОфициант: Спасибо, сейчас принесу.",
+            ua: "Офіціант: Добрий день! Прошу.\nАна: Добрий день. Можна мені каву з молоком?\nОфіціант: Звичайно. А для Вас?\nІван: Мені чай з лимоном, будь ласка.\nОфіціант: Добре. Кава з молоком і чай з лимоном. Бажаєте воду?\nАна: Так, газовану воду, будь ласка.\nІван: Мені негазовану воду.\nОфіціант: Дякую, зараз принесу."
+          }
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: { en: "What does Ana want to drink?", ru: "Что хочет выпить Ана?", ua: "Що хоче випити Ана?" },
+          options: ["Kavu s mlijekom", "Čaj s limunom", "Pivo", "Sok"],
+          correctAnswer: "Kavu s mlijekom"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What does Ivan order?", ru: "Что заказывает Иван?", ua: "Що замовляє Іван?" },
+          options: ["Čaj s limunom", "Kavu s mlijekom", "Vodu", "Sok"],
+          correctAnswer: "Čaj s limunom"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Mogu li dobiti _____ s mlijekom?", ru: "Заполните: Mogu li dobiti _____ s mlijekom?", ua: "Заповніть: Mogu li dobiti _____ s mlijekom?" },
+          correctAnswer: "kavu",
+          hint: { en: "coffee (accusative)", ru: "кофе (винительный падеж)", ua: "каву (знахідний відмінок)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What kind of water does Ana want?", ru: "Какую воду хочет Ана?", ua: "Яку воду хоче Ана?" },
+          options: ["Gaziranu (sparkling)", "Negaziranu (still)", "Hladnu (cold)", "Toplu (warm)"],
+          correctAnswer: "Gaziranu (sparkling)"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Ja ću čaj s _____ (lemon - instrumental).", ru: "Заполните: Ja ću čaj s _____ (лимон - творительный падеж).", ua: "Заповніть: Ja ću čaj s _____ (лимон - орудний відмінок)." },
+          correctAnswer: "limunom",
+          hint: { en: "with lemon", ru: "с лимоном", ua: "з лимоном" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What does 'stiže odmah' mean?", ru: "Что означает 'stiže odmah'?", ua: "Що означає 'stiže odmah'?" },
+          options: ["Coming right up", "Goodbye", "Too expensive", "We don't have it"],
+          correctAnswer: "Coming right up"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Dobar dan! Izvolite.'", ru: "Переведите: 'Dobar dan! Izvolite.'", ua: "Перекладіть: 'Dobar dan! Izvolite.'" },
+          correctAnswer: "Good day! Here you go."
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Who ordered negazirana voda?", ru: "Кто заказал негазированную воду?", ua: "Хто замовив негазовану воду?" },
+          options: ["Ivan", "Ana", "Konobar", "Niko"],
+          correctAnswer: "Ivan"
+        }
+      ]
+    }
+  },
   {
     id: "a1-dictation-1",
     type: "dictation",
@@ -276,166 +292,228 @@ export const lessonsData: LessonData[] = [
     },
     content: {
       description: {
-        en: "Listen to basic Croatian greetings and type what you hear.",
-        ru: "Прослушайте базовые приветствия на хорватском и напишите услышанное.",
-        ua: "Прослухайте базові вітання хорватською та запишіть почуте."
+        en: "Listen to basic Croatian greetings and write down what you hear.",
+        ru: "Прослушайте базовые приветствия на хорватском языке и запишите услышанное.",
+        ua: "Прослухайте базові вітання хорватською мовою та запишіть почуте."
       },
-      dictationText: "Dobar dan. Kako ste? Ja sam dobro, hvala.",
+      dictationText: "Dobar dan! Kako si? Ja sam dobro, hvala. Kako se zoveš? Drago mi je. Zbogom i do viđenja!",
       exercises: [
         {
           type: "dictation",
-          question: {
-            en: "Type what you hear:",
-            ru: "Напишите то, что вы слышите:",
-            ua: "Запишіть те, що ви чуєте:"
-          },
-          correctAnswer: "Dobar dan. Kako ste? Ja sam dobro, hvala."
+          question: { en: "Listen and type: 'Dobar dan!'", ru: "Прослушайте и напишите: 'Dobar dan!'", ua: "Прослухайте та напишіть: 'Dobar dan!'" },
+          correctAnswer: "Dobar dan!"
+        },
+        {
+          type: "dictation",
+          question: { en: "Listen and type: 'Kako si?'", ru: "Прослушайте и напишите: 'Kako si?'", ua: "Прослухайте та напишіть: 'Kako si?'" },
+          correctAnswer: "Kako si?"
+        },
+        {
+          type: "dictation",
+          question: { en: "Listen and type: 'Ja sam dobro, hvala.'", ru: "Прослушайте и напишите: 'Ja sam dobro, hvala.'", ua: "Прослухайте та напишіть: 'Ja sam dobro, hvala.'" },
+          correctAnswer: "Ja sam dobro, hvala."
+        },
+        {
+          type: "dictation",
+          question: { en: "Listen and type: 'Kako se zoveš?'", ru: "Прослушайте и напишите: 'Kako se zoveš?'", ua: "Прослухайте та напишіть: 'Kako se zoveš?'" },
+          correctAnswer: "Kako se zoveš?"
+        },
+        {
+          type: "dictation",
+          question: { en: "Listen and type: 'Drago mi je.'", ru: "Прослушайте и напишите: 'Drago mi je.'", ua: "Прослухайте та напишіть: 'Drago mi je.'" },
+          correctAnswer: "Drago mi je."
+        },
+        {
+          type: "dictation",
+          question: { en: "Listen and type: 'Zbogom'", ru: "Прослушайте и напишите: 'Zbogom'", ua: "Прослухайте та напишіть: 'Zbogom'" },
+          correctAnswer: "Zbogom"
+        },
+        {
+          type: "dictation",
+          question: { en: "Listen and type: 'do viđenja!'", ru: "Прослушайте и напишите: 'do viđenja!'", ua: "Прослухайте та напишіть: 'do viđenja!'" },
+          correctAnswer: "do viđenja!"
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "Which Croatian phrase means \"Good day\"?",
-            ru: "Какая хорватская фраза означает \"Добрый день\"?",
-            ua: "Яка хорватська фраза означає \"Добрий день\"?"
-          },
-          options: ["Dobar dan", "Dobra večer", "Laku noć", "Hvala"],
-          correctAnswer: "Dobar dan"
-        },
-        {
-          type: "multiple-choice",
-          question: {
-            en: "Select the correct spelling of the Croatian word for \"thank you\":",
-            ru: "Выберите правильное написание слова \"спасибо\" на хорватском:",
-            ua: "Оберіть правильне написання слова \"дякую\" хорватською:"
-          },
-          options: ["Hvala", "Fala", "Xvala", "Havla"],
-          correctAnswer: "Hvala"
+          question: { en: "What does 'Drago mi je' mean?", ru: "Что означает 'Drago mi je'?", ua: "Що означає 'Drago mi je'?" },
+          options: ["Nice to meet you", "Thank you very much", "Good evening", "Excuse me"],
+          correctAnswer: "Nice to meet you"
         }
       ]
     }
   },
-  // A2 Grammar
+
+  // ==========================================
+  // LEVEL A2
+  // ==========================================
   {
     id: "a2-grammar-1",
     type: "grammar",
     level: "A2",
     title: {
-      en: "Padeži - Akuzativ (Cases - Accusative)",
-      ru: "Падежи - Винительный (Akuzativ)",
+      en: "Vidovi akuzativa (Accusative Case)",
+      ru: "Винительный падеж (Akuzativ)",
       ua: "Відмінки - Знахідний (Akuzativ)"
     },
     content: {
       description: {
-        en: "Learn the accusative case in Croatian — used for direct objects.",
-        ru: "Изучите винительный падеж (аккузатив) в хорватском — используется для прямого дополнения.",
+        en: "Learn the accusative case (akuzativ) in Croatian — used for direct objects.",
+        ru: "Изучите винительный падеж (akuzativ) в хорватском — используется для прямых дополнений.",
         ua: "Вивчіть знахідний відмінок (акузатив) у хорватській — використовується для прямого додатка."
       },
       sections: [
         {
-          title: {
-            en: "The Accusative Case (Akuzativ)",
-            ru: "Винительный падеж (Akuzativ)",
-            ua: "Знахідний відмінок (Akuzativ)"
-          },
+          title: { en: "Accusative Endings", ru: "Окончания винительного падежа", ua: "Закінчення знахідного відмінка" },
           text: {
-            en: "The accusative case is used for direct objects — the thing or person receiving the action of a verb.",
-            ru: "Винительный падеж используется для выражения прямого дополнения — предмета или лица, на которое направлено действие глагола.",
-            ua: "Знахідний відмінок використовується для прямого додатка — предмета чи особи, на яку безпосередньо спрямована дія глагола."
+            en: "Accusative is used with transitive verbs (eg. vidjeti, kupiti). Endings:\n- Feminine singular: -a changes to -u (knjiga -> knjigu)\n- Masculine singular (inanimate): stays same as nominative (stol -> stol)\n- Masculine singular (animate): gets -a (brat -> brata)\n- Neuter singular: stays same as nominative (more -> more)",
+            ru: "Винительный падеж используется с переходными глаголами. Окончания:\n- Женский род ед.ч.: -a меняется на -u (knjiga -> knjigu)\n- Мужской род неодуш.: совпадает с именительным (stol -> stol)\n- Мужской род одуш.: получает -a (brat -> brata)\n- Средний род ед.ч.: совпадает с именительным (more -> more)",
+            ua: "Знахідний відмінок використовується з перехідними дієсловами. Закінчення:\n- Жіночий рід однини: -a змінюється на -u (knjiga -> knjigu)\n- Чоловічий рід неживий: збігається з називним (stol -> stol)\n- Чоловічий рід живий: отримує -a (brat -> brata)\n- Середній рід однини: збігається з називним (more -> more)"
           },
           examples: [
-            { en: "Vidim kuću. (I see a house) — kuća → kuću", ru: "Vidim kuću. (Я вижу дом) — kuća → kuću", ua: "Vidim kuću. (Я бачу будинок) — kuća → kuću" },
-            { en: "Čitam knjigu. (I read a book) — knjiga → knjigu", ru: "Čitam knjigu. (Я читаю книгу) — knjiga → knjigu", ua: "Čitam knjigu. (Я читаю книгу) — knjiga → knjigu" },
-            { en: "Volim Hrvatsku. (I love Croatia) — Hrvatska → Hrvatsku", ru: "Volim Hrvatsku. (Я люблю Хорватию) — Hrvatska → Hrvatsku", ua: "Volim Hrvatsku. (Я люблю Хорватію) — Hrvatska → Hrvatsku" },
-            { en: "Jedem jabuku. (I eat an apple) — jabuka → jabuku", ru: "Jedem jabuku. (Я ем яблоко) — jabuka → jabuku", ua: "Jedem jabuku. (Я їм яблуко) — jabuka → jabuku" }
-          ]
-        },
-        {
-          title: {
-            en: "Feminine Nouns Rule",
-            ru: "Правило для женского рода",
-            ua: "Правило для жіночого роду"
-          },
-          text: {
-            en: "Feminine nouns ending in -a change to -u in the accusative case.",
-            ru: "Существительные женского рода, оканчивающиеся на -a, меняют окончание на -u в винительном падеже.",
-            ua: "Іменники жіночого роду, що закінчуються на -a, змінюють закінчення на -u у знахідному відмінку."
-          },
-          examples: [
-            { en: "žena → ženu (woman)", ru: "žena → ženu (женщина)", ua: "žena → ženu (жінка)" },
-            { en: "škola → školu (school)", ru: "škola → školu (школа)", ua: "škola → školu (школа)" },
-            { en: "ulica → ulicu (street)", ru: "ulica → ulicu (улица)", ua: "ulica → ulicu (вулиця)" }
+            { en: "Čitam knjigu. (I am reading a book.)", ru: "Čitam knjigu. (Я читаю книгу.)", ua: "Čitam knjigu. (Я читаю книгу.)" },
+            { en: "Vidim prijatelja. (I see a friend [masc. animate]).", ru: "Vidim prijatelja. (Я вижу друга.)", ua: "Vidim prijatelja. (Я бачу друга.)" },
+            { en: "Kupujem auto. (I am buying a car [masc. inanimate]).", ru: "Kupujem auto. (Я покупаю машину.)", ua: "Kupujem auto. (Я купую машину.)" }
           ]
         }
       ],
       exercises: [
         {
           type: "multiple-choice",
-          question: {
-            en: "Vidim _____ (kuća). (I see the house.)",
-            ru: "Vidim _____ (kuća). (Я вижу дом.)",
-            ua: "Vidim _____ (kuća). (Я бачу будинок.)"
-          },
-          options: ["kuću", "kuća", "kuće", "kući"],
-          correctAnswer: "kuću"
-        },
-        {
-          type: "fill-blank",
-          question: {
-            en: "Čitam _____ (knjiga). (I read the book.)",
-            ru: "Čitam _____ (knjiga). (Я читаю книгу.)",
-            ua: "Čitam _____ (knjiga). (Я читаю книгу.)"
-          },
-          correctAnswer: "knjigu",
-          hint: {
-            en: "Feminine -a changes to -u",
-            ru: "Окончание женского рода -a меняется на -u",
-            ua: "Закінчення жіночого роду -a змінюється на -u"
-          }
+          question: { en: "Čitam _____ (knjiga).", ru: "Čitam _____ (knjiga).", ua: "Čitam _____ (knjiga)." },
+          options: ["knjigu", "knjiga", "knjigi", "knjigom"],
+          correctAnswer: "knjigu"
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "Volim _____ (Hrvatska). (I love Croatia.)",
-            ru: "Volim _____ (Hrvatska). (Я люблю Хорватию.)",
-            ua: "Volim _____ (Hrvatska). (Я люблю Хорватію.)"
-          },
-          options: ["Hrvatsku", "Hrvatska", "Hrvatski", "Hrvatske"],
-          correctAnswer: "Hrvatsku"
+          question: { en: "Vidim _____ (pas - animate). (I see a dog.)", ru: "Vidim _____ (pas). (Я вижу собаку.)", ua: "Vidim _____ (pas). (Я бачу собаку.)" },
+          options: ["psa", "pas", "psu", "psom"],
+          correctAnswer: "psa"
         },
         {
           type: "fill-blank",
-          question: {
-            en: "Jedem _____ (jabuka). (I am eating an apple.)",
-            ru: "Jedem _____ (jabuka). (Я ем яблоко.)",
-            ua: "Jedem _____ (jabuka). (Я їм яблуко.)"
-          },
-          correctAnswer: "jabuku",
-          hint: {
-            en: "Change 'jabuka' to accusative form",
-            ru: "Поставьте 'jabuka' в винительный падеж",
-            ua: "Поставте 'jabuka' у знахідний відмінок"
-          }
+          question: { en: "Complete: Kupujem _____ (telefon - inanimate). (I am buying a phone.)", ru: "Заполните: Kupujem _____ (telefon). (Я покупаю телефон.)", ua: "Заповніть: Kupujem _____ (telefon). (Я купую телефон.)" },
+          correctAnswer: "telefon",
+          hint: { en: "Inanimate masculine singular stays the same", ru: "Неодушевленный мужской род не меняется", ua: "Неживий чоловічий рід не змінюється" }
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "On traži _____ (adresa). (He is looking for the address.)",
-            ru: "On traži _____ (adresa). (Он ищет адрес.)",
-            ua: "On traži _____ (adresa). (Він шукає адресу.)"
-          },
-          options: ["adresu", "adresa", "adrese", "adresi"],
-          correctAnswer: "adresu"
+          question: { en: "Poznajem tvoju _____ (sestra). (I know your sister.)", ru: "Poznajem tvoju _____ (sestra). (Я знаю твою сестру.)", ua: "Poznajem tvoju _____ (sestra). (Я знаю твою сестру.)" },
+          options: ["sestru", "sestra", "sestri", "sestre"],
+          correctAnswer: "sestru"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Volim _____ (more - neuter). (I love the sea.)", ru: "Заполните: Volim _____ (more). (Я люблю море.)", ua: "Заповніть: Volim _____ (more). (Я люблю море.)" },
+          correctAnswer: "more",
+          hint: { en: "Neuter stays the same", ru: "Средний род не меняется", ua: "Середній рід не змінюється" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Pijem _____ (kava). (I am drinking coffee.)", ru: "Pijem _____ (kava). (Я пью кофе.)", ua: "Pijem _____ (kava). (Я п'ю каву.)" },
+          options: ["kavu", "kava", "kavi", "kave"],
+          correctAnswer: "kavu"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Vidim brata.'", ru: "Переведите: 'Vidim brata.'", ua: "Перекладіть: 'Vidim brata.'" },
+          correctAnswer: "I see my brother."
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Gledam _____ (film). (I am watching a film.)", ru: "Gledam _____ (film). (Я смотрю фильм.)", ua: "Gledam _____ (film). (Я дивлюся фільм.)" },
+          options: ["film", "filma", "filmu", "filmom"],
+          correctAnswer: "film"
         }
       ]
     }
   },
-  // A2 Communication
+  {
+    id: "a2-grammar-2",
+    type: "grammar",
+    level: "A2",
+    title: {
+      en: "Lokativ i prepozicije (Locative Case)",
+      ru: "Предложный падеж (Lokativ)",
+      ua: "Місцевий відмінок і прийменники (Lokativ)"
+    },
+    content: {
+      description: {
+        en: "Learn the locative case (lokativ) with prepositions 'u', 'na', and 'o' to describe location.",
+        ru: "Изучите местный падеж (lokativ) с предлогами 'u', 'na' и 'o' для описания местоположения.",
+        ua: "Вивчіть місцевий відмінок (lokativ) з прийменниками 'u', 'na' та 'o' для опису розташування."
+      },
+      sections: [
+        {
+          title: { en: "Locative Endings", ru: "Окончания местного падежа", ua: "Закінчення місцевого відмінка" },
+          text: {
+            en: "Locative is always used with prepositions (u = in, na = on, o = about). Endings:\n- Masculine and Neuter singular: -u (Zagreb -> u Zagrebu, more -> na moru)\n- Feminine singular: -i (škola -> u školi, stanica -> na stanici)",
+            ru: "Местный падеж всегда употребляется с предлогами. Окончания:\n- Мужской и Средний род ед.ч.: -u (Zagreb -> u Zagrebu)\n- Женский род ед.ч.: -i (škola -> u školi)",
+            ua: "Місцевий відмінок завжди вживається з прийменниками. Закінчення:\n- Чоловічий та Середній рід однини: -u (Zagreb -> u Zagrebu)\n- Жіночий рід однини: -i (škola -> u školi)"
+          },
+          examples: [
+            { en: "Živim u Zagrebu. (I live in Zagreb.)", ru: "Živim u Zagrebu. (Я живу в Загребе.)", ua: "Živim u Zagrebu. (Я живу в Загребі.)" },
+            { en: "Knjiga je na stolu. (The book is on the table.)", ru: "Knjiga je na stolu. (Книга на столе.)", ua: "Knjiga je na stolu. (Книга на столі.)" },
+            { en: "Razgovaramo o školi. (We talk about school.)", ru: "Razgovaramo o školi. (Мы разговариваем о школе.)", ua: "Razgovaramo o školi. (Ми розмовляємо про школу.)" }
+          ]
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: { en: "Radim u _____ (ured). (I work in the office.)", ru: "Radim u _____ (ured). (Я работаю в офисе.)", ua: "Radim u _____ (ured). (Я працюю в офісі.)" },
+          options: ["uredu", "ureda", "uredu", "uredom"],
+          correctAnswer: "uredu"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Djeca su u _____ (škola). (Children are at school.)", ru: "Djeca su u _____ (škola). (Дети в школе.)", ua: "Djeca su u _____ (škola). (Діти в школі.)" },
+          options: ["školi", "školu", "škola", "škole"],
+          correctAnswer: "školi"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Kava je na _____ (stol). (The coffee is on the table.)", ru: "Заполните: Kava je na _____ (stol). (Кофе на столе.)", ua: "Заповніть: Kava je na _____ (stol). (Кава на столі.)" },
+          correctAnswer: "stolu",
+          hint: { en: "Masculine singular ending is -u", ru: "Окончание мужского рода — -u", ua: "Закінчення чоловічого роду — -u" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Mi smo na _____ (more). (We are at the sea.)", ru: "Mi smo na _____ (more). (Мы на море.)", ua: "Mi smo na _____ (more). (Ми на морі.)" },
+          options: ["moru", "more", "mora", "morem"],
+          correctAnswer: "moru"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Razgovaramo o _____ (Split). (We talk about Split.)", ru: "Заполните: Razgovaramo o _____ (Split). (Мы говорим о Сплите.)", ua: "Заповніть: Razgovaramo o _____ (Split). (Ми говоримо про Спліт.)" },
+          correctAnswer: "Splitu",
+          hint: { en: "Add -u to the town name", ru: "Добавьте -u к названию города", ua: "Додайте -u до назви міста" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Kišobran je u _____ (torba). (The umbrella is in the bag.)", ru: "Kišobran je u _____ (torba). (Зонт в сумке.)", ua: "Kišobran je u _____ (torba). (Парасолька в сумці.)" },
+          options: ["torbi", "torbu", "torbom", "torbe"],
+          correctAnswer: "torbi"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'On je u Zagrebu.'", ru: "Переведите: 'On je u Zagrebu.'", ua: "Перекладіть: 'On je u Zagrebu.'" },
+          correctAnswer: "He is in Zagreb."
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Sastanak je na _____ (fakultet). (The meeting is at the university.)", ru: "Sastanak je na _____ (fakultet). (Встреча в университете.)", ua: "Sustret je na _____ (fakultet). (Зустріч в університеті.)" },
+          options: ["fakultetu", "fakulteta", "fakultetom", "fakultete"],
+          correctAnswer: "fakultetu"
+        }
+      ]
+    }
+  },
   {
     id: "a2-communication-1",
     type: "communication",
     level: "A2",
     title: {
-      en: "U restoranu (At the restaurant)",
+      en: "U restoranu (At the Restaurant)",
       ru: "В ресторане (U restoranu)",
       ua: "У ресторані (U restoranu)"
     },
@@ -447,11 +525,7 @@ export const lessonsData: LessonData[] = [
       },
       sections: [
         {
-          title: {
-            en: "Useful Phrases",
-            ru: "Полезные фразы",
-            ua: "Корисні фрази"
-          },
+          title: { en: "Useful Phrases", ru: "Полезные фразы", ua: "Корисні фрази" },
           text: {
             en: "Essential phrases for dining out in Croatia:",
             ru: "Ключевые фразы для похода в ресторан в Хорватии:",
@@ -460,75 +534,63 @@ export const lessonsData: LessonData[] = [
           examples: [
             { en: "Mogu li dobiti jelovnik? — Can I get the menu?", ru: "Mogu li dobiti jelovnik? — Можно меню?", ua: "Mogu li dobiti jelovnik? — Можна меню?" },
             { en: "Što preporučujete? — What do you recommend?", ru: "Što preporučujete? — Что вы порекомендуете?", ua: "Što preporučujete? — Що ви порадите?" },
-            { en: "Želim naručiti... — I would like to order...", ru: "Želim naručiti... — Я хочу заказать...", ua: "Želim naručiti... — Я хочу замовити..." },
-            { en: "Račun, molim. — The bill, please.", ru: "Račun, molim. — Счет, пожалуйста.", ua: "Račun, molim. — Рахунок, будь ласка." },
-            { en: "Bilo je izvrsno! — It was excellent!", ru: "Bilo je izvrsno! — Было великолепно!", ua: "Bilo je izvrsno! — Було чудово!" }
+            { en: "Želim naručiti... — I would like to order...", ru: "Želim naručiti... — Я хочу заказать...", ua: "Želim naručiti... — Я хочу замовити..." }
           ]
         }
       ],
       exercises: [
         {
           type: "multiple-choice",
-          question: {
-            en: "How do you ask for the menu?",
-            ru: "Как попросить меню?",
-            ua: "Як попросити меню?"
-          },
-          options: [
-            "Mogu li dobiti jelovnik?",
-            "Koliko košta?",
-            "Gdje je WC?",
-            "Kako se zovete?"
-          ],
+          question: { en: "How do you ask for the menu?", ru: "Как попросить меню?", ua: "Як попросити меню?" },
+          options: ["Mogu li dobiti jelovnik?", "Koliko košta?", "Gdje je WC?", "Kako se zovete?"],
           correctAnswer: "Mogu li dobiti jelovnik?"
         },
         {
           type: "translation",
-          question: {
-            en: "Translate: \"The bill, please.\"",
-            ru: "Переведите: \"Счет, пожалуйста.\"",
-            ua: "Перекладіть: \"Рахунок, будь ласка.\""
-          },
+          question: { en: "Translate: 'The bill, please.'", ru: "Переведите: 'Счет, пожалуйста.'", ua: "Перекладіть: 'Рахунок, будь ласка.'" },
           correctAnswer: "Račun, molim."
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "What does the phrase \"Što preporučujete?\" mean?",
-            ru: "Что означает фраза \"Što preporučujete?\"?",
-            ua: "Що означає фраза \"Što preporučujete?\"?"
-          },
-          options: [
-            "What do you recommend?",
-            "What would you like to drink?",
-            "How much does it cost?",
-            "Where is the table?"
-          ],
+          question: { en: "What does the phrase 'Što preporučujete?' mean?", ru: "Что означает фраза 'Što preporučujete?'?", ua: "Що означає фраза 'Što preporučujete?'?" },
+          options: ["What do you recommend?", "What would you like to drink?", "How much does it cost?", "Where is the table?"],
           correctAnswer: "What do you recommend?"
         },
         {
           type: "translation",
-          question: {
-            en: "Translate to Croatian: \"Can I get a glass of water?\"",
-            ru: "Переведите на хорватский: \"Можно стакан воды?\"",
-            ua: "Перекладіть на хорватську: \"Можна склянку води?\""
-          },
+          question: { en: "Translate to Croatian: 'Can I get a glass of water?'", ru: "Переведите на хорватский: 'Можно стакан воды?'", ua: "Перекладіть на хорватську: 'Можна склянку води?'" },
           correctAnswer: "Mogu li dobiti čašu vode."
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "How do you express \"It was excellent!\" in Croatian?",
-            ru: "Как сказать \"Было отлично/великолепно!\" по-хорватски?",
-            ua: "Як сказати \"Було чудово/прекрасно!\" хорватською?"
-          },
+          question: { en: "How do you express 'It was excellent!' in Croatian?", ru: "Как сказать 'Было отлично/великолепно!' по-хорватски?", ua: "Як сказати 'Було чудово/прекрасно!' хорватською?" },
           options: ["Bilo je izvrsno!", "Dobar tek!", "U redu je", "Nema na čemu"],
           correctAnswer: "Bilo je izvrsno!"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What is 'konobar' in English?", ru: "Что такое 'konobar'?", ua: "Хто такий 'konobar'?" },
+          options: ["waiter", "chef", "manager", "cashier"],
+          correctAnswer: "waiter"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Dobar _____! (Bon appetit!)", ru: "Заполните: Dobar _____! (Приятного аппетита!)", ua: "Заповніть: Dobar _____! (Приємного апетиту!)" },
+          correctAnswer: "tek",
+          hint: { en: "tek", ru: "tek", ua: "tek" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate to Croatian: 'I want to order meat.'", ru: "Переведите на хорватский: 'Я хочу заказать мясо.'", ua: "Перекладіть на хорватську: 'Я хочу замовити м'ясо.'" },
+          correctAnswer: "Želim naručiti meso."
         }
       ]
     }
   },
-  // B1 Grammar
+
+  // ==========================================
+  // LEVEL B1
+  // ==========================================
   {
     id: "b1-grammar-1",
     type: "grammar",
@@ -546,11 +608,7 @@ export const lessonsData: LessonData[] = [
       },
       sections: [
         {
-          title: {
-            en: "Verb Aspects (Glagolski aspekti)",
-            ru: "Виды глаголов",
-            ua: "Види дієслів"
-          },
+          title: { en: "Verb Aspects", ru: "Виды глаголов", ua: "Види дієслів" },
           text: {
             en: "Croatian verbs come in pairs: imperfective (ongoing/repeated) and perfective (completed/one-time).",
             ru: "Хорватские глаголы образуют видовые пары: несовершенный вид (длящееся/повторяющееся действие) и совершенный (завершенное/однократное).",
@@ -558,40 +616,26 @@ export const lessonsData: LessonData[] = [
           },
           examples: [
             { en: "pisati (impf.) / napisati (pf.) — to write", ru: "pisati (нсв) / napisati (св) — писать / написать", ua: "pisati (нсв) / napisati (св) — писати / написати" },
-            { en: "čitati (impf.) / pročitati (pf.) — to read", ru: "čitati (нсв) / pročitati (св) — читать / прочитать", ua: "čitati (нсв) / pročitati (св) — читати / прочитати" },
-            { en: "učiti (impf.) / naučiti (pf.) — to learn", ru: "učiti (нсв) / naučiti (св) — учить / выучить", ua: "učiti (нсв) / naučiti (св) — вчити / вивчити" },
-            { en: "govoriti (impf.) / reći (pf.) — to speak", ru: "govoriti (нсв) / reći (св) — говорить / сказать", ua: "govoriti (нсв) / reći (св) — говорити / сказати" }
+            { en: "čitati (impf.) / pročitati (pf.) — to read", ru: "čitati (нсв) / pročitati (св) — читать / прочитать", ua: "čitati (нсв) / pročitati (св) — читати / прочитати" }
           ]
         }
       ],
       exercises: [
         {
           type: "multiple-choice",
-          question: {
-            en: "Jučer sam _____ cijelu knjigu. (Yesterday I read the whole book.) — completed action",
-            ru: "Jučer sam _____ cijelu knjigu. (Вчера я прочитал всю книгу.) — завершенное действие",
-            ua: "Jučer sam _____ cijelu knjigu. (Вчора я прочитав всю книгу.) — завершена дія"
-          },
+          question: { en: "Jučer sam _____ cijelu knjigu. (Yesterday I read the whole book.) — completed", ru: "Jučer sam _____ cijelu knjigu. (Вчера я прочитал всю книгу.) — завершенное", ua: "Jučer sam _____ cijelu knjigu. (Вчора я прочитав всю книгу.) — завершена" },
           options: ["pročitao", "čitao", "čitam", "pročitam"],
           correctAnswer: "pročitao"
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "Svaki dan _____ novine. (Every day I read newspapers.) — habitual action",
-            ru: "Svaki dan _____ novine. (Каждый день я читаю газеты.) — регулярное действие",
-            ua: "Svaki dan _____ novine. (Щодня я читаю газети.) — регулярна дія"
-          },
+          question: { en: "Svaki dan _____ novine. (Every day I read newspapers.) — habitual", ru: "Svaki dan _____ novine. (Каждый день я читаю газеты.) — регулярное", ua: "Svaki dan _____ novine. (Щодня я читаю газети.) — регулярна" },
           options: ["čitam", "pročitam", "pročitao sam", "čitat ću"],
           correctAnswer: "čitam"
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "He usually writes letters for an hour, but today he wrote one in ten minutes.",
-            ru: "Обычно он пишет письмо целый час, но сегодня он написал его за 10 минут.",
-            ua: "Зазвичай він пише листа цілу годину, але сьогодні він написав його за 10 хвилин."
-          },
+          question: { en: "He usually writes letters, but today he wrote one in ten minutes.", ru: "Обычно он пишет письмо, но сегодня он написал его за 10 минут.", ua: "Зазвичай він пише листа, але сьогодні він написав його за 10 хвилин." },
           options: [
             "Obično piše pismo... danas ga je napisao",
             "Obično napiše pismo... danas ga je pisao",
@@ -602,848 +646,931 @@ export const lessonsData: LessonData[] = [
         },
         {
           type: "fill-blank",
-          question: {
-            en: "Complete: Jučer sam _____ (pisati, imperfective past) zadaću tri sata.",
-            ru: "Заполните: Jučer sam _____ (pisati, нсв прош. вр.) zadaću tri sata. (Вчера я три часа писал домашнее задание.)",
-            ua: "Заповніть: Jučer sam _____ (pisati, недок. в. мин. ч.) zadaću tri sata. (Вчора я три години писав домашнє завдання.)"
-          },
+          question: { en: "Complete: Jučer sam _____ (pisati, impf. past masc) zadaću tri sata.", ru: "Заполните: Jučer sam _____ (pisati, нсв прош. м.р.) zadaću tri sata.", ua: "Заповніть: Jučer sam _____ (pisati, недок. в. мин. ч. ч.р.) zadaću tri sata." },
           correctAnswer: "pisao",
-          hint: {
-            en: "Use masculine past form for 'ja' (assuming a male speaker)",
-            ru: "Используйте мужской род прошедшего времени глагола 'pisati'",
-            ua: "Використовуйте чоловічий рід минулого часу дієслова 'pisati'"
-          }
+          hint: { en: "Use masculine past form", ru: "Мужской род прош. вр.", ua: "Чоловічий рід мин. ч." }
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "Moram _____ (naučiti, perfective) ove riječi do sutra. (I must learn these words by tomorrow.)",
-            ru: "Moram _____ (naučiti, св) ove riječi do sutra. (Я должен выучить эти слова к завтрашнему дню.)",
-            ua: "Moram _____ (naučiti, док. в.) ove riječi do sutra. (Я мушу вивчити ці слова до завтра.)"
-          },
+          question: { en: "Moram _____ (naučiti, perfective) ove riječi do sutra. (I must learn these words by tomorrow.)", ru: "Moram _____ (naučiti, св) ove riječi do sutra.", ua: "Moram _____ (naučiti, док. в.) ove riječi do sutra." },
           options: ["naučiti", "učiti", "naučim", "učim"],
           correctAnswer: "naučiti"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Brzo sam _____ (popiti, pf. past masc) kavu. (I quickly drank the coffee.)", ru: "Заполните: Brzo sam _____ (popiti, св прош. м.р.) kavu.", ua: "Заповніть: Brzo sam _____ (popiti, док. в. мин. ч. ч.р.) kavu." },
+          correctAnswer: "popio",
+          hint: { en: "perfective past form of popiti", ru: "форма св от popiti", ua: "форма док. в. від popiti" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Oni uvijek piju kavu.'", ru: "Переведите: 'Oni uvijek piju kavu.'", ua: "Перекладіть: 'Oni uvijek piju kavu.'" },
+          correctAnswer: "They always drink coffee."
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "_____ sam pismo pola sata. (I was writing a letter for half an hour. - ongoing)", ru: "_____ sam pismo pola sata. (Я писал письмо полчаса.)", ua: "_____ sam pismo pola sata. (Я писав листа півгодини.)" },
+          options: ["Pisao", "Napisao", "Pišem", "Napišem"],
+          correctAnswer: "Pisao"
         }
       ]
     }
   },
-  // B1 Level Lesson 2
   {
     id: "b1-grammar-2",
     type: "grammar",
     level: "B1",
     title: {
-      en: "Zemlje, jezici i Futur II (Countries, Languages and Future II)",
+      en: "Zemlje, jezici i Futur II (Countries, Languages & Future II)",
       ru: "Страны, языки и Futur II",
       ua: "Країни, мови та Futur II"
     },
     content: {
       description: {
-        en: "Explore vocabulary regarding mother tongues and master the Future II tense in relative clauses.",
-        ru: "Изучите лексику о родных языках и освойте время Futur II в придаточных предложениях.",
-        ua: "Вивчіть лексику про рідні мови та опануйте час Futur II у підрядних реченнях."
+        en: "Learn names of countries, languages and master Future II (Futur drugi) in subordinate clauses.",
+        ru: "Изучите названия стран, языков и освойте Futur II в придаточных предложениях.",
+        ua: "Вивчіть назви країн, мов та опануйте Futur II у підрядних реченнях."
       },
       sections: [
         {
-          title: {
-            en: "Mother tongue and origins",
-            ru: "Родной язык и происхождение",
-            ua: "Рідна мова та походження"
-          },
+          title: { en: "Future II", ru: "Будущее время II", ua: "Майбутній час II" },
           text: {
-            en: "At B1 level, you communicate about identities, language differences, and where people originate. Common terms: domovina (homeland), materinski jezik (mother tongue), dvojezičnost (bilingualism).",
-            ru: "На уровне B1 вы учитесь общаться на темы идентичности, языковых различий и происхождения. Ключевые слова: domovina (родина), materinski jezik (родной язык), dvojezičnost (двуязычие).",
-            ua: "На рівні B1 ви вчитеся спілкуватися на теми ідентичності, мовних відмінностей та походження. Ключові слова: domovina (батьківщина), materinski jezik (рідна мова), dvojezičnost (двомовність)."
+            en: "Future II is used in conditional and temporal subordinate clauses to describe an action that will happen before another future action. Formed with: budem, budeš, bude, budemo, budete, budu + active participle (-o, -la, -lo).",
+            ru: "Futur II используется в придаточных времени и условия, выражая действие, которое завершится перед другим будущим действием. Образуется: budem, budeš... + причастие.",
+            ua: "Futur II використовується у підрядних реченнях часу та умови, виражаючи дію, що завершиться перед іншою майбутньою дією. Утворюється: budem, budeš... + дієприкметник."
           },
           examples: [
-            "Moj materinski jezik je ukrajinski, ali tečno govorim i hrvatski. (My mother tongue is Ukrainian...)",
-            "Dvojezičnost je prednost u suvremenom društvu. (Bilingualism is an advantage...)"
-          ]
-        },
-        {
-          title: {
-            en: "Futur II (Future Exact / Second Future)",
-            ru: "Futur II (Будущее предварительное)",
-            ua: "Futur II (Майбутній попередній час)"
-          },
-          text: {
-            en: "Future II is used in subordinate clauses (usually starting with 'ako' or 'kad') to express an action that will happen BEFORE another future action.",
-            ru: "Futur II используется в придаточных предложениях (чаще всего после слов 'ako' или 'kad') для выражения действия, которое совершится РАНЕЕ другого действия в будущем.",
-            ua: "Futur II використовується в підрядних реченнях (найчастіше після слів 'ako' або 'kad') для вираження дії, яка відбудеться РАНІШЕ за іншу дію в майбутньому."
-          },
-          examples: [
-            {
-              en: "Form: auxiliary verb 'biti' in present (budem, budeš...) + active verbal adjective (-o, -la...).",
-              ru: "Образование: вспомогательный глагол 'biti' в настоящем времени (budem, budeš...) + активное причастие (-o, -la...).",
-              ua: "Утворення: допоміжне дієслово 'biti' у теперішньому часі (budem, budeš...) + активний дієприкметник (-o, -la...)."
-            },
-            {
-              en: "Ako budem učio, položit ću ispit. (If I study/have studied, I will pass the exam.)",
-              ru: "Ako budem učio, položit ću ispit. (Если я буду учиться, я сдам экзамен.)",
-              ua: "Ako budem učio, položit ću ispit. (Якщо я буду вчитися, я здам іспит.)"
-            },
-            {
-              en: "Kad budete stigli u Zagreb, nazovite me. (When you arrive in Zagreb, call me.)",
-              ru: "Kad budete stigli u Zagreb, nazovite me. (Когда приедете в Загреб, позвоните мне.)",
-              ua: "Kad budete stigli u Zagreb, nazovite me. (Коли приїдете до Загреба, зателефонуйте мені.)"
-            }
+            { en: "Ako budem imao vremena, doći ću. (If I have time, I will come.)", ru: "Ako budem imao vremena, doći ću. (Если у меня будет время, я приду.)", ua: "Ako budem imao vremena, doći ću. (Якщо у мене буде час, я прийду.)" },
+            { en: "Njemačka - njemački (Germany - German)", ru: "Njemačka - njemački (Германия - немецкий)", ua: "Njemačka - njemački (Німеччина - німецька)" }
           ]
         }
       ],
       exercises: [
         {
           type: "multiple-choice",
-          question: {
-            en: "Ako sutra _____ (padati) kiša, ostat ćemo kod kuće.",
-            ru: "Ako sutra _____ (padati) kiša, ostat ćemo kod kuće. (Если завтра будет идти дождь...)",
-            ua: "Ako sutra _____ (padati) kiša, ostat ćemo kod kuće. (Якщо завтра йтиме дощ...)"
-          },
-          options: ["bude padala", "padat će", "bude pala", "pada"],
-          correctAnswer: "bude padala",
-          hint: {
-            en: "Use Future II of 'padati' (feminine singular because of kiša)",
-            ru: "Используйте Futur II от 'padati' (женский род, т.к. kiša)",
-            ua: "Використовуйте Futur II від 'padati' (жіночий рід, тому що kiša)"
-          }
-        },
-        {
-          type: "fill-blank",
-          question: {
-            en: "Complete: Kad _____ (mi, naučiti) riječi, igrat ćemo kviz.",
-            ru: "Заполните: Kad _____ (mi, naučiti) riječi, igrat ćemo kviz. (Когда мы выучим слова...)",
-            ua: "Заповніть: Kad _____ (mi, naučiti) riječi, igrat ćemo kviz. (Коли ми вивчимо слова...)"
-          },
-          correctAnswer: "budemo naučili",
-          hint: {
-            en: "First-person plural Future II of 'naučiti'",
-            ru: "Форма 1-го лица мн. ч. Futur II от 'naučiti'",
-            ua: "Форма 1-ї особи мн. ч. Futur II від 'naučiti'"
-          }
+          question: { en: "Ako _____ (budem imao) vremena, čitat ću knjigu. (If I have time...)", ru: "Ako _____ vremena, čitat ću knjigu.", ua: "Ako _____ vremena, čitat ću knjigu." },
+          options: ["budem imao", "ću imati", "imam", "bih imao"],
+          correctAnswer: "budem imao"
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "Kad _____ (ti, završiti) posao, javi mi se. (When you [singular] finish work, let me know.)",
-            ru: "Kad _____ (ti, završiti) posao, javi mi se. (Когда закончишь работу, дай мне знать.)",
-            ua: "Kad _____ (ti, završiti) posao, javi mi se. (Коли закінчиш роботу, дай мені знати.)"
-          },
-          options: ["budeš završio", "završiš", "budeš završila", "završit ćeš"],
-          correctAnswer: "budeš završio"
+          question: { en: "U Njemačkoj se govori _____ jezik. (In Germany, people speak...)", ru: "U Njemačkoj se govori _____ jezik.", ua: "U Німеччині говорять _____ мовою." },
+          options: ["njemački", "engleski", "hrvatski", "talijanski"],
+          correctAnswer: "njemački"
         },
         {
           type: "fill-blank",
-          question: {
-            en: "Complete: Ako _____ (on, doći) na vrijeme, stignut ćemo na vlak.",
-            ru: "Заполните: Ako _____ (on, doći) na vrijeme, stignut ćemo na vlak. (Если он придет вовремя, мы успеем на поезд.)",
-            ua: "Заповніть: Ako _____ (on, doći) na vrijeme, stignut ćemo na vlak. (Якщо він прийде вчасно, ми встигнемо на поїзд.)"
-          },
-          correctAnswer: "bude došao",
-          hint: {
-            en: "Future II masculine third-person singular",
-            ru: "Futur II мужского рода 3-го лица единственного числа",
-            ua: "Futur II чоловічого роду 3-ї особи однини"
-          }
+          question: { en: "Complete: Kad _____ (budu stigli, they arrive), javit će se. (When they arrive, they will check in.)", ru: "Заполните: Kad _____ na stanicu, javit će se. (Когда они прибудут на станцию...)", ua: "Заповніть: Kad _____ na stanicu, javit će se. (Коли вони прибудуть на станцію...)" },
+          correctAnswer: "budu stigli",
+          hint: { en: "Future II plural of stići", ru: "Futur II мн.ч. от stići", ua: "Futur II мн. від stići" }
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "Kad _____ (oni, kupiti) auto, putovat će više. (When they buy the car, they will travel more.)",
-            ru: "Kad _____ (oni, kupiti) auto, putovat će više. (Когда они купят машину, они будут путешествовать больше.)",
-            ua: "Kad _____ (oni, kupiti) auto, putovat će više. (Коли вони куплять машину, вони будуть подорожувати більше.)"
-          },
-          options: ["budu kupili", "kupe", "kupit će", "budu kupovali"],
-          correctAnswer: "budu kupili"
+          question: { en: "Francuska -> _____ jezik.", ru: "Francuska -> _____ jezik.", ua: "Francuska -> _____ jezik." },
+          options: ["francuski", "talijanski", "španjolski", "njemački"],
+          correctAnswer: "francuski"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Ako ti _____ (budeš učio), položit ćeš ispit. (If you study...)", ru: "Заполните: Ako ti _____ (budeš učio), položit ćeš ispit.", ua: "Заповніть: Ako ti _____ (budeš učio), položit ćeš ispit." },
+          correctAnswer: "budeš učio",
+          hint: { en: "Future II for 'ti' (masc)", ru: "Futur II для 'ti' (м.р.)", ua: "Futur II для 'ti' (ч.р.)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "In Italy, they speak:", ru: "В Италии говорят на:", ua: "В Італії говорять:" },
+          options: ["talijanski", "engleski", "hrvatski", "njemački"],
+          correctAnswer: "talijanski"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Ako budemo znali odgovor, reći ćemo vam.'", ru: "Переведите: 'Ako budemo znali odgovor, reći ćemo vam.'", ua: "Перекладіть: 'Ako budemo znali odgovor, reći ćemo vam.'" },
+          correctAnswer: "If we know the answer, we will tell you."
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Ukrajina -> _____ jezik.", ru: "Ukrajina -> _____ jezik.", ua: "Ukrajina -> _____ jezik." },
+          options: ["ukrajinski", "ruski", "poljski", "češki"],
+          correctAnswer: "ukrajinski"
         }
       ]
     }
   },
-  // B1 Level Lesson 2
+  {
+    id: "b1-grammar-3",
+    type: "grammar",
+    level: "B1",
+    title: {
+      en: "Perfekt i prepozicije s genitivom (Past Tense & Genitive Prepositions)",
+      ru: "Прошедшее время и предлоги родительного падежа",
+      ua: "Минулий час та прийменники з родовим відмінком"
+    },
+    content: {
+      description: {
+        en: "Master past tense (perfekt) combinations and learn prepositions that require Genitive: bez, kod, blizu, iz.",
+        ru: "Освойте конструкции прошедшего времени (перфект) и предлоги родительного падежа: bez, kod, blizu, iz.",
+        ua: "Опануйте конструкції минулого часу (перфект) та прийменники родового відмінка: bez, kod, blizu, iz."
+      },
+      sections: [
+        {
+          title: { en: "Past Tense and Genitive", ru: "Прошедшее время и родительный падеж", ua: "Минулий час та родовий відмінок" },
+          text: {
+            en: "Perfekt = short form of 'biti' + active participle (eg. ja sam radio, mi smo jeli). Prepositions requiring genitive:\n- bez (without) -> bez šećera\n- kod (at/to) -> kod prijatelja\n- blizu (near) -> blizu mora\n- iz (from) -> iz ureda",
+            ru: "Перфект = краткая форма 'biti' + причастие. Предлоги родительного падежа:\n- bez (без) -> bez šećera\n- kod (у/к) -> kod prijatelja\n- blizu (около) -> blizu mora\n- iz (из) -> iz ureda",
+            ua: "Перфект = коротка форма 'biti' + дієприкметник. Прийменники родового відмінка:\n- bez (без) -> bez šećera\n- kod (у/до) -> kod prijatelja\n- blizu (поблизу) -> blizu mora\n- iz (з) -> iz ureda"
+          },
+          examples: [
+            { en: "Jučer sam išao kod liječnika. (Yesterday I went to the doctor.)", ru: "Jučer sam išao kod liječnika. (Вчера я ходил к врачу.)", ua: "Jučer sam išao kod liječnika. (Вчора я ходив до лікаря.)" },
+            { en: "Kava bez šećera. (Coffee without sugar.)", ru: "Kava bez šećera. (Кофе без сахара.)", ua: "Kava bez šećera. (Кава без цукру.)" }
+          ]
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: { en: "Jučer smo _____ (gledati - plural) film. (Yesterday we watched a movie.)", ru: "Jučer smo _____ film. (Вчера мы смотрели фильм.)", ua: "Вчора ми _____ фільм." },
+          options: ["gledali", "gledao", "gledala", "gledati"],
+          correctAnswer: "gledali"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Pijem čaj bez _____ (šećer - genitive). (I drink tea without sugar.)", ru: "Pijem čaj bez _____ (šećer).", ua: "П'ю чай без _____ (šećer)." },
+          options: ["šećera", "šećer", "šećeru", "šećerom"],
+          correctAnswer: "šećera"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Danas idem kod _____ (doktor - genitive). (Today I go to the doctor.)", ru: "Заполните: Danas idem kod _____ (doktor). (Сегодня я иду к врачу.)", ua: "Заповніть: Danas idem kod _____ (doktor). (Сьогодні я йду до лікаря.)" },
+          correctAnswer: "doktora",
+          hint: { en: "Genitive singular of doktor", ru: "Родительный падеж от doktor", ua: "Родовий відмінок від doktor" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Živim blizu _____ (more - genitive). (I live near the sea.)", ru: "Živim blizu _____ (more). (Я живу около моря.)", ua: "Живу поблизу _____ (more)." },
+          options: ["mora", "more", "moru", "morem"],
+          correctAnswer: "mora"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Oni su _____ (putovati, past plural masc) u Zadar. (They traveled to Zadar.)", ru: "Заполните: Oni su _____ u Zadar. (Они ездили в Задар.)", ua: "Заповніть: Oni su _____ u Zadar. (Вони їздили до Задара.)" },
+          correctAnswer: "putovali",
+          hint: { en: "Past participle plural of putovati", ru: "Причастие мн.ч. от putovati", ua: "Дієприкметник мн. від putovati" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Dolazim iz _____ (škola - genitive). (I come from school.)", ru: "Dolazim iz _____ (škola). (Я иду из школы.)", ua: "Йду з _____ (škola)." },
+          options: ["škole", "školu", "školi", "školom"],
+          correctAnswer: "škole"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Kava bez mlijeka, molim.'", ru: "Переведите: 'Kava bez mlijeka, molim.'", ua: "Перекладіть: 'Kava bez mlijeka, molim.'" },
+          correctAnswer: "Coffee without milk, please."
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Jesi li _____ (čuti - singular masc) vijest? (Did you hear the news?)", ru: "Jesi li _____ vijest? (Ты слышал новость?)", ua: "Чи ти _____ новину?" },
+          options: ["čuo", "čula", "čuli", "čuti"],
+          correctAnswer: "čuo"
+        }
+      ]
+    }
+  },
   {
     id: "b1-reading-2",
     type: "reading",
     level: "B1",
     title: {
       en: "Kvaliteta života i ekologija (Quality of Life & Ecology)",
-      ru: "Качество жизни и экология",
-      ua: "Якість життя та екологія"
+      ru: "Качество жизни и экология (Kvaliteta života)",
+      ua: "Якість життя та екологія (Kvaliteta života)"
     },
     content: {
       description: {
-        en: "Read about environmental concerns and lifestyle standards in Croatia.",
-        ru: "Прочитайте о проблемах экологии и стандартах качества жизни в Хорватии.",
+        en: "Read a short text about environmental protection and standard of living in Croatia.",
+        ru: "Прочитайте короткий текст об охране окружающей среды и качестве жизни в Хорватии.",
         ua: "Прочитайте про проблеми екології та стандарти якості життя в Хорватії."
       },
       sections: [
         {
-          title: {
-            en: "Text: Green Zagreb",
-            ru: "Текст: Зеленый Загреб",
-            ua: "Текст: Зелений Загреб"
-          },
-          text: "Hrvatska ima prekrasnu prirodu, ali briga za ekologiju postaje sve važnija. U Zagrebu se provodi novi sustav razvrstavanja otpada. Građani moraju odvajati papir, plastiku, staklo i biootpad. Mnogi se žale da je sustav kompliciran, ali većina shvaća da bez toga ne možemo sačuvati čisti okoliš. Kvaliteta života ovisi o čistom zraku, čistoj vodi i zelenim površinama u gradu.",
-        },
-        {
-          title: {
-            en: "Vocabulary",
-            ru: "Словарь",
-            ua: "Словник"
-          },
+          title: { en: "Ecology in Croatia", ru: "Экология в Хорватии", ua: "Екологія в Хорватії" },
           text: {
-            en: "Key vocabulary from the text:",
-            ru: "Ключевая лексика из текста:",
-            ua: "Ключова лексика з тексту:"
-          },
-          examples: [
-            { en: "otpad — waste", ru: "otpad — отходы", ua: "otpad — відходи" },
-            { en: "razvrstavanje — sorting", ru: "razvrstavanje — сортировка", ua: "razvrstavanje — сортування" },
-            { en: "okoliš — environment", ru: "okoliš — окружающая среда", ua: "okoliš — довкілля" },
-            { en: "zelene površine — green spaces", ru: "zelene površine — зеленые зоны", ua: "zelene površine — зелені зони" },
-            { en: "biootpad — bio-waste", ru: "biootpad — биоотходы", ua: "biootpad — біовідходи" },
-            { en: "sačuvati — to preserve", ru: "sačuvati — сохранить", ua: "sačuvati — зберегти" }
-          ]
+            en: "Zaštita okoliša i ekologija postaju sve važnije teme u Hrvatskoj. Zemlja je poznata po čistom moru, brojnim nacionalnim parkovima i bogatoj biološkoj raznolikosti. Međutim, brzi turistički razvoj i zbrinjavanje otpada predstavljaju velike izazove. Mnogi gradovi potiču razvrstavanje otpada i recikliranje. Građani također shvaćaju da očuvanje prirode izravno utječe na kvalitetu života i na zdravlje svih nas.",
+            ru: "Охрана окружающей среды и экология становятся всё более важными темами в Хорватии. Страна известна своим чистым морем, многочисленными национальными парками и богатым биоразнообразием. Однако быстрое развитие туризма и утилизация отходов представляют собой серьезные вызовы. Многие города стимулируют сортировку мусора и переработку. Граждане также понимают, что сохранение природы напрямую влияет на качество жизни и здоровье всех нас.",
+            ua: "Охорона довкілля та екологія стають дедалі важливішими темами в Хорватії. Країна відома своїм чистим морем, численними національними парками та багатим біорізноманіттям. Проте швидкий розвиток туризму та утилізація відходів є серйозними викликами. Багато міст стимулюють сортування сміття та переробку. Громадяни також розуміють, що збереження природи безпосередньо впливає на якість життя та здоров'я всіх нас."
+          }
         }
       ],
       exercises: [
         {
           type: "multiple-choice",
-          question: {
-            en: "What do citizens of Zagreb have to separate?",
-            ru: "Что жители Загреба должны сортировать?",
-            ua: "Що жителі Загреба мають сортувати?"
-          },
-          options: ["Papir, plastiku, staklo i biootpad", "Samo metal", "Ništa, sve ide u istu kantu", "Samo papir"],
-          correctAnswer: "Papir, plastiku, staklo i biootpad"
+          question: { en: "Why is Croatia famous in terms of nature?", ru: "Чем знаменита Хорватия в плане природы?", ua: "Чим відома Хорватія в плані природи?" },
+          options: ["Čisto more i parkovi", "Velike pustinje", "Zagađene rijeke", "Visoke zgrade"],
+          correctAnswer: "Čisto more i parkovi"
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "What does quality of life depend on, according to the text?",
-            ru: "От чего зависит качество жизни согласно тексту?",
-            ua: "Від чого залежить якість життя згідно з текстом?"
-          },
-          options: ["O čistom zraku, vodi i zelenim površinama", "O novcu", "O brzim automobilima", "O velikim trgovinama"],
-          correctAnswer: "O čistom zraku, vodi i zelenim površinama"
-        },
-        {
-          type: "multiple-choice",
-          question: {
-            en: "What does the word \"okoliš\" mean?",
-            ru: "Что означает слово \"okoliš\"?",
-            ua: "Що означає слово \"okoliš\"?"
-          },
-          options: ["environment", "waste", "ecology", "air"],
-          correctAnswer: "environment"
+          question: { en: "What represents a big challenge for ecology in Croatia?", ru: "Что представляет собой вызов для экологии Хорватии?", ua: "Що є викликом для екології Хорватії?" },
+          options: ["Turistički razvoj i otpad", "Sadnja stabala", "Nedostatak automobila", "Velike kiše"],
+          correctAnswer: "Turistički razvoj i otpad"
         },
         {
           type: "fill-blank",
-          question: {
-            en: "Complete the word: Briga za _____ (ecology) postaje sve važnija.",
-            ru: "Заполните слово: Briga za _____ (ecology) postaje sve važnija. (Забота об экологии...)",
-            ua: "Заповніть слово: Briga za _____ (ecology) postaje sve važnija. (Турбота про екологію...)"
-          },
-          correctAnswer: "ekologiju",
-          hint: {
-            en: "Write 'ekologija' in accusative singular",
-            ru: "Напишите 'ekologija' в винительном падеже",
-            ua: "Напишіть 'ekologija' у знахідному відмінку"
-          }
+          question: { en: "Complete: Zaštita _____ (environment - genitive) je važna.", ru: "Заполните: Zaštita _____ je važna. (Охрана окружающей среды важна.)", ua: "Заповніть: Zaštita _____ je važna. (Охорона довкілля важлива.)" },
+          correctAnswer: "okoliša",
+          hint: { en: "Genitive singular of okoliš", ru: "Родительный падеж от okoliš", ua: "Родовий відмінок від okoliš" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What are cities encouraging citizens to do?", ru: "К чему города призывают граждан?", ua: "До чого міста закликають громадян?" },
+          options: ["Razvrstavanje otpada", "Kupovinu plastike", "Bacanje smeća na ulicu", "Vožnju automobila"],
+          correctAnswer: "Razvrstavanje otpada"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Očuvanje prirode utječe na _____ (quality - accusative) života.", ru: "Заполните: Očuvanje prirode utječe na _____ života. (Влияет на качество жизни.)", ua: "Заповніть: Očuvanje prirode utječe na _____ života. (Впливає на якість життя.)" },
+          correctAnswer: "kvalitetu",
+          hint: { en: "Accusative of kvaliteta", ru: "Винительный падеж от kvaliteta", ua: "Знахідний відмінок від kvaliteta" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What does 'razvrstavanje' mean?", ru: "Что означает 'razvrstavanje'?", ua: "Що означає 'razvrstavanje'?" },
+          options: ["sorting", "buying", "throwing", "burning"],
+          correctAnswer: "sorting"
         },
         {
           type: "translation",
-          question: {
-            en: "Translate to Croatian: \"clean air\"",
-            ru: "Переведите на хорватский: \"чистый воздух\"",
-            ua: "Перекладіть на хорватську: \"чисте повітря\""
-          },
-          correctAnswer: "čisti zrak"
+          question: { en: "Translate: 'očuvanje prirode'", ru: "Переведите: 'očuvanje prirode'", ua: "Перекладіть: 'očuvanje prirode'" },
+          correctAnswer: "preservation of nature"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What is 'otpad' in English?", ru: "Что такое 'otpad'?", ua: "Що таке 'otpad'?" },
+          options: ["waste/garbage", "resource", "factory", "water"],
+          correctAnswer: "waste/garbage"
         }
       ]
     }
   },
-  // B1 Exam Prep
   {
     id: "b1-reading-3",
     type: "reading",
     level: "B1",
     title: {
-      en: "Priprema za B1 ispit: Poznavanje jezika (Language Test Preparation)",
+      en: "Priprema za ispit B1: Znanje jezika (B1 Exam Prep)",
       ru: "Подготовка к экзамену B1: Знание языка",
       ua: "Підготовка до іспиту B1: Знання мови"
     },
     content: {
       description: {
-        en: "Practice grammar and vocabulary structure questions typically found in B1 language exams.",
-        ru: "Потренируйтесь на грамматических и лексических вопросах, типичных для экзамена B1.",
+        en: "Practice grammar and vocabulary questions typical for the B1 level Croatian proficiency exam.",
+        ru: "Потренируйтесь на грамматических и лексических вопросах, типичных для языкового экзамена уровня B1.",
         ua: "Потренуйтеся на граматичних та лексичних питаннях, типових для іспиту B1."
       },
       sections: [
         {
-          title: {
-            en: "Grammar Structures in B1 Exam",
-            ru: "Грамматика на экзамене B1",
-            ua: "Граматика на іспиті B1"
-          },
+          title: { en: "Exam Context", ru: "Контекст экзамена", ua: "Контекст іспиту" },
           text: {
-            en: "B1 exams check your comprehension of prepositions, verbal aspects, relative pronouns and proper case endings. Pay close attention to verbs that trigger Genitive, Dative, or Locative.",
-            ru: "Экзамены B1 проверяют понимание предлогов, видов глагола, относительных местоимений и падежных окончаний. Обратите внимание на управление глаголов (родительный, дательный, местный падежи).",
-            ua: "Іспити B1 перевіряють розуміння прийменників, видів дієслова, відносних займенників та відмінкових закінчень. Зверніть увагу на керування дієслів (родовий, давальний, місцевий відмінки)."
-          },
-          examples: [
-            {
-              en: "Zadovoljan sam svojim poslom. (I am satisfied with my job.)",
-              ru: "Zadovoljan sam своим poslom. (Я доволен своей работой.)",
-              ua: "Zadovoljan sam svojim poslom. (Я задоволений своєю роботою.)"
-            },
-            {
-              en: "Čestitam ti na uspjehu. (I congratulate you on your success.)",
-              ru: "Čestitam ti na uspjehu. (Поздравляю тебя с успехом.)",
-              ua: "Čestitam ti na uspjehu. (Вітаю тебе з успіхом.)"
-            }
-          ]
+            en: "On a B1 language exam, you will encounter reading comprehension tasks, grammar completion (filling in correct endings or pronouns), and vocabulary matching. Let's practice standard queries.",
+            ru: "На экзамене уровня B1 вы столкнетесь с заданиями на чтение, грамматическими упражнениями (подстановка падежных окончаний, местоимений) и лексическими тестами.",
+            ua: "На іспиті рівня B1 ви зустрінете завдання на розуміння тексту, граматичні вправи (вставка відмінкових закінчень або займенників) та лексичні тести."
+          }
         }
       ],
       exercises: [
         {
           type: "multiple-choice",
-          question: {
-            en: "Putujem u Zagreb _____ (vlak). (I travel to Zagreb by train.)",
-            ru: "Putujem u Zagreb _____ (vlak). (Я еду в Загреб на поезде.)",
-            ua: "Putujem u Zagreb _____ (vlak). (Я їду до Загреба потягом.)"
-          },
-          options: ["vlakom", "vlak", "vlaku", "vlaka"],
-          correctAnswer: "vlakom",
-          hint: {
-            en: "Use Instrumental case (vlak → vlakom)",
-            ru: "Используйте творительный падеж (vlak → vlakom)",
-            ua: "Використовуйте орудний відмінок (vlak → vlakom)"
-          }
+          question: { en: "Oni se _____ (tuširati, present plural). (They are showering.)", ru: "Oni se _____ (tuširati, наст. вр. мн.ч.).", ua: "Вони _____ (tuširati, теп. ч. мн.)." },
+          options: ["tuširaju", "tušira", "tuširamo", "tuširaš"],
+          correctAnswer: "tuširaju"
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "On se boji _____ (pas). (He is afraid of the dog.)",
-            ru: "On se boji _____ (pas). (Он боится собаки.)",
-            ua: "On se boji _____ (pas). (Він боїться собаки.)"
-          },
-          options: ["psa", "pas", "psu", "psi"],
-          correctAnswer: "psa",
-          hint: {
-            en: "Verb 'bojati se' requires Genitive case",
-            ru: "Глагол 'bojati se' требует родительного падежа (genitiv)",
-            ua: "Дієслово 'bojati se' вимагає родового відмінка (genitiv)"
-          }
+          question: { en: "Želim razgovarati s _____ (direktor - instrumental). (I want to speak with the director.)", ru: "Želim razgovarati s _____ (direktor).", ua: "Хочу поговорити з _____ (direktor)." },
+          options: ["direktorom", "direktora", "direktoru", "direktore"],
+          correctAnswer: "direktorom"
         },
         {
           type: "fill-blank",
-          question: {
-            en: "Complete: Radujem se _____ (vikend). (I look forward to the weekend.)",
-            ru: "Заполните: Radujem se _____ (vikend). (Я радуюсь выходным.)",
-            ua: "Заповніть: Radujem se _____ (vikend). (Я радію вихідним.)"
-          },
-          correctAnswer: "vikendu",
-          hint: {
-            en: "Verb 'radovati se' requires Dative case (vikend → vikendu)",
-            ru: "Глагол 'radovati se' требует дательного падежа (dativ)",
-            ua: "Дієслово 'radovati se' вимагає давального відмінка (dativ)"
-          }
+          question: { en: "Complete: Idem u _____ (trgovina - accusative). (I go to the store.)", ru: "Заполните: Idem u _____ (trgovina). (Я иду в магазин.)", ua: "Заповніть: Idem u _____ (trgovina). (Я йду в магазин.)" },
+          correctAnswer: "trgovinu",
+          hint: { en: "Feminine singular accusative", ru: "Винительный падеж ж.р.", ua: "Знахідний відмінок ж.р." }
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "Upravljam _____ (automobil). (I drive the car.)",
-            ru: "Upravljam _____ (automobil). (Я управляю автомобилем.)",
-            ua: "Upravljam _____ (automobil). (Я керую автомобілем.)"
-          },
-          options: ["automobilom", "automobil", "automobilu", "automobila"],
-          correctAnswer: "automobilom"
+          question: { en: "Ovo je kuća _____ (moj - genitive feminine singular) bake. (This is the house of my grandmother.)", ru: "Ovo je kuća _____ bake.", ua: "Це будинок _____ бабусі." },
+          options: ["moje", "mojoj", "moju", "mojom"],
+          correctAnswer: "moje"
         },
         {
           type: "fill-blank",
-          question: {
-            en: "Complete: Zanimam se za _____ (glazba). (I am interested in music.)",
-            ru: "Заполните: Zanimam se za _____ (glazba). (Я интересуюсь музыкой.)",
-            ua: "Заповніть: Zanimam se za _____ (glazba). (Я цікавлюся музикою.)"
-          },
-          correctAnswer: "glazbu",
-          hint: {
-            en: "Accusative feminine of 'glazba'",
-            ru: "Винительный падеж женского рода от 'glazba'",
-            ua: "Знахідний відмінок жіночого роду від 'glazba'"
-          }
+          question: { en: "Complete: Kupio sam knjigu _____ (prijatelj - dative). (I bought a book for my friend.)", ru: "Заполните: Kupio sam knjigu _____ (prijatelj). (Я купил книгу другу.)", ua: "Заповніть: Kupio sam knjigu _____ (prijatelj). (Я купив книгу другові.)" },
+          correctAnswer: "prijatelju",
+          hint: { en: "Dative singular of prijatelj", ru: "Дательный падеж от prijatelj", ua: "Давальний відмінок від prijatelj" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Koji je dan nakon nedjelje?", ru: "Какой день идет после воскресенья?", ua: "Який день йде після неділі?" },
+          options: ["ponedjeljak", "utorak", "srijeda", "subota"],
+          correctAnswer: "ponedjeljak"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Oni su u kući.'", ru: "Переведите: 'Oni su u kući.'", ua: "Перекладіть: 'Oni su u kući.'" },
+          correctAnswer: "They are in the house."
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Nemam _____ (novac - genitive). (I don't have money.)", ru: "Nemam _____ (novac).", ua: "Не маю _____ (novac)." },
+          options: ["novca", "novac", "novcu", "novcem"],
+          correctAnswer: "novca"
         }
       ]
     }
   },
-  // B2 Level Lesson 1
+
+  // ==========================================
+  // LEVEL B2
+  // ==========================================
   {
     id: "b2-grammar-1",
     type: "grammar",
     level: "B2",
     title: {
-      en: "Odnosi, pasiv i glagolske imenice (Relationships, Passive & Verbal Nouns)",
-      ru: "Отношения, пассивный залог и отглагольные существительные",
-      ua: "Відносини, пасивний стан та отглагольні іменники"
+      en: "Pasivni stan i glagolske imenice (Passive & Verbal Nouns)",
+      ru: "Пассивный залог и отглагольные имена (Pasivni stan)",
+      ua: "Відносини, пасивний стан та отглагольные іменники (Pasivni stan)"
     },
     content: {
       description: {
-        en: "Learn how to use passive voice and form verbal nouns to express abstract ideas at B2 level.",
+        en: "Learn how to use passive voice constructions and form verbal nouns in B2 level Croatian.",
         ru: "Научитесь использовать пассивный залог и образовывать отглагольные существительные на уровне B2.",
-        ua: "Навчіться використовувати пасивний стан та утворювати отглагольні іменники на рівні B2."
+        ua: "Навчіться використовувати пасивний стан та утворювати віддієслівні іменники на рівні B2."
       },
       sections: [
         {
-          title: {
-            en: "Pasiv (Passive Voice)",
-            ru: "Пассивный залог (Pasiv)",
-            ua: "Пасивний стан (Pasiv)"
-          },
+          title: { en: "Passive and Verbal Nouns", ru: "Пассивный залог и отглагольные имена", ua: "Пасивний стан та віддієслівні іменники" },
           text: {
-            en: "In B2, passive voice is common in official and written styles. It is formed using the verb 'biti' or 'bivati' + passive verbal adjective, or by using the reflexive particle 'se'.",
-            ru: "На уровне B2 пассивный залог часто встречается в официальном и письменном стилях. Он образуется с помощью глагола 'biti' или 'bivati' + пассивное причастие, либо через возвратную частицу 'se'.",
-            ua: "На рівні B2 пасивний стан часто зустрічається в офіційному та письмовому стилях. Він утворюється за допомогою дієслова 'biti' або 'bivati' + пасивний дієприкметник, або через зворотну частку 'se'."
+            en: "Passive voice is formed either reflexively (se + present active, eg. knjiga se čita) or descriptively (biti + passive participle, eg. knjiga je pročitana). Verbal nouns are formed using the suffix -nje with verbs (učiti -> učenje, pisati -> pisanje).",
+            ru: "Пассивный залог образуется либо возвратным способом (se + глагол, например, kuća se gradi), либо описательным (biti + страдательное причастие, например, projekt je završen). Отглагольные существительные образуются с суффиксом -nje.",
+            ua: "Пасивний стан утворюється або зворотним способом (se + дієслово, наприклад, kuća se gradi), або описовим (biti + пасивний дієприкметник, наприклад, projekt je završen). Віддієслівні іменники утворюються з суфіксом -nje."
           },
           examples: [
-            {
-              en: "Knjiga je napisana prošle godine. (The book was written last year.)",
-              ru: "Knjiga je napisana prošle godine. (Книга была написана в прошлом году.)",
-              ua: "Knjiga je napisana prošle godine. (Книга була написана минулого року.)"
-            },
-            {
-              en: "Odluka se donosi na sastanku. (The decision is being made at the meeting.)",
-              ru: "Odluka se donosi na sastanku. (Решение принимается на собрании.)",
-              ua: "Odluka se donosi na sastanku. (Рішення приймається на зборах.)"
-            }
-          ]
-        },
-        {
-          title: {
-            en: "Glagolske imenice (Verbal Nouns)",
-            ru: "Отглагольные существительные",
-            ua: "Віддієслівні іменники"
-          },
-          text: {
-            en: "Verbal nouns ending in -nje are formed from verbs (mostly imperfective) and describe process or action.",
-            ru: "Отглагольные существительные, оканчивающиеся на -nje, образуются от глаголов (чаще несовершенного вида) и выражают процесс или действие.",
-            ua: "Віддієслівні іменники, що закінчуються на -nje, утворюються від дієслів (найчастіше недоконаного виду) і виражають процес або дію."
-          },
-          examples: [
-            { en: "učiti → učenje (learning)", ru: "učiti → učenje (обучение)", ua: "učiti → učenje (навчання)" },
-            { en: "putovati → putovanje (traveling)", ru: "putovati → putovanje (путешествие)", ua: "putovati → putovanje (подорож)" }
+            { en: "Učenje jezika je zanimljivo. (Learning a language is interesting.)", ru: "Učenje jezika je zanimljivo. (Изучение языка интересно.)", ua: "Učenje jezika je zanimljivo. (Вивчення мови цікаве.)" },
+            { en: "Ova knjiga je tiskana u Zagrebu. (This book was printed in Zagreb.)", ru: "Ova knjiga je tiskana u Zagrebu. (Эта книга была напечатана в Загребе.)", ua: "Ova knjiga je tiskana u Zagrebu. (Ця книга була надрукована в Загребі.)" }
           ]
         }
       ],
       exercises: [
         {
           type: "multiple-choice",
-          question: {
-            en: "How do you form the verbal noun from 'čitati'?",
-            ru: "Как звучит отглагольное существительное от глагола 'čitati'?",
-            ua: "Як звучить віддієслівний іменник від дієслова 'čitati'?"
-          },
-          options: ["čitanje", "čitač", "pročitano", "čitati"],
-          correctAnswer: "čitanje"
+          question: { en: "Kuća se _____ (is being built) u centru grada.", ru: "Kuća se _____ (строится) в центре города.", ua: "Будинок _____ (будується) в центрі міста." },
+          options: ["gradi", "graditi", "gradila", "grade"],
+          correctAnswer: "gradi"
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "Passive: Kuća _____ (graditi, present passive) već tri godine.",
-            ru: "Пассив: Kuća _____ (graditi) već tri godine. (Дом строится уже три года.)",
-            ua: "Пасив: Kuća _____ (graditi) već tri godine. (Будинок будується вже три роки.)"
-          },
-          options: ["se gradi", "gradi", "je građena", "bila je građena"],
-          correctAnswer: "se gradi"
-        },
-        {
-          type: "multiple-choice",
-          question: {
-            en: "What is the verbal noun for \"putovati\"?",
-            ru: "Какое отглагольное существительное образуется от \"putovati\"?",
-            ua: "Який віддієслівний іменник утворюється від \"putovati\"?"
-          },
-          options: ["putovanje", "putovati", "putopis", "putnik"],
-          correctAnswer: "putovanje"
+          question: { en: "_____ (learning) jezika traži vremena. (Learning a language takes time.)", ru: "_____ (изучение) языка требует времени.", ua: "_____ (вивчення) мови потребує часу." },
+          options: ["Učenje", "Učiti", "Učenik", "Učenost"],
+          correctAnswer: "Učenje"
         },
         {
           type: "fill-blank",
-          question: {
-            en: "Complete: Pismo je _____ (napisati, past participle neuter) jučer.",
-            ru: "Заполните: Pismo je _____ (napisati, причастие ср. р.) jučer. (Письмо было написано вчера.)",
-            ua: "Заповніть: Pismo je _____ (napisati, дієприкметник сер. р.) jučer. (Лист був написаний вчора.)"
-          },
-          correctAnswer: "napisano",
-          hint: {
-            en: "Neuter singular forms end in -o",
-            ru: "Формы среднего рода ед. ч. оканчиваются на -o",
-            ua: "Форми середнього роду однини закінчуються на -o"
-          }
+          question: { en: "Complete: Projekt je _____ (finish - passive participle masc). (The project is completed.)", ru: "Заполните: Projekt je _____ (završiti - страд. причастие). (Проект завершен.)", ua: "Заповніть: Projekt je _____ (završiti - пасивний дієприкметник). (Проект завершено.)" },
+          correctAnswer: "završen",
+          hint: { en: "Masculine passive form of završiti", ru: "Форма м.р. от završiti", ua: "Форма ч.р. від završiti" }
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "Passive: Odluka _____ (donijeti, past passive feminine) na sastanku.",
-            ru: "Пассив: Odluka _____ (donijeti, ж.р. прош.вр. пассив) na sastanku. (Решение было принято на собрании.)",
-            ua: "Пасив: Odluka _____ (donijeti, ж.р. мин.ч. пасив) na sastanku. (Рішення було прийняте на зборах.)"
-          },
-          options: ["je donesena", "se donosi", "je donio", "bude donesena"],
-          correctAnswer: "je donesena"
+          question: { en: "_____ (writing) ovog pisma je bilo teško.", ru: "_____ (написание) этого письма было трудным.", ua: "_____ (написання) цього листа було важким." },
+          options: ["Pisanje", "Pisati", "Pisac", "Pismeno"],
+          correctAnswer: "Pisanje"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Čaša je _____ (slomiti - passive participle fem). (The glass is broken.)", ru: "Заполните: Čaša je _____ (slomiti - страд. причастие ж.р.). (Чашка сломана.)", ua: "Заповніть: Čaša je _____ (slomiti - пасивний дієприкметник ж.р.). (Чашка зламана.)" },
+          correctAnswer: "slomljena",
+          hint: { en: "Feminine passive form of slomiti", ru: "Форма ж.р. от slomiti", ua: "Форма жіночого роду від slomiti" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Pismo je _____ (napisati - passive participle neuter). (The letter was written.)", ru: "Pismo je _____ (napisati - страд. причастие ср.р.). (Письмо написано.)", ua: "Лист був _____ (napisati - пасивний дієприкметник с.р.). (Лист написаний.)" },
+          options: ["napisano", "napisana", "napisan", "napisani"],
+          correctAnswer: "napisano"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Čitanje knjiga je korisno.'", ru: "Переведите: 'Čitanje knjiga je korisno.'", ua: "Перекладіть: 'Čitanje knjiga je korisno.'" },
+          correctAnswer: "Reading books is useful."
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Ugovor je _____ (potpisati - passive participle masc). (The contract is signed.)", ru: "Ugovor je _____ (potpisati - страд. причастие м.р.). (Договор подписан.)", ua: "Договір був _____ (potpisati - пасивний дієприкметник ч.р.). (Договір підписаний.)" },
+          options: ["potpisan", "potpisana", "potpisano", "potpisani"],
+          correctAnswer: "potpisan"
         }
       ]
     }
   },
-  // B2 Level Lesson 2
+  {
+    id: "b2-grammar-2",
+    type: "grammar",
+    level: "B2",
+    title: {
+      en: "Kondicional I i II (Conditionals I & II)",
+      ru: "Условное наклонение I и II (Kondicional)",
+      ua: "Умовний спосіб I та II (Kondicional)"
+    },
+    content: {
+      description: {
+        en: "Learn how to formulate present and past hypotheticals using Conditional I and II in Croatian.",
+        ru: "Научитесь формулировать гипотезы в настоящем и прошлом с помощью условного наклонения I и II.",
+        ua: "Навчіться формулювати гіпотези в теперішньому та минулому за допомогою умовного способу I та II."
+      },
+      sections: [
+        {
+          title: { en: "Conditionals", ru: "Условное наклонение", ua: "Умовний спосіб" },
+          text: {
+            en: "Conditional I (present hypothetical): clitic of 'biti' in conditional (bih, bi, bi, bismo, biste, bi) + active participle. E.g. Kupio bih auto (I would buy a car).\nConditional II (past hypothetical): Conditional I of 'biti' (bio bih, bio bi...) + active participle. E.g. Bio bih došao (I would have come).",
+            ru: "Conditional I (настоящее): частицы bih, bi... + причастие. Пример: Kupio bih auto (Я бы купил машину).\nConditional II (прошлое): условная форма глагола 'biti' + причастие. Пример: Bio bih došao (Я бы пришел).",
+            ua: "Conditional I (теперішнє): частки bih, bi... + дієприкметник. Приклад: Kupio bih auto (Я б купив машину).\nConditional II (минуле): умовна форма дієслова 'biti' + дієприкметник. Приклад: Bio bih došao (Я б прийшов)."
+          },
+          examples: [
+            { en: "Da imam novca, putovao bih. (If I had money, I would travel.)", ru: "Da imam novca, putovao bih. (Если бы у меня были деньги, я бы путешествовал.)", ua: "Da imam novca, putovao bih. (Якби у мене були гроші, я б подорожував.)" },
+            { en: "Da sam znao, bio bih ti pomogao. (If I had known, I would have helped you.)", ru: "Da sam znao, bio bih ti pomogao. (Если бы я знал, я бы тебе помог.)", ua: "Da sam znao, bio bih ti pomogao. (Якби я знав, я б тобі поміг.)" }
+          ]
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: { en: "Ja _____ (would buy) kuću.", ru: "Ja _____ kuću. (Я бы купил дом.)", ua: "Я _____ kuću. (Я б купив будинок.)" },
+          options: ["bih kupio", "bi kupio", "bismo kupili", "sam kupio"],
+          correctAnswer: "bih kupio"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Oni _____ (would go) u kino.", ru: "Oni _____ u kino. (Они бы пошли в кино.)", ua: "Вони _____ u kino. (Вони б пішли в кіно.)" },
+          options: ["bi išli", "bismo išli", "bih išao", "su išli"],
+          correctAnswer: "bi išli"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Da sam to čuo ranije, _____ (I would have come - Conditional II masc).", ru: "Заполните: Da sam to čuo ranije, _____ (я бы пришел - Conditional II м.р.).", ua: "Заповніть: Da sam to čuo ranije, _____ (я б прийшов - Conditional II ч.р.)." },
+          correctAnswer: "bio bih došao",
+          hint: { en: "Use past conditional for 'ja'", ru: "Форма прошедшего условного времени", ua: "Форма минулого умовного часу" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Mi _____ (would help) vam.", ru: "Mi _____ vam. (Мы бы помогли вам.)", ua: "Ми _____ vam. (Ми б допомогли вам.)" },
+          options: ["bismo pomogli", "bi pomogli", "bih pomogao", "biste pomogli"],
+          correctAnswer: "bismo pomogli"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Da si me zvao, _____ (I would have helped - Conditional II masc).", ru: "Заполните: Da si me zvao, _____ (я бы помог - Conditional II м.р.).", ua: "Заповніть: Da si me zvao, _____ (я б допоміг - Conditional II ч.р.)." },
+          correctAnswer: "bio bih pomogao",
+          hint: { en: "I would have helped", ru: "Я бы помог", ua: "Я б допоміг" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Da _____ (if you had - past condition) novca, bi li putovao?", ru: "Da _____ novca, bi li putovao? (Если бы у тебя были деньги...)", ua: "Da _____ novca, bi li putovao? (Якби у тебе були гроші...)" },
+          options: ["si imao", "imaš", "budeš imao", "imao bi"],
+          correctAnswer: "si imao"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Kupio bih auto.'", ru: "Переведите: 'Kupio bih auto.'", ua: "Перекладіть: 'Kupio bih auto.'" },
+          correctAnswer: "I would buy a car."
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Vi _____ (would write) bolje.", ru: "Vi _____ bolje. (Вы бы написали лучше.)", ua: "Ви _____ bolje. (Ви б написали краще.)" },
+          options: ["biste pisali", "bismo pisali", "bi pisali", "bih pisao"],
+          correctAnswer: "biste pisali"
+        }
+      ]
+    }
+  },
   {
     id: "b2-communication-1",
     type: "communication",
     level: "B2",
     title: {
-      en: "Posao i radno okruženje (Work & Work Environment)",
-      ru: "Работа и рабочее окружение",
-      ua: "Робота та робоче оточення"
+      en: "Robota ta robotočinje (Work & Career)",
+      ru: "Работа и карьера (Radno okruženje)",
+      ua: "Робота та робоче оточення (Radno okruženje)"
     },
     content: {
       description: {
-        en: "Learn professional vocabulary, idioms, and speak about careers in Croatian.",
-        ru: "Изучите профессиональную лексику, идиомы и научитесь рассказывать о карьере на хорватском.",
+        en: "Learn professional vocabulary, idioms, and how to discuss your career in Croatian.",
+        ru: "Выучите профессиональную лексику, идиомы и научитесь рассказывать о своей карьере на хорватском.",
         ua: "Вивчіть професійну лексику, ідіоми та навчіться розповідати про кар'єру хорватською."
       },
       sections: [
         {
-          title: {
-            en: "Work environment",
-            ru: "Рабочее окружение",
-            ua: "Робоче оточення"
-          },
+          title: { en: "Workplace Phrases", ru: "Фразы на рабочем месте", ua: "Фрази на робочому місці" },
           text: {
-            en: "Speaking about career paths, professional goals, and job interviews in Croatia. Common terms: zapošljavanje (employment), životopis (resume), razgovor za posao (job interview), prekovremeni rad (overtime work).",
-            ru: "Обсуждение карьерного пути, профессиональных целей и собеседований в Хорватии. Понятия: zapošljavanje (трудоустройство), životopis (резюме), razgovor za posao (собеседование), prekovremeni rad (сверхурочная работа).",
-            ua: "Обговорення кар'єрного шляху, професійних цілей та співбесід у Хорватії. Поняття: zapošljavanje (працевлаштування), životopis (резюме), razgovor za posao (співбесіда), prekovremeni rad (понаднормова робота)."
+            en: "Essential professional terms:\n- radni staž (work experience/years)\n- plaća (salary)\n- natječaj za posao (job opening/vacancy)\n- dati otkaz (to resign/quit)\n- napredovati (to be promoted)",
+            ru: "Ключевые карьерные термины:\n- radni staž (стаж работы)\n- plaća (зарплата)\n- natječaj za posao (конкурс на вакансию)\n- dati otkaz (уволиться)\n- napredovati (продвигаться по службе)",
+            ua: "Ключові кар'єрні терміни:\n- radni staž (стаж роботи)\n- plaća (зарплата)\n- natječaj za posao (конкурс на вакансію)\n- dati otkaz (звільнитися)\n- napredovati (просуватися по службі)"
           },
           examples: [
-            {
-              en: "Poslao sam svoj životopis na natječaj za posao programera. (I sent my resume for the programmer job opening.)",
-              ru: "Poslao sam svoj životopis na natječaj za posao programera. (Я отправил свое резюме на вакансию программиста.)",
-              ua: "Poslao sam svoj životopis na natječaj za posao programera. (Я надіслав своє резюме на вакансію програміста.)"
-            },
-            {
-              en: "Radna atmosfera u našem uredu je izuzetno motivirajuća. (The working atmosphere in our office is extremely motivating.)",
-              ru: "Radna atmosfera u našem uredu je izuzetno motivirajuća. (Рабочая атмосфера в нашем офисе очень мотивирующая.)",
-              ua: "Radna atmosfera u našem uredu je izuzetno motivirajuća. (Робоча атмосфера в нашому офісі надзвичайно мотивує.)"
-            }
+            { en: "Želim se prijaviti na natječaj. (I want to apply for the vacancy.)", ru: "Želim se prijaviti na natječaj. (Я хочу подать заявку на вакансию.)", ua: "Želim se prijaviti na natječaj. (Я хочу подати заявку на вакансію.)" },
+            { en: "Dobio sam povišicu. (I got a raise.)", ru: "Dobio sam povišicu. (Я получил прибавку.)", ua: "Dobio sam povišicu. (Я отримав надбавку.)" }
           ]
         }
       ],
       exercises: [
         {
           type: "multiple-choice",
-          question: {
-            en: "What does the word 'životopis' mean?",
-            ru: "Что означает слово 'životopis'?",
-            ua: "Що означає слово 'životopis'?"
-          },
-          options: ["Resume / CV", "Biography book", "Job contract", "Working hours"],
-          correctAnswer: "Resume / CV"
-        },
-        {
-          type: "fill-blank",
-          question: {
-            en: "Translate: 'job interview' -> razgovor za _____.",
-            ru: "Переведите: 'собеседование на работу' -> razgovor za _____.",
-            ua: "Перекладіть: 'співбесіда на роботу' -> razgovor za _____."
-          },
-          correctAnswer: "posao"
-        },
-        {
-          type: "multiple-choice",
-          question: {
-            en: "What does the term \"prekovremeni rad\" refer to?",
-            ru: "К чему относится термин \"prekovremeni rad\"?",
-            ua: "До чого відноситься термін \"prekovremeni rad\"?"
-          },
-          options: ["overtime work", "part-time work", "vacation days", "working from home"],
-          correctAnswer: "overtime work"
+          question: { en: "What does 'plaća' mean?", ru: "Что значит 'plaća'?", ua: "Що означає 'plaća'?" },
+          options: ["salary (зарплата)", "workplace", "colleague", "interview"],
+          correctAnswer: "salary (зарплата)"
         },
         {
           type: "translation",
-          question: {
-            en: "Translate to Croatian: \"employment\"",
-            ru: "Переведите на хорватский: \"трудоустройство\"",
-            ua: "Перекладіть на хорватську: \"працевлаштування\""
-          },
-          correctAnswer: "zapošljavanje"
+          question: { en: "Translate: 'Tražim novi posao.'", ru: "Переведите: 'Tražim novi posao.'", ua: "Перекладіть: 'Tražim novi posao.'" },
+          correctAnswer: "I am looking for a new job."
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "Select the Croatian word for \"employer\":",
-            ru: "Выберите хорватское слово, означающее \"работодатель\":",
-            ua: "Оберіть хорватське слово, що означає \"роботодавець\":"
-          },
-          options: ["poslodavac", "radnik", "direktor", "kolega"],
-          correctAnswer: "poslodavac"
+          question: { en: "How do you say 'to resign/quit a job'?", ru: "Как сказать 'уволиться'?", ua: "Як сказати 'звільнитися з роботи'?" },
+          options: ["dati otkaz", "dati povišicu", "zaposliti se", "raditi prekovremeno"],
+          correctAnswer: "dati otkaz"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate to Croatian: 'I have five years of work experience.'", ru: "Переведите на хорватский: 'У меня пять лет опыта/стажа.'", ua: "Перекладіть на хорватську: 'Я маю п'ять років досвіду/стажу.'" },
+          correctAnswer: "Imam pet godina radnog staža."
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What is 'poslovni sastanak'?", ru: "Что такое 'poslovni sastanak'?", ua: "Що таке 'poslovni sastanak'?" },
+          options: ["business meeting", "work contract", "salary raise", "job vacancy"],
+          correctAnswer: "business meeting"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "How do you say 'colleague/co-worker'?", ru: "Как сказать 'коллега'?", ua: "Як сказати 'колега'?" },
+          options: ["kolega", "direktor", "radnik", "klijent"],
+          correctAnswer: "kolega"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Dobio sam _____ (raise). (I got a raise.)", ru: "Заполните: Dobio sam _____ (raise). (Я получил прибавку.)", ua: "Заповніть: Dobio sam _____ (raise). (Я отримав надбавку.)" },
+          correctAnswer: "povišicu",
+          hint: { en: "povišicu", ru: "povišicu", ua: "povišicu" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate to Croatian: 'The contract is signed.'", ru: "Переведите на хорватский: 'Контракт подписан.'", ua: "Перекладіть на хорватську: 'Контракт підписаний.'" },
+          correctAnswer: "Ugovor je potpisan."
         }
       ]
     }
   },
-  // C1 Level Lesson 1 — Advanced Subordinate Clauses
+
+  // ==========================================
+  // LEVEL C1
+  // ==========================================
   {
     id: "c1-grammar-1",
     type: "grammar",
     level: "C1",
     title: {
-      en: "Složene rečenice i veznici (Complex Sentences & Conjunctions)",
+      en: "Složene rečenice i veznici (Complex Sentences)",
       ru: "Сложные предложения и союзы (Složene rečenice)",
       ua: "Складні речення та сполучники (Složene rečenice)"
     },
     content: {
       description: {
-        en: "Master complex sentence structures, conditional clauses, concessive conjunctions, and logical sentence flow at a professional level.",
-        ru: "Освойте сложные синтаксические структуры, условные предложения, уступительные союзы на профессиональном уровне.",
-        ua: "Опануйте складні синтаксичні структури, умовні речення, допустові сполучники на професійному рівні."
+        en: "Master complex syntactic structures, conditionals, and concessive conjunctions.",
+        ru: "Освойте сложные синтаксические структуры, условные предложения и уступительные союзы.",
+        ua: "Опануйте складні синтаксичні структури, умовні речення, допустові сполучники."
       },
       sections: [
         {
-          title: {
-            en: "Concessive Clauses (Dopunske rečenice)",
-            ru: "Уступительные предложения",
-            ua: "Допустові речення"
-          },
+          title: { en: "Complex Conjunctions", ru: "Сложные союзы", ua: "Складні сполучники" },
           text: {
-            en: "Concessive clauses express an action that happens despite an obstacle. The main conjunctions used are: iako (although), premda (albeit / although), mada (even though), makar (at least / even if). Note that 'iako' is the most common and neutral, whereas 'premda' is highly stylistic.",
-            ru: "Уступительные предложения выражают действие, происходящее вопреки препятствию. Основные союзы: iako (хотя), premda (хотя), mada (хотя/даже если), makar (хотя бы/пусть даже).",
-            ua: "Допустові речення виражають дію, що відбувається всупереч перешкоді. Основні сполучники: iako (хоча), premda (хоча), mada (хоча/навіть якщо), makar (хоча б/хай навіть)."
+            en: "Advanced clauses require precise conjunctions:\n- Concessive (although): iako, premda, mada\n- Causal (since/because): budući da, jer, zato što\n- Temporal (as soon as): čim, nakon što\n- Conditional: ukoliko (formal equivalent of ako)",
+            ru: "Сложные предложения требуют точных союзов:\n- Уступительные (хотя): iako, premda, mada\n- Причинные (поскольку): budući da, jer\n- Временные (как только): čim, nakon što\n- Условные: ukoliko (если - книжный вариант)",
+            ua: "Складні речення вимагають точних сполучників:\n- Допустові (хоча): iako, premda, mada\n- Причинові (оскільки): budući da, jer\n- Часові (як тільки): čim, nakon što\n- Умовні: ukoliko (якщо - книжковий варіант)"
           },
           examples: [
-            {
-              en: "Iako je padala jaka kiša, odlučili smo prošetati gradom. (Although it was raining heavily, we decided to walk around the city.)",
-              ru: "Iako je padala jaka kiša, odlučili smo prošetati gradom. (Хотя шел сильный дождь, мы решили прогуляться по городу.)",
-              ua: "Iako je padala jaka kiša, odlučili smo prošetati gradom. (Хоча йшов сильний дощ, ми вирішили прогулятися містом.)"
-            },
-            {
-              en: "Premda su pregovori bili teški, postigli smo dogovor. (Although the negotiations were difficult, we reached an agreement.)",
-              ru: "Premda su pregovori bili teški, postigli smo dogovor. (Несмотря на то, что переговоры были трудными, мы достигли соглашения.)",
-              ua: "Premda su pregovori bili teški, postigli smo dogovor. (Хоча переговори були важкими, ми досягли згоди.)"
-            }
-          ]
-        },
-        {
-          title: {
-            en: "Conditional Clauses with 'da' vs 'ako'",
-            ru: "Условные предложения с 'da' и 'ako'",
-            ua: "Умовні речення з 'da' та 'ako'"
-          },
-          text: {
-            en: "In C1, understanding hypothetical vs real conditions is crucial. 'Ako' presents real/possible conditions (Ako budeš učio, položit ćeš - If you study, you will pass). 'Da' + present or perfect expresses highly hypothetical or impossible/past conditions (Da sam znao, došao bih - If I had known, I would have come).",
-            ru: "В C1 важно понимать разницу между реальными и нереальными условиями. 'Ako' — для реальных/возможных (Ako budeš učio, položit ćeš). 'Da' + настоящее или прошедшее время выражает гипотетическое/невозможное условие (Da sam znao, došao bih).",
-            ua: "У C1 важливо розуміти різницю між реальними та нереальними умовами. 'Ako' — для реальних/можливих (Ako budeš učio, položit ćeš). 'Da' + теперішній або минулий час виражає гіпотетичну/неможливу умову (Da sam znao, došao bih)."
-          },
-          examples: [
-            {
-              en: "Ako kupiš kartu na vrijeme, proći ćeš jeftinije. (If you buy the ticket on time, it will cost you less.)",
-              ru: "Ako kupiš kartu na vrijeme, proći ćeš jeftinije. (Если купишь билет вовремя, выйдет дешевле.)",
-              ua: "Ako kupiš kartu na vrijeme, proći ćeš jeftinije. (Якщо купиш квиток вчасно, вийде дешевше.)"
-            },
-            {
-              en: "Da imam više slobodnog vremena, upisao bih tečaj slikanja. (If I had more free time, I would enroll in a painting course.)",
-              ru: "Da imam više slobodnog vremena, upisao bih tečaj slikanja. (Если бы у меня было больше свободного времени, я бы записался на курсы рисования.)",
-              ua: "Da imam više slobodnog vremena, upisao bih tečaj slikanja. (Якби в мене було більше вільного часу, я б записався на курси малювання.)"
-            }
+            { en: "Iako je padala kiša, išli smo u šetnju. (Although it was raining, we went for a walk.)", ru: "Iako je padala kiša, išli smo u šetnju. (Хотя шел дождь, мы пошли гулять.)", ua: "Iako je padala kiša, išli smo u šetnju. (Хоча йшов дощ, ми пішли гуляти.)" },
+            { en: "Budući da je projekt završen, možemo se odmoriti. (Since the project is finished, we can rest.)", ru: "Budući da je projekt završen, možemo se odmoriti. (Поскольку проект завершен, мы можем отдохнуть.)", ua: "Budući da je projekt završen, možemo se odmoriti. (Оскільки проєкт завершено, ми можемо відпочити.)" }
           ]
         }
       ],
       exercises: [
         {
           type: "multiple-choice",
-          question: {
-            en: "Choose the correct concessive conjunction: _____ nismo imali mnogo vremena, uspjeli smo dovršiti projekt.",
-            ru: "Выберите союз: _____ nismo imali mnogo vremena, uspjeli smo dovršiti projekt.",
-            ua: "Оберіть сполучник: _____ nismo imali mnogo vremena, uspjeli smo dovršiti projekt."
-          },
-          options: ["Iako", "Zato što", "Kao da", "Tijekom"],
+          question: { en: "_____ je bio bolestan, došao je na posao. (Although he was sick...)", ru: "_____ je bio bolestan, došao je na posao. (Хотя он был болен...)", ua: "_____ je bio bolestan, došao je на роботу." },
+          options: ["Iako", "Zato što", "Budući da", "Jer"],
           correctAnswer: "Iako"
         },
         {
+          type: "multiple-choice",
+          question: { en: "_____ (Since/Because) nemamo dovoljno informacija, odgađamo sastanak.", ru: "_____ nemamo dovoljno informacija, odgađamo sastanak. (Поскольку у нас нет...)", ua: "_____ nemamo dovoljno informacija, odgađamo sastanak. (Оскільки ми не маємо...)" },
+          options: ["Budući da", "Iako", "Premda", "Čim"],
+          correctAnswer: "Budući da"
+        },
+        {
           type: "fill-blank",
-          question: {
-            en: "Complete the hypothetical clause: Da sam _____ (znati, past active participle masculine) za sastanak, došao bih.",
-            ru: "Заполните гипотетическое условие: Da sam _____ (znati, причастие м.р.) za sastanak, došao bih.",
-            ua: "Заповніть гіпотетичну умову: Da sam _____ (znati, дієприкметник ч.р.) za sastanak, došao bih."
-          },
-          correctAnswer: "znao",
-          hint: {
-            en: "Past active participle of 'znati' for 'ja' (masculine)",
-            ru: "Причастие прошедшего времени глагола 'znati' для м.р.",
-            ua: "Дієприкметник минулого часу дієслова 'znati' для ч.р."
-          }
+          question: { en: "Complete: Javit ću vam se _____ (as soon as) stignem u ured.", ru: "Заполните: Javit ću vam se _____ stignem u ured. (Как только приеду в офис...)", ua: "Заповніть: Javit ću vam se _____ stignem u ured. (Як тільки приїду в офіс...)" },
+          correctAnswer: "čim",
+          hint: { en: "conjunction meaning 'as soon as'", ru: "союз со значением 'как только'", ua: "сполучник зі значенням 'як тільки'" }
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "What does the conjunction 'premda' mean?",
-            ru: "Что означает союз 'premda'?",
-            ua: "Що означає сполучник 'premda'?"
-          },
-          options: ["although", "because", "therefore", "unless"],
-          correctAnswer: "although"
+          question: { en: "_____ (If - formal) potpišete ugovor, obveze stupaju na snagu.", ru: "_____ potpišete ugovor, obveze stupaju na snagu. (В случае если вы подпишете...)", ua: "_____ potpišete ugovor, obveze stupaju na snagu. (У разі якщо ви підпишете...)" },
+          options: ["Ukoliko", "Premda", "Jer", "Mada"],
+          correctAnswer: "Ukoliko"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Nije položio ispit _____ (although) je puno učio.", ru: "Заполните: Nije položio ispit _____ je puno učio. (Хотя много учился.)", ua: "Заповніть: Nije položio ispit _____ je puno učio. (Хоча багато вчився.)" },
+          correctAnswer: "premda",
+          hint: { en: "concessive conjunction starting with p-", ru: "уступительный союз на p-", ua: "допустовий сполучник на p-" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "_____ (After) smo potpisali ugovor, započeli smo s radom.", ru: "_____ smo potpisali ugovor, započeli smo s radom. (После того как мы...)", ua: "_____ smo potpisali ugovor, započeli smo s radom. (Після того як ми...)" },
+          options: ["Nakon što", "Prije nego što", "Jer", "Ukoliko"],
+          correctAnswer: "Nakon što"
         },
         {
           type: "translation",
-          question: {
-            en: "Translate: 'Da imam novca, kupio bih auto.'",
-            ru: "Переведите: 'Da imam novca, kupio bih auto.'",
-            ua: "Перекладіть: 'Da imam novca, kupio bih auto.'"
-          },
-          correctAnswer: "If I had money, I would buy a car"
+          question: { en: "Translate: 'Ukoliko ne dođete, javite nam.'", ru: "Переведите: 'Ukoliko ne dođete, javite nam.'", ua: "Перекладіть: 'Ukoliko ne dođete, javite nam.'" },
+          correctAnswer: "If you do not come, let us know."
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "Complete: Ako _____ (biti, future II) gladan, skuhaj nešto.",
-            ru: "Заполните: Ako _____ (biti, будущ. II) gladan, skuhaj nešto.",
-            ua: "Заповніть: Ako _____ (biti, майбут. II) gladan, skuhaj nešto."
-          },
-          options: ["budeš", "jesi", "sam", "bude"],
-          correctAnswer: "budeš"
-        },
-        {
-          type: "fill-blank",
-          question: {
-            en: "Translate 'even though' using a 4-letter Croatian word beginning with 'm':",
-            ru: "Переведите 'хотя/даже хотя' 4-буквенным хорватским словом на 'm':",
-            ua: "Перекладіть 'хоча/навіть хоча' 4-літерним хорватським словом на 'm':"
-          },
-          correctAnswer: "mada"
+          question: { en: "Ona nije došla _____ (because) je morala raditi prekovremeno.", ru: "Ona nije došla _____ je morala raditi prekovremeno.", ua: "Вона не прийшла _____ мусила працювати понаднормово." },
+          options: ["jer", "iako", "premda", "čim"],
+          correctAnswer: "jer"
         }
       ]
     }
   },
-  // C2 Level Lesson 1 — Advanced Expression, Nuances and Idioms
+  {
+    id: "c1-grammar-2",
+    type: "grammar",
+    level: "C1",
+    title: {
+      en: "Zavisne rečenice i napredni veznici (Subordinate Clauses)",
+      ru: "Придаточные предложения и продвинутые союзы",
+      ua: "Підрядні речення та складні сполучники"
+    },
+    content: {
+      description: {
+        en: "Deepen your understanding of relative clauses, conditional statements, and advanced conjunctions.",
+        ru: "Углубите понимание относительных придаточных предложений, условных утверждений и продвинутых союзов.",
+        ua: "Поглибте розуміння відносних підрядних речень, складних умовних конструкцій та сполучників."
+      },
+      sections: [
+        {
+          title: { en: "Relative and Conditional Clauses", ru: "Относительные и условные придаточные", ua: "Відносні та умовні підрядні речення" },
+          text: {
+            en: "Focus on:\n- Relative pronoun: koji, čiji, kakav. Remember: čiji (whose) agrees in gender/number with the noun following it.\n- Conjunctions of manner: kao da (as if), tako da (so that).\n- Conditional markers: da + past (past impossible conditions), kad bi + conditional (unlikely present conditions).",
+            ru: "В центре внимания:\n- Относительное местоимение čiji (чей) согласуется в роде/числе с последующим существительным.\n- Союзы образа действия: kao da (как будто), tako da (так что).\n- Условные конструкции: da + прош.вр. (нереальное условие в прошлом).",
+            ua: "У центрі уваги:\n- Відносний займенник čiji (чий) узгоджується в роді/числі з наступним іменником.\n- Сполучники способу дії: kao da (ніби/начебто), tako da (так що).\n- Умовні конструкції: da + мин.ч. (нереальна умова в минулому)."
+          },
+          examples: [
+            { en: "Izgleda kao da će kiša. (It looks as if it will rain.)", ru: "Izgleda kao da će kiša. (Выглядит так, будто пойдет дождь.)", ua: "Izgleda kao da će kiša. (Виглядає так, ніби піде дощ.)" },
+            { en: "Znam čovjeka čiji sin studira kemiju. (I know the man whose son studies chemistry.)", ru: "Znam čovjeka čiji sin studira kemiju. (Я знаю человека, чей сын изучает химию.)", ua: "Znam Znam čovjeka čiji sin studira kemiju. (Я знаю чоловіка, чий син вивчає хімію.)" }
+          ]
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: { en: "Upoznao sam djevojku _____ (whose) otac radi u vladi.", ru: "Upoznao sam djevojku _____ (чей) otac radi u vladi.", ua: "Я познайомився з дівчиною, _____ (чий) батько працює в уряді." },
+          options: ["čiji", "čije", "čija", "čijeg"],
+          correctAnswer: "čiji"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Govori o tom problemu _____ (as if) sve zna.", ru: "Govori o tom problemu _____ (как будто) sve zna.", ua: "Він говорить про цю проблему, _____ (ніби) все знає." },
+          options: ["kao da", "tako da", "zato što", "budući da"],
+          correctAnswer: "kao da"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Da sam to znao, _____ (I would have reacted - masc). (If I had known, I would have reacted.)", ru: "Заполните: Da sam to znao, _____ (я бы отреагировал - м.р.).", ua: "Заповніть: Da sam to znao, _____ (я б відреагував - ч.р.)." },
+          correctAnswer: "bio bih reagirao",
+          hint: { en: "Use past conditional I of reagirati", ru: "Форма прошедшего условного времени", ua: "Форма минулого умовного часу" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Knjiga _____ (which - accusative feminine) sam čitao je izvrsna.", ru: "Knjiga _____ sam čitao je izvrsna. (Книга, которую я читал...)", ua: "Книга, _____ я читав, чудова." },
+          options: ["koju", "koji", "koje", "kojom"],
+          correctAnswer: "koju"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Govorio je tiho _____ (so that) ga nitko ne čuje.", ru: "Заполните: Govorio je tiho _____ ga nitko ne čuje. (Так, чтобы его никто не услышал.)", ua: "Заповніть: Govorio je tiho _____ ga nitko ne čuje. (Так, щоб його ніхто не почув.)" },
+          correctAnswer: "tako da",
+          hint: { en: "so that", ru: "так что / чтобы (tako da)", ua: "так що / щоб (tako da)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Da _____ (if we had) vremena, posjetili bismo vas.", ru: "Da _____ vremena, posjetili bismo vas. (Если бы у нас было время...)", ua: "Da _____ vremena, posjetili bismo vas. (Якби ми мали час...)" },
+          options: ["smo imali", "imamo", "budemo imali", "imali bismo"],
+          correctAnswer: "smo imali"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Znam ženu čija kćer živi u Londonu.'", ru: "Переведите: 'Znam ženu čija kćer živi u Londonu.'", ua: "Перекладіть: 'Znam ženu čija kćer živi u Londonu.'" },
+          correctAnswer: "I know the woman whose daughter lives in London."
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Ukoliko _____ (you need) pomoć, slobodno se javite.", ru: "Ukoliko _____ pomoć, slobodno se javite. (Если вам нужна...)", ua: "Ukoliko _____ pomoć, slobodno se javite. (Якщо вам потрібна...)" },
+          options: ["trebate", "biste trebali", "budete trebali", "treba"],
+          correctAnswer: "trebate"
+        }
+      ]
+    }
+  },
+
+  // ==========================================
+  // LEVEL C2
+  // ==========================================
+  {
+    id: "c2-grammar-1",
+    type: "grammar",
+    level: "C2",
+    title: {
+      en: "Frazemi i stilske figure (Idioms & Stylistics)",
+      ru: "Фразеологизмы и стилистика (Frazemi)",
+      ua: "Фразеологізми та стилістичні фігури (Frazemi)"
+    },
+    content: {
+      description: {
+        en: "Learn idiomatic expressions, figures of speech, and advanced literary stylistics in Croatian.",
+        ru: "Изучите идиоматические выражения, фигуры речи и продвинутую художественную стилистику в хорватском.",
+        ua: "Вивчіть ідіоматичні вирази, фігури мовлення та просунуту художню стилістику в хорватській."
+      },
+      sections: [
+        {
+          title: { en: "Croatian Idioms", ru: "Хорватские фразеологизмы", ua: "Хорватські фразеологізми" },
+          text: {
+            en: "Native-level proficiency involves mastership of idioms:\n- mlatiti praznu slamu (talk in vain / waste time)\n- Bogu iza nogu (in the middle of nowhere / very far)\n- baciti koplje u trnje (to give up / surrender)\n- trčati pred rudo (to jump to conclusions / rush things)",
+            ru: "Владение языком на уровне носителя включает знание фразеологизмов:\n- mlatiti praznu slamu (молотить пустую солому / болтать попусту)\n- Bogu iza nogu (у черта на куличках / очень далеко)\n- baciti koplje u trnje (бросить копье в терновник / сдаться)\n- trčati pred rudo (бежать впереди телеги / торопить события)",
+            ua: "Володіння мовою на рівні носія включає знання фразеологізмів:\n- mlatiti praznu slamu (товкти воду в ступі / базікати марно)\n- Bogu iza nogu (у біса на болоті / дуже далеко)\n- baciti koplje u trnje (кинути списа в тернину / здатися)\n- trčati pred rudo (бігти попереду батька в пекло / квапити події)"
+          },
+          examples: [
+            { en: "Živi Bogu iza nogu. (He lives in the middle of nowhere.)", ru: "Živi Bogu iza nogu. (Он живет у черта на куличках.)", ua: "Živi Bogu iza nogu. (Він живе у біса на болоті.)" },
+            { en: "Nemoj baciti koplje u trnje. (Don't give up.)", ru: "Nemoj baciti koplje u trnje. (Не сдавайся.)", ua: "Nemoj baciti koplje u trnje. (Не здавайся.)" }
+          ]
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: { en: "What does 'mlatiti praznu slamu' mean?", ru: "Что означает 'mlatiti praznu slamu'?", ua: "Що означає 'mlatiti praznu slamu'?" },
+          options: [
+            "pričati bez smisla i koristi (talk in vain)",
+            "raditi koristan poljoprivredni posao",
+            "prikupiti puno pšenice",
+            "pomoći prijatelju u nevolji"
+          ],
+          correctAnswer: "pričati bez smisla i koristi (talk in vain)"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Where is a place described as 'Bogu iza nogu'?", ru: "Какое место описывают как 'Bogu iza nogu'?", ua: "Яке місце описують як 'Bogu iza nogu'?" },
+          options: ["vrlo udaljeno i zabačeno mjesto (very remote)", "mjesto blizu crkve", "centar grada", "planinski vrh"],
+          correctAnswer: "vrlo udaljeno i zabačeno mjesto (very remote)"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete the idiom: Nemoj baciti _____ u trnje! (Don't give up!)", ru: "Заполните: Nemoj baciti _____ u trnje! (Не сдавайся!)", ua: "Заповніть: Nemoj baciti _____ u trnje! (Не здавайся!)" },
+          correctAnswer: "koplje",
+          hint: { en: "spear", ru: "копье (koplje)", ua: "спис (koplje)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What does 'trčati pred rudo' refer to?", ru: "К чему относится 'trčati pred rudo'?", ua: "До чого відноситься 'trčati pred rudo'?" },
+          options: [
+            "brzopleto donositi odluke (rushing things)",
+            "sudjelovati u utrci",
+            "pomagati u radu",
+            "bježati od opasnosti"
+          ],
+          correctAnswer: "brzopleto donositi odluke (rushing things)"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Dosta smo mlatili praznu _____! (We have wasted enough time talking!)", ru: "Заполните: Dosta smo mlatili praznu _____! (Хватит молотить пустую солому!)", ua: "Заповніть: Dosta smo mlatili praznu _____! (Досить товкти воду в ступі!)" },
+          correctAnswer: "slamu",
+          hint: { en: "straw", ru: "солому (slamu)", ua: "солому (slamu)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Identify the hyperbole:", ru: "Найдите гиперболу:", ua: "Знайдіть гіперболу:" },
+          options: [
+            "Tisuću puta sam ti rekao! (I told you a thousand times!)",
+            "Ona je tiha kao miš. (Quiet as a mouse.)",
+            "Vrijeme leti. (Time flies.)",
+            "On je dobar čovjek."
+          ],
+          correctAnswer: "Tisuću puta sam ti rekao! (I told you a thousand times!)"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Oni žive Bogu iza nogu.'", ru: "Переведите: 'Oni žive Bogu iza nogu.'", ua: "Перекладіть: 'Oni žive Bogu iza nogu.'" },
+          correctAnswer: "They live in the middle of nowhere."
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What stylistic device is 'miris vlage šapuće o prošlosti' (smell of moisture whispers of the past)?", ru: "Какое стилистическое средство используется в 'miris vlage šapuće o prošlosti'?", ua: "Який стилістичний засіб використано в 'miris vlage šapuće o prošlosti'?" },
+          options: ["personifikacija (personification)", "hiperbola (hyperbole)", "metonimija (metonymy)", "oksimoron (oxymoron)"],
+          correctAnswer: "personifikacija (personification)"
+        }
+      ]
+    }
+  },
   {
     id: "c2-communication-1",
     type: "communication",
     level: "C2",
     title: {
-      en: "Stilske nijanse i frazeologija (Stylistic Nuances & Idioms)",
-      ru: "Стилистические нюансы и фразеология",
-      ua: "Стилістичні нюанси та фразеологія"
+      en: "Diskusija o društvu (Advanced Discussion)",
+      ru: "Дискуссия об обществе (Advanced Discussion)",
+      ua: "Дискусія про суспільство (Advanced Discussion)"
     },
     content: {
       description: {
-        en: "Learn to recognize advanced rhetoric, literary devices, and expressions used by native speakers in academic, literary, or political discourse.",
-        ru: "Научитесь распознавать сложную риторику, литературные приёмы и фразеологизмы, используемые носителями языка.",
-        ua: "Навчіться розпізнавати складну риторику, літературні прийоми та фразеологізми, які використовують носії мови."
+        en: "Engage in advanced socio-cultural arguments, debates, and express opinions on structural topics.",
+        ru: "Участвуйте в сложных социально-культурных дискуссиях, дебатах и выражайте мнение на абстрактные темы.",
+        ua: "Беріть участь у складних соціально-культурних дискусіях, дебатах та висловлюйте думку на складні теми."
       },
       sections: [
         {
-          title: {
-            en: "Croatian Idioms (Frazemi)",
-            ru: "Хорватские фразеологизмы",
-            ua: "Хорватські фразеологізми"
-          },
+          title: { en: "Debating Phrases", ru: "Фразы для дебатов", ua: "Фрази для дебатів" },
           text: {
-            en: "C2 fluency requires a deep grasp of idiomatic expressions. Examples: 'Bogu iza nogu' (literally 'behind God's legs', meaning extremely far away / in the middle of nowhere). 'Mlatiti praznu slamu' (literally 'to beat empty straw', meaning to talk nonsense / waste time). 'Prodavati maglu' (literally 'to sell fog', meaning to deceive or mislead people).",
-            ru: "Свободное владение на уровне C2 требует глубокого понимания идиоматических выражений. Примеры: 'Bogu iza nogu' (у чёрта на куличках). 'Mlatiti praznu slamu' (переливать из пустого в порожнее). 'Prodavati maglu' (вешать лапшу на уши / пускать пыль в глаза).",
-            ua: "Вільне володіння на рівні C2 вимагає глибокого розуміння ідіоматичних виразів. Приклади: 'Bogu iza nogu' (у біса на болоті / дуже далеко). 'Mlatiti praznu slamu' (толокти воду в ступі). 'Prodavati maglu' (замилювати очі / дурити)."
+            en: "Expressing complex stances:\n- S jedne strane... s druge strane... (On one hand... on the other hand...)\n- Smatram da je ključni problem u... (I consider the key problem to be in...)\n- Ne slažem se u potpunosti s tim stajalištem. (I do not fully agree with that stance.)\n- Unatoč suprotnim tvrdnjama... (Despite opposite assertions...)",
+            ru: "Выражение сложных позиций:\n- S jedne strane... s druge strane... (С одной стороны... с другой стороны...)\n- Smatram da je ključni problem u... (Я считаю, что ключевая проблема в...)\n- Ne slažem se u potpunosti s tim stajalištem. (Я не совсем согласен с этой точкой зрения.)",
+            ua: "Висловлення складних позицій:\n- S jedne strane... s druge strane... (З одного боку... з іншого боку...)\n- Smatram da je ključni problem u... (Я вважаю, що ключова проблема у...)\n- Ne slažem se u potpunosti s tim stajalištem. (Я не зовсім згоден з цією точкою зору.)"
           },
           examples: [
-            {
-              en: "Njegovo selo nalazi se Bogu iza nogu. (His village is located in the middle of nowhere.)",
-              ru: "Njegovo selo nalazi se Bogu iza nogu. (Его деревня находится у черта на куличках.)",
-              ua: "Njegovo selo nalazi se Bogu iza nogu. (Його село знаходиться у біса на рогах.)"
-            },
-            {
-              en: "Nemoj mi prodavati maglu, znam pravu istinu. (Don't try to sell me fog, I know the real truth.)",
-              ru: "Nemoj mi prodavati maglu, znam pravu istinu. (Не вешай мне лапшу на уши, я знаю правду.)",
-              ua: "Nemoj mi prodavati maglu, znam pravu istinu. (Не вішай мені локшину на вуха, я знаю правду.)"
-            }
-          ]
-        },
-        {
-          title: {
-            en: "Double Negatives in Formal Discourse",
-            ru: "Двойное отрицание",
-            ua: "Подвійне заперечення"
-          },
-          text: {
-            en: "Unlike English but similar to Russian and Ukrainian, Croatian requires double negatives when negative pronouns or adverbs are used (e.g. Nitko ne zna - Nobody knows; Nikada nismo išli - We never went). However, in C2 contexts, watch for advanced rhetorical structures combining negation to express subtle affirmation or emphasis.",
-            ru: "В хорватском языке требуется двойное отрицание при использовании отрицательных местоимений или наречий (Nitko ne zna - Никто не знает).",
-            ua: "У хорватській мові потрібне подвійне заперечення при використанні заперечних займенників або прислівників (Nitko ne zna - Ніхто не знає)."
-          },
-          examples: [
-            {
-              en: "Nikada nikome ništa ne govori. (He never tells anyone anything.)",
-              ru: "Nikada nikome ništa ne govori. (Он никогда никому ничего не говорит.)",
-              ua: "Nikada nikome ništa ne govori. (Він ніколи нікому нічого не говорить.)"
-            },
-            {
-              en: "Nema toga tko ne bi poželio uspjeh. (There is nobody who wouldn't wish for success.)",
-              ru: "Nema toga tko ne bi poželio sukses. (Нет никого, кто бы не пожелал успеха.)",
-              ua: "Nema toga tko ne bi poželio uspjeh. (Немає нікого, хто б не побажав успіху.)"
-            }
+            { en: "Smatram da tehnologija otuđuje ljude. (I believe technology alienates people.)", ru: "Smatram da tehnologija otuđuje ljude. (Я считаю, что технологии отдаляют людей.)", ua: "Smatram da tehnologija otuđuje ljude. (Я вважаю, що технології віддаляють людей.)" }
           ]
         }
       ],
       exercises: [
         {
           type: "multiple-choice",
-          question: {
-            en: "What does the idiom 'Bogu iza nogu' mean?",
-            ru: "Что означает фразеологизм 'Bogu iza nogu'?",
-            ua: "Що означає фразеологізм 'Bogu iza nogu'?"
-          },
-          options: ["Very far away / middle of nowhere", "Close to church", "Immediately", "Blessed situation"],
-          correctAnswer: "Very far away / middle of nowhere"
-        },
-        {
-          type: "multiple-choice",
-          question: {
-            en: "What does the idiom 'mlatiti praznu slamu' translate to metaphorically?",
-            ru: "Чему метафорически соответствует фразеологизм 'mlatiti praznu slamu'?",
-            ua: "Чому метафорично відповідає фразеологізм 'mlatiti praznu slamu'?"
-          },
-          options: ["To talk nonsense / waste breath", "To work hard on a field", "To build a straw house", "To sleep deeply"],
-          correctAnswer: "To talk nonsense / waste breath"
-        },
-        {
-          type: "fill-blank",
-          question: {
-            en: "Complete the idiom 'to deceive/mislead': prodavati _____.",
-            ru: "Дополните фразеологизм 'вешать лапшу / обманывать': prodavati _____.",
-            ua: "Доповніть фразеологізм 'замилювати очі / дурити': prodavati _____."
-          },
-          correctAnswer: "maglu"
+          question: { en: "How do you say 'on one hand... on the other hand...'?", ru: "Как сказать 'с одной стороны... с другой стороны...'?", ua: "Як сказати 'з одного боку... з іншого боку...'?" },
+          options: [
+            "S jedne strane... s druge strane...",
+            "Prije svega... nakon svega...",
+            "Bez sumnje... bez odgode...",
+            "Uglavnom... u potpunosti..."
+          ],
+          correctAnswer: "S jedne strane... s druge strane..."
         },
         {
           type: "translation",
-          question: {
-            en: "Translate: 'Nitko nije došao.'",
-            ru: "Переведите: 'Nitko nije došao.'",
-            ua: "Перекладіть: 'Nitko nije došao.'"
-          },
-          correctAnswer: "Nobody came"
+          question: { en: "Translate: 'Ne slažem se s tim stajalištem.'", ru: "Переведите: 'Ne slažem se s tim stajalištem.'", ua: "Перекладіть: 'Ne slažem se s tim stajalištem.'" },
+          correctAnswer: "I do not agree with that stance."
         },
         {
           type: "multiple-choice",
-          question: {
-            en: "Which sentence correctly demonstrates a double negative in Croatian?",
-            ru: "Какое предложение грамматически правильно выражает двойное отрицание?",
-            ua: "Яке речення граматично правильно виражає подвійне заперечення?"
-          },
-          options: [
-            "Nikad nisam vidio more.",
-            "Nikad sam vidio more.",
-            "Ja ne vidio more nikad.",
-            "Nisam nikad vidio ništa more."
-          ],
-          correctAnswer: "Nikad nisam vidio more."
+          question: { en: "What does the verb 'otuđiti' mean?", ru: "Что означает глагол 'otuđiti'?", ua: "Що означає дієслово 'otuđiti'?" },
+          options: ["to alienate (отчуждать)", "to unite", "to purchase", "to construct"],
+          correctAnswer: "to alienate (отчуждать)"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate to Croatian: 'I consider that the key problem is global warming.'", ru: "Переведите на хорватский: 'Я считаю, что ключевая проблема — глобальное потепление.'", ua: "Перекладіть на хорватську: 'Я вважаю, що ключова проблема — глобальне потепління.'" },
+          correctAnswer: "Smatram da je ključni problem globalno zatopljenje."
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What is 'ravnopravnost'?", ru: "Что такое 'ravnopravnost'?", ua: "Що таке 'ravnopravnost'?" },
+          options: ["equality / equal rights", "injustice", "sovereignty", "development"],
+          correctAnswer: "equality / equal rights"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "How do you express 'without a doubt' in Croatian?", ru: "Как выразить 'без сомнения' по-хорватски?", ua: "Як виразити 'без сумніву' хорватською?" },
+          options: ["bez sumnje", "bez obzira", "bez odgode", "bez razloga"],
+          correctAnswer: "bez sumnje"
         },
         {
           type: "fill-blank",
-          question: {
-            en: "Complete the double negative: Nikome _____ (prijati, present negative 3rd sing) hladnoća.",
-            ru: "Заполните отрицание: Nikome _____ (prijati, отрицат. наст. вр. 3-е л. ед.ч.) hladnoća. (Никому не нравится холод.)",
-            ua: "Заповніть заперечення: Nikome _____ (prijati, запереч. тепер. ч. 3-я ос. одн.) hladnoća. (Нікому не подобається холод.)"
-          },
-          correctAnswer: "ne prija"
+          question: { en: "Complete: To ovisi o _____ (opinion - locative) većine. (That depends on the opinion of the majority.)", ru: "Заполните: To ovisi o _____ većine. (Это зависит от мнения большинства.)", ua: "Заповніть: To ovisi o _____ većine. (Це залежить від думки більшості.)" },
+          correctAnswer: "mišljenju",
+          hint: { en: "Locative of mišljenje", ru: "Местный падеж от mišljenje", ua: "Місцевий відмінок від mišljenje" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate to Croatian: 'We must preserve cultural heritage.'", ru: "Переведите на хорватский: 'Мы должны сохранить культурное наследие.'", ua: "Перекладіть на хорватську: 'Ми повинні зберегти культурну спадщину.'" },
+          correctAnswer: "Moramo očuvati kulturnu baštinu."
         }
       ]
     }

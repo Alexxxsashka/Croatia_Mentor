@@ -35,7 +35,35 @@ export default function ListeningPage() {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "hr-HR";
+      
+      const voices = window.speechSynthesis.getVoices();
+      let selectedVoice = voices.find(
+        (v) => v.lang === "hr-HR" || v.lang.startsWith("hr-")
+      );
+      if (!selectedVoice) {
+        selectedVoice = voices.find(
+          (v) =>
+            v.name.toLowerCase().includes("croatian") ||
+            v.name.toLowerCase().includes("hrvatski")
+        );
+      }
+      if (!selectedVoice) {
+        // Fallback to Serbian/Slovenian/Bosnian (Slavic pronunciation match)
+        selectedVoice = voices.find(
+          (v) =>
+            v.lang.startsWith("sr") ||
+            v.lang.startsWith("sl") ||
+            v.lang.startsWith("bs")
+        );
+      }
+
+      if (selectedVoice) {
+        utterance.voice = selectedVoice;
+        utterance.lang = selectedVoice.lang;
+      } else {
+        utterance.lang = "hr-HR";
+      }
+
       utterance.rate = 0.8;
       window.speechSynthesis.speak(utterance);
     }
