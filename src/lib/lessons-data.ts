@@ -691,6 +691,357 @@ export const lessonsData: LessonData[] = [
   },
 
   // ==========================================
+  {
+    id: "a1-grammar-5",
+    type: "grammar",
+    level: "A1",
+    title: {
+      en: "Rod imenica (Gender of Nouns)",
+      ru: "Род существительных (Rod imenica)",
+      ua: "Рід іменників (Rod imenica)"
+    },
+    content: {
+      description: {
+        en: "Learn how to identify masculine, feminine, and neuter nouns in Croatian.",
+        ru: "Узнайте, как определять мужской, женский и средний род существительных в хорватском.",
+        ua: "Дізнайтеся, як визначати чоловічий, жіночий та середній рід іменників у хорватській."
+      },
+      sections: [
+        {
+          title: { en: "Noun Gender Rules", ru: "Правила рода существительных", ua: "Правила роду іменників" },
+          text: {
+            en: "In Croatian, nouns have three genders. You can identify the gender of a noun in the Nominative Singular by its ending:\n1. **Masculine (muški rod):** ends in a **consonant**:\n   - *prozor* (window), *stol* (table), *otac* (father).\n2. **Feminine (ženski rod):** ends in **-a**:\n   - *knjiga* (book), *sestra* (sister), *kava* (coffee).\n3. **Neuter (srednji rod):** ends in **-o** or **-e**:\n   - *selo* (village), *pismo* (letter), *sunce* (sun).\n\n*Note:* There are few exceptions, e.g. male names/roles ending in -a (*tata* - dad, *kolega* - colleague) are grammatically feminine in endings but masculine in agreement.",
+            ru: "В хорватском языке существительные бывают мужского, женского или среднего рода. Род определяется по окончанию в именительном падеже ед. ч.:\n1. **Мужской род (muški rod):** оканчивается на **согласную**:\n   - *prozor* (окно), *stol* (стол), *otac* (отец).\n2. **Женский род (ženski rod):** оканчивается на **-a**:\n   - *knjiga* (книга), *sestra* (сестра), *kava* (кофе).\n3. **Средний род (srednji rod):** оканчивается на **-o** или **-e**:\n   - *selo* (деревня), *pismo* (письмо), *sunce* (солнце).",
+            ua: "У хорватській мові іменники бувають чоловічого, жіночого або середнього роду. Рід визначається за закінченням у називному відмінку однини:\n1. **Чоловічий рід (muški rod):** закінчується на **приголосну**:\n   - *prozor* (вікно), *stol* (стіл), *otac* (батько).\n2. **Жіночий рід (ženski rod):** закінчується на **-a**:\n   - *knjiga* (книга), *sestra* (сестра), *kava* (кава).\n3. **Середній рід (srednji rod):** закінчується на **-o** або **-e**:\n   - *selo* (село), *pismo* (лист), *sunce* (сонце)."
+          }
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: { en: "What gender is the noun 'prozor' (window)?", ru: "Какого рода существительное 'prozor'?", ua: "Якого роду іменник 'prozor'?" },
+          options: ["muški rod (masculine)", "ženski rod (feminine)", "srednji rod (neuter)"],
+          correctAnswer: "muški rod (masculine)"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What gender is 'pismo' (letter)?", ru: "Какого рода 'pismo' (письмо)?", ua: "Якого роду 'pismo' (лист)?" },
+          options: ["srednji rod (neuter)", "muški rod (masculine)", "ženski rod (feminine)"],
+          correctAnswer: "srednji rod (neuter)"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: 'Kava' (coffee) ends in -a, so it is in _____ rod.", ru: "Заполните: 'Kava' оканчивается на -a, значит это _____ род.", ua: "Заповніть: 'Kava' закінчується на -a, отже це _____ рід." },
+          correctAnswer: "ženski",
+          hint: { en: "feminine (ženski)", ru: "женский (ženski)", ua: "жіночий (ženski)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What gender is 'auto' (car)?", ru: "Какого рода 'auto'?", ua: "Якого роду 'auto'?" },
+          options: ["srednji rod (neuter)", "muški rod (masculine)", "ženski rod (feminine)"],
+          correctAnswer: "srednji rod (neuter)"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What gender is 'student' (student)?", ru: "Какого рода 'student'?", ua: "Якого роду 'student'?" },
+          options: ["muški rod (masculine)", "ženski rod (feminine)", "srednji rod (neuter)"],
+          correctAnswer: "muški rod (masculine)"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Noun 'more' (sea) ends in -e, so it is _____ rod.", ru: "Заполните: Существительное 'more' оканчивается на -e, значит это _____ род.", ua: "Заповніть: Іменник 'more' закінчується на -e, отже це _____ рід." },
+          correctAnswer: "srednji",
+          hint: { en: "neuter (srednji)", ru: "средний (srednji)", ua: "середній (srednji)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What gender is 'prijateljica' (female friend)?", ru: "Какого рода 'prijateljica'?", ua: "Якого роду 'prijateljica'?" },
+          options: ["ženski rod (feminine)", "muški rod (masculine)", "srednji rod (neuter)"],
+          correctAnswer: "ženski rod (feminine)"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Kuća je velika.'", ru: "Переведите: 'Kuća je velika.'", ua: "Перекладіть: 'Kuća je velika.'" },
+          correctAnswer: { en: "The house is big", ru: "Дом большой", ua: "Будинок великий" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What gender is 'telefon' (telephone)?", ru: "Какого рода 'telefon'?", ua: "Якого роду 'telefon'?" },
+          options: ["muški rod (masculine)", "ženski rod (feminine)", "srednji rod (neuter)"],
+          correctAnswer: "muški rod (masculine)"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What gender is 'jaje' (egg)?", ru: "Какого рода 'jaje'?", ua: "Якого роду 'jaje'?" },
+          options: ["srednji rod (neuter)", "muški rod (masculine)", "ženski rod (feminine)"],
+          correctAnswer: "srednji rod (neuter)"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: 'Stan' (apartment) ends in a consonant, so it is _____ rod.", ru: "Заполните: 'Stan' оканчивается на согласную, значит это _____ род.", ua: "Заповніть: 'Stan' закінчується на приголосну, отже це _____ рід." },
+          correctAnswer: "muški",
+          hint: { en: "masculine (muški)", ru: "мужской (muški)", ua: "чоловічий (muški)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What gender is 'majka' (mother)?", ru: "Какого рода 'majka'?", ua: "Якого роду 'majka'?" },
+          options: ["ženski rod (feminine)", "muški rod (masculine)", "srednji rod (neuter)"],
+          correctAnswer: "ženski rod (feminine)"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What gender is 'ime' (name)?", ru: "Какого рода 'ime'?", ua: "Якого роду 'ime'?" },
+          options: ["srednji rod (neuter)", "muški rod (masculine)", "ženski rod (feminine)"],
+          correctAnswer: "srednji rod (neuter)"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: 'Tata' (dad) refers to a male but ends in -a, so its grammatical ending pattern is _____.", ru: "Заполните: 'Tata' оканчивается на -a, поэтому грамматически изменяется как _____ род.", ua: "Заповніть: 'Tata' закінчується на -a, тому граматично змінюється як _____ рід." },
+          correctAnswer: "ženski",
+          hint: { en: "feminine (ženski)", ru: "женский (ženski)", ua: "жіночий (ženski)" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Brat je ovdje.'", ru: "Переведите: 'Brat je ovdje.'", ua: "Перекладіть: 'Brat je ovdje.'" },
+          correctAnswer: { en: "Brother is here", ru: "Брат здесь", ua: "Брат тут" }
+        }
+      ]
+    }
+  },
+  {
+    id: "a1-grammar-6",
+    type: "grammar",
+    level: "A1",
+    title: {
+      en: "Posvojne zamjenice i obitelj (Possessive Pronouns & Family)",
+      ru: "Притяжательные местоимения и семья (Posvojne zamjenice)",
+      ua: "Присвійні займенники та сім'я (Posvojne zamjenice)"
+    },
+    content: {
+      description: {
+        en: "Learn how to use possessive pronouns (my, your, his, her, etc.) and match them with genders of family nouns.",
+        ru: "Изучите притяжательные местоимения (мой, твой, его, ее и т.д.) и правила их согласования с членами семьи.",
+        ua: "Вивчіть присвійні займенники (мій, твій, його, її тощо) та правила їх узгодження з членами родини."
+      },
+      sections: [
+        {
+          title: { en: "Possessive Pronouns forms", ru: "Формы притяжательных местоимений", ua: "Форми присвійних займенників" },
+          text: {
+            en: "Possessive pronouns in Croatian must match the gender of the noun they modify:\n- **ja** (I) -> **moj** (masc) / **moja** (fem) / **moje** (neut) — *my*\n- **ti** (you) -> **tvoj** / **tvoja** / **tvoje** — *your*\n- **on** (he) -> **njegov** / **njegova** / **njegovo** — *his*\n- **ona** (she) -> **njezin** / **njezina** / **njezino** — *her*\n- **mi** (we) -> **naš** / **naša** / **naše** — *our*\n- **vi** (you pl./formal) -> **vaš** / **vaša** / **vaše** — *your*\n- **oni/one/ona** (they) -> **njihov** / **njihova** / **njihovo** — *their*\n\n**Examples:**\n- *moj* brat (my brother - masc)\n- *tvoja* sestra (your sister - fem)\n- *naše* dijete (our child - neut)",
+            ru: "Притяжательные местоимения в хорватском согласуются в роде с существительным:\n- **ja** (я) -> **moj** (муж.) / **moja** (жен.) / **moje** (ср.) — *мой*\n- **ti** (ты) -> **tvoj** / **tvoja** / **tvoje** — *твой*\n- **on** (он) -> **njegov** / **njegova** / **njegovo** — *его*\n- **ona** (она) -> **njezin** / **njezina** / **njezino** — *ее*\n- **mi** (мы) -> **naš** / **naša** / **naše** — *наш*\n- **vi** (вы) -> **vaš** / **vaša** / **vaše** — *ваш*\n- **oni/one/ona** (они) -> **njihov** / **njihova** / **njihovo** — *их*\n\n**Примеры:**\n- *moj* brat (мой брат)\n- *tvoja* sestra (твоя сестра)\n- *naše* dijete (наш ребенок)",
+            ua: "Присвійні займенники в хорватській мові узгоджуються в роді з іменником:\n- **ja** (я) -> **moj** (чол.) / **moja** (жін.) / **moje** (сер.) — *мій*\n- **ti** (ти) -> **tvoj** / **tvoja** / **tvoje** — *твій*\n- **on** (він) -> **njegov** / **njegova** / **njegovo** — *його*\n- **ona** (вона) -> **njezin** / **njezina** / **njezino** — *її*\n- **mi** (ми) -> **naš** / **naša** / **naše** — *наш*\n- **vi** (ви) -> **vaš** / **vaša** / **vaše** — *ваш*\n- **oni/one/ona** (вони) -> **njihov** / **njihova** / **njihovo** — *їх*\n\n**Приклади:**\n- *moj* brat (мій брат)\n- *tvoja* sestra (твоя сестра)\n- *naše* dijete (наша дитина)"
+          }
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: { en: "Ovo je _____ (my) otac.", ru: "Ovo je _____ (мой) otac.", ua: "Ovo je _____ (мій) otac." },
+          options: ["moj", "moja", "moje", "tvoj"],
+          correctAnswer: "moj"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Gdje je _____ (your) sestra?", ru: "Gdje je _____ (твоя) sestra?", ua: "Gdje je _____ (твоя) sestra?" },
+          options: ["tvoja", "tvoj", "tvoje", "moja"],
+          correctAnswer: "tvoja"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: To je _____ (our) pismo (neuter).", ru: "Заполните: To je _____ (наше) pismo.", ua: "Заповніть: To je _____ (наше) pismo." },
+          correctAnswer: "naše",
+          hint: { en: "our (neuter)", ru: "наше (naše)", ua: "наше (naše)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Gdje živi _____ (their) obitelj (feminine)?", ru: "Gdje živi _____ (их) obitelj?", ua: "Gdje živi _____ (їхня) obitelj?" },
+          options: ["njihova", "njihov", "njihovo", "naša"],
+          correctAnswer: "njihova"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Ovo je _____ (his) pas.", ru: "Ovo je _____ (его) pas.", ua: "Ovo je _____ (його) pas." },
+          options: ["njegov", "njegova", "njegovo", "njezin"],
+          correctAnswer: "njegov"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Kako se zove _____ (her) majka?", ru: "Заполните: Kako se zove _____ (её) majka?", ua: "Заповніть: Kako se zove _____ (її) majka?" },
+          correctAnswer: "njezina",
+          hint: { en: "her (feminine)", ru: "её (njezina)", ua: "її (njezina)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Je li ovo _____ (your - plural/polite) auto (neuter)?", ru: "Je li ovo _____ (ваш) auto?", ua: "Je li ovo _____ (ваш) auto?" },
+          options: ["vaše", "vaš", "vaša", "tvoje"],
+          correctAnswer: "vaše"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Moja majka je učiteljica.'", ru: "Переведите: 'Moja majka je učiteljica.'", ua: "Перекладіть: 'Moja majka je učiteljica.'" },
+          correctAnswer: { en: "My mother is a teacher", ru: "Моя мама учительница", ua: "Моя мама вчителька" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Gdje je _____ (my) knjiga?", ru: "Gdje je _____ (моя) knjiga?", ua: "Gdje je _____ (моя) knjiga?" },
+          options: ["moja", "moj", "moje", "tvoja"],
+          correctAnswer: "moja"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Kako se zove _____ (your) brat?", ru: "Kako se zove _____ (твой) brat?", ua: "Kako se zove _____ (твій) brat?" },
+          options: ["tvoj", "tvoja", "tvoje", "moj"],
+          correctAnswer: "tvoj"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Ovo je _____ (their) kuća.", ru: "Заполните: Ovo je _____ (их) kuća.", ua: "Заповніть: Ovo je _____ (їхній) kuća." },
+          correctAnswer: "njihova",
+          hint: { en: "their (feminine)", ru: "их (njihova)", ua: "їхня (njihova)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "To je _____ (his) dijete (neuter).", ru: "To je _____ (его) dijete.", ua: "To je _____ (його) dijete." },
+          options: ["njegovo", "njegov", "njegova", "njezino"],
+          correctAnswer: "njegovo"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Gdje je _____ (our) stan?", ru: "Gdje je _____ (наш) stan?", ua: "Gdje je _____ (наш) stan?" },
+          options: ["naš", "naša", "naše", "vaš"],
+          correctAnswer: "naš"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: _____ (My) sestra se zove Ana.", ru: "Заполните: _____ (Моя) sestra se zove Ana.", ua: "Заповніть: _____ (Моя) sestra se zove Ana." },
+          correctAnswer: "Moja",
+          hint: { en: "My (feminine)", ru: "Моя (Moja)", ua: "Моя (Moja)" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Tvoj brat živi u Zagrebu.'", ru: "Переведите: 'Tvoj brat živi u Zagrebu.'", ua: "Перекладіть: 'Tvoj brat živi u Zagrebu.'" },
+          correctAnswer: { en: "Your brother lives in Zagreb", ru: "Твой брат живет в Загребе", ua: "Твій брат живе в Загребі" }
+        }
+      ]
+    }
+  },
+  {
+    id: "a1-grammar-7",
+    type: "grammar",
+    level: "A1",
+    title: {
+      en: "Pridjevi i opisivanje (Adjectives & Descriptions)",
+      ru: "Прилагательные и описание (Pridjevi)",
+      ua: "Прикметники та опис (Pridjevi)"
+    },
+    content: {
+      description: {
+        en: "Learn how to use adjectives to describe things and people, and match their endings with noun genders.",
+        ru: "Научитесь использовать прилагательные для описания людей и вещей и согласовывать их окончания по родам.",
+        ua: "Навчіться використовувати прикметники для опису людей і речей та узгоджувати їх закінчення за родами."
+      },
+      sections: [
+        {
+          title: { en: "Adjective Agreement", ru: "Согласование прилагательных", ua: "Узгодження прикметників" },
+          text: {
+            en: "Adjectives must agree in gender, number, and case with the noun they describe. In the Nominative Singular, adjectives have three forms:\n1. **Masculine:** ends in a **consonant** or **-i**:\n   - *nov* / *novi* (new) -> *novi* mobitel (new phone).\n2. **Feminine:** ends in **-a**:\n   - *nova* -> *nova* torba (new bag).\n3. **Neuter:** ends in **-o** or **-e**:\n   - *novo* -> *novo* stablo (new tree).\n\n**Common adjectives:**\n- *velik / velika / veliko* (big)\n- *malen / malena / maleno* (small)\n- *star / stara / staro* (old)\n- *lijep / lijepa / lijepo* (beautiful)\n- *dobar / dobra / dobro* (good)",
+            ru: "Прилагательные в хорватском языке согласуются в роде, числе и падеже с существительным. В именительном падеже ед. ч. они имеют следующие окончания:\n1. **Мужской род:** оканчивается на **согласную** или **-i**:\n   - *nov* / *novi* (новый) -> *novi* mobitel (новый телефон).\n2. **Женский род:** оканчивается на **-a**:\n   - *nova* -> *nova* torba (новая сумка).\n3. **Средний род:** оканчивается на **-o** или **-e**:\n   - *novo* -> *novo* stablo (новое дерево).\n\n**Популярные прилагательные:**\n- *velik* (большой), *malen* (маленький), *star* (старый), *lijep* (красивый), *dobar* (хороший).",
+            ua: "Прикметники в хорватській мові узгоджуються в роді, числі та відмінку з іменником. У називному відмінку однини вони мають такі закінчення:\n1. **Чоловічий рід:** закінчується на **приголосну** або **-i**:\n   - *nov* / *novi* (новий) -> *novi* mobitel (новий телефон).\n2. **Жіночий рід:** закінчується на **-a**:\n   - *nova* -> *nova* torba (нова сумка).\n3. **Середній рід:** закінчується на **-o** або **-e**:\n   - *novo* -> *novo* stablo (нове дерево).\n\n**Популярні прикметники:**\n- *velik* (великий), *malen* (маленький), *star* (старий), *lijep* (красивий), *dobar* (хороший)."
+          }
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: { en: "Kupujem _____ (new - masculine) auto.", ru: "Kupujem _____ (новый) auto.", ua: "Купую _____ (новий) auto." },
+          options: ["novi", "nova", "novo", "nove"],
+          correctAnswer: "novi"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Ova knjiga je _____ (beautiful - feminine).", ru: "Ova knjiga je _____ (красивая).", ua: "Ця книга є _____ (красива)." },
+          options: ["lijepa", "lijep", "lijepo", "lijepe"],
+          correctAnswer: "lijepa"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Tamo je jedno _____ (big - neuter) selo.", ru: "Заполните: Tamo je jedno _____ (большое) selo.", ua: "Заповніть: Tamo je jedno _____ (велике) selo." },
+          correctAnswer: "veliko",
+          hint: { en: "big (neuter)", ru: "большое (veliko)", ua: "велике (veliko)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Naš profesor je vrlo _____ (good - masculine).", ru: "Naš profesor je vrlo _____ (хороший).", ua: "Наш професор є дуже _____ (хороший)." },
+          options: ["dobar", "dobra", "dobro", "dobri"],
+          correctAnswer: "dobar"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Hrvatska je _____ (beautiful) zemlja.", ru: "Hrvatska je _____ (красивая) zemlja.", ua: "Hrvatska je _____ (красива) zemlja." },
+          options: ["lijepa", "lijep", "lijepo", "lijepe"],
+          correctAnswer: "lijepa"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Pijem _____ (cold - feminine) kava.", ru: "Заполните: Pijem _____ (холодный) kavu.", ua: "Заповніть: Pijem _____ (холодну) kavu." },
+          correctAnswer: "hladnu",
+          hint: { en: "cold (feminine accusative matching kavu)", ru: "холодную (hladnu)", ua: "холодну (hladnu)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Ovo pivo je _____ (cold - neuter).", ru: "Ovo pivo je _____ (холодное).", ua: "Це пиво є _____ (холодне)." },
+          options: ["hladno", "hladan", "hladna", "hladni"],
+          correctAnswer: "hladno"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'On je mlad čovjek.'", ru: "Переведите: 'On je mlad čovjek.'", ua: "Перекладіть: 'On je mlad čovjek.'" },
+          correctAnswer: { en: "He is a young man", ru: "Он молодой человек", ua: "Він молодий чоловік" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Tvoj stan je _____ (big - masculine).", ru: "Tvoj stan je _____ (большой).", ua: "Твоя квартира є _____ (велика - masc stan)." },
+          options: ["velik", "velika", "veliko", "veliki"],
+          correctAnswer: "velik"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Zagreb je _____ (old - masculine) grad.", ru: "Zagreb je _____ (старый) grad.", ua: "Загреб — _____ (старе) місто (grad - masc)." },
+          options: ["stari", "stara", "staro", "stare"],
+          correctAnswer: "stari"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: More je _____ (warm - neuter).", ru: "Заполните: More je _____ (теплое).", ua: "Заповніть: More je _____ (тепле)." },
+          correctAnswer: "toplo",
+          hint: { en: "warm (neuter)", ru: "теплое (toplo)", ua: "тепле (toplo)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Djevojka je _____ (young - feminine).", ru: "Djevojka je _____ (молодая).", ua: "Дівчина є _____ (молода)." },
+          options: ["mlada", "mlad", "mlado", "mlade"],
+          correctAnswer: "mlada"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "To je _____ (bad - neuter) vrijeme.", ru: "To je _____ (плохая) vrijeme.", ua: "Це є _____ (погана) погода (vrijeme - neuter)." },
+          options: ["loše", "loš", "loša", "loši"],
+          correctAnswer: "loše"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Moj pas je _____ (black - masculine).", ru: "Заполните: Moj pas je _____ (черный).", ua: "Заповніть: Moj pas je _____ (чорний)." },
+          correctAnswer: "crn",
+          hint: { en: "black (masculine)", ru: "черный (crn)", ua: "чорний (crn)" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Lijep dan.'", ru: "Переведите: 'Lijep dan.'", ua: "Перекладіть: 'Lijep dan.'" },
+          correctAnswer: { en: "Beautiful day", ru: "Красивый день / Прекрасный день", ua: "Гарний день / Прекрасний день" }
+        }
+      ]
+    }
+  },
   // LEVEL A2
   // ==========================================
   {
@@ -980,6 +1331,356 @@ export const lessonsData: LessonData[] = [
   },
 
   // ==========================================
+  {
+    id: "a2-grammar-3",
+    type: "grammar",
+    level: "A2",
+    title: {
+      en: "Prošlo vrijeme: Perfekt (Past Tense: Perfekt)",
+      ru: "Прошедшее время: Перфект (Perfekt)",
+      ua: "Минулий час: Перфект (Perfekt)"
+    },
+    content: {
+      description: {
+        en: "Learn how to form and use the past tense (perfekt) in Croatian using the auxiliary verb 'biti' and active past participles.",
+        ru: "Изучите образование и употребление прошедшего времени (перфект) в хорватском с помощью вспомогательного глагола 'biti' и причастий.",
+        ua: "Вивчіть утворення та вживання минулого часу (перфект) у хорватській за допомогою допоміжного дієслова 'biti' та дієприкметників."
+      },
+      sections: [
+        {
+          title: { en: "How to form Perfekt", ru: "Как образуется перфект", ua: "Як утворюється перфект" },
+          text: {
+            en: "The past tense (perfekt) in Croatian is a compound tense formed by two parts:\n\n1. **Short present form of the auxiliary verb 'biti'** (clitic):\n   - *sam, si, je, smo, ste, su*\n2. **Active Past Participle** (glagolski pridjev radni) of the main verb. It is formed by removing the infinitive suffix **-ti** and adding gender/number endings:\n   - **Masculine Singular:** **-o** (*radio*, *učio*, *bio*)\n   - **Feminine Singular:** **-la** (*radila*, *učila*, *bila*)\n   - **Neuter Singular:** **-lo** (*radilo*, *učilo*, *bilo*)\n   - **Masculine Plural:** **-li** (*radili*, *učili*, *bili*)\n   - **Feminine Plural:** **-le** (*radile*, *učile*, *bile*)\n\n**Word Order Rule:** The clitic must stand in the second position of the sentence:\n- *Ja sam radio.* (I worked.) / *Radio sam.* (I worked. - clitic is second)\n- *Mi smo učili.* (We studied.) / *Učili smo.* (We studied.)",
+            ru: "Прошедшее время (перфект) в хорватском языке состоит из двух частей:\n\n1. **Вспомогательный глагол 'biti' в настоящем времени** (энклитика):\n   - *sam, si, je, smo, ste, su*\n2. **Рабочее причастие прошедшего времени** смыслового глагола. Образуется путем удаления инфинитивного суффикса **-ti** и добавления окончаний рода/числа:\n   - **Мужской род ед.ч.:** **-o** (*radio*, *bio*)\n   - **Женский род ед.ч.:** **-la** (*radila*, *bila*)\n   - **Средний род ед.ч.:** **-lo** (*radilo*, *bilo*)\n   - **Мужской род мн.ч.:** **-li** (*radili*, *bili*)\n\n**Порядок слов:** Энклитика всегда стоит на втором месте в предложении:\n- *Ja sam radio.* (Я работал.) / *Radio sam.* (Я работал.)\n- *Mi smo učili.* (Мы учились.) / *Učili smo.* (Мы учились.)",
+            ua: "Минулий час (перфект) у хорватській мові складається з двох частин:\n\n1. **Допоміжне дієслово 'biti' у теперішньому часі** (енклітика):\n   - *sam, si, je, smo, ste, su*\n2. **Дієприкметник минулого часу** змістовного дієслова. Утворюється шляхом відкидання інфінітивного суфікса **-ti** та додавання закінчень роду/числа:\n   - **Чоловічий рід однини:** **-o** (*radio*, *bio*)\n   - **Жіночий рід однини:** **-la** (*radila*, *bila*)\n   - **Середній рід однини:** **-lo** (*radilo*, *bilo*)\n   - **Чоловічий рід множини:** **-li** (*radili*, *bili*)\n\n**Порядок слів:** Енклітика завжди стоїть на другому місці в реченні:\n- *Ja sam radio.* (Я працював.) / *Radio sam.* (Я працював.)\n- *Mi smo učili.* (Ми вчилися.) / *Učili smo.* (Ми вчилися.)"
+          }
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: { en: "Ja sam _____ (raditi - masculine) jučer. (I worked yesterday.)", ru: "Ja sam _____ (работал) jučer.", ua: "Ja sam _____ (працював) jučer." },
+          options: ["radio", "radila", "radili", "raditi"],
+          correctAnswer: "radio"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Gdje si _____ (biti - feminine)? (Where were you?)", ru: "Gdje si _____ (была)?", ua: "Де ти _____ (була)?" },
+          options: ["bila", "bio", "bili", "biti"],
+          correctAnswer: "bila"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Mi smo _____ (učiti) hrvatski. (We studied Croatian.)", ru: "Заполните: Mi smo _____ (учили) hrvatski.", ua: "Заповніть: Mi smo _____ (вчили) hrvatski." },
+          correctAnswer: "učili",
+          hint: { en: "Plural participle of učiti", ru: "Причастие мн.ч. от učiti", ua: "Дієприкметник множини від učiti" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "On je _____ (kupiti) novi auto. (He bought a new car.)", ru: "On je _____ (купил) novi auto.", ua: "On je _____ (купив) novi auto." },
+          options: ["kupio", "kupila", "kupili", "kupiti"],
+          correctAnswer: "kupio"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Gdje su _____ (živjeti - plural)? (Where did they live?)", ru: "Gdje su _____ (жили)?", ua: "Де вони _____ (жили)?" },
+          options: ["živjeli", "živio", "živjela", "živjeti"],
+          correctAnswer: "živjeli"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Ja sam _____ (piti - feminine) kavu. (I drank coffee.)", ru: "Заполните: Ja sam _____ (пила) kavu.", ua: "Заповніть: Ja sam _____ (пила) kavu." },
+          correctAnswer: "pila",
+          hint: { en: "feminine singular of piti", ru: "женский р. ед.ч. от piti", ua: "жіночий рід однини від piti" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Bili smo u Zagrebu.'", ru: "Переведите: 'Bili smo u Zagrebu.'", ua: "Перекладіть: 'Bili smo u Zagrebu.'" },
+          correctAnswer: { en: "We were in Zagreb", ru: "Мы были в Загребе", ua: "Ми були в Загребі" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Ti si _____ (čitati - masculine) knjigu. (You read a book.)", ru: "Ti si _____ (читал) knjigu.", ua: "Ti si _____ (читав) knjigu." },
+          options: ["čitao", "čitala", "čitali", "čitati"],
+          correctAnswer: "čitao"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Djevojke su _____ (ići) u trgovinu. (The girls went to the shop.)", ru: "Djevojke su _____ (пошли) u trgovinu.", ua: "Дівчата _____ (пішли) u trgovinu." },
+          options: ["išle", "išli", "išla", "išao"],
+          correctAnswer: "išle"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Što si _____ (kupiti - masculine)? (What did you buy?)", ru: "Заполните: Što si _____ (купил)?", ua: "Заповніть: Što si _____ (купив)?" },
+          correctAnswer: "kupio",
+          hint: { en: "masculine singular of kupiti", ru: "мужской род ед.ч. от kupiti", ua: "чоловічий рід однини від kupiti" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Ana je _____ (spavati) cijeli dan. (Ana slept all day.)", ru: "Ana je _____ (спала) cijeli dan.", ua: "Ана _____ (спала) цілий день." },
+          options: ["spavala", "spavao", "spavali", "spavati"],
+          correctAnswer: "spavala"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Jeste li _____ (čuti) vijest? (Did you hear the news?)", ru: "Jeste li _____ (слышали) vijest?", ua: "Чи ви _____ (чули) новину?" },
+          options: ["čuli", "čuo", "čula", "čuti"],
+          correctAnswer: "čuli"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Jučer _____ (she was) kod kuće. (Yesterday she was at home.)", ru: "Заполните: Jučer _____ bila kod kuće. (Вчера она была дома.)", ua: "Заповніть: Jučer _____ bila kod kuće. (Вчора вона була вдома.)" },
+          correctAnswer: "je",
+          hint: { en: "3rd person singular of biti clitic", ru: "Глагол-связка для 3 лица ед.ч.", ua: "Дієслово-зв'язка для 3 особи однини" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Radio sam jučer.'", ru: "Переведите: 'Radio sam jučer.'", ua: "Перекладіть: 'Radio sam jučer.'" },
+          correctAnswer: { en: "I worked yesterday", ru: "Я работал вчера", ua: "Я працював вчора" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Djeca su _____ (jesti) jabuke. (Children ate apples.)", ru: "Djeca su _____ (ели) jabuke.", ua: "Діти _____ (їли) jabuke." },
+          options: ["jela", "jeli", "jeo", "jesti"],
+          correctAnswer: "jeli"
+        }
+      ]
+    }
+  },
+  {
+    id: "a2-grammar-4",
+    type: "grammar",
+    level: "A2",
+    title: {
+      en: "Buduće vrijeme: Futur I (Future Tense: Futur I)",
+      ru: "Будущее время: Футур I (Futur I)",
+      ua: "Майбутній час: Футур I (Futur I)"
+    },
+    content: {
+      description: {
+        en: "Learn how to form and use the future tense (futur I) in Croatian using short forms of 'htjeti' and verb infinitives.",
+        ru: "Изучите образование и употребление будущего времени (futur I) в хорватском с помощью кратких форм глагола 'htjeti' и инфинитивов.",
+        ua: "Вивчіть утворення та вживання майбутнього часу (futur I) у хорватській за допомогою коротких форм дієслова 'htjeti' та інфінітивів."
+      },
+      sections: [
+        {
+          title: { en: "How to form Futur I", ru: "Как образуется будущее время", ua: "Як утворюється майбутній час" },
+          text: {
+            en: "Future Tense (Futur I) in Croatian is formed using:\n\n1. **Unstressed short forms of 'htjeti'**:\n   - *ću, ćeš, će, ćemo, ćete, će*\n2. **Infinitive** of the main verb (ends in *-ti* or *-ći*).\n\n**Word Order Rules:**\n1. If the pronoun is used, the clitic follows it, and the infinitive stays full:\n   - *Ja ću raditi.* (I will work.) / *Mi ćemo ići.* (We will go.)\n2. If the pronoun is omitted, the clitic attaches to the infinitive. For verbs ending in **-ti**, the **-ti** changes to **-t**:\n   - *Radit ću.* (I will work.) / *Učit ćemo.* (We will study.)\n   - For verbs ending in **-ći**, the spelling remains unchanged:\n   - *Ići ću.* (I will go.)",
+            ru: "Будущее время (Futur I) в хорватском языке образуется с помощью:\n\n1. **Кратких форм вспомогательного глагола 'htjeti'**:\n   - *ću, ćeš, će, ćemo, ćete, će*\n2. **Инфинитива** смыслового глагола.\n\n**Правила порядка слов:**\n1. Если местоимение указано, вспомогательный глагол следует за ним, а инфинитив пишется полностью:\n   - *Ja ću raditi.* (Я буду работать.) / *Mi ćemo ići.* (Мы пойдем.)\n2. Если местоимения нет, то инфинитив на **-ti** теряет конечную гласную **-i** перед энклитикой:\n   - *Radit ću.* (Я буду работать.) / *Učit ćemo.* (Мы будем учиться.)\n   - Глаголы на **-ći** не меняют свое написание:\n   - *Ići ću.* (Я пойду.)",
+            ua: "Майбутній час (Futur I) у хорватській мові утворюється за допомогою:\n\n1. **Коротких форм допоміжного дієслова 'htjeti'**:\n   - *ću, ćeš, će, ćemo, ćete, će*\n2. **Інфінітива** змістовного дієслова.\n\n**Правила порядку слів:**\n1. Якщо займенник вказано, допоміжне дієслово йде за ним, а інфінітив залишається повним:\n   - *Ja ću raditi.* (Я буду працювати.) / *Mi ćemo ići.* (Ми підемо.)\n2. Якщо займенника немає, інфінітив на **-ti** втрачає кінцеву голосну **-i** перед енклітикою:\n   - *Radit ću.* (Я буду працювати.) / *Učit ćemo.* (Ми будемо вчитися.)\n   - Дієслова на **-ći** не змінюють своє написання перед енклітикою:\n   - *Ići ću.* (Я піду.)"
+          }
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: { en: "Ja _____ (will) raditi sutra. (I will work tomorrow.)", ru: "Ja _____ raditi sutra. (Я буду работать завтра.)", ua: "Ja _____ raditi sutra. (Я буду працювати завтра.)" },
+          options: ["ću", "ćeš", "će", "ćemo"],
+          correctAnswer: "ću"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Mi ćemo _____ (study) hrvatski. (We will study Croatian.)", ru: "Mi ćemo _____ (учить) hrvatski.", ua: "Mi ćemo _____ (вчитися) hrvatski." },
+          options: ["učiti", "učit", "učimo", "učili"],
+          correctAnswer: "učiti"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Sutra _____ (I will) ići u Split. (Tomorrow I will go to Split.)", ru: "Заполните: Sutra _____ ići u Split.", ua: "Заповніть: Sutra _____ ići u Split." },
+          correctAnswer: "ću",
+          hint: { en: "1st person singular future clitic", ru: "Энклитика будущего времени для 'я'", ua: "Енклітика майбутнього часу для 'я'" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Write 'I will work' without using the pronoun 'ja':", ru: "Напишите 'Я буду работать' без местоимения 'ja':", ua: "Напишіть 'Я буду працювати' без займенника 'ja':" },
+          options: ["Radit ću", "Raditi ću", "Radit ću ja", "Radit će"],
+          correctAnswer: "Radit ću"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Kako se kaže 'We will go' (infinitive ići) without 'mi'?", ru: "Как сказать 'Мы пойдем' (ići) без 'mi'?", ua: "Як сказати 'Ми підемо' (ići) без 'mi'?" },
+          options: ["Ići ćemo", "Ić ćemo", "Ići ću", "Ić ćemo mi"],
+          correctAnswer: "Ići ćemo"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: On _____ (will) doći u pet sati. (He will come at five o'clock.)", ru: "Заполните: On _____ doći u pet sati.", ua: "Заповніть: On _____ doći u pet sati." },
+          correctAnswer: "će",
+          hint: { en: "3rd person singular future clitic", ru: "Энклитика будущего времени для 3 лица ед.ч.", ua: "Енклітика майбутнього часу для 3 особи однини" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Putovat ćemo u ('Hrvatsku').'", ru: "Переведите: 'Putovat ćemo u ('Hrvatsku').'", ua: "Перекладіть: 'Putovat ćemo u ('Hrvatsku').'" },
+          correctAnswer: { en: "We will travel to Croatia", ru: "Мы поедем в Хорватию", ua: "Ми поїдемо до Хорватії" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Oni _____ (will) kupiti novi mobitel. (They will buy a new phone.)", ru: "Oni _____ kupiti novi mobitel.", ua: "Oni _____ kupiti novi mobitel." },
+          options: ["će", "ću", "ćeš", "ćemo"],
+          correctAnswer: "će"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Što ćeš _____ (do) večeras? (What will you do tonight?)", ru: "Što ćeš _____ (делать) večeras?", ua: "Що ти будеш _____ (робити) сьогодні ввечері?" },
+          options: ["raditi", "radit", "radimo", "radio"],
+          correctAnswer: "raditi"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Vi _____ (will) platiti račun. (You will pay the bill.)", ru: "Заполните: Vi _____ platiti račun.", ua: "Заповніть: Vi _____ platiti račun." },
+          correctAnswer: "ćete",
+          hint: { en: "2nd person plural future clitic", ru: "Энклитика для 2 лица мн.ч.", ua: "Енклітика для 2 особи множини" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Kako se piše 'You will speak' (govoriti) without pronoun 'ti'?", ru: "Как пишется 'Ты будешь говорить' без 'ti'?", ua: "Як пишеться 'Ти будеш говорити' без займенника 'ti'?" },
+          options: ["Govorit ćeš", "Govoriti ćeš", "Govorit će", "Govorit ću"],
+          correctAnswer: "Govorit ćeš"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Kada _____ (will they) stići? (When will they arrive?)", ru: "Kada _____ stići?", ua: "Коли _____ прибудуть?" },
+          options: ["će", "ću", "ćeš", "ćemo"],
+          correctAnswer: "će"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Ja _____ (will not) doći sutra. (I will not come tomorrow.)", ru: "Заполните: Ja _____ doći sutra. (Я не приду завтра.)", ua: "Заповніть: Ja _____ doći sutra. (Я не прийду завтра.)" },
+          correctAnswer: "neću",
+          hint: { en: "Negative future form for ja", ru: "Отрицательная форма будущего времени для 'я'", ua: "Заперечна форма майбутнього часу для 'я'" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Kupit ću kruh.'", ru: "Переведите: 'Kupit ću kruh.'", ua: "Перекладіть: 'Kupit ću kruh.'" },
+          correctAnswer: { en: "I will buy bread", ru: "Я куплю хлеб", ua: "Я куплю хліб" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Ona _____ (will) spavati kod kuće. (She will sleep at home.)", ru: "Ona _____ spavati kod kuće.", ua: "Вона _____ spavati kod kuće." },
+          options: ["će", "ću", "ćeš", "ćemo"],
+          correctAnswer: "će"
+        }
+      ]
+    }
+  },
+  {
+    id: "a2-communication-2",
+    type: "communication",
+    level: "A2",
+    title: {
+      en: "Trgovina i kupovina (Shopping & Store)",
+      ru: "Магазин и покупки (Trgovina i kupovina)",
+      ua: "Магазин та покупки (Trgovina i kupovina)"
+    },
+    content: {
+      description: {
+        en: "Learn how to ask for prices, pay, and converse in a Croatian shop.",
+        ru: "Научитесь спрашивать цены, платить и общаться в хорватском магазине.",
+        ua: "Навчіться запитувати ціни, платити та спілкуватися в хорватському магазині."
+      },
+      sections: [
+        {
+          title: { en: "Useful Shopping Phrases", ru: "Полезные фразы для покупок", ua: "Корисні фрази для покупок" },
+          text: {
+            en: "Key expressions in a shop:\n- **Koliko košta ovo?** (How much does this cost?)\n- **Mogu li platiti karticom?** (Can I pay by card?)\n- **Samo gledam, hvala.** (I am just looking, thank you.)\n- **Trebam vrećicu, molim.** (I need a bag, please.)\n- **Imate li veći/manji broj?** (Do you have a bigger/smaller size?)\n- **Gdje je garderoba?** (Where is the fitting room?)",
+            ru: "Ключевые выражения в магазине:\n- **Koliko košta ovo?** (Сколько это стоит?)\n- **Mogu li platiti karticom?** (Можно заплатить картой?)\n- **Samo gledam, hvala.** (Я просто смотрю, спасибо.)\n- **Trebam vrećicu, molim.** (Мне нужен пакет, пожалуйста.)\n- **Imate li veći/manji broj?** (У вас есть размер побольше/поменьше?)\n- **Gdje je garderoba?** (Где примерочная?)",
+            ua: "Ключові вирази в магазині:\n- **Koliko košta ovo?** (Скільки це коштує?)\n- **Mogu li platiti karticom?** (Можна заплатити карткою?)\n- **Samo gledam, hvala.** (Я просто дивлюся, дякую.)\n- **Trebam vrećicu, molim.** (Мне потрібен пакет, будь ласка.)\n- **Imate li veći/manji broj?** (Чи є у вас більший/менший розмір?)\n- **Gdje je garderoba?** (Де примірочна?)"
+          }
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: { en: "How do you say 'How much does this cost?' in Croatian?", ru: "Как спросить 'Сколько это стоит?' по-хорватски?", ua: "Як запитати 'Скільки це коштує?' хорватською?" },
+          options: ["Koliko košta ovo?", "Mogu li platiti?", "Gdje je trgovina?", "Dobar dan!"],
+          correctAnswer: "Koliko košta ovo?"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Mogu li platiti _____ (by card)?", ru: "Заполните: Mogu li platiti _____ (картой)?", ua: "Заповніть: Mogu li platiti _____ (карткою)?" },
+          correctAnswer: "karticom",
+          hint: { en: "with card (instrumental)", ru: "картой (karticom)", ua: "карткою (karticom)" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Trebam vrećicu, molim.'", ru: "Переведите: 'Trebam vrećicu, molim.'", ua: "Перекладіть: 'Trebam vrećicu, molim.'" },
+          correctAnswer: { en: "I need a bag, please", ru: "Мне нужен пакет, пожалуйста", ua: "Мені потрібен пакет, будь ласка" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "How do you ask 'Where is the fitting room?'", ru: "Как спросить 'Где примерочная?'", ua: "Як запитати 'Де примірочна?'" },
+          options: ["Gdje je garderoba?", "Gdje je račun?", "Koliko košta?", "Imate li vrećicu?"],
+          correctAnswer: "Gdje je garderoba?"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What does 'Samo gledam, hvala' mean?", ru: "Что означает 'Samo gledam, hvala'?", ua: "Що означає 'Samo gledam, hvala'?" },
+          options: ["I am just looking, thank you", "I want to buy this, thank you", "Where is the shop, thank you", "Can I pay by card, thank you"],
+          correctAnswer: "I am just looking, thank you"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Imate li _____ (bigger) broj?", ru: "Заполните: Imate li _____ (больше) broj?", ua: "Заповніть: Imate li _____ (більший) broj?" },
+          correctAnswer: "veći",
+          hint: { en: "bigger (veći)", ru: "больше / крупнее (veći)", ua: "більший (veći)" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate to Croatian: 'Do you have a bag?'", ru: "Переведите на хорватский: 'У вас есть пакет?'", ua: "Перекладіть на хорватську: 'У вас є пакет?'" },
+          correctAnswer: "Imate li vrećicu"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "How do you ask to pay in cash?", ru: "Как попросить заплатить наличными?", ua: "Як попросити заплатити готівкою?" },
+          options: ["Mogu li platiti gotovinom?", "Mogu li platiti karticom?", "Gdje je blagajna?", "Koliko košta?"],
+          correctAnswer: "Mogu li platiti gotovinom?"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "What is 'blagajna' in English?", ru: "Что такое 'blagajna'?", ua: "Що таке 'blagajna'?" },
+          options: ["cash register / checkout", "bag", "fitting room", "price"],
+          correctAnswer: "cash register / checkout"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Molim _____ (receipt/bill).", ru: "Заполните: Molim _____ (чек).", ua: "Заповніть: Molim _____ (чек/рахунок)." },
+          correctAnswer: "račun",
+          hint: { en: "receipt / bill (račun)", ru: "счет / чек (račun)", ua: "рахунок / чек (račun)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "How do you say 'cheap' in Croatian?", ru: "Как сказать 'дешевый' по-хорватски?", ua: "Як скати 'дешевий' хорватською?" },
+          options: ["jeftin", "skup", "nov", "star"],
+          correctAnswer: "jeftin"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "How do you say 'expensive' in Croatian?", ru: "Как сказать 'дорогой' по-хорватски?", ua: "Як сказать 'дорогий' хорватською?" },
+          options: ["skup", "jeftin", "lijep", "dobar"],
+          correctAnswer: "skup"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Imate li _____ (smaller) broj?", ru: "Заполните: Imate li _____ (меньше) broj?", ua: "Заповніть: Imate li _____ (менший) broj?" },
+          correctAnswer: "manji",
+          hint: { en: "smaller (manji)", ru: "меньше (manji)", ua: "менший (manji)" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'To je preskupo.'", ru: "Переведите: 'To je preskupo.'", ua: "Перекладіть: 'To je preskupo.'" },
+          correctAnswer: { en: "That is too expensive", ru: "Это слишком дорого", ua: "Це занадто дорого" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "How do you ask 'Is this on sale?'", ru: "Как спросить 'Это по скидке/распродаже?'", ua: "Як запитати 'Це на розрозпродажі/знижці?'" },
+          options: ["Je li ovo na popustu?", "Gdje je garderoba?", "Koliko košta?", "Mogu li platiti?"],
+          correctAnswer: "Je li ovo na popustu?"
+        }
+      ]
+    }
+  },
   // LEVEL B1
   // ==========================================
   {
@@ -1966,102 +2667,4 @@ export const lessonsData: LessonData[] = [
       ]
     }
   },
-  {
-    id: "a1-grammar-5",
-    type: "grammar",
-    level: "A1",
-    title: {
-      en: "Rod imenica (Gender of Nouns)",
-      ru: "Род существительных (Rod imenica)",
-      ua: "Рід іменників (Rod imenica)"
-    },
-    content: {
-      description: {
-        en: "Learn how to identify masculine, feminine, and neuter nouns in Croatian.",
-        ru: "Узнайте, как определять мужской, женский и средний род существительных в хорватском.",
-        ua: "Дізнайтеся, як визначати чоловічий, жіночий та середній рід іменників у хорватській."
-      },
-      sections: [
-        {
-          title: { en: "Noun Gender Rules", ru: "Правила рода существительных", ua: "Правила роду іменників" },
-          text: {
-            en: "In Croatian, nouns can be masculine, feminine, or neuter. You can usually tell the gender by the final letter of the noun in the nominative singular:\n- Masculine (muški rod): end in a consonant (e.g. prozor - window, stol - table).\n- Feminine (ženski rod): end in '-a' (e.g. knjiga - book, ruka - hand).\n- Neuter (srednji rod): end in '-o' or '-e' (e.g. selo - village, sunce - sun).",
-            ru: "В хорватском существительные бывают мужского, женского или среднего рода. Род обычно определяется по последней букве в именительном падеже:\n- Мужской род: оканчиваются на согласную (prozor - окно, stol - стол).\n- Женский род: оканчиваются на '-a' (knjiga - книга, ruka - рука).\n- Средний род: оканчиваются на '-o' или '-e' (selo - деревня, sunce - солнце).",
-            ua: "У хорватській мові іменники бувають чоловічого, жіночого або середнього роду. Рід зазвичай визначається за останньою літерою у називному відмінку:\n- Чоловічий рід: закінчуються на приголосну (prozor - вікно, stol - стіл).\n- Жіночий рід: закінчуються на '-a' (knjiga - книга, ruka - рука).\n- Середній рід: закінчуються на '-o' або '-e' (selo - село, sunce - сонце)."
-          }
-        }
-      ],
-      exercises: [
-        {
-          type: "multiple-choice",
-          question: { en: "What gender is the noun 'prozor' (window)?", ru: "Какого рода существительное 'prozor'?", ua: "Якого роду іменник 'prozor'?" },
-          options: ["muški rod (masculine)", "ženski rod (feminine)", "srednji rod (neuter)"],
-          correctAnswer: "muški rod (masculine)"
-        },
-        {
-          type: "multiple-choice",
-          question: { en: "What gender is the noun 'pismo' (letter)?", ru: "Какого рода существительное 'pismo'?", ua: "Якого роду іменник 'pismo'?" },
-          options: ["muški rod (masculine)", "ženski rod (feminine)", "srednji rod (neuter)"],
-          correctAnswer: "srednji rod (neuter)"
-        },
-        {
-          type: "fill-blank",
-          question: { en: "Complete: 'Knjiga' ends in -a, so it is in _____ rod.", ru: "Заполните: 'Knjiga' заканчивается на -a, значит это _____ род.", ua: "Заповніть: 'Knjiga' закінчується на -a, отже це _____ рід." },
-          correctAnswer: "ženski",
-          hint: { en: "feminine", ru: "женский (ženski)", ua: "жіночий (ženski)" }
-        },
-        {
-          type: "translation",
-          question: { en: "Translate: 'Kuća je velika.'", ru: "Переведите: 'Kuća je velika.'", ua: "Перекладіть: 'Kuća je velika.'" },
-          correctAnswer: { en: "The house is big.", ru: "Дом большой.", ua: "Будинок великий." }
-        }
-      ]
-    }
-  },
-  {
-    id: "a2-communication-2",
-    type: "communication",
-    level: "A2",
-    title: {
-      en: "Trgovina i kupovina (Shopping & Store)",
-      ru: "Магазин и покупки (Trgovina i kupovina)",
-      ua: "Магазин та покупки (Trgovina i kupovina)"
-    },
-    content: {
-      description: {
-        en: "Learn how to ask for prices, pay, and converse in a Croatian shop.",
-        ru: "Научитесь спрашивать цены, платить и общаться в хорватском магазине.",
-        ua: "Навчіться запитувати ціни, платити та спілкуватися в хорватському магазині."
-      },
-      sections: [
-        {
-          title: { en: "Useful Shopping Phrases", ru: "Полезные фразы для покупок", ua: "Корисні фрази для покупок" },
-          text: {
-            en: "Key expressions in a shop:\n- Koliko košta ovo? (How much does this cost?)\n- Mogu li platiti karticom? (Can I pay by card?)\n- Samo gledam, hvala. (I am just looking, thank you.)\n- Trebam vrećicu, molim. (I need a bag, please.)",
-            ru: "Ключевые выражения в магазине:\n- Koliko košta ovo? (Сколько это стоит?)\n- Mogu li platiti karticom? (Можно заплатить картой?)\n- Samo gledam, hvala. (Я просто смотрю, спасибо.)\n- Trebam vrećicu, molim. (Мне нужен пакет, пожалуйста.)",
-            ua: "Ключові вирази в магазине:\n- Koliko košta ovo? (Скільки це коштує?)\n- Mogu li platiti karticom? (Можна заплатити карткою?)\n- Samo gledam, hvala. (Я просто дивлюся, дякую.)\n- Trebam vrećicu, molim. (Мне потрібен пакет, будь ласка.)"
-          }
-        }
-      ],
-      exercises: [
-        {
-          type: "multiple-choice",
-          question: { en: "How do you say 'How much does this cost?' in Croatian?", ru: "Как спросить 'Сколько это стоит?' по-хорватски?", ua: "Як запитати 'Скільки це коштує?' хорватською?" },
-          options: ["Koliko košta ovo?", "Mogu li platiti?", "Gdje je trgovina?", "Dobar dan!"],
-          correctAnswer: "Koliko košta ovo?"
-        },
-        {
-          type: "fill-blank",
-          question: { en: "Complete: Mogu li platiti _____ (by card)?", ru: "Заполните: Mogu li platiti _____ (картой)?", ua: "Заповніть: Mogu li platiti _____ (карткою)?" },
-          correctAnswer: "karticom",
-          hint: { en: "with card (instrumental)", ru: "картой (karticom)", ua: "карткою (karticom)" }
-        },
-        {
-          type: "translation",
-          question: { en: "Translate: 'Trebam vrećicu, molim.'", ru: "Переведите: 'Trebam vrećicu, molim.'", ua: "Перекладіть: 'Trebam vrećicu, molim.'" },
-          correctAnswer: { en: "I need a bag, please.", ru: "Мне нужен пакет, пожалуйста.", ua: "Мені потрібен пакет, будь ласка." }
-        }
-      ]
-    }
-  }
 ];
