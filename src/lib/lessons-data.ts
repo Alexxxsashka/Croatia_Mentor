@@ -303,6 +303,256 @@ export const lessonsData: LessonData[] = [
     }
   },
   {
+    id: "a1-grammar-3",
+    type: "grammar",
+    level: "A1",
+    title: {
+      en: "Brojevi i brojanje (Numbers & Counting)",
+      ru: "Числа и счет (Brojevi)",
+      ua: "Числа та рахунок (Brojevi)"
+    },
+    content: {
+      description: {
+        en: "Learn cardinal and ordinal numbers in Croatian from 1 to 100, and understand the basic rules of counting nouns.",
+        ru: "Изучите количественные и порядковые числительные в хорватском от 1 до 100, а также базовые правила согласования чисел с существительными.",
+        ua: "Вивчіть кількісні та порядкові числівники у хорватській від 1 до 100, а також базові правила узгодження чисел з іменниками."
+      },
+      sections: [
+        {
+          title: { en: "Cardinal Numbers (1 to 20)", ru: "Количественные числительные (от 1 до 20)", ua: "Кількісні числівники (від 1 до 20)" },
+          text: {
+            en: "Here are the basic cardinal numbers in Croatian:\n- **1** - jedan (masc) / jedna (fem) / jedno (neut)\n- **2** - dva (masc/neut) / dvije (fem)\n- **3** - tri\n- **4** - četiri\n- **5** - pet\n- **6** - šest\n- **7** - sedam\n- **8** - osam\n- **9** - devet\n- **10** - deset\n\nFor numbers **11 to 19**, add the suffix **-naest** to the base number:\n- *jedanaest* (11), *dvanaest* (12), *trinaest* (13), *četrnaest* (14), *petnaest* (15), *šesnaest* (16), *sedamnaest* (17), *osamnaest* (18), *devetnaest* (19).\n- **20** is **dvadeset**.",
+            ru: "Базовые количественные числительные в хорватском:\n- **1** - jedan (муж.) / jedna (жен.) / jedno (ср.)\n- **2** - dva (муж./ср.) / dvije (жен.)\n- **3** - tri\n- **4** - četiri\n- **5** - pet\n- **6** - šest\n- **7** - sedam\n- **8** - osam\n- **9** - devet\n- **10** - deset\n\nДля чисел **от 11 до 19** добавьте суффикс **-naest** к основе:\n- *jedanaest* (11), *dvanaest* (12), *trinaest* (13), *četrnaest* (14), *petnaest* (15), *šesnaest* (16), *sedamnaest* (17), *osamnaest* (18), *devetnaest* (19).\n- **20** — это **dvadeset**.",
+            ua: "Базові кількісні числівники у хорватській:\n- **1** - jedan (чол.) / jedna (жін.) / jedno (сер.)\n- **2** - dva (чол./сер.) / dvije (жін.)\n- **3** - tri\n- **4** - četiri\n- **5** - pet\n- **6** - šest\n- **7** - sedam\n- **8** - osam\n- **9** - devet\n- **10** - deset\n\nДля чисел **від 11 до 19** додайте суфікс **-naest** до основи:\n- *jedanaest* (11), *dvanaest* (12), *trinaest* (13), *četrnaest* (14), *petnaest* (15), *šesnaest* (16), *sedamnaest* (17), *osamnaest* (18), *devetnaest* (19).\n- **20** — це **dvadeset**."
+          }
+        },
+        {
+          title: { en: "Tens, Hundreds, and Counting Rules", ru: "Десятки, сотни и правила согласования", ua: "Десятки, сотні та правила узгодження" },
+          text: {
+            en: "**Tens & Hundreds:**\n- **30** - trideset, **40** - četrdeset, **50** - pedeset, **60** - šezdeset, **70** - sedamdeset, **80** - osamdeset, **90** - devedeset, **100** - sto (or *stotina*).\n\n**Critical Agreement Rules for Nouns:**\n1. After **1** (or numbers ending in 1 like 21, 31): Noun stays in **Nominative Singular**:\n   - *jedan učenik* (1 student), *dvadeset jedna knjiga* (21 books).\n2. After **2, 3, 4** (or numbers ending in 2, 3, 4): Noun must be in **Genitive Singular**:\n   - *dva učenika* (2 students), *tri knjige* (3 books), *četiri stola* (4 tables).\n3. After **5 to 20** (and tens ending in 0): Noun must be in **Genitive Plural**:\n   - *pet učenika* (5 students), *deset knjiga* (10 books), *pedeset stolova* (50 tables).",
+            ru: "**Десятки и сотни:**\n- **30** - trideset, **40** - četrdeset, **50** - pedeset, **60** - šezdeset, **70** - sedamdeset, **80** - osamdeset, **90** - devedeset, **100** - sto.\n\n**Правила согласования с существительными:**\n1. После **1** (и чисел на 1, кроме 11): Существительное стоит в **Именительном падеже ед.ч. (Nominative Singular)**:\n   - *jedan učenik* (1 ученик), *dvadeset jedna knjiga* (21 книга).\n2. После **2, 3, 4** (и чисел на 2, 3, 4, кроме 12, 13, 14): Существительное стоит в **Родительном падеже ед.ч. (Genitive Singular)**:\n   - *dva učenika* (2 ученика), *tri knjige* (3 книги).\n3. После **5 и более** (включая 11-19, и круглые десятки): Существительное стоит в **Родительном падеже мн.ч. (Genitive Plural)**:\n   - *pet učenika* (5 учеников), *deset knjiga* (10 книг).",
+            ua: "**Десятки та сотні:**\n- **30** - trideset, **40** - četrdeset, **50** - pedeset, **60** - šezdeset, **70** - sedamdeset, **80** - osamdeset, **90** - devedeset, **100** - sto.\n\n**Правила узгодження з іменниками:**\n1. Після **1** (і чисел на 1, крім 11): Іменник стоїть у **Називному відмінку однини (Nominative Singular)**:\n   - *jedan učenik* (1 учень), *dvadeset jedna knjiga* (21 книга).\n2. Після **2, 3, 4** (і чисел на 2, 3, 4, крім 12, 13, 14): Іменник стоїть у **Родовому відмінку однини (Genitive Singular)**:\n   - *dva učenika* (2 учні), *tri knjige* (3 книги).\n3. Після **5 і більше** (включая 11-19, та круглі десятки): Іменник стоїть у **Родовому відмінку множини (Genitive Plural)**:\n   - *pet učenika* (5 учнів), *deset knjiga* (10 книг)."
+          }
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: { en: "How do you say 15 in Croatian?", ru: "Как будет 15 по-хорватски?", ua: "Як буде 15 хорватською?" },
+          options: ["petnaest", "pedeset", "pet", "petnaestak"],
+          correctAnswer: "petnaest"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "How do you say 50 in Croatian?", ru: "Как будет 50 по-хорватски?", ua: "Як буде 50 хорватською?" },
+          options: ["pedeset", "petnaest", "petsto", "pet"],
+          correctAnswer: "pedeset"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Imam 2 _____ (prijatelj - Genitive Singular). (I have 2 friends.)", ru: "Заполните: Imam 2 _____ (prijatelj). (У меня 2 друга.)", ua: "Заповніть: Imam 2 _____ (prijatelj). (У мене 2 друга.)" },
+          correctAnswer: "prijatelja",
+          hint: { en: "Genitive singular of prijatelj", ru: "Родительный падеж ед.ч. от prijatelj", ua: "Родовий відмінок однини від prijatelj" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "U razredu ima 5 _____ (učenik - Genitive Plural). (There are 5 students in the class.)", ru: "U razredu ima 5 _____ (učenik). (В классе 5 учеников.)", ua: "U razredu ima 5 _____ (učenik). (У класі 5 учнів.)" },
+          options: ["učenika", "učenik", "učenici", "učenikom"],
+          correctAnswer: "učenika"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: To košta 1 _____ (euro - Nominative Singular). (That costs 1 euro.)", ru: "Заполните: To košta 1 _____ (euro). (Это стоит 1 евро.)", ua: "Заповніть: To košta 1 _____ (euro). (Це коштує 1 євро.)" },
+          correctAnswer: "euro",
+          hint: { en: "1 takes Nominative singular", ru: "Число 1 требует именительного падежа", ua: "Число 1 вимагає називного відмінка" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Kako se piše 40?", ru: "Как пишется 40?", ua: "Як пишеться 40?" },
+          options: ["četrdeset", "četiri", "četrnaest", "četrsto"],
+          correctAnswer: "četrdeset"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Imam tri sestre.'", ru: "Переведите: 'Imam tri sestre.'", ua: "Перекладіть: 'Imam tri sestre.'" },
+          correctAnswer: { en: "I have three sisters", ru: "У меня три сестры", ua: "У мене три сестри" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Kako se kaže 12?", ru: "Как сказать 12?", ua: "Як сказати 12?" },
+          options: ["dvanaest", "dva", "dvadeset", "dvjesto"],
+          correctAnswer: "dvanaest"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Kupujem 4 _____ (jabuka - Genitive Singular). (I am buying 4 apples.)", ru: "Заполните: Kupujem 4 _____ (jabuka). (Я покупаю 4 яблока.)", ua: "Заповніть: Kupujem 4 _____ (jabuka). (Я купую 4 яблука.)" },
+          correctAnswer: "jabuke",
+          hint: { en: "Genitive singular of feminine jabuka ends in -e", ru: "Родительный падеж ед.ч. женского рода оканчивается на -e", ua: "Родовий відмінок однини жіночого роду закінчується на -e" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Kako se kaže 100?", ru: "Как сказать 100?", ua: "Як сказати 100?" },
+          options: ["sto", "tisuću", "deset", "milijun"],
+          correctAnswer: "sto"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Imam 21 _____ (godina). (I am 21 years old.)", ru: "Imam 21 _____ (godina). (Мне 21 год.)", ua: "Imam 21 _____ (godina). (Мені 21 рік.)" },
+          options: ["godinu", "godine", "godina", "godini"],
+          correctAnswer: "godinu"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Tamo je 10 _____ (stol - Genitive Plural). (There are 10 tables there.)", ru: "Заполните: Tamo je 10 _____ (stol). (Там 10 столов.)", ua: "Заповніть: Tamo je 10 _____ (stol). (Там 10 столів.)" },
+          correctAnswer: "stolova",
+          hint: { en: "Genitive plural of stol is stolova", ru: "Родительный падеж мн.ч. от stol — stolova", ua: "Родовий відмінок множини від stol — stolova" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'dvadeset osam'", ru: "Переведите: 'dvadeset osam'", ua: "Перекладіть: 'dvadeset osam'" },
+          correctAnswer: { en: "twenty eight", ru: "двадцать восемь", ua: "двадцять вісім" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Kako se kaže 70?", ru: "Как сказать 70?", ua: "Як сказати 70?" },
+          options: ["sedamdeset", "sedamnaest", "sedam", "sedamsto"],
+          correctAnswer: "sedamdeset"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Imam 22 _____ (godina). (I am 22 years old.)", ru: "Imam 22 _____ (godina). (Мне 22 года.)", ua: "Imam 22 _____ (godina). (Мені 22 роки.)" },
+          options: ["godine", "godina", "godinu", "godini"],
+          correctAnswer: "godine"
+        }
+      ]
+    }
+  },
+  {
+    id: "a1-grammar-4",
+    type: "grammar",
+    level: "A1",
+    title: {
+      en: "Modalni glagoli: morati, moći, htjeti",
+      ru: "Модальные глаголы (morati, moći, htjeti)",
+      ua: "Модальні дієслова (morati, moći, htjeti)"
+    },
+    content: {
+      description: {
+        en: "Learn the present tense of modal verbs 'morati' (must), 'moći' (can), and 'htjeti' (want), and how to form sentences with them.",
+        ru: "Изучите настоящее время модальных глаголов 'morati' (должен), 'moći' (мочь) и 'htjeti' (хотеть), а также построение предложений с ними.",
+        ua: "Вивчіть теперішній час модальних дієслів 'morati' (мусити), 'moći' (могти) та 'htjeti' (хотіти), а також побудову речень з ними."
+      },
+      sections: [
+        {
+          title: { en: "Conjugation of Modal Verbs", ru: "Спряжение модальных глаголов", ua: "Відмінювання модальних дієслів" },
+          text: {
+            en: "Modal verbs express necessity, ability, or desire. Here is their present tense conjugation:\n\n1. **morati** (must / to have to):\n   - ja **moram**, ti **moraš**, on/ona/ono **mora**\n   - mi **moramo**, vi **morate**, oni/one/ona **moraju**\n\n2. **moći** (can / to be able to):\n   - ja **mogu**, ti **možeš**, on/ona/ono **može**\n   - mi **možemo**, vi **možete**, oni/one/ona **mogu**\n\n3. **htjeti** (want / will):\n   - ja **hoću** (or short *ću*), ti **hoćeš** (*ćeš*), on/ona/ono **hoće** (*će*)\n   - mi **hoćemo** (*ćemo*), vi **hoćete** (*ćete*), oni/one/ona **hoće** (*će*)\n   - *Negative:* **neću, nećeš, neće, nećemo, nećete, neće**.",
+            ru: "Модальные глаголы выражают необходимость, возможность или желание. Спряжение в настоящем времени:\n\n1. **morati** (должен / обязан):\n   - ja **moram**, ti **moraš**, on/ona/ono **mora**\n   - mi **moramo**, vi **morate**, oni/one/ona **moraju**\n\n2. **moći** (мочь / быть в состоянии):\n   - ja **mogu**, ti **možeš**, on/ona/ono **može**\n   - mi **možemo**, vi **možete**, oni/one/ona **mogu**\n\n3. **htjeti** (хотеть):\n   - ja **hoću**, ti **hoćeš**, on/ona/ono **hoće**\n   - mi **hoćemo**, vi **hoćete**, oni/one/ona **hoće**\n   - *Отрицание:* **neću, nećeš, neće, nećemo, nećete, neće**.",
+            ua: "Модальні дієслова виражають необхідність, можливість або бажання. Відмінювання в теперішньому часі:\n\n1. **morati** (мусити / бути повинним):\n   - ja **moram**, ti **moraš**, on/ona/ono **mora**\n   - mi **moramo**, vi **morate**, oni/one/ona **moraju**\n\n2. **moći** (могти / бути в змозі):\n   - ja **mogu**, ti **možeš**, on/ona/ono **može**\n   - mi **možemo**, vi **možete**, oni/one/ona **mogu**\n\n3. **htjeti** (хотіти):\n   - ja **hoću**, ti **hoćeš**, on/ona/ono **hoće**\n   - mi **hoćemo**, vi **hoćete**, oni/one/ona **hoće**\n   - *Заперечення:* **neću, nećeš, neće, nećemo, nećete, neće**."
+          }
+        },
+        {
+          title: { en: "Sentence Structure with Modal Verbs", ru: "Структура предложения с модальными глаголами", ua: "Структура речення з модальними дієсловами" },
+          text: {
+            en: "In Croatian, a modal verb is directly followed by the **infinitive** form of the main verb (infinitive ends in *-ti* or *-ći*):\n- *Moram* **raditi** danas. (I must work today.)\n- *Možemo* **ići** kući. (We can go home.)\n- *Neću* **učiti** navečer. (I don't want to study in the evening.)\n\n**Asking questions:**\n- *Možeš li* **pomoći**? (Can you help?)\n- *Što* **moraš** **kupiti**? (What do you have to buy?)",
+            ru: "В хорватском языке после модального глагола следует глагол в **инфинитиве** (оканчивается на *-ti* или *-ći*):\n- *Moram* **raditi** danas. (Я должен работать сегодня.)\n- *Možemo* **ići** kući. (Мы можем идти домой.)\n- *Neću* **učiti** navečer. (Я не хочу учиться вечером.)\n\n**Вопросы:**\n- *Možeš li* **pomoći**? (Можешь помочь?)\n- *Što* **moraš** **kupiti**? (Что ты должен купить?)",
+            ua: "У хорватській мові після модального дієслова вживається дієслово в **інфінітиві** (закінчується на *-ti* або *-ći*):\n- *Moram* **raditi** danas. (Я мушу працювати сьогодні.)\n- *Možemo* **ići** kući. (Ми можемо йти додому.)\n- *Neću* **učiti** navečer. (Я не хочу вчитися ввечері.)\n\n**Запитання:**\n- *Možeš li* **pomoći**? (Можеш допомогти?)\n- *Što* **moraš** **kupiti**? (Що ти мусиш купити?)"
+          }
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: { en: "Ja _____ (must) učiti.", ru: "Ja _____ (должен) učiti.", ua: "Ja _____ (мушу) učiti." },
+          options: ["moram", "moraš", "moramo", "moraju"],
+          correctAnswer: "moram"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Mi _____ (can) doći sutra.", ru: "Mi _____ (можем) doći sutra.", ua: "Mi _____ (можемо) прийти завтра." },
+          options: ["možemo", "mogu", "možeš", "možete"],
+          correctAnswer: "možemo"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Ja ne _____ (want) piti čaj.", ru: "Заполните: Ja ne _____ (хочу) piti čaj.", ua: "Заповніть: Ja ne _____ (хочу) piti čaj." },
+          correctAnswer: "hoću",
+          hint: { en: "Present tense of htjeti for 'ja'", ru: "Форма глагола htjeti для 'ja'", ua: "Форма дієслова htjeti для 'ja'" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Oni _____ (must) raditi.", ru: "Oni _____ (должны) raditi.", ua: "Oni _____ (мусять) raditi." },
+          options: ["moraju", "mora", "morate", "moram"],
+          correctAnswer: "moraju"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: _____ li ti (can) govoriti hrvatski?", ru: "Заполните: _____ li ti (можешь) govoriti hrvatski?", ua: "Заповніть: _____ li ti (можеш) govoriti hrvatski?" },
+          correctAnswer: "Možeš",
+          hint: { en: "Verb moći for 'ti'", ru: "Глагол moći для 'ti'", ua: "Дієслово moći для 'ti'" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Ona _____ (does not want) ići u školu.", ru: "Ona _____ (не хочет) ići u školu.", ua: "Вона _____ (не хоче) іти до школи." },
+          options: ["neće", "neću", "nećeš", "nećemo"],
+          correctAnswer: "neće"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Moramo kupiti kruh.'", ru: "Переведите: 'Moramo kupiti kruh.'", ua: "Перекладіть: 'Moramo kupiti kruh.'" },
+          correctAnswer: { en: "We must buy bread", ru: "Мы должны купить хлеб", ua: "Ми мусимо купити хліб" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Vi _____ (can) platiti karticom.", ru: "Vi _____ (можете) platiti karticom.", ua: "Ви _____ (можете) заплатити карткою." },
+          options: ["možete", "možemo", "može", "mogu"],
+          correctAnswer: "možete"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Što oni _____ (want) jesti?", ru: "Заполните: Što oni _____ (хотят) jesti?", ua: "Заповніть: Što oni _____ (хочуть) їсти?" },
+          correctAnswer: "hoće",
+          hint: { en: "Verb htjeti for 'oni'", ru: "Глагол htjeti для 'oni'", ua: "Дієслово htjeti для 'oni'" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Ti _____ (must) platiti račun.", ru: "Ti _____ (должен) platiti račun.", ua: "Ти _____ (мусиш) заплатити рахунок." },
+          options: ["moraš", "moram", "mora", "morate"],
+          correctAnswer: "moraš"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Oni _____ (can) plivati.", ru: "Oni _____ (могут) plivati.", ua: "Вони _____ (можуть) плавати." },
+          options: ["mogu", "može", "možemo", "možete"],
+          correctAnswer: "mogu"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Ja _____ (do not want) raditi.", ru: "Заполните: Ja _____ (не хочу) raditi.", ua: "Заповніть: Ja _____ (не хочу) працювати." },
+          correctAnswer: "neću",
+          hint: { en: "Negative of htjeti for 'ja'", ru: "Отрицание глагола htjeti для 'ja'", ua: "Заперечення дієслова htjeti для 'ja'" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Ne mogu spavati.'", ru: "Переведите: 'Ne mogu spavati.'", ua: "Перекладіть: 'Ne mogu spavati.'" },
+          correctAnswer: { en: "I cannot sleep", ru: "Я не могу спать", ua: "Я не можу спати" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Što _____ (we want) raditi?", ru: "Što _____ (мы хотим) raditi?", ua: "Що _____ (ми хочемо) робити?" },
+          options: ["hoćemo", "hoćete", "hoću", "hoće"],
+          correctAnswer: "hoćemo"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Ona _____ (can) govoriti engleski.", ru: "Ona _____ (может) govoriti engleski.", ua: "Вона _____ (може) розмовляти англійською." },
+          options: ["može", "mogu", "možeš", "možemo"],
+          correctAnswer: "može"
+        }
+      ]
+    }
+  },
+  {
     id: "a1-reading-1",
     type: "reading",
     level: "A1",
