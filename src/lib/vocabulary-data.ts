@@ -4707,4 +4707,370 @@ export const vocabularyWords: VocabWord[] = [
     "level": "C1",
     "category": "school"
   },
+  // ==========================================
+  // BODY & HEALTH (body)
+  // ==========================================
+  {
+    "hr": "glava",
+    "en": "head",
+    "ru": "голова",
+    "ua": "голова",
+    "level": "A1",
+    "category": "body"
+  },
+  {
+    "hr": "ruka",
+    "en": "hand / arm",
+    "ru": "рука",
+    "ua": "рука",
+    "level": "A1",
+    "category": "body"
+  },
+  {
+    "hr": "noga",
+    "en": "leg / foot",
+    "ru": "нога",
+    "ua": "нога",
+    "level": "A1",
+    "category": "body"
+  },
+  {
+    "hr": "oko",
+    "en": "eye",
+    "ru": "глаз",
+    "ua": "око",
+    "level": "A1",
+    "category": "body"
+  },
+  {
+    "hr": "uho",
+    "en": "ear",
+    "ru": "ухо",
+    "ua": "вухо",
+    "level": "A1",
+    "category": "body"
+  },
+  {
+    "hr": "nos",
+    "en": "nose",
+    "ru": "нос",
+    "ua": "ніс",
+    "level": "A1",
+    "category": "body"
+  },
+  {
+    "hr": "usta",
+    "en": "mouth",
+    "ru": "рот",
+    "ua": "рот",
+    "level": "A1",
+    "category": "body"
+  },
+  {
+    "hr": "zub",
+    "en": "tooth",
+    "ru": "зуб",
+    "ua": "зуб",
+    "level": "A1",
+    "category": "body"
+  },
+  {
+    "hr": "srce",
+    "en": "heart",
+    "ru": "сердце",
+    "ua": "серце",
+    "level": "A1",
+    "category": "body"
+  },
+  {
+    "hr": "kosa",
+    "en": "hair",
+    "ru": "волосы",
+    "ua": "волосся",
+    "level": "A1",
+    "category": "body"
+  },
+  {
+    "hr": "prst",
+    "en": "finger / toe",
+    "ru": "палец",
+    "ua": "палець",
+    "level": "A1",
+    "category": "body"
+  },
+  {
+    "hr": "leđa",
+    "en": "back",
+    "ru": "спина",
+    "ua": "спина",
+    "level": "A2",
+    "category": "body"
+  },
+  {
+    "hr": "trbuh",
+    "en": "stomach / belly",
+    "ru": "живот",
+    "ua": "живіт",
+    "level": "A2",
+    "category": "body"
+  },
+  {
+    "hr": "grlo",
+    "en": "throat",
+    "ru": "горло",
+    "ua": "горло",
+    "level": "A2",
+    "category": "body"
+  },
+  {
+    "hr": "zdravlje",
+    "en": "health",
+    "ru": "здоровье",
+    "ua": "здоров'я",
+    "level": "A2",
+    "category": "body"
+  },
+  {
+    "hr": "bolest",
+    "en": "illness / disease",
+    "ru": "болезнь",
+    "ua": "хвороба",
+    "level": "B1",
+    "category": "body"
+  },
+  {
+    "hr": "bolnica",
+    "en": "hospital",
+    "ru": "больница",
+    "ua": "лікарня",
+    "level": "A2",
+    "category": "body"
+  },
+  {
+    "hr": "ljekarna",
+    "en": "pharmacy",
+    "ru": "аптека",
+    "ua": "аптека",
+    "level": "A2",
+    "category": "body"
+  },
+  {
+    "hr": "lijek",
+    "en": "medicine",
+    "ru": "лекарство",
+    "ua": "ліки",
+    "level": "A2",
+    "category": "body"
+  },
+  {
+    "hr": "liječnik",
+    "en": "doctor / physician",
+    "ru": "врач",
+    "ua": "лікар",
+    "level": "B1",
+    "category": "body"
+  },
+  {
+    "hr": "bol",
+    "en": "pain",
+    "ru": "боль",
+    "ua": "біль",
+    "level": "B1",
+    "category": "body"
+  },
+  {
+    "hr": "temperatura",
+    "en": "temperature / fever",
+    "ru": "температура",
+    "ua": "температура",
+    "level": "A2",
+    "category": "body"
+  },
+  {
+    "hr": "prehlada",
+    "en": "cold (illness)",
+    "ru": "простуда",
+    "ua": "застуда",
+    "level": "B1",
+    "category": "body"
+  },
+  {
+    "hr": "kašalj",
+    "en": "cough",
+    "ru": "кашель",
+    "ua": "кашель",
+    "level": "B1",
+    "category": "body"
+  },
+  {
+    "hr": "tlak",
+    "en": "pressure / blood pressure",
+    "ru": "давление",
+    "ua": "тиск",
+    "level": "B2",
+    "category": "body"
+  },
+  // ==========================================
+  // CLOTHES (clothes)
+  // ==========================================
+  {
+    "hr": "majica",
+    "en": "T-shirt / shirt",
+    "ru": "футболка / майка",
+    "ua": "футболка / майка",
+    "level": "A1",
+    "category": "clothes"
+  },
+  {
+    "hr": "hlače",
+    "en": "pants / trousers",
+    "ru": "брюки / штаны",
+    "ua": "штани / брюки",
+    "level": "A1",
+    "category": "clothes"
+  },
+  {
+    "hr": "haljina",
+    "en": "dress",
+    "ru": "платье",
+    "ua": "сукня / плаття",
+    "level": "A1",
+    "category": "clothes"
+  },
+  {
+    "hr": "suknja",
+    "en": "skirt",
+    "ru": "юбка",
+    "ua": "спідниця",
+    "level": "A1",
+    "category": "clothes"
+  },
+  {
+    "hr": "košulja",
+    "en": "button-up shirt",
+    "ru": "рубашка",
+    "ua": "сорочка",
+    "level": "A2",
+    "category": "clothes"
+  },
+  {
+    "hr": "cipele",
+    "en": "shoes",
+    "ru": "обувь / туфли",
+    "ua": "взуття / туфлі",
+    "level": "A1",
+    "category": "clothes"
+  },
+  {
+    "hr": "čarape",
+    "en": "socks",
+    "ru": "носки",
+    "ua": "шкарпетки",
+    "level": "A1",
+    "category": "clothes"
+  },
+  {
+    "hr": "jakna",
+    "en": "jacket",
+    "ru": "куртка / куртка-ветровка",
+    "ua": "куртка / вітровка",
+    "level": "A1",
+    "category": "clothes"
+  },
+  {
+    "hr": "kaput",
+    "en": "coat",
+    "ru": "пальто",
+    "ua": "пальто",
+    "level": "A2",
+    "category": "clothes"
+  },
+  {
+    "hr": "kapa",
+    "en": "hat / cap",
+    "ru": "шапка / кепка",
+    "ua": "шапка / кепка",
+    "level": "A1",
+    "category": "clothes"
+  },
+  {
+    "hr": "šal",
+    "en": "scarf",
+    "ru": "шарф",
+    "ua": "шарф",
+    "level": "A2",
+    "category": "clothes"
+  },
+  {
+    "hr": "rukavice",
+    "en": "gloves",
+    "ru": "перчатки",
+    "ua": "рукавички",
+    "level": "A2",
+    "category": "clothes"
+  },
+  {
+    "hr": "odijelo",
+    "en": "suit",
+    "ru": "костюм",
+    "ua": "костюм",
+    "level": "B1",
+    "category": "clothes"
+  },
+  {
+    "hr": "kupaći kostim",
+    "en": "swimsuit",
+    "ru": "купальник / плавки",
+    "ua": "купальник / плавки",
+    "level": "A2",
+    "category": "clothes"
+  },
+  {
+    "hr": "naočale",
+    "en": "glasses",
+    "ru": "очки",
+    "ua": "окуляри",
+    "level": "A2",
+    "category": "clothes"
+  },
+  {
+    "hr": "torba",
+    "en": "bag",
+    "ru": "сумка",
+    "ua": "сумка",
+    "level": "A1",
+    "category": "clothes"
+  },
+  {
+    "hr": "remen",
+    "en": "belt",
+    "ru": "ремень",
+    "ua": "ремінь",
+    "level": "A2",
+    "category": "clothes"
+  },
+  {
+    "hr": "tenisice",
+    "en": "sneakers / trainers",
+    "ru": "кроссовки",
+    "ua": "кросівки",
+    "level": "A2",
+    "category": "clothes"
+  },
+  {
+    "hr": "čizme",
+    "en": "boots",
+    "ru": "сапоги / ботинки",
+    "ua": "чоботи / черевики",
+    "level": "A2",
+    "category": "clothes"
+  },
+  {
+    "hr": "džemper",
+    "en": "sweater",
+    "ru": "свитер / джемпер",
+    "ua": "светр / джемпер",
+    "level": "A2",
+    "category": "clothes"
+  }
 ];
