@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { glossaryData, type GlossaryCategory, type GlossarySection } from "@/lib/glossary-data";
+import { lessonsData } from "@/lib/lessons-data";
 import {
   Search,
   BookOpen,
@@ -199,6 +200,15 @@ function translateText(text: string, locale: string): string {
   return text;
 }
 
+const LESSON_MAPPING: Record<string, string[]> = {
+  cases: ["a1-grammar-5", "a2-grammar-1", "a2-grammar-2", "a2-grammar-5", "a2-grammar-6"],
+  verbs: ["a1-grammar-1", "a1-grammar-2", "a1-grammar-4", "a2-grammar-3", "a2-grammar-4", "a2-grammar-8"],
+  numbers: ["a1-grammar-3"],
+  pronouns_prepositions: ["a1-grammar-6"],
+  advanced_grammar: ["a1-grammar-7", "a2-grammar-7"],
+  topics: ["a1-reading-1", "a1-dictation-1", "a2-communication-1", "a2-communication-2"]
+};
+
 export default function GlossaryPage() {
   const t = useTranslations("glossary");
   const locale = useLocale();
@@ -224,11 +234,67 @@ export default function GlossaryPage() {
     speakText(text);
   };
 
+  // Convert lessons into glossary sections dynamically
+  const getMappedSections = (categoryId: string): GlossarySection[] => {
+    const lessonIds = LESSON_MAPPING[categoryId] || [];
+    const mappedLessons = lessonsData.filter((lesson) => lessonIds.includes(lesson.id));
+    return mappedLessons.map((lesson) => {
+      const subsections = (lesson.content.sections || []).map((sec: any) => {
+        let examples = undefined;
+        if (sec.examples) {
+          examples = sec.examples.map((ex: any) => {
+            const hr = ex.hr || ex.en || '';
+            const translation = ex.translation || {
+              en: ex.en || '',
+              ru: ex.ru || '',
+              ua: ex.ua || ''
+            };
+            return { hr, translation };
+          });
+        }
+        return {
+          title: sec.title,
+          text: sec.text,
+          examples
+        };
+      });
+
+      const getLocalizedTitle = (titleObj: any): { en: string; ru: string; ua: string } => {
+        if (!titleObj) return { en: '', ru: '', ua: '' };
+        if (typeof titleObj === 'string') {
+          return { en: titleObj, ru: titleObj, ua: titleObj };
+        }
+        return {
+          en: titleObj.en || '',
+          ru: titleObj.ru || '',
+          ua: titleObj.ua || ''
+        };
+      };
+
+      const titleLoc = getLocalizedTitle(lesson.title);
+
+      return {
+        id: lesson.id,
+        title: {
+          en: `${titleLoc.en} (Lesson Theory)`,
+          ru: `${titleLoc.ru} (Теория урока)`,
+          ua: `${titleLoc.ua} (Теорія уроку)`
+        },
+        icon: "🎓",
+        subsections
+      };
+    });
+  };
+
+  const baseSections = activeCategory.sections;
+  const mappedSections = getMappedSections(activeCategory.id);
+  const allSections = [...baseSections, ...mappedSections];
+
   // Filter sections based on search
-  const filterSections = (category: GlossaryCategory): GlossarySection[] => {
-    if (!searchQuery.trim()) return category.sections;
+  const filteredSections = (() => {
+    if (!searchQuery.trim()) return allSections;
     const q = searchQuery.toLowerCase();
-    return category.sections.filter((section) => {
+    return allSections.filter((section) => {
       const titleMatch = getLocalized(section.title, locale).toLowerCase().includes(q);
       const subsectionMatch = section.subsections.some((sub) => {
         const subTitle = getLocalized(sub.title, locale).toLowerCase().includes(q);
@@ -242,9 +308,7 @@ export default function GlossaryPage() {
       });
       return titleMatch || subsectionMatch;
     });
-  };
-
-  const filteredSections = filterSections(activeCategory);
+  })();
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
