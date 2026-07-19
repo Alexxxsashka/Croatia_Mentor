@@ -34,6 +34,61 @@ interface Flashcard {
   category: string;
 }
 
+const posLabels: Record<string, { en: string; ru: string; ua: string }> = {
+  all: { en: "All parts", ru: "Все части", ua: "Всі частини" },
+  noun: { en: "Nouns", ru: "Существительные", ua: "Іменники" },
+  verb: { en: "Verbs", ru: "Глаголы", ua: "Дієслова" },
+  pronoun: { en: "Pronouns", ru: "Местоимения", ua: "Займенники" },
+  adjective: { en: "Adjectives", ru: "Прилагательные", ua: "Прикметники" },
+  other: { en: "Others", ru: "Другое", ua: "Інше" },
+};
+
+function getPartOfSpeech(word: VocabWord): string {
+  const hr = word.hr.toLowerCase().trim();
+  const en = word.en.toLowerCase().trim();
+  const ru = word.ru.toLowerCase().trim();
+  
+  // 1. Pronouns (fixed list)
+  const pronouns = new Set([
+    "ja", "ti", "on", "ona", "ono", "mi", "vi", "oni", "one", 
+    "tko", "što", "moj", "tvoj", "njegov", "njezin", "naš", "vaš", "njihov",
+    "sebe", "se", "nitko", "ništa", "netko", "nešto",
+    "ovaj", "ova", "ovo", "taj", "ta", "to", "onaj", "ona", "ono",
+    "neki", "svaki", "sav", "sam"
+  ]);
+  if (pronouns.has(hr)) return "pronoun";
+
+  // 2. Verbs (infinitive ends in -ti or -ći in Croatian, or translation starts with "to " in English)
+  if (en.startsWith("to ") || hr.endsWith("ti") || hr.endsWith("ći") || hr.endsWith("ti se") || hr.endsWith("ći se")) {
+    const nounExceptions = new Set(["gost", "kosti", "masti", "vijesti", "svijesti", "bolesti"]);
+    if (!nounExceptions.has(hr)) {
+      return "verb";
+    }
+  }
+
+  // 3. Adjectives (Russian/Ukrainian endings for adjectives)
+  const adjEndingsRu = ["ый", "ий", "ой", "ая", "яя", "ое", "ее", "ые", "ие"];
+  const isAdjRu = adjEndingsRu.some(ending => ru.endsWith(ending)) && ru.length > 3;
+  if (isAdjRu) {
+    const nounExceptions = new Set(["чай", "трамвай", "музей", "край", "лишай", "обычай"]);
+    if (!nounExceptions.has(ru)) {
+      return "adjective";
+    }
+  }
+
+  // 4. Other (conjunctions, prepositions, numbers)
+  const otherWords = new Set([
+    "i", "a", "ali", "ili", "da", "ako", "jer", "dok",
+    "u", "na", "o", "po", "pri", "kod", "od", "do", "za", "s", "sa", "iz", "bez",
+    "ne", "možda", "tamo", "ovdje", "gdje", "kako", "zašto", "kada",
+    "jedan", "dva", "tri", "četiri", "pet", "šest", "sedam", "osam", "devet", "deset",
+    "nula", "prvi", "drugi", "treći"
+  ]);
+  if (otherWords.has(hr)) return "other";
+
+  return "noun";
+}
+
 export default function VocabularyPortal() {
   const t = useTranslations("vocabulary");
   const locale = useLocale();
@@ -44,6 +99,7 @@ export default function VocabularyPortal() {
   const [activeTab, setActiveTab] = useState<"categories" | "flashcards" | "quiz" | "dictionary">("categories");
   const [selectedLevel, setSelectedLevel] = useState<string>("all");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [selectedPOS, setSelectedPOS] = useState<string>("all");
   
   // Flashcard states
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -96,7 +152,8 @@ export default function VocabularyPortal() {
   const filteredWords = allMergedWords.filter((w) => {
     const levelMatch = selectedLevel === "all" || w.level.toLowerCase() === selectedLevel.toLowerCase();
     const categoryMatch = selectedCategory === "all" || w.category === selectedCategory;
-    return levelMatch && categoryMatch;
+    const posMatch = selectedPOS === "all" || getPartOfSpeech(w) === selectedPOS;
+    return levelMatch && categoryMatch && posMatch;
   });
 
   const getTranslation = (word: VocabWord) => {
@@ -298,6 +355,27 @@ export default function VocabularyPortal() {
                 {vocabularyCategories.map((cat) => (
                   <option key={cat} value={cat} className="bg-slate-900 text-foreground">
                     {getCategoryLabel(cat)}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
+                {locale === "ua" ? "Частина мови" : locale === "ru" ? "Часть речи" : "Part of Speech"}:
+              </span>
+              <select
+                value={selectedPOS}
+                onChange={(e) => {
+                  setSelectedPOS(e.target.value);
+                  setCurrentCardIndex(0);
+                  setIsFlipped(false);
+                }}
+                className="bg-transparent text-xs font-semibold text-foreground border border-white/10 rounded-xl px-2 py-1 focus:outline-none focus:border-blue-500"
+              >
+                {Object.entries(posLabels).map(([key, labelObj]) => (
+                  <option key={key} value={key} className="bg-slate-900 text-foreground">
+                    {labelObj[locale as "en" | "ru" | "ua"] || labelObj.en}
                   </option>
                 ))}
               </select>
