@@ -15,6 +15,63 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
+// Helper to render basic markdown (bold, italic, and bullets)
+function renderMarkdown(text: string) {
+  const lines = text.split("\n");
+  return lines.map((line, lineIdx) => {
+    const trimmed = line.trim();
+    const isBullet = trimmed.startsWith("- ") || trimmed.startsWith("* ");
+    const cleanLine = isBullet ? trimmed.substring(2) : line;
+
+    const parseInline = (str: string): React.ReactNode[] => {
+      // Split by bold first
+      const boldParts = str.split("**");
+      return boldParts.flatMap((bPart, bIdx) => {
+        const isBold = bIdx % 2 === 1;
+        // Split by italic
+        const italicParts = bPart.split("*");
+        const rendered = italicParts.map((iPart, iIdx) => {
+          const isItalic = iIdx % 2 === 1;
+          if (isItalic) {
+            return (
+              <em key={`${bIdx}-${iIdx}`} className="italic font-medium text-foreground">
+                {iPart}
+              </em>
+            );
+          }
+          return iPart;
+        });
+
+        if (isBold) {
+          return (
+            <strong key={bIdx} className="font-bold text-foreground">
+              {rendered}
+            </strong>
+          );
+        }
+        return rendered;
+      });
+    };
+
+    const parsedContent = parseInline(cleanLine);
+
+    if (isBullet) {
+      return (
+        <div key={lineIdx} className="flex items-start gap-2 ml-4 my-1">
+          <span className="text-blue-500 shrink-0 mt-2 w-1.5 h-1.5 rounded-full bg-blue-500" />
+          <span className="flex-1 text-muted-foreground">{parsedContent}</span>
+        </div>
+      );
+    }
+
+    return (
+      <div key={lineIdx} className="min-h-[1.2rem]">
+        {parsedContent}
+      </div>
+    );
+  });
+}
+
 export default function LessonDetailPage({
   params,
 }: {
@@ -206,9 +263,9 @@ export default function LessonDetailPage({
           {lesson.content.sections.map((section, i) => (
             <div key={i} className="glass rounded-2xl p-6">
               <h2 className="text-lg font-semibold mb-3">{getLocalizedText(section.title, locale)}</h2>
-              <p className="text-sm text-muted-foreground whitespace-pre-line leading-relaxed">
-                {getLocalizedText(section.text, locale)}
-              </p>
+              <div className="text-sm text-muted-foreground leading-relaxed space-y-1">
+                {renderMarkdown(getLocalizedText(section.text, locale))}
+              </div>
               {section.examples && (
                 <ul className="mt-4 space-y-2">
                   {section.examples.map((ex, j) => (
