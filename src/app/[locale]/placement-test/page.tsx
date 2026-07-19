@@ -12,14 +12,15 @@ import {
 import {
   Trophy,
   ArrowRight,
-  CheckCircle2,
-  XCircle,
   RotateCcw,
   Target,
   Clock,
+  AlertCircle,
 } from "lucide-react";
 
 type TestState = "intro" | "testing" | "results";
+
+const TIME_LIMIT = 900; // 15 minutes global time limit (900 seconds)
 
 const normalizeText = (text: string) => {
   return text
@@ -47,23 +48,32 @@ export default function PlacementTestPage() {
     new Array(placementQuestions.length).fill(null)
   );
   
-  // Multiple choice state
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
-  
   // Translation state
   const [typedAnswer, setTypedAnswer] = useState("");
-  
-  const [showFeedback, setShowFeedback] = useState(false);
-  const [timeElapsed, setTimeElapsed] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(TIME_LIMIT);
 
   // Timer effect
   useEffect(() => {
     if (state !== "testing") return;
     const timer = setInterval(() => {
-      setTimeElapsed((prev) => prev + 1);
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          return 0;
+        }
+        return prev - 1;
+      });
     }, 1000);
     return () => clearInterval(timer);
   }, [state]);
+
+  // Handle time out
+  useEffect(() => {
+    if (state === "testing" && timeLeft === 0) {
+      setState("results");
+      saveResults(answers);
+    }
+  }, [timeLeft, state]);
 
   const question = placementQuestions[currentQuestion];
   const totalQuestions = placementQuestions.length;
@@ -85,44 +95,32 @@ export default function PlacementTestPage() {
   const determinedLevel = calculateLevel(correctCount);
 
   const handleAnswer = (optionIndex: number) => {
-    if (showFeedback) return;
-    setSelectedAnswer(optionIndex);
-    setShowFeedback(true);
-
     const newAnswers = [...answers];
     newAnswers[currentQuestion] = optionIndex;
     setAnswers(newAnswers);
 
-    setTimeout(() => {
-      if (currentQuestion < totalQuestions - 1) {
-        setCurrentQuestion(currentQuestion + 1);
-        setSelectedAnswer(null);
-        setShowFeedback(false);
-      } else {
-        setState("results");
-        saveResults(newAnswers);
-      }
-    }, 2000);
+    if (currentQuestion < totalQuestions - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+    } else {
+      setState("results");
+      saveResults(newAnswers);
+    }
   };
 
   const handleTranslationSubmit = () => {
-    if (showFeedback || !typedAnswer.trim()) return;
-    setShowFeedback(true);
+    if (!typedAnswer.trim()) return;
 
     const newAnswers = [...answers];
     newAnswers[currentQuestion] = typedAnswer;
     setAnswers(newAnswers);
 
-    setTimeout(() => {
-      if (currentQuestion < totalQuestions - 1) {
-        setCurrentQuestion(currentQuestion + 1);
-        setTypedAnswer("");
-        setShowFeedback(false);
-      } else {
-        setState("results");
-        saveResults(newAnswers);
-      }
-    }, 3000);
+    if (currentQuestion < totalQuestions - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+      setTypedAnswer("");
+    } else {
+      setState("results");
+      saveResults(newAnswers);
+    }
   };
 
   const saveResults = async (finalAnswers: (number | string | null)[]) => {
@@ -159,10 +157,8 @@ export default function PlacementTestPage() {
   const resetTest = () => {
     setCurrentQuestion(0);
     setAnswers(new Array(totalQuestions).fill(null));
-    setSelectedAnswer(null);
     setTypedAnswer("");
-    setShowFeedback(false);
-    setTimeElapsed(0);
+    setTimeLeft(TIME_LIMIT);
     setState("intro");
   };
 
@@ -171,6 +167,8 @@ export default function PlacementTestPage() {
     const s = seconds % 60;
     return `${m}:${s < 10 ? "0" : ""}${s}`;
   };
+
+  const timeElapsed = TIME_LIMIT - timeLeft;
 
   // Intro screen
   if (state === "intro") {
@@ -182,9 +180,15 @@ export default function PlacementTestPage() {
           </div>
           <h1 className="text-4xl font-bold">{t("title")}</h1>
           <p className="text-lg text-muted-foreground">{t("subtitle")}</p>
-          <p className="text-sm text-muted-foreground max-w-md mx-auto">
-            {t("description")}
-          </p>
+          <div className="glass max-w-md mx-auto p-6 rounded-2xl border border-red-500/10 space-y-3">
+            <div className="flex items-center justify-center gap-2 text-red-400 font-semibold text-sm">
+              <AlertCircle className="w-4 h-4" />
+              <span>Time Limit: 15 Minutes</span>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Once you start, the screen will be locked and a global timer will count down. Exiting or reloading will submit whatever you have answered. No hints or explanations are provided during the test.
+            </p>
+          </div>
           <div className="glass inline-flex items-center gap-3 px-6 py-3 rounded-2xl">
             <span className="text-sm text-muted-foreground">
               {totalQuestions} {t("question")}s • CEFR A1 → C2
@@ -288,126 +292,81 @@ export default function PlacementTestPage() {
     );
   }
 
-  const isTranslationCorrect = question.type === "translation" && checkTranslationAnswer(typedAnswer, question.acceptedAnswers);
-
-  // Testing screen
+  // Testing screen (Fullscreen Lock)
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
-      {/* Progress bar & Timer */}
-      <div className="mb-8 animate-fade-in flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="flex-1">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm text-muted-foreground">
-              {t("question")} {currentQuestion + 1} {t("of")} {totalQuestions}
-            </span>
-            <span className="text-xs px-3 py-1 rounded-full glass font-medium">
-              {question.level}
-            </span>
-          </div>
-          <div className="h-2 rounded-full bg-white/5 overflow-hidden">
-            <div
-              className="h-full rounded-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-500"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-        </div>
-        <div className="flex items-center gap-2 px-4 py-2 rounded-xl glass shrink-0 h-fit self-end sm:self-auto">
-          <Clock className="w-4 h-4 text-blue-400" />
-          <span className="text-sm font-semibold monospace">
-            {formatTime(timeElapsed)}
-          </span>
-        </div>
-      </div>
-
-      {/* Question Card */}
-      {question.type === "translation" ? (
-        <div className="glass rounded-2xl p-8 mb-6 animate-slide-up">
-          <h2 className="text-xl font-bold mb-8 leading-relaxed">
-            {question.question}
-          </h2>
-
-          <div className="space-y-4">
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleTranslationSubmit();
-              }}
-              className="flex flex-col sm:flex-row gap-3"
-            >
-              <input
-                type="text"
-                value={typedAnswer}
-                onChange={(e) => setTypedAnswer(e.target.value)}
-                disabled={showFeedback}
-                placeholder={t("translationPlaceholder")}
-                className={`flex-1 p-4 rounded-xl border bg-white/5 outline-none transition-all text-lg ${
-                  showFeedback
-                    ? isTranslationCorrect
-                      ? "border-green-500/50 bg-green-500/10 text-green-400"
-                      : "border-red-500/50 bg-red-500/10 text-red-400"
-                    : "border-white/10 focus:border-blue-500 focus:bg-white/10"
-                }`}
+    <div className="fixed inset-0 bg-slate-950 z-[9999] overflow-y-auto px-4 py-8 flex flex-col justify-center items-center">
+      <div className="w-full max-w-3xl">
+        {/* Progress bar & Timer */}
+        <div className="mb-8 animate-fade-in flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex-1">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm text-muted-foreground">
+                {t("question")} {currentQuestion + 1} {t("of")} {totalQuestions}
+              </span>
+              <span className="text-xs px-3 py-1 rounded-full glass font-medium">
+                {question.level}
+              </span>
+            </div>
+            <div className="h-2 rounded-full bg-white/5 overflow-hidden">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-500"
+                style={{ width: `${progress}%` }}
               />
-              <button
-                type="submit"
-                disabled={showFeedback || !typedAnswer.trim()}
-                className="px-6 py-4 rounded-xl bg-blue-500 hover:bg-blue-600 disabled:opacity-50 text-white font-semibold transition-all shrink-0"
-              >
-                {t("submit")}
-              </button>
-            </form>
-
-            {showFeedback && (
-              <div className="animate-fade-in space-y-2 mt-4 p-4 rounded-xl bg-white/5 border border-white/10">
-                <div className="flex items-center gap-2">
-                  {isTranslationCorrect ? (
-                    <CheckCircle2 className="w-5 h-5 text-green-400" />
-                  ) : (
-                    <XCircle className="w-5 h-5 text-red-400" />
-                  )}
-                  <span className={`font-semibold ${isTranslationCorrect ? "text-green-400" : "text-red-400"}`}>
-                    {isTranslationCorrect ? t("common.correct") : t("common.incorrect")}
-                  </span>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  {t("lessons.correctAnswer")}: <strong className="text-foreground">{question.acceptedAnswers?.[0]}</strong>
-                </p>
-                <p className="text-sm text-muted-foreground leading-relaxed mt-2 pt-2 border-t border-white/5">
-                  {question.explanation[locale as "en" | "ru" | "ua"] || question.explanation.en}
-                </p>
-              </div>
-            )}
+            </div>
+          </div>
+          <div className={`flex items-center gap-2 px-4 py-2 rounded-xl glass shrink-0 h-fit self-end sm:self-auto ${timeLeft < 60 ? "border-red-500/30 text-red-400 animate-pulse" : ""}`}>
+            <Clock className="w-4 h-4 text-blue-400" />
+            <span className="text-sm font-semibold monospace">
+              {formatTime(timeLeft)}
+            </span>
           </div>
         </div>
-      ) : (
-        <div className="glass rounded-2xl p-8 mb-6 animate-slide-up">
-          <h2 className="text-xl font-bold mb-8 leading-relaxed">
-            {question.question}
-          </h2>
 
-          <div className="grid gap-3">
-            {question.options?.map((optionObj, i) => {
-              let optionStyle = "glass hover:bg-white/10 hover:border-blue-500/30";
+        {/* Question Card */}
+        {question.type === "translation" ? (
+          <div className="glass rounded-2xl p-8 mb-6 animate-slide-up">
+            <h2 className="text-xl font-bold mb-8 leading-relaxed">
+              {question.question}
+            </h2>
 
-              if (showFeedback) {
-                if (i === question.correctAnswer) {
-                  optionStyle =
-                    "bg-green-500/10 border-green-500/50 text-green-400";
-                } else if (i === selectedAnswer && i !== question.correctAnswer) {
-                  optionStyle = "bg-red-500/10 border-red-500/50 text-red-400";
-                } else {
-                  optionStyle = "opacity-50";
-                }
-              }
+            <div className="space-y-4">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleTranslationSubmit();
+                }}
+                className="flex flex-col sm:flex-row gap-3"
+              >
+                <input
+                  type="text"
+                  value={typedAnswer}
+                  onChange={(e) => setTypedAnswer(e.target.value)}
+                  placeholder={t("translationPlaceholder")}
+                  className="flex-1 p-4 rounded-xl border border-white/10 bg-white/5 outline-none transition-all text-lg focus:border-blue-500 focus:bg-white/10"
+                  autoFocus
+                />
+                <button
+                  type="submit"
+                  disabled={!typedAnswer.trim()}
+                  className="px-6 py-4 rounded-xl bg-blue-500 hover:bg-blue-600 disabled:opacity-50 text-white font-semibold transition-all shrink-0"
+                >
+                  {t("submit")}
+                </button>
+              </form>
+            </div>
+          </div>
+        ) : (
+          <div className="glass rounded-2xl p-8 mb-6 animate-slide-up">
+            <h2 className="text-xl font-bold mb-8 leading-relaxed">
+              {question.question}
+            </h2>
 
-              return (
+            <div className="grid gap-3">
+              {question.options?.map((optionObj, i) => (
                 <button
                   key={i}
                   onClick={() => handleAnswer(i)}
-                  disabled={showFeedback}
-                  className={`w-full text-left p-4 rounded-xl border transition-all duration-300 ${optionStyle} ${
-                    !showFeedback ? "cursor-pointer" : "cursor-default"
-                  }`}
+                  className="w-full text-left p-4 rounded-xl border border-white/10 glass hover:bg-white/10 hover:border-blue-500/30 transition-all duration-300 cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
                     <span className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-sm font-semibold shrink-0">
@@ -416,29 +375,13 @@ export default function PlacementTestPage() {
                     <span className="font-medium">
                       {optionObj[locale as "en" | "ru" | "ua"] || optionObj.en}
                     </span>
-                    {showFeedback && i === question.correctAnswer && (
-                      <CheckCircle2 className="w-5 h-5 text-green-400 ml-auto" />
-                    )}
-                    {showFeedback &&
-                      i === selectedAnswer &&
-                      i !== question.correctAnswer && (
-                        <XCircle className="w-5 h-5 text-red-400 ml-auto" />
-                      )}
                   </div>
                 </button>
-              );
-            })}
-          </div>
-
-          {showFeedback && (
-            <div className="animate-fade-in mt-4 p-4 rounded-xl bg-white/5 border border-white/10">
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {question.explanation[locale as "en" | "ru" | "ua"] || question.explanation.en}
-              </p>
+              ))}
             </div>
-          )}
-        </div>
-      )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
