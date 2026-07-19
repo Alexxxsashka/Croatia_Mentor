@@ -11,6 +11,7 @@ import {
   Volume2,
   GraduationCap,
 } from "lucide-react";
+import { speakText } from "@/lib/speech";
 
 function getLocalized(obj: { en: string; ru: string; ua: string }, locale: string): string {
   if (locale === "ru") return obj.ru;
@@ -220,15 +221,7 @@ export default function GlossaryPage() {
   };
 
   const speakWord = (text: string) => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "hr-HR";
-      const voices = window.speechSynthesis.getVoices();
-      const hrVoice = voices.find((v) => v.lang.includes("hr"));
-      if (hrVoice) utterance.voice = hrVoice;
-      window.speechSynthesis.speak(utterance);
-    }
+    speakText(text);
   };
 
   // Filter sections based on search

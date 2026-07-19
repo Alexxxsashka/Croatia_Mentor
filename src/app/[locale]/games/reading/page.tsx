@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { readingTexts } from "@/lib/reading-data";
 import { ArrowLeft, BookOpen, Check, X, Volume2, ChevronRight, Trophy } from "lucide-react";
+import { speakText } from "@/lib/speech";
 
 function getLocalized(obj: { en: string; ru: string; ua: string }, locale: string) {
   if (locale === "ru") return obj.ru;
@@ -31,13 +32,7 @@ export default function ReadingPage() {
   const text = readingTexts.find((t) => t.id === selectedText);
 
   const speakWord = (text: string) => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "hr-HR";
-      utterance.rate = 0.85;
-      window.speechSynthesis.speak(utterance);
-    }
+    speakText(text);
   };
 
   const handleAnswer = (option: string) => {

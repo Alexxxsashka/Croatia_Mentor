@@ -22,6 +22,8 @@ import {
   FolderOpen,
 } from "lucide-react";
 
+import { speakText } from "@/lib/speech";
+
 interface Flashcard {
   id: string;
   wordHr: string;
@@ -116,18 +118,7 @@ export default function VocabularyPortal() {
 
   // TTS Pronunciation
   const speakWord = (text: string) => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "hr-HR";
-      
-      const voices = window.speechSynthesis.getVoices();
-      const hrVoice = voices.find(voice => voice.lang.includes("hr") || voice.lang.includes("HR"));
-      if (hrVoice) {
-        utterance.voice = hrVoice;
-      }
-      window.speechSynthesis.speak(utterance);
-    }
+    speakText(text);
   };
 
   // Generate Quiz

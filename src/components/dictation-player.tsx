@@ -4,6 +4,8 @@ import { useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { Play, Pause, RotateCcw, Volume2 } from "lucide-react";
 
+import { speakText } from "@/lib/speech";
+
 interface DictationPlayerProps {
   text: string;
 }
@@ -12,38 +14,34 @@ export function DictationPlayer({ text }: DictationPlayerProps) {
   const t = useTranslations("lessons");
   const [isPlaying, setIsPlaying] = useState(false);
   const [speed, setSpeed] = useState(0.8);
+  const [activeSpeech, setActiveSpeech] = useState<{ stop: () => void } | null>(null);
 
   const speak = useCallback(() => {
-    if (typeof window === "undefined" || !window.speechSynthesis) return;
+    if (activeSpeech) {
+      activeSpeech.stop();
+    }
+    const ctrl = speakText(text, {
+      rate: speed,
+      onStart: () => setIsPlaying(true),
+      onEnd: () => {
+        setIsPlaying(false);
+        setActiveSpeech(null);
+      },
+      onError: () => {
+        setIsPlaying(false);
+        setActiveSpeech(null);
+      }
+    });
+    setActiveSpeech(ctrl);
+  }, [text, speed, activeSpeech]);
 
-    window.speechSynthesis.cancel();
-
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "hr-HR";
-    utterance.rate = speed;
-    utterance.pitch = 1;
-
-    // Try to find a Croatian voice
-    const voices = window.speechSynthesis.getVoices();
-    const croatianVoice = voices.find(
-      (v) =>
-        v.lang.startsWith("hr") ||
-        v.lang.startsWith("sr") ||
-        v.name.toLowerCase().includes("croat")
-    );
-    if (croatianVoice) utterance.voice = croatianVoice;
-
-    utterance.onstart = () => setIsPlaying(true);
-    utterance.onend = () => setIsPlaying(false);
-    utterance.onerror = () => setIsPlaying(false);
-
-    window.speechSynthesis.speak(utterance);
-  }, [text, speed]);
-
-  const stop = () => {
-    window.speechSynthesis.cancel();
+  const stop = useCallback(() => {
+    if (activeSpeech) {
+      activeSpeech.stop();
+    }
     setIsPlaying(false);
-  };
+    setActiveSpeech(null);
+  }, [activeSpeech]);
 
   return (
     <div className="glass rounded-2xl p-6">
