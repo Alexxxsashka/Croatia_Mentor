@@ -36,9 +36,9 @@
   "landing": {
     "hero": {
       "title": "Master Croatian",
-      "titleHighlight": "Through Immersion",
-      "subtitle": "Your premium, structured path to Croatian fluency. Master the language through real-life scenarios, cultural context, pop music, and conversational simulation.",
-      "cta": "Start Journey Free",
+      "titleHighlight": "Naturally",
+      "subtitle": "A simple website for learning Croatian. Complete grammar explanation, vocabulary flashcards, and interactive speaking practice. Absolutely free, no ads, no microtransactions.",
+      "cta": "Start Learning Free",
       "ctaSecondary": "Take Placement Test",
       "goToDashboard": "Go to Dashboard"
     },
@@ -125,18 +125,23 @@
   "placementTest": {
     "title": "Placement Test",
     "subtitle": "Let's determine your Croatian language level",
-    "description": "This test consists of multiple-choice questions covering grammar and vocabulary from A1 to C2 levels. Answer as many as you can!",
+    "description": "This test consists of multiple-choice questions and translation tasks covering grammar and vocabulary from A1 to C2 levels. Answer as many as you can!",
     "start": "Start Test",
     "question": "Question",
     "of": "of",
     "timeRemaining": "Time Remaining",
+    "timeElapsed": "Time",
+    "translationPlaceholder": "Type in Croatian...",
+    "submit": "Submit Answer",
     "results": {
       "title": "Test Complete!",
       "yourLevel": "Your Level",
       "score": "Your Score",
       "description": "Based on your answers, we've determined your Croatian proficiency level.",
       "goToDashboard": "Go to Dashboard",
-      "retake": "Retake Test"
+      "retake": "Retake Test",
+      "totalTime": "Total Time",
+      "avgTimePerQuestion": "Avg. time per question"
     }
   },
   "lessons": {
@@ -363,8 +368,8 @@
     "examples": "Examples"
   },
   "meta": {
-    "title": "Croatia Mentor - Immersive Croatian Language & Culture Academy",
-    "description": "Master Croatian naturally through cultural immersion, pop music, interactive speaking dialogues, and structured lessons from A1 to C2. Step into Croatian culture today.",
-    "keywords": "learn croatian, croatian language course, study croatian, croata, croatian grammar, croatian phrases, croatian lessons, CEFR, speak croatian, croatia mentor"
+    "title": "Croatia Mentor - Learn Croatian without microtransactions",
+    "description": "A simple website for learning Croatian. Learn grammar, vocabulary, reading and speaking. Completely free, no ads, no microtransactions.",
+    "keywords": "learn croatian, study croatian, croatian grammar, croatian phrases, croatian lessons, CEFR, speak croatian, croatia mentor"
   }
 }

@@ -72,7 +72,7 @@ export default function HomePage() {
         <div className="text-center space-y-8 animate-fade-in">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-medium text-blue-400">
             <Sparkles className="w-4 h-4" />
-            Immersive Croatian Academy
+            Croatian Without Microtransactions
           </div>
 
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight">

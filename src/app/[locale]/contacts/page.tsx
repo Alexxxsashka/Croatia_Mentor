@@ -25,12 +25,15 @@ const texts = {
     donationTitle: "Підтримка та донати",
     donationDesc: "Якщо наш проект допомагає вам вивчати мову і ви бажаєте підтримати розробку та додавання нових матеріалів, ви можете надіслати пожертву за реквізитами нижче. Будемо щиро вдячні!",
     hrRequisites: "Хорватські реквізити (IBAN)",
-    uaRequisites: "Українські реквізити",
+    uaRequisites: "Банка Monobank (UA)",
     recipient: "Отримувач",
     iban: "IBAN",
     owner: "Власник рахунку",
     copied: "Скопійовано!",
     copy: "Копіювати",
+    monobankJarLink: "Посилання на Банку",
+    monobankJarCard: "Номер картки Банки",
+    qrCode: "QR-код для поповнення",
   },
   ru: {
     title: "Контакты и Поддержка",
@@ -42,12 +45,15 @@ const texts = {
     donationTitle: "Поддержка и донаты",
     donationDesc: "Если наш проект помогает вам изучать язык и вы хотите поддержать разработку и добавление новых материалов, вы можете отправить пожертвование по реквизитам ниже. Будем искренне благодарны!",
     hrRequisites: "Хорватские реквизиты (IBAN)",
-    uaRequisites: "Украинские реквизиты",
+    uaRequisites: "Банка Monobank (UA)",
     recipient: "Получатель",
     iban: "IBAN",
     owner: "Владелец счета",
     copied: "Скопировано!",
     copy: "Копировать",
+    monobankJarLink: "Ссылка на Банку",
+    monobankJarCard: "Номер карты Банки",
+    qrCode: "QR-код для пополнения",
   },
   en: {
     title: "Contacts & Support",
@@ -59,12 +65,15 @@ const texts = {
     donationTitle: "Support & Donations",
     donationDesc: "If our project helps you learn the language and you would like to support the development and addition of new materials, you can make a donation using the details below. We would be truly grateful!",
     hrRequisites: "Croatian Bank Details (IBAN)",
-    uaRequisites: "Ukrainian Bank Details",
+    uaRequisites: "Monobank Jar (UA)",
     recipient: "Recipient",
     iban: "IBAN",
     owner: "Account Owner",
     copied: "Copied!",
     copy: "Copy",
+    monobankJarLink: "Jar Link",
+    monobankJarCard: "Jar Card Number",
+    qrCode: "QR Code for donation",
   },
 };
 
@@ -232,30 +241,48 @@ export default function ContactsPage() {
                 </div>
               </div>
 
-              {/* Ukraine Bank details card */}
+              {/* Ukraine Monobank Jar details card */}
               <div className="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3">
                 <div className="flex items-center gap-2 text-sm font-semibold text-purple-400">
                   <CreditCard className="w-4 h-4" />
                   <h4>{t.uaRequisites}</h4>
                 </div>
                 <div className="space-y-1">
-                  <div className="text-xs text-muted-foreground">{t.recipient}</div>
-                  <div className="text-sm font-bold">Марцін Олександр Олександрович</div>
+                  <div className="text-xs text-muted-foreground">{t.monobankJarLink}</div>
+                  <a
+                    href="https://send.monobank.ua/jar/6RfGtPt3Gf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm font-bold text-blue-400 hover:underline break-all"
+                  >
+                    https://send.monobank.ua/jar/6RfGtPt3Gf
+                  </a>
                 </div>
                 <div className="space-y-1">
-                  <div className="text-xs text-muted-foreground">IBAN</div>
+                  <div className="text-xs text-muted-foreground">{t.monobankJarCard}</div>
                   <div className="flex items-center justify-between gap-2 p-2 bg-black/30 rounded-xl">
-                    <span className="font-mono text-xs text-white break-all">UA433220010000026202370863220</span>
+                    <span className="font-mono text-xs text-white break-all">4874 1000 3092 5906</span>
                     <button
-                      onClick={() => copyToClipboard("UA433220010000026202370863220", "uaIban")}
+                      onClick={() => copyToClipboard("4874100030925906", "monobankCard")}
                       className="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors shrink-0"
                     >
-                      {copiedKey === "uaIban" ? (
+                      {copiedKey === "monobankCard" ? (
                         <Check className="w-3.5 h-3.5 text-green-400" />
                       ) : (
                         <Copy className="w-3.5 h-3.5 text-muted-foreground hover:text-foreground" />
                       )}
                     </button>
+                  </div>
+                </div>
+
+                <div className="space-y-2 pt-2 border-t border-white/5">
+                  <div className="text-xs text-muted-foreground text-center">{t.qrCode}</div>
+                  <div className="flex justify-center">
+                    <img
+                      src="/monobank-jar.png"
+                      alt="Monobank Jar QR Code"
+                      className="w-40 h-40 rounded-2xl border border-white/10 shadow-lg object-contain bg-white p-1"
+                    />
                   </div>
                 </div>
               </div>
