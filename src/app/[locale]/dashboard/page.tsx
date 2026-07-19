@@ -4,7 +4,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { useSession } from "next-auth/react";
 import { Link } from "@/i18n/navigation";
 import { useState, useEffect } from "react";
-import { lessonsData } from "@/lib/lessons-data";
+import { lessonsData, getLocalizedText } from "@/lib/lessons-data";
 import {
   Trophy,
   Sparkles,
@@ -35,6 +35,7 @@ interface UserProgress {
   currentStreak: number;
   completedLessons: string[];
   testScores: TestScore[];
+  lastActivityDate?: string | Date;
 }
 
 export default function DashboardPage() {
@@ -65,6 +66,7 @@ export default function DashboardPage() {
               currentStreak: data.progress.currentStreak || 0,
               completedLessons: data.progress.completedLessons || [],
               testScores: parsedScores,
+              lastActivityDate: data.progress.lastActivityDate || undefined,
             });
           }
           setProgressLoaded(true);
@@ -163,34 +165,64 @@ export default function DashboardPage() {
   };
 
   // Build dynamic recent activity based on actual test scores and completions
-  const recentActivity: { type: "lesson" | "game" | "chat" | "test"; title: string; xp: number; time: string }[] = [];
-  
+  const rawRecentActivity: { type: "lesson" | "game" | "chat" | "test"; title: string; xp: number; time: string; rawDate: Date }[] = [];
+
+  // 1. Add test scores
   if (progress?.testScores) {
-    progress.testScores.slice(0, 3).forEach((score) => {
+    progress.testScores.forEach((score) => {
       const date = new Date(score.date);
-      const diffMs = new Date().getTime() - date.getTime();
-      const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-      
-      let timeStr = "";
-      if (diffHours < 1) {
-        timeStr = locale === "ua" ? "Щойно" : locale === "ru" ? "Только что" : "Just now";
-      } else if (diffHours < 24) {
-        timeStr = locale === "ua" ? `${diffHours} год. тому` : locale === "ru" ? `${diffHours} ч. назад` : `${diffHours}h ago`;
-      } else {
-        const days = Math.floor(diffHours / 24);
-        timeStr = locale === "ua" ? `${days} дн. тому` : locale === "ru" ? `${days} дн. назад` : `${days}d ago`;
-      }
-      
-      recentActivity.push({
+      rawRecentActivity.push({
         type: "test",
-        title: score.type === "placement" 
-          ? (locale === "ua" ? "Тест рівня" : locale === "ru" ? "Тест уровня" : "Placement Test") 
+        title: score.type === "placement"
+          ? (locale === "ua" ? "Тест рівня" : locale === "ru" ? "Тест уровня" : "Placement Test")
           : (locale === "ua" ? "Тест підвищення" : locale === "ru" ? "Тест повышения" : "Level Quiz"),
         xp: score.score * 10,
-        time: timeStr,
+        time: "",
+        rawDate: date,
       });
     });
   }
+
+  // 2. Add completed lessons
+  if (progress?.completedLessons && progress.completedLessons.length > 0) {
+    const lastActivity = progress.lastActivityDate ? new Date(progress.lastActivityDate) : new Date();
+    [...progress.completedLessons].reverse().forEach((lessonId, idx) => {
+      const lessonObj = lessonsData.find((l) => l.id === lessonId);
+      if (lessonObj) {
+        const date = new Date(lastActivity.getTime() - idx * 10 * 60 * 1000);
+        const titleText = getLocalizedText(lessonObj.title, locale);
+        rawRecentActivity.push({
+          type: "lesson",
+          title: `${locale === "ua" ? "Урок" : locale === "ru" ? "Урок" : "Lesson"}: ${titleText}`,
+          xp: 150,
+          time: "",
+          rawDate: date,
+        });
+      }
+    });
+  }
+
+  // 3. Sort and map to recentActivity
+  rawRecentActivity.sort((a, b) => b.rawDate.getTime() - a.rawDate.getTime());
+  const recentActivity = rawRecentActivity.slice(0, 5).map((act) => {
+    const diffMs = new Date().getTime() - act.rawDate.getTime();
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+    let timeStr = "";
+    if (diffHours < 1) {
+      timeStr = locale === "ua" ? "Щойно" : locale === "ru" ? "Только что" : "Just now";
+    } else if (diffHours < 24) {
+      timeStr = locale === "ua" ? `${diffHours} год. тому` : locale === "ru" ? `${diffHours} ч. назад` : `${diffHours}h ago`;
+    } else {
+      const days = Math.floor(diffHours / 24);
+      timeStr = locale === "ua" ? `${days} дн. тому` : locale === "ru" ? `${days} дн. назад` : `${days}d ago`;
+    }
+    return {
+      type: act.type,
+      title: act.title,
+      xp: act.xp,
+      time: timeStr,
+    };
+  });
 
   const quickActions = [
     {
