@@ -446,23 +446,26 @@ export const lessonsData: LessonData[] = [
     },
     content: {
       description: {
-        en: "Learn the accusative case (akuzativ) in Croatian — used for direct objects.",
-        ru: "Изучите винительный падеж (akuzativ) в хорватском — используется для прямых дополнений.",
-        ua: "Вивчіть знахідний відмінок (акузатив) у хорватській — використовується для прямого додатка."
+        en: "Learn the accusative case (akuzativ) in Croatian — used for direct objects and destination after verbs of motion.",
+        ru: "Изучите винительный падеж (akuzativ) в хорватском — используется для прямых дополнений и направления после глаголов движения.",
+        ua: "Вивчіть знахідний відмінок (акузатив) у хорватській — використовується для прямого додатка та напрямку після дієслів руху."
       },
       sections: [
         {
-          title: { en: "Accusative Endings", ru: "Окончания винительного падежа", ua: "Закінчення знахідного відмінка" },
+          title: { en: "Accusative Endings (Singular)", ru: "Окончания винительного падежа (Единственное число)", ua: "Закінчення знахідного відмінка (Однина)" },
           text: {
-            en: "Accusative is used with transitive verbs (eg. vidjeti, kupiti). Endings:\n- Feminine singular: -a changes to -u (knjiga -> knjigu)\n- Masculine singular (inanimate): stays same as nominative (stol -> stol)\n- Masculine singular (animate): gets -a (brat -> brata)\n- Neuter singular: stays same as nominative (more -> more)",
-            ru: "Винительный падеж используется с переходными глаголами. Окончания:\n- Женский род ед.ч.: -a меняется на -u (knjiga -> knjigu)\n- Мужской род неодуш.: совпадает с именительным (stol -> stol)\n- Мужской род одуш.: получает -a (brat -> brata)\n- Средний род ед.ч.: совпадает с именительным (more -> more)",
-            ua: "Знахідний відмінок використовується з перехідними дієсловами. Закінчення:\n- Жіночий рід однини: -a змінюється на -u (knjiga -> knjigu)\n- Чоловічий рід неживий: збігається з називним (stol -> stol)\n- Чоловічий рід живий: отримує -a (brat -> brata)\n- Середній рід однини: збігається з називним (more -> more)"
-          },
-          examples: [
-            { en: "Čitam knjigu. (I am reading a book.)", ru: "Čitam knjigu. (Я читаю книгу.)", ua: "Čitam knjigu. (Я читаю книгу.)" },
-            { en: "Vidim prijatelja. (I see a friend [masc. animate]).", ru: "Vidim prijatelja. (Я вижу друга.)", ua: "Vidim prijatelja. (Я бачу друга.)" },
-            { en: "Kupujem auto. (I am buying a car [masc. inanimate]).", ru: "Kupujem auto. (Я покупаю машину.)", ua: "Kupujem auto. (Я купую машину.)" }
-          ]
+            en: "The Accusative case (*akuzativ*) answers the questions *Koga?* (Whom?) for animates and *Što?* (What?) for inanimates. It is primarily used for direct objects of transitive verbs (like *vidjeti* - to see, *kupiti* - to buy).\n\n**Singular endings rules:**\n1. **Feminine nouns** ending in **-a** change to **-u**:\n   - *knjiga* (book) -> Čitam **knjigu**.\n   - *kava* (coffee) -> Pijem **kavu**.\n2. **Masculine inanimate nouns** (objects/concepts) **stay the same as Nominative**:\n   - *stol* (table) -> Vidim **stol**.\n   - *mobitel* (phone) -> Kupujem **mobitel**.\n3. **Masculine animate nouns** (people/animals) get the ending **-a**:\n   - *brat* (brother) -> Vidim **brata**.\n   - *pas* (dog) -> Poznajem **psa**.\n4. **Neuter nouns** always **stay the same as Nominative**:\n   - *more* (sea) -> Volim **more**.\n   - *pivo* (beer) -> Pijem **pivo**.",
+            ru: "Винительный падеж (*akuzativ*) отвечает на вопросы *Koga?* (Кого?) для одушевленных и *Što?* (Что?) для неодушевленных объектов. Используется для прямых дополнений при переходных глаголах (например, *vidjeti* - видеть, *kupiti* - покупать).\n\n**Правила окончаний в единственном числе:**\n1. **Женский род** на **-a** меняет окончание на **-u**:\n   - *knjiga* (книга) -> Čitam **knjigu**.\n   - *kava* (кофе) -> Pijem **kavu**.\n2. **Мужской род неодушевленный** **совпадает с именительным падежом**:\n   - *stol* (стол) -> Vidim **stol**.\n   - *mobitel* (телефон) -> Kupujem **mobitel**.\n3. **Мужской род одушевленный** получает окончание **-a**:\n   - *brat* (брат) -> Vidim **brata**.\n   - *pas* (собака) -> Poznajem **psa**.\n4. **Средний род** всегда **совпадает с именительным падежом**:\n   - *more* (море) -> Volim **more**.\n   - *pivo* (пиво) -> Pijem **pivo**.",
+            ua: "Знахідний відмінок (*akuzativ*) відповідає на запитання *Koga?* (Кого?) для істот та *Što?* (Що?) для неістот. Використовується для прямого додатка при перехідних дієсловах (наприклад, *vidjeti* - бачити, *kupiti* - купувати).\n\n**Правила закінчень в однині:**\n1. **Жіночий рід** на **-a** змінює закінчення на **-u**:\n   - *knjiga* (книга) -> Čitam **knjigu**.\n   - *kava* (кава) -> Pijem **kavu**.\n2. **Чоловічий рід неживий** **збігається з називним відмінком**:\n   - *stol* (стіл) -> Vidim **stol**.\n   - *mobitel* (телефон) -> Kupujem **mobitel**.\n3. **Чоловічий рід живий** отримує закінчення **-a**:\n   - *brat* (брат) -> Vidim **brata**.\n   - *pas* (собака) -> Poznajem **psa**.\n4. **Середній рід** завжди **збігається з називним відмінком**:\n   - *more* (море) -> Volim **more**.\n   - *pivo* (пиво) -> Pijem **pivo**."
+          }
+        },
+        {
+          title: { en: "Accusative of Destination (Verbs of Motion)", ru: "Винительный направления (Глаголы движения)", ua: "Знахідний напрямку (Дієслова руху)" },
+          text: {
+            en: "Accusative is also used after the prepositions **u** (into) and **na** (onto) when there is **movement/direction** towards a destination (answering the question *Kamo?* - Whereto?):\n- *Idem u* **školu** (Accusative). - I am going to school.\n- *Idem na* **koncert** (Accusative). - I am going to a concert.\n\n*Contrast:* If you are already there and not moving, you must use the Locative case (e.g. *U školi sam* - I am in school).",
+            ru: "Винительный падеж также употребляется с предлогами **u** (в) и **na** (на) при выражении **направления/движения** (отвечает на вопрос *Kamo?* - Куда?):\n- *Idem u* **školu** (Винительный). - Я иду в школу.\n- *Idem na* **koncert** (Винительный). - Я иду на концерт.\n\n*Сравните:* Если вы уже там находитесь без движения, используется предложный падеж (*U školi sam* - Я в школе).",
+            ua: "Знахідний відмінок також вживається з прийменниками **u** (в) та **na** (на) для вираження **напрямку/руху** (відповідає на запитання *Kamo?* - Куди?):\n- *Idem u* **školu** (Знахідний). - Я йду до школи.\n- *Idem na* **koncert** (Знахідний). - Я йду на концерт.\n\n*Порівняйте:* Якщо ви вже там перебуваєте без руху, використовується місцевий відмінок (*U školi sam* - Я в школі)."
+          }
         }
       ],
       exercises: [
@@ -505,13 +508,54 @@ export const lessonsData: LessonData[] = [
         {
           type: "translation",
           question: { en: "Translate: 'Vidim brata.'", ru: "Переведите: 'Vidim brata.'", ua: "Перекладіть: 'Vidim brata.'" },
-          correctAnswer: { en: "I see my brother.", ru: "Я вижу брата.", ua: "Я бачу брата." }
+          correctAnswer: { en: "I see my brother", ru: "Я вижу брата", ua: "Я бачу брата" }
         },
         {
           type: "multiple-choice",
           question: { en: "Gledam _____ (film). (I am watching a film.)", ru: "Gledam _____ (film). (Я смотрю фильм.)", ua: "Gledam _____ (film). (Я дивлюся фільм.)" },
           options: ["film", "filma", "filmu", "filmom"],
           correctAnswer: "film"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Idem u _____ (škola - motion/destination). (I am going to school.)", ru: "Idem u _____ (škola). (Я иду в школу.)", ua: "Idem u _____ (škola). (Я йду до школи.)" },
+          options: ["školu", "škola", "školi", "škole"],
+          correctAnswer: "školu"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Posjećujem _____ (Zagreb). (I am visiting Zagreb.)", ru: "Заполните: Posjećujem _____ (Zagreb). (Я посещаю Загреб.)", ua: "Заповніть: Posjećujem _____ (Zagreb). (Я відвідую Загреб.)" },
+          correctAnswer: "Zagreb",
+          hint: { en: "Inanimate city name remains unchanged", ru: "Неодушевленное имя города остается неизменным", ua: "Нежива назва міста залишається незмінною" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Čekaš _____ (prijateljica). (You are waiting for a friend.)", ru: "Čekaš _____ (prijateljica). (Ты ждешь подругу.)", ua: "Чекаєш _____ (prijateljica). (Ти чекаєш на подругу.)" },
+          options: ["prijateljicu", "prijateljica", "prijateljici", "prijateljice"],
+          correctAnswer: "prijateljicu"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Trebam _____ (savjet). (I need advice.)", ru: "Trebam _____ (savjet). (Мне нужен совет.)", ua: "Trebam _____ (savjet). (Мені потрібна порада.)" },
+          options: ["savjet", "savjeta", "savjetu", "savjetom"],
+          correctAnswer: "savjet"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Slušam _____ (glazba). (I am listening to music.)", ru: "Заполните: Slušam _____ (glazba). (Я слушаю музыку.)", ua: "Заповніть: Slušam _____ (glazba). (Я слухаю музику.)" },
+          correctAnswer: "glazbu",
+          hint: { en: "Feminine accusative ending is -u", ru: "Окончание женского рода в винительном падеже — -u", ua: "Закінчення жіночого роду в знахідному відмінку — -u" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Kupujem novu kuću.'", ru: "Переведите: 'Kupujem novu kuću.'", ua: "Перекладіть: 'Kupujem novu kuću.'" },
+          correctAnswer: { en: "I am buying a new house", ru: "Я покупаю новый дом", ua: "Я купую новий будинок" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Vozim _____ (auto). (I am driving a car.)", ru: "Vozim _____ (auto). (Я веду машину.)", ua: "Vozim _____ (auto). (Я веду машину.)" },
+          options: ["auto", "auta", "autu", "autom"],
+          correctAnswer: "auto"
         }
       ]
     }
