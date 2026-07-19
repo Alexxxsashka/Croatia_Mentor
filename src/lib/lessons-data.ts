@@ -55,23 +55,26 @@ export const lessonsData: LessonData[] = [
     },
     content: {
       description: {
-        en: "Learn the personal pronouns in Croatian — the building blocks of every sentence.",
-        ru: "Изучите личные местоимения в хорватском — основу каждого предложения.",
-        ua: "Вивчіть особові займенники в хорватській — основу кожного речення."
+        en: "Learn the personal pronouns in Croatian — the building blocks of every sentence, including singular, plural, and gender forms.",
+        ru: "Изучите личные местоимения в хорватском — основу каждого предложения, включая формы единственного, множественного числа и рода.",
+        ua: "Вивчіть особові займенники в хорватській — основу кожного речення, включаючи форми однини, множини та роду."
       },
       sections: [
         {
-          title: { en: "Personal Pronouns", ru: "Личные местоимения", ua: "Особові займенники" },
+          title: { en: "Personal Pronouns (Nominative Case)", ru: "Личные местоимения (Именительный падеж)", ua: "Особові займенники (Називний відмінок)" },
           text: {
-            en: "In Croatian, personal pronouns change based on their function in the sentence. Here are the basic nominative forms:",
-            ru: "В хорватском языке личные местоимения изменяются в зависимости от их функции в предложении. Вот основные формы в именительном падеже:",
-            ua: "У хорватській мові особові займенники змінюються залежно від їхньої функції в реченні. Ось основні форми в називному відмінку:"
-          },
-          examples: [
-            { en: "ja (I) — Ja sam student. (I am a student)", ru: "ja (я) — Ja sam student. (Я студент)", ua: "ja (я) — Ja sam student. (Я студент)" },
-            { en: "ti (you) — Ti si učenik. (You are a pupil)", ru: "ti (ты) — Ti si učenik. (Ты ученик)", ua: "ti (ти) — Ti si učenik. (Ти учень)" },
-            { en: "on/ona/ono (he/she/it) — On je dobar. (He is good)", ru: "on/ona/ono (он/она/оно) — On je dobar. (Он хороший)", ua: "on/ona/ono (він/вона/воно) — On je dobar. (Він добрий)" }
-          ]
+            en: "In Croatian, personal pronouns are used to represent the subject of a verb. Here are the basic forms in the Nominative case (the subject form):\n\n**Singular (Jednina):**\n- **ja** — I\n- **ti** — you (singular, informal)\n- **on** — he / it (masculine)\n- **ona** — she / it (feminine)\n- **ono** — it (neuter)\n\n**Plural (Množina):**\n- **mi** — we\n- **vi** — you (plural or polite formal singular)\n- **oni** — they (masculine or mixed group)\n- **one** — they (feminine only)\n- **ona** — they (neuter only)",
+            ru: "В хорватском языке личные местоимения представляют субъект предложения. Вот формы именительного падежа:\n\n**Единственное число (Jednina):**\n- **ja** — я\n- **ti** — ты (дружеское обращение)\n- **on** — он (мужской род)\n- **ona** — она (женский род)\n- **ono** — оно (средний род)\n\n**Множественное число (Množina):**\n- **mi** — мы\n- **vi** — вы (множественное число или уважительное обращение к одному человеку)\n- **oni** — они (мужской род или смешанная группа)\n- **one** — они (только женский род)\n- **ona** — они (только средний род)",
+            ua: "У хорватській мові особові займенники представляють підмет речення. Ось форми називного відмінка:\n\n**Однина (Jednina):**\n- **ja** — я\n- **ti** — ти (дружнє звернення)\n- **on** — він (чоловічий рід)\n- **ona** — вона (жіночий рід)\n- **ono** — воно (середній рід)\n\n**Множина (Množina):**\n- **mi** — ми\n- **vi** — ви (множина або шанобливе звернення до однієї особи)\n- **oni** — вони (чоловічий рід або змішана група)\n- **one** — вони (тільки жіночий рід)\n- **ona** — вони (тільки середній рід)"
+          }
+        },
+        {
+          title: { en: "Important Usage Rules", ru: "Важные правила использования", ua: "Важливі правила використання" },
+          text: {
+            en: "1. **Omission of Pronouns:** In Croatian, personal subject pronouns (ja, ti, on...) are very frequently omitted in daily conversation because the ending of the conjugated verb clearly indicates who is performing the action. For example, instead of saying *Ja radim* (I work), Croatians usually say just *Radim*.\n2. **Formal Address (Vi):** The pronoun *Vi* is capitalized in writing when addressing one person formally (e.g., *Kako ste Vi?* - How are you?). When addressing multiple people, it remains lowercase *vi*.\n3. **Third Person Plural Genders:** Croatian distinguishes gender in the plural of 'they':\n   - *oni* is used for groups of men or mixed groups (e.g., 5 men and 1 woman).\n   - *one* is used only for groups consisting entirely of women.\n   - *ona* is used only for groups of neuter nouns (e.g., children - *djeca*, or fields - *polja*).",
+            ru: "1. **Опущение местоимений:** В хорватском личные местоимения (ja, ti...) очень часто опускаются, так как окончание глагола уже указывает на лицо. Вместо *Ja radim* (Я работаю) обычно говорят просто *Radim*.\n2. **Вежливое обращение (Vi):** Местоимение *Vi* пишется с большой буквы при уважительном обращении к одному лицу (*Kako ste Vi?*). При обращении к нескольким людям пишется со строчной буквы *vi*.\n3. **Род во множественном числе:** Хорватский язык различает род слова «они»:\n   - *oni* — для мужчин или смешанных групп.\n   - *one* — только для групп женщин.\n   - *ona* — только для существительных среднего рода во мн. ч. (например, дети — *djeca*).",
+            ua: "1. **Опущення займенників:** У хорватській мові особові займенники (ja, ti...) дуже часто опускаються, оскільки закінчення дієслова вже вказує на особу. Замість *Ja radim* (Я працюю) зазвичай говорять просто *Radim*.\n2. **Ввічливе звернення (Vi):** Займенник *Vi* пишеться з великої літери при шанобливому зверненні до однієї особи (*Kako ste Vi?*). При зверненні до кількох людей пишеться з малої літери *vi*.\n3. **Рід у множині:** Хорватська мова розрізняє рід слова «вони»:\n   - *oni* — для чоловіків або змішаних груп.\n   - *one* — тільки для груп жінок.\n   - *ona* — тільки для іменників середнього роду у множині (наприклад, діти — *djeca*)."
+          }
         }
       ],
       exercises: [
@@ -83,7 +86,7 @@ export const lessonsData: LessonData[] = [
         },
         {
           type: "multiple-choice",
-          question: { en: "_____ ste lijepi. (You [formal] are beautiful.)", ru: "_____ ste lijepi. (Вы [вежливо] красивы.)", ua: "_____ ste lijepi. (Ви [ввічливо] красиві.)" },
+          question: { en: "_____ ste lijepi. (You [formal/plural] are beautiful.)", ru: "_____ ste lijepi. (Вы красивы.)", ua: "_____ ste lijepi. (Ви красиві.)" },
           options: ["Vi", "Ti", "Oni", "Ja"],
           correctAnswer: "Vi"
         },
@@ -91,7 +94,7 @@ export const lessonsData: LessonData[] = [
           type: "fill-blank",
           question: { en: "Complete: _____ je profesorica. (She is a professor.)", ru: "Заполните: _____ je profesorica. (Она преподаватель.)", ua: "Заповніть: _____ je profesorica. (Вона викладач.)" },
           correctAnswer: "Ona",
-          hint: { en: "Think about the feminine 3rd person pronoun", ru: "Подумайте о местоимении 3-го лица женского рода (Она)", ua: "Подумайте про займенник 3-ї особи жіночого роду (Вона)" }
+          hint: { en: "Feminine 3rd person singular pronoun", ru: "Местоимение 3-го лица женского рода (Она)", ua: "Займенник 3-ї особи жіночого роду (Вона)" }
         },
         {
           type: "multiple-choice",
@@ -107,7 +110,7 @@ export const lessonsData: LessonData[] = [
         },
         {
           type: "multiple-choice",
-          question: { en: "_____ su u uredu. (They [masc.] are in the office.)", ru: "_____ su u uredu. (Они [м.р.] в офисе.)", ua: "_____ su u uredu. (Вони [ч.р.] в офісі.)" },
+          question: { en: "_____ su u uredu. (They [masc./mixed] are in the office.)", ru: "_____ su u uredu. (Они [м.р./смеш.] в офисе.)", ua: "_____ su u uredu. (Вони [ч.р./зміш.] в офісі.)" },
           options: ["Oni", "One", "Ona", "Vi"],
           correctAnswer: "Oni"
         },
@@ -121,6 +124,47 @@ export const lessonsData: LessonData[] = [
           question: { en: "_____ čitaš knjigu. (You are reading a book.)", ru: "_____ čitaš knjigu. (Ты читаешь книгу.)", ua: "_____ čitaš knjigu. (Ти читаєш книгу.)" },
           options: ["Ti", "Ja", "On", "Mi"],
           correctAnswer: "Ti"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "_____ su sestre. (They [feminine only] are sisters.)", ru: "_____ su sestre. (Они [только жен. род] сестры.)", ua: "_____ su sestre. (Вони [тільки жін. рід] сестри.)" },
+          options: ["One", "Oni", "Ona", "Vi"],
+          correctAnswer: "One"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: _____ je dijete. (It is a child.)", ru: "Заполните: _____ je dijete. (Оно ребенок.)", ua: "Заповніть: _____ je dijete. (Воно дитина.)" },
+          correctAnswer: "Ono",
+          hint: { en: "Neuter 3rd person singular pronoun", ru: "Местоимение 3-го лица среднего рода (Оно)", ua: "Займенник 3-ї особи середнього роду (Воно)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Tko ste _____? (Who are you [plural/formal]?)", ru: "Tko ste _____? (Кто вы?)", ua: "Tko ste _____? (Хто ви?)" },
+          options: ["vi", "ti", "oni", "ja"],
+          correctAnswer: "vi"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "_____ smo učenici. (We are pupils.)", ru: "_____ smo učenici. (Мы ученики.)", ua: "_____ smo učenici. (Ми учні.)" },
+          options: ["Mi", "Vi", "Oni", "Ja"],
+          correctAnswer: "Mi"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: _____ uče hrvatski. (They [masc./mixed] study Croatian.)", ru: "Заполните: _____ uče hrvatski. (Они учат хорватский.)", ua: "Заповніть: _____ uče hrvatski. (Вони вчать хорватську.)" },
+          correctAnswer: "Oni",
+          hint: { en: "They (masculine plural)", ru: "Они (мужской род)", ua: "Вони (чоловічий рід)" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate to English: 'On je liječnik.'", ru: "Переведите на русский: 'On je liječnik.'", ua: "Перекладіть на українську: 'On je liječnik.'" },
+          correctAnswer: { en: "He is a doctor", ru: "Он врач", ua: "Він лікар" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "_____ radite danas. (You [plural] work today.)", ru: "_____ radite danas. (Вы работаете сегодня.)", ua: "_____ radite danas. (Ви працюєте сьогодні.)" },
+          options: ["Vi", "Ti", "Mi", "Oni"],
+          correctAnswer: "Vi"
         }
       ]
     }
@@ -136,22 +180,26 @@ export const lessonsData: LessonData[] = [
     },
     content: {
       description: {
-        en: "Master the present tense of the verb 'biti' (to be) and learn to introduce yourself.",
-        ru: "Освойте настоящее время глагола 'biti' (быть) и научитесь представляться.",
-        ua: "Опануйте теперішній час дієслова 'biti' (бути) та навчіться представлятися."
+        en: "Master the present tense of the auxiliary verb 'biti' (to be) in positive, negative, and interrogative forms, and practice introductions.",
+        ru: "Освойте настоящее время вспомогательного глагола 'biti' (быть) в утвердительной, отрицательной и вопросительной формах, и попрактикуйтесь в знакомстве.",
+        ua: "Опануйте теперішній час допоміжного дієслова 'biti' (бути) в стверджувальній, заперечній та питальній формах, і попрактикуйтеся у знайомстві."
       },
       sections: [
         {
-          title: { en: "Present of Biti", ru: "Настоящее время глагола Biti", ua: "Теперішній час дієслова Biti" },
+          title: { en: "The Present Tense of 'Biti'", ru: "Настоящее время глагола 'biti'", ua: "Теперішній час дієслова 'biti'" },
           text: {
-            en: "The short (clitic) forms of 'biti' are: sam, si, je, smo, ste, su. To make questions, we use 'Li' (e.g. Jesi li...?). To introduce yourself: 'Ja sam Marko' or 'Zovem se Marko'.",
-            ru: "Краткие формы глагола 'biti': sam, si, je, smo, ste, su. Для вопросов используется частица 'li'. Представление: 'Ja sam Marko' или 'Zovem se Marko'.",
-            ua: "Короткі форми дієслова 'biti': sam, si, je, smo, ste, su. Для запитань використовується частка 'li'. Представлення: 'Ja sam Marko' або 'Zovem se Marko'."
-          },
-          examples: [
-            { en: "Kako se zoveš? — Zovem se Ana. (What is your name? — My name is Ana.)", ru: "Kako se zoveš? — Zovem se Ana. (Как тебя зовут? — Меня зовут Ана.)", ua: "Kako se zoveš? — Zovem se Ana. (Як тебе звати? — Мене звати Ана.)" },
-            { en: "Odakle si? — Ja sam iz Ukrajine. (Where are you from? — I am from Ukraine.)", ru: "Odakle si? — Ja sam iz Ukrajine. (Откуда ты? — Я из Украины.)", ua: "Odakle si? — Ja sam iz Ukrajine. (Звідки ти? — Я з України.)" }
-          ]
+            en: "The verb *biti* (to be) is the most important auxiliary verb in Croatian. In the present tense, it has two sets of positive forms:\n\n1. **Unstressed Short Forms (Clitics):** These are the default forms used in sentences. They cannot stand at the beginning of a sentence.\n   - ja **sam** (I am)\n   - ti **si** (you are)\n   - on/ona/ono **je** (he/she/it is)\n   - mi **smo** (we are)\n   - vi **ste** (you are)\n   - oni/one/ona **su** (they are)\n\n2. **Stressed Long Forms:** Used for emphasis, in short answers (e.g. *Jesi li ti student? - Jesam.*), or at the very beginning of a sentence.\n   - **jesam**, **jesi**, **jest**, **jesmo**, **jeste**, **jesu**",
+            ru: "Глагол *biti* (быть) — важнейший вспомогательный глагол в хорватском языке. В настоящем времени он имеет две утвердительные формы:\n\n1. **Краткие безударные формы (энклитики):** Используются по умолчанию. Не могут стоять в самом начале предложения.\n   - ja **sam** (я есть)\n   - ti **si** (ты есть)\n   - on/ona/ono **je** (он/она/оно есть)\n   - mi **smo** (мы есть)\n   - vi **ste** (вы есть)\n   - oni/one/ona **su** (они есть)\n\n2. **Полные ударные формы:** Используются для логического ударения, в кратких ответах (например, *Jesi li ti student? - Jesam.*) или в самом начале предложения.\n   - **jesam**, **jesi**, **jest**, **jesmo**, **jeste**, **jesu**",
+            ua: "Дієслово *biti* (бути) — найважливіше допоміжне дієслово в хорватській мові. У теперішньому часі воно має дві стверджувальні форми:\n\n1. **Короткі ненаголошені форми (енклітики):** Використовуються за замовчуванням. Не можуть стояти на самому початку речення.\n   - ja **sam** (я є)\n   - ti **si** (ти є)\n   - on/ona/ono **je** (він/вона/воно є)\n   - mi **smo** (ми є)\n   - vi **ste** (ви є)\n   - oni/one/ona **su** (вони є)\n\n2. **Повні наголошені форми:** Використовуються для логічного наголосу, у коротких відповідях (наприклад, *Jesi li ti student? - Jesam.*) або на самому початку речення.\n   - **jesam**, **jesi**, **jest**, **jesmo**, **jeste**, **jesu**"
+          }
+        },
+        {
+          title: { en: "Negation and Questions", ru: "Отрицание и вопросы", ua: "Заперечення та запитання" },
+          text: {
+            en: "**Negative Forms:** Formed by adding the negative particle *ni-* directly to the stressed forms, creating a single word:\n- ja **nisam** (I am not)\n- ti **nisi** (you are not)\n- on/ona/ono **nije** (he/she/it is not)\n- mi **nismo** (we are not)\n- vi **niste** (you are not)\n- oni/one/ona **nisu** (they are not)\n\n**Interrogative Forms (Questions):** To form a 'yes/no' question, use the stressed verb form followed by the particle **li**:\n- *Jesi li* ti student? (Are you a student?)\n- *Je li* on učitelj? (Is he a teacher?)\n- *Jeste li* vi iz Zagreba? (Are you from Zagreb?)",
+            ru: "**Отрицательные формы:** Образуются путем слияния частицы *ni-* с формой глагола:\n- ja **nisam** (я не есть)\n- ti **nisi** (ты не есть)\n- on/ona/ono **nije** (он/она/оно не есть)\n- mi **nismo** (мы не есть)\n- vi **niste** (вы не есть)\n- oni/one/ona **nisu** (они не есть)\n\n**Вопросительные предложения:** Для общего вопроса используется ударная форма глагола и вопросительная частица **li**:\n- *Jesi li* ti student? (Ты студент?)\n- *Je li* on učitelj? (Он учитель?)\n- *Jeste li* vi iz Zagreba? (Вы из Загреба?)",
+            ua: "**Заперечні форми:** Утворюються шляхом злиття частки *ni-* з формою дієслова:\n- ja **nisam** (я не є)\n- ti **nisi** (ти не є)\n- on/ona/ono **nije** (він/вона/воно не є)\n- mi **nismo** (ми не є)\n- vi **niste** (ви не є)\n- oni/one/ona **nisu** (вони не є)\n\n**Питальні речення:** Для загального запитання використовується наголошена форма дієслова та питальна частка **li**:\n- *Jesi li* ti student? (Ти студент?)\n- *Je li* on učitelj? (Він вчитель?)\n- *Jeste li* vi iz Zagreba? (Ви з Загреба?)"
+          }
         }
       ],
       exercises: [
@@ -171,7 +219,7 @@ export const lessonsData: LessonData[] = [
           type: "fill-blank",
           question: { en: "Complete: Odakle _____ ti? (Where are you from?)", ru: "Заполните: Odakle _____ ti? (Откуда ты?)", ua: "Заповніть: Odakle _____ ti? (Звідки ти?)" },
           correctAnswer: "si",
-          hint: { en: "Use present form of 'biti' for 'ti'", ru: "Используйте форму глагола 'biti' для 'ti'", ua: "Використовуйте форму дієслова 'biti' для 'ti'" }
+          hint: { en: "Short present form of 'biti' for 'ti'", ru: "Краткая форма глагола 'biti' для 'ti'", ua: "Коротка форма дієслова 'biti' для 'ti'" }
         },
         {
           type: "multiple-choice",
@@ -182,7 +230,7 @@ export const lessonsData: LessonData[] = [
         {
           type: "translation",
           question: { en: "Translate: 'Ja sam iz Kijeva.'", ru: "Переведите: 'Ja sam iz Kijeva.'", ua: "Перекладіть: 'Ja sam iz Kijeva.'" },
-          correctAnswer: { en: "I am from Kyiv.", ru: "Я из Киева.", ua: "Я з Києва." }
+          correctAnswer: { en: "I am from Kyiv", ru: "Я из Киева", ua: "Я з Києва" }
         },
         {
           type: "multiple-choice",
@@ -194,13 +242,54 @@ export const lessonsData: LessonData[] = [
           type: "fill-blank",
           question: { en: "Complete: Mi _____ studenti. (We are students.)", ru: "Заполните: Mi _____ studenti. (Мы студенты.)", ua: "Заповніть: Mi _____ studenti. (Ми студенти.)" },
           correctAnswer: "smo",
-          hint: { en: "We are", ru: "Мы есть (smo)", ua: "Ми є (smo)" }
+          hint: { en: "Short form of 'biti' (we are)", ru: "Краткая форма глагола 'biti' (мы есть - smo)", ua: "Коротка форма дієслова 'biti' (ми є - smo)" }
         },
         {
           type: "multiple-choice",
           question: { en: "Kako se _____ ona? (What is her name?)", ru: "Kako se _____ ona? (Как её зовут?)", ua: "Kako se _____ ona? (Як її звати?)" },
           options: ["zove", "zovem", "zoveš", "zovu"],
           correctAnswer: "zove"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Ja _____ iz Zagreба. (I am not from Zagreb.)", ru: "Ja _____ iz Zagreba. (Я не из Загреба.)", ua: "Ja _____ iz Zagreba. (Я не з Загреба.)" },
+          options: ["nisam", "nisi", "nije", "nismo"],
+          correctAnswer: "nisam"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: _____ li ti sretan? (Are you happy?)", ru: "Заполните: _____ li ti sretan? (Ты счастлив?)", ua: "Заповніть: _____ li ti sretan? (Ти щасливий?)" },
+          correctAnswer: "Jesi",
+          hint: { en: "Question form: 2nd person singular stressed 'biti'", ru: "Вопросительная форма: 2-е лицо ед. ч. ударная форма 'biti'", ua: "Питальна форма: 2-га особа однини наголошена форма 'biti'" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "On _____ profesor. (He is not a professor.)", ru: "On _____ profesor. (Он не преподаватель.)", ua: "On _____ profesor. (Він не викладач.)" },
+          options: ["nije", "nisam", "nisi", "nisu"],
+          correctAnswer: "nije"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Jesu _____ oni umorni? (Are they tired?)", ru: "Jesu _____ oni umorni? (Они устали?)", ua: "Jesu _____ oni umorni? (Вони втомилися?)" },
+          options: ["li", "su", "si", "se"],
+          correctAnswer: "li"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Mi _____ umorni. (We are not tired.)", ru: "Заполните: Mi _____ umorni. (Мы не устали.)", ua: "Заповніть: Mi _____ umorni. (Ми не втомилися.)" },
+          correctAnswer: "nismo",
+          hint: { en: "We are not (negation)", ru: "Мы не есть (nismo)", ua: "Ми не є (nismo)" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate to English: 'Nisam umoran.'", ru: "Переведите на русский: 'Nisam umoran.'", ua: "Перекладіть на українську: 'Nisam umoran.'" },
+          correctAnswer: { en: "I am not tired", ru: "Я не устал", ua: "Я не втомився" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Jeste li _____ iz Splita? (Are you [plural/formal] from Split?)", ru: "Jeste li _____ iz Splita? (Вы из Сплита?)", ua: "Jeste li _____ iz Splita? (Ви зі Спліта?)" },
+          options: ["vi", "ti", "oni", "mi"],
+          correctAnswer: "vi"
         }
       ]
     }
