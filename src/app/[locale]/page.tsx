@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import { Link } from "@/i18n/navigation";
@@ -15,9 +16,27 @@ import {
   Sparkles,
 } from "lucide-react";
 
+const DUST_PARTICLES = Array.from({ length: 30 }).map((_, i) => ({
+  id: i,
+  top: `${(i * 13) % 100}%`,
+  left: `${(i * 27) % 100}%`,
+  size: `${(i % 3) + 2}px`,
+  delay: `${(i * 0.3).toFixed(1)}s`,
+  duration: `${((i % 4) * 2 + 7).toFixed(1)}s`,
+}));
+
 export default function HomePage() {
   const t = useTranslations("landing");
   const { data: session } = useSession();
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const features = [
     {
@@ -59,28 +78,54 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="relative overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/3 -left-40 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-pink-500/10 rounded-full blur-3xl" />
+    <div className="relative overflow-hidden min-h-screen">
+      {/* Background Parallax Layer */}
+      <div
+        className="absolute inset-0 bg-cover bg-center pointer-events-none transition-transform duration-75 ease-out"
+        style={{
+          backgroundImage: "url('/hero-bg.jpg')",
+          transform: `translateY(${scrollY * 0.3}px)`,
+          zIndex: -2,
+        }}
+      />
+      {/* Dark overlay to ensure text readability */}
+      <div 
+        className="absolute inset-0 bg-slate-950/80 backdrop-blur-[1px] pointer-events-none" 
+        style={{ zIndex: -1 }} 
+      />
+
+      {/* Floating Dust Particles */}
+      <div className="dust-container" style={{ transform: `translateY(${scrollY * -0.15}px)` }}>
+        {DUST_PARTICLES.map((p) => (
+          <div
+            key={p.id}
+            className="dust-particle"
+            style={{
+              top: p.top,
+              left: p.left,
+              width: p.size,
+              height: p.size,
+              animationDelay: p.delay,
+              animationDuration: p.duration,
+            }}
+          />
+        ))}
       </div>
 
       {/* Hero Section */}
-      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32">
+      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-32">
         <div className="text-center space-y-8 animate-fade-in">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-medium text-blue-400">
             <Sparkles className="w-4 h-4" />
             Croatian Without Microtransactions
           </div>
 
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight drop-shadow-md">
             {t("hero.title")}{" "}
             <span className="gradient-text">{t("hero.titleHighlight")}</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed drop-shadow-sm">
             {t("hero.subtitle")}
           </p>
 
@@ -113,27 +158,39 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Floating badges */}
+        {/* Floating badges (Parallaxed) */}
         <div className="hidden lg:block">
-          <div className="absolute top-32 left-10 animate-float glass px-4 py-2 rounded-xl text-sm font-medium flex items-center gap-1.5">
+          <div 
+            className="absolute top-32 left-10 animate-float glass px-4 py-2 rounded-xl text-sm font-medium flex items-center gap-1.5 transition-transform duration-75"
+            style={{ transform: `translateY(${scrollY * -0.1}px)` }}
+          >
             <Flag countryCode="hr" className="w-5 h-3.5 rounded-[2px]" />
             Dobar dan!
           </div>
           <div
-            className="absolute top-48 right-16 animate-float glass px-4 py-2 rounded-xl text-sm font-medium"
-            style={{ animationDelay: "1s" }}
+            className="absolute top-48 right-16 animate-float glass px-4 py-2 rounded-xl text-sm font-medium transition-transform duration-75"
+            style={{ 
+              animationDelay: "1s",
+              transform: `translateY(${scrollY * -0.05}px)`
+            }}
           >
             📚 A1 → C2
           </div>
           <div
-            className="absolute bottom-32 left-20 animate-float glass px-4 py-2 rounded-xl text-sm font-medium"
-            style={{ animationDelay: "2s" }}
+            className="absolute bottom-32 left-20 animate-float glass px-4 py-2 rounded-xl text-sm font-medium transition-transform duration-75"
+            style={{ 
+              animationDelay: "2s",
+              transform: `translateY(${scrollY * 0.05}px)`
+            }}
           >
             🔥 15 day streak
           </div>
           <div
-            className="absolute bottom-48 right-24 animate-float glass px-4 py-2 rounded-xl text-sm font-medium"
-            style={{ animationDelay: "0.5s" }}
+            className="absolute bottom-48 right-24 animate-float glass px-4 py-2 rounded-xl text-sm font-medium transition-transform duration-75"
+            style={{ 
+              animationDelay: "0.5s",
+              transform: `translateY(${scrollY * 0.1}px)`
+            }}
           >
             ⭐ 2,450 XP
           </div>
@@ -170,7 +227,7 @@ export default function HomePage() {
 
       {/* CTA Section */}
       <section className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
-        <div className="text-center p-12 rounded-3xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 glass">
+        <div className="text-center p-12 rounded-3xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 glass border border-white/5">
           <h2 className="text-3xl font-bold mb-4 flex items-center justify-center gap-2 flex-wrap">
             Počnimo učiti hrvatski!
             <Flag countryCode="hr" className="w-7 h-5 rounded-[3px] shadow" />
