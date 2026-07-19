@@ -23,6 +23,7 @@ export function speakText(text: string, options?: SpeakOptions) {
   const audio = new Audio(url);
   
   let playedSuccessfully = false;
+  let fallbackCalled = false;
 
   audio.onplay = () => {
     playedSuccessfully = true;
@@ -34,6 +35,9 @@ export function speakText(text: string, options?: SpeakOptions) {
   };
 
   const handleFallback = () => {
+    if (fallbackCalled) return;
+    fallbackCalled = true;
+
     if ("speechSynthesis" in window) {
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(cleanText);
