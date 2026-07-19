@@ -1681,6 +1681,474 @@ export const lessonsData: LessonData[] = [
       ]
     }
   },
+  {
+    id: "a2-grammar-5",
+    type: "grammar",
+    level: "A2",
+    title: {
+      en: "Instrumental s prijedlozima i bez (Instrumental Case)",
+      ru: "Творительный падеж (Instrumental)",
+      ua: "Орудний відмінок (Instrumental)"
+    },
+    content: {
+      description: {
+        en: "Learn the instrumental case (instrumental) in Croatian — used for company (with someone), means of transport, and tools.",
+        ru: "Изучите творительный падеж (instrumental) в хорватском — используется для выражения совместности (с кем-то), средств транспорта и инструментов.",
+        ua: "Вивчіть орудний відмінок (instrumental) у хорватській — використовується для компанії (з кимось), засобів транспорту та інструментів."
+      },
+      sections: [
+        {
+          title: { en: "Instrumental Endings & Usage", ru: "Окончания и употребление творительного падежа", ua: "Закінчення та вживання орудного відмінка" },
+          text: {
+            en: "The Instrumental case answers the questions **S kim?** (With whom?) and **Čime?** (With what?).\n\n**Key endings (Singular):**\n- **Masculine/Neuter:** **-om** (after hard consonants: *stol* -> *stolom*, *prijatelj* -> *prijateljem* - ending is **-em** after soft palatals like *ž, š, č, ć, j*).\n- **Feminine:** **-om** (*kava* -> *kavom*, *sestra* -> *sestrom*).\n\n**Important Rules:**\n1. **With preposition 's / sa' (with):** used when referring to company or accompaniment (people/animals):\n   - *Šetam s prijateljem.* (I walk with a friend.)\n   - *Kava s mlijekom.* (Coffee with milk.)\n2. **Without preposition 's / sa':** used for instruments, tools, or means of transport:\n   - *Putujem vlakom.* (I travel by train. - NOT s vlakom!)\n   - *Pišem olovkom.* (I write with a pencil.)",
+            ru: "Творительный падеж отвечает на вопросы **S kim?** (С кем?) и **Čime?** (Чем?).\n\n**Основные окончания (Единственное число):**\n- **Мужской/Средний род:** **-om** (после твердых: *stolom*, после мягких *ж, ш, ч, щ, й* окончание **-em**: *prijateljem*).\n- **Женский род:** **-om** (*kavom*, *sestrom*).\n\n**Важные правила:**\n1. **С предлогом 's / sa' (c):** используется для совместности (люди/животные):\n   - *Šetam s prijateljem.* (Гуляю с другом.)\n2. **Без предлога 's / sa':** для инструментов или транспорта:\n   - *Putujem vlakom.* (Еду поездом / на поезде.)\n   - *Pišem olovkom.* (Пишу карандашом.)",
+            ua: "Орудний відмінок відповідає на запитання **S kim?** (З кем?) та **Čime?** (Чим?).\n\n**Основні закінчення (Однина):**\n- **Чоловічий/Середній рід:** **-om** (після твердих приголосних: *stolom*, після м'яких закінчення **-em**: *prijateljem*).\n- **Жіночий рід:** **-om** (*kavom*, *sestrom*).\n\n**Важливі правила:**\n1. **З прийменником 's / sa' (з):** використовується для сумісності (люди/тварини):\n   - *Šetam s prijateljem.* (Гуляю з другом.)\n2. **Без прийменника 's / sa':** для інструментів або транспорту:\n   - *Putujem vlakom.* (Їду поїздом.)\n   - *Pišem olovkom.* (Пишу олівцем.)"
+          }
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: { en: "Putujem _____ (vlak - train). (I travel by train.)", ru: "Putujem _____ (vlak). (Я еду на поезде.)", ua: "Putujem _____ (vlak). (Я їду поїздом.)" },
+          options: ["vlakom", "s vlakom", "vlaku", "vlakomom"],
+          correctAnswer: "vlakom"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Idem u kino _____ (sestra - sister). (I am going to the cinema with sister.)", ru: "Idem u kino _____ (sestra). (Я иду в кино с сестрой.)", ua: "Idem u kino _____ (sestra). (Я йду в кіно з сестрою.)" },
+          options: ["sa sestrom", "sestrom", "sestru", "sestre"],
+          correctAnswer: "sa sestrom"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Pišem _____ (olovka - pencil). (I write with a pencil.)", ru: "Заполните: Pišem _____ (olovka). (Я пишу карандашом.)", ua: "Заповніть: Pišem _____ (olovka). (Я пишу олівцем.)" },
+          correctAnswer: "olovkom",
+          hint: { en: "instrumental of olovka without preposition", ru: "творительный падеж без предлога", ua: "орудний відмінок без прийменника" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Razgovaram _____ (brat - brother). (I am talking with my brother.)", ru: "Razgovaram _____ (brat). (Я разговариваю с братом.)", ua: "Razgovaram _____ (brat). (Я розмовляю з братом.)" },
+          options: ["s bratom", "bratom", "bratu", "s brata"],
+          correctAnswer: "s bratom"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Putujemo _____ (auto - car). (We travel by car.)", ru: "Putujemo _____ (auto). (Мы едем на машине.)", ua: "Putujemo _____ (auto). (Ми їдемо машиною.)" },
+          options: ["autom", "s autom", "autu", "autonom"],
+          correctAnswer: "autom"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Želim kavu s _____ (mlijeko - milk).", ru: "Заполните: Želim kavu s _____ (mlijeko).", ua: "Заповніть: Želim kavu s _____ (mlijeko)." },
+          correctAnswer: "mlijekom",
+          hint: { en: "milk (instrumental)", ru: "молоком (mlijekom)", ua: "молоком (mlijekom)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Bavim se _____ (sport - sport). (I play sports.)", ru: "Bavim se _____ (sport). (Я занимаюсь спортом.)", ua: "Bavim se _____ (sport). (Я займаюся спортом.)" },
+          options: ["sportom", "s sportom", "sportu", "sportomom"],
+          correctAnswer: "sportom"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Putujem avionom.'", ru: "Переведите: 'Putujem avionom.'", ua: "Перекладіть: 'Putujem avionom.'" },
+          correctAnswer: { en: "I travel by plane", ru: "Я лечу самолетом / Я путешествую на самолете", ua: "Я лечу літаком / Я подорожую літаком" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Pijem čaj s _____ (limun - lemon).", ru: "Pijem čaj s _____ (limun).", ua: "П'ю чай з _____ (limun)." },
+          options: ["limunom", "limunem", "s limunom", "limuna"],
+          correctAnswer: "limunom"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Što radiš s _____ (taj mobitel - that phone)?", ru: "Что ты делаешь с _____ (taj mobitel)?", ua: "Що ти робиш із _____ (taj mobitel)?" },
+          options: ["tim mobitelom", "taj mobitelom", "tome mobitelu", "tim mobitelu"],
+          correctAnswer: "tim mobitelom"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Šetam s _____ (pas - dog). (I walk with the dog.)", ru: "Заполните: Šetam s _____ (pas). (Я гуляю с собакой.)", ua: "Заповніть: Šetam s _____ (pas). (Я гуляю з собакою.)" },
+          correctAnswer: "psom",
+          hint: { en: "dog (instrumental - stem changes to ps-)", ru: "собакой (psom)", ua: "собакою (psom)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Želim pizzu sa _____ (sir - cheese). (I want pizza with cheese.)", ru: "Želim pizzu sa _____ (sir).", ua: "Želim pizzu sa _____ (sir)." },
+          options: ["sirom", "sirenem", "sira", "siru"],
+          correctAnswer: "sirom"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Upravljam _____ (tvrtka - company). (I manage the company.)", ru: "Upravljam _____ (tvrtka). (Я руковожу компанией.)", ua: "Upravljam _____ (tvrtka). (Я керую компанією.)" },
+          options: ["tvrtkom", "s tvrtkom", "tvrtku", "tvrtki"],
+          correctAnswer: "tvrtkom"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Putujem _____ (brod - ship). (I travel by ship.)", ru: "Заполните: Putujem _____ (brod). (Я путешествую на корабле.)", ua: "Заповніть: Putujem _____ (brod). (Я подорожую кораблем.)" },
+          correctAnswer: "brodom",
+          hint: { en: "by ship (instrumental)", ru: "кораблем (brodom)", ua: "кораблем (brodom)" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Razgovaram s majkom.'", ru: "Переведите: 'Razgovaram s majkom.'", ua: "Перекладіть: 'Razgovaram s majkom.'" },
+          correctAnswer: { en: "I am talking with mother", ru: "Я разговариваю с мамой", ua: "Я розмовляю з мамою" }
+        }
+      ]
+    }
+  },
+  {
+    id: "a2-grammar-6",
+    type: "grammar",
+    level: "A2",
+    title: {
+      en: "Dativ i prijedlozi (Dative Case)",
+      ru: "Дательный падеж (Dativ)",
+      ua: "Давальний відмінок (Dativ)"
+    },
+    content: {
+      description: {
+        en: "Learn the dative case (dativ) in Croatian — used for indirect objects (to whom) and motion towards people using 'k/ka'.",
+        ru: "Изучите дательный падеж (dativ) в хорватском — используется для косвенных дополнений (кому) и направления движения к людям с предлогом 'k/ka'.",
+        ua: "Вивчіть давальний відмінок (dativ) у хорватській — використовується для непрямих додатків (кому) та руху до людей з прийменником 'k/ka'."
+      },
+      sections: [
+        {
+          title: { en: "Dative Endings & Usage", ru: "Окончания и употребление дательного падежа", ua: "Закінчення та вживання давального відмінка" },
+          text: {
+            en: "The Dative case answers the questions **Kome?** (To whom?) and **Čemu?** (To what?). It is identical in endings to the Locative case, but differs in meaning and preposition usage.\n\n**Key endings (Singular):**\n- **Masculine/Neuter:** **-u** (*brat* -> *bratu*, *selo* -> *selu*).\n- **Feminine:** **-i** (*sestra* -> *sestri*, *kolegica* -> *kolegici*).\n\n**Common Usages:**\n1. **Indirect Object:**\n   - *Dajem knjigu* **bratu** (Dative). (I give the book to my brother.)\n   - *Pišem pismo* **prijateljici** (Dative). (I write a letter to a friend.)\n2. **Motion towards a person (Preposition 'k / ka'):**\n   - *Idem k* **liječniku** (Dative). (I am going to the doctor's.)\n   - *Hodi k* **meni**! (Come to me!)",
+            ru: "Дательный падеж отвечает на вопросы **Kome?** (Кому?) и **Čemu?** (Чему?). Окончания совпадают с предложным падежом (локативом), но употребляется с другими предлогами.\n\n**Окончания в единственном числе:**\n- **Мужской/Средний род:** **-u** (*bratu*, *selu*).\n- **Женский род:** **-i** (*sestri*).\n\n**Типичное употребление:**\n1. **Косвенное дополнение:**\n   - *Dajem knjigu* **bratu**. (Даю книгу брату.)\n2. **Направление к человеку (предлог 'k / ka'):**\n   - *Idem k* **liječniku**. (Иду к врачу.)",
+            ua: "Давальний відмінок відповідає на запитання **Kome?** (Кому?) та **Čemu?** (Чому?). Закінчення збігаються з місцевим відмінком (локативом), але використовуються інші прийменники.\n\n**Закінчення в однині:**\n- **Чоловічий/Середній рід:** **-u** (*bratu*, *selu*).\n- **Жіночий рід:** **-i** (*sestri*).\n\n**Типове вживання:**\n1. **Непрямий додаток:**\n   - *Dajem knjigu* **bratu**. (Даю книгу братові.)\n2. **Напрямок до людини (прийменник 'k / ka'):**\n   - *Idem k* **liječniku**. (Йду до лікаря.)"
+          }
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: { en: "Dajem poklon _____ (brat - brother). (I give a present to my brother.)", ru: "Dajem poklon _____ (brat). (Я дарю подарок брату.)", ua: "Dajem poklon _____ (brat). (Я дарую подарунок брату.)" },
+          options: ["bratu", "bratom", "brata", "brati"],
+          correctAnswer: "bratu"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Pišem pismo _____ (sestra - sister). (I write a letter to my sister.)", ru: "Pišem pismo _____ (sestra). (Я пишу письмо сестре.)", ua: "Pišem pismo _____ (sestra). (Я пишу листа сестрі.)" },
+          options: ["sestri", "sestru", "sestrom", "sestre"],
+          correctAnswer: "sestri"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Idem k _____ (liječnik - doctor). (I am going to the doctor.)", ru: "Заполните: Idem k _____ (liječnik). (Я иду к врачу.)", ua: "Заповніть: Idem k _____ (liječnik). (Я йду до лікаря.)" },
+          correctAnswer: "liječniku",
+          hint: { en: "doctor (dative)", ru: "врачу (liječniku)", ua: "лікарю (liječniku)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Pomažem _____ (majka - mother). (I help my mother.)", ru: "Pomažem _____ (majka). (Я помогаю маме.)", ua: "Pomažem _____ (majka). (Я допомагаю мамі.)" },
+          options: ["majci", "majku", "majkom", "majke"],
+          correctAnswer: "majci"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Kupujem cvijeće _____ (supruga - wife). (I buy flowers for my wife.)", ru: "Kupujem cvijeće _____ (supruga). (Я покупаю цветы жене.)", ua: "Kupujem cvijeće _____ (supruga). (Я купую квіти дружині.)" },
+          options: ["supruzi", "suprugu", "suprugom", "supruge"],
+          correctAnswer: "supruzi"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Dođi k _____ (ja - me)! (Come to me!)", ru: "Заполните: Dođi k _____! (Приди ко мне!)", ua: "Заповніть: Dođi k _____! (Прийди до мене!)" },
+          correctAnswer: "meni",
+          hint: { en: "me (dative pronoun form)", ru: "мне (meni)", ua: "мене (meni)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Vjerujem _____ (prijatelj - friend). (I believe my friend.)", ru: "Vjerujem _____ (prijatelj). (Я верю другу.)", ua: "Vjerujem _____ (prijatelj). (Я вірю другові.)" },
+          options: ["prijatelju", "prijateljem", "prijatelja", "prijatelji"],
+          correctAnswer: "prijatelju"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Daj mi čašu vode.'", ru: "Переведите: 'Daj mi čašu vode.'", ua: "Перекладіть: 'Daj mi čašu vode.'" },
+          correctAnswer: { en: "Give me a glass of water", ru: "Дай мне стакан воды", ua: "Дай мені склянку води" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Objašnjavam pravilo _____ (student - student). (I explain the rule to the student.)", ru: "Objašnjavam pravilo _____ (student).", ua: "Objašnjavam pravilo _____ (student)." },
+          options: ["studentu", "studenta", "studentom", "studenti"],
+          correctAnswer: "studentu"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Čestitam rođendan _____ (otac - father). (I congratulate father on birthday.)", ru: "Čestitam rođendan _____ (otac).", ua: "Čestitam rođendan _____ (otac)." },
+          options: ["ocu", "otcu", "otcem", "otaca"],
+          correctAnswer: "ocu"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Idem _____ (k / na) prijatelju. (I go to my friend.)", ru: "Заполните: Idem _____ prijatelju. (Я иду к другу.)", ua: "Заповніть: Idem _____ prijatelju. (Я йду до друга.)" },
+          correctAnswer: "k",
+          hint: { en: "k", ru: "k", ua: "k" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Donosim kavu _____ (profesorica - female professor).", ru: "Donosim kavu _____ (profesorica).", ua: "Donosim kavu _____ (profesorica)." },
+          options: ["profesorici", "profesoriciu", "profesoricom", "profesoricu"],
+          correctAnswer: "profesorici"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Odgovaram _____ (kolega - colleague). (I reply to the colleague.)", ru: "Odgovaram _____ (kolega).", ua: "Odgovaram _____ (kolega)." },
+          options: ["kolegi", "kolegu", "kolegom", "kolege"],
+          correctAnswer: "kolegi"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Pošalji poruku _____ (on - him). (Send a message to him.)", ru: "Заполните: Pošalji poruku _____ (mu - short dative). (Отправь ему сообщение.)", ua: "Заповніть: Pošalji poruku _____ (mu - short dative). (Надішли йому повідомлення.)" },
+          correctAnswer: "mu",
+          hint: { en: "him (short dative)", ru: "ему (mu)", ua: "йому (mu)" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Vjerujem ti.'", ru: "Переведите: 'Vjerujem ti.'", ua: "Перекладіть: 'Vjerujem ti.'" },
+          correctAnswer: { en: "I believe you", ru: "Я верю тебе", ua: "Я вірю тобі" }
+        }
+      ]
+    }
+  },
+  {
+    id: "a2-grammar-7",
+    type: "grammar",
+    level: "A2",
+    title: {
+      en: "Komparacija pridjeva (Comparison of Adjectives)",
+      ru: "Сравнение прилагательных (Komparacija pridjeva)",
+      ua: "Порівняння прикметників (Komparacija pridjeva)"
+    },
+    content: {
+      description: {
+        en: "Learn how to compare adjectives in Croatian, form comparative and superlative degrees, and use irregular comparisons.",
+        ru: "Изучите степени сравнения прилагательных в хорватском языке, образование сравнительной и превосходной степени, а также исключения.",
+        ua: "Вивчіть ступені порівняння прикметників у хорватській мові, утворення вищого та найвищого ступенів, а також винятки."
+      },
+      sections: [
+        {
+          title: { en: "Comparative and Superlative Degrees", ru: "Сравнительная и превосходная степень", ua: "Вищий та найвищий ступені" },
+          text: {
+            en: "Croatian adjectives have three degrees: Positive, Comparative, and Superlative.\n\n**1. Comparative (komparativ):**\n- Formed by adding suffixes **-iji** (most common): *nov* -> *noviji*, *star* -> *stariji*, *topao* -> *topliji*.\n- Suffix **-ji** (causes consonant changes called jotation): *mlad* -> *mlađi*, *brz* -> *brži*, *tih* -> *tiši*.\n- Suffix **-ši** (only three adjectives): *lak* (easy) -> *lakši*, *mek* (soft) -> *mekši*, *lijep* (beautiful) -> *ljepši*.\n\n**2. Superlative (superlativ):**\n- Formed simply by adding the prefix **naj-** to the comparative form:\n  - *najnoviji* (the newest), *najstariji* (the oldest), *najljepši* (the most beautiful).\n\n**3. Irregular Adjectives:**\n- *dobar* (good) -> *bolji* -> *najbolji*\n- *loš* (bad) -> *gori* -> *najgori*\n- *velik* (big) -> *veći* -> *najveći*\n- *malen* (small) -> *manji* -> *najmanji*\n- *dug* (long) -> *dulji* / *duži* -> *najdulji* / *najduži*",
+            ru: "Хорватские прилагательные имеют три степени сравнения: положительную, сравнительную и превосходную.\n\n**1. Сравнительная степень (komparativ):**\n- Чаще всего образуется с суффиксом **-iji**: *nov* -> *noviji* (новее), *star* -> *stariji* (старше).\n- С суффиксом **-ji** (с изменением согласного): *mlad* -> *mlađi*, *brz* -> *brži*.\n- С суффиксом **-ši** (только три слова): *lak* -> *lakši*, *mek* -> *mekši*, *lijep* -> *ljepši*.\n\n**2. Превосходная степень (superlativ):**\n- Образуется путем добавления приставки **naj-** к сравнительной форме:\n  - *najbolji* (самый лучший), *najveći* (самый большой).\n\n**3. Исключения:**\n- *dobar* (хороший) -> *bolji* -> *najbolji*\n- *loš* (плохой) -> *gori* -> *najgori*\n- *velik* (большой) -> *veći* -> *najveći*\n- *malen* (маленький) -> *manji* -> *najmanji*",
+            ua: "Хорватські прикметники мають три ступені порівняння: звичайний, вищий та найвищий.\n\n**1. Вищий ступінь (komparativ):**\n- Найчастіше утворюється з суфіксом **-iji**: *nov* -> *noviji* (новіший), *star* -> *stariji* (старіший).\n- З суфіксом **-ji** (зі зміною приголосного): *mlad* -> *mlađi*, *brz* -> *brži*.\n- З суфіксом **-ši** (тільки три слова): *lak* -> *lakši*, *mek* -> *mekši*, *lijep* -> *ljepši*.\n\n**2. Найвищий ступінь (superlativ):**\n- Утворюється шляхом додавання префікса **naj-** до форми вищого ступеня:\n  - *najbolji* (найкращий), *najveći* (найбільший).\n\n**3. Винятки:**\n- *dobar* (добрий) -> *bolji* -> *najbolji*\n- *loš* (поганий) -> *gori* -> *najgori*\n- *velik* (великий) -> *veći* -> *najveći*\n- *malen* (маленький) -> *manji* -> *najmanji*"
+          }
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: { en: "Zagreb je _____ (novi -> comparative) od Zadra.", ru: "Zagreb je _____ od Zadra. (Загреб новее Задара.)", ua: "Zagreb je _____ od Zadra. (Загреб новіший за Задар.)" },
+          options: ["noviji", "novi", "najnoviji", "novijiiji"],
+          correctAnswer: "noviji"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Ova knjiga je _____ (dobra -> comparative) od one.", ru: "Ova knjiga je _____ od one. (Эта книга лучше той.)", ua: "Ova knjiga je _____ od one. (Ця книга краща за ту.)" },
+          options: ["bolja", "dobrija", "najbolja", "gora"],
+          correctAnswer: "bolja"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Split je _____ (velik -> comparative) od Šibenika.", ru: "Заполните: Split je _____ od Šibenika. (Сплит больше Шибеника.)", ua: "Заповніть: Split je _____ od Šibenika. (Спліт більший за Шибеник.)" },
+          correctAnswer: "veći",
+          hint: { en: "bigger (veći)", ru: "больше (veći)", ua: "більший (veći)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Moja sestra je _____ (mlada -> comparative) od mene.", ru: "Moja sestra je _____ od mene. (Моя сестра моложе меня.)", ua: "Moja sestra je _____ od mene. (Моя сестра молодша за мене.)" },
+          options: ["mlađa", "mladija", "najmlađa", "mladša"],
+          correctAnswer: "mlađa"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Ovo je _____ (dobar -> superlative) hotel u gradu.", ru: "Ovo je _____ hotel u gradu. (Это лучший отель в городе.)", ua: "Ovo je _____ hotel u gradu. (Це найкращий готель у місті.)" },
+          options: ["najbolji", "najdobriji", "bolji", "najgori"],
+          correctAnswer: "najbolji"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Hrvatski jezik je _____ (lak -> comparative) od njemačkog.", ru: "Заполните: Hrvatski jezik je _____ od njemačkog. (Хорватский проще немецкого.)", ua: "Заповніть: Hrvatski jezik je _____ od njemačkog. (Хорватська простіша за німецьку.)" },
+          correctAnswer: "lakši",
+          hint: { en: "easier (lakši)", ru: "проще / легче (lakši)", ua: "простіша / легша (lakši)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Ova kava je _____ (loša -> comparative) od jučerašnje.", ru: "Ova kava je _____ od jučerašnje. (Этот кофе хуже вчерашнего.)", ua: "Ova kava je _____ od jučerašnje. (Ця кава гірша за вчорашню.)" },
+          options: ["gora", "lošija", "najgora", "goraa"],
+          correctAnswer: "gora"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'On je stariji od mene.'", ru: "Переведите: 'On je stariji od mene.'", ua: "Перекладіть: 'On je stariji od mene.'" },
+          correctAnswer: { en: "He is older than me", ru: "Он старше меня", ua: "Він старший за мене" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Zagreb je _____ (velik -> superlative) grad u Hrvatskoj.", ru: "Zagreb je _____ grad u Hrvatskoj. (Загреб — самый большой город...)", ua: "Zagreb je _____ grad u Hrvatskoj. (Загреб — найбільше місто...)" },
+          options: ["najveći", "najvećiji", "veći", "najvelikiji"],
+          correctAnswer: "najveći"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Moja soba je _____ (malena -> comparative) od tvoje.", ru: "Moja soba je _____ od tvoje. (Моя комната меньше твоей.)", ua: "Moja soба є _____ від твоєї. (Моя кімната менша за твою.)" },
+          options: ["manja", "malenija", "najmanja", "manjija"],
+          correctAnswer: "manja"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Danas je _____ (topao -> comparative) nego jučer.", ru: "Заполните: Danas je _____ nego jučer. (Сегодня теплее, чем вчера.)", ua: "Заповніть: Danas je _____ nego jučer. (Сьогодні тепліше, ніж учора.)" },
+          correctAnswer: "toplije",
+          hint: { en: "warmer (neuter adverb form toplije)", ru: "теплее (toplije)", ua: "тепліше (toplije)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Ovaj test je _____ (težak -> comparative) od prvog.", ru: "Ovaj test je _____ od prvog. (Этот тест сложнее первого.)", ua: "Цей тест є _____ від першого. (Цей тест важчий за перший.)" },
+          options: ["teži", "težiji", "najteži", "težijiiji"],
+          correctAnswer: "teži"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Ovo je _____ (lijep -> superlative) plaža.", ru: "Ovo je _____ plaža. (Это самый красивый пляж.)", ua: "Це є _____ пляж. (Це найкрасивіший пляж.)" },
+          options: ["najljepša", "najlijepša", "ljepša", "najljepšija"],
+          correctAnswer: "najljepša"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Marko je _____ (visok -> comparative) od Ivana.", ru: "Заполните: Marko je _____ od Ivana. (Марко выше Ивана.)", ua: "Заповніть: Marko je _____ od Ivana. (Марко вищий за Івана.)" },
+          correctAnswer: "viši",
+          hint: { en: "taller (viši)", ru: "выше (viši)", ua: "вищий (viši)" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'To je najbolja ideja.'", ru: "Переведите: 'To je najbolja ideja.'", ua: "Перекладіть: 'To je najbolja ideja.'" },
+          correctAnswer: { en: "That is the best idea", ru: "Это лучшая идея", ua: "Це найкраща ідея" }
+        }
+      ]
+    }
+  },
+  {
+    id: "a2-grammar-8",
+    type: "grammar",
+    level: "A2",
+    title: {
+      en: "Povratni glagoli (Reflexive Verbs)",
+      ru: "Возвратные глаголы (Povratni glagoli)",
+      ua: "Зворотні дієслова (Povratni glagoli)"
+    },
+    content: {
+      description: {
+        en: "Learn how to conjugate and use reflexive verbs in Croatian using the reflexive pronoun 'se' and master word order rules.",
+        ru: "Научитесь спрягать и употреблять возвратные глаголы в хорватском языке с частицей 'se' и освойте порядок слов.",
+        ua: "Навчіться відмінювати та вживати зворотні дієслова в хорватській мові з часткою 'se' та опануйте порядок слів."
+      },
+      sections: [
+        {
+          title: { en: "Reflexive Verbs and 'se'", ru: "Возвратные глаголы и частица 'se'", ua: "Зворотні дієслова та частка 'se'" },
+          text: {
+            en: "Reflexive verbs in Croatian are accompanied by the reflexive pronoun clitic **se** (equivalent to '-ся' in Russian/Ukrainian or 'oneself' in English).\n\n**Common reflexive verbs:**\n- *smijati se* (to laugh)\n- *družiti se* (to hang out, socialise)\n- *odmarati se* (to rest)\n- *tuširati se* (to shower)\n- *zvati se* (to be named)\n- *brinuti se* (to worry)\n- *osjećati se* (to feel)\n\n**Word Order Rule:**\nThe clitic **se** must always stand in the **second position** in the sentence:\n- *Ja se odmaram.* (I am resting.) / *Odmaram se.* (I am resting.)\n- *Mi se družimo.* (We hang out.) / *Družimo se.* (We hang out.)\n- In questions with *li*:\n  - *Smiješ li se?* (Are you laughing?)\n- In past tense, both clitics (*sam/si/je* and *se*) must go together (auxiliary verb first):\n  - *Ja sam se tuširao.* (I showered.) / *Tuširao sam se.* (I showered.)",
+            ru: "Возвратные глаголы в хорватском языке употребляются с безударной частицей **se** (аналог '-ся' в русском/украинском языке).\n\n**Популярные глаголы:**\n- *smijati se* (смеяться), *družiti se* (общаться/тусоваться), *odmarati se* (отдыхать), *tuširati se* (принимать душ), *brinuti se* (беспокоиться).\n\n**Порядок слов:**\nЧастица **se** всегда должна занимать **второе место** в предложении:\n- *Ja se odmaram.* (Я отдыхаю.) / *Odmaram se.* (Отдыхаю.)\n- В прошедшем времени связка *sam/si...* стоит перед *se*:\n  - *Tuširao sam se.* (Я принимал душ.)",
+            ua: "Зворотні дієслова в хорватській мові вживаються з ненаголошеною часткою **se** (аналог '-ся' в українській мові).\n\n**Популярні дієслова:**\n- *smijati se* (сміятися), *družiti se* (спілкуватися/тусуватися), *odmarati se* (відпочивати), *tuširati se* (приймати душ), *brinuti se* (турбуватися).\n\n**Порядок слів:**\nЧастка **se** завжди повинна займати **друге місце** в реченні:\n- *Ja se odmaram.* (Я відпочиваю.) / *Odmaram se.* (Відпочиваю.)\n- У минулому часі зв'язка *sam/si...* стоїть перед *se*:\n  - *Tuširao sam se.* (Я приймав душ.)"
+          }
+        }
+      ],
+      exercises: [
+        {
+          type: "multiple-choice",
+          question: { en: "Ja _____ (rest) kod kuće. (I am resting at home.)", ru: "Ja _____ kod kuće. (Я отдыхаю дома.)", ua: "Ja _____ kod kuće. (Я відпочиваю вдома.)" },
+          options: ["se odmaram", "odmaram se", "odmaram se ja", "odmaram"],
+          correctAnswer: "se odmaram"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Kako _____ (are you named/called)? (What is your name?)", ru: "Kako _____? (Как тебя зовут?)", ua: "Kako _____? (Як тебе звати?)" },
+          options: ["se zoveš", "zoveš se", "se zove", "zoveš"],
+          correctAnswer: "se zoveš"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete without pronoun: _____ (We hang out) svaki dan. (We hang out every day.)", ru: "Заполните без местоимения: _____ svaki dan. (Мы общаемся каждый день.)", ua: "Заповніть без займенника: _____ svaki dan. (Ми спілкуємося щодня.)" },
+          correctAnswer: "Družimo se",
+          hint: { en: "We hang out (družiti se - 1st person plural)", ru: "Мы общаемся (družimo se)", ua: "Ми спілкуємося (družimo se)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Zašto _____ (are you laughing)? (Why are you laughing?)", ru: "Zašto _____? (Почему ты смеешься?)", ua: "Zašto _____? (Чому ти смієшся?)" },
+          options: ["se smiješ", "smiješ se", "smiješ", "se smije"],
+          correctAnswer: "se smiješ"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Jučer sam _____ (showered - masculine). (Yesterday I showered.)", ru: "Jučer sam _____ . (Вчера я принимал душ.)", ua: "Jučer sam _____ . (Вчора я приймав душ.)" },
+          options: ["se tuširao", "tuširao se", "tuširao", "se tuširala"],
+          correctAnswer: "se tuširao"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Kako _____ osjećaš danas? (How do you feel today?)", ru: "Заполните: Kako _____ osjećaš danas? (Как ты себя чувствуешь сегодня?)", ua: "Заповніть: Kako _____ osjećaš danas? (Як ти почуваєшся сьогодні?)" },
+          correctAnswer: "se",
+          hint: { en: "reflexive pronoun clitic", ru: "возвратная частица se", ua: "зворотна частка se" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Oni _____ (worry) za tebe. (They worry about you.)", ru: "Oni _____ za tebe. (Они беспокоятся о тебе.)", ua: "Oni _____ za tebe. (Вони турбуються про тебе.)" },
+          options: ["se brinu", "brinu se", "brinu", "se brine"],
+          correctAnswer: "se brinu"
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Danas se odmaram.'", ru: "Переведите: 'Danas se odmaram.'", ua: "Перекладіть: 'Danas se odmaram.'" },
+          correctAnswer: { en: "Today I am resting", ru: "Сегодня я отдыхаю", ua: "Сьогодні я відпочиваю" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Gdje _____ (did you rest - singular masc)? (Where did you rest?)", ru: "Gdje _____ ? (Где ты отдыхал?)", ua: "Де _____ ? (Де ти відпочивав?)" },
+          options: ["si se odmarao", "se odmarao si", "odmarao si se", "si odmarao se"],
+          correctAnswer: "si se odmarao"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Djeca _____ (are playing) u parku. (The children are playing in the park.)", ru: "Djeca _____ u parku. (Дети играют в парке.)", ua: "Djeca _____ u parku. (Діти граються в парку.)" },
+          options: ["se igraju", "igraju se", "igraju", "se igra"],
+          correctAnswer: "se igraju"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Moram _____ (shower). (I have to shower.)", ru: "Заполните: Moram se _____ . (Я должен принять душ.)", ua: "Заповніть: Moram se _____ . (Я мушу прийняти душ.)" },
+          correctAnswer: "tuširati",
+          hint: { en: "shower (infinitive)", ru: "принять душ (tuširati)", ua: "прийняти душ (tuširati)" }
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "Mi _____ (agree) s tobom. (We agree with you.)", ru: "Mi _____ s tobom. (Мы согласны с тобой.)", ua: "Mi _____ s tobom. (Ми згодні з тобою.)" },
+          options: ["se slažemo", "slažemo se", "slažemo", "se slaže"],
+          correctAnswer: "se slažemo"
+        },
+        {
+          type: "multiple-choice",
+          question: { en: "On _____ (is shaving). (He is shaving.)", ru: "On _____ . (Он бреется.)", ua: "On _____ . (Він голиться.)" },
+          options: ["se brije", "brije se", "brije", "se briju"],
+          correctAnswer: "se brije"
+        },
+        {
+          type: "fill-blank",
+          question: { en: "Complete: Ona _____ (smješkati se - smiles) cijelo vrijeme.", ru: "Заполните: Ona _____ smješka cijelo vrijeme.", ua: "Заповніть: Ona _____ smješka cijelo vrijeme." },
+          correctAnswer: "se",
+          hint: { en: "reflexive pronoun clitic", ru: "se", ua: "se" }
+        },
+        {
+          type: "translation",
+          question: { en: "Translate: 'Kako se osjećaš?'", ru: "Переведите: 'Kako se osjećaš?'", ua: "Перекладіть: 'Kako se osjećaš?'" },
+          correctAnswer: { en: "How do you feel?", ru: "Как ты себя чувствуешь?", ua: "Як ти почуваєшся?" }
+        }
+      ]
+    }
+  },
   // LEVEL B1
   // ==========================================
   {
