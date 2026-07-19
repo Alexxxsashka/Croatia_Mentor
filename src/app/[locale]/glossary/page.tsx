@@ -276,11 +276,11 @@ export default function GlossaryPage() {
       return {
         id: lesson.id,
         title: {
-          en: `${titleLoc.en} (Lesson Theory)`,
-          ru: `${titleLoc.ru} (Теория урока)`,
-          ua: `${titleLoc.ua} (Теорія уроку)`
+          en: titleLoc.en,
+          ru: titleLoc.ru,
+          ua: titleLoc.ua
         },
-        icon: "🎓",
+        icon: "📖",
         subsections
       };
     });
