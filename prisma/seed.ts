@@ -25,32 +25,22 @@ async function main() {
     });
   }
 
+  console.log("Clearing existing flashcards...");
+  await prisma.flashcard.deleteMany({});
+
   console.log("Seeding flashcards from vocabulary-data...");
-  for (const word of vocabularyWords) {
-    const existing = await prisma.flashcard.findFirst({
-      where: { wordHr: word.hr }
-    });
+  const flashcardData = vocabularyWords.map((word) => ({
+    wordHr: word.hr,
+    translationEng: word.en,
+    translationRu: word.ru,
+    translationUa: word.ua,
+    level: word.level,
+    category: word.category,
+  }));
 
-    const cardData = {
-      wordHr: word.hr,
-      translationEng: word.en,
-      translationRu: word.ru,
-      translationUa: word.ua,
-      level: word.level,
-      category: word.category
-    };
-
-    if (existing) {
-      await prisma.flashcard.update({
-        where: { id: existing.id },
-        data: cardData
-      });
-    } else {
-      await prisma.flashcard.create({
-        data: cardData
-      });
-    }
-  }
+  await prisma.flashcard.createMany({
+    data: flashcardData,
+  });
 
   console.log("Seeding complete!");
 }

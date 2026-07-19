@@ -4044,14 +4044,6 @@ export const vocabularyWords: VocabWord[] = [
     "category": "home"
   },
   {
-    "hr": "stolnjaki",
-    "en": "tablecloths",
-    "ru": "скатертьы",
-    "ua": "скатертинаи",
-    "level": "A2",
-    "category": "home"
-  },
-  {
     "hr": "slika",
     "en": "picture / painting",
     "ru": "картина",
@@ -4060,26 +4052,10 @@ export const vocabularyWords: VocabWord[] = [
     "category": "home"
   },
   {
-    "hr": "slikai",
-    "en": "picture / paintings",
-    "ru": "картинаы",
-    "ua": "картинаи",
-    "level": "A2",
-    "category": "home"
-  },
-  {
     "hr": "vaza",
     "en": "vase",
     "ru": "ваза",
     "ua": "ваза",
-    "level": "A2",
-    "category": "home"
-  },
-  {
-    "hr": "vazai",
-    "en": "vases",
-    "ru": "вазаы",
-    "ua": "вазаи",
     "level": "A2",
     "category": "home"
   },
@@ -4092,26 +4068,10 @@ export const vocabularyWords: VocabWord[] = [
     "category": "nature"
   },
   {
-    "hr": "cvijeti",
-    "en": "flowers",
-    "ru": "цветокы",
-    "ua": "квіткаи",
-    "level": "A2",
-    "category": "nature"
-  },
-  {
     "hr": "biljka",
     "en": "plant",
     "ru": "растение",
     "ua": "рослина",
-    "level": "A2",
-    "category": "nature"
-  },
-  {
-    "hr": "biljkai",
-    "en": "plants",
-    "ru": "растениеы",
-    "ua": "рослинаи",
     "level": "A2",
     "category": "nature"
   },
@@ -4124,14 +4084,6 @@ export const vocabularyWords: VocabWord[] = [
     "category": "nature"
   },
   {
-    "hr": "stabloi",
-    "en": "trees",
-    "ru": "деревоы",
-    "ua": "деревои",
-    "level": "A2",
-    "category": "nature"
-  },
-  {
     "hr": "trava",
     "en": "grass",
     "ru": "трава",
@@ -4140,26 +4092,10 @@ export const vocabularyWords: VocabWord[] = [
     "category": "nature"
   },
   {
-    "hr": "travai",
-    "en": "grasss",
-    "ru": "траваы",
-    "ua": "траваи",
-    "level": "A2",
-    "category": "nature"
-  },
-  {
     "hr": "kamen",
     "en": "stone",
     "ru": "камень",
     "ua": "камінь",
-    "level": "A2",
-    "category": "nature"
-  },
-  {
-    "hr": "kameni",
-    "en": "stones",
-    "ru": "каменьы",
-    "ua": "каміньи",
     "level": "A2",
     "category": "nature"
   },
@@ -4172,27 +4108,11 @@ export const vocabularyWords: VocabWord[] = [
     "category": "nature"
   },
   {
-    "hr": "pijesaki",
-    "en": "sands",
-    "ru": "песокы",
-    "ua": "пісоки",
-    "level": "A2",
-    "category": "nature"
-  },
-  {
     "hr": "tlo",
     "en": "ground / soil",
     "ru": "почва",
     "ua": "ґрунт",
     "level": "B1",
-    "category": "nature"
-  },
-  {
-    "hr": "tloi",
-    "en": "ground / soils",
-    "ru": "почваы",
-    "ua": "ґрунти",
-    "level": "A2",
     "category": "nature"
   },
   {
@@ -4204,26 +4124,10 @@ export const vocabularyWords: VocabWord[] = [
     "category": "nature"
   },
   {
-    "hr": "morei",
-    "en": "seas",
-    "ru": "мореы",
-    "ua": "мореи",
-    "level": "A2",
-    "category": "nature"
-  },
-  {
     "hr": "jezero",
     "en": "lake",
     "ru": "озеро",
     "ua": "озеро",
-    "level": "A2",
-    "category": "nature"
-  },
-  {
-    "hr": "jezeroi",
-    "en": "lakes",
-    "ru": "озероы",
-    "ua": "озерои",
     "level": "A2",
     "category": "nature"
   },
@@ -4236,27 +4140,11 @@ export const vocabularyWords: VocabWord[] = [
     "category": "nature"
   },
   {
-    "hr": "rijekai",
-    "en": "rivers",
-    "ru": "рекаы",
-    "ua": "річкаи",
-    "level": "A2",
-    "category": "nature"
-  },
-  {
     "hr": "potok",
     "en": "brook / stream",
     "ru": "ручей",
     "ua": "струмок",
     "level": "B1",
-    "category": "nature"
-  },
-  {
-    "hr": "potoki",
-    "en": "brook / streams",
-    "ru": "ручейы",
-    "ua": "струмоки",
-    "level": "A2",
     "category": "nature"
   },
   {
@@ -4268,26 +4156,10 @@ export const vocabularyWords: VocabWord[] = [
     "category": "nature"
   },
   {
-    "hr": "izvori",
-    "en": "source / springs",
-    "ru": "источникы",
-    "ua": "джерелои",
-    "level": "A2",
-    "category": "nature"
-  },
-  {
     "hr": "brijeg",
     "en": "hill",
     "ru": "холм",
     "ua": "пагорб",
-    "level": "A2",
-    "category": "nature"
-  },
-  {
-    "hr": "brijegi",
-    "en": "hills",
-    "ru": "холмы",
-    "ua": "пагорби",
     "level": "A2",
     "category": "nature"
   },
@@ -4300,27 +4172,11 @@ export const vocabularyWords: VocabWord[] = [
     "category": "nature"
   },
   {
-    "hr": "dolinai",
-    "en": "valleys",
-    "ru": "долинаы",
-    "ua": "долинаи",
-    "level": "A2",
-    "category": "nature"
-  },
-  {
     "hr": "ravnica",
     "en": "plain",
     "ru": "равнина",
     "ua": "рівнина",
     "level": "B2",
-    "category": "nature"
-  },
-  {
-    "hr": "ravnicai",
-    "en": "plains",
-    "ru": "равнинаы",
-    "ua": "рівнинаи",
-    "level": "A2",
     "category": "nature"
   },
   {
@@ -4332,27 +4188,11 @@ export const vocabularyWords: VocabWord[] = [
     "category": "nature"
   },
   {
-    "hr": "pustinjai",
-    "en": "deserts",
-    "ru": "пустыняы",
-    "ua": "пустеляи",
-    "level": "A2",
-    "category": "nature"
-  },
-  {
     "hr": "močvara",
     "en": "swamp",
     "ru": "болото",
     "ua": "болото",
     "level": "B2",
-    "category": "nature"
-  },
-  {
-    "hr": "močvarai",
-    "en": "swamps",
-    "ru": "болотоы",
-    "ua": "болотои",
-    "level": "A2",
     "category": "nature"
   },
   {
@@ -4364,14 +4204,6 @@ export const vocabularyWords: VocabWord[] = [
     "category": "travel"
   },
   {
-    "hr": "kartai",
-    "en": "ticket / maps",
-    "ru": "билет / картаы",
-    "ua": "квиток / картаи",
-    "level": "A2",
-    "category": "travel"
-  },
-  {
     "hr": "putovnica",
     "en": "passport",
     "ru": "паспорт",
@@ -4380,26 +4212,10 @@ export const vocabularyWords: VocabWord[] = [
     "category": "travel"
   },
   {
-    "hr": "putovnicai",
-    "en": "passports",
-    "ru": "паспорты",
-    "ua": "паспорти",
-    "level": "A2",
-    "category": "travel"
-  },
-  {
     "hr": "viza",
     "en": "visa",
     "ru": "виза",
     "ua": "віза",
-    "level": "A2",
-    "category": "travel"
-  },
-  {
-    "hr": "vizai",
-    "en": "visas",
-    "ru": "визаы",
-    "ua": "візаи",
     "level": "A2",
     "category": "travel"
   },
@@ -4412,27 +4228,11 @@ export const vocabularyWords: VocabWord[] = [
     "category": "travel"
   },
   {
-    "hr": "leti",
-    "en": "flights",
-    "ru": "полет / рейсы",
-    "ua": "політ / рейси",
-    "level": "A2",
-    "category": "travel"
-  },
-  {
     "hr": "zrakoplov",
     "en": "airplane",
     "ru": "самолет",
     "ua": "літак",
     "level": "A1",
-    "category": "travel"
-  },
-  {
-    "hr": "zrakoplovi",
-    "en": "airplanes",
-    "ru": "самолеты",
-    "ua": "літаки",
-    "level": "A2",
     "category": "travel"
   },
   {
@@ -4444,27 +4244,11 @@ export const vocabularyWords: VocabWord[] = [
     "category": "travel"
   },
   {
-    "hr": "vlaki",
-    "en": "trains",
-    "ru": "поезды",
-    "ua": "потяги",
-    "level": "A2",
-    "category": "travel"
-  },
-  {
     "hr": "autobus",
     "en": "bus",
     "ru": "автобус",
     "ua": "автобус",
     "level": "A1",
-    "category": "travel"
-  },
-  {
-    "hr": "autobusi",
-    "en": "buss",
-    "ru": "автобусы",
-    "ua": "автобуси",
-    "level": "A2",
     "category": "travel"
   },
   {
@@ -4476,14 +4260,6 @@ export const vocabularyWords: VocabWord[] = [
     "category": "travel"
   },
   {
-    "hr": "tramvaji",
-    "en": "trams",
-    "ru": "трамвайы",
-    "ua": "трамвайи",
-    "level": "A2",
-    "category": "travel"
-  },
-  {
     "hr": "brod",
     "en": "ship / boat",
     "ru": "корабль / лодка",
@@ -4492,26 +4268,10 @@ export const vocabularyWords: VocabWord[] = [
     "category": "travel"
   },
   {
-    "hr": "brodi",
-    "en": "ship / boats",
-    "ru": "корабль / лодкаы",
-    "ua": "корабель / човени",
-    "level": "A2",
-    "category": "travel"
-  },
-  {
     "hr": "luka",
     "en": "port / harbor",
     "ru": "порт",
     "ua": "порт",
-    "level": "A2",
-    "category": "travel"
-  },
-  {
-    "hr": "lukai",
-    "en": "port / harbors",
-    "ru": "порты",
-    "ua": "порти",
     "level": "A2",
     "category": "travel"
   },
@@ -4524,26 +4284,10 @@ export const vocabularyWords: VocabWord[] = [
     "category": "travel"
   },
   {
-    "hr": "kolodvori",
-    "en": "stations",
-    "ru": "вокзалы",
-    "ua": "вокзали",
-    "level": "A2",
-    "category": "travel"
-  },
-  {
     "hr": "stajalište",
     "en": "stop (bus/tram)",
     "ru": "остановка",
     "ua": "зупинка",
-    "level": "A2",
-    "category": "travel"
-  },
-  {
-    "hr": "stajalištei",
-    "en": "stop (bus/tram)s",
-    "ru": "остановкаы",
-    "ua": "зупинкаи",
     "level": "A2",
     "category": "travel"
   },
@@ -4707,9 +4451,6 @@ export const vocabularyWords: VocabWord[] = [
     "level": "C1",
     "category": "school"
   },
-  // ==========================================
-  // BODY & HEALTH (body)
-  // ==========================================
   {
     "hr": "glava",
     "en": "head",
@@ -4910,9 +4651,6 @@ export const vocabularyWords: VocabWord[] = [
     "level": "B2",
     "category": "body"
   },
-  // ==========================================
-  // CLOTHES (clothes)
-  // ==========================================
   {
     "hr": "majica",
     "en": "T-shirt / shirt",
