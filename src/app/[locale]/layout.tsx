@@ -4,6 +4,7 @@ import { SessionProvider } from "@/components/providers/session-provider";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Toaster } from "sonner";
+import { ChangelogModal } from "@/components/changelog-modal";
 
 export async function generateMetadata({
   params,
@@ -61,6 +62,7 @@ export default async function LocaleLayout({
             <main className="flex-1">{children}</main>
             <Footer />
             <Toaster position="top-right" richColors />
+            <ChangelogModal />
           </SessionProvider>
         </NextIntlClientProvider>
       </body>

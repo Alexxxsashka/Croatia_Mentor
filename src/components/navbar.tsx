@@ -16,6 +16,7 @@ import {
   Languages,
   Sun,
   Moon,
+  ShieldAlert,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -50,6 +51,10 @@ export function Navbar() {
 
   const locale = useLocale();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const user = session?.user as any;
+  const isAdmin = user?.role === "admin";
+
   const navLinks = session
     ? [
         {
@@ -62,6 +67,7 @@ export function Navbar() {
         { href: "/glossary", label: t("glossary"), icon: GraduationCap },
         { href: "/games", label: t("games"), icon: Gamepad2 },
         { href: "/ai-chat", label: t("aiChat"), icon: MessageCircle, disabled: true },
+        ...(isAdmin ? [{ href: "/admin", label: "Admin", icon: ShieldAlert }] : []),
       ]
     : [];
 

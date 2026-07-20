@@ -88,3 +88,16 @@ model Flashcard {
   level          String  @default("A1")
   category       String  @default("general")
 }
+
+model Changelog {
+  id        String   @id @default(cuid())
+  version   String
+  titleEn   String
+  titleRu   String
+  titleUa   String
+  contentEn String   @db.Text
+  contentRu String   @db.Text
+  contentUa String   @db.Text
+  createdAt DateTime @default(now())
+}
+
