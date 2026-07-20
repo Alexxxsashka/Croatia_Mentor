@@ -200,6 +200,63 @@ function translateText(text: string, locale: string): string {
   return text;
 }
 
+// Helper to render basic markdown (bold, italic, and bullets)
+function renderMarkdown(text: string) {
+  const lines = text.split("\n");
+  return lines.map((line, lineIdx) => {
+    const trimmed = line.trim();
+    const isBullet = trimmed.startsWith("- ") || trimmed.startsWith("* ");
+    const cleanLine = isBullet ? trimmed.substring(2) : line;
+
+    const parseInline = (str: string): React.ReactNode[] => {
+      // Split by bold first
+      const boldParts = str.split("**");
+      return boldParts.flatMap((bPart, bIdx) => {
+        const isBold = bIdx % 2 === 1;
+        // Split by italic
+        const italicParts = bPart.split("*");
+        const rendered = italicParts.map((iPart, iIdx) => {
+          const isItalic = iIdx % 2 === 1;
+          if (isItalic) {
+            return (
+              <em key={`${bIdx}-${iIdx}`} className="italic font-medium text-foreground">
+                {iPart}
+              </em>
+            );
+          }
+          return iPart;
+        });
+
+        if (isBold) {
+          return (
+            <strong key={bIdx} className="font-bold text-foreground">
+              {rendered}
+            </strong>
+          );
+        }
+        return rendered;
+      });
+    };
+
+    const parsedContent = parseInline(cleanLine);
+
+    if (isBullet) {
+      return (
+        <div key={lineIdx} className="flex items-start gap-2 ml-4 my-1">
+          <span className="text-blue-500 shrink-0 mt-2 w-1.5 h-1.5 rounded-full bg-blue-500" />
+          <span className="flex-1 text-muted-foreground">{parsedContent}</span>
+        </div>
+      );
+    }
+
+    return (
+      <div key={lineIdx} className="min-h-[1.2rem]">
+        {parsedContent}
+      </div>
+    );
+  });
+}
+
 const LESSON_MAPPING: Record<string, string[]> = {
   cases: ["a1-grammar-5", "a2-grammar-1", "a2-grammar-2", "a2-grammar-5", "a2-grammar-6"],
   verbs: ["a1-grammar-1", "a1-grammar-2", "a1-grammar-4", "a2-grammar-3", "a2-grammar-4", "a2-grammar-8"],
@@ -398,9 +455,9 @@ export default function GlossaryPage() {
                         <h3 className="font-semibold text-blue-400 text-sm uppercase tracking-wider">
                           {getLocalized(sub.title, locale)}
                         </h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
-                          {getLocalized(sub.text, locale)}
-                        </p>
+                        <div className="text-sm text-muted-foreground leading-relaxed space-y-1">
+                          {renderMarkdown(getLocalized(sub.text, locale))}
+                        </div>
 
                         {/* Table */}
                         {sub.table && (
