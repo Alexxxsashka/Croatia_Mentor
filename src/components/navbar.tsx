@@ -118,7 +118,7 @@ export function Navbar() {
           </div>
 
           {/* Right side */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5 shrink-0">
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
