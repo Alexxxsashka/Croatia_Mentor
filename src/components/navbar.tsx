@@ -4,6 +4,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { useSession, signOut } from "next-auth/react";
 import { Link } from "@/i18n/navigation";
 import { LanguageSwitcher } from "./language-switcher";
+import { NewsBell } from "./news-bell";
 import {
   BookOpen,
   Gamepad2,
@@ -130,6 +131,9 @@ export function Navbar() {
                 <Moon className="w-4.5 h-4.5 text-indigo-600" />
               )}
             </button>
+
+            {/* Notification Bell for News */}
+            <NewsBell />
 
             <LanguageSwitcher />
 

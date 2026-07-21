@@ -3,8 +3,9 @@
 import { useState, useEffect } from "react";
 import { useLocale } from "next-intl";
 import { X, Sparkles, Megaphone } from "lucide-react";
-
-interface LatestChangelog {
+import { BBCode } from "@/components/bbcode";
+ 
+ interface LatestChangelog {
   id: string;
   version: string;
   titleEn: string;
@@ -41,6 +42,15 @@ export function ChangelogModal() {
   const handleClose = () => {
     if (changelog) {
       localStorage.setItem("last_seen_changelog_id", changelog.id);
+      try {
+        const stored = localStorage.getItem("read_changelog_ids");
+        const list = stored ? JSON.parse(stored) : [];
+        if (!list.includes(changelog.id)) {
+          const updated = [...list, changelog.id];
+          localStorage.setItem("read_changelog_ids", JSON.stringify(updated));
+          window.dispatchEvent(new Event("changelog_read_updated"));
+        }
+      } catch {}
     }
     setIsOpen(false);
   };
@@ -113,8 +123,8 @@ export function ChangelogModal() {
         </div>
 
         {/* Body Content */}
-        <div className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line max-h-60 overflow-y-auto border-t border-b border-white/5 py-4">
-          {content}
+        <div className="text-sm text-muted-foreground leading-relaxed max-h-60 overflow-y-auto border-t border-b border-white/5 py-4">
+          <BBCode content={content} />
         </div>
 
         {/* Action Buttons */}
