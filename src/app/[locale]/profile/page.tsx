@@ -256,7 +256,7 @@ export default function ProfilePage() {
   const displayedAvatar = avatar === "custom" ? customAvatarUrl : avatar;
 
   const tempDisabledBadge =
-    locale === "ua" ? "Аутентифікація заблокована" : locale === "ru" ? "Аутентификация заблокирована" : "Authentication Locked";
+    locale === "ua" ? "Тимчасово недоступно" : locale === "ru" ? "Временно недоступно" : "Temporarily unavailable";
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 space-y-8 animate-fade-in">
@@ -361,7 +361,7 @@ export default function ProfilePage() {
                   {locale === "ua" ? "Особисті дані" : locale === "ru" ? "Личные данные" : "Personal Details"}
                 </h2>
                 <p className="text-xs text-muted-foreground">
-                  {locale === "ua" ? "Оновіть своє ім'я та мову інтерфейсу" : locale === "ru" ? "Обновите свое имя и язык интерфейса" : "Update your display name and primary language"}
+                  {locale === "ua" ? "Оновіть своє ім'я користувача" : locale === "ru" ? "Обновите свое имя пользователя" : "Update your display name"}
                 </p>
               </div>
             </div>
@@ -384,39 +384,7 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">
-                  {locale === "ua" ? "Рідна мова" : locale === "ru" ? "Родной язык" : "Native Language"}
-                </label>
-                <div className="relative">
-                  <select
-                    value={nativeLang}
-                    onChange={(e) => setNativeLang(e.target.value)}
-                    className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-foreground focus:outline-none focus:border-blue-500 transition-colors pl-10 appearance-none cursor-pointer"
-                  >
-                    <option value="en">English</option>
-                    <option value="ru">Русский</option>
-                    <option value="ua">Українська</option>
-                  </select>
-                  <Globe className="w-4.5 h-4.5 text-muted-foreground absolute left-3.5 top-3 pointer-events-none" />
-                </div>
-              </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">
-                  {locale === "ua" ? "Номер телефону" : locale === "ru" ? "Номер телефона" : "Phone Number"}
-                </label>
-                <div className="relative">
-                  <input
-                    type="tel"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    placeholder="+380991234567"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-foreground focus:outline-none focus:border-blue-500 transition-colors pl-10"
-                  />
-                  <Phone className="w-4.5 h-4.5 text-muted-foreground absolute left-3.5 top-3" />
-                </div>
-              </div>
 
               <button
                 type="submit"
