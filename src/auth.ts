@@ -56,7 +56,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
       if (user) {
         const dbUser = await prisma.user.findUnique({
           where: { email: user.email! },
@@ -65,15 +65,22 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         if (dbUser) {
           token.id = dbUser.id;
           token.role = dbUser.role;
+          token.picture = dbUser.image;
           token.nativeLanguage = dbUser.nativeLanguage;
           token.currentLevel = dbUser.progress?.currentLevel || "A1";
         }
+      }
+      if (trigger === "update" && session) {
+        if (session.name) token.name = session.name;
+        if (session.image) token.picture = session.image;
+        if (session.nativeLanguage) token.nativeLanguage = session.nativeLanguage;
       }
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
+        session.user.image = token.picture as string;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const user = session.user as any;
         user.role = token.role;

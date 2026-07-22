@@ -18,14 +18,59 @@ import {
   Sun,
   Moon,
   ShieldAlert,
+  User,
+  ChevronDown,
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+
+const PRESET_AVATARS = [
+  { emoji: "🦊", color: "from-orange-400 to-red-500" },
+  { emoji: "🐼", color: "from-slate-700 to-slate-900" },
+  { emoji: "🐱", color: "from-yellow-400 to-orange-500" },
+  { emoji: "🧙‍♂️", color: "from-indigo-500 to-purple-600" },
+  { emoji: "🚀", color: "from-cyan-400 to-blue-500" },
+  { emoji: "🌟", color: "from-yellow-300 to-amber-500" },
+  { emoji: "🧑‍🎓", color: "from-blue-500 to-indigo-600" },
+  { emoji: "🦉", color: "from-emerald-400 to-teal-600" },
+];
+
+function renderNavbarAvatar(avatarStr: string | null | undefined, nameInitials: string) {
+  if (!avatarStr) {
+    return (
+      <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-xs font-bold shadow-md">
+        {nameInitials}
+      </div>
+    );
+  }
+
+  const preset = PRESET_AVATARS.find((p) => p.emoji === avatarStr);
+  if (preset) {
+    return (
+      <div className={`w-full h-full bg-gradient-to-br ${preset.color} flex items-center justify-center text-sm shadow-md`}>
+        {preset.emoji}
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={avatarStr}
+      alt="Avatar"
+      className="w-full h-full object-cover"
+      onError={(e) => {
+        (e.currentTarget as HTMLImageElement).src = `https://api.dicebear.com/7.x/bottts/svg?seed=${nameInitials}`;
+      }}
+    />
+  );
+}
 
 export function Navbar() {
   const t = useTranslations("nav");
   const { data: session } = useSession();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const savedTheme = (localStorage.getItem("theme") as "dark" | "light") || "dark";
@@ -37,6 +82,16 @@ export function Navbar() {
     setTimeout(() => {
       setTheme(savedTheme);
     }, 0);
+  }, []);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setProfileDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const toggleTheme = () => {
@@ -68,7 +123,6 @@ export function Navbar() {
         { href: "/glossary", label: t("glossary"), icon: GraduationCap },
         { href: "/games", label: t("games"), icon: Gamepad2 },
         { href: "/ai-chat", label: t("aiChat"), icon: MessageCircle, disabled: true },
-        ...(isAdmin ? [{ href: "/admin", label: "Admin", icon: ShieldAlert }] : []),
       ]
     : [];
 
@@ -138,22 +192,70 @@ export function Navbar() {
             <LanguageSwitcher />
 
             {session ? (
-              <div className="hidden md:flex items-center gap-3">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-sm font-semibold">
-                    {session.user?.name?.[0]?.toUpperCase() || "U"}
+              <div className="relative" ref={dropdownRef}>
+                {/* Profile Trigger Button */}
+                <button
+                  type="button"
+                  onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
+                  className="flex items-center gap-2 p-1.5 pr-2.5 rounded-xl glass hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-200 border border-black/5 dark:border-white/10"
+                >
+                  <div className="w-7 h-7 rounded-lg overflow-hidden flex items-center justify-center shadow-md">
+                    {renderNavbarAvatar(session.user?.image, session.user?.name?.[0]?.toUpperCase() || "U")}
                   </div>
-                  <span className="text-sm font-medium hidden lg:block">
+                  <span className="text-xs font-semibold hidden lg:block max-w-[120px] truncate text-foreground">
                     {session.user?.name}
                   </span>
-                </div>
-                <button
-                  onClick={() => signOut()}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-muted-foreground hover:text-red-400 hover:bg-red-500/10 transition-all duration-200"
-                >
-                  <LogOut className="w-4 h-4" />
-                  <span className="hidden lg:inline">{t("signOut")}</span>
+                  <ChevronDown className="w-3.5 h-3.5 text-muted-foreground" />
                 </button>
+
+                {/* Profile Dropdown Menu */}
+                {profileDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-56 rounded-2xl glass border border-black/10 dark:border-white/10 shadow-2xl p-2 z-50 animate-scale-up space-y-1">
+                    <div className="flex items-center gap-2.5 px-3 py-2.5 border-b border-black/5 dark:border-white/10 mb-1">
+                      <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center shrink-0">
+                        {renderNavbarAvatar(session.user?.image, session.user?.name?.[0]?.toUpperCase() || "U")}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs font-bold text-foreground truncate">{session.user?.name}</p>
+                        <p className="text-[10px] text-muted-foreground truncate">{session.user?.email}</p>
+                      </div>
+                    </div>
+
+                    <Link
+                      href="/profile"
+                      onClick={() => setProfileDropdownOpen(false)}
+                      className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-all"
+                    >
+                      <User className="w-4 h-4 text-blue-400" />
+                      {locale === "ua" ? "Профіль учасника" : locale === "ru" ? "Профиль участника" : "My Profile"}
+                    </Link>
+
+                    {isAdmin && (
+                      <Link
+                        href="/admin"
+                        onClick={() => setProfileDropdownOpen(false)}
+                        className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-amber-400 hover:bg-amber-500/10 transition-all"
+                      >
+                        <ShieldAlert className="w-4 h-4 text-amber-400" />
+                        Admin Panel
+                      </Link>
+                    )}
+
+                    <div className="border-t border-black/5 dark:border-white/10 pt-1">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setProfileDropdownOpen(false);
+                          signOut();
+                        }}
+                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-red-400 hover:bg-red-500/10 transition-all text-left"
+                      >
+                        <LogOut className="w-4 h-4" />
+                        {t("signOut")}
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="hidden md:flex items-center gap-2">
@@ -216,6 +318,30 @@ export function Navbar() {
                 </Link>
               );
             })}
+
+            {session && (
+              <>
+                <Link
+                  href="/profile"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-blue-400 hover:bg-blue-500/10 transition-all"
+                >
+                  <User className="w-4 h-4" />
+                  {locale === "ua" ? "Профіль учасника" : locale === "ru" ? "Профиль участника" : "My Profile"}
+                </Link>
+                {isAdmin && (
+                  <Link
+                    href="/admin"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-amber-400 hover:bg-amber-500/10 transition-all"
+                  >
+                    <ShieldAlert className="w-4 h-4" />
+                    Admin Panel
+                  </Link>
+                )}
+              </>
+            )}
+
             {session ? (
               <button
                 onClick={() => {

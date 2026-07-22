@@ -16,6 +16,7 @@ model User {
   image          String?
   password       String?
   role           String    @default("user")
+  phone          String?
   nativeLanguage String    @default("en")
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
