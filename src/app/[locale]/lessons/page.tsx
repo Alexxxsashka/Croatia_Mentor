@@ -38,7 +38,7 @@ export default function LessonsPage() {
 
   const [filterType, setFilterType] = useState<string>("all");
   const [filterLevel, setFilterLevel] = useState<string>("all");
-  const [viewMode, setViewMode] = useState<"map" | "grid" | "list" | "material">("map");
+  const [viewMode, setViewMode] = useState<"map" | "grid" | "list">("map");
 
   // Progress states
   const [completedLessons, setCompletedLessons] = useState<string[]>([]);
@@ -74,13 +74,13 @@ export default function LessonsPage() {
       })
       .catch(console.error);
 
-    const savedView = localStorage.getItem("lessons_view_mode") as "map" | "grid" | "list" | "material" | null;
-    if (savedView && ["map", "grid", "list", "material"].includes(savedView)) {
+    const savedView = localStorage.getItem("lessons_view_mode") as "map" | "grid" | "list" | null;
+    if (savedView && ["map", "grid", "list"].includes(savedView)) {
       setViewMode(savedView);
     }
   }, []);
 
-  const handleViewChange = (mode: "map" | "grid" | "list" | "material") => {
+  const handleViewChange = (mode: "map" | "grid" | "list") => {
     setViewMode(mode);
     localStorage.setItem("lessons_view_mode", mode);
   };
@@ -265,19 +265,6 @@ export default function LessonsPage() {
           >
             <ListIcon className="w-4 h-4" />
             <span>{locale === "ua" ? "Список" : locale === "ru" ? "Список" : "List"}</span>
-          </button>
-
-          <button
-            onClick={() => handleViewChange("material")}
-            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
-              viewMode === "material"
-                ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md shadow-blue-500/20"
-                : "text-muted-foreground hover:text-foreground hover:bg-white/5"
-            }`}
-            title="Material Cards"
-          >
-            <FileText className="w-4 h-4" />
-            <span>{locale === "ua" ? "Матеріали" : locale === "ru" ? "Материал" : "Material"}</span>
           </button>
         </div>
       </div>
@@ -597,117 +584,6 @@ export default function LessonsPage() {
               );
             })}
           </div>
-        </div>
-      )}
-
-      {/* VIEW MODE 4: MATERIAL */}
-      {viewMode === "material" && (
-        <div className="space-y-4 animate-fade-in">
-          {filtered.map((lesson) => {
-            const Icon = typeIcons[lesson.type] || BookOpen;
-            const gradient = typeGradients[lesson.type] || "from-gray-500 to-gray-400";
-            const isCompleted = completedLessons.includes(lesson.id);
-            const isLocked = LEVEL_ORDER.indexOf(lesson.level) > LEVEL_ORDER.indexOf(userLevel);
-            const sectionsCount = lesson.content.sections?.length || 0;
-            const exercisesCount = lesson.content.exercises?.length || 0;
-
-            return (
-              <div
-                key={lesson.id}
-                className={`glass rounded-2xl p-6 border transition-all ${
-                  isLocked
-                    ? "opacity-50 border-white/5 bg-black/5"
-                    : isCompleted
-                    ? "border-emerald-500/20 bg-emerald-500/5 hover:border-emerald-500/40"
-                    : "border-white/10 hover:border-blue-500/30"
-                }`}
-              >
-                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-                  <div className="flex items-start gap-4 flex-1">
-                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${gradient} flex items-center justify-center shrink-0 shadow-lg text-white`}>
-                      <Icon className="w-7 h-7" />
-                    </div>
-
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <span className={`text-xs font-black px-2.5 py-0.5 rounded-md level-${lesson.level.toLowerCase()} text-white uppercase`}>
-                          {lesson.level}
-                        </span>
-                        <span className="text-xs font-bold text-blue-400 capitalize">
-                          {t(lesson.type as "grammar" | "reading" | "dictation" | "communication")}
-                        </span>
-                        {isCompleted && (
-                          <span className="text-xs font-bold text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded flex items-center gap-1">
-                            <CheckCircle2 className="w-3.5 h-3.5" />
-                            {t("completed")}
-                          </span>
-                        )}
-                      </div>
-
-                      <h3 className="text-lg font-bold text-foreground">
-                        {getLocalizedText(lesson.title, locale)}
-                      </h3>
-
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {getLocalizedText(lesson.content.description, locale)}
-                      </p>
-
-                      <div className="flex items-center gap-4 text-xs text-muted-foreground pt-2">
-                        {sectionsCount > 0 && (
-                          <span className="flex items-center gap-1">
-                            <Layers className="w-3.5 h-3.5 text-purple-400" />
-                            {sectionsCount} {locale === "ua" ? "розділів" : locale === "ru" ? "разделов" : "sections"}
-                          </span>
-                        )}
-                        {exercisesCount > 0 && (
-                          <span className="flex items-center gap-1">
-                            <FileQuestion className="w-3.5 h-3.5 text-cyan-400" />
-                            {exercisesCount} {locale === "ua" ? "вправ" : locale === "ru" ? "упражнений" : "exercises"}
-                          </span>
-                        )}
-                        <span className="flex items-center gap-1 text-amber-400 font-semibold">
-                          <Sparkles className="w-3.5 h-3.5" />
-                          +50 XP
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="shrink-0 w-full md:w-auto">
-                    {isLocked ? (
-                      <button
-                        onClick={() => {
-                          toast.error(
-                            locale === "ua"
-                              ? `Урок заблоковано. Складіть іспит на рівень ${lesson.level}!`
-                              : locale === "ru"
-                              ? `Урок заблокирован. Сдайте экзамен на уровень ${lesson.level}!`
-                              : `Pass the ${lesson.level} Promotion Exam first!`
-                          );
-                        }}
-                        className="w-full md:w-auto px-6 py-3 rounded-xl font-bold text-sm bg-gray-800 text-gray-400 cursor-not-allowed flex items-center justify-center gap-2"
-                      >
-                        <Lock className="w-4 h-4" />
-                        <span>{locale === "ua" ? "Заблоковано" : locale === "ru" ? "Заблокировано" : "Locked"}</span>
-                      </button>
-                    ) : (
-                      <Link
-                        href={`/lessons/${lesson.id}`}
-                        className={`w-full md:w-auto px-6 py-3 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-lg ${
-                          isCompleted
-                            ? "bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/30"
-                            : "bg-gradient-to-r from-blue-500 to-indigo-600 hover:opacity-90 text-white shadow-blue-500/20"
-                        }`}
-                      >
-                        <span>{isCompleted ? t("repeatLesson") : t("startLesson")}</span>
-                        <ArrowRight className="w-4 h-4" />
-                      </Link>
-                    )}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
         </div>
       )}
 

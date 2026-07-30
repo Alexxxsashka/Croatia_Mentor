@@ -96,7 +96,7 @@ export default function VocabularyPortal() {
 
   const [loading, setLoading] = useState(true);
   const [dbWords, setDbWords] = useState<Flashcard[]>([]);
-  const [activeTab, setActiveTab] = useState<"categories" | "flashcards" | "quiz" | "dictionary">("categories");
+  const [activeTab, setActiveTab] = useState<"categories" | "flashcards" | "quiz">("categories");
   const [selectedLevel, setSelectedLevel] = useState<string>("all");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedPOS, setSelectedPOS] = useState<string>("all");
@@ -297,14 +297,6 @@ export default function VocabularyPortal() {
             }`}
           >
             {t("quiz")}
-          </button>
-          <button
-            onClick={() => setActiveTab("dictionary")}
-            className={`px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 ${
-              activeTab === "dictionary" ? "bg-blue-600 text-white shadow-md" : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            {t("dictionary")}
           </button>
         </div>
       </div>
@@ -658,100 +650,6 @@ export default function VocabularyPortal() {
               )}
             </div>
           )}
-        </div>
-      )}
-
-      {/* Dictionary & HJP View */}
-      {activeTab === "dictionary" && (
-        <div className="space-y-6 animate-fade-in">
-          {/* Dictionary Search */}
-          <div className="glass rounded-2xl border border-white/10 p-6 space-y-4">
-            <h3 className="font-bold text-lg text-foreground">{t("localDictionary")}</h3>
-            <div className="relative">
-              <input
-                type="text"
-                placeholder={t("searchPlaceholder")}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 pl-11 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:border-blue-500 transition-colors"
-              />
-              <Search className="w-4 h-4 text-muted-foreground absolute left-4 top-3.5" />
-            </div>
-
-            {/* List */}
-            <div className="grid gap-3 sm:grid-cols-2 max-h-96 overflow-y-auto pr-1">
-              {filteredWords
-                .filter((w) => w.hr.toLowerCase().includes(searchQuery.toLowerCase()))
-                .map((word, index) => (
-                  <div
-                    key={index}
-                    className="p-3.5 rounded-xl border border-white/5 bg-white/5 flex items-center justify-between"
-                  >
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="font-bold text-foreground">{word.hr}</span>
-                        <span className="text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400">
-                          {word.level}
-                        </span>
-                      </div>
-                      <p className="text-xs text-muted-foreground mt-0.5">{getTranslation(word)}</p>
-                    </div>
-
-                    <div className="flex gap-2">
-                      <button
-                        onClick={() => speakWord(word.hr)}
-                        className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
-                        title="Pronounce"
-                      >
-                        <Volume2 className="w-4.5 h-4.5" />
-                      </button>
-                      <button
-                        onClick={() => window.open(`https://hjp.znanje.hr`, "_blank")}
-                        className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
-                        title="Search on HJP"
-                      >
-                        <ExternalLink className="w-4.5 h-4.5" />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-
-              {filteredWords.filter((w) => w.hr.toLowerCase().includes(searchQuery.toLowerCase())).length === 0 && (
-                <p className="text-xs text-muted-foreground col-span-2 text-center py-4">
-                  {t("noWordsFound")}
-                </p>
-              )}
-            </div>
-          </div>
-
-          {/* HJP Official Link Box */}
-          <div className="glass rounded-2xl border border-white/10 p-6 space-y-4 bg-gradient-to-br from-blue-500/5 to-purple-500/5">
-            <div className="flex items-center gap-3">
-              <Bookmark className="w-6 h-6 text-blue-400" />
-              <h3 className="font-bold text-lg text-foreground">Hrvatski Jezični Portal (HJP)</h3>
-            </div>
-            
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              {t("hjpNotice")}
-            </p>
-
-            <div className="flex gap-3 flex-col sm:flex-row">
-              <input
-                type="text"
-                placeholder={t("hjpInputPlaceholder")}
-                value={hjpSearchWord}
-                onChange={(e) => setHjpSearchWord(e.target.value)}
-                className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-foreground focus:outline-none focus:border-blue-500 transition-colors"
-              />
-              <button
-                onClick={() => openHjp(hjpSearchWord)}
-                className="px-5 py-2.5 rounded-xl font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg transition-all flex items-center justify-center gap-1.5 text-sm"
-              >
-                <span>{t("hjpLinkText")}</span>
-                <ExternalLink className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
         </div>
       )}
     </div>
