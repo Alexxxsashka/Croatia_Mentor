@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { lessonsData, getLocalizedText } from "@/lib/lessons-data";
 import { promotionTests } from "@/lib/promotion-tests-data";
+import { InteractiveGameMap } from "@/components/lessons/InteractiveGameMap";
 import {
   BookOpen,
   Languages,
@@ -20,6 +21,12 @@ import {
   Sparkles,
   X,
   Target,
+  Gamepad2,
+  LayoutGrid,
+  List as ListIcon,
+  FileText,
+  FileQuestion,
+  Layers,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -31,7 +38,8 @@ export default function LessonsPage() {
 
   const [filterType, setFilterType] = useState<string>("all");
   const [filterLevel, setFilterLevel] = useState<string>("all");
-  
+  const [viewMode, setViewMode] = useState<"map" | "grid" | "list" | "material">("map");
+
   // Progress states
   const [completedLessons, setCompletedLessons] = useState<string[]>([]);
   const [userLevel, setUserLevel] = useState<string>("A1");
@@ -65,7 +73,17 @@ export default function LessonsPage() {
         }
       })
       .catch(console.error);
+
+    const savedView = localStorage.getItem("lessons_view_mode") as "map" | "grid" | "list" | "material" | null;
+    if (savedView && ["map", "grid", "list", "material"].includes(savedView)) {
+      setViewMode(savedView);
+    }
   }, []);
+
+  const handleViewChange = (mode: "map" | "grid" | "list" | "material") => {
+    setViewMode(mode);
+    localStorage.setItem("lessons_view_mode", mode);
+  };
 
   const types = [
     { value: "all", label: t("all") },
@@ -106,14 +124,14 @@ export default function LessonsPage() {
     return true;
   });
 
-  // Start the promotion test
-  const startPromotionTest = () => {
-    const test = promotionTests[userLevel];
+  // Start the promotion test for a specific level
+  const startPromotionTestForLevel = (targetLevel: string) => {
+    const test = promotionTests[targetLevel];
     if (!test) {
       toast.error("No test available for this level.");
       return;
     }
-    setPromoLevel(userLevel);
+    setPromoLevel(targetLevel);
     setCurrentPromoQ(0);
     setPromoAnswers(new Array(test.questions.length).fill(null));
     setSelectedPromoAnswer(null);
@@ -122,6 +140,10 @@ export default function LessonsPage() {
     setPromoPassed(false);
     setPromoCorrectCount(0);
     setShowPromoModal(true);
+  };
+
+  const startPromotionTest = () => {
+    startPromotionTestForLevel(userLevel);
   };
 
   // Handle promo test answer click
@@ -198,9 +220,66 @@ export default function LessonsPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Header */}
-      <div className="mb-8 animate-fade-in">
-        <h1 className="text-3xl font-bold">{t("title")}</h1>
-        <p className="text-muted-foreground mt-1">{t("subtitle")}</p>
+      <div className="mb-8 animate-fade-in flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-bold">{t("title")}</h1>
+          <p className="text-muted-foreground mt-1">{t("subtitle")}</p>
+        </div>
+
+        {/* View Mode Switcher Toolbar */}
+        <div className="flex items-center gap-1.5 p-1.5 glass rounded-2xl border border-white/10 shadow-lg shrink-0">
+          <button
+            onClick={() => handleViewChange("map")}
+            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+              viewMode === "map"
+                ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md shadow-blue-500/20"
+                : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+            }`}
+            title="Interactive Map"
+          >
+            <Gamepad2 className="w-4 h-4" />
+            <span>{locale === "ua" ? "Карта" : locale === "ru" ? "Карта" : "Game Map"}</span>
+          </button>
+
+          <button
+            onClick={() => handleViewChange("grid")}
+            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+              viewMode === "grid"
+                ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md shadow-blue-500/20"
+                : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+            }`}
+            title="Grid / Islands"
+          >
+            <LayoutGrid className="w-4 h-4" />
+            <span>{locale === "ua" ? "Острови" : locale === "ru" ? "Острова" : "Islands Grid"}</span>
+          </button>
+
+          <button
+            onClick={() => handleViewChange("list")}
+            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+              viewMode === "list"
+                ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md shadow-blue-500/20"
+                : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+            }`}
+            title="List View"
+          >
+            <ListIcon className="w-4 h-4" />
+            <span>{locale === "ua" ? "Список" : locale === "ru" ? "Список" : "List"}</span>
+          </button>
+
+          <button
+            onClick={() => handleViewChange("material")}
+            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+              viewMode === "material"
+                ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md shadow-blue-500/20"
+                : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+            }`}
+            title="Material Cards"
+          >
+            <FileText className="w-4 h-4" />
+            <span>{locale === "ua" ? "Матеріали" : locale === "ru" ? "Материал" : "Material"}</span>
+          </button>
+        </div>
       </div>
 
       {/* Level Progress & Promotion Card */}
@@ -303,118 +382,334 @@ export default function LessonsPage() {
         </div>
       </div>
 
-      {/* Lessons Grid */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
-        {filtered.map((lesson) => {
-          const Icon = typeIcons[lesson.type] || BookOpen;
-          const gradient = typeGradients[lesson.type] || "from-gray-500 to-gray-400";
-          const isCompleted = completedLessons.includes(lesson.id);
-          
-          // Locking logic based on userLevel
-          const isLocked = LEVEL_ORDER.indexOf(lesson.level) > LEVEL_ORDER.indexOf(userLevel);
+      {/* VIEW MODE 1: GAME MAP */}
+      {viewMode === "map" && (
+        <InteractiveGameMap
+          lessons={filtered}
+          completedLessons={completedLessons}
+          userLevel={userLevel}
+          locale={locale}
+          onStartPromoTest={startPromotionTestForLevel}
+        />
+      )}
 
-          if (isLocked) {
+      {/* VIEW MODE 2: GRID / ISLANDS */}
+      {viewMode === "grid" && (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
+          {filtered.map((lesson) => {
+            const Icon = typeIcons[lesson.type] || BookOpen;
+            const gradient = typeGradients[lesson.type] || "from-gray-500 to-gray-400";
+            const isCompleted = completedLessons.includes(lesson.id);
+            const isLocked = LEVEL_ORDER.indexOf(lesson.level) > LEVEL_ORDER.indexOf(userLevel);
+
+            if (isLocked) {
+              return (
+                <div
+                  key={lesson.id}
+                  onClick={() => {
+                    toast.error(
+                      locale === "ua"
+                        ? `Цей урок заблоковано. Спочатку складіть іспит на рівень ${lesson.level}!`
+                        : locale === "ru"
+                        ? `Этот урок заблокирован. Сначала сдайте экзамен на уровень ${lesson.level}!`
+                        : `This lesson is locked. Pass the ${lesson.level} Promotion Exam first!`
+                    );
+                  }}
+                  className="group glass rounded-2xl p-6 block opacity-50 cursor-pointer border border-dashed border-white/5 relative"
+                >
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+                      <Lock className="w-6 h-6 text-muted-foreground" />
+                    </div>
+                    <div className="flex-1 flex items-center justify-between">
+                      <div>
+                        <span className="text-xs font-semibold px-2 py-0.5 rounded-md bg-white/10 text-muted-foreground">
+                          {lesson.level}
+                        </span>
+                        <span className="text-xs text-muted-foreground ml-2 capitalize">
+                          {t(lesson.type as "grammar" | "reading" | "dictation" | "communication")}
+                        </span>
+                      </div>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-red-500/10 text-red-400 uppercase tracking-wider flex items-center gap-1">
+                        <Lock className="w-3 h-3" />
+                        {locale === "ua" ? "Заблоковано" : locale === "ru" ? "Заблокирован" : "Locked"}
+                      </span>
+                    </div>
+                  </div>
+                  <h3 className="font-semibold mb-2 text-muted-foreground line-clamp-1">
+                    {getLocalizedText(lesson.title, locale)}
+                  </h3>
+                  <p className="text-sm text-muted-foreground/60 line-clamp-2">
+                    {getLocalizedText(lesson.content.description, locale)}
+                  </p>
+                  <div className="flex items-center gap-1 mt-4 text-sm font-medium text-muted-foreground">
+                    {locale === "ua" ? "Заблоковано" : locale === "ru" ? "Заблокировано" : "Locked"}
+                  </div>
+                </div>
+              );
+            }
+
             return (
-              <div
+              <Link
                 key={lesson.id}
-                onClick={() => {
-                  toast.error(
-                    locale === "ua"
-                      ? `Цей урок заблоковано. Спочатку складіть іспит на рівень ${lesson.level}!`
-                      : locale === "ru"
-                      ? `Этот урок заблокирован. Сначала сдайте экзамен на уровень ${lesson.level}!`
-                      : `This lesson is locked. Pass the ${lesson.level} Promotion Exam first!`
-                  );
-                }}
-                className="group glass rounded-2xl p-6 block opacity-50 cursor-pointer border border-dashed border-white/5 relative"
+                href={`/lessons/${lesson.id}`}
+                className={`group glass rounded-2xl p-6 block transition-all ${
+                  isCompleted 
+                    ? "border-emerald-500/20 bg-emerald-500/5 hover:border-emerald-500/40 opacity-90"
+                    : "card-hover"
+                }`}
               >
                 <div className="flex items-start gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
-                    <Lock className="w-6 h-6 text-muted-foreground" />
+                  <div
+                    className={`w-12 h-12 rounded-xl bg-gradient-to-br ${
+                      isCompleted ? "from-emerald-600 to-teal-500" : gradient
+                    } flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
+                  >
+                    <Icon className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1 flex items-center justify-between">
                     <div>
-                      <span className="text-xs font-semibold px-2 py-0.5 rounded-md bg-white/10 text-muted-foreground">
+                      <span
+                        className={`text-xs font-semibold px-2 py-0.5 rounded-md level-${lesson.level.toLowerCase()} text-white`}
+                      >
                         {lesson.level}
                       </span>
                       <span className="text-xs text-muted-foreground ml-2 capitalize">
                         {t(lesson.type as "grammar" | "reading" | "dictation" | "communication")}
                       </span>
                     </div>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-red-500/10 text-red-400 uppercase tracking-wider flex items-center gap-1">
-                      <Lock className="w-3 h-3" />
-                      {locale === "ua" ? "Заблоковано" : locale === "ru" ? "Заблокирован" : "Locked"}
-                    </span>
+                    {isCompleted && (
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        {t("completed")}
+                      </span>
+                    )}
                   </div>
                 </div>
-                <h3 className="font-semibold mb-2 text-muted-foreground line-clamp-1">
+                <h3 className={`font-semibold mb-2 group-hover:text-blue-400 transition-colors ${
+                  isCompleted ? "text-muted-foreground/90" : ""
+                }`}>
                   {getLocalizedText(lesson.title, locale)}
                 </h3>
-                <p className="text-sm text-muted-foreground/60 line-clamp-2">
+                <p className="text-sm text-muted-foreground line-clamp-2">
                   {getLocalizedText(lesson.content.description, locale)}
                 </p>
-                <div className="flex items-center gap-1 mt-4 text-sm font-medium text-muted-foreground">
-                  {locale === "ua" ? "Заблоковано" : locale === "ru" ? "Заблокировано" : "Locked"}
+                <div className={`flex items-center gap-1 mt-4 text-sm font-medium ${
+                  isCompleted ? "text-emerald-400" : "text-blue-400"
+                }`}>
+                  {isCompleted ? t("repeatLesson") : t("startLesson")}
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      )}
+
+      {/* VIEW MODE 3: LIST */}
+      {viewMode === "list" && (
+        <div className="glass rounded-2xl border border-white/10 overflow-hidden shadow-xl animate-fade-in">
+          <div className="divide-y divide-white/5">
+            {filtered.map((lesson) => {
+              const Icon = typeIcons[lesson.type] || BookOpen;
+              const isCompleted = completedLessons.includes(lesson.id);
+              const isLocked = LEVEL_ORDER.indexOf(lesson.level) > LEVEL_ORDER.indexOf(userLevel);
+
+              return (
+                <div
+                  key={lesson.id}
+                  className={`p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-colors ${
+                    isLocked
+                      ? "opacity-50 bg-black/5 dark:bg-white/5"
+                      : isCompleted
+                      ? "bg-emerald-500/5 hover:bg-emerald-500/10"
+                      : "hover:bg-black/5 dark:hover:bg-white/5"
+                  }`}
+                >
+                  <div className="flex items-center gap-4 flex-1 min-w-0">
+                    <div
+                      className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
+                        isLocked
+                          ? "bg-gray-800 text-gray-500"
+                          : isCompleted
+                          ? "bg-emerald-500/20 text-emerald-400"
+                          : "bg-blue-500/20 text-blue-400"
+                      }`}
+                    >
+                      {isLocked ? <Lock className="w-5 h-5" /> : <Icon className="w-5 h-5" />}
+                    </div>
+
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2 mb-1 flex-wrap">
+                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded level-${lesson.level.toLowerCase()} text-white uppercase`}>
+                          {lesson.level}
+                        </span>
+                        <span className="text-xs text-muted-foreground capitalize font-medium">
+                          {t(lesson.type as "grammar" | "reading" | "dictation" | "communication")}
+                        </span>
+                        {isCompleted && (
+                          <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded">
+                            ✓ {t("completed")}
+                          </span>
+                        )}
+                      </div>
+                      <h4 className="font-bold text-sm text-foreground truncate">
+                        {getLocalizedText(lesson.title, locale)}
+                      </h4>
+                      <p className="text-xs text-muted-foreground truncate">
+                        {getLocalizedText(lesson.content.description, locale)}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="shrink-0 w-full sm:w-auto">
+                    {isLocked ? (
+                      <button
+                        onClick={() => {
+                          toast.error(
+                            locale === "ua"
+                              ? `Урок заблоковано. Складіть іспит на рівень ${lesson.level}!`
+                              : locale === "ru"
+                              ? `Урок заблокирован. Сдайте экзамен на уровень ${lesson.level}!`
+                              : `Pass the ${lesson.level} Promotion Exam first!`
+                          );
+                        }}
+                        className="w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-semibold bg-gray-800 text-gray-400 cursor-not-allowed flex items-center justify-center gap-1.5"
+                      >
+                        <Lock className="w-3.5 h-3.5" />
+                        <span>{locale === "ua" ? "Заблоковано" : locale === "ru" ? "Заблокировано" : "Locked"}</span>
+                      </button>
+                    ) : (
+                      <Link
+                        href={`/lessons/${lesson.id}`}
+                        className={`w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                          isCompleted
+                            ? "bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400"
+                            : "bg-blue-500 text-white hover:bg-blue-600 shadow-md shadow-blue-500/20"
+                        }`}
+                      >
+                        <span>{isCompleted ? t("repeatLesson") : t("startLesson")}</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* VIEW MODE 4: MATERIAL */}
+      {viewMode === "material" && (
+        <div className="space-y-4 animate-fade-in">
+          {filtered.map((lesson) => {
+            const Icon = typeIcons[lesson.type] || BookOpen;
+            const gradient = typeGradients[lesson.type] || "from-gray-500 to-gray-400";
+            const isCompleted = completedLessons.includes(lesson.id);
+            const isLocked = LEVEL_ORDER.indexOf(lesson.level) > LEVEL_ORDER.indexOf(userLevel);
+            const sectionsCount = lesson.content.sections?.length || 0;
+            const exercisesCount = lesson.content.exercises?.length || 0;
+
+            return (
+              <div
+                key={lesson.id}
+                className={`glass rounded-2xl p-6 border transition-all ${
+                  isLocked
+                    ? "opacity-50 border-white/5 bg-black/5"
+                    : isCompleted
+                    ? "border-emerald-500/20 bg-emerald-500/5 hover:border-emerald-500/40"
+                    : "border-white/10 hover:border-blue-500/30"
+                }`}
+              >
+                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                  <div className="flex items-start gap-4 flex-1">
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${gradient} flex items-center justify-center shrink-0 shadow-lg text-white`}>
+                      <Icon className="w-7 h-7" />
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <span className={`text-xs font-black px-2.5 py-0.5 rounded-md level-${lesson.level.toLowerCase()} text-white uppercase`}>
+                          {lesson.level}
+                        </span>
+                        <span className="text-xs font-bold text-blue-400 capitalize">
+                          {t(lesson.type as "grammar" | "reading" | "dictation" | "communication")}
+                        </span>
+                        {isCompleted && (
+                          <span className="text-xs font-bold text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded flex items-center gap-1">
+                            <CheckCircle2 className="w-3.5 h-3.5" />
+                            {t("completed")}
+                          </span>
+                        )}
+                      </div>
+
+                      <h3 className="text-lg font-bold text-foreground">
+                        {getLocalizedText(lesson.title, locale)}
+                      </h3>
+
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {getLocalizedText(lesson.content.description, locale)}
+                      </p>
+
+                      <div className="flex items-center gap-4 text-xs text-muted-foreground pt-2">
+                        {sectionsCount > 0 && (
+                          <span className="flex items-center gap-1">
+                            <Layers className="w-3.5 h-3.5 text-purple-400" />
+                            {sectionsCount} {locale === "ua" ? "розділів" : locale === "ru" ? "разделов" : "sections"}
+                          </span>
+                        )}
+                        {exercisesCount > 0 && (
+                          <span className="flex items-center gap-1">
+                            <FileQuestion className="w-3.5 h-3.5 text-cyan-400" />
+                            {exercisesCount} {locale === "ua" ? "вправ" : locale === "ru" ? "упражнений" : "exercises"}
+                          </span>
+                        )}
+                        <span className="flex items-center gap-1 text-amber-400 font-semibold">
+                          <Sparkles className="w-3.5 h-3.5" />
+                          +50 XP
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="shrink-0 w-full md:w-auto">
+                    {isLocked ? (
+                      <button
+                        onClick={() => {
+                          toast.error(
+                            locale === "ua"
+                              ? `Урок заблоковано. Складіть іспит на рівень ${lesson.level}!`
+                              : locale === "ru"
+                              ? `Урок заблокирован. Сдайте экзамен на уровень ${lesson.level}!`
+                              : `Pass the ${lesson.level} Promotion Exam first!`
+                          );
+                        }}
+                        className="w-full md:w-auto px-6 py-3 rounded-xl font-bold text-sm bg-gray-800 text-gray-400 cursor-not-allowed flex items-center justify-center gap-2"
+                      >
+                        <Lock className="w-4 h-4" />
+                        <span>{locale === "ua" ? "Заблоковано" : locale === "ru" ? "Заблокировано" : "Locked"}</span>
+                      </button>
+                    ) : (
+                      <Link
+                        href={`/lessons/${lesson.id}`}
+                        className={`w-full md:w-auto px-6 py-3 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-lg ${
+                          isCompleted
+                            ? "bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/30"
+                            : "bg-gradient-to-r from-blue-500 to-indigo-600 hover:opacity-90 text-white shadow-blue-500/20"
+                        }`}
+                      >
+                        <span>{isCompleted ? t("repeatLesson") : t("startLesson")}</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    )}
+                  </div>
                 </div>
               </div>
             );
-          }
-
-          return (
-            <Link
-              key={lesson.id}
-              href={`/lessons/${lesson.id}`}
-              className={`group glass rounded-2xl p-6 block transition-all ${
-                isCompleted 
-                  ? "border-emerald-500/20 bg-emerald-500/5 hover:border-emerald-500/40 opacity-90"
-                  : "card-hover"
-              }`}
-            >
-              <div className="flex items-start gap-4 mb-4">
-                <div
-                  className={`w-12 h-12 rounded-xl bg-gradient-to-br ${
-                    isCompleted ? "from-emerald-600 to-teal-500" : gradient
-                  } flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
-                >
-                  <Icon className="w-6 h-6 text-white" />
-                </div>
-                <div className="flex-1 flex items-center justify-between">
-                  <div>
-                    <span
-                      className={`text-xs font-semibold px-2 py-0.5 rounded-md level-${lesson.level.toLowerCase()} text-white`}
-                    >
-                      {lesson.level}
-                    </span>
-                    <span className="text-xs text-muted-foreground ml-2 capitalize">
-                      {t(lesson.type as "grammar" | "reading" | "dictation" | "communication")}
-                    </span>
-                  </div>
-                  {isCompleted && (
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      {t("completed")}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <h3 className={`font-semibold mb-2 group-hover:text-blue-400 transition-colors ${
-                isCompleted ? "text-muted-foreground/90" : ""
-              }`}>
-                {getLocalizedText(lesson.title, locale)}
-              </h3>
-              <p className="text-sm text-muted-foreground line-clamp-2">
-                {getLocalizedText(lesson.content.description, locale)}
-              </p>
-              <div className={`flex items-center gap-1 mt-4 text-sm font-medium ${
-                isCompleted ? "text-emerald-400" : "text-blue-400"
-              }`}>
-                {isCompleted ? t("repeatLesson") : t("startLesson")}
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </Link>
-          );
-        })}
-      </div>
+          })}
+        </div>
+      )}
 
       {filtered.length === 0 && (
         <div className="text-center py-16 text-muted-foreground">
