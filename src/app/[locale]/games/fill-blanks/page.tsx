@@ -152,7 +152,7 @@ export default function FillBlanksPage() {
             className="w-full py-4 rounded-2xl text-base font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90 transition-all shadow-xl shadow-purple-500/25 flex items-center justify-center gap-2 cursor-pointer"
           >
             <Zap className="w-5 h-5 fill-white" />
-            Start Fill Blanks (10 Sentences)
+            {locale === "ua" ? "Почати вставку слів (10 речень)" : locale === "ru" ? "Начать вставку слов (10 предложений)" : "Start Fill Blanks (10 Sentences)"}
           </button>
         </div>
 
@@ -241,13 +241,13 @@ export default function FillBlanksPage() {
             className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90 transition-all shadow-lg cursor-pointer"
           >
             <RotateCcw className="w-4 h-4" />
-            Play Again (10 New Sentences)
+            {locale === "ua" ? "Грати знову (10 нових речень)" : locale === "ru" ? "Играть снова (10 новых предложений)" : "Play Again (10 New Sentences)"}
           </button>
           <button
             onClick={() => setGameStarted(false)}
             className="px-6 py-3 rounded-xl font-semibold glass hover:bg-white/10 transition-all cursor-pointer"
           >
-            Change Filters
+            {locale === "ua" ? "Змінити фільтри" : locale === "ru" ? "Сменить фильтры" : "Change Filters"}
           </button>
         </div>
       </div>
@@ -265,33 +265,39 @@ export default function FillBlanksPage() {
           <ArrowLeft className="w-5 h-5" />
         </button>
         <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-          Sentences {Object.keys(answers).length} / {activeSentences.length}
+          {locale === "ua" ? "Речень" : locale === "ru" ? "Предложений" : "Sentences"} {Object.keys(answers).length} / {activeSentences.length}
         </span>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-4">
         {activeSentences.map((sentence, i) => {
-          const parts = sentence.text.split("___");
-          const fullTextToSpeak = sentence.text.replace("___", sentence.correctAnswer);
+          const isSelected = !!answers[i];
+          const fullTextToSpeak = sentence.text.replace("___", answers[i] || sentence.correctAnswer);
 
           return (
             <div
               key={sentence.id || i}
-              className="glass rounded-2xl p-6 border border-white/10 animate-fade-in space-y-4"
+              className={`glass rounded-2xl p-5 border transition-all space-y-3 ${
+                isSelected ? "border-purple-500/40 bg-purple-500/5" : "border-white/10"
+              }`}
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 mb-2 inline-block">
-                    {sentence.level} • {sentence.category}
-                  </span>
-                  <p className="text-xl font-extrabold text-foreground leading-relaxed">
-                    {parts[0]}
-                    <span className="inline-block px-3 py-1 mx-1 rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/30 font-bold min-w-[60px] text-center">
-                      {answers[i] || "___"}
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-purple-500/10 text-purple-400">
+                      #{i + 1} • {sentence.level}
                     </span>
-                    {parts[1]}
+                    {sentence.category && (
+                      <span className="text-[10px] font-semibold text-muted-foreground">
+                        {sentence.category}
+                      </span>
+                    )}
+                  </div>
+
+                  <p className="text-lg font-black text-foreground leading-snug">
+                    {sentence.text}
                   </p>
-                  <p className="text-xs text-muted-foreground mt-2">
+                  <p className="text-xs text-muted-foreground/80 italic mt-0.5">
                     {getSentenceTranslation(sentence)}
                   </p>
                 </div>
@@ -333,7 +339,7 @@ export default function FillBlanksPage() {
           disabled={!allAnswered}
           className="w-full py-4 rounded-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90 disabled:opacity-40 transition-all shadow-xl text-base cursor-pointer"
         >
-          Check All Answers ({Object.keys(answers).length}/{activeSentences.length})
+          {locale === "ua" ? "Перевірити всі відповіді" : locale === "ru" ? "Проверить все ответы" : "Check All Answers"} ({Object.keys(answers).length}/{activeSentences.length})
         </button>
       </div>
     </div>

@@ -170,7 +170,7 @@ export default function ReadingPage() {
                 <div>
                   <h2 className="font-bold text-base text-foreground">{getLocalized(text.title, locale)}</h2>
                   <span className="text-xs text-muted-foreground font-medium">
-                    ⏱️ ~{Math.max(1, Math.ceil(text.text.split(" ").length / 150))} min read • {text.text.split(" ").length} words
+                    ⏱️ ~{Math.max(1, Math.ceil(text.text.split(" ").length / 150))} {locale === "ua" ? "хв читання" : locale === "ru" ? "мин чтения" : "min read"} • {text.text.split(" ").length} {locale === "ua" ? "слів" : locale === "ru" ? "слов" : "words"}
                   </span>
                 </div>
               </div>
@@ -179,7 +179,7 @@ export default function ReadingPage() {
                 className="px-3 py-1.5 rounded-xl bg-blue-500/10 text-blue-400 hover:bg-blue-500 hover:text-white transition-all flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
               >
                 <Volume2 className="w-4 h-4" />
-                Listen Audio
+                {locale === "ua" ? "Слухати аудіо" : locale === "ru" ? "Слушать аудио" : "Listen Audio"}
               </button>
             </div>
 
@@ -196,7 +196,7 @@ export default function ReadingPage() {
           {/* Vocabulary Box */}
           <div className="glass rounded-3xl p-6 border border-white/10 space-y-4">
             <h2 className="font-bold text-sm text-foreground uppercase tracking-wider text-muted-foreground">
-              📖 Key Vocabulary ({text.vocabulary.length} words)
+              📖 {locale === "ua" ? "Ключовий словник" : locale === "ru" ? "Ключевой словарь" : "Key Vocabulary"} ({text.vocabulary.length} {locale === "ua" ? "слів" : locale === "ru" ? "слов" : "words"})
             </h2>
             <div className="grid gap-2 sm:grid-cols-2">
               {text.vocabulary.map((v, i) => (
@@ -216,7 +216,7 @@ export default function ReadingPage() {
           </div>
 
           <button onClick={() => setPhase("questions")} className="w-full py-4 rounded-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition-all shadow-xl text-base cursor-pointer">
-            {t("reading.startQuestions")} ({text.questions.length} Questions)
+            {locale === "ua" ? "Перейти до запитань" : locale === "ru" ? "Перейти к вопросам" : "Start Questions"} ({text.questions.length} {locale === "ua" ? "Запитань" : locale === "ru" ? "Вопросов" : "Questions"})
           </button>
         </div>
       )}

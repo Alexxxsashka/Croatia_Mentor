@@ -631,7 +631,7 @@ export default function VocabularyPortal() {
               activeTab === "glossary" ? "bg-blue-600 text-white shadow-md" : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            {locale === "ua" ? "📖 Грамматика & Справочник" : locale === "ru" ? "📖 Грамматика и справочник" : "📖 Grammar Glossary"}
+            {locale === "ua" ? "📖 Граматика та довідник" : locale === "ru" ? "📖 Грамматика и справочник" : "📖 Grammar & Reference"}
           </button>
         </div>
       </div>
@@ -643,7 +643,9 @@ export default function VocabularyPortal() {
             onClick={() => setSelectedStatus("learned")}
             className={`glass p-3.5 rounded-2xl border transition-all text-center cursor-pointer ${selectedStatus === "learned" ? "border-emerald-500 bg-emerald-500/10" : "border-white/10 hover:bg-white/5"}`}
           >
-            <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider block">Выучено слов</span>
+            <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider block">
+              {locale === "ua" ? "Вивчено слів" : locale === "ru" ? "Выучено слов" : "Words Learned"}
+            </span>
             <span className="text-xl font-black text-emerald-400">
               {Object.values(wordProgressMap).filter((p) => p.status === "learned" || p.status === "mastered").length}
             </span>
@@ -652,7 +654,9 @@ export default function VocabularyPortal() {
             onClick={() => setSelectedStatus("due")}
             className={`glass p-3.5 rounded-2xl border transition-all text-center cursor-pointer ${selectedStatus === "due" ? "border-amber-500 bg-amber-500/10" : "border-white/10 hover:bg-white/5"}`}
           >
-            <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider block">Обязательный повтор</span>
+            <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider block">
+              {locale === "ua" ? "Обов'язкове повторення" : locale === "ru" ? "Обязательный повтор" : "Mandatory Review"}
+            </span>
             <span className="text-xl font-black text-amber-400">
               {Object.values(wordProgressMap).filter((p) => p.nextReview && new Date(p.nextReview) <= new Date()).length}
             </span>
@@ -661,14 +665,18 @@ export default function VocabularyPortal() {
             onClick={() => setSelectedStatus("starred")}
             className={`glass p-3.5 rounded-2xl border transition-all text-center cursor-pointer ${selectedStatus === "starred" ? "border-yellow-500 bg-yellow-500/10" : "border-white/10 hover:bg-white/5"}`}
           >
-            <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider block">Избранные слова</span>
+            <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider block">
+              {locale === "ua" ? "Обрані слова" : locale === "ru" ? "Избранные слова" : "Favorite Words"}
+            </span>
             <span className="text-xl font-black text-yellow-400">{starredWords.length}</span>
           </button>
           <button
             onClick={() => setSelectedStatus("all")}
             className={`glass p-3.5 rounded-2xl border transition-all text-center cursor-pointer ${selectedStatus === "all" ? "border-blue-500 bg-blue-500/10" : "border-white/10 hover:bg-white/5"}`}
           >
-            <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider block">Всего в базе</span>
+            <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider block">
+              {locale === "ua" ? "Всього у базі" : locale === "ru" ? "Всего в базе" : "Total in Database"}
+            </span>
             <span className="text-xl font-black text-blue-400">{allMergedWords.length}</span>
           </button>
         </div>
@@ -680,15 +688,15 @@ export default function VocabularyPortal() {
           <div className="flex flex-wrap items-center gap-4">
             <div className="flex items-center gap-2">
               <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
-                Статус:
+                {locale === "ua" ? "Статус:" : locale === "ru" ? "Статус:" : "Status:"}
               </span>
               <div className="flex gap-1 flex-wrap">
                 {[
-                  { id: "all", label: "Все" },
-                  { id: "due", label: "🔥 Повторить" },
-                  { id: "learned", label: "✅ Выученные" },
-                  { id: "starred", label: "⭐ Избранные" },
-                  { id: "new", label: "🆕 Новые" },
+                  { id: "all", label: locale === "ua" ? "Усі" : locale === "ru" ? "Все" : "All" },
+                  { id: "due", label: locale === "ua" ? "🔥 Повторити" : locale === "ru" ? "🔥 Повторить" : "🔥 Due" },
+                  { id: "learned", label: locale === "ua" ? "✅ Вивчені" : locale === "ru" ? "✅ Выученные" : "✅ Learned" },
+                  { id: "starred", label: locale === "ua" ? "⭐ Обрані" : locale === "ru" ? "⭐ Избранные" : "⭐ Starred" },
+                  { id: "new", label: locale === "ua" ? "🆕 Нові" : locale === "ru" ? "🆕 Новые" : "🆕 New" },
                 ].map((st) => (
                   <button
                     key={st.id}
@@ -842,15 +850,15 @@ export default function VocabularyPortal() {
                             </span>
                             {isLearned ? (
                               <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                                ✅ Выучено
+                                {locale === "ua" ? "✅ Вивчено" : locale === "ru" ? "✅ Выучено" : "✅ Learned"}
                               </span>
                             ) : isDue ? (
                               <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                                🔥 Повторить
+                                {locale === "ua" ? "🔥 Повторити" : locale === "ru" ? "🔥 Повторить" : "🔥 Due"}
                               </span>
                             ) : (
                               <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-white/5 text-muted-foreground/60">
-                                🆕 Новое
+                                {locale === "ua" ? "🆕 Нове" : locale === "ru" ? "🆕 Новое" : "🆕 New"}
                               </span>
                             )}
                           </div>
@@ -901,7 +909,9 @@ export default function VocabularyPortal() {
                               : "glass text-muted-foreground border-white/10 hover:bg-white/10 hover:text-foreground"
                           }`}
                         >
-                          {isLearned ? "✓ Выучено" : "+ Отметить выученным"}
+                          {isLearned
+                            ? locale === "ua" ? "✓ Вивчено" : locale === "ru" ? "✓ Выучено" : "✓ Learned"
+                            : locale === "ua" ? "+ Позначити вивченим" : locale === "ru" ? "+ Отметить выученным" : "+ Mark Learned"}
                         </button>
                       </div>
                     </div>
@@ -920,7 +930,7 @@ export default function VocabularyPortal() {
           <div className="glass p-4 rounded-2xl border border-white/10 flex flex-wrap items-center justify-between gap-4">
             <div className="flex flex-wrap items-center gap-3">
               {/* Deck Mode Selector */}
-              <div className="flex items-center gap-1.5 bg-white/5 p-1 rounded-xl border border-white/5">
+              <div className="flex items-center gap-1.5 bg-white/5 p-1 rounded-xl border border-white/5 flex-wrap">
                 <button
                   onClick={() => setDeckMode("all")}
                   className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${
@@ -960,7 +970,7 @@ export default function VocabularyPortal() {
                     deckMode === "due" ? "bg-amber-500 text-white shadow-md font-bold" : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
-                  🔥 Повтор ({Object.values(wordProgressMap).filter((p) => p.nextReview && new Date(p.nextReview) <= new Date()).length})
+                  🔥 {locale === "ua" ? "Повторення" : locale === "ru" ? "Повтор" : "Due"} ({Object.values(wordProgressMap).filter((p) => p.nextReview && new Date(p.nextReview) <= new Date()).length})
                 </button>
                 <button
                   onClick={() => setDeckMode("learned")}
@@ -968,7 +978,7 @@ export default function VocabularyPortal() {
                     deckMode === "learned" ? "bg-emerald-600 text-white shadow-md font-bold" : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
-                  ✅ Выучено ({Object.values(wordProgressMap).filter((p) => p.status === "learned" || p.status === "mastered").length})
+                  ✅ {locale === "ua" ? "Вивчено" : locale === "ru" ? "Выучено" : "Learned"} ({Object.values(wordProgressMap).filter((p) => p.status === "learned" || p.status === "mastered").length})
                 </button>
               </div>
 
