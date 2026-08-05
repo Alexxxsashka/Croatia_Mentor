@@ -5,6 +5,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Toaster } from "sonner";
 import { ChangelogModal } from "@/components/changelog-modal";
+import { NotificationListener } from "@/components/notification-listener";
 
 export async function generateMetadata({
   params,
@@ -58,6 +59,7 @@ export default async function LocaleLayout({
       <body className="min-h-screen flex flex-col">
         <NextIntlClientProvider messages={messages}>
           <SessionProvider>
+            <NotificationListener />
             <Navbar />
             <main className="flex-1">{children}</main>
             <Footer />
