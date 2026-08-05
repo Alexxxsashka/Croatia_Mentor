@@ -160,39 +160,63 @@ export default function ReadingPage() {
       {/* Reading phase */}
       {phase === "read" && (
         <div className="space-y-6 animate-slide-up">
-          {/* Text */}
-          <div className="glass rounded-2xl p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="font-semibold flex items-center gap-2"><BookOpen className="w-4 h-4" /> {t("reading.text")}</h2>
-              <button onClick={() => speakWord(text.text)} className="p-2 rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-colors">
+          {/* Text Container */}
+          <div className="glass rounded-3xl p-8 border border-white/10 space-y-6">
+            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center">
+                  <BookOpen className="w-5 h-5" />
+                </div>
+                <div>
+                  <h2 className="font-bold text-base text-foreground">{getLocalized(text.title, locale)}</h2>
+                  <span className="text-xs text-muted-foreground font-medium">
+                    ⏱️ ~{Math.max(1, Math.ceil(text.text.split(" ").length / 150))} min read • {text.text.split(" ").length} words
+                  </span>
+                </div>
+              </div>
+              <button
+                onClick={() => speakWord(text.text)}
+                className="px-3 py-1.5 rounded-xl bg-blue-500/10 text-blue-400 hover:bg-blue-500 hover:text-white transition-all flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
+              >
                 <Volume2 className="w-4 h-4" />
+                Listen Audio
               </button>
             </div>
-            <p className="text-sm leading-relaxed whitespace-pre-line text-foreground">{text.text}</p>
+
+            {/* Long Text Paragraphs */}
+            <div className="space-y-4 text-base text-foreground leading-relaxed font-normal">
+              {text.text.split("\n\n").map((paragraph, idx) => (
+                <p key={idx} className="indent-4 text-slate-200 leading-relaxed text-justify">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           </div>
 
-          {/* Vocabulary */}
-          <div className="glass rounded-2xl p-6">
-            <h2 className="font-semibold mb-3">{t("reading.vocabulary")}</h2>
+          {/* Vocabulary Box */}
+          <div className="glass rounded-3xl p-6 border border-white/10 space-y-4">
+            <h2 className="font-bold text-sm text-foreground uppercase tracking-wider text-muted-foreground">
+              📖 Key Vocabulary ({text.vocabulary.length} words)
+            </h2>
             <div className="grid gap-2 sm:grid-cols-2">
               {text.vocabulary.map((v, i) => (
-                <div key={i} className="flex items-center justify-between p-2 rounded-lg bg-white/5">
+                <div key={i} className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
                   <div>
-                    <span className="font-bold text-sm text-foreground">{v.hr}</span>
-                    <span className="text-xs text-muted-foreground ml-2">
+                    <span className="font-bold text-sm text-foreground block">{v.hr}</span>
+                    <span className="text-xs text-muted-foreground">
                       {locale === "ru" ? v.ru : locale === "ua" ? v.ua : v.en}
                     </span>
                   </div>
-                  <button onClick={() => speakWord(v.hr)} className="p-1 rounded text-muted-foreground hover:text-foreground">
-                    <Volume2 className="w-3.5 h-3.5" />
+                  <button onClick={() => speakWord(v.hr)} className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/10 transition-colors cursor-pointer">
+                    <Volume2 className="w-4 h-4 text-blue-400" />
                   </button>
                 </div>
               ))}
             </div>
           </div>
 
-          <button onClick={() => setPhase("questions")} className="w-full py-3 rounded-xl font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition-all shadow-lg">
-            {t("reading.startQuestions")}
+          <button onClick={() => setPhase("questions")} className="w-full py-4 rounded-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition-all shadow-xl text-base cursor-pointer">
+            {t("reading.startQuestions")} ({text.questions.length} Questions)
           </button>
         </div>
       )}
