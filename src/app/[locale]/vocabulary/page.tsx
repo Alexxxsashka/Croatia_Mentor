@@ -9,6 +9,7 @@ import {
   categoryLabels,
   type VocabWord,
 } from "@/lib/vocabulary-data";
+import { glossaryData } from "@/lib/glossary-data";
 import {
   Search,
   Volume2,
@@ -26,6 +27,10 @@ import {
   Sparkles,
   Layers,
   ArrowRightLeft,
+  GraduationCap,
+  BookOpen,
+  ChevronDown,
+  ChevronRight,
 } from "lucide-react";
 
 import { speakText } from "@/lib/speech";
@@ -102,7 +107,8 @@ export default function VocabularyPortal() {
 
   const [loading, setLoading] = useState(true);
   const [dbWords, setDbWords] = useState<Flashcard[]>([]);
-  const [activeTab, setActiveTab] = useState<"categories" | "flashcards" | "quiz">("categories");
+  const [activeTab, setActiveTab] = useState<"categories" | "flashcards" | "quiz" | "glossary">("categories");
+  const [expandedGlossary, setExpandedGlossary] = useState<Record<string, boolean>>({});
   const [selectedLevel, setSelectedLevel] = useState<string>("all");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedPOS, setSelectedPOS] = useState<string>("all");
@@ -112,6 +118,17 @@ export default function VocabularyPortal() {
   const [deckDirection, setDeckDirection] = useState<"hr_to_native" | "native_to_hr">("hr_to_native");
   const [autoAudio, setAutoAudio] = useState<boolean>(false);
   const [starredWords, setStarredWords] = useState<string[]>([]);
+
+  // Check URL query tab parameter
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const tab = params.get("tab");
+      if (tab && ["categories", "flashcards", "quiz", "glossary"].includes(tab)) {
+        setActiveTab(tab as any);
+      }
+    }
+  }, []);
   
   const [deckQueue, setDeckQueue] = useState<VocabWord[]>([]);
   const [deckIndex, setDeckIndex] = useState(0);
@@ -524,11 +541,19 @@ export default function VocabularyPortal() {
           >
             {t("quiz")}
           </button>
+          <button
+            onClick={() => setActiveTab("glossary")}
+            className={`px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 ${
+              activeTab === "glossary" ? "bg-blue-600 text-white shadow-md" : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            {locale === "ua" ? "📖 Грамматика & Справочник" : locale === "ru" ? "📖 Грамматика и справочник" : "📖 Grammar Glossary"}
+          </button>
         </div>
       </div>
 
-      {/* Filters (skip during active quiz) */}
-      {!(activeTab === "quiz" && quizStarted && !quizComplete) && (
+      {/* Filters (skip during active quiz or glossary) */}
+      {!(activeTab === "quiz" && quizStarted && !quizComplete) && activeTab !== "glossary" && (
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 bg-white/5 p-4 rounded-2xl border border-white/10 animate-fade-in">
           <div className="flex flex-wrap items-center gap-4">
             <div className="flex items-center gap-2">
@@ -1265,6 +1290,82 @@ export default function VocabularyPortal() {
               })()}
             </div>
           )}
+        </div>
+      )}
+
+      {/* Grammar Glossary Tab Content */}
+      {activeTab === "glossary" && (
+        <div className="space-y-6 animate-fade-in">
+          <div className="glass p-6 rounded-3xl border border-white/10 space-y-4">
+            <h2 className="text-xl font-bold flex items-center gap-2 text-foreground">
+              <GraduationCap className="w-6 h-6 text-purple-400" />
+              {locale === "ua" ? "Грамматичний довідник хорватської мови" : locale === "ru" ? "Грамматический справочник хорватского языка" : "Croatian Grammar Reference Glossary"}
+            </h2>
+            <p className="text-xs text-muted-foreground">
+              {locale === "ua"
+                ? "Правила відмінювання, відмінки, алфавіт, дієслова та граматичні структури."
+                : locale === "ru"
+                ? "Правила склонения, падежи, алфавит, глаголы и грамматические структуры."
+                : "Rules of declension, cases, alphabet, verb conjugations, and structure reference."}
+            </p>
+
+            <div className="space-y-4 pt-2">
+              {glossaryData.map((cat) => (
+                <div key={cat.id} className="p-4 rounded-2xl bg-white/5 border border-white/5 space-y-3">
+                  <button
+                    onClick={() => setExpandedGlossary((prev) => ({ ...prev, [cat.id]: !prev[cat.id] }))}
+                    className="w-full flex items-center justify-between font-bold text-sm text-foreground hover:text-blue-400 transition-colors text-left"
+                  >
+                    <span>{cat.title[locale as "en" | "ru" | "ua"] || cat.title.en}</span>
+                    {expandedGlossary[cat.id] ? <ChevronDown className="w-4 h-4 text-muted-foreground" /> : <ChevronRight className="w-4 h-4 text-muted-foreground" />}
+                  </button>
+
+                  {(expandedGlossary[cat.id] ?? true) && (
+                    <div className="space-y-4 pt-2 text-xs text-muted-foreground">
+                      {cat.sections.map((sec) => (
+                        <div key={sec.id} className="p-3.5 rounded-xl bg-black/20 space-y-3">
+                          <h4 className="font-bold text-foreground text-sm flex items-center gap-2">
+                            <span>{sec.icon}</span>
+                            {sec.title[locale as "en" | "ru" | "ua"] || sec.title.en}
+                          </h4>
+                          {sec.subsections.map((sub, sIdx) => (
+                            <div key={sIdx} className="space-y-2 pl-2 border-l-2 border-white/10">
+                              <h5 className="font-semibold text-foreground text-xs">{sub.title[locale as "en" | "ru" | "ua"] || sub.title.en}</h5>
+                              <p className="leading-relaxed text-muted-foreground">{sub.text[locale as "en" | "ru" | "ua"] || sub.text.en}</p>
+                              {sub.table && (
+                                <div className="overflow-x-auto my-2 rounded-xl border border-white/10 bg-slate-900/50 p-2">
+                                  <table className="w-full text-xs text-left border-collapse">
+                                    <thead>
+                                      <tr className="border-b border-white/10 text-muted-foreground font-semibold">
+                                        {sub.table.headers.map((h, hIdx) => {
+                                          const hText = typeof h === "string" ? h : (h[locale as "en" | "ru" | "ua"] || h.en);
+                                          return <th key={hIdx} className="p-2">{hText}</th>;
+                                        })}
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {sub.table.rows.map((row, rIdx) => (
+                                        <tr key={rIdx} className="border-b border-white/5 hover:bg-white/5">
+                                          {row.cells.map((cell, cIdx) => {
+                                            const cellText = typeof cell === "string" ? cell : (cell[locale as "en" | "ru" | "ua"] || cell.en);
+                                            return <td key={cIdx} className="p-2 font-medium text-foreground">{cellText}</td>;
+                                          })}
+                                        </tr>
+                                      ))}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       )}
     </div>
