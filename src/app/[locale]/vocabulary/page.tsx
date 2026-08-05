@@ -112,12 +112,64 @@ export default function VocabularyPortal() {
   const [selectedLevel, setSelectedLevel] = useState<string>("all");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedPOS, setSelectedPOS] = useState<string>("all");
+  const [selectedStatus, setSelectedStatus] = useState<string>("all");
   
+  // Progress tracking map
+  const [wordProgressMap, setWordProgressMap] = useState<Record<string, { status: string; nextReview?: string; correctCount: number; wrongCount: number }>>({});
+
   // Flashcard Advanced Deck states
-  const [deckMode, setDeckMode] = useState<"all" | "quick15" | "quick30" | "starred">("all");
+  const [deckMode, setDeckMode] = useState<"all" | "quick15" | "quick30" | "starred" | "due" | "learned">("all");
   const [deckDirection, setDeckDirection] = useState<"hr_to_native" | "native_to_hr">("hr_to_native");
   const [autoAudio, setAutoAudio] = useState<boolean>(false);
   const [starredWords, setStarredWords] = useState<string[]>([]);
+
+  // Fetch word progress map
+  useEffect(() => {
+    fetch("/api/words/progress")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.wordProgress && Array.isArray(data.wordProgress)) {
+          const map: Record<string, { status: string; nextReview?: string; correctCount: number; wrongCount: number }> = {};
+          data.wordProgress.forEach((item: any) => {
+            map[item.wordHr.toLowerCase()] = {
+              status: item.status,
+              nextReview: item.nextReview,
+              correctCount: item.correctCount || 0,
+              wrongCount: item.wrongCount || 0,
+            };
+          });
+          setWordProgressMap(map);
+        }
+      })
+      .catch((err) => console.error("Failed to load word progress:", err));
+  }, []);
+
+  // Update word progress helper
+  const updateWordStatus = async (wordHr: string, newStatus: string) => {
+    const key = wordHr.toLowerCase();
+    setWordProgressMap((prev) => ({
+      ...prev,
+      [key]: {
+        status: newStatus,
+        correctCount: (prev[key]?.correctCount || 0) + (newStatus === "learned" || newStatus === "mastered" ? 1 : 0),
+        wrongCount: prev[key]?.wrongCount || 0,
+      },
+    }));
+
+    try {
+      await fetch("/api/words/progress", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          wordHr,
+          correct: newStatus === "learned" || newStatus === "mastered",
+          timeTakenMs: 1000,
+        }),
+      });
+    } catch (err) {
+      console.error("Failed to update word status:", err);
+    }
+  };
 
   // Check URL query tab parameter
   useEffect(() => {
@@ -222,10 +274,32 @@ export default function VocabularyPortal() {
 
   // Filter words
   const filteredWords = allMergedWords.filter((w) => {
+    const key = w.hr.toLowerCase();
     const levelMatch = selectedLevel === "all" || w.level.toLowerCase() === selectedLevel.toLowerCase();
     const categoryMatch = selectedCategory === "all" || w.category === selectedCategory;
     const posMatch = selectedPOS === "all" || getPartOfSpeech(w) === selectedPOS;
-    return levelMatch && categoryMatch && posMatch;
+    
+    let statusMatch = true;
+    if (selectedStatus === "starred") {
+      statusMatch = starredWords.includes(w.hr);
+    } else if (selectedStatus === "due") {
+      const prog = wordProgressMap[key];
+      statusMatch = !!(prog?.nextReview && new Date(prog.nextReview) <= new Date());
+    } else if (selectedStatus === "learned") {
+      const prog = wordProgressMap[key];
+      statusMatch = prog?.status === "learned" || prog?.status === "mastered";
+    } else if (selectedStatus === "mastered") {
+      const prog = wordProgressMap[key];
+      statusMatch = prog?.status === "mastered";
+    } else if (selectedStatus === "learning") {
+      const prog = wordProgressMap[key];
+      statusMatch = prog?.status === "learning";
+    } else if (selectedStatus === "new") {
+      const prog = wordProgressMap[key];
+      statusMatch = !prog || prog.status === "new";
+    }
+
+    return levelMatch && categoryMatch && posMatch && statusMatch;
   });
 
   const getTranslation = (word: VocabWord) => {
@@ -252,7 +326,7 @@ export default function VocabularyPortal() {
 
   // Start or reset flashcard deck
   const startDeck = (
-    modeOverride?: "all" | "quick15" | "quick30" | "starred",
+    modeOverride?: "all" | "quick15" | "quick30" | "starred" | "due" | "learned",
     wordsOverride?: VocabWord[]
   ) => {
     const mode = modeOverride || deckMode;
@@ -260,6 +334,16 @@ export default function VocabularyPortal() {
 
     if (mode === "starred") {
       pool = allMergedWords.filter((w) => starredWords.includes(w.hr));
+    } else if (mode === "due") {
+      pool = allMergedWords.filter((w) => {
+        const prog = wordProgressMap[w.hr.toLowerCase()];
+        return !!(prog?.nextReview && new Date(prog.nextReview) <= new Date());
+      });
+    } else if (mode === "learned") {
+      pool = allMergedWords.filter((w) => {
+        const prog = wordProgressMap[w.hr.toLowerCase()];
+        return prog?.status === "learned" || prog?.status === "mastered";
+      });
     } else if (mode === "quick15") {
       pool = [...pool].sort(() => 0.5 - Math.random()).slice(0, 15);
     } else if (mode === "quick30") {
@@ -552,10 +636,75 @@ export default function VocabularyPortal() {
         </div>
       </div>
 
+      {/* Vocabulary Progress Stats Overview Bar */}
+      {activeTab !== "glossary" && !(activeTab === "quiz" && quizStarted) && (
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6 animate-fade-in">
+          <button
+            onClick={() => setSelectedStatus("learned")}
+            className={`glass p-3.5 rounded-2xl border transition-all text-center cursor-pointer ${selectedStatus === "learned" ? "border-emerald-500 bg-emerald-500/10" : "border-white/10 hover:bg-white/5"}`}
+          >
+            <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider block">Выучено слов</span>
+            <span className="text-xl font-black text-emerald-400">
+              {Object.values(wordProgressMap).filter((p) => p.status === "learned" || p.status === "mastered").length}
+            </span>
+          </button>
+          <button
+            onClick={() => setSelectedStatus("due")}
+            className={`glass p-3.5 rounded-2xl border transition-all text-center cursor-pointer ${selectedStatus === "due" ? "border-amber-500 bg-amber-500/10" : "border-white/10 hover:bg-white/5"}`}
+          >
+            <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider block">Обязательный повтор</span>
+            <span className="text-xl font-black text-amber-400">
+              {Object.values(wordProgressMap).filter((p) => p.nextReview && new Date(p.nextReview) <= new Date()).length}
+            </span>
+          </button>
+          <button
+            onClick={() => setSelectedStatus("starred")}
+            className={`glass p-3.5 rounded-2xl border transition-all text-center cursor-pointer ${selectedStatus === "starred" ? "border-yellow-500 bg-yellow-500/10" : "border-white/10 hover:bg-white/5"}`}
+          >
+            <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider block">Избранные слова</span>
+            <span className="text-xl font-black text-yellow-400">{starredWords.length}</span>
+          </button>
+          <button
+            onClick={() => setSelectedStatus("all")}
+            className={`glass p-3.5 rounded-2xl border transition-all text-center cursor-pointer ${selectedStatus === "all" ? "border-blue-500 bg-blue-500/10" : "border-white/10 hover:bg-white/5"}`}
+          >
+            <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider block">Всего в базе</span>
+            <span className="text-xl font-black text-blue-400">{allMergedWords.length}</span>
+          </button>
+        </div>
+      )}
+
       {/* Filters (skip during active quiz or glossary) */}
       {!(activeTab === "quiz" && quizStarted && !quizComplete) && activeTab !== "glossary" && (
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 bg-white/5 p-4 rounded-2xl border border-white/10 animate-fade-in">
           <div className="flex flex-wrap items-center gap-4">
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
+                Статус:
+              </span>
+              <div className="flex gap-1 flex-wrap">
+                {[
+                  { id: "all", label: "Все" },
+                  { id: "due", label: "🔥 Повторить" },
+                  { id: "learned", label: "✅ Выученные" },
+                  { id: "starred", label: "⭐ Избранные" },
+                  { id: "new", label: "🆕 Новые" },
+                ].map((st) => (
+                  <button
+                    key={st.id}
+                    onClick={() => setSelectedStatus(st.id)}
+                    className={`px-3 py-1 text-xs font-semibold rounded-full border transition-all ${
+                      selectedStatus === st.id
+                        ? "bg-blue-500/20 text-blue-400 border-blue-500/40 font-bold"
+                        : "border-white/5 text-muted-foreground hover:text-foreground hover:bg-white/5"
+                    }`}
+                  >
+                    {st.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <div className="flex items-center gap-2">
               <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
                 {t("levelFilter")}:
@@ -673,43 +822,91 @@ export default function VocabularyPortal() {
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 stagger-children">
-                {filteredWords.map((word, i) => (
-                  <div
-                    key={i}
-                    className="glass p-5 rounded-2xl border border-white/10 flex flex-col justify-between"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-blue-500/10 text-blue-400">
-                          {word.level}
-                        </span>
+                {filteredWords.map((word, i) => {
+                  const key = word.hr.toLowerCase();
+                  const prog = wordProgressMap[key];
+                  const isStarred = starredWords.includes(word.hr);
+                  const isLearned = prog?.status === "learned" || prog?.status === "mastered";
+                  const isDue = prog?.nextReview && new Date(prog.nextReview) <= new Date();
+
+                  return (
+                    <div
+                      key={i}
+                      className="glass p-5 rounded-2xl border border-white/10 flex flex-col justify-between"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-blue-500/10 text-blue-400">
+                              {word.level}
+                            </span>
+                            {isLearned ? (
+                              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                                ✅ Выучено
+                              </span>
+                            ) : isDue ? (
+                              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                                🔥 Повторить
+                              </span>
+                            ) : (
+                              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-white/5 text-muted-foreground/60">
+                                🆕 Новое
+                              </span>
+                            )}
+                          </div>
+
+                          <div className="flex items-center gap-1">
+                            <button
+                              onClick={(e) => toggleStarWord(word.hr, e)}
+                              className={`p-1 rounded transition-colors ${
+                                isStarred ? "text-yellow-400" : "text-muted-foreground/40 hover:text-foreground"
+                              }`}
+                            >
+                              <Star className="w-4 h-4" fill={isStarred ? "currentColor" : "none"} />
+                            </button>
+                            <button
+                              onClick={() => speakWord(word.hr)}
+                              className="p-1 rounded bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
+                            >
+                              <Volume2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </div>
+
+                        <h3 className="text-xl font-black text-foreground mb-1 select-all">
+                          {word.hr}
+                        </h3>
+                        <p className="text-sm font-semibold text-blue-400 mb-3">
+                          {getTranslation(word)}
+                        </p>
+                      </div>
+
+                      {word.example && (
+                        <div className="mt-3 pt-3 border-t border-white/5">
+                          <p className="text-xs italic text-muted-foreground leading-relaxed">
+                            &quot;{word.example.hr}&quot;
+                          </p>
+                          <p className="text-[10px] text-muted-foreground/60 mt-1 leading-relaxed">
+                            {locale === "ru" ? word.example.ru : locale === "ua" ? word.example.ua : word.example.en}
+                          </p>
+                        </div>
+                      )}
+
+                      <div className="mt-3 pt-3 border-t border-white/5 flex items-center justify-between">
                         <button
-                          onClick={() => speakWord(word.hr)}
-                          className="p-1 rounded bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
+                          onClick={() => updateWordStatus(word.hr, isLearned ? "new" : "learned")}
+                          className={`text-xs font-semibold px-2.5 py-1 rounded-lg border transition-all cursor-pointer ${
+                            isLearned
+                              ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/20"
+                              : "glass text-muted-foreground border-white/10 hover:bg-white/10 hover:text-foreground"
+                          }`}
                         >
-                          <Volume2 className="w-4 h-4" />
+                          {isLearned ? "✓ Выучено" : "+ Отметить выученным"}
                         </button>
                       </div>
-                      <h3 className="text-xl font-black text-foreground mb-1 select-all">
-                        {word.hr}
-                      </h3>
-                      <p className="text-sm font-semibold text-blue-400 mb-3">
-                        {getTranslation(word)}
-                      </p>
                     </div>
-
-                    {word.example && (
-                      <div className="mt-3 pt-3 border-t border-white/5">
-                        <p className="text-xs italic text-muted-foreground leading-relaxed">
-                          &quot;{word.example.hr}&quot;
-                        </p>
-                        <p className="text-[10px] text-muted-foreground/60 mt-1 leading-relaxed">
-                          {locale === "ru" ? word.example.ru : locale === "ua" ? word.example.ua : word.example.en}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           )}
@@ -756,6 +953,22 @@ export default function VocabularyPortal() {
                 >
                   <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                   {t("starredOnly")} ({starredWords.length})
+                </button>
+                <button
+                  onClick={() => setDeckMode("due")}
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all flex items-center gap-1 ${
+                    deckMode === "due" ? "bg-amber-500 text-white shadow-md font-bold" : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  🔥 Повтор ({Object.values(wordProgressMap).filter((p) => p.nextReview && new Date(p.nextReview) <= new Date()).length})
+                </button>
+                <button
+                  onClick={() => setDeckMode("learned")}
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all flex items-center gap-1 ${
+                    deckMode === "learned" ? "bg-emerald-600 text-white shadow-md font-bold" : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  ✅ Выучено ({Object.values(wordProgressMap).filter((p) => p.status === "learned" || p.status === "mastered").length})
                 </button>
               </div>
 
