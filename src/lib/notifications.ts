@@ -1,5 +1,5 @@
 /**
- * Duolingo-Style Smart Push Notification & Toast Manager
+ * Professional Smart Push Notification & Toast Manager
  */
 
 import { toast } from "sonner";
@@ -53,7 +53,7 @@ export function sendSmartNotification(
 }
 
 /**
- * Trigger daily login / streak saved notification (once per day)
+ * Trigger daily login / streak active notification (once per day)
  */
 export function checkDailyLoginNotification(streak: number, locale: string) {
   const todayStr = new Date().toISOString().split("T")[0];
@@ -65,16 +65,16 @@ export function checkDailyLoginNotification(streak: number, locale: string) {
 
   const messages: Record<string, { title: string; body: string }> = {
     ua: {
-      title: `🔥 Ласкаво просимо! Серію збережено (${streak} дн.)`,
-      body: "Чудовий початок дня! Пройди кілька карточок або тест, щоб покращити словарний запас.",
+      title: `🔥 Серія активна (${streak} дн.)`,
+      body: "Ласкаво просимо! Пройдіть карточки або тест для досягнення сьогоднішньої цілі.",
     },
     ru: {
-      title: `🔥 Добро пожаловать! Серия сохранена (${streak} дн.)`,
-      body: "Отличное начало дня! Пройди пару карточек или тест, чтобы прокачать словарный запас.",
+      title: `🔥 Серия активна (${streak} дн.)`,
+      body: "Добро пожаловать! Пройдите карточки или тест для достижения сегодняшней цели.",
     },
     en: {
-      title: `🔥 Welcome back! Streak active (${streak} days)`,
-      body: "Great start! Practice a few flashcards or take a quiz to boost your vocabulary today.",
+      title: `🔥 Active streak (${streak} days)`,
+      body: "Welcome back! Practice flashcards or take a quiz to achieve your daily target.",
     },
   };
 
@@ -83,7 +83,7 @@ export function checkDailyLoginNotification(streak: number, locale: string) {
 }
 
 /**
- * Check if streak is in danger (user hasn't practiced today or missed yesterday)
+ * Check if streak is unfulfilled (user hasn't practiced today)
  */
 export function checkStreakDangerNotification(
   completedToday: boolean,
@@ -99,22 +99,22 @@ export function checkStreakDangerNotification(
   const now = new Date();
   const currentHour = now.getHours();
 
-  // Trigger warning after 14:00 (2 PM) if daily goal not completed
+  // Trigger reminder after 14:00 (2 PM) if daily goal not completed
   if (currentHour >= 14) {
     localStorage.setItem("last_streak_danger_notified", todayStr);
 
     const messages: Record<string, { title: string; body: string }> = {
       ua: {
-        title: `🚨 Твоя серія в небезпеці! (${streak} дн.)`,
-        body: "Огонь може згаснути! Приділи 5 хвилин хорватській мові прямо зараз.",
+        title: `⚠️ Денна ціль не завершена (${streak} дн.)`,
+        body: "Приділіть кілька хвилин навчанню сьогодні, щоб зберегти вашу навчальну серію.",
       },
       ru: {
-        title: `🚨 Твоя серия в опасности! (${streak} дн.)`,
-        body: "Огонь может погаснуть! Удели 5 минут хорватскому прямо сейчас.",
+        title: `⚠️ Дневная цель не завершена (${streak} дн.)`,
+        body: "Уделите несколько минут обучению сегодня, чтобы сохранить вашу учебную серию.",
       },
       en: {
-        title: `🚨 Your streak is in danger! (${streak} days)`,
-        body: "Don't lose your streak flame! Spend 5 minutes practicing Croatian right now.",
+        title: `⚠️ Daily goal incomplete (${streak} days)`,
+        body: "Spend a few minutes learning today to maintain your active streak.",
       },
     };
 
@@ -146,16 +146,16 @@ export function checkMissedDaysNotification(
 
     const messages: Record<string, { title: string; body: string }> = {
       ua: {
-        title: `🦉 Сова сумує! (Пропущено ${daysMissed} дн.)`,
-        body: "Ти давно не вчив хорватську! Повертайся, щоб відновити серію і не забути слова.",
+        title: `📌 Ви пропустили ${daysMissed} дн.`,
+        body: "Ви давно не займалися хорватською мовою. Поверніться до занять, щоб продовжити прогрес.",
       },
       ru: {
-        title: `🦉 Сова скучает! (Пропущено ${daysMissed} дн.)`,
-        body: "Ты давно не учил хорватский! Возвращайся, чтобы восстановить серию и не забыть слова.",
+        title: `📌 Вы пропустили ${daysMissed} дн.`,
+        body: "Вы давно не занимались хорватским языком. Вернитесь к занятиям, чтобы продолжить прогресс.",
       },
       en: {
-        title: `🦉 We miss you! (${daysMissed} days missed)`,
-        body: "You haven't practiced Croatian in a while! Come back to restore your streak.",
+        title: `📌 You missed ${daysMissed} days`,
+        body: "You haven't practiced Croatian recently. Return to your studies to maintain progress.",
       },
     };
 
