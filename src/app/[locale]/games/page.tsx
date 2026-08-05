@@ -91,7 +91,7 @@ export default function GamesPage() {
           <Link
             key={game.id}
             href={`/games/${game.id}`}
-            className="group relative glass rounded-3xl p-6 card-hover overflow-hidden block"
+            className="group relative glass rounded-3xl p-6 card-hover overflow-hidden block border border-white/10"
           >
             {/* Background decoration */}
             <div
@@ -100,26 +100,31 @@ export default function GamesPage() {
 
             <div className="relative flex flex-col h-full justify-between">
               <div>
-                <div
-                  className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${game.gradient} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}
-                >
-                  <game.icon className="w-7 h-7 text-white" />
+                <div className="flex justify-between items-start mb-4">
+                  <div
+                    className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${game.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                  >
+                    <game.icon className="w-7 h-7 text-white" />
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-muted-foreground">
+                    Arcade Mode
+                  </span>
                 </div>
 
-                <h2 className="text-xl font-bold mb-3 group-hover:text-blue-400 transition-colors">
+                <h2 className="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">
                   {game.title}
                 </h2>
-                <p className="text-sm text-muted-foreground mb-6 line-clamp-3">
+                <p className="text-xs text-muted-foreground mb-6 line-clamp-3 leading-relaxed">
                   {game.description}
                 </p>
               </div>
 
-              <div className="inline-flex items-center justify-between w-full mt-auto">
-                <span className="text-sm font-semibold text-blue-400 group-hover:text-blue-300 transition-colors">
-                  {game.cta}
+              <div className="inline-flex items-center justify-between w-full mt-auto pt-2 border-t border-white/5">
+                <span className="text-xs font-bold text-blue-400 group-hover:text-blue-300 transition-colors flex items-center gap-1">
+                  {game.cta} →
                 </span>
-                <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-blue-500/10 group-hover:text-blue-400 transition-all">
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <div className="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-blue-500/10 group-hover:text-blue-400 transition-all">
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </div>
               </div>
             </div>
