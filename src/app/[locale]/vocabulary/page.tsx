@@ -146,14 +146,32 @@ export default function VocabularyPortal() {
   const [searchQuery, setSearchQuery] = useState("");
   const [hjpSearchWord, setHjpSearchWord] = useState("");
 
-  // Quiz states
+  // Configurable Quiz states
   const [quizStarted, setQuizStarted] = useState(false);
-  const [quizQuestions, setQuizQuestions] = useState<{ word: VocabWord; options: string[]; answer: string }[]>([]);
+  const [quizCount, setQuizCount] = useState<number>(10);
+  const [quizMode, setQuizMode] = useState<"mc" | "written" | "listening" | "mixed">("mc");
+  const [quizDirection, setQuizDirection] = useState<"hr_to_native" | "native_to_hr" | "mixed">("hr_to_native");
+  
+  const [quizQuestions, setQuizQuestions] = useState<{
+    word: VocabWord;
+    options: string[];
+    answer: string;
+    prompt: string;
+    type: "mc" | "written" | "listening";
+  }[]>([]);
   const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
   const [quizScore, setQuizScore] = useState(0);
   const [selectedQuizOption, setSelectedQuizOption] = useState<string | null>(null);
   const [quizAnswered, setQuizAnswered] = useState(false);
   const [quizComplete, setQuizComplete] = useState(false);
+
+  // Written answer states
+  const [quizInputText, setQuizInputText] = useState("");
+  const [quizInputChecked, setQuizInputChecked] = useState(false);
+  const [quizInputCorrect, setQuizInputCorrect] = useState(false);
+
+  // Mistakes log
+  const [quizMistakes, setQuizMistakes] = useState<{ word: VocabWord; userAnswer: string; correctAnswer: string }[]>([]);
 
   useEffect(() => {
     fetch("/api/vocabulary")
@@ -290,29 +308,55 @@ export default function VocabularyPortal() {
     setDeckFinished(false);
   };
 
-  // Generate Quiz
-  const startQuiz = () => {
-    if (filteredWords.length < 4) {
-      alert("Please select a level/category with at least 4 words to start the quiz.");
+  // Generate Quiz with configurable count, direction, and mode
+  const startQuiz = (overrideWords?: VocabWord[]) => {
+    const pool = overrideWords || [...filteredWords];
+    if (pool.length < 2) {
+      alert("Please select a level/category with at least 2 words to start the quiz.");
       return;
     }
 
-    const shuffled = [...filteredWords].sort(() => 0.5 - Math.random());
-    const questions = shuffled.slice(0, 8).map((word) => {
-      const correctTranslation = getTranslation(word);
-      const incorrects = allMergedWords
-        .filter((w) => w.hr !== word.hr)
-        .map((w) => getTranslation(w))
-        .filter((t, index, self) => self.indexOf(t) === index && t !== correctTranslation)
-        .sort(() => 0.5 - Math.random())
-        .slice(0, 3);
+    const shuffled = [...pool].sort(() => 0.5 - Math.random());
+    const count = overrideWords ? overrideWords.length : Math.min(quizCount, shuffled.length);
+    const selected = shuffled.slice(0, count);
 
-      const options = [correctTranslation, ...incorrects].sort(() => 0.5 - Math.random());
-      
+    const questions = selected.map((word) => {
+      let isHrToNative = quizDirection === "hr_to_native";
+      if (quizDirection === "mixed") {
+        isHrToNative = Math.random() > 0.5;
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const qType: "mc" | "written" | "listening" = quizMode === "mixed"
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ? (["mc", "written", "listening"][Math.floor(Math.random() * 3)] as any)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        : (quizMode as any);
+
+      const prompt = isHrToNative ? word.hr : getTranslation(word);
+      const answer = isHrToNative ? getTranslation(word) : word.hr;
+
+      let options: string[] = [];
+      if (qType === "mc" || qType === "listening") {
+        const optionPool = isHrToNative
+          ? allMergedWords.map((w) => getTranslation(w))
+          : allMergedWords.map((w) => w.hr);
+
+        const incorrects = optionPool
+          .filter((t) => t.toLowerCase() !== answer.toLowerCase())
+          .filter((t, index, self) => self.indexOf(t) === index)
+          .sort(() => 0.5 - Math.random())
+          .slice(0, 3);
+
+        options = [answer, ...incorrects].sort(() => 0.5 - Math.random());
+      }
+
       return {
         word,
         options,
-        answer: correctTranslation,
+        answer,
+        prompt,
+        type: qType,
       };
     });
 
@@ -321,25 +365,76 @@ export default function VocabularyPortal() {
     setQuizScore(0);
     setSelectedQuizOption(null);
     setQuizAnswered(false);
+    setQuizInputText("");
+    setQuizInputChecked(false);
+    setQuizInputCorrect(false);
+    setQuizMistakes([]);
     setQuizComplete(false);
     setQuizStarted(true);
+
+    if (questions[0]?.type === "listening") {
+      setTimeout(() => speakText(questions[0].word.hr), 300);
+    }
   };
 
   const handleQuizAnswer = (option: string) => {
     if (quizAnswered) return;
     setSelectedQuizOption(option);
     setQuizAnswered(true);
-    
-    if (option === quizQuestions[currentQuizIndex].answer) {
-      setQuizScore(quizScore + 1);
+
+    const q = quizQuestions[currentQuizIndex];
+    const isCorrect = option.toLowerCase().trim() === q.answer.toLowerCase().trim();
+
+    fetch("/api/words/progress", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ wordHr: q.word.hr, correct: isCorrect }),
+    }).catch(console.error);
+
+    if (isCorrect) {
+      setQuizScore((s) => s + 1);
+    } else {
+      setQuizMistakes((prev) => [...prev, { word: q.word, userAnswer: option, correctAnswer: q.answer }]);
+    }
+  };
+
+  const handleWrittenQuizCheck = () => {
+    if (quizInputChecked) return;
+    const q = quizQuestions[currentQuizIndex];
+    const target = q.answer.toLowerCase().trim();
+    const input = quizInputText.toLowerCase().trim();
+    const isCorrect = input === target || levenshteinDistance(input, target) <= 1;
+
+    setQuizInputChecked(true);
+    setQuizInputCorrect(isCorrect);
+    setQuizAnswered(true);
+
+    fetch("/api/words/progress", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ wordHr: q.word.hr, correct: isCorrect }),
+    }).catch(console.error);
+
+    if (isCorrect) {
+      setQuizScore((s) => s + 1);
+    } else {
+      setQuizMistakes((prev) => [...prev, { word: q.word, userAnswer: quizInputText || "(blank)", correctAnswer: q.answer }]);
     }
   };
 
   const nextQuizQuestion = () => {
     if (currentQuizIndex < quizQuestions.length - 1) {
-      setCurrentQuizIndex(currentQuizIndex + 1);
+      const nextIdx = currentQuizIndex + 1;
+      setCurrentQuizIndex(nextIdx);
       setSelectedQuizOption(null);
       setQuizAnswered(false);
+      setQuizInputText("");
+      setQuizInputChecked(false);
+      setQuizInputCorrect(false);
+
+      if (quizQuestions[nextIdx]?.type === "listening") {
+        setTimeout(() => speakText(quizQuestions[nextIdx].word.hr), 300);
+      }
     } else {
       setQuizComplete(true);
       const earnedXP = quizScore * 10;
@@ -352,6 +447,27 @@ export default function VocabularyPortal() {
       }
     }
   };
+
+  const retryQuizMistakes = () => {
+    if (quizMistakes.length === 0) return;
+    startQuiz(quizMistakes.map((m) => m.word));
+  };
+
+  function levenshteinDistance(a: string, b: string): number {
+    const dp = Array.from({ length: a.length + 1 }, () => Array(b.length + 1).fill(0));
+    for (let i = 0; i <= a.length; i++) dp[i][0] = i;
+    for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+    for (let i = 1; i <= a.length; i++) {
+      for (let j = 1; j <= b.length; j++) {
+        dp[i][j] = Math.min(
+          dp[i - 1][j] + 1,
+          dp[i][j - 1] + 1,
+          dp[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)
+        );
+      }
+    }
+    return dp[a.length][b.length];
+  }
 
   const openHjp = (word: string) => {
     if (!word.trim()) return;
@@ -836,104 +952,317 @@ export default function VocabularyPortal() {
         </div>
       )}
 
-      {/* Quiz View */}
+      {/* Quiz View (Fully Configurable Test System) */}
       {activeTab === "quiz" && (
-        <div className="space-y-6 animate-fade-in">
+        <div className="space-y-6 animate-fade-in max-w-2xl mx-auto">
           {!quizStarted ? (
-            <div className="text-center py-12 glass rounded-2xl border border-white/10 flex flex-col items-center">
-              <Trophy className="w-12 h-12 text-yellow-400 mb-4 animate-bounce" />
-              <h2 className="text-2xl font-bold text-foreground">{t("quiz")}</h2>
-              <p className="text-sm text-muted-foreground mt-2 max-w-sm">
-                {t("quizSubtitle")}
-              </p>
+            /* Quiz Configuration Setup */
+            <div className="glass p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6">
+              <div className="text-center space-y-2">
+                <div className="w-14 h-14 rounded-2xl bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center mx-auto">
+                  <Trophy className="w-7 h-7" />
+                </div>
+                <h2 className="text-2xl font-extrabold text-foreground">{t("quiz")}</h2>
+                <p className="text-sm text-muted-foreground">{t("quizSubtitle")}</p>
+              </div>
+
+              <div className="space-y-4 pt-2 border-t border-white/5">
+                {/* Question Count Selector */}
+                <div>
+                  <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+                    {t("questionCount")}
+                  </label>
+                  <div className="grid grid-cols-6 gap-2">
+                    {[5, 10, 15, 20, 25, 50].map((num) => (
+                      <button
+                        key={num}
+                        onClick={() => setQuizCount(num)}
+                        className={`py-2 rounded-xl text-xs font-bold border transition-all text-center ${
+                          quizCount === num
+                            ? "bg-blue-600 text-white border-blue-500 shadow-md"
+                            : "bg-white/5 border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10"
+                        }`}
+                      >
+                        {num}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Test Mode Selector */}
+                <div>
+                  <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+                    {t("testMode")}
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {[
+                      { key: "mc", label: t("modeMultipleChoice") },
+                      { key: "written", label: t("modeWritten") },
+                      { key: "listening", label: t("modeListening") },
+                      { key: "mixed", label: t("modeMixed") },
+                    ].map(({ key, label }) => (
+                      <button
+                        key={key}
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        onClick={() => setQuizMode(key as any)}
+                        className={`p-3 rounded-xl text-xs font-semibold border text-left transition-all ${
+                          quizMode === key
+                            ? "bg-blue-600 text-white border-blue-500 shadow-md"
+                            : "bg-white/5 border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10"
+                        }`}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Direction Selector */}
+                <div>
+                  <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+                    {t("direction")}
+                  </label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {[
+                      { key: "hr_to_native", label: t("hrToNative") },
+                      { key: "native_to_hr", label: t("nativeToHr") },
+                      { key: "mixed", label: "🔀 Mixed" },
+                    ].map(({ key, label }) => (
+                      <button
+                        key={key}
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        onClick={() => setQuizDirection(key as any)}
+                        className={`p-2.5 rounded-xl text-xs font-semibold border text-center transition-all ${
+                          quizDirection === key
+                            ? "bg-blue-600 text-white border-blue-500 shadow-md"
+                            : "bg-white/5 border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10"
+                        }`}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
               <button
-                onClick={startQuiz}
-                className="mt-6 px-6 py-2.5 rounded-xl font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/25 transition-all"
+                onClick={() => startQuiz()}
+                className="w-full py-3.5 rounded-xl font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/25 transition-all text-sm flex items-center justify-center gap-2"
               >
-                {t("start")}
+                <Sparkles className="w-4 h-4" />
+                {t("start")} ({Math.min(quizCount, filteredWords.length)} {t("words")})
               </button>
             </div>
           ) : quizComplete ? (
-            <div className="text-center py-12 glass rounded-2xl border border-white/10 flex flex-col items-center">
-              <Trophy className="w-14 h-14 text-yellow-400 mb-4" />
-              <h2 className="text-3xl font-extrabold text-foreground">{t("quizComplete")}</h2>
-              <p className="text-lg text-muted-foreground mt-2">
-                {t("score")}: <span className="text-blue-400 font-black">{quizScore} / {quizQuestions.length}</span>
-              </p>
-              <p className="text-sm text-green-400 font-semibold mt-2">
-                +{quizScore * 10} XP Earned!
-              </p>
-              <button
-                onClick={startQuiz}
-                className="mt-6 px-6 py-2.5 rounded-xl font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg transition-all flex items-center gap-2"
-              >
-                <RefreshCw className="w-4 h-4" />
-                {t("tryAgain")}
-              </button>
+            /* Detailed Quiz Completion & Mistake Review */
+            <div className="glass p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6 animate-fade-in">
+              <div className="text-center space-y-2">
+                <Trophy className="w-14 h-14 text-yellow-400 mx-auto animate-bounce" />
+                <h2 className="text-3xl font-extrabold text-foreground">{t("quizComplete")}</h2>
+                <p className="text-lg text-muted-foreground">
+                  {t("score")}: <span className="text-blue-400 font-black">{quizScore} / {quizQuestions.length}</span>
+                </p>
+                <div className="flex justify-center gap-4 text-xs font-bold pt-1">
+                  <span className="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    {t("accuracy")}: {Math.round((quizScore / quizQuestions.length) * 100)}%
+                  </span>
+                  <span className="px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
+                    +{quizScore * 10} XP
+                  </span>
+                </div>
+              </div>
+
+              {/* Detailed Mistakes Review Log */}
+              {quizMistakes.length > 0 && (
+                <div className="space-y-3 pt-4 border-t border-white/5">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
+                    <X className="w-4 h-4 text-red-400" />
+                    {t("reviewMistakes")} ({quizMistakes.length})
+                  </h3>
+                  <div className="space-y-2 max-h-60 overflow-y-auto pr-1">
+                    {quizMistakes.map((m, idx) => (
+                      <div key={idx} className="p-3 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between text-xs">
+                        <div>
+                          <div className="flex items-center gap-2 font-bold text-foreground">
+                            <span>{m.word.hr}</span>
+                            <button onClick={() => speakWord(m.word.hr)} className="p-1 rounded bg-blue-500/10 text-blue-400">
+                              <Volume2 className="w-3 h-3" />
+                            </button>
+                          </div>
+                          <p className="text-red-400 mt-0.5">
+                            {t("yourAnswer")}: <span className="line-through">{m.userAnswer}</span>
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <span className="text-emerald-400 font-semibold">{t("correctAnswer")}: {m.correctAnswer}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Actions */}
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                {quizMistakes.length > 0 && (
+                  <button
+                    onClick={retryQuizMistakes}
+                    className="flex-1 py-3 rounded-xl font-bold text-xs sm:text-sm bg-red-500/20 text-red-300 border border-red-500/30 hover:bg-red-500/30 transition-all flex items-center justify-center gap-1.5"
+                  >
+                    <RotateCcw className="w-4 h-4" />
+                    {t("retryMissedQuiz")} ({quizMistakes.length})
+                  </button>
+                )}
+                <button
+                  onClick={() => setQuizStarted(false)}
+                  className="flex-1 py-3 rounded-xl font-bold text-xs sm:text-sm bg-blue-600 text-white hover:bg-blue-500 transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-blue-500/25"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                  {t("newQuizSetup")}
+                </button>
+              </div>
             </div>
           ) : (
-            <div className="glass rounded-2xl border border-white/10 p-6 sm:p-8 space-y-6">
+            /* Active Quiz Question Screen */
+            <div className="glass rounded-3xl border border-white/10 p-6 sm:p-8 space-y-6 shadow-2xl">
               {/* Quiz progress */}
               <div className="flex items-center justify-between text-xs text-muted-foreground">
                 <span className="font-semibold uppercase tracking-wider">
                   {t("question")} {currentQuizIndex + 1} {t("of")} {quizQuestions.length}
                 </span>
-                <span className="font-bold text-green-400">XP: +{quizScore * 10}</span>
+                <span className="font-bold text-emerald-400">XP: +{quizScore * 10}</span>
               </div>
 
-              {/* Question word */}
-              <div className="text-center py-6">
-                <h3 className="text-3xl font-black text-foreground">
-                  {quizQuestions[currentQuizIndex].word.hr}
-                </h3>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {t("chooseCorrectTranslation")}
-                </p>
-              </div>
+              {/* Question Header */}
+              {(() => {
+                const q = quizQuestions[currentQuizIndex];
+                if (!q) return null;
 
-              {/* Options */}
-              <div className="grid gap-3 sm:grid-cols-2">
-                {quizQuestions[currentQuizIndex].options.map((option) => {
-                  const isCorrect = option === quizQuestions[currentQuizIndex].answer;
-                  const isSelected = option === selectedQuizOption;
-                  
-                  let optionClass = "border-white/10 hover:bg-white/5 text-foreground";
-                  if (quizAnswered) {
-                    if (isCorrect) {
-                      optionClass = "bg-green-500/10 text-green-400 border-green-500/30";
-                    } else if (isSelected) {
-                      optionClass = "bg-red-500/10 text-red-400 border-red-500/30";
-                    } else {
-                      optionClass = "opacity-50 border-white/5";
-                    }
-                  }
+                return (
+                  <div className="space-y-6">
+                    <div className="text-center py-4">
+                      {q.type === "listening" ? (
+                        <div className="flex flex-col items-center gap-3">
+                          <button
+                            onClick={() => speakWord(q.word.hr)}
+                            className="w-16 h-16 rounded-full bg-blue-600/20 border border-blue-500/30 text-blue-400 flex items-center justify-center hover:bg-blue-600/30 transition-all"
+                          >
+                            <Volume2 className="w-8 h-8" />
+                          </button>
+                          <p className="text-xs text-muted-foreground">Listen and choose translation</p>
+                        </div>
+                      ) : (
+                        <>
+                          <h3 className="text-3xl font-black text-foreground tracking-tight">{q.prompt}</h3>
+                          <div className="flex items-center justify-center gap-2 mt-1">
+                            {q.prompt === q.word.hr && (
+                              <button onClick={() => speakWord(q.word.hr)} className="p-1 rounded bg-blue-500/10 text-blue-400">
+                                <Volume2 className="w-3.5 h-3.5" />
+                              </button>
+                            )}
+                            <p className="text-xs text-muted-foreground">{t("chooseCorrectTranslation")}</p>
+                          </div>
+                        </>
+                      )}
+                    </div>
 
-                  return (
-                    <button
-                      key={option}
-                      disabled={quizAnswered}
-                      onClick={() => handleQuizAnswer(option)}
-                      className={`w-full p-4 rounded-xl border text-sm font-semibold transition-all flex items-center justify-between ${optionClass}`}
-                    >
-                      <span>{option}</span>
-                      {quizAnswered && isCorrect && <Check className="w-4 h-4 text-green-400" />}
-                      {quizAnswered && isSelected && !isCorrect && <X className="w-4 h-4 text-red-400" />}
-                    </button>
-                  );
-                })}
-              </div>
+                    {/* Question Body: Multiple Choice vs Written Input */}
+                    {q.type === "written" ? (
+                      <div className="space-y-4 max-w-sm mx-auto">
+                        <input
+                          type="text"
+                          value={quizInputText}
+                          onChange={(e) => setQuizInputText(e.target.value)}
+                          onKeyDown={(e) => { if (e.key === "Enter" && !quizInputChecked) handleWrittenQuizCheck(); }}
+                          disabled={quizInputChecked}
+                          placeholder="Type translation..."
+                          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-foreground text-center text-lg font-semibold focus:outline-none focus:border-blue-500 disabled:opacity-50"
+                          autoFocus
+                        />
 
-              {/* Action Button */}
-              {quizAnswered && (
-                <div className="flex justify-end pt-4">
-                  <button
-                    onClick={nextQuizQuestion}
-                    className="px-6 py-2 rounded-xl font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg transition-all"
-                  >
-                    {currentQuizIndex < quizQuestions.length - 1 ? t("nextQuestion") : t("finish")}
-                  </button>
-                </div>
-              )}
+                        {quizInputChecked && (
+                          <div className={`p-3 rounded-xl border ${quizInputCorrect ? "bg-emerald-500/10 border-emerald-500/30" : "bg-red-500/10 border-red-500/30"}`}>
+                            <div className="flex items-center gap-2">
+                              {quizInputCorrect ? <Check className="w-4 h-4 text-emerald-400" /> : <X className="w-4 h-4 text-red-400" />}
+                              <span className={`text-xs font-bold ${quizInputCorrect ? "text-emerald-400" : "text-red-400"}`}>
+                                {quizInputCorrect ? t("correct") : t("incorrect")}
+                              </span>
+                            </div>
+                            {!quizInputCorrect && (
+                              <p className="text-xs text-muted-foreground mt-1">
+                                {t("correctAnswer")}: <span className="font-bold text-foreground">{q.answer}</span>
+                              </p>
+                            )}
+                          </div>
+                        )}
+
+                        <div className="flex justify-end">
+                          {!quizInputChecked ? (
+                            <button
+                              onClick={handleWrittenQuizCheck}
+                              disabled={!quizInputText.trim()}
+                              className="px-6 py-2 rounded-xl bg-blue-600 text-white font-bold text-xs disabled:opacity-50 hover:bg-blue-500 transition-all"
+                            >
+                              Check
+                            </button>
+                          ) : (
+                            <button
+                              onClick={nextQuizQuestion}
+                              className="px-6 py-2 rounded-xl bg-blue-600 text-white font-bold text-xs hover:bg-blue-500 transition-all"
+                            >
+                              {currentQuizIndex < quizQuestions.length - 1 ? t("nextQuestion") : t("finish")}
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    ) : (
+                      /* Multiple Choice Options */
+                      <div className="grid gap-3 sm:grid-cols-2">
+                        {q.options.map((option) => {
+                          const isCorrect = option.toLowerCase().trim() === q.answer.toLowerCase().trim();
+                          const isSelected = option === selectedQuizOption;
+
+                          let optionClass = "border-white/10 hover:bg-white/5 text-foreground";
+                          if (quizAnswered) {
+                            if (isCorrect) {
+                              optionClass = "bg-emerald-500/10 text-emerald-400 border-emerald-500/30";
+                            } else if (isSelected) {
+                              optionClass = "bg-red-500/10 text-red-400 border-red-500/30";
+                            } else {
+                              optionClass = "opacity-50 border-white/5";
+                            }
+                          }
+
+                          return (
+                            <button
+                              key={option}
+                              disabled={quizAnswered}
+                              onClick={() => handleQuizAnswer(option)}
+                              className={`w-full p-4 rounded-xl border text-sm font-semibold transition-all flex items-center justify-between ${optionClass}`}
+                            >
+                              <span>{option}</span>
+                              {quizAnswered && isCorrect && <Check className="w-4 h-4 text-emerald-400" />}
+                              {quizAnswered && isSelected && !isCorrect && <X className="w-4 h-4 text-red-400" />}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
+
+                    {/* Action Button for Multiple Choice */}
+                    {quizAnswered && q.type !== "written" && (
+                      <div className="flex justify-end pt-4 border-t border-white/5">
+                        <button
+                          onClick={nextQuizQuestion}
+                          className="px-6 py-2.5 rounded-xl font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg text-sm transition-all"
+                        >
+                          {currentQuizIndex < quizQuestions.length - 1 ? t("nextQuestion") : t("finish")}
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
             </div>
           )}
         </div>

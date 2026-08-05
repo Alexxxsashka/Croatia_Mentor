@@ -376,7 +376,19 @@
     "cardsNeedReview": "Cards to Review",
     "restudyMissed": "Re-study Missed Cards",
     "restartDeck": "Restart Full Deck",
-    "shuffle": "Shuffle Deck"
+    "shuffle": "Shuffle Deck",
+    "questionCount": "Question Count",
+    "testMode": "Test Mode",
+    "modeMultipleChoice": "Multiple Choice (4 Options)",
+    "modeWritten": "Written Input",
+    "modeListening": "Listening Test",
+    "modeMixed": "Mixed Challenge",
+    "reviewMistakes": "Review Mistakes",
+    "yourAnswer": "Your answer",
+    "correctAnswer": "Correct answer",
+    "retryMissedQuiz": "Retry Missed Questions",
+    "newQuizSetup": "Configure New Quiz",
+    "accuracy": "Accuracy"
   },
   "glossary": {
     "title": "Grammar Glossary & Book Theory",

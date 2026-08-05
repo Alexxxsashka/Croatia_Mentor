@@ -376,7 +376,19 @@
     "cardsNeedReview": "На повторение",
     "restudyMissed": "Повторить неизученные",
     "restartDeck": "Начать колоду заново",
-    "shuffle": "Перемешать"
+    "shuffle": "Перемешать",
+    "questionCount": "Количество вопросов",
+    "testMode": "Режим теста",
+    "modeMultipleChoice": "Выбор ответа (4 варианта)",
+    "modeWritten": "Письменный ввод",
+    "modeListening": "Аудирование (На слух)",
+    "modeMixed": "Смешанный режим",
+    "reviewMistakes": "Разбор ошибок",
+    "yourAnswer": "Ваш ответ",
+    "correctAnswer": "Правильный ответ",
+    "retryMissedQuiz": "Пройти ошибки заново",
+    "newQuizSetup": "Настроить новый тест",
+    "accuracy": "Точность"
   },
   "glossary": {
     "title": "Грамматический глоссарий и теория",

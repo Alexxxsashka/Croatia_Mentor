@@ -17,6 +17,11 @@ export default function SpeedQuizPage() {
   const locale = useLocale();
   const router = useRouter();
 
+  const [questionsCount, setQuestionsCount] = useState(15);
+  const [selectedLevel, setSelectedLevel] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [timerSeconds, setTimerSeconds] = useState(10);
+
   const [questions, setQuestions] = useState<{ word: typeof vocabularyWords[0]; options: string[]; correct: string }[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -28,11 +33,20 @@ export default function SpeedQuizPage() {
   const [gameStarted, setGameStarted] = useState(false);
   const [gameOver, setGameOver] = useState(false);
 
-  const TOTAL_QUESTIONS = 15;
-
   const generateQuestions = useCallback(() => {
-    const shuffled = [...vocabularyWords].sort(() => 0.5 - Math.random());
-    const selected = shuffled.slice(0, TOTAL_QUESTIONS);
+    let pool = [...vocabularyWords];
+    if (selectedLevel !== "all") {
+      pool = pool.filter((w) => w.level.toLowerCase() === selectedLevel.toLowerCase());
+    }
+    if (selectedCategory !== "all") {
+      pool = pool.filter((w) => w.category === selectedCategory);
+    }
+    if (pool.length < 4) pool = [...vocabularyWords]; // Fallback if too few words
+
+    const shuffled = [...pool].sort(() => 0.5 - Math.random());
+    const count = Math.min(questionsCount, shuffled.length);
+    const selected = shuffled.slice(0, count);
+
     return selected.map((word) => {
       const correctAnswer = getTranslation(word, locale);
       const wrongOptions = vocabularyWords
@@ -44,7 +58,7 @@ export default function SpeedQuizPage() {
       const options = [correctAnswer, ...wrongOptions].sort(() => 0.5 - Math.random());
       return { word, options, correct: correctAnswer };
     });
-  }, [locale]);
+  }, [locale, questionsCount, selectedLevel, selectedCategory]);
 
   const startGame = () => {
     const qs = generateQuestions();
@@ -53,7 +67,7 @@ export default function SpeedQuizPage() {
     setScore(0);
     setStreak(0);
     setBestStreak(0);
-    setTimeLeft(10);
+    setTimeLeft(timerSeconds);
     setAnswered(false);
     setSelectedOption(null);
     setGameStarted(true);
@@ -100,26 +114,100 @@ export default function SpeedQuizPage() {
   const nextQuestion = () => {
     if (currentIndex >= questions.length - 1) {
       setGameOver(true);
+      const earnedXP = Math.floor(score / 10);
+      if (earnedXP > 0) {
+        fetch("/api/progress", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ xp: earnedXP }),
+        }).catch(console.error);
+      }
       return;
     }
     setCurrentIndex((i) => i + 1);
-    setTimeLeft(10);
+    setTimeLeft(timerSeconds);
     setAnswered(false);
     setSelectedOption(null);
   };
 
   if (!gameStarted) {
     return (
-      <div className="max-w-2xl mx-auto px-4 py-16 text-center animate-fade-in">
-        <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-yellow-500 to-orange-500 mb-6 shadow-2xl shadow-yellow-500/25">
-          <Zap className="w-10 h-10 text-white" />
+      <div className="max-w-2xl mx-auto px-4 py-12 animate-fade-in space-y-8">
+        <div className="text-center space-y-3">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-yellow-500 to-orange-500 shadow-2xl shadow-yellow-500/25">
+            <Zap className="w-10 h-10 text-white" />
+          </div>
+          <h1 className="text-3xl font-extrabold text-foreground">{t("speedQuiz.title")}</h1>
+          <p className="text-muted-foreground text-sm max-w-md mx-auto">{t("speedQuiz.description")}</p>
         </div>
-        <h1 className="text-3xl font-bold mb-3">{t("speedQuiz.title")}</h1>
-        <p className="text-muted-foreground mb-8 max-w-md mx-auto">{t("speedQuiz.description")}</p>
-        <button onClick={startGame} className="px-8 py-4 rounded-2xl text-lg font-semibold bg-gradient-to-r from-yellow-500 to-orange-500 text-white hover:opacity-90 transition-all shadow-xl">
-          {t("speedQuiz.play")}
-        </button>
-        <button onClick={() => router.push("/games")} className="block mx-auto mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors">
+
+        {/* Speed Quiz Setup Options */}
+        <div className="glass p-6 rounded-3xl border border-white/10 space-y-5 max-w-md mx-auto">
+          <div>
+            <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+              Question Count
+            </label>
+            <div className="grid grid-cols-4 gap-2">
+              {[10, 15, 25, 50].map((num) => (
+                <button
+                  key={num}
+                  onClick={() => setQuestionsCount(num)}
+                  className={`py-2 rounded-xl text-xs font-bold border transition-all text-center ${
+                    questionsCount === num
+                      ? "bg-amber-500 text-white border-amber-400 shadow-md"
+                      : "bg-white/5 border-white/10 text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {num}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">
+                Level
+              </label>
+              <select
+                value={selectedLevel}
+                onChange={(e) => setSelectedLevel(e.target.value)}
+                className="w-full bg-slate-900 border border-white/10 text-xs font-semibold rounded-xl px-3 py-2 text-foreground focus:outline-none focus:border-amber-500"
+              >
+                <option value="all">All Levels</option>
+                <option value="A1">A1 Beginner</option>
+                <option value="A2">A2 Elementary</option>
+                <option value="B1">B1 Intermediate</option>
+                <option value="B2">B2 Upper Int</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">
+                Speed
+              </label>
+              <select
+                value={timerSeconds}
+                onChange={(e) => setTimerSeconds(Number(e.target.value))}
+                className="w-full bg-slate-900 border border-white/10 text-xs font-semibold rounded-xl px-3 py-2 text-foreground focus:outline-none focus:border-amber-500"
+              >
+                <option value={5}>⚡ 5 sec (Hyper)</option>
+                <option value={10}>🔥 10 sec (Standard)</option>
+                <option value={15}>⏱️ 15 sec (Casual)</option>
+              </select>
+            </div>
+          </div>
+
+          <button
+            onClick={startGame}
+            className="w-full py-3.5 rounded-2xl text-base font-bold bg-gradient-to-r from-yellow-500 to-orange-500 text-white hover:opacity-90 transition-all shadow-xl shadow-orange-500/25 flex items-center justify-center gap-2"
+          >
+            <Zap className="w-5 h-5 fill-white" />
+            {t("speedQuiz.play")} ({questionsCount} Qs)
+          </button>
+        </div>
+
+        <button onClick={() => router.push("/games")} className="block mx-auto text-sm text-muted-foreground hover:text-foreground transition-colors">
           <ArrowLeft className="w-4 h-4 inline mr-1" />{t("backToGames")}
         </button>
       </div>
@@ -167,7 +255,7 @@ export default function SpeedQuizPage() {
           <ArrowLeft className="w-5 h-5" />
         </button>
         <div className="flex items-center gap-4 text-sm">
-          <span className="text-muted-foreground">{currentIndex + 1}/{TOTAL_QUESTIONS}</span>
+          <span className="text-muted-foreground">{currentIndex + 1}/{questions.length}</span>
           {streak > 1 && <span className="text-orange-400 font-bold">🔥 {streak}</span>}
           <span className="text-blue-400 font-bold">{score} pts</span>
         </div>

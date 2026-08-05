@@ -376,7 +376,19 @@
     "cardsNeedReview": "На повторення",
     "restudyMissed": "Повторити невивчені",
     "restartDeck": "Почати колоду знову",
-    "shuffle": "Перемішати"
+    "shuffle": "Перемішати",
+    "questionCount": "Кількість запитань",
+    "testMode": "Режим тесту",
+    "modeMultipleChoice": "Вибір відповіді (4 варіанти)",
+    "modeWritten": "Письмове введення",
+    "modeListening": "Аудіювання (На слух)",
+    "modeMixed": "Змішаний режим",
+    "reviewMistakes": "Розбір помилок",
+    "yourAnswer": "Ваша відповідь",
+    "correctAnswer": "Правильна відповідь",
+    "retryMissedQuiz": "Пройти помилки знову",
+    "newQuizSetup": "Налаштувати новий тест",
+    "accuracy": "Точність"
   },
   "glossary": {
     "title": "Граматичний глосарій та теорія",
