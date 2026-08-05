@@ -23,9 +23,13 @@ import {
   Phone,
   Camera,
   X,
+  Target,
+  Bell,
+  Clock,
 } from "lucide-react";
 import { toast } from "sonner";
 import { lessonsData } from "@/lib/lessons-data";
+import { requestNotificationPermission, scheduleReminder } from "@/lib/notifications";
 
 interface TestScore {
   type: string;
@@ -86,13 +90,102 @@ export default function ProfilePage() {
   const [phoneField, setPhoneField] = useState("");
   const [passwordField, setPasswordField] = useState("");
 
+  // Learning settings states
+  const [dailyGoalMinutes, setDailyGoalMinutes] = useState(10);
+  const [reminderEnabled, setReminderEnabled] = useState(true);
+  const [reminderTime, setReminderTime] = useState("09:00");
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+  const [savingSettings, setSavingSettings] = useState(false);
+
   useEffect(() => {
     if (status === "authenticated") {
       fetchProfile();
+      fetchSettings();
     } else if (status === "unauthenticated") {
       setLoading(false);
     }
   }, [status]);
+
+  const fetchSettings = async () => {
+    try {
+      const res = await fetch("/api/settings");
+      if (res.ok) {
+        const data = await res.json();
+        if (data.settings) {
+          setDailyGoalMinutes(data.settings.dailyGoalMinutes || 10);
+          setReminderEnabled(data.settings.reminderEnabled ?? true);
+          setReminderTime(data.settings.reminderTime || "09:00");
+          setNotificationsEnabled(data.settings.notificationsEnabled ?? false);
+        }
+      }
+    } catch (err) {
+      console.error("Settings load error:", err);
+    }
+  };
+
+  const handleSaveSettings = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    setSavingSettings(true);
+
+    try {
+      const res = await fetch("/api/settings", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          dailyGoalMinutes,
+          reminderEnabled,
+          reminderTime,
+          notificationsEnabled,
+        }),
+      });
+
+      if (res.ok) {
+        toast.success(
+          locale === "ua"
+            ? "Налаштування навчання збережено!"
+            : locale === "ru"
+            ? "Настройки обучения сохранены!"
+            : "Learning settings saved!"
+        );
+        if (reminderEnabled) {
+          scheduleReminder(reminderTime, locale);
+        }
+      } else {
+        toast.error("Failed to save learning settings");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("An error occurred while saving settings");
+    } finally {
+      setSavingSettings(false);
+    }
+  };
+
+  const handleToggleNotifications = async () => {
+    if (!notificationsEnabled) {
+      const granted = await requestNotificationPermission();
+      if (granted) {
+        setNotificationsEnabled(true);
+        toast.success(
+          locale === "ua"
+            ? "Сповіщення увімкнено!"
+            : locale === "ru"
+            ? "Уведомления включены!"
+            : "Notifications enabled!"
+        );
+      } else {
+        toast.error(
+          locale === "ua"
+            ? "Дозвіл на сповіщення відхилено в браузері"
+            : locale === "ru"
+            ? "Разрешение на уведомления отклонено в браузере"
+            : "Notification permission was denied in browser"
+        );
+      }
+    } else {
+      setNotificationsEnabled(false);
+    }
+  };
 
   const fetchProfile = async () => {
     try {
@@ -400,6 +493,139 @@ export default function ProfilePage() {
                   <>
                     <Check className="w-4 h-4" />
                     {locale === "ua" ? "Зберегти зміни" : locale === "ru" ? "Сохранить изменения" : "Save Changes"}
+                  </>
+                )}
+              </button>
+            </form>
+          </section>
+
+          {/* Learning Goal & Reminder Settings */}
+          <section className="glass rounded-3xl p-6 md:p-8 border border-white/10 space-y-6">
+            <div className="flex items-center gap-3 border-b border-white/5 pb-4">
+              <div className="p-2.5 rounded-xl bg-emerald-500/15 text-emerald-400">
+                <Target className="w-5 h-5" />
+              </div>
+              <div>
+                <h2 className="text-lg font-bold text-foreground">
+                  {locale === "ua" ? "Налаштування навчання" : locale === "ru" ? "Настройки обучения" : "Daily Learning Settings"}
+                </h2>
+                <p className="text-xs text-muted-foreground">
+                  {locale === "ua" ? "Оберіть денну ціль та час нагадувань" : locale === "ru" ? "Выберите дневную цель и время напоминаний" : "Configure daily time goal and reminder preferences"}
+                </p>
+              </div>
+            </div>
+
+            <form onSubmit={handleSaveSettings} className="space-y-6">
+              {/* Daily Goal selector */}
+              <div>
+                <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+                  {locale === "ua" ? "Денна ціль (хвилин на день)" : locale === "ru" ? "Дневная цель (минут в день)" : "Daily Goal (minutes per day)"}
+                </label>
+                <div className="grid grid-cols-4 gap-2">
+                  {[5, 10, 15, 20].map((mins) => (
+                    <button
+                      key={mins}
+                      type="button"
+                      onClick={() => setDailyGoalMinutes(mins)}
+                      className={`py-3 px-2 rounded-xl text-xs sm:text-sm font-bold border transition-all text-center ${
+                        dailyGoalMinutes === mins
+                          ? "bg-blue-600 text-white border-blue-500 shadow-md shadow-blue-500/25"
+                          : "bg-white/5 border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10"
+                      }`}
+                    >
+                      <div>{mins} {locale === "ua" ? "хв" : locale === "ru" ? "мин" : "min"}</div>
+                    </button>
+                  ))}
+                </div>
+                <p className="text-xs text-muted-foreground mt-2">
+                  {dailyGoalMinutes === 5 && (locale === "ua" ? "⚡ Легкий темп: 5 нових слів + 10 на повторення щодня" : locale === "ru" ? "⚡ Легкий темп: 5 новых слов + 10 на повторение ежедневно" : "⚡ Casual: 5 new words + 10 reviews daily")}
+                  {dailyGoalMinutes === 10 && (locale === "ua" ? "🔥 Стандартний темп: 10 нових слів + 15 на повторення щодня" : locale === "ru" ? "🔥 Стандартный темп: 10 новых слов + 15 на повторение ежедневно" : "🔥 Regular: 10 new words + 15 reviews daily")}
+                  {dailyGoalMinutes === 15 && (locale === "ua" ? "🚀 Интенсивний темп: 15 нових слів + 20 на повторення щодня" : locale === "ru" ? "🚀 Интенсивный темп: 15 новых слов + 20 на повторение ежедневно" : "🚀 Serious: 15 new words + 20 reviews daily")}
+                  {dailyGoalMinutes === 20 && (locale === "ua" ? "🏆 Максимальний темп: 20 нових слів + 25 на повторення щодня" : locale === "ru" ? "🏆 Максимальный темп: 20 новых слов + 25 на повторение ежедневно" : "🏆 Extreme: 20 new words + 25 reviews daily")}
+                </p>
+              </div>
+
+              {/* Reminders & Notifications */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Bell className="w-4 h-4 text-amber-400" />
+                      <span className="text-sm font-semibold text-foreground">
+                        {locale === "ua" ? "Щоденні нагадування" : locale === "ru" ? "Ежедневные напоминания" : "Daily Reminders"}
+                      </span>
+                    </div>
+                    <input
+                      type="checkbox"
+                      checked={reminderEnabled}
+                      onChange={(e) => setReminderEnabled(e.target.checked)}
+                      className="w-4 h-4 rounded accent-blue-500 cursor-pointer"
+                    />
+                  </div>
+                  {reminderEnabled && (
+                    <div className="flex items-center gap-2 pt-1">
+                      <Clock className="w-3.5 h-3.5 text-muted-foreground" />
+                      <select
+                        value={reminderTime}
+                        onChange={(e) => setReminderTime(e.target.value)}
+                        className="bg-slate-900 border border-white/10 text-xs rounded-lg px-2 py-1 text-foreground focus:outline-none focus:border-blue-500"
+                      >
+                        <option value="08:00">08:00</option>
+                        <option value="09:00">09:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="18:00">18:00</option>
+                        <option value="21:00">21:00</option>
+                      </select>
+                    </div>
+                  )}
+                </div>
+
+                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3 flex flex-col justify-between">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Bell className="w-4 h-4 text-cyan-400" />
+                      <span className="text-sm font-semibold text-foreground">
+                        {locale === "ua" ? "Браузерні сповіщення" : locale === "ru" ? "Браузерные уведомления" : "Push Notifications"}
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleToggleNotifications}
+                      className={`px-3 py-1 rounded-lg text-xs font-bold border transition-colors ${
+                        notificationsEnabled
+                          ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
+                          : "bg-white/5 text-muted-foreground border-white/10 hover:text-foreground"
+                      }`}
+                    >
+                      {notificationsEnabled
+                        ? (locale === "ua" ? "Увімкнено" : locale === "ru" ? "Включено" : "Enabled")
+                        : (locale === "ua" ? "Увімкнути" : locale === "ru" ? "Включить" : "Enable")}
+                    </button>
+                  </div>
+                  <p className="text-[11px] text-muted-foreground">
+                    {locale === "ua"
+                      ? "Сповіщення нагадуватимуть про серію при пропусках."
+                      : locale === "ru"
+                      ? "Уведомления напомнят о серии при пропусках."
+                      : "Notifications alert you to protect your streak."}
+                  </p>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={savingSettings}
+                className="flex items-center gap-2 px-6 py-2.5 rounded-xl font-semibold bg-emerald-600 text-white hover:bg-emerald-500 transition-all text-sm shadow-lg shadow-emerald-500/20 disabled:opacity-50"
+              >
+                {savingSettings ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Saving...
+                  </>
+                ) : (
+                  <>
+                    <Check className="w-4 h-4" />
+                    {locale === "ua" ? "Зберегти налаштування" : locale === "ru" ? "Сохранить настройки" : "Save Learning Settings"}
                   </>
                 )}
               </button>

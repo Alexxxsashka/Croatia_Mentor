@@ -20,6 +20,12 @@ import {
   Loader2,
   RefreshCw,
   FolderOpen,
+  Star,
+  Shuffle,
+  RotateCcw,
+  Sparkles,
+  Layers,
+  ArrowRightLeft,
 } from "lucide-react";
 
 import { speakText } from "@/lib/speech";
@@ -101,9 +107,40 @@ export default function VocabularyPortal() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedPOS, setSelectedPOS] = useState<string>("all");
   
-  // Flashcard states
-  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  // Flashcard Advanced Deck states
+  const [deckMode, setDeckMode] = useState<"all" | "quick15" | "quick30" | "starred">("all");
+  const [deckDirection, setDeckDirection] = useState<"hr_to_native" | "native_to_hr">("hr_to_native");
+  const [autoAudio, setAutoAudio] = useState<boolean>(false);
+  const [starredWords, setStarredWords] = useState<string[]>([]);
+  
+  const [deckQueue, setDeckQueue] = useState<VocabWord[]>([]);
+  const [deckIndex, setDeckIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
+  const [masteredCount, setMasteredCount] = useState(0);
+  const [reviewLaterQueue, setReviewLaterQueue] = useState<VocabWord[]>([]);
+  const [deckFinished, setDeckFinished] = useState(false);
+
+  // Load starred words from localStorage
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("croatia_mentor_starred");
+      if (saved) {
+        setStarredWords(JSON.parse(saved));
+      }
+    } catch (_) {}
+  }, []);
+
+  const toggleStarWord = (hr: string, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setStarredWords((prev) => {
+      const isStarred = prev.includes(hr);
+      const next = isStarred ? prev.filter((w) => w !== hr) : [...prev, hr];
+      try {
+        localStorage.setItem("croatia_mentor_starred", JSON.stringify(next));
+      } catch (_) {}
+      return next;
+    });
+  };
 
   // Search/Dictionary states
   const [searchQuery, setSearchQuery] = useState("");
@@ -176,6 +213,81 @@ export default function VocabularyPortal() {
   // TTS Pronunciation
   const speakWord = (text: string) => {
     speakText(text);
+  };
+
+  // Start or reset flashcard deck
+  const startDeck = (
+    modeOverride?: "all" | "quick15" | "quick30" | "starred",
+    wordsOverride?: VocabWord[]
+  ) => {
+    const mode = modeOverride || deckMode;
+    let pool = wordsOverride || [...filteredWords];
+
+    if (mode === "starred") {
+      pool = allMergedWords.filter((w) => starredWords.includes(w.hr));
+    } else if (mode === "quick15") {
+      pool = [...pool].sort(() => 0.5 - Math.random()).slice(0, 15);
+    } else if (mode === "quick30") {
+      pool = [...pool].sort(() => 0.5 - Math.random()).slice(0, 30);
+    } else {
+      pool = [...pool].sort(() => 0.5 - Math.random());
+    }
+
+    setDeckQueue(pool);
+    setDeckIndex(0);
+    setIsFlipped(false);
+    setMasteredCount(0);
+    setReviewLaterQueue([]);
+    setDeckFinished(false);
+  };
+
+  // Auto-start deck when tab/filter/mode changes
+  useEffect(() => {
+    if (activeTab === "flashcards") {
+      startDeck();
+    }
+  }, [activeTab, selectedLevel, selectedCategory, selectedPOS, deckMode]);
+
+  // Handle card answer (Anki style: know it vs need review)
+  const handleCardAnswer = (knowIt: boolean) => {
+    const currentWord = deckQueue[deckIndex];
+    if (!currentWord) return;
+
+    // Save SM-2 progress in backend asynchronously
+    fetch("/api/words/progress", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ wordHr: currentWord.hr, correct: knowIt }),
+    }).catch(console.error);
+
+    if (knowIt) {
+      setMasteredCount((m) => m + 1);
+    } else {
+      setReviewLaterQueue((prev) => [...prev, currentWord]);
+    }
+
+    setIsFlipped(false);
+
+    if (deckIndex < deckQueue.length - 1) {
+      const nextIndex = deckIndex + 1;
+      setDeckIndex(nextIndex);
+      if (autoAudio) {
+        setTimeout(() => speakText(deckQueue[nextIndex].hr), 250);
+      }
+    } else {
+      setDeckFinished(true);
+    }
+  };
+
+  // Re-study only missed cards
+  const restudyMissed = () => {
+    if (reviewLaterQueue.length === 0) return;
+    setDeckQueue([...reviewLaterQueue].sort(() => 0.5 - Math.random()));
+    setDeckIndex(0);
+    setIsFlipped(false);
+    setMasteredCount(0);
+    setReviewLaterQueue([]);
+    setDeckFinished(false);
   };
 
   // Generate Quiz
@@ -257,8 +369,6 @@ export default function VocabularyPortal() {
     );
   }
 
-  const activeWord = filteredWords[currentCardIndex];
-
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Header */}
@@ -315,7 +425,7 @@ export default function VocabularyPortal() {
                     key={lvl}
                     onClick={() => {
                       setSelectedLevel(lvl);
-                      setCurrentCardIndex(0);
+                      setDeckIndex(0);
                       setIsFlipped(false);
                     }}
                     className={`px-3 py-1 text-xs font-semibold rounded-full border transition-all ${
@@ -338,7 +448,7 @@ export default function VocabularyPortal() {
                 value={selectedCategory}
                 onChange={(e) => {
                   setSelectedCategory(e.target.value);
-                  setCurrentCardIndex(0);
+                  setDeckIndex(0);
                   setIsFlipped(false);
                 }}
                 className="bg-transparent text-xs font-semibold text-foreground border border-white/10 rounded-xl px-2 py-1 focus:outline-none focus:border-blue-500"
@@ -360,7 +470,7 @@ export default function VocabularyPortal() {
                 value={selectedPOS}
                 onChange={(e) => {
                   setSelectedPOS(e.target.value);
-                  setCurrentCardIndex(0);
+                  setDeckIndex(0);
                   setIsFlipped(false);
                 }}
                 className="bg-transparent text-xs font-semibold text-foreground border border-white/10 rounded-xl px-2 py-1 focus:outline-none focus:border-blue-500"
@@ -465,82 +575,258 @@ export default function VocabularyPortal() {
         </div>
       )}
 
-      {/* Flashcards View */}
+      {/* Flashcards View (Professional Anki / Quizlet Deck System) */}
       {activeTab === "flashcards" && (
         <div className="space-y-6 animate-fade-in">
-          {filteredWords.length > 0 ? (
-            <div className="flex flex-col items-center">
-              <div 
-                onClick={() => setIsFlipped(!isFlipped)}
-                className="w-full max-w-md h-64 cursor-pointer relative perspective"
-              >
-                <div 
-                  className={`w-full h-full duration-500 preserve-3d relative rounded-2xl glass border border-white/10 flex flex-col items-center justify-center p-8 transition-transform shadow-2xl ${
-                    isFlipped ? "rotate-y-180" : ""
+          {/* Deck Configuration & Toolbar */}
+          <div className="glass p-4 rounded-2xl border border-white/10 flex flex-wrap items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center gap-3">
+              {/* Deck Mode Selector */}
+              <div className="flex items-center gap-1.5 bg-white/5 p-1 rounded-xl border border-white/5">
+                <button
+                  onClick={() => setDeckMode("all")}
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${
+                    deckMode === "all" ? "bg-blue-600 text-white shadow-md" : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
-                  {/* Front Side */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-6 backface-hidden">
-                    <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 uppercase tracking-wider mb-4 border border-blue-500/20">
-                      {activeWord.level}
-                    </span>
-                    <h2 className="text-4xl font-extrabold text-foreground tracking-tight select-none">
-                      {activeWord.hr}
-                    </h2>
-                    <p className="text-xs text-muted-foreground mt-4 select-none">
-                      {t("revealTranslation")}
-                    </p>
-                  </div>
+                  {t("allFiltered")}
+                </button>
+                <button
+                  onClick={() => setDeckMode("quick15")}
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${
+                    deckMode === "quick15" ? "bg-blue-600 text-white shadow-md" : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {t("quick15")}
+                </button>
+                <button
+                  onClick={() => setDeckMode("quick30")}
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${
+                    deckMode === "quick30" ? "bg-blue-600 text-white shadow-md" : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {t("quick30")}
+                </button>
+                <button
+                  onClick={() => setDeckMode("starred")}
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all flex items-center gap-1 ${
+                    deckMode === "starred" ? "bg-amber-500/20 text-amber-300 border border-amber-500/30 shadow-md" : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                  {t("starredOnly")} ({starredWords.length})
+                </button>
+              </div>
 
-                  {/* Back Side */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-6 backface-hidden rotate-y-180">
-                    <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 uppercase tracking-wider mb-2 border border-emerald-500/20">
-                      {getCategoryLabel(activeWord.category)}
-                    </span>
-                    <h3 className="text-3xl font-extrabold text-foreground text-center">
-                      {getTranslation(activeWord)}
-                    </h3>
-                    
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        speakWord(activeWord.hr);
-                      }}
-                      className="mt-6 p-2 rounded-full bg-blue-600/10 text-blue-400 border border-blue-500/20 hover:bg-blue-600 hover:text-white transition-all flex items-center gap-1.5 text-xs font-medium"
-                    >
-                      <Volume2 className="w-4 h-4" />
-                      {t("listenPronunciation")}
-                    </button>
-                  </div>
+              {/* Direction Toggle */}
+              <button
+                onClick={() => setDeckDirection((d) => d === "hr_to_native" ? "native_to_hr" : "hr_to_native")}
+                className="px-3 py-1.5 text-xs font-semibold rounded-xl bg-white/5 border border-white/10 text-foreground hover:bg-white/10 transition-all flex items-center gap-1.5"
+                title={t("direction")}
+              >
+                <ArrowRightLeft className="w-3.5 h-3.5 text-blue-400" />
+                {deckDirection === "hr_to_native" ? t("hrToNative") : t("nativeToHr")}
+              </button>
+
+              {/* Auto Audio Toggle */}
+              <button
+                onClick={() => setAutoAudio(!autoAudio)}
+                className={`px-3 py-1.5 text-xs font-semibold rounded-xl border transition-all flex items-center gap-1.5 ${
+                  autoAudio
+                    ? "bg-emerald-500/15 text-emerald-400 border-emerald-500/30"
+                    : "bg-white/5 text-muted-foreground border-white/10 hover:text-foreground"
+                }`}
+              >
+                <Volume2 className="w-3.5 h-3.5" />
+                {t("autoAudio")}
+              </button>
+            </div>
+
+            {/* Shuffle Button */}
+            <button
+              onClick={() => startDeck()}
+              className="px-3 py-1.5 text-xs font-semibold rounded-xl bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10 transition-all flex items-center gap-1.5"
+            >
+              <Shuffle className="w-3.5 h-3.5" />
+              {t("shuffle")}
+            </button>
+          </div>
+
+          {/* Main Deck Container */}
+          {deckFinished ? (
+            /* Deck Completion Screen */
+            <div className="glass p-8 rounded-3xl border border-white/10 text-center space-y-6 max-w-md mx-auto animate-fade-in">
+              <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center mx-auto">
+                <Sparkles className="w-8 h-8" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-extrabold text-foreground">{t("deckComplete")}</h2>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {deckQueue.length} {t("words")}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 p-4 rounded-2xl bg-white/5 border border-white/5">
+                <div className="text-center">
+                  <span className="text-2xl font-black text-emerald-400">{masteredCount}</span>
+                  <p className="text-xs text-muted-foreground mt-0.5">{t("cardsMastered")}</p>
+                </div>
+                <div className="text-center">
+                  <span className="text-2xl font-black text-red-400">{reviewLaterQueue.length}</span>
+                  <p className="text-xs text-muted-foreground mt-0.5">{t("cardsNeedReview")}</p>
                 </div>
               </div>
 
-              {/* Navigation Controls */}
-              <div className="flex items-center gap-4 mt-6">
+              <div className="flex flex-col gap-2 pt-2">
+                {reviewLaterQueue.length > 0 && (
+                  <button
+                    onClick={restudyMissed}
+                    className="w-full py-3 rounded-xl font-bold text-sm bg-red-500/20 text-red-300 border border-red-500/30 hover:bg-red-500/30 transition-all flex items-center justify-center gap-2"
+                  >
+                    <RotateCcw className="w-4 h-4" />
+                    {t("restudyMissed")} ({reviewLaterQueue.length})
+                  </button>
+                )}
                 <button
-                  disabled={currentCardIndex === 0}
-                  onClick={() => {
-                    setCurrentCardIndex(currentCardIndex - 1);
-                    setIsFlipped(false);
-                  }}
-                  className="px-4 py-2 text-sm font-semibold rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 disabled:opacity-50 transition-all text-foreground"
+                  onClick={() => startDeck()}
+                  className="w-full py-3 rounded-xl font-bold text-sm bg-blue-600 text-white hover:bg-blue-500 transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25"
                 >
-                  {t("previous")}
-                </button>
-                <span className="text-sm font-medium text-muted-foreground">
-                  {currentCardIndex + 1} / {filteredWords.length}
-                </span>
-                <button
-                  disabled={currentCardIndex === filteredWords.length - 1}
-                  onClick={() => {
-                    setCurrentCardIndex(currentCardIndex + 1);
-                    setIsFlipped(false);
-                  }}
-                  className="px-4 py-2 text-sm font-semibold rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 disabled:opacity-50 transition-all text-foreground"
-                >
-                  {t("next")}
+                  <RefreshCw className="w-4 h-4" />
+                  {t("restartDeck")}
                 </button>
               </div>
+            </div>
+          ) : deckQueue.length > 0 ? (
+            /* Active Card Stack */
+            <div className="flex flex-col items-center space-y-6">
+              {/* Progress & Deck Status Bar */}
+              <div className="w-full max-w-md space-y-2">
+                <div className="flex items-center justify-between text-xs font-semibold">
+                  <span className="text-emerald-400">✅ {masteredCount}</span>
+                  <span className="text-muted-foreground">
+                    {deckIndex + 1} / {deckQueue.length}
+                  </span>
+                  <span className="text-red-400">❌ {reviewLaterQueue.length}</span>
+                </div>
+                <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden border border-white/5">
+                  <div
+                    className="h-full bg-gradient-to-r from-blue-500 to-emerald-400 rounded-full transition-all duration-300"
+                    style={{ width: `${((deckIndex + 1) / deckQueue.length) * 100}%` }}
+                  />
+                </div>
+              </div>
+
+              {/* 3D Flip Card */}
+              {(() => {
+                const word = deckQueue[deckIndex];
+                if (!word) return null;
+                const isStarred = starredWords.includes(word.hr);
+
+                const frontText = deckDirection === "hr_to_native" ? word.hr : getTranslation(word);
+                const backText = deckDirection === "hr_to_native" ? getTranslation(word) : word.hr;
+
+                return (
+                  <div className="w-full max-w-md space-y-6">
+                    <div
+                      onClick={() => setIsFlipped(!isFlipped)}
+                      className="w-full h-72 cursor-pointer relative perspective"
+                    >
+                      <div
+                        className={`w-full h-full duration-500 preserve-3d relative rounded-3xl glass border border-white/10 flex flex-col items-center justify-center p-8 transition-transform shadow-2xl ${
+                          isFlipped ? "rotate-y-180" : ""
+                        }`}
+                      >
+                        {/* Star Button (Top Right) */}
+                        <button
+                          onClick={(e) => toggleStarWord(word.hr, e)}
+                          className={`absolute top-4 right-4 p-2 rounded-xl border transition-all z-20 ${
+                            isStarred
+                              ? "bg-amber-500/20 border-amber-500/30 text-amber-400"
+                              : "bg-white/5 border-white/10 text-muted-foreground hover:text-amber-400"
+                          }`}
+                          title="Star word"
+                        >
+                          <Star className={`w-5 h-5 ${isStarred ? "fill-amber-400 text-amber-400" : ""}`} />
+                        </button>
+
+                        {/* Front Side */}
+                        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 backface-hidden">
+                          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 uppercase tracking-wider mb-4 border border-blue-500/20">
+                            {word.level} • {getCategoryLabel(word.category)}
+                          </span>
+                          <h2 className="text-4xl font-extrabold text-foreground tracking-tight text-center select-none">
+                            {frontText}
+                          </h2>
+                          <div className="flex items-center gap-2 mt-4">
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                speakWord(word.hr);
+                              }}
+                              className="p-2 rounded-full bg-blue-600/10 text-blue-400 border border-blue-500/20 hover:bg-blue-600 hover:text-white transition-all"
+                            >
+                              <Volume2 className="w-4 h-4" />
+                            </button>
+                            <span className="text-xs text-muted-foreground select-none">
+                              {t("revealTranslation")}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Back Side */}
+                        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 backface-hidden rotate-y-180">
+                          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 uppercase tracking-wider mb-3 border border-emerald-500/20">
+                            {getCategoryLabel(word.category)}
+                          </span>
+                          <h3 className="text-3xl font-extrabold text-foreground text-center">
+                            {backText}
+                          </h3>
+
+                          {word.example && (
+                            <div className="mt-4 text-center max-w-xs">
+                              <p className="text-xs italic text-muted-foreground leading-relaxed">
+                                &quot;{word.example.hr}&quot;
+                              </p>
+                              <p className="text-[10px] text-muted-foreground/60 mt-1">
+                                {locale === "ru" ? word.example.ru : locale === "ua" ? word.example.ua : word.example.en}
+                              </p>
+                            </div>
+                          )}
+
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              speakWord(word.hr);
+                            }}
+                            className="mt-4 p-2 rounded-full bg-blue-600/10 text-blue-400 border border-blue-500/20 hover:bg-blue-600 hover:text-white transition-all flex items-center gap-1.5 text-xs font-medium"
+                          >
+                            <Volume2 className="w-4 h-4" />
+                            {t("listenPronunciation")}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Anki Active Recall Controls (Need Review vs Mastered) */}
+                    <div className="flex gap-4">
+                      <button
+                        onClick={() => handleCardAnswer(false)}
+                        className="flex-1 py-3.5 rounded-2xl border border-red-500/30 bg-red-500/10 text-red-400 font-bold text-sm hover:bg-red-500/20 transition-all flex items-center justify-center gap-2 shadow-lg shadow-red-500/10 active:scale-95"
+                      >
+                        <X className="w-5 h-5" />
+                        {t("stillLearning")}
+                      </button>
+                      <button
+                        onClick={() => handleCardAnswer(true)}
+                        className="flex-1 py-3.5 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 font-bold text-sm hover:bg-emerald-500/20 transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/10 active:scale-95"
+                      >
+                        <Check className="w-5 h-5" />
+                        {t("mastered")}
+                      </button>
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           ) : (
             <div className="text-center py-12 glass rounded-2xl border border-white/10">

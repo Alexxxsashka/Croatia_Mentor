@@ -60,15 +60,62 @@ model VerificationToken {
 }
 
 model Progress {
-  id               String   @id @default(cuid())
-  userId           String   @unique
-  currentLevel     String   @default("A1")
-  totalXP          Int      @default(0)
-  currentStreak    Int      @default(0)
-  lastActivityDate DateTime @default(now())
-  completedLessons String[] @default([])
-  testScores       Json     @default("[]")
-  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                 String   @id @default(cuid())
+  userId             String   @unique
+  currentLevel       String   @default("A1")
+  totalXP            Int      @default(0)
+  currentStreak      Int      @default(0)
+  longestStreak      Int      @default(0)
+  totalWordsLearned  Int      @default(0)
+  totalWordsReviewed Int      @default(0)
+  lastActivityDate   DateTime @default(now())
+  completedLessons   String[] @default([])
+  testScores         Json     @default("[]")
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model WordProgress {
+  id           String    @id @default(cuid())
+  userId       String
+  wordHr       String
+  status       String    @default("new") // new, learning, learned, mastered
+  correctCount Int       @default(0)
+  wrongCount   Int       @default(0)
+  lastReviewed DateTime?
+  nextReview   DateTime?
+  easeFactor   Float     @default(2.5)
+  interval     Int       @default(1)
+  repetitions  Int       @default(0)
+
+  @@unique([userId, wordHr])
+  @@index([userId, status])
+  @@index([userId, nextReview])
+}
+
+model DailyActivity {
+  id             String  @id @default(cuid())
+  userId         String
+  date           String  // YYYY-MM-DD
+  wordsLearned   Int     @default(0)
+  wordsReviewed  Int     @default(0)
+  testsCompleted Int     @default(0)
+  xpEarned       Int     @default(0)
+  minutesSpent   Int     @default(0)
+  completed      Boolean @default(false)
+
+  @@unique([userId, date])
+  @@index([userId, date])
+}
+
+model UserSettings {
+  id                   String  @id @default(cuid())
+  userId               String  @unique
+  dailyGoalMinutes     Int     @default(10)
+  reminderEnabled      Boolean @default(true)
+  reminderTime         String  @default("09:00")
+  notificationsEnabled Boolean @default(false)
+
+  @@index([userId])
 }
 
 model Lesson {
