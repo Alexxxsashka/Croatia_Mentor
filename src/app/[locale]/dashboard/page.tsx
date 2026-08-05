@@ -18,6 +18,16 @@ import {
   Clock,
   Loader2,
   RotateCcw,
+  CalendarDays,
+  Flame,
+  RefreshCw,
+  Check,
+  Brain,
+  Pencil,
+  Timer,
+  Ear,
+  Shuffle,
+  Languages,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -45,34 +55,61 @@ export default function DashboardPage() {
   const [progress, setProgress] = useState<UserProgress | null>(null);
   const [progressLoaded, setProgressLoaded] = useState(false);
 
+  const [dailyStats, setDailyStats] = useState<{
+    wordsLearned: number;
+    wordsReviewed: number;
+    completed: boolean;
+    dailyGoal: { newWords: number; reviewWords: number };
+    dailyGoalMinutes: number;
+  } | null>(null);
+
+  const [dailyHistory, setDailyHistory] = useState<{ date: string; xpEarned: number; completed: boolean }[]>([]);
+
   useEffect(() => {
     if (status === "authenticated") {
-      fetch("/api/progress")
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.progress) {
+      Promise.all([
+        fetch("/api/progress").then((r) => r.json()),
+        fetch("/api/words/daily").then((r) => r.json()),
+        fetch("/api/words/session").then((r) => r.json()),
+      ])
+        .then(([progData, dailyData, sessData]) => {
+          if (progData.progress) {
             let parsedScores: TestScore[] = [];
             try {
-              parsedScores = typeof data.progress.testScores === "string"
-                ? JSON.parse(data.progress.testScores)
-                : data.progress.testScores || [];
+              parsedScores = typeof progData.progress.testScores === "string"
+                ? JSON.parse(progData.progress.testScores)
+                : progData.progress.testScores || [];
             } catch {
-              parsedScores = data.progress.testScores || [];
+              parsedScores = progData.progress.testScores || [];
             }
 
             setProgress({
-              currentLevel: data.progress.currentLevel || "A1",
-              totalXP: data.progress.totalXP || 0,
-              currentStreak: data.progress.currentStreak || 0,
-              completedLessons: data.progress.completedLessons || [],
+              currentLevel: progData.progress.currentLevel || "A1",
+              totalXP: progData.progress.totalXP || 0,
+              currentStreak: progData.progress.currentStreak || 0,
+              completedLessons: progData.progress.completedLessons || [],
               testScores: parsedScores,
-              lastActivityDate: data.progress.lastActivityDate || undefined,
+              lastActivityDate: progData.progress.lastActivityDate || undefined,
             });
           }
+
+          if (dailyData) {
+            setDailyHistory(dailyData.history || []);
+            const today = dailyData.today || {};
+            const goal = sessData?.dailyGoal || { newWords: 10, reviewWords: 15 };
+            setDailyStats({
+              wordsLearned: today.wordsLearned || 0,
+              wordsReviewed: today.wordsReviewed || 0,
+              completed: !!today.completed,
+              dailyGoal: goal,
+              dailyGoalMinutes: sessData?.dailyGoalMinutes || 10,
+            });
+          }
+
           setProgressLoaded(true);
         })
         .catch((err) => {
-          console.error("Failed to load progress:", err);
+          console.error("Failed to load dashboard data:", err);
           setProgressLoaded(true);
         });
     }
@@ -363,6 +400,135 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
+
+      {/* Daily Goal & Word Practice Hub */}
+      {dailyStats && (
+        <div className="glass p-6 rounded-3xl border border-white/10 mb-8 animate-fade-in space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
+              <Target className="w-5 h-5 text-blue-400" />
+              {locale === "ua" ? "Денна ціль навчання" : locale === "ru" ? "Дневная цель обучения" : "Daily Learning Goal"}
+            </h2>
+            <span className="text-xs font-semibold px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+              {dailyStats.dailyGoalMinutes} {locale === "ua" ? "хв/день" : locale === "ru" ? "мин/день" : "min/day"}
+            </span>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4">
+            {/* New Words Goal */}
+            <div className="p-4 rounded-2xl bg-white/5 border border-white/5 space-y-2">
+              <div className="flex justify-between text-xs">
+                <span className="text-muted-foreground">{locale === "ua" ? "Нові слова" : locale === "ru" ? "Новые слова" : "New Words"}</span>
+                <span className="font-bold text-blue-400">{dailyStats.wordsLearned} / {dailyStats.dailyGoal.newWords}</span>
+              </div>
+              <div className="h-2.5 bg-black/20 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full transition-all duration-500"
+                  style={{ width: `${Math.min(100, (dailyStats.wordsLearned / dailyStats.dailyGoal.newWords) * 100)}%` }}
+                />
+              </div>
+            </div>
+
+            {/* Review Words Goal */}
+            <div className="p-4 rounded-2xl bg-white/5 border border-white/5 space-y-2">
+              <div className="flex justify-between text-xs">
+                <span className="text-muted-foreground">{locale === "ua" ? "Повторення" : locale === "ru" ? "Повторение" : "Review Words"}</span>
+                <span className="font-bold text-emerald-400">{dailyStats.wordsReviewed} / {dailyStats.dailyGoal.reviewWords}</span>
+              </div>
+              <div className="h-2.5 bg-black/20 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full transition-all duration-500"
+                  style={{ width: `${Math.min(100, (dailyStats.wordsReviewed / dailyStats.dailyGoal.reviewWords) * 100)}%` }}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Practice Action Buttons */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <Link
+              href="/vocabulary?tab=flashcards"
+              className="p-4 rounded-2xl bg-gradient-to-r from-blue-600/20 to-indigo-600/20 border border-blue-500/30 hover:border-blue-500 flex items-center justify-between group transition-all"
+            >
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-blue-500/20 text-blue-400 group-hover:scale-110 transition-transform">
+                  <Languages className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-sm text-foreground">
+                    {locale === "ua" ? "Тренувати слова (Flashcards)" : locale === "ru" ? "Тренировать слова (Flashcards)" : "Practice Flashcard Decks"}
+                  </h3>
+                  <p className="text-xs text-muted-foreground">
+                    {locale === "ua" ? "Активне запам'ятовування" : locale === "ru" ? "Активное запоминание" : "Anki & Quizlet style active recall"}
+                  </p>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all" />
+            </Link>
+
+            <Link
+              href="/vocabulary?tab=quiz"
+              className="p-4 rounded-2xl bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30 hover:border-purple-500 flex items-center justify-between group transition-all"
+            >
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-purple-500/20 text-purple-400 group-hover:scale-110 transition-transform">
+                  <Trophy className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-sm text-foreground">
+                    {locale === "ua" ? "Словарний тест" : locale === "ru" ? "Словарный тест" : "Custom Vocabulary Quiz"}
+                  </h3>
+                  <p className="text-xs text-muted-foreground">
+                    {locale === "ua" ? "Тести на 5-50 слів з выобором режиму" : locale === "ru" ? "Тесты на 5-50 слов с выбором режима" : "Configurable 5-50 Qs tests"}
+                  </p>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all" />
+            </Link>
+          </div>
+        </div>
+      )}
+
+      {/* Activity Heatmap Calendar */}
+      {dailyHistory.length > 0 && (
+        <div className="glass p-6 rounded-3xl border border-white/10 mb-8 animate-fade-in">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-bold text-foreground text-sm flex items-center gap-2">
+              <CalendarDays className="w-4 h-4 text-emerald-400" />
+              {locale === "ua" ? "Календар навчальної активності (90 днів)" : locale === "ru" ? "Календарь учебной активности (90 дней)" : "90-Day Learning Activity Calendar"}
+            </h2>
+            <span className="text-xs text-muted-foreground font-semibold">
+              {locale === "ua" ? "Активних днів:" : locale === "ru" ? "Активных дней:" : "Active Days:"} {dailyHistory.filter((h) => h.completed || h.xpEarned > 0).length}
+            </span>
+          </div>
+
+          <div className="flex flex-wrap gap-1.5">
+            {(() => {
+              const days: { date: string; level: number }[] = [];
+              for (let i = 89; i >= 0; i--) {
+                const d = new Date();
+                d.setDate(d.getDate() - i);
+                const dateStr = d.toISOString().split("T")[0];
+                const act = dailyHistory.find((h) => h.date === dateStr);
+                const level = act ? (act.completed ? 3 : act.xpEarned > 50 ? 2 : 1) : 0;
+                days.push({ date: dateStr, level });
+              }
+              return days.map((day) => (
+                <div
+                  key={day.date}
+                  title={`${day.date}`}
+                  className={`w-3.5 h-3.5 rounded-sm transition-colors ${
+                    day.level === 0 ? "bg-white/5" :
+                    day.level === 1 ? "bg-emerald-500/30" :
+                    day.level === 2 ? "bg-emerald-500/60" :
+                    "bg-emerald-500 shadow-sm shadow-emerald-500/50"
+                  }`}
+                />
+              ));
+            })()}
+          </div>
+        </div>
+      )}
 
       <div className="grid lg:grid-cols-3 gap-8">
         {/* Quick Actions */}
