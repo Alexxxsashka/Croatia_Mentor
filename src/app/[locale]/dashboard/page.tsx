@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { Link } from "@/i18n/navigation";
 import { useState, useEffect } from "react";
 import { lessonsData, getLocalizedText } from "@/lib/lessons-data";
+import { DailyQuestWizard } from "@/components/daily-quest-wizard";
 import {
   Trophy,
   Sparkles,
@@ -488,6 +489,15 @@ export default function DashboardPage() {
           </div>
         </div>
       )}
+
+      {/* Step-by-Step Daily Quest Component */}
+      <div className="mb-8">
+        <DailyQuestWizard onComplete={() => {
+          fetch("/api/words/daily").then((r) => r.json()).then((dailyData) => {
+            if (dailyData) setDailyHistory(dailyData.history || []);
+          });
+        }} />
+      </div>
 
       {/* Activity Heatmap Calendar */}
       {dailyHistory.length > 0 && (
