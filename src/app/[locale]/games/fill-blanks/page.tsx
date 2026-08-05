@@ -1,81 +1,72 @@
 "use client";
 
-import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useState, useEffect, useCallback } from "react";
+import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
+import { fillBlanksData, type BlankSentence } from "@/lib/fill-blanks-data";
+import { speakText } from "@/lib/speech";
 import {
   ArrowLeft,
   CheckCircle2,
   XCircle,
   Trophy,
   RotateCcw,
+  Volume2,
+  Sparkles,
+  Zap,
 } from "lucide-react";
-
-interface Sentence {
-  text: string; // use ___ for blank
-  options: string[];
-  correctAnswer: string;
-  translation: string;
-}
-
-const sentences: Sentence[] = [
-  {
-    text: "Ja _____ student.",
-    options: ["sam", "si", "je", "smo"],
-    correctAnswer: "sam",
-    translation: "I am a student.",
-  },
-  {
-    text: "Ona _____ u Zagrebu.",
-    options: ["živi", "živim", "živiš", "žive"],
-    correctAnswer: "živi",
-    translation: "She lives in Zagreb.",
-  },
-  {
-    text: "Mi _____ kavu.",
-    options: ["pijemo", "pijem", "piješ", "piju"],
-    correctAnswer: "pijemo",
-    translation: "We drink coffee.",
-  },
-  {
-    text: "_____ se zoveš?",
-    options: ["Kako", "Što", "Gdje", "Kada"],
-    correctAnswer: "Kako",
-    translation: "What is your name?",
-  },
-  {
-    text: "Idem u _____.",
-    options: ["školu", "škola", "školom", "škole"],
-    correctAnswer: "školu",
-    translation: "I'm going to school.",
-  },
-  {
-    text: "On _____ hrvatski.",
-    options: ["govori", "govorim", "govore", "govoriš"],
-    correctAnswer: "govori",
-    translation: "He speaks Croatian.",
-  },
-  {
-    text: "_____ je tvoj brat?",
-    options: ["Gdje", "Kako", "Što", "Koliko"],
-    correctAnswer: "Gdje",
-    translation: "Where is your brother?",
-  },
-  {
-    text: "Volim _____ na moru.",
-    options: ["plivati", "plivam", "plivanje", "plivao"],
-    correctAnswer: "plivati",
-    translation: "I love to swim in the sea.",
-  },
-];
 
 export default function FillBlanksPage() {
   const t = useTranslations("games.fillBlanks");
+  const tRoot = useTranslations("games");
+  const locale = useLocale();
   const router = useRouter();
 
+  // Settings
+  const [selectedLevel, setSelectedLevel] = useState<string>("all");
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [gameStarted, setGameStarted] = useState(false);
+
+  const [activeSentences, setActiveSentences] = useState<BlankSentence[]>([]);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [checked, setChecked] = useState(false);
   const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
+
+  const QUESTIONS_PER_GAME = 10;
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("fillblanks_best_score");
+      if (saved) setBestScore(Number(saved));
+    } catch (_) {}
+  }, []);
+
+  const getSentenceTranslation = useCallback((s: BlankSentence) => {
+    if (locale === "ru") return s.translation.ru;
+    if (locale === "ua") return s.translation.ua;
+    return s.translation.en;
+  }, [locale]);
+
+  const startNewGame = useCallback(() => {
+    let pool = [...fillBlanksData];
+    if (selectedLevel !== "all") {
+      pool = pool.filter((s) => s.level.toLowerCase() === selectedLevel.toLowerCase());
+    }
+    if (selectedCategory !== "all") {
+      pool = pool.filter((s) => s.category === selectedCategory);
+    }
+    if (pool.length < QUESTIONS_PER_GAME) {
+      pool = [...fillBlanksData];
+    }
+
+    const shuffled = [...pool].sort(() => 0.5 - Math.random()).slice(0, QUESTIONS_PER_GAME);
+    setActiveSentences(shuffled);
+    setAnswers({});
+    setChecked(false);
+    setScore(0);
+    setGameStarted(true);
+  }, [selectedLevel, selectedCategory]);
 
   const handleSelect = (index: number, option: string) => {
     if (checked) return;
@@ -84,170 +75,265 @@ export default function FillBlanksPage() {
 
   const checkAll = () => {
     let correct = 0;
-    sentences.forEach((s, i) => {
+    activeSentences.forEach((s, i) => {
       if (answers[i] === s.correctAnswer) correct++;
     });
     setScore(correct);
     setChecked(true);
+
+    const earnedXP = correct * 10;
+    fetch("/api/progress", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ xp: earnedXP }),
+    }).catch(console.error);
+
+    if (correct > bestScore) {
+      setBestScore(correct);
+      try { localStorage.setItem("fillblanks_best_score", String(correct)); } catch (_) {}
+    }
   };
 
-  const reset = () => {
-    setAnswers({});
-    setChecked(false);
-    setScore(0);
-  };
+  const allAnswered = Object.keys(answers).length === activeSentences.length;
 
-  const allAnswered = Object.keys(answers).length === sentences.length;
+  // SETUP SCREEN
+  if (!gameStarted) {
+    return (
+      <div className="max-w-2xl mx-auto px-4 py-12 text-center animate-fade-in space-y-6">
+        <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-2xl shadow-purple-500/25">
+          <Sparkles className="w-10 h-10 text-white" />
+        </div>
+        <div className="space-y-2">
+          <h1 className="text-3xl font-extrabold">{t("title")}</h1>
+          <p className="text-muted-foreground text-sm max-w-md mx-auto">{t("instructions")}</p>
+        </div>
 
+        <div className="glass p-6 rounded-3xl border border-white/10 max-w-md mx-auto space-y-4">
+          <div className="grid grid-cols-2 gap-3 text-left">
+            <div>
+              <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Level</label>
+              <select
+                value={selectedLevel}
+                onChange={(e) => setSelectedLevel(e.target.value)}
+                className="w-full bg-slate-900 border border-white/10 text-xs font-semibold rounded-xl px-3 py-2 text-foreground focus:outline-none focus:border-purple-500"
+              >
+                <option value="all">All Levels</option>
+                <option value="A1">A1 Beginner</option>
+                <option value="A2">A2 Elementary</option>
+                <option value="B1">B1 Intermediate</option>
+                <option value="B2">B2 Upper Int</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Grammar Category</label>
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="w-full bg-slate-900 border border-white/10 text-xs font-semibold rounded-xl px-3 py-2 text-foreground focus:outline-none focus:border-purple-500"
+              >
+                <option value="all">All Grammar</option>
+                <option value="verbs">Verbs & Present</option>
+                <option value="pronouns">Pronouns & Questions</option>
+                <option value="cases">Cases & Declensions</option>
+                <option value="prepositions">Prepositions</option>
+              </select>
+            </div>
+          </div>
+
+          {bestScore > 0 && (
+            <div className="p-3 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between text-xs">
+              <span className="text-muted-foreground">🏆 Best High Score:</span>
+              <span className="font-bold text-purple-400">{bestScore}/{QUESTIONS_PER_GAME}</span>
+            </div>
+          )}
+
+          <button
+            onClick={startNewGame}
+            className="w-full py-4 rounded-2xl text-base font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90 transition-all shadow-xl shadow-purple-500/25 flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <Zap className="w-5 h-5 fill-white" />
+            Start Fill Blanks (10 Sentences)
+          </button>
+        </div>
+
+        <button onClick={() => router.push("/games")} className="block mx-auto text-sm text-muted-foreground hover:text-foreground transition-colors">
+          <ArrowLeft className="w-4 h-4 inline mr-1" />{tRoot("backToGames") || "Back"}
+        </button>
+      </div>
+    );
+  }
+
+  // GAME OVER RESULTS
   if (checked) {
     return (
-      <div className="max-w-3xl mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
+      <div className="max-w-3xl mx-auto px-4 py-8 space-y-6 animate-fade-in">
+        <div className="flex items-center gap-4 mb-4">
           <button
-            onClick={() => router.push("/games")}
-            className="p-2 rounded-xl glass hover:bg-white/10 transition-all"
+            onClick={() => setGameStarted(false)}
+            className="p-2 rounded-xl glass hover:bg-white/10 transition-all cursor-pointer"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <h1 className="text-2xl font-bold">{t("title")}</h1>
         </div>
 
-        {/* Results */}
-        <div className="text-center mb-8 animate-fade-in">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-purple-400 to-pink-500 mb-4 shadow-2xl">
+        <div className="text-center space-y-3">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-purple-400 to-pink-500 shadow-2xl">
             <Trophy className="w-10 h-10 text-white" />
           </div>
-          <h2 className="text-2xl font-bold mb-2">{t("complete")} 🎉</h2>
-          <p className="text-lg text-muted-foreground">
-            {score} / {sentences.length}
+          <h2 className="text-2xl font-bold">{t("complete")} 🎉</h2>
+          <p className="text-xl font-black text-purple-400">
+            {score} / {activeSentences.length} ({score * 10} XP)
           </p>
-          <div className="h-3 w-48 mx-auto mt-4 rounded-full bg-white/5 overflow-hidden">
-            <div
-              className="h-full rounded-full bg-gradient-to-r from-green-400 to-emerald-400"
-              style={{
-                width: `${(score / sentences.length) * 100}%`,
-              }}
-            />
-          </div>
         </div>
 
         {/* Review answers */}
-        <div className="space-y-4 mb-8">
-          {sentences.map((sentence, i) => {
+        <div className="space-y-3">
+          {activeSentences.map((sentence, i) => {
             const userAnswer = answers[i];
             const isCorrect = userAnswer === sentence.correctAnswer;
+            const fullSentenceText = sentence.text.replace("___", sentence.correctAnswer);
 
             return (
               <div
-                key={i}
-                className={`glass rounded-xl p-4 border ${
-                  isCorrect
-                    ? "border-green-500/30"
-                    : "border-red-500/30"
+                key={sentence.id || i}
+                className={`glass rounded-2xl p-4 border transition-all ${
+                  isCorrect ? "border-green-500/30 bg-green-500/5" : "border-red-500/30 bg-red-500/5"
                 }`}
               >
-                <div className="flex items-start gap-3">
-                  {isCorrect ? (
-                    <CheckCircle2 className="w-5 h-5 text-green-400 mt-0.5 shrink-0" />
-                  ) : (
-                    <XCircle className="w-5 h-5 text-red-400 mt-0.5 shrink-0" />
-                  )}
-                  <div>
-                    <p className="font-medium">
-                      {sentence.text.replace(
-                        "_____",
-                        isCorrect
-                          ? `✓ ${userAnswer}`
-                          : `✗ ${userAnswer} → ${sentence.correctAnswer}`
-                      )}
-                    </p>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      {sentence.translation}
-                    </p>
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-start gap-3">
+                    {isCorrect ? (
+                      <CheckCircle2 className="w-5 h-5 text-green-400 mt-0.5 shrink-0" />
+                    ) : (
+                      <XCircle className="w-5 h-5 text-red-400 mt-0.5 shrink-0" />
+                    )}
+                    <div>
+                      <p className="font-bold text-foreground">
+                        {sentence.text.replace(
+                          "___",
+                          isCorrect
+                            ? `✓ ${userAnswer}`
+                            : `✗ ${userAnswer || "—"} → ${sentence.correctAnswer}`
+                        )}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {getSentenceTranslation(sentence)}
+                      </p>
+                    </div>
                   </div>
+
+                  <button
+                    onClick={() => speakText(fullSentenceText)}
+                    className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-foreground transition-all cursor-pointer"
+                  >
+                    <Volume2 className="w-4 h-4 text-blue-400" />
+                  </button>
                 </div>
               </div>
             );
           })}
         </div>
 
-        <div className="flex items-center justify-center gap-4">
+        <div className="flex items-center justify-center gap-4 pt-4">
           <button
-            onClick={reset}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90 transition-all shadow-lg"
+            onClick={startNewGame}
+            className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90 transition-all shadow-lg cursor-pointer"
           >
             <RotateCcw className="w-4 h-4" />
-            {t("tryAgain") || "Try Again"}
+            Play Again (10 New Sentences)
           </button>
           <button
-            onClick={() => router.push("/games")}
-            className="px-6 py-3 rounded-xl font-semibold glass hover:bg-white/10 transition-all"
+            onClick={() => setGameStarted(false)}
+            className="px-6 py-3 rounded-xl font-semibold glass hover:bg-white/10 transition-all cursor-pointer"
           >
-            Back
+            Change Filters
           </button>
         </div>
       </div>
     );
   }
 
+  // ACTIVE PLAY
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
-      {/* Header */}
-      <div className="flex items-center gap-4 mb-8 animate-fade-in">
+    <div className="max-w-3xl mx-auto px-4 py-8 space-y-6">
+      <div className="flex items-center justify-between">
         <button
-          onClick={() => router.push("/games")}
-          className="p-2 rounded-xl glass hover:bg-white/10 transition-all"
+          onClick={() => setGameStarted(false)}
+          className="p-2 rounded-xl glass hover:bg-white/10 transition-all cursor-pointer"
         >
           <ArrowLeft className="w-5 h-5" />
         </button>
-        <h1 className="text-2xl font-bold">{t("title")}</h1>
+        <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+          Sentences {Object.keys(answers).length} / {activeSentences.length}
+        </span>
       </div>
 
-      <p className="text-sm text-muted-foreground text-center mb-8">
-        {t("instructions")}
-      </p>
+      <div className="space-y-6">
+        {activeSentences.map((sentence, i) => {
+          const parts = sentence.text.split("___");
+          const fullTextToSpeak = sentence.text.replace("___", sentence.correctAnswer);
 
-      {/* Sentences */}
-      <div className="space-y-6 stagger-children mb-8">
-        {sentences.map((sentence, i) => (
-          <div key={i} className="glass rounded-2xl p-6">
-            <p className="text-lg font-medium mb-1">
-              {sentence.text.replace(
-                "_____",
-                answers[i] ? `[${answers[i]}]` : "_____"
-              )}
-            </p>
-            <p className="text-xs text-muted-foreground mb-4">
-              {sentence.translation}
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {sentence.options.map((option) => (
+          return (
+            <div
+              key={sentence.id || i}
+              className="glass rounded-2xl p-6 border border-white/10 animate-fade-in space-y-4"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 mb-2 inline-block">
+                    {sentence.level} • {sentence.category}
+                  </span>
+                  <p className="text-xl font-extrabold text-foreground leading-relaxed">
+                    {parts[0]}
+                    <span className="inline-block px-3 py-1 mx-1 rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/30 font-bold min-w-[60px] text-center">
+                      {answers[i] || "___"}
+                    </span>
+                    {parts[1]}
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-2">
+                    {getSentenceTranslation(sentence)}
+                  </p>
+                </div>
+
                 <button
-                  key={option}
-                  onClick={() => handleSelect(i, option)}
-                  className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-                    answers[i] === option
-                      ? "bg-purple-500/20 text-purple-400 border border-purple-500/30 scale-105"
-                      : "glass hover:bg-white/10 cursor-pointer"
-                  }`}
+                  onClick={() => speakText(fullTextToSpeak)}
+                  className="p-2.5 rounded-xl bg-purple-500/10 text-purple-400 hover:bg-purple-500 hover:text-white transition-all cursor-pointer"
                 >
-                  {option}
+                  <Volume2 className="w-4 h-4" />
                 </button>
-              ))}
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
+                {sentence.options.map((option) => {
+                  const isSelected = answers[i] === option;
+                  return (
+                    <button
+                      key={option}
+                      onClick={() => handleSelect(i, option)}
+                      className={`p-3 rounded-xl text-sm font-bold border transition-all text-center cursor-pointer ${
+                        isSelected
+                          ? "bg-purple-600 text-white border-purple-500 shadow-md scale-[1.02]"
+                          : "glass border-white/10 hover:bg-white/10 text-foreground"
+                      }`}
+                    >
+                      {option}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
-      {/* Check button */}
-      <div className="text-center">
+      <div className="pt-4">
         <button
           onClick={checkAll}
           disabled={!allAnswered}
-          className="px-8 py-4 rounded-2xl text-lg font-semibold bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:opacity-90 transition-all shadow-2xl shadow-purple-500/25 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="w-full py-4 rounded-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90 disabled:opacity-40 transition-all shadow-xl text-base cursor-pointer"
         >
-          {t("checkAll")}
+          Check All Answers ({Object.keys(answers).length}/{activeSentences.length})
         </button>
       </div>
     </div>
