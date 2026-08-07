@@ -101,6 +101,7 @@ model DailyActivity {
   testsCompleted Int     @default(0)
   xpEarned       Int     @default(0)
   minutesSpent   Int     @default(0)
+  chatCount      Int     @default(0)
   completed      Boolean @default(false)
 
   @@unique([userId, date])

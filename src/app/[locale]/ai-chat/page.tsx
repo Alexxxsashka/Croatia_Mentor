@@ -41,6 +41,7 @@ export default function AIChatPage() {
   const [isListening, setIsListening] = useState(false);
   const [autoPlayVoice, setAutoPlayVoice] = useState(false);
   const [speakingIdx, setSpeakingIdx] = useState<number | null>(null);
+  const [remainingLimit, setRemainingLimit] = useState<{ remaining: number; limit: number; isAdmin: boolean } | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -54,6 +55,17 @@ export default function AIChatPage() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    fetch("/api/chat")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && typeof data.remaining === "number") {
+          setRemainingLimit({ remaining: data.remaining, limit: data.limit, isAdmin: !!data.isAdmin });
+        }
+      })
+      .catch(console.error);
+  }, []);
 
   const scenarios = [
     { id: "Pekara / Bakery", label: locale === "ua" ? "🥐 Пекерня (Pekara)" : locale === "ru" ? "🥐 Пекарня (Pekara)" : "🥐 Bakery (Pekara)" },
@@ -171,6 +183,10 @@ export default function AIChatPage() {
       });
 
       const data = await res.json();
+      if (typeof data.remaining === "number") {
+        setRemainingLimit((prev) => prev ? { ...prev, remaining: data.remaining } : null);
+      }
+
       const aiReply = data.response || data.error || (locale === "ua"
         ? "Вибачте, виникла тимчасова помилка зв'язку з ИИ."
         : locale === "ru"
@@ -233,8 +249,24 @@ export default function AIChatPage() {
           </div>
         </div>
 
-        {/* Auto Voice Output Toggle */}
-        <div className="flex items-center gap-2 self-end sm:self-auto">
+        {/* Auto Voice Output Toggle & Daily Limit Counter Badge */}
+        <div className="flex flex-wrap items-center gap-2 self-end sm:self-auto">
+          {remainingLimit && (
+            <div className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-white/5 border border-white/10 flex items-center gap-1.5 text-muted-foreground">
+              <MessageSquare className="w-3.5 h-3.5 text-blue-400" />
+              {remainingLimit.isAdmin ? (
+                <span className="text-amber-400 font-bold">👑 Admin (Unlimited)</span>
+              ) : (
+                <span>
+                  {locale === "ua" ? "Ліміт на день:" : locale === "ru" ? "Лимит в день:" : "Daily limit:"}{" "}
+                  <strong className={remainingLimit.remaining === 0 ? "text-red-400" : "text-emerald-400 font-extrabold"}>
+                    {remainingLimit.remaining}/{remainingLimit.limit}
+                  </strong>
+                </span>
+              )}
+            </div>
+          )}
+
           <button
             type="button"
             onClick={() => setAutoPlayVoice(!autoPlayVoice)}
