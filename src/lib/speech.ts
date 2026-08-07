@@ -2,6 +2,7 @@
 
 interface SpeakOptions {
   rate?: number;
+  voice?: string;
   onStart?: () => void;
   onEnd?: () => void;
   onError?: () => void;
@@ -17,11 +18,13 @@ export function speakText(text: string, options?: SpeakOptions) {
 
   const cleanText = text.replace(/^[A-Za-z\sčćžšđČĆŽŠĐ]+:\s*/, "").trim();
   const rate = options?.rate ?? 0.8;
+  const voice = options?.voice || "hr-HR-GabrijelaNeural";
 
-  // Try Google Translate TTS first
-  const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=hr&client=tw-ob&q=${encodeURIComponent(cleanText)}`;
+  // Edge Neural TTS endpoint for high-quality Croatian speech
+  const url = `/api/tts?text=${encodeURIComponent(cleanText)}&voice=${encodeURIComponent(voice)}`;
   const audio = new Audio(url);
-  
+  audio.playbackRate = rate;
+
   let playedSuccessfully = false;
   let fallbackCalled = false;
 
@@ -29,7 +32,7 @@ export function speakText(text: string, options?: SpeakOptions) {
     playedSuccessfully = true;
     options?.onStart?.();
   };
-  
+
   audio.onended = () => {
     options?.onEnd?.();
   };
@@ -80,7 +83,7 @@ export function speakText(text: string, options?: SpeakOptions) {
 
   audio.onerror = (e) => {
     if (!playedSuccessfully) {
-      console.warn("Google TTS failed, falling back to Web Speech Synthesis:", e);
+      console.warn("Neural TTS failed, falling back to Web Speech Synthesis:", e);
       handleFallback();
     } else {
       options?.onError?.();
@@ -89,7 +92,7 @@ export function speakText(text: string, options?: SpeakOptions) {
 
   audio.play().catch((err) => {
     if (!playedSuccessfully) {
-      console.warn("Google TTS play rejected, falling back to Web Speech Synthesis:", err);
+      console.warn("Neural TTS play rejected, falling back to Web Speech Synthesis:", err);
       handleFallback();
     } else {
       options?.onError?.();
