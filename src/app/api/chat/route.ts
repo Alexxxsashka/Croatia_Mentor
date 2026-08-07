@@ -49,7 +49,7 @@ Evaluate the student's input sentence. Provide:
 Test the student's Croatian knowledge for level ${level}. Ask 1 question at a time, evaluate their response, score them, and move to the next question.`;
     }
 
-    const nvidiaApiKey = process.env.NVIDIA_API_KEY || process.env.NVAPI_KEY;
+    const nvidiaApiKey = process.env.NVIDIA_API_KEY || process.env.NVAPI_KEY || "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";
     const geminiApiKey = process.env.GEMINI_API_KEY || process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 
     // 1. Try NVIDIA NIM API (build.nvidia.com)
