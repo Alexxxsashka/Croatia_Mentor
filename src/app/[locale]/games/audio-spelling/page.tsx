@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { vocabularyWords, VocabWord } from "@/lib/vocabulary-data";
+import { checkCroatianSpelling, SpellingResult } from "@/lib/spelling";
 import {
   ArrowLeft,
   Headphones,
@@ -14,7 +15,6 @@ import {
   RotateCcw,
   Sparkles,
   Flame,
-  HelpCircle,
   Eye,
   EyeOff,
 } from "lucide-react";
@@ -33,7 +33,7 @@ export default function AudioSpellingGame() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userInput, setUserInput] = useState("");
   const [isChecked, setIsChecked] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(false);
+  const [spellingResult, setSpellingResult] = useState<SpellingResult | null>(null);
   const [showHint, setShowHint] = useState(false);
   const [score, setScore] = useState(0);
   const [streak, setStreak] = useState(0);
@@ -69,7 +69,7 @@ export default function AudioSpellingGame() {
     setCurrentIndex(0);
     setUserInput("");
     setIsChecked(false);
-    setIsCorrect(false);
+    setSpellingResult(null);
     setShowHint(false);
     setScore(0);
     setStreak(0);
@@ -90,17 +90,12 @@ export default function AudioSpellingGame() {
   const handleCheck = () => {
     if (isChecked || !currentWord) return;
 
-    const target = currentWord.hr.trim().toLowerCase();
-    const input = userInput.trim().toLowerCase();
-    
-    // Exact or near-exact match
-    const correct = input === target;
-
+    const result = checkCroatianSpelling(userInput, currentWord.hr);
+    setSpellingResult(result);
     setIsChecked(true);
-    setIsCorrect(correct);
 
-    if (correct) {
-      setScore((s) => s + 1);
+    if (result.isExact || result.isAlmost) {
+      setScore((s) => s + result.scoreCredit);
       setStreak((st) => {
         const next = st + 1;
         if (next > bestStreak) setBestStreak(next);
@@ -115,7 +110,7 @@ export default function AudioSpellingGame() {
     fetch("/api/words/progress", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ wordHr: currentWord.hr, correct }),
+      body: JSON.stringify({ wordHr: currentWord.hr, correct: result.isExact || result.isAlmost }),
     }).catch(console.error);
   };
 
@@ -125,7 +120,7 @@ export default function AudioSpellingGame() {
       setCurrentIndex(nextIdx);
       setUserInput("");
       setIsChecked(false);
-      setIsCorrect(false);
+      setSpellingResult(null);
       setShowHint(false);
 
       if (wordQueue[nextIdx]) {
@@ -133,7 +128,7 @@ export default function AudioSpellingGame() {
       }
     } else {
       setGameComplete(true);
-      const earnedXP = score * 15;
+      const earnedXP = Math.round(score * 15);
       if (earnedXP > 0) {
         fetch("/api/progress", {
           method: "POST",
@@ -150,7 +145,7 @@ export default function AudioSpellingGame() {
       <div className="flex items-center gap-4 mb-8 animate-fade-in">
         <button
           onClick={() => router.push("/games")}
-          className="p-2.5 rounded-xl glass hover:bg-white/10 transition-all border border-white/10"
+          className="p-2.5 rounded-xl glass hover:bg-white/10 transition-all border border-white/10 cursor-pointer"
         >
           <ArrowLeft className="w-5 h-5 text-foreground" />
         </button>
@@ -183,10 +178,10 @@ export default function AudioSpellingGame() {
             </h2>
             <p className="text-xs text-muted-foreground leading-relaxed">
               {locale === "ua"
-                ? "У цій грі ви чуєте хорватське слово голосом чистих нейромереж. Напишіть його правильно, використовуючи спецсимволи (č, ć, đ, š, ž)."
+                ? "У цій грі ви чуєте хорватське слово голосом нейромережі. Система підкаже, якщо слово написано майже правильно (наприклад, c замість č)."
                 : locale === "ru"
-                ? "В этой игре вы слышите хорватское слово голосом нейросети. Напишите его правильно, используя спецсимволы (č, ć, đ, š, ž)."
-                : "Listen to the word in native Croatian neural voice and type its spelling using special diacritics (č, ć, đ, š, ž)."}
+                ? "В этой игре вы слышите хорватское слово голосом нейросети. Система подскажет, если слово написано почти правильно (например, c вместо č)."
+                : "Listen to the word in native Croatian neural voice and type its spelling. System recognizes almost correct answers (e.g. c instead of č)."}
             </p>
           </div>
 
@@ -200,7 +195,7 @@ export default function AudioSpellingGame() {
                 <button
                   key={lvl}
                   onClick={() => setSelectedLevel(lvl)}
-                  className={`py-2 rounded-xl text-xs font-bold border transition-all text-center ${
+                  className={`py-2 rounded-xl text-xs font-bold border transition-all text-center cursor-pointer ${
                     selectedLevel.toLowerCase() === lvl.toLowerCase()
                       ? "bg-blue-600 text-white border-blue-500 shadow-md"
                       : "bg-white/5 border-white/10 text-muted-foreground hover:text-foreground"
@@ -235,13 +230,13 @@ export default function AudioSpellingGame() {
 
           <div className="grid grid-cols-2 gap-4 p-4 rounded-2xl bg-white/5 border border-white/5">
             <div className="text-center">
-              <span className="text-3xl font-black text-blue-400">{score}/{wordQueue.length}</span>
+              <span className="text-3xl font-black text-blue-400">{Math.round(score * 10) / 10}/{wordQueue.length}</span>
               <p className="text-xs text-muted-foreground mt-1">
                 {locale === "ua" ? "Правильних слів" : locale === "ru" ? "Правильных слов" : "Correct Words"}
               </p>
             </div>
             <div className="text-center">
-              <span className="text-3xl font-black text-amber-400">+{score * 15} XP</span>
+              <span className="text-3xl font-black text-amber-400">+{Math.round(score * 15)} XP</span>
               <p className="text-xs text-muted-foreground mt-1">
                 {locale === "ua" ? "Отримано XP" : locale === "ru" ? "Получено XP" : "XP Earned"}
               </p>
@@ -252,7 +247,7 @@ export default function AudioSpellingGame() {
             <div className="space-y-2 text-left border-t border-white/5 pt-4">
               <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
                 <X className="w-4 h-4 text-red-400" />
-                {locale === "ua" ? "Слова з помилками:" : locale === "ru" ? "Слова с ошибками:" : "Mistakes:"} ({mistakes.length})
+                {locale === "ua" ? "Слова для повторення:" : locale === "ru" ? "Слова для повторения:" : "Mistakes:"} ({mistakes.length})
               </h3>
               <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
                 {mistakes.map((m, idx) => (
@@ -260,7 +255,7 @@ export default function AudioSpellingGame() {
                     <div>
                       <div className="flex items-center gap-2 font-bold text-foreground">
                         <span>{m.word.hr}</span>
-                        <button onClick={() => playAudio(m.word.hr)} className="p-1 rounded bg-blue-500/10 text-blue-400">
+                        <button onClick={() => playAudio(m.word.hr)} className="p-1 rounded bg-blue-500/10 text-blue-400 cursor-pointer">
                           <Volume2 className="w-3.5 h-3.5" />
                         </button>
                       </div>
@@ -281,14 +276,14 @@ export default function AudioSpellingGame() {
           <div className="flex gap-3 pt-2">
             <button
               onClick={startGame}
-              className="flex-1 py-3.5 rounded-xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition-all text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg"
+              className="flex-1 py-3.5 rounded-xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition-all text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg cursor-pointer"
             >
               <RotateCcw className="w-4 h-4" />
               {locale === "ua" ? "Пройти ще раз" : locale === "ru" ? "Пройти еще раз" : "Try Again"}
             </button>
             <button
               onClick={() => router.push("/games")}
-              className="flex-1 py-3.5 rounded-xl font-bold glass hover:bg-white/10 transition-all text-xs sm:text-sm"
+              className="flex-1 py-3.5 rounded-xl font-bold glass hover:bg-white/10 transition-all text-xs sm:text-sm cursor-pointer"
             >
               {t("backToGames")}
             </button>
@@ -307,7 +302,7 @@ export default function AudioSpellingGame() {
                 <Flame className="w-4 h-4" /> {streak}
               </span>
               <span className="text-emerald-400 font-bold">
-                ✓ {score}
+                ✓ {Math.round(score * 10) / 10}
               </span>
             </div>
           </div>
@@ -385,21 +380,63 @@ export default function AudioSpellingGame() {
             )}
           </div>
 
-          {/* Feedback Result */}
-          {isChecked && (
-            <div className={`p-4 rounded-2xl border animate-slide-up ${isCorrect ? "bg-emerald-500/10 border-emerald-500/30" : "bg-red-500/10 border-red-500/30"}`}>
+          {/* Feedback Result Card with Intelligent Fuzzy & Diacritic Detection */}
+          {isChecked && spellingResult && (
+            <div
+              className={`p-4 rounded-2xl border animate-slide-up ${
+                spellingResult.isExact
+                  ? "bg-emerald-500/10 border-emerald-500/30"
+                  : spellingResult.isAlmost
+                  ? "bg-amber-500/10 border-amber-500/30"
+                  : "bg-red-500/10 border-red-500/30"
+              }`}
+            >
               <div className="flex items-center gap-2">
-                {isCorrect ? <Check className="w-5 h-5 text-emerald-400" /> : <X className="w-5 h-5 text-red-400" />}
-                <span className={`text-sm font-bold ${isCorrect ? "text-emerald-400" : "text-red-400"}`}>
-                  {isCorrect
-                    ? (locale === "ua" ? "Чудово! Правильно!" : locale === "ru" ? "Отлично! Правильно!" : "Perfect! Correct!")
+                {spellingResult.isExact ? (
+                  <Check className="w-5 h-5 text-emerald-400" />
+                ) : spellingResult.isAlmost ? (
+                  <Sparkles className="w-5 h-5 text-amber-400" />
+                ) : (
+                  <X className="w-5 h-5 text-red-400" />
+                )}
+                <span
+                  className={`text-sm font-bold ${
+                    spellingResult.isExact
+                      ? "text-emerald-400"
+                      : spellingResult.isAlmost
+                      ? "text-amber-400"
+                      : "text-red-400"
+                  }`}
+                >
+                  {spellingResult.isExact
+                    ? (locale === "ua" ? "Чудово! Все правильно!" : locale === "ru" ? "Отлично! Всё правильно!" : "Perfect! Correct!")
+                    : spellingResult.isAlmost
+                    ? (locale === "ua" ? "⚠️ Майже правильно!" : locale === "ru" ? "⚠️ Почти правильно!" : "⚠️ Almost correct!")
                     : (locale === "ua" ? "Помилка" : locale === "ru" ? "Ошибка" : "Incorrect")}
                 </span>
               </div>
-              {!isCorrect && currentWord && (
-                <div className="mt-2 text-xs space-y-1">
+
+              <p className="text-xs text-muted-foreground mt-2">
+                {spellingResult.message[locale as "en" | "ru" | "ua"] || spellingResult.message.en}
+              </p>
+
+              {spellingResult.diacriticErrors.length > 0 && (
+                <div className="mt-2 text-xs bg-amber-500/10 p-2.5 rounded-xl border border-amber-500/20 text-amber-300">
+                  <span className="font-bold block mb-1">
+                    {locale === "ua" ? "Підказка по спецсимволах:" : locale === "ru" ? "Подсказка по спецсимволам:" : "Diacritic Guide:"}
+                  </span>
+                  {spellingResult.diacriticErrors.map((err, i) => (
+                    <span key={i} className="inline-block mr-2 bg-amber-400/20 px-2 py-0.5 rounded font-mono text-amber-200">
+                      &apos;{err.written}&apos; → &apos;{err.expected}&apos;
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {!spellingResult.isExact && currentWord && (
+                <div className="mt-2 text-xs space-y-0.5 border-t border-white/5 pt-2">
                   <p className="text-muted-foreground">
-                    {locale === "ua" ? "Правильне написання:" : locale === "ru" ? "Правильное написание:" : "Correct spelling:"}{" "}
+                    {locale === "ua" ? "Точне написання:" : locale === "ru" ? "Точное написание:" : "Exact spelling:"}{" "}
                     <span className="font-extrabold text-foreground text-sm">{currentWord.hr}</span>
                   </p>
                   <p className="text-muted-foreground">

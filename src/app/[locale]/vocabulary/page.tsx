@@ -34,6 +34,7 @@ import {
 } from "lucide-react";
 
 import { speakText } from "@/lib/speech";
+import { checkCroatianSpelling, SpellingResult } from "@/lib/spelling";
 
 interface Flashcard {
   id: string;
@@ -238,6 +239,7 @@ export default function VocabularyPortal() {
   const [quizInputText, setQuizInputText] = useState("");
   const [quizInputChecked, setQuizInputChecked] = useState(false);
   const [quizInputCorrect, setQuizInputCorrect] = useState(false);
+  const [quizSpellingResult, setQuizSpellingResult] = useState<SpellingResult | null>(null);
 
   // Mistakes log
   const [quizMistakes, setQuizMistakes] = useState<{ word: VocabWord; userAnswer: string; correctAnswer: string }[]>([]);
@@ -474,6 +476,7 @@ export default function VocabularyPortal() {
     setQuizInputText("");
     setQuizInputChecked(false);
     setQuizInputCorrect(false);
+    setQuizSpellingResult(null);
     setQuizMistakes([]);
     setQuizComplete(false);
     setQuizStarted(true);
@@ -491,11 +494,7 @@ export default function VocabularyPortal() {
     const q = quizQuestions[currentQuizIndex];
     const isCorrect = option.toLowerCase().trim() === q.answer.toLowerCase().trim();
 
-    fetch("/api/words/progress", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ wordHr: q.word.hr, correct: isCorrect }),
-    }).catch(console.error);
+    updateWordStatus(q.word.hr, isCorrect ? "learned" : "learning");
 
     if (isCorrect) {
       setQuizScore((s) => s + 1);
@@ -507,22 +506,19 @@ export default function VocabularyPortal() {
   const handleWrittenQuizCheck = () => {
     if (quizInputChecked) return;
     const q = quizQuestions[currentQuizIndex];
-    const target = q.answer.toLowerCase().trim();
-    const input = quizInputText.toLowerCase().trim();
-    const isCorrect = input === target || levenshteinDistance(input, target) <= 1;
 
+    const result = checkCroatianSpelling(quizInputText, q.answer);
+    setQuizSpellingResult(result);
+
+    const isCorrect = result.isExact || result.isAlmost;
     setQuizInputChecked(true);
     setQuizInputCorrect(isCorrect);
     setQuizAnswered(true);
 
-    fetch("/api/words/progress", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ wordHr: q.word.hr, correct: isCorrect }),
-    }).catch(console.error);
+    updateWordStatus(q.word.hr, isCorrect ? "learned" : "learning");
 
     if (isCorrect) {
-      setQuizScore((s) => s + 1);
+      setQuizScore((s) => s + result.scoreCredit);
     } else {
       setQuizMistakes((prev) => [...prev, { word: q.word, userAnswer: quizInputText || "(blank)", correctAnswer: q.answer }]);
     }
@@ -537,6 +533,7 @@ export default function VocabularyPortal() {
       setQuizInputText("");
       setQuizInputChecked(false);
       setQuizInputCorrect(false);
+      setQuizSpellingResult(null);
 
       if (quizQuestions[nextIdx]?.type === "listening" || quizQuestions[nextIdx]?.type === "audio_spelling") {
         setTimeout(() => speakText(quizQuestions[nextIdx].word.hr), 300);
@@ -1468,15 +1465,61 @@ export default function VocabularyPortal() {
                         )}
 
                         {quizInputChecked && (
-                          <div className={`p-3 rounded-xl border ${quizInputCorrect ? "bg-emerald-500/10 border-emerald-500/30" : "bg-red-500/10 border-red-500/30"}`}>
+                          <div
+                            className={`p-3 rounded-xl border animate-slide-up ${
+                              quizSpellingResult?.isExact
+                                ? "bg-emerald-500/10 border-emerald-500/30"
+                                : quizSpellingResult?.isAlmost
+                                ? "bg-amber-500/10 border-amber-500/30"
+                                : "bg-red-500/10 border-red-500/30"
+                            }`}
+                          >
                             <div className="flex items-center gap-2">
-                              {quizInputCorrect ? <Check className="w-4 h-4 text-emerald-400" /> : <X className="w-4 h-4 text-red-400" />}
-                              <span className={`text-xs font-bold ${quizInputCorrect ? "text-emerald-400" : "text-red-400"}`}>
-                                {quizInputCorrect ? t("correct") : t("incorrect")}
+                              {quizSpellingResult?.isExact ? (
+                                <Check className="w-4 h-4 text-emerald-400" />
+                              ) : quizSpellingResult?.isAlmost ? (
+                                <Sparkles className="w-4 h-4 text-amber-400" />
+                              ) : (
+                                <X className="w-4 h-4 text-red-400" />
+                              )}
+                              <span
+                                className={`text-xs font-bold ${
+                                  quizSpellingResult?.isExact
+                                    ? "text-emerald-400"
+                                    : quizSpellingResult?.isAlmost
+                                    ? "text-amber-400"
+                                    : "text-red-400"
+                                }`}
+                              >
+                                {quizSpellingResult?.isExact
+                                  ? (locale === "ua" ? "Чудово! Все правильно!" : locale === "ru" ? "Отлично! Всё правильно!" : "Perfect!")
+                                  : quizSpellingResult?.isAlmost
+                                  ? (locale === "ua" ? "⚠️ Майже правильно!" : locale === "ru" ? "⚠️ Почти правильно!" : "⚠️ Almost correct!")
+                                  : (locale === "ua" ? "Помилка" : locale === "ru" ? "Ошибка" : "Incorrect")}
                               </span>
                             </div>
-                            {!quizInputCorrect && (
-                              <div className="mt-1 text-xs space-y-0.5">
+
+                            {quizSpellingResult?.message && (
+                              <p className="text-[11px] text-muted-foreground mt-1">
+                                {quizSpellingResult.message[locale as "en" | "ru" | "ua"] || quizSpellingResult.message.en}
+                              </p>
+                            )}
+
+                            {quizSpellingResult?.diacriticErrors && quizSpellingResult.diacriticErrors.length > 0 && (
+                              <div className="mt-1.5 text-[11px] bg-amber-500/10 p-2 rounded-lg border border-amber-500/20 text-amber-300">
+                                <span className="font-bold block mb-0.5">
+                                  {locale === "ua" ? "Зверніть увагу на спецсимволи:" : locale === "ru" ? "Обратите внимание на спецсимволы:" : "Diacritic Warning:"}
+                                </span>
+                                {quizSpellingResult.diacriticErrors.map((err, i) => (
+                                  <span key={i} className="inline-block mr-1.5 bg-amber-400/20 px-1.5 py-0.5 rounded font-mono text-amber-200">
+                                    &apos;{err.written}&apos; → &apos;{err.expected}&apos;
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+
+                            {!quizSpellingResult?.isExact && (
+                              <div className="mt-1.5 text-xs space-y-0.5 border-t border-white/5 pt-1.5">
                                 <p className="text-muted-foreground">
                                   {t("correctAnswer")}: <span className="font-bold text-foreground">{q.answer}</span>
                                 </p>
