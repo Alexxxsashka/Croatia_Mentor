@@ -49,87 +49,96 @@ Evaluate the student's input sentence. Provide:
 Test the student's Croatian knowledge for level ${level}. Ask 1 question at a time, evaluate their response, score them, and move to the next question.`;
     }
 
-    const apiKey = process.env.GEMINI_API_KEY || process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+    const nvidiaApiKey = process.env.NVIDIA_API_KEY || process.env.NVAPI_KEY;
+    const geminiApiKey = process.env.GEMINI_API_KEY || process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 
-    if (!apiKey) {
-      return NextResponse.json({
-        response: `Bok! 🇭🇷 Я ваш ИИ-ментор по хорватскому языку.
+    // 1. Try NVIDIA NIM API (build.nvidia.com)
+    if (nvidiaApiKey) {
+      try {
+        const messages = [
+          { role: "system", content: systemPrompt },
+          ...(history || []).map((m: { role: string; content: string }) => ({
+            role: m.role === "user" ? "user" : "assistant",
+            content: m.content,
+          })),
+          { role: "user", content: message },
+        ];
 
-Для активации ответов нейросети укажите **GEMINI_API_KEY** в файле \`.env\` вашего проекта.
-Вы можете бесплатно получить свой ключ за 30 секунд в [Google AI Studio](https://aistudio.google.com/).`
-      });
-    }
-
-    // Build chat contents array for Gemini REST API
-    const formattedContents: { role: string; parts: { text: string }[] }[] = [];
-
-    if (Array.isArray(history)) {
-      for (const msg of history) {
-        formattedContents.push({
-          role: msg.role === "user" ? "user" : "model",
-          parts: [{ text: msg.content }],
+        const nvidiaRes = await fetch("https://integrate.api.nvidia.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${nvidiaApiKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model: "meta/llama-3.3-70b-instruct",
+            messages,
+            temperature: 0.6,
+            top_p: 0.7,
+            max_tokens: 1024,
+          }),
         });
+
+        if (nvidiaRes.ok) {
+          const nvidiaData = await nvidiaRes.json();
+          const reply = nvidiaData?.choices?.[0]?.message?.content;
+          if (reply) {
+            return NextResponse.json({ response: reply, provider: "nvidia" });
+          }
+        } else {
+          const errText = await nvidiaRes.text();
+          console.error("NVIDIA NIM API Error:", nvidiaRes.status, errText);
+        }
+      } catch (err) {
+        console.error("NVIDIA NIM fetch error:", err);
       }
     }
 
-    // Append latest user message
-    formattedContents.push({
-      role: "user",
-      parts: [{ text: message }],
-    });
+    // 2. Fallback to Gemini REST API
+    if (geminiApiKey) {
+      try {
+        const formattedContents = (history || []).map((m: { role: string; content: string }) => ({
+          role: m.role === "user" ? "user" : "model",
+          parts: [{ text: m.content }],
+        }));
+        formattedContents.push({ role: "user", parts: [{ text: message }] });
 
-    // Call Gemini 1.5 Flash REST API
-    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+        const geminiRes = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiApiKey}`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              system_instruction: { parts: [{ text: systemPrompt }] },
+              contents: formattedContents,
+            }),
+          }
+        );
 
-    const geminiRes = await fetch(geminiUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        system_instruction: {
-          parts: [{ text: systemPrompt }],
-        },
-        contents: formattedContents,
-        generationConfig: {
-          temperature: 0.7,
-          maxOutputTokens: 1000,
-        },
-      }),
-    });
-
-    if (!geminiRes.ok) {
-      const errorText = await geminiRes.text();
-      console.error("Gemini API REST error:", geminiRes.status, errorText);
-
-      // Try fallback to gemini-2.0-flash if 1.5 failed
-      const gemini2Url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-      const gemini2Res = await fetch(gemini2Url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          system_instruction: { parts: [{ text: systemPrompt }] },
-          contents: formattedContents,
-        }),
-      });
-
-      if (gemini2Res.ok) {
-        const data2 = await gemini2Res.json();
-        const text2 = data2?.candidates?.[0]?.content?.parts?.[0]?.text;
-        if (text2) return NextResponse.json({ response: text2 });
+        if (geminiRes.ok) {
+          const gData = await geminiRes.json();
+          const reply = gData?.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (reply) return NextResponse.json({ response: reply, provider: "gemini" });
+        }
+      } catch (err) {
+        console.error("Gemini fallback error:", err);
       }
-
-      return NextResponse.json({
-        response: `⚠️ Ошибка ответа от Gemini API (код ${geminiRes.status}). Проверьте верность GEMINI_API_KEY на https://aistudio.google.com/`
-      });
     }
 
-    const data = await geminiRes.json();
-    const responseText =
-      data?.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "Bok! Kako ti mogu pomoći s hrvatsким jezikom?";
+    // 3. If neither key is configured or both failed, guide user clearly
+    return NextResponse.json({
+      response: `Bok! 🇭🇷 Я ваш ИИ-ментор по хорватскому языку.
 
-    return NextResponse.json({ response: responseText });
+Для активации **NVIDIA NIM API** (build.nvidia.com):
+1. Зарегистрируйтесь на [build.nvidia.com](https://build.nvidia.com/) и создайте API ключ в личном кабинете (вы получите 1000 бесплатных кредитов).
+2. Укажите ключ в файле \`.env\` вашего сервера:
+\`\`\`env
+NVIDIA_API_KEY=nvapi-your-key-here
+\`\`\`
+После этого ИИ-ментор заработает на мощнейшей нейросети **NVIDIA Llama 3.3 70B**!`
+    });
   } catch (error) {
-    console.error("Chat API error:", error);
+    console.error("Chat API root error:", error);
     return NextResponse.json({
       response: "Bok! Произошла временная ошибка сети. Попробуйте еще раз."
     });
