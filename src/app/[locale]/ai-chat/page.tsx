@@ -170,10 +170,12 @@ export default function AIChatPage() {
         }),
       });
 
-      if (!res.ok) throw new Error("Chat failed");
-
       const data = await res.json();
-      const aiReply = data.response;
+      const aiReply = data.response || data.error || (locale === "ua"
+        ? "Вибачте, виникла тимчасова помилка зв'язку з ИИ."
+        : locale === "ru"
+        ? "Извините, произошла временная ошибка связи с ИИ."
+        : "Sorry, temporary AI connection error.");
 
       setMessages([
         ...newMessages,

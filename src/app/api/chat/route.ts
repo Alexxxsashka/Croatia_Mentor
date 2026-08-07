@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { GoogleGenAI } from "@google/genai";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 
@@ -50,45 +49,89 @@ Evaluate the student's input sentence. Provide:
 Test the student's Croatian knowledge for level ${level}. Ask 1 question at a time, evaluate their response, score them, and move to the next question.`;
     }
 
-    const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY || process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+
     if (!apiKey) {
       return NextResponse.json({
-        response: `Bok! Kako si? (Hello! How are you?) I am Croatia Mentor AI. Please configure GEMINI_API_KEY in your environment for live neural AI responses.`
+        response: `Bok! 🇭🇷 Я ваш ИИ-ментор по хорватскому языку.
+
+Для активации ответов нейросети укажите **GEMINI_API_KEY** в файле \`.env\` вашего проекта.
+Вы можете бесплатно получить свой ключ за 30 секунд в [Google AI Studio](https://aistudio.google.com/).`
       });
     }
 
-    const ai = new GoogleGenAI({ apiKey });
-    const chatHistory = (history || []).map(
-      (msg: { role: string; content: string }) => ({
-        role: msg.role === "user" ? "user" : "model",
-        parts: [{ text: msg.content }],
-      })
-    );
+    // Build chat contents array for Gemini REST API
+    const formattedContents: { role: string; parts: { text: string }[] }[] = [];
 
-    const chat = ai.chats.create({
-      model: "gemini-2.0-flash",
-      history: [
-        {
-          role: "user",
-          parts: [{ text: "You are Croatia Mentor. Please follow system instructions." }],
-        },
-        {
-          role: "model",
-          parts: [{ text: systemPrompt }],
-        },
-        ...chatHistory,
-      ],
+    if (Array.isArray(history)) {
+      for (const msg of history) {
+        formattedContents.push({
+          role: msg.role === "user" ? "user" : "model",
+          parts: [{ text: msg.content }],
+        });
+      }
+    }
+
+    // Append latest user message
+    formattedContents.push({
+      role: "user",
+      parts: [{ text: message }],
     });
 
-    const result = await chat.sendMessage({ message });
-    const responseText = result.text || "I couldn't generate a response. Please try again.";
+    // Call Gemini 1.5 Flash REST API
+    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+    const geminiRes = await fetch(geminiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        system_instruction: {
+          parts: [{ text: systemPrompt }],
+        },
+        contents: formattedContents,
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 1000,
+        },
+      }),
+    });
+
+    if (!geminiRes.ok) {
+      const errorText = await geminiRes.text();
+      console.error("Gemini API REST error:", geminiRes.status, errorText);
+
+      // Try fallback to gemini-2.0-flash if 1.5 failed
+      const gemini2Url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+      const gemini2Res = await fetch(gemini2Url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          system_instruction: { parts: [{ text: systemPrompt }] },
+          contents: formattedContents,
+        }),
+      });
+
+      if (gemini2Res.ok) {
+        const data2 = await gemini2Res.json();
+        const text2 = data2?.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (text2) return NextResponse.json({ response: text2 });
+      }
+
+      return NextResponse.json({
+        response: `⚠️ Ошибка ответа от Gemini API (код ${geminiRes.status}). Проверьте верность GEMINI_API_KEY на https://aistudio.google.com/`
+      });
+    }
+
+    const data = await geminiRes.json();
+    const responseText =
+      data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "Bok! Kako ti mogu pomoći s hrvatsким jezikom?";
 
     return NextResponse.json({ response: responseText });
   } catch (error) {
     console.error("Chat API error:", error);
-    return NextResponse.json(
-      { error: "Failed to generate response" },
-      { status: 500 }
-    );
+    return NextResponse.json({
+      response: "Bok! Произошла временная ошибка сети. Попробуйте еще раз."
+    });
   }
 }
