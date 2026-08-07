@@ -74,6 +74,14 @@ export default function GamesPage() {
       gradient: "from-indigo-500 to-purple-400",
       cta: t("listening.play"),
     },
+    {
+      id: "audio-spelling",
+      title: "Аудіо-диктант слів",
+      description: "Слухайте вимову слів нейромережевим голосом та пишіть їх хорватською мовою без візуальних підказок.",
+      icon: Headphones,
+      gradient: "from-blue-600 to-indigo-500",
+      cta: "Грати в диктант",
+    },
   ];
 
   return (

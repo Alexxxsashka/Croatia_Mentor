@@ -218,7 +218,7 @@ export default function VocabularyPortal() {
   // Configurable Quiz states
   const [quizStarted, setQuizStarted] = useState(false);
   const [quizCount, setQuizCount] = useState<number>(10);
-  const [quizMode, setQuizMode] = useState<"mc" | "written" | "listening" | "mixed">("mc");
+  const [quizMode, setQuizMode] = useState<"mc" | "written" | "listening" | "audio_spelling" | "mixed">("mc");
   const [quizDirection, setQuizDirection] = useState<"hr_to_native" | "native_to_hr" | "mixed">("hr_to_native");
   
   const [quizQuestions, setQuizQuestions] = useState<{
@@ -226,7 +226,7 @@ export default function VocabularyPortal() {
     options: string[];
     answer: string;
     prompt: string;
-    type: "mc" | "written" | "listening";
+    type: "mc" | "written" | "listening" | "audio_spelling";
   }[]>([]);
   const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
   const [quizScore, setQuizScore] = useState(0);
@@ -428,14 +428,19 @@ export default function VocabularyPortal() {
       }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const qType: "mc" | "written" | "listening" = quizMode === "mixed"
+      const qType: "mc" | "written" | "listening" | "audio_spelling" = quizMode === "mixed"
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ? (["mc", "written", "listening"][Math.floor(Math.random() * 3)] as any)
+        ? (["mc", "written", "listening", "audio_spelling"][Math.floor(Math.random() * 4)] as any)
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         : (quizMode as any);
 
-      const prompt = isHrToNative ? word.hr : getTranslation(word);
-      const answer = isHrToNative ? getTranslation(word) : word.hr;
+      const prompt = qType === "audio_spelling"
+        ? word.hr
+        : (isHrToNative ? word.hr : getTranslation(word));
+
+      const answer = (qType === "audio_spelling" || !isHrToNative)
+        ? word.hr
+        : getTranslation(word);
 
       let options: string[] = [];
       if (qType === "mc" || qType === "listening") {
@@ -473,7 +478,7 @@ export default function VocabularyPortal() {
     setQuizComplete(false);
     setQuizStarted(true);
 
-    if (questions[0]?.type === "listening") {
+    if (questions[0]?.type === "listening" || questions[0]?.type === "audio_spelling") {
       setTimeout(() => speakText(questions[0].word.hr), 300);
     }
   };
@@ -533,7 +538,7 @@ export default function VocabularyPortal() {
       setQuizInputChecked(false);
       setQuizInputCorrect(false);
 
-      if (quizQuestions[nextIdx]?.type === "listening") {
+      if (quizQuestions[nextIdx]?.type === "listening" || quizQuestions[nextIdx]?.type === "audio_spelling") {
         setTimeout(() => speakText(quizQuestions[nextIdx].word.hr), 300);
       }
     } else {
@@ -1247,6 +1252,7 @@ export default function VocabularyPortal() {
                       { key: "mc", label: t("modeMultipleChoice") },
                       { key: "written", label: t("modeWritten") },
                       { key: "listening", label: t("modeListening") },
+                      { key: "audio_spelling", label: locale === "ua" ? "🎧 Аудіо-диктант (На слух)" : locale === "ru" ? "🎧 Аудио-диктант (На слух)" : "🎧 Audio Dictation (Spelling)" },
                       { key: "mixed", label: t("modeMixed") },
                     ].map(({ key, label }) => (
                       <button
@@ -1389,7 +1395,24 @@ export default function VocabularyPortal() {
                 return (
                   <div className="space-y-6">
                     <div className="text-center py-4">
-                      {q.type === "listening" ? (
+                      {q.type === "audio_spelling" ? (
+                        <div className="flex flex-col items-center gap-3">
+                          <button
+                            type="button"
+                            onClick={() => speakWord(q.word.hr)}
+                            className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 border border-blue-400 text-white flex items-center justify-center hover:scale-105 transition-all shadow-xl shadow-blue-500/30 cursor-pointer"
+                          >
+                            <Volume2 className="w-10 h-10 animate-pulse" />
+                          </button>
+                          <p className="text-xs text-blue-400 font-bold uppercase tracking-wider">
+                            🔊 {locale === "ua" ? "Натисніть для повтору аудіо" : locale === "ru" ? "Нажмите для повтора аудио" : "Click to re-listen audio"}
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            💡 {locale === "ua" ? "Підказка (Переклад):" : locale === "ru" ? "Подсказка (Перевод):" : "Hint (Translation):"}{" "}
+                            <span className="font-semibold text-foreground">{getTranslation(q.word)}</span>
+                          </p>
+                        </div>
+                      ) : q.type === "listening" ? (
                         <div className="flex flex-col items-center gap-3">
                           <button
                             onClick={() => speakWord(q.word.hr)}
@@ -1414,8 +1437,8 @@ export default function VocabularyPortal() {
                       )}
                     </div>
 
-                    {/* Question Body: Multiple Choice vs Written Input */}
-                    {q.type === "written" ? (
+                    {/* Question Body: Written / Audio Spelling vs Multiple Choice */}
+                    {q.type === "written" || q.type === "audio_spelling" ? (
                       <div className="space-y-4 max-w-sm mx-auto">
                         <input
                           type="text"
@@ -1423,10 +1446,26 @@ export default function VocabularyPortal() {
                           onChange={(e) => setQuizInputText(e.target.value)}
                           onKeyDown={(e) => { if (e.key === "Enter" && !quizInputChecked) handleWrittenQuizCheck(); }}
                           disabled={quizInputChecked}
-                          placeholder="Type translation..."
+                          placeholder={q.type === "audio_spelling" ? (locale === "ua" ? "Напишіть слово на слух..." : locale === "ru" ? "Напишите слово на слух..." : "Spell Croatian word...") : "Type translation..."}
                           className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-foreground text-center text-lg font-semibold focus:outline-none focus:border-blue-500 disabled:opacity-50"
                           autoFocus
                         />
+
+                        {/* Diacritic Keyboard Buttons */}
+                        {!quizInputChecked && (
+                          <div className="flex flex-wrap justify-center gap-1">
+                            {["č", "ć", "đ", "š", "ž", "Č", "Ć", "Đ", "Š", "Ž"].map((char) => (
+                              <button
+                                key={char}
+                                type="button"
+                                onClick={() => setQuizInputText((prev) => prev + char)}
+                                className="w-7 h-7 rounded bg-white/5 border border-white/10 text-xs font-bold text-foreground hover:bg-blue-500 hover:text-white transition-all"
+                              >
+                                {char}
+                              </button>
+                            ))}
+                          </div>
+                        )}
 
                         {quizInputChecked && (
                           <div className={`p-3 rounded-xl border ${quizInputCorrect ? "bg-emerald-500/10 border-emerald-500/30" : "bg-red-500/10 border-red-500/30"}`}>
@@ -1437,9 +1476,16 @@ export default function VocabularyPortal() {
                               </span>
                             </div>
                             {!quizInputCorrect && (
-                              <p className="text-xs text-muted-foreground mt-1">
-                                {t("correctAnswer")}: <span className="font-bold text-foreground">{q.answer}</span>
-                              </p>
+                              <div className="mt-1 text-xs space-y-0.5">
+                                <p className="text-muted-foreground">
+                                  {t("correctAnswer")}: <span className="font-bold text-foreground">{q.answer}</span>
+                                </p>
+                                {q.type === "audio_spelling" && (
+                                  <p className="text-muted-foreground">
+                                    {locale === "ua" ? "Переклад:" : locale === "ru" ? "Перевод:" : "Translation:"} <span className="font-medium text-blue-400">{getTranslation(q.word)}</span>
+                                  </p>
+                                )}
+                              </div>
                             )}
                           </div>
                         )}
@@ -1449,14 +1495,14 @@ export default function VocabularyPortal() {
                             <button
                               onClick={handleWrittenQuizCheck}
                               disabled={!quizInputText.trim()}
-                              className="px-6 py-2 rounded-xl bg-blue-600 text-white font-bold text-xs disabled:opacity-50 hover:bg-blue-500 transition-all"
+                              className="px-6 py-2 rounded-xl bg-blue-600 text-white font-bold text-xs disabled:opacity-50 hover:bg-blue-500 transition-all cursor-pointer"
                             >
-                              Check
+                              {locale === "ua" ? "Перевірити" : locale === "ru" ? "Проверить" : "Check"}
                             </button>
                           ) : (
                             <button
                               onClick={nextQuizQuestion}
-                              className="px-6 py-2 rounded-xl bg-blue-600 text-white font-bold text-xs hover:bg-blue-500 transition-all"
+                              className="px-6 py-2 rounded-xl bg-blue-600 text-white font-bold text-xs hover:bg-blue-500 transition-all cursor-pointer"
                             >
                               {currentQuizIndex < quizQuestions.length - 1 ? t("nextQuestion") : t("finish")}
                             </button>
