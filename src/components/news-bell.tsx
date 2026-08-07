@@ -151,7 +151,7 @@ export function NewsBell() {
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute right-0 mt-3 w-80 sm:w-96 rounded-2xl glass border border-black/10 dark:border-white/10 shadow-2xl p-4 z-50 animate-scale-up space-y-3">
+        <div className="absolute right-0 mt-3 w-80 sm:w-96 rounded-2xl glass-dropdown border border-black/10 dark:border-white/10 shadow-2xl p-4 z-50 animate-scale-up space-y-3">
           {/* Header */}
           <div className="flex items-center justify-between border-b border-black/5 dark:border-white/10 pb-3">
             <div className="flex items-center gap-2">
@@ -226,7 +226,7 @@ export function NewsBell() {
       {/* Selected News Detail Modal */}
       {selectedNews && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md animate-fade-in">
-          <div className="relative w-full max-w-lg overflow-hidden glass rounded-3xl border border-white/10 shadow-2xl p-6 md:p-8 animate-scale-up space-y-6">
+          <div className="relative w-full max-w-lg overflow-hidden glass-modal rounded-3xl border border-white/10 shadow-2xl p-6 md:p-8 animate-scale-up space-y-6">
             <button
               onClick={() => setSelectedNews(null)}
               className="absolute top-4 right-4 p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all"

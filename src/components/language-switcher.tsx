@@ -50,7 +50,7 @@ export function LanguageSwitcher() {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-44 rounded-xl glass shadow-2xl border border-black/5 dark:border-white/10 overflow-hidden animate-fade-in z-50">
+        <div className="absolute right-0 mt-2 w-44 rounded-xl glass-dropdown shadow-2xl border border-black/5 dark:border-white/10 overflow-hidden animate-fade-in z-50">
           {locales.map((loc) => (
             <button
               key={loc.code}

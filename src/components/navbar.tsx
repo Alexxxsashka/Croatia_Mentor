@@ -209,7 +209,7 @@ export function Navbar() {
 
                 {/* Profile Dropdown Menu */}
                 {profileDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-56 rounded-2xl glass border border-black/10 dark:border-white/10 shadow-2xl p-2 z-50 animate-scale-up space-y-1">
+                  <div className="absolute right-0 mt-2 w-56 rounded-2xl glass-dropdown border border-black/10 dark:border-white/10 shadow-2xl p-2 z-50 animate-scale-up space-y-1">
                     <div className="flex items-center gap-2.5 px-3 py-2.5 border-b border-black/5 dark:border-white/10 mb-1">
                       <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center shrink-0">
                         {renderNavbarAvatar(session.user?.image, session.user?.name?.[0]?.toUpperCase() || "U")}
