@@ -29,6 +29,9 @@ import {
   Search,
   Award,
   Shield,
+  Pencil,
+  Trash2,
+  X,
 } from "lucide-react";
 import { toast } from "sonner";
 import { BBCode } from "@/components/bbcode";
@@ -86,6 +89,7 @@ export default function AdminPage() {
   const [expandedIds, setExpandedIds] = useState<Record<string, boolean>>({});
 
   // Form states
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [version, setVersion] = useState("");
   const [titleEn, setTitleEn] = useState("");
   const [titleRu, setTitleRu] = useState("");
@@ -216,6 +220,46 @@ export default function AdminPage() {
     insertBBCode(lang, `[color=${color}]`, "[/color]", "colored text");
   };
 
+  const startEdit = (item: Changelog) => {
+    setEditingId(item.id);
+    setVersion(item.version);
+    setTitleEn(item.titleEn);
+    setTitleRu(item.titleRu);
+    setTitleUa(item.titleUa);
+    setContentEn(item.contentEn);
+    setContentRu(item.contentRu);
+    setContentUa(item.contentUa);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const cancelEdit = () => {
+    setEditingId(null);
+    setVersion("");
+    setTitleEn("");
+    setTitleRu("");
+    setTitleUa("");
+    setContentEn("");
+    setContentRu("");
+    setContentUa("");
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this news update?")) return;
+    try {
+      const res = await fetch(`/api/admin/changelogs/${id}`, { method: "DELETE" });
+      if (res.ok) {
+        toast.success("News update deleted successfully!");
+        if (editingId === id) cancelEdit();
+        fetchChangelogs();
+      } else {
+        toast.error("Failed to delete news update");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("An error occurred while deleting");
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!version || !titleEn || !titleRu || !titleUa || !contentEn || !contentRu || !contentUa) {
@@ -225,8 +269,11 @@ export default function AdminPage() {
 
     setSubmitting(true);
     try {
-      const res = await fetch("/api/admin/changelogs", {
-        method: "POST",
+      const url = editingId ? `/api/admin/changelogs/${editingId}` : "/api/admin/changelogs";
+      const method = editingId ? "PUT" : "POST";
+
+      const res = await fetch(url, {
+        method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           version,
@@ -240,18 +287,12 @@ export default function AdminPage() {
       });
 
       if (res.ok) {
-        toast.success("News changelog added successfully!");
-        setVersion("");
-        setTitleEn("");
-        setTitleRu("");
-        setTitleUa("");
-        setContentEn("");
-        setContentRu("");
-        setContentUa("");
+        toast.success(editingId ? "News update edited successfully!" : "News changelog added successfully!");
+        cancelEdit();
         fetchChangelogs();
       } else {
         const data = await res.json();
-        toast.error(data.error || "Failed to create changelog");
+        toast.error(data.error || "Failed to save changelog");
       }
     } catch (err) {
       console.error(err);
@@ -425,12 +466,24 @@ export default function AdminPage() {
       {activeTab === "news" ? (
         /* NEWS TAB CONTENT */
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 animate-slide-up">
-          {/* Create Changelog Form */}
+          {/* Create / Edit Changelog Form */}
           <section className="glass rounded-3xl p-6 border border-white/5 space-y-6 h-fit">
-            <h2 className="text-xl font-bold flex items-center gap-2">
-              <Plus className="w-5 h-5 text-blue-400" />
-              Add New Changelog / News
-            </h2>
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-bold flex items-center gap-2">
+                {editingId ? <Pencil className="w-5 h-5 text-amber-400" /> : <Plus className="w-5 h-5 text-blue-400" />}
+                {editingId ? `Edit News Update (${version})` : "Add New Changelog / News"}
+              </h2>
+              {editingId && (
+                <button
+                  type="button"
+                  onClick={cancelEdit}
+                  className="flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground transition-all cursor-pointer"
+                >
+                  <X className="w-3.5 h-3.5" />
+                  Cancel Edit
+                </button>
+              )}
+            </div>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">
@@ -538,13 +591,19 @@ export default function AdminPage() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-2xl font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition-all shadow-lg disabled:opacity-50"
+                className={`w-full flex items-center justify-center gap-2 px-6 py-3 rounded-2xl font-semibold text-white transition-all shadow-lg disabled:opacity-50 cursor-pointer ${
+                  editingId
+                    ? "bg-gradient-to-r from-amber-500 to-orange-600 hover:opacity-90"
+                    : "bg-gradient-to-r from-blue-500 to-purple-600 hover:opacity-90"
+                }`}
               >
                 {submitting ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    Creating...
+                    {editingId ? "Saving..." : "Creating..."}
                   </>
+                ) : editingId ? (
+                  "Save Changes"
                 ) : (
                   "Publish Update"
                 )}
@@ -574,15 +633,31 @@ export default function AdminPage() {
                         <span className="text-xs font-semibold px-2 py-0.5 rounded-md bg-purple-500/20 text-purple-300">
                           {item.version}
                         </span>
-                        <div className="flex items-center gap-3">
-                          <span className="text-xs text-muted-foreground flex items-center gap-1">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs text-muted-foreground flex items-center gap-1 mr-1">
                             <Calendar className="w-3.5 h-3.5" />
                             {new Date(item.createdAt).toLocaleDateString()}
                           </span>
                           <button
                             type="button"
+                            onClick={() => startEdit(item)}
+                            className="p-1.5 rounded-lg bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 transition-colors cursor-pointer"
+                            title="Edit News"
+                          >
+                            <Pencil className="w-3.5 h-3.5" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleDelete(item.id)}
+                            className="p-1.5 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-colors cursor-pointer"
+                            title="Delete News"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                          <button
+                            type="button"
                             onClick={() => toggleExpand(item.id)}
-                            className="flex items-center gap-1 text-xs text-blue-400 hover:text-blue-300 font-medium transition-colors bg-blue-500/10 px-2 py-1 rounded-lg"
+                            className="flex items-center gap-1 text-xs text-blue-400 hover:text-blue-300 font-medium transition-colors bg-blue-500/10 px-2 py-1 rounded-lg cursor-pointer"
                           >
                             {isExpanded ? (
                               <>
