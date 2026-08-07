@@ -29,7 +29,32 @@ export default function ReadingPage() {
   const [currentTranslation, setCurrentTranslation] = useState(0);
   const [translationScore, setTranslationScore] = useState(0);
 
+  const [isPlayingAudio, setIsPlayingAudio] = useState(false);
+  const [audioControl, setAudioControl] = useState<{ stop: () => void } | null>(null);
+
   const text = readingTexts.find((t) => t.id === selectedText);
+
+  const toggleAudio = (fullText: string) => {
+    if (isPlayingAudio && audioControl) {
+      audioControl.stop();
+      setIsPlayingAudio(false);
+      setAudioControl(null);
+    } else {
+      setIsPlayingAudio(true);
+      const ctrl = speakText(fullText, {
+        onStart: () => setIsPlayingAudio(true),
+        onEnd: () => {
+          setIsPlayingAudio(false);
+          setAudioControl(null);
+        },
+        onError: () => {
+          setIsPlayingAudio(false);
+          setAudioControl(null);
+        }
+      });
+      setAudioControl(ctrl);
+    }
+  };
 
   const speakWord = (text: string) => {
     speakText(text);
@@ -175,11 +200,18 @@ export default function ReadingPage() {
                 </div>
               </div>
               <button
-                onClick={() => speakWord(text.text)}
-                className="px-3 py-1.5 rounded-xl bg-blue-500/10 text-blue-400 hover:bg-blue-500 hover:text-white transition-all flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
+                onClick={() => toggleAudio(text.text)}
+                className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 text-xs font-semibold cursor-pointer ${
+                  isPlayingAudio
+                    ? "bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white"
+                    : "bg-blue-500/10 text-blue-400 hover:bg-blue-500 hover:text-white"
+                }`}
               >
-                <Volume2 className="w-4 h-4" />
-                {locale === "ua" ? "Слухати аудіо" : locale === "ru" ? "Слушать аудио" : "Listen Audio"}
+                <Volume2 className={`w-4 h-4 ${isPlayingAudio ? "animate-pulse" : ""}`} />
+                {isPlayingAudio
+                  ? (locale === "ua" ? "Зупинити аудіо" : locale === "ru" ? "Остановить аудио" : "Stop Audio")
+                  : (locale === "ua" ? "Слухати аудіо" : locale === "ru" ? "Слушать аудио" : "Listen Audio")
+                }
               </button>
             </div>
 

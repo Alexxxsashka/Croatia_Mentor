@@ -17,33 +17,80 @@ export function speakText(text: string, options?: SpeakOptions) {
   }
 
   const cleanText = text.replace(/^[A-Za-z\sčćžšđČĆŽŠĐ]+:\s*/, "").trim();
+  if (!cleanText) return { stop: () => {} };
+
   const rate = options?.rate ?? 0.8;
   const voice = options?.voice || "hr-HR-GabrijelaNeural";
 
-  // Edge Neural TTS endpoint for high-quality Croatian speech
-  const url = `/api/tts?text=${encodeURIComponent(cleanText)}&voice=${encodeURIComponent(voice)}`;
-  const audio = new Audio(url);
-  audio.playbackRate = rate;
+  // Split long text into manageable chunks (max ~350 chars each)
+  const chunks: string[] = [];
+  const rawParagraphs = cleanText.split(/\n+/);
 
-  let playedSuccessfully = false;
-  let fallbackCalled = false;
+  for (const paragraph of rawParagraphs) {
+    const trimmed = paragraph.trim();
+    if (!trimmed) continue;
+    
+    if (trimmed.length <= 350) {
+      chunks.push(trimmed);
+    } else {
+      // Split paragraph into sentences
+      const sentences = trimmed.match(/[^.!?]+[.!?]+|\S+/g) || [trimmed];
+      let currentChunk = "";
+      for (const sentence of sentences) {
+        if ((currentChunk + " " + sentence).length <= 350) {
+          currentChunk = (currentChunk + " " + sentence).trim();
+        } else {
+          if (currentChunk) chunks.push(currentChunk);
+          currentChunk = sentence.trim();
+        }
+      }
+      if (currentChunk) chunks.push(currentChunk);
+    }
+  }
 
-  audio.onplay = () => {
-    playedSuccessfully = true;
-    options?.onStart?.();
-  };
+  if (chunks.length === 0) return { stop: () => {} };
 
-  audio.onended = () => {
-    options?.onEnd?.();
-  };
+  let currentAudio: HTMLAudioElement | null = null;
+  let isStopped = false;
+  let hasStarted = false;
 
-  const handleFallback = () => {
-    if (fallbackCalled) return;
-    fallbackCalled = true;
+  const playChunk = (index: number) => {
+    if (isStopped) return;
 
-    if ("speechSynthesis" in window) {
+    if (index >= chunks.length) {
+      options?.onEnd?.();
+      return;
+    }
+
+    const chunkText = chunks[index];
+    const url = `/api/tts?text=${encodeURIComponent(chunkText)}&voice=${encodeURIComponent(voice)}`;
+    const audio = new Audio(url);
+    audio.playbackRate = rate;
+    currentAudio = audio;
+
+    let playedSuccessfully = false;
+
+    audio.onplay = () => {
+      playedSuccessfully = true;
+      if (!hasStarted) {
+        hasStarted = true;
+        options?.onStart?.();
+      }
+    };
+
+    audio.onended = () => {
+      if (!isStopped) {
+        playChunk(index + 1);
+      }
+    };
+
+    const handleWebSpeechFallback = () => {
+      if (!("speechSynthesis" in window) || isStopped) {
+        if (!isStopped) playChunk(index + 1);
+        return;
+      }
       window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(cleanText);
+      const utterance = new SpeechSynthesisUtterance(chunkText);
       utterance.lang = "hr-HR";
       utterance.rate = rate;
 
@@ -51,57 +98,56 @@ export function speakText(text: string, options?: SpeakOptions) {
       let selectedVoice = voices.find(
         (v) => v.lang === "hr-HR" || v.lang.startsWith("hr-")
       );
-      if (!selectedVoice) {
-        selectedVoice = voices.find(
-          (v) =>
-            v.name.toLowerCase().includes("croatian") ||
-            v.name.toLowerCase().includes("hrvatski")
-        );
-      }
-      if (!selectedVoice) {
-        selectedVoice = voices.find(
-          (v) =>
-            v.lang.startsWith("sr") ||
-            v.lang.startsWith("sl") ||
-            v.lang.startsWith("bs")
-        );
-      }
       if (selectedVoice) {
         utterance.voice = selectedVoice;
-        utterance.lang = selectedVoice.lang;
       }
 
-      if (options?.onStart) utterance.onstart = () => options.onStart?.();
-      if (options?.onEnd) utterance.onend = () => options.onEnd?.();
-      if (options?.onError) utterance.onerror = () => options.onError?.();
+      if (!hasStarted) {
+        utterance.onstart = () => {
+          hasStarted = true;
+          options?.onStart?.();
+        };
+      }
+
+      utterance.onend = () => {
+        if (!isStopped) playChunk(index + 1);
+      };
+      utterance.onerror = () => {
+        if (!isStopped) playChunk(index + 1);
+      };
 
       window.speechSynthesis.speak(utterance);
-    } else {
-      options?.onError?.();
-    }
+    };
+
+    audio.onerror = () => {
+      if (!playedSuccessfully) {
+        console.warn("Neural TTS chunk failed, falling back to Web Speech:", chunkText);
+        handleWebSpeechFallback();
+      } else if (!isStopped) {
+        playChunk(index + 1);
+      }
+    };
+
+    audio.play().catch((err) => {
+      if (!playedSuccessfully) {
+        console.warn("Neural TTS play rejected, falling back to Web Speech:", err);
+        handleWebSpeechFallback();
+      } else if (!isStopped) {
+        playChunk(index + 1);
+      }
+    });
   };
 
-  audio.onerror = (e) => {
-    if (!playedSuccessfully) {
-      console.warn("Neural TTS failed, falling back to Web Speech Synthesis:", e);
-      handleFallback();
-    } else {
-      options?.onError?.();
-    }
-  };
-
-  audio.play().catch((err) => {
-    if (!playedSuccessfully) {
-      console.warn("Neural TTS play rejected, falling back to Web Speech Synthesis:", err);
-      handleFallback();
-    } else {
-      options?.onError?.();
-    }
-  });
+  playChunk(0);
 
   return {
     stop: () => {
-      audio.pause();
+      isStopped = true;
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        currentAudio = null;
+      }
       if ("speechSynthesis" in window) {
         window.speechSynthesis.cancel();
       }
