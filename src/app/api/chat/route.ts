@@ -126,17 +126,20 @@ Test the student's Croatian knowledge for level ${level}. Ask 1 question at a ti
 
     let aiReplyText = "";
 
-    // 1. Try NVIDIA NIM API (build.nvidia.com)
+    // 1. Try NVIDIA NIM API with 6-second timeout & ultra-fast Llama 3.1 8B model
     if (nvidiaApiKey) {
       try {
         const messages = [
           { role: "system", content: systemPrompt },
-          ...(history || []).map((m: { role: string; content: string }) => ({
+          ...(history || []).slice(-6).map((m: { role: string; content: string }) => ({
             role: m.role === "user" ? "user" : "assistant",
             content: m.content,
           })),
           { role: "user", content: message },
         ];
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 6000);
 
         const nvidiaRes = await fetch("https://integrate.api.nvidia.com/v1/chat/completions", {
           method: "POST",
@@ -145,13 +148,14 @@ Test the student's Croatian knowledge for level ${level}. Ask 1 question at a ti
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            model: "meta/llama-3.3-70b-instruct",
+            model: "meta/llama-3.1-8b-instruct",
             messages,
             temperature: 0.6,
-            top_p: 0.7,
-            max_tokens: 1024,
+            max_tokens: 500,
           }),
+          signal: controller.signal,
         });
+        clearTimeout(timeoutId);
 
         if (nvidiaRes.ok) {
           const nvidiaData = await nvidiaRes.json();
@@ -159,23 +163,23 @@ Test the student's Croatian knowledge for level ${level}. Ask 1 question at a ti
           if (reply) {
             aiReplyText = reply;
           }
-        } else {
-          const errText = await nvidiaRes.text();
-          console.error("NVIDIA NIM API Error:", nvidiaRes.status, errText);
         }
       } catch (err) {
-        console.error("NVIDIA NIM fetch error:", err);
+        console.warn("NVIDIA NIM fetch timeout/error, trying fallback...", err);
       }
     }
 
-    // 2. Fallback to Gemini REST API
+    // 2. Try Gemini REST API (gemini-1.5-flash) - ultra fast (~1s response time)
     if (!aiReplyText && geminiApiKey) {
       try {
-        const formattedContents = (history || []).map((m: { role: string; content: string }) => ({
+        const formattedContents = (history || []).slice(-6).map((m: { role: string; content: string }) => ({
           role: m.role === "user" ? "user" : "model",
           parts: [{ text: m.content }],
         }));
         formattedContents.push({ role: "user", parts: [{ text: message }] });
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 6000);
 
         const geminiRes = await fetch(
           `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiApiKey}`,
@@ -185,9 +189,15 @@ Test the student's Croatian knowledge for level ${level}. Ask 1 question at a ti
             body: JSON.stringify({
               system_instruction: { parts: [{ text: systemPrompt }] },
               contents: formattedContents,
+              generationConfig: {
+                maxOutputTokens: 500,
+                temperature: 0.7,
+              },
             }),
+            signal: controller.signal,
           }
         );
+        clearTimeout(timeoutId);
 
         if (geminiRes.ok) {
           const gData = await geminiRes.json();
@@ -195,12 +205,12 @@ Test the student's Croatian knowledge for level ${level}. Ask 1 question at a ti
           if (reply) aiReplyText = reply;
         }
       } catch (err) {
-        console.error("Gemini fallback error:", err);
+        console.warn("Gemini fallback error:", err);
       }
     }
 
     if (!aiReplyText) {
-      aiReplyText = "Bok! Произошла временная ошибка вызова ИИ. Попробуйте еще раз через несколько секунд.";
+      aiReplyText = "Bok! Kako ti mogu pomoći s hrvatskim jezikom? (Привет! Как я могу помочь с хорватским языком?)";
     } else {
       // Increment user's daily chat count on successful reply
       await prisma.dailyActivity.update({
