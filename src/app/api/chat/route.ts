@@ -3,8 +3,6 @@ import { GoogleGenAI } from "@google/genai";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
-
 export async function POST(req: Request) {
   try {
     const session = await auth();
@@ -12,7 +10,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { message, history } = await req.json();
+    const { message, history, mode, scenario } = await req.json();
 
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
@@ -27,26 +25,39 @@ export async function POST(req: Request) {
       ru: "Russian",
       ua: "Ukrainian",
     };
+    const targetLangName = langMap[nativeLang] || "English";
 
-    const systemPrompt = `You are "Croatia Mentor", an expert Croatian language tutor and cultural guide. 
+    let systemPrompt = `You are "Croatia Mentor", an expert Croatian language AI tutor and native Croatian speaker.
 
-Your role:
-- Act as a patient, encouraging Croatian language teacher
-- Adjust your Croatian vocabulary and grammar complexity to the student's current CEFR level: ${level}
-- The student's native language is ${langMap[nativeLang] || "English"}. Use this language for explanations, grammar rules, and translations.
-- Always correct mistakes in the student's Croatian, explaining WHY something is wrong
-- Provide the correct form and explain the grammar rule behind it
-- Use Croatian text with translations in parentheses when introducing new words
-- Simulate real-life scenarios in Croatia (ordering at a pekara/restaurant, renting apartments, asking directions, shopping at Dolac market, socializing)
-- Include cultural tips about Croatia (customs, traditions, regional differences between Zagreb, Split, Dubrovnik, etc.)
-- Use emoji occasionally to make conversations more engaging
-- If the student writes in Croatian, respond primarily in Croatian with explanations in their native language
-- If the student asks a question in their native language, explain in their native language but include Croatian examples
-- End each response with a practice suggestion or question to keep the conversation going
-- For level A1-A2: Use very simple sentences, basic vocabulary, present tense
-- For level B1-B2: Introduce more complex grammar, cases, verb aspects
-- For level C1-C2: Use advanced vocabulary, idioms, subjunctive, complex sentence structures`;
+Your core directives:
+- Student Level: ${level} (CEFR). Adjust your Croatian vocabulary and grammar to match.
+- Student Native Language: ${targetLangName}. Use ${targetLangName} for explanations, rule breakdowns, and translations.
+- Always check student's Croatian for typos, wrong cases, or missing diacritics (č, ć, đ, š, ž), explaining WHY gently.
+- Encourage active practice and end responses with a relevant follow-up question in Croatian.`;
 
+    if (mode === "roleplay") {
+      systemPrompt += `\n\nCURRENT SCENARIO: "${scenario || "Pekara / Bakery"}".
+Act as the Croatian interlocutor in this scenario (e.g. baker, landlord, waiter). Stay in character while providing helpful language guidance in parentheses.`;
+    } else if (mode === "pronunciation") {
+      systemPrompt += `\n\nMODE: Speech & Grammar Analysis.
+Evaluate the student's input sentence. Provide:
+1. Grammar & Spelling Score (0-100%)
+2. Diacritic & Pronunciation breakdown (e.g. č vs ć, š, ž, đ)
+3. Corrected natural Croatian phrasing
+4. Explanation in ${targetLangName}`;
+    } else if (mode === "exam") {
+      systemPrompt += `\n\nMODE: Language Examiner.
+Test the student's Croatian knowledge for level ${level}. Ask 1 question at a time, evaluate their response, score them, and move to the next question.`;
+    }
+
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json({
+        response: `Bok! Kako si? (Hello! How are you?) I am Croatia Mentor AI. Please configure GEMINI_API_KEY in your environment for live neural AI responses.`
+      });
+    }
+
+    const ai = new GoogleGenAI({ apiKey });
     const chatHistory = (history || []).map(
       (msg: { role: string; content: string }) => ({
         role: msg.role === "user" ? "user" : "model",
@@ -59,7 +70,7 @@ Your role:
       history: [
         {
           role: "user",
-          parts: [{ text: "You are Croatia Mentor. Please follow the system instructions." }],
+          parts: [{ text: "You are Croatia Mentor. Please follow system instructions." }],
         },
         {
           role: "model",
