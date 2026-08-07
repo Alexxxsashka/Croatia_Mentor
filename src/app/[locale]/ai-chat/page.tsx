@@ -84,58 +84,117 @@ export default function AIChatPage() {
     { key: "shopping", label: t("topics.shopping") },
   ];
 
-  const startListening = () => {
+  const startListening = async () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    if (typeof window === "undefined" || (!("webkitSpeechRecognition" in window) && !("SpeechRecognition" in window))) {
-      toast.error(
-        locale === "ua"
-          ? "Розпізнавання голосу не підтримується цим браузером"
-          : locale === "ru"
-          ? "Распознавание речи не поддерживается этим браузером"
-          : "Speech recognition is not supported in this browser"
-      );
-      return;
+    const SpeechRecognition =
+      typeof window !== "undefined" &&
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition);
+
+    if (SpeechRecognition) {
+      try {
+        const recognition = new SpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = "hr-HR";
+
+        recognition.onstart = () => {
+          setIsListening(true);
+          toast.info(
+            locale === "ua"
+              ? "🎙️ Мікрофон активний! Говоріть хорватською або рідною мовою..."
+              : locale === "ru"
+              ? "🎙️ Микрофон активен! Говорите на хорватском или родном языке..."
+              : "🎙️ Microphone active! Speak in Croatian or native language..."
+          );
+        };
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        recognition.onresult = (event: any) => {
+          let transcript = "";
+          for (let i = 0; i < event.results.length; i++) {
+            transcript += event.results[i][0].transcript;
+          }
+          setInput(transcript);
+        };
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        recognition.onerror = (event: any) => {
+          console.error("Speech recognition error:", event.error);
+          setIsListening(false);
+          if (event.error === "not-allowed" || event.error === "service-not-allowed") {
+            toast.error(
+              locale === "ua"
+                ? "⚠️ Доступ до мікрофону заблоковано! Натисніть значок замочка 🔒 біля адреси сайту та дозвольте мікрофон."
+                : locale === "ru"
+                ? "⚠️ Доступ к микрофону заблокирован! Нажмите значок замочка 🔒 возле адреса сайта и разрешите микрофон."
+                : "⚠️ Microphone blocked! Click the lock icon 🔒 near site URL to allow microphone."
+            );
+          } else if (event.error === "no-speech") {
+            toast.warning(
+              locale === "ua"
+                ? "Мову не виявлено. Говоріть голосніше біля мікрофону."
+                : locale === "ru"
+                ? "Речь не обнаружена. Говорите громче возле микрофона."
+                : "No speech detected. Please speak louder."
+            );
+          }
+        };
+
+        recognition.onend = () => {
+          setIsListening(false);
+        };
+
+        recognitionRef.current = recognition;
+        recognition.start();
+        return;
+      } catch (err) {
+        console.error("SpeechRecognition instantiation failed:", err);
+      }
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
-    recognition.continuous = false;
-    recognition.interimResults = true;
-    recognition.lang = "hr-HR";
+    // Fallback if SpeechRecognition API is unsupported (e.g. Firefox)
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        setIsListening(true);
+        toast.info(
+          locale === "ua"
+            ? "🎙️ Мікрофон увімкнено! Запис голосу розпочато."
+            : locale === "ru"
+            ? "🎙️ Микрофон включен! Запись голоса запущена."
+            : "🎙️ Microphone enabled! Recording started."
+        );
+        
+        const mediaRecorder = new MediaRecorder(stream);
+        recognitionRef.current = {
+          stop: () => {
+            mediaRecorder.stop();
+            stream.getTracks().forEach((track) => track.stop());
+            setIsListening(false);
+          },
+        };
 
-    recognition.onstart = () => {
-      setIsListening(true);
-      toast.info(
-        locale === "ua"
-          ? "🎙️ Говоріть хорватською або рідною мовою..."
-          : locale === "ru"
-          ? "🎙️ Говорите на хорватском или родном языке..."
-          : "🎙️ Speak in Croatian or native language..."
-      );
-    };
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    recognition.onresult = (event: any) => {
-      let transcript = "";
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        transcript += event.results[i][0].transcript;
+        mediaRecorder.start();
+      } catch (err) {
+        console.error("getUserMedia error:", err);
+        toast.error(
+          locale === "ua"
+            ? "⚠️ Доступ до мікрофону заблоковано в браузері."
+            : locale === "ru"
+            ? "⚠️ Доступ к микрофону заблокирован в браузере."
+            : "⚠️ Microphone access blocked in browser."
+        );
       }
-      setInput(transcript);
-    };
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    recognition.onerror = (event: any) => {
-      console.error("Speech recognition error:", event.error);
-      setIsListening(false);
-    };
-
-    recognition.onend = () => {
-      setIsListening(false);
-    };
-
-    recognitionRef.current = recognition;
-    recognition.start();
+    } else {
+      toast.error(
+        locale === "ua"
+          ? "Браузер не підтримує запис голосу"
+          : locale === "ru"
+          ? "Браузер не поддерживает запись голоса"
+          : "Browser does not support voice recording"
+      );
+    }
   };
 
   const stopListening = () => {
