@@ -291,6 +291,21 @@
     "send": "Send",
     "thinking": "Thinking...",
     "suggestedTopics": "Suggested Topics",
+    "clearChat": "Clear Chat",
+    "clearChatSuccess": "Chat cleared!",
+    "scenarioLabel": "Scenario:",
+    "modes": {
+      "tutor": "Chat Tutor",
+      "essay": "Essay Correction",
+      "exam": "Examiner",
+      "roleplay": "Roleplay"
+    },
+    "initialGreetings": {
+      "tutor": "Bok! 🇭🇷 I am your Croatian language AI tutor. Ask me about grammar, vocabulary, or practice chatting with me in Croatian!",
+      "essay": "📝 Essay & Text Correction mode. Send me your Croatian text or paragraph, and I will analyze errors, check diacritics (č/ć/š/ž/đ), and provide a score!",
+      "exam": "🏆 Examiner Mode. I will test your Croatian proficiency step-by-step. I'll ask one question at a time and grade your answers. Ready? Type 'Yes' or 'Da'!",
+      "roleplay": "🎭 Roleplay Mode. Pick a scenario below (Bakery, Restaurant, Renting...) and let's practice real life Croatian conversations!"
+    },
     "topics": {
       "greet": "How to greet someone in Croatian",
       "order": "Order food at a pekara in Zagreb",

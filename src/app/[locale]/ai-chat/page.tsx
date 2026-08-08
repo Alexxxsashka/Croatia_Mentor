@@ -48,10 +48,10 @@ const getInitialMessages = (locale: string): Record<ChatMode, Message[]> => ({
       role: "assistant",
       content:
         locale === "ua"
-          ? "📝 Режим перевірки творів та текстів. Надішли мені свій текст хорватською (сочинение, предложение или фрагмент), и я проведу полный разбор: исправлю ошибки, проверю гачеки (č/ć/š/ž/đ) и дам оценку!"
+          ? "📝 Режим перевірки творів та текстів. Надішли мені свій текст хорватською (твір, речення або фрагмент), і я проведу повний розбір: виправлю помилки, перевірю гачеки (č/ć/š/ž/đ) та дам оцінку!"
           : locale === "ru"
           ? "📝 Режим проверки сочинений и текстов. Отправь мне свой текст на хорватском (сочинение, предложение или фрагмент), и я проведу полный разбор: исправлю ошибки, проверю гачеки (č/ć/š/ž/đ) и дам оценку!"
-          : "📝 Essay & Text Correction mode. Send me your Croatian text or paragraph, and I will analyze errors, correct diacritics, and provide a score!",
+          : "📝 Essay & Text Correction mode. Send me your Croatian text or paragraph, and I will analyze errors, check diacritics (č/ć/š/ž/đ), and provide a score!",
     },
   ],
   exam: [
@@ -59,7 +59,7 @@ const getInitialMessages = (locale: string): Record<ChatMode, Message[]> => ({
       role: "assistant",
       content:
         locale === "ua"
-          ? "🏆 Режим Екзаменатора. Я буду перевіряти твоє знання хорватської мови. Я буду ставити по одному питанню за раз і виставляти оцінки. Готовий почати іспит? Відповідай: Да або Da!"
+          ? "🏆 Режим Екзаменатора. Я буду перевіряти твоє знання хорватської мови. Я ставитиму по одному питанню за раз і виставлятиму оцінки. Готовий почати іспит? Відповідай: Так або Da!"
           : locale === "ru"
           ? "🏆 Режим Экзаменатора. Я буду тестировать твои знания хорватского языка. Я буду задавать по одному вопросу за раз и выставлять баллы. Готов начать экзамен? Ответь: Да или Da!"
           : "🏆 Examiner Mode. I will test your Croatian proficiency step-by-step. I'll ask one question at a time and grade your answers. Ready? Type 'Yes' or 'Da'!",
@@ -125,13 +125,7 @@ export default function AIChatPage() {
       ...prev,
       [chatMode]: initial[chatMode],
     }));
-    toast.success(
-      locale === "ua"
-        ? "Чат очищено!"
-        : locale === "ru"
-        ? "Чат очищен!"
-        : "Chat cleared!"
-    );
+    toast.success(t("clearChatSuccess") || "Chat cleared!");
   };
 
   const scenarios = [
@@ -409,10 +403,10 @@ export default function AIChatPage() {
             type="button"
             onClick={clearCurrentChat}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10 transition-all cursor-pointer"
-            title="Clear Chat History"
+            title={t("clearChat")}
           >
             <RotateCcw className="w-3.5 h-3.5" />
-            {locale === "ua" ? "Очистити чат" : locale === "ru" ? "Очистить чат" : "Clear Chat"}
+            {t("clearChat")}
           </button>
 
           <button
@@ -441,7 +435,7 @@ export default function AIChatPage() {
           }`}
         >
           <MessageSquare className="w-3.5 h-3.5" />
-          {locale === "ua" ? "Чат-репетитор" : locale === "ru" ? "Чат-репетитор" : "Chat Tutor"}
+          {t("modes.tutor")}
         </button>
 
         <button
@@ -453,7 +447,7 @@ export default function AIChatPage() {
           }`}
         >
           <FileText className="w-3.5 h-3.5" />
-          {locale === "ua" ? "Проверка сочинений" : locale === "ru" ? "Проверка сочинений" : "Essay Correction"}
+          {t("modes.essay")}
         </button>
 
         <button
@@ -465,7 +459,7 @@ export default function AIChatPage() {
           }`}
         >
           <GraduationCap className="w-3.5 h-3.5" />
-          {locale === "ua" ? "Экзаменатор" : locale === "ru" ? "Экзаменатор" : "Examiner"}
+          {t("modes.exam")}
         </button>
 
         <button
@@ -477,7 +471,7 @@ export default function AIChatPage() {
           }`}
         >
           <Theater className="w-3.5 h-3.5" />
-          {locale === "ua" ? "Ролевая игра" : locale === "ru" ? "Ролевая игра" : "Roleplay"}
+          {t("modes.roleplay")}
         </button>
       </div>
 
@@ -485,7 +479,7 @@ export default function AIChatPage() {
       {chatMode === "roleplay" && (
         <div className="flex items-center gap-2 mb-3 overflow-x-auto pb-1">
           <span className="text-xs font-bold text-purple-400 shrink-0">
-            {locale === "ua" ? "Сценарій:" : locale === "ru" ? "Сценарий:" : "Scenario:"}
+            {t("scenarioLabel")}
           </span>
           {scenarios.map((s) => (
             <button
