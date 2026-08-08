@@ -112,18 +112,21 @@ export function Navbar() {
   const user = session?.user as any;
   const isAdmin = user?.role === "admin";
 
-  const navLinks: { href: string; label: string; icon: any; disabled?: boolean }[] = session
-    ? [
-        {
-          href: "/dashboard",
-          label: t("dashboard"),
-          icon: LayoutDashboard,
-        },
-        { href: "/lessons", label: t("lessons"), icon: BookOpen },
-        { href: "/vocabulary", label: t("vocabulary"), icon: Languages },
-        { href: "/games", label: t("games"), icon: Gamepad2 },
-      ]
-    : [];
+  const navLinks: { href: string; label: string; icon: any; disabled?: boolean }[] = [
+    ...(session
+      ? [
+          {
+            href: "/dashboard",
+            label: t("dashboard"),
+            icon: LayoutDashboard,
+          },
+        ]
+      : []),
+    { href: "/lessons", label: t("lessons"), icon: BookOpen },
+    { href: "/vocabulary", label: t("vocabulary"), icon: Languages },
+    { href: "/games", label: t("games"), icon: Gamepad2 },
+    { href: "/ai-chat", label: t("aiChat"), icon: MessageCircle },
+  ];
 
   return (
     <nav className="sticky top-0 z-50 glass border-b border-black/5 dark:border-white/10">

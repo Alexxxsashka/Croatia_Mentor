@@ -8,7 +8,7 @@ export async function GET() {
   try {
     const session = await auth();
     if (!session?.user?.id) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ remaining: 15, limit: 15, used: 0, isAdmin: false, isGuest: true });
     }
 
     const today = new Date().toISOString().split("T")[0];
@@ -44,48 +44,55 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const session = await auth();
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
     const { message, history, mode, scenario } = await req.json();
 
-    const user = await prisma.user.findUnique({
-      where: { id: session.user.id },
-      include: { progress: true },
-    });
+    const userId = session?.user?.id;
+    let isAdmin = false;
+    let level = "A1";
+    let nativeLang = "en";
+    let currentChatCount = 0;
+    let dailyActivityId: string | null = null;
 
-    const isAdmin = user?.role === "admin";
-    const today = new Date().toISOString().split("T")[0];
+    if (userId) {
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+        include: { progress: true },
+      });
 
-    // Check daily chat limit for non-admin users
-    const dailyActivity = await prisma.dailyActivity.upsert({
-      where: {
-        userId_date: {
-          userId: session.user.id,
+      isAdmin = user?.role === "admin";
+      level = user?.progress?.currentLevel || "A1";
+      nativeLang = user?.nativeLanguage || "en";
+
+      const today = new Date().toISOString().split("T")[0];
+      const dailyActivity = await prisma.dailyActivity.upsert({
+        where: {
+          userId_date: {
+            userId,
+            date: today,
+          },
+        },
+        update: {},
+        create: {
+          userId,
           date: today,
         },
-      },
-      update: {},
-      create: {
-        userId: session.user.id,
-        date: today,
-      },
-    });
+      });
 
-    const currentChatCount = dailyActivity.chatCount || 0;
+      dailyActivityId = dailyActivity.id;
+      currentChatCount = dailyActivity.chatCount || 0;
 
-    if (!isAdmin && currentChatCount >= DAILY_CHAT_LIMIT) {
-      return NextResponse.json(
-        {
-          response: `🛑 Вы достигли дневного лимита общения с ИИ-ментором (${DAILY_CHAT_LIMIT}/${DAILY_CHAT_LIMIT} сообщений в день). 
+      if (!isAdmin && currentChatCount >= DAILY_CHAT_LIMIT) {
+        return NextResponse.json(
+          {
+            response: `🛑 Вы достигли дневного лимита общения с ИИ-ментором (${DAILY_CHAT_LIMIT}/${DAILY_CHAT_LIMIT} сообщений в день). 
 
 Лимит обновится завтра! Это ограничение введено, чтобы сервис оставался бесплатным и комфортным для всех пользователей без перегрузки API ключа.`,
-          remaining: 0,
-          limitReached: true,
-        },
-        { status: 429 }
-      );
+            remaining: 0,
+            limitReached: true,
+          },
+          { status: 429 }
+        );
+      }
     }
 
     const level = user?.progress?.currentLevel || "A1";
@@ -225,10 +232,10 @@ CURRENT SCENARIO: "${scenario || "Pekara / Bakery"}".
 
     if (!aiReplyText) {
       aiReplyText = "Bok! Kako ti mogu pomoći s hrvatskim jezikom? (Привет! Как я могу помочь с хорватским языком?)";
-    } else {
+    } else if (dailyActivityId) {
       // Increment user's daily chat count on successful reply
       await prisma.dailyActivity.update({
-        where: { id: dailyActivity.id },
+        where: { id: dailyActivityId },
         data: {
           chatCount: { increment: 1 },
         },
