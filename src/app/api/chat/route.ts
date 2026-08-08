@@ -95,9 +95,6 @@ export async function POST(req: Request) {
       }
     }
 
-    const level = user?.progress?.currentLevel || "A1";
-    const nativeLang = user?.nativeLanguage || "en";
-
     const langMap: Record<string, string> = {
       en: "English",
       ru: "Russian",
