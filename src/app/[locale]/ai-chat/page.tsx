@@ -16,6 +16,8 @@ import {
   Theater,
   CheckCircle2,
   GraduationCap,
+  RotateCcw,
+  FileText,
 } from "lucide-react";
 import { speakText } from "@/lib/speech";
 import { toast } from "sonner";
@@ -27,16 +29,66 @@ interface Message {
 
 const DIACRITICS = ["č", "ć", "đ", "š", "ž", "Č", "Ć", "Đ", "Š", "Ž"];
 
+type ChatMode = "conversation" | "essay" | "exam" | "roleplay";
+
+const getInitialMessages = (locale: string): Record<ChatMode, Message[]> => ({
+  conversation: [
+    {
+      role: "assistant",
+      content:
+        locale === "ua"
+          ? "Bok! 🇭🇷 Я твій особистий ІІ-репетитор з хорватської мови. Запитай мене про граматику, нові слова або просто поспілкуйся зі мною хорватською!"
+          : locale === "ru"
+          ? "Bok! 🇭🇷 Я твой личный ИИ-репетитор по хорватскому языку. Спроси меня о грамматике, новых словах или просто попрактикуйся в общении!"
+          : "Bok! 🇭🇷 I am your Croatian language AI tutor. Ask me about grammar, vocabulary, or practice chatting with me in Croatian!",
+    },
+  ],
+  essay: [
+    {
+      role: "assistant",
+      content:
+        locale === "ua"
+          ? "📝 Режим перевірки творів та текстів. Надішли мені свій текст хорватською (сочинение, предложение или фрагмент), и я проведу полный разбор: исправлю ошибки, проверю гачеки (č/ć/š/ž/đ) и дам оценку!"
+          : locale === "ru"
+          ? "📝 Режим проверки сочинений и текстов. Отправь мне свой текст на хорватском (сочинение, предложение или фрагмент), и я проведу полный разбор: исправлю ошибки, проверю гачеки (č/ć/š/ž/đ) и дам оценку!"
+          : "📝 Essay & Text Correction mode. Send me your Croatian text or paragraph, and I will analyze errors, correct diacritics, and provide a score!",
+    },
+  ],
+  exam: [
+    {
+      role: "assistant",
+      content:
+        locale === "ua"
+          ? "🏆 Режим Екзаменатора. Я буду перевіряти твоє знання хорватської мови. Я буду ставити по одному питанню за раз і виставляти оцінки. Готовий почати іспит? Відповідай: Да або Da!"
+          : locale === "ru"
+          ? "🏆 Режим Экзаменатора. Я буду тестировать твои знания хорватского языка. Я буду задавать по одному вопросу за раз и выставлять баллы. Готов начать экзамен? Ответь: Да или Da!"
+          : "🏆 Examiner Mode. I will test your Croatian proficiency step-by-step. I'll ask one question at a time and grade your answers. Ready? Type 'Yes' or 'Da'!",
+    },
+  ],
+  roleplay: [
+    {
+      role: "assistant",
+      content:
+        locale === "ua"
+          ? "🎭 Режим Рольової гри. Обирай сценарій нижче (Пекарня, Ресторан, Оренда житла...) та давай попрактикуємо реальний діалог хорватською!"
+          : locale === "ru"
+          ? "🎭 Режим Ролевой игры. Выбирай сценарий ниже (Пекарня, Ресторан, Аренда жилья...) и давай попрактикуем реальный диалог на хорватском!"
+          : "🎭 Roleplay Mode. Pick a scenario below (Bakery, Restaurant, Renting...) and let's practice real life Croatian conversations!",
+    },
+  ],
+});
+
 export default function AIChatPage() {
   const t = useTranslations("aiChat");
   const locale = useLocale();
 
-  const [messages, setMessages] = useState<Message[]>([
-    { role: "assistant", content: t("systemMessage") },
-  ]);
+  const [chatMode, setChatMode] = useState<ChatMode>("conversation");
+  const [modeMessages, setModeMessages] = useState<Record<ChatMode, Message[]>>(() => getInitialMessages(locale));
+
+  const messages = modeMessages[chatMode];
+
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [chatMode, setChatMode] = useState<"conversation" | "roleplay" | "pronunciation" | "exam">("conversation");
   const [selectedScenario, setSelectedScenario] = useState("Pekara / Bakery");
   const [isListening, setIsListening] = useState(false);
   const [autoPlayVoice, setAutoPlayVoice] = useState(false);
@@ -66,6 +118,21 @@ export default function AIChatPage() {
       })
       .catch(console.error);
   }, []);
+
+  const clearCurrentChat = () => {
+    const initial = getInitialMessages(locale);
+    setModeMessages((prev) => ({
+      ...prev,
+      [chatMode]: initial[chatMode],
+    }));
+    toast.success(
+      locale === "ua"
+        ? "Чат очищено!"
+        : locale === "ru"
+        ? "Чат очищен!"
+        : "Chat cleared!"
+    );
+  };
 
   const scenarios = [
     { id: "Pekara / Bakery", label: locale === "ua" ? "🥐 Пекерня (Pekara)" : locale === "ru" ? "🥐 Пекарня (Pekara)" : "🥐 Bakery (Pekara)" },
@@ -221,8 +288,13 @@ export default function AIChatPage() {
     if (!messageText || loading) return;
 
     const userMessage: Message = { role: "user", content: messageText };
-    const newMessages = [...messages, userMessage];
-    setMessages(newMessages);
+    const currentHistory = modeMessages[chatMode];
+    const newHistory = [...currentHistory, userMessage];
+
+    setModeMessages((prev) => ({
+      ...prev,
+      [chatMode]: newHistory,
+    }));
     setInput("");
     setLoading(true);
 
@@ -234,7 +306,7 @@ export default function AIChatPage() {
           message: messageText,
           mode: chatMode,
           scenario: selectedScenario,
-          history: newMessages.slice(1).map((m) => ({
+          history: newHistory.slice(1).map((m) => ({
             role: m.role,
             content: m.content,
           })),
@@ -243,35 +315,42 @@ export default function AIChatPage() {
 
       const data = await res.json();
       if (typeof data.remaining === "number") {
-        setRemainingLimit((prev) => prev ? { ...prev, remaining: data.remaining } : null);
+        setRemainingLimit((prev) => (prev ? { ...prev, remaining: data.remaining } : null));
       }
 
-      const aiReply = data.response || data.error || (locale === "ua"
-        ? "Вибачте, виникла тимчасова помилка зв'язку з ИИ."
-        : locale === "ru"
-        ? "Извините, произошла временная ошибка связи с ИИ."
-        : "Sorry, temporary AI connection error.");
+      const aiReply =
+        data.response ||
+        data.error ||
+        (locale === "ua"
+          ? "Вибачте, виникла тимчасова помилка зв'язку з ИИ."
+          : locale === "ru"
+          ? "Извините, произошла временная ошибка связи с ИИ."
+          : "Sorry, temporary AI connection error.");
 
-      setMessages([
-        ...newMessages,
-        { role: "assistant", content: aiReply },
-      ]);
+      setModeMessages((prev) => ({
+        ...prev,
+        [chatMode]: [...newHistory, { role: "assistant", content: aiReply }],
+      }));
 
       if (autoPlayVoice) {
         speakText(aiReply);
       }
     } catch {
-      setMessages([
-        ...newMessages,
-        {
-          role: "assistant",
-          content: locale === "ua"
-            ? "Вибачте, виникла помилка підключення. Спробуйте ще раз."
-            : locale === "ru"
-            ? "Извините, произошла ошибка подключения. Попробуйте еще раз."
-            : "Sorry, connection error occurred. Please try again.",
-        },
-      ]);
+      setModeMessages((prev) => ({
+        ...prev,
+        [chatMode]: [
+          ...newHistory,
+          {
+            role: "assistant",
+            content:
+              locale === "ua"
+                ? "Вибачте, виникла помилка підключення. Спробуйте ще раз."
+                : locale === "ru"
+                ? "Извините, произошла ошибка подключения. Попробуйте еще раз."
+                : "Sorry, connection error occurred. Please try again.",
+          },
+        ],
+      }));
     } finally {
       setLoading(false);
       inputRef.current?.focus();
@@ -308,7 +387,7 @@ export default function AIChatPage() {
           </div>
         </div>
 
-        {/* Auto Voice Output Toggle & Daily Limit Counter Badge */}
+        {/* Action Controls & Daily Limit Counter Badge */}
         <div className="flex flex-wrap items-center gap-2 self-end sm:self-auto">
           {remainingLimit && (
             <div className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-white/5 border border-white/10 flex items-center gap-1.5 text-muted-foreground">
@@ -325,6 +404,16 @@ export default function AIChatPage() {
               )}
             </div>
           )}
+
+          <button
+            type="button"
+            onClick={clearCurrentChat}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10 transition-all cursor-pointer"
+            title="Clear Chat History"
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+            {locale === "ua" ? "Очистити чат" : locale === "ru" ? "Очистить чат" : "Clear Chat"}
+          </button>
 
           <button
             type="button"
@@ -352,31 +441,19 @@ export default function AIChatPage() {
           }`}
         >
           <MessageSquare className="w-3.5 h-3.5" />
-          {locale === "ua" ? "Чат-ментор" : locale === "ru" ? "Чат-ментор" : "Chat Mentor"}
+          {locale === "ua" ? "Чат-репетитор" : locale === "ru" ? "Чат-репетитор" : "Chat Tutor"}
         </button>
 
         <button
-          onClick={() => setChatMode("roleplay")}
+          onClick={() => setChatMode("essay")}
           className={`p-2.5 rounded-xl text-xs font-bold border flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-            chatMode === "roleplay"
+            chatMode === "essay"
               ? "bg-purple-600 text-white border-purple-500 shadow-md"
               : "glass border-white/10 text-muted-foreground hover:text-foreground"
           }`}
         >
-          <Theater className="w-3.5 h-3.5" />
-          {locale === "ua" ? "Рольова гра" : locale === "ru" ? "Ролевая игра" : "Roleplay"}
-        </button>
-
-        <button
-          onClick={() => setChatMode("pronunciation")}
-          className={`p-2.5 rounded-xl text-xs font-bold border flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-            chatMode === "pronunciation"
-              ? "bg-purple-600 text-white border-purple-500 shadow-md"
-              : "glass border-white/10 text-muted-foreground hover:text-foreground"
-          }`}
-        >
-          <CheckCircle2 className="w-3.5 h-3.5" />
-          {locale === "ua" ? "Перевірка речення" : locale === "ru" ? "Проверка предложений" : "Check Speech"}
+          <FileText className="w-3.5 h-3.5" />
+          {locale === "ua" ? "Проверка сочинений" : locale === "ru" ? "Проверка сочинений" : "Essay Correction"}
         </button>
 
         <button
@@ -388,7 +465,19 @@ export default function AIChatPage() {
           }`}
         >
           <GraduationCap className="w-3.5 h-3.5" />
-          {locale === "ua" ? "Екзаменатор" : locale === "ru" ? "Экзаменатор" : "Examiner"}
+          {locale === "ua" ? "Экзаменатор" : locale === "ru" ? "Экзаменатор" : "Examiner"}
+        </button>
+
+        <button
+          onClick={() => setChatMode("roleplay")}
+          className={`p-2.5 rounded-xl text-xs font-bold border flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+            chatMode === "roleplay"
+              ? "bg-purple-600 text-white border-purple-500 shadow-md"
+              : "glass border-white/10 text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          <Theater className="w-3.5 h-3.5" />
+          {locale === "ua" ? "Ролевая игра" : locale === "ru" ? "Ролевая игра" : "Roleplay"}
         </button>
       </div>
 

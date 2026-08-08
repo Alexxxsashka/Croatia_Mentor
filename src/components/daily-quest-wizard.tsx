@@ -376,7 +376,7 @@ export function DailyQuestWizard({ onComplete }: DailyQuestWizardProps) {
             onChange={(e) => setSpellingInput(e.target.value)}
             disabled={spellingChecked}
             placeholder="Напишіть слово хорватською..."
-            className="w-full px-4 py-3.5 rounded-xl bg-slate-900 border border-white/10 text-foreground text-center font-bold focus:outline-none focus:border-cyan-500"
+            className="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-slate-100 text-center font-bold focus:outline-none focus:border-cyan-500 shadow-sm"
           />
           {!spellingChecked ? (
             <button

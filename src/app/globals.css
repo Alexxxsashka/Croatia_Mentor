@@ -67,6 +67,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Form control defaults for light and dark themes */
+select, input, textarea {
+  color: inherit;
+}
+
+select option {
+  background-color: #ffffff;
+  color: #0f172a;
+}
+
+.dark select option {
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+
 /* Glass morphism utility */
 .glass {
   background: rgba(255, 255, 255, 0.85);

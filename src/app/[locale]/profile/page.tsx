@@ -368,7 +368,7 @@ export default function ProfilePage() {
             <div className="absolute inset-0 bg-black/40 rounded-3xl opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all duration-300">
               <Camera className="w-6 h-6 text-white animate-pulse" />
             </div>
-            <div className="absolute -bottom-2 -right-2 p-1.5 rounded-xl bg-slate-900 border border-white/10 text-xs font-semibold flex items-center gap-1 text-blue-400 shadow-md">
+            <div className="absolute -bottom-2 -right-2 p-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs font-semibold flex items-center gap-1 text-blue-500 dark:text-blue-400 shadow-md">
               <Award className="w-3.5 h-3.5" />
               {currentLevel}
             </div>
@@ -470,7 +470,7 @@ export default function ProfilePage() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Enter your name"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-foreground focus:outline-none focus:border-blue-500 transition-colors pl-10"
+                    className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-foreground focus:outline-none focus:border-blue-500 transition-colors pl-10"
                     required
                   />
                   <User className="w-4.5 h-4.5 text-muted-foreground absolute left-3.5 top-3" />
@@ -568,13 +568,13 @@ export default function ProfilePage() {
                       <select
                         value={reminderTime}
                         onChange={(e) => setReminderTime(e.target.value)}
-                        className="bg-slate-900 border border-white/10 text-xs rounded-lg px-2 py-1 text-foreground focus:outline-none focus:border-blue-500"
+                        className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs rounded-lg px-2 py-1 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-500 cursor-pointer"
                       >
-                        <option value="08:00">08:00</option>
-                        <option value="09:00">09:00</option>
-                        <option value="12:00">12:00</option>
-                        <option value="18:00">18:00</option>
-                        <option value="21:00">21:00</option>
+                        <option value="08:00" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">08:00</option>
+                        <option value="09:00" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">09:00</option>
+                        <option value="12:00" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">12:00</option>
+                        <option value="18:00" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">18:00</option>
+                        <option value="21:00" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">21:00</option>
                       </select>
                     </div>
                   )}

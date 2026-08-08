@@ -115,13 +115,13 @@ export default function FillBlanksPage() {
               <select
                 value={selectedLevel}
                 onChange={(e) => setSelectedLevel(e.target.value)}
-                className="w-full bg-slate-900 border border-white/10 text-xs font-semibold rounded-xl px-3 py-2 text-foreground focus:outline-none focus:border-purple-500"
+                className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs font-semibold rounded-xl px-3 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-purple-500 cursor-pointer shadow-sm"
               >
-                <option value="all">All Levels</option>
-                <option value="A1">A1 Beginner</option>
-                <option value="A2">A2 Elementary</option>
-                <option value="B1">B1 Intermediate</option>
-                <option value="B2">B2 Upper Int</option>
+                <option value="all" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">All Levels</option>
+                <option value="A1" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">A1 Beginner</option>
+                <option value="A2" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">A2 Elementary</option>
+                <option value="B1" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">B1 Intermediate</option>
+                <option value="B2" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">B2 Upper Int</option>
               </select>
             </div>
             <div>
@@ -129,13 +129,13 @@ export default function FillBlanksPage() {
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full bg-slate-900 border border-white/10 text-xs font-semibold rounded-xl px-3 py-2 text-foreground focus:outline-none focus:border-purple-500"
+                className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs font-semibold rounded-xl px-3 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-purple-500 cursor-pointer shadow-sm"
               >
-                <option value="all">All Grammar</option>
-                <option value="verbs">Verbs & Present</option>
-                <option value="pronouns">Pronouns & Questions</option>
-                <option value="cases">Cases & Declensions</option>
-                <option value="prepositions">Prepositions</option>
+                <option value="all" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">All Grammar</option>
+                <option value="verbs" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">Verbs & Present</option>
+                <option value="pronouns" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">Pronouns & Questions</option>
+                <option value="cases" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">Cases & Declensions</option>
+                <option value="prepositions" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">Prepositions</option>
               </select>
             </div>
           </div>

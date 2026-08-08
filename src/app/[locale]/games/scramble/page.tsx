@@ -199,13 +199,13 @@ export default function ScramblePage() {
               <select
                 value={selectedLevel}
                 onChange={(e) => setSelectedLevel(e.target.value)}
-                className="w-full bg-slate-900 border border-white/10 text-xs font-semibold rounded-xl px-3 py-2 text-foreground focus:outline-none focus:border-emerald-500"
+                className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs font-semibold rounded-xl px-3 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-emerald-500 cursor-pointer shadow-sm"
               >
-                <option value="all">All Levels</option>
-                <option value="A1">A1 Beginner</option>
-                <option value="A2">A2 Elementary</option>
-                <option value="B1">B1 Intermediate</option>
-                <option value="B2">B2 Upper Int</option>
+                <option value="all" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">All Levels</option>
+                <option value="A1" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">A1 Beginner</option>
+                <option value="A2" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">A2 Elementary</option>
+                <option value="B1" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">B1 Intermediate</option>
+                <option value="B2" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">B2 Upper Int</option>
               </select>
             </div>
             <div>
@@ -213,13 +213,13 @@ export default function ScramblePage() {
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full bg-slate-900 border border-white/10 text-xs font-semibold rounded-xl px-3 py-2 text-foreground focus:outline-none focus:border-emerald-500"
+                className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs font-semibold rounded-xl px-3 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-emerald-500 cursor-pointer shadow-sm"
               >
-                <option value="all">All Themes</option>
-                <option value="verbs">Verbs</option>
-                <option value="adjectives">Adjectives</option>
-                <option value="food">Food & Drink</option>
-                <option value="travel">Travel</option>
+                <option value="all" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">All Themes</option>
+                <option value="verbs" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">Verbs</option>
+                <option value="adjectives" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">Adjectives</option>
+                <option value="food" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">Food & Drink</option>
+                <option value="travel" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">Travel</option>
               </select>
             </div>
           </div>

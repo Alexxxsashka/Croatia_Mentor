@@ -751,11 +751,11 @@ export default function VocabularyPortal() {
                   setDeckIndex(0);
                   setIsFlipped(false);
                 }}
-                className="bg-transparent text-xs font-semibold text-foreground border border-white/10 rounded-xl px-2 py-1 focus:outline-none focus:border-blue-500"
+                className="bg-white dark:bg-slate-900 text-xs font-semibold text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-white/10 rounded-xl px-2 py-1 focus:outline-none focus:border-blue-500 cursor-pointer shadow-sm"
               >
-                <option value="all" className="bg-slate-900 text-foreground">{t("allCategories") || "All categories"}</option>
+                <option value="all" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">{t("allCategories") || "All categories"}</option>
                 {vocabularyCategories.map((cat) => (
-                  <option key={cat} value={cat} className="bg-slate-900 text-foreground">
+                  <option key={cat} value={cat} className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">
                     {getCategoryLabel(cat)}
                   </option>
                 ))}
@@ -773,10 +773,10 @@ export default function VocabularyPortal() {
                   setDeckIndex(0);
                   setIsFlipped(false);
                 }}
-                className="bg-transparent text-xs font-semibold text-foreground border border-white/10 rounded-xl px-2 py-1 focus:outline-none focus:border-blue-500"
+                className="bg-white dark:bg-slate-900 text-xs font-semibold text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-white/10 rounded-xl px-2 py-1 focus:outline-none focus:border-blue-500 cursor-pointer shadow-sm"
               >
                 {Object.entries(posLabels).map(([key, labelObj]) => (
-                  <option key={key} value={key} className="bg-slate-900 text-foreground">
+                  <option key={key} value={key} className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">
                     {labelObj[locale as "en" | "ru" | "ua"] || labelObj.en}
                   </option>
                 ))}
