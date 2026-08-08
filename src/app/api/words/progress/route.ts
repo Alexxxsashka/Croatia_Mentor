@@ -40,7 +40,7 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json();
-    const { wordHr, correct, timeTakenMs } = body;
+    const { wordHr, correct, timeTakenMs, status: explicitStatus } = body;
 
     if (!wordHr) {
       return NextResponse.json({ error: "wordHr is required" }, { status: 400 });
@@ -56,13 +56,23 @@ export async function POST(req: Request) {
       },
     });
 
-    const quality = answerToQuality(correct, timeTakenMs);
+    const isExplicit = typeof explicitStatus === "string" && ["learned", "learning", "mastered", "new"].includes(explicitStatus);
+    const isCorrect = isExplicit ? (explicitStatus === "learned" || explicitStatus === "mastered") : !!correct;
+
+    const quality = answerToQuality(isCorrect, timeTakenMs);
     const sm2 = calculateSM2(
       quality,
       existing?.easeFactor ?? 2.5,
       existing?.interval ?? 1,
       existing?.repetitions ?? 0
     );
+
+    const finalStatus = isExplicit ? explicitStatus : sm2.status;
+    const finalNextReview = isExplicit
+      ? (explicitStatus === "learned" || explicitStatus === "mastered"
+          ? new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+          : new Date(Date.now() + 24 * 60 * 60 * 1000))
+      : sm2.nextReview;
 
     const wordProgress = await prisma.wordProgress.upsert({
       where: {
@@ -72,26 +82,26 @@ export async function POST(req: Request) {
         },
       },
       update: {
-        status: sm2.status,
-        correctCount: { increment: correct ? 1 : 0 },
-        wrongCount: { increment: correct ? 0 : 1 },
+        status: finalStatus,
+        correctCount: { increment: isCorrect ? 1 : 0 },
+        wrongCount: { increment: isCorrect ? 0 : 1 },
         lastReviewed: new Date(),
-        nextReview: sm2.nextReview,
+        nextReview: finalNextReview,
         easeFactor: sm2.easeFactor,
         interval: sm2.interval,
-        repetitions: sm2.repetitions,
+        repetitions: isExplicit ? (explicitStatus === "learned" ? 3 : 0) : sm2.repetitions,
       },
       create: {
         userId: session.user.id,
         wordHr,
-        status: sm2.status,
-        correctCount: correct ? 1 : 0,
-        wrongCount: correct ? 0 : 1,
+        status: finalStatus,
+        correctCount: isCorrect ? 1 : 0,
+        wrongCount: isCorrect ? 0 : 1,
         lastReviewed: new Date(),
-        nextReview: sm2.nextReview,
+        nextReview: finalNextReview,
         easeFactor: sm2.easeFactor,
         interval: sm2.interval,
-        repetitions: sm2.repetitions,
+        repetitions: isExplicit ? (explicitStatus === "learned" ? 3 : 0) : sm2.repetitions,
       },
     });
 

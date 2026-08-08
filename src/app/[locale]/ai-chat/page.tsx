@@ -18,6 +18,8 @@ import {
   GraduationCap,
   RotateCcw,
   FileText,
+  Check,
+  BookOpen,
 } from "lucide-react";
 import { speakText } from "@/lib/speech";
 import { toast } from "sonner";
@@ -37,10 +39,10 @@ const getInitialMessages = (locale: string): Record<ChatMode, Message[]> => ({
       role: "assistant",
       content:
         locale === "ua"
-          ? "Bok! 🇭🇷 Я твій особистий ІІ-репетитор з хорватської мови. Запитай мене про граматику, нові слова або просто поспілкуйся зі мною хорватською!"
+          ? "Bok! 🇭🇷 Я твій особистий ІІ-репетитор з хорватської мови. Запитай мене про граматику, нові слова чи дай команду показати список слів зі словника!"
           : locale === "ru"
-          ? "Bok! 🇭🇷 Я твой личный ИИ-репетитор по хорватскому языку. Спроси меня о грамматике, новых словах или просто попрактикуйся в общении!"
-          : "Bok! 🇭🇷 I am your Croatian language AI tutor. Ask me about grammar, vocabulary, or practice chatting with me in Croatian!",
+          ? "Bok! 🇭🇷 Я твой личный ИИ-репетитор по хорватскому языку. Спроси меня о грамматике, попроси список слов из словаря или слова на повторение!"
+          : "Bok! 🇭🇷 I am your Croatian language AI tutor. Ask me about grammar, request a word list from the dictionary, or practice chatting!",
     },
   ],
   essay: [
@@ -95,6 +97,9 @@ export default function AIChatPage() {
   const [speakingIdx, setSpeakingIdx] = useState<number | null>(null);
   const [remainingLimit, setRemainingLimit] = useState<{ remaining: number; limit: number; isAdmin: boolean } | null>(null);
 
+  // Synchronized Word Progress Map
+  const [wordProgressMap, setWordProgressMap] = useState<Record<string, { status: string; nextReview?: string }>>({});
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -117,7 +122,195 @@ export default function AIChatPage() {
         }
       })
       .catch(console.error);
+
+    // Load initial user word progress map from DB
+    fetch("/api/words/progress")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.wordProgress && Array.isArray(data.wordProgress)) {
+          const map: Record<string, { status: string; nextReview?: string }> = {};
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          data.wordProgress.forEach((item: any) => {
+            map[item.wordHr.toLowerCase()] = {
+              status: item.status,
+              nextReview: item.nextReview,
+            };
+          });
+          setWordProgressMap(map);
+        }
+      })
+      .catch((err) => console.error("Failed to fetch word progress map:", err));
   }, []);
+
+  const handleUpdateWordStatus = async (wordHr: string, newStatus: "learned" | "learning") => {
+    const key = wordHr.toLowerCase();
+    setWordProgressMap((prev) => ({
+      ...prev,
+      [key]: { status: newStatus },
+    }));
+
+    if (newStatus === "learned") {
+      toast.success(
+        locale === "ua"
+          ? `Слово "${wordHr}" позначено як вивчене! ✅`
+          : locale === "ru"
+          ? `Слово "${wordHr}" отмечено как выученное! ✅`
+          : `Word "${wordHr}" marked as learned! ✅`
+      );
+    } else {
+      toast.info(
+        locale === "ua"
+          ? `Слово "${wordHr}" додано на повторення! 🔄`
+          : locale === "ru"
+          ? `Слово "${wordHr}" добавлено на повторение! 🔄`
+          : `Word "${wordHr}" added for review! 🔄`
+      );
+    }
+
+    try {
+      await fetch("/api/words/progress", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          wordHr,
+          status: newStatus,
+          correct: newStatus === "learned",
+        }),
+      });
+    } catch (err) {
+      console.error("Failed to update word progress status:", err);
+    }
+  };
+
+  const renderMessageContent = (content: string, isAssistant: boolean) => {
+    if (!isAssistant) {
+      return <div className="whitespace-pre-wrap">{content}</div>;
+    }
+
+    const wordRegex = /\[\[WORD:\s*([^|\]]+)\s*\|\s*([^|\]]+)(?:\s*\|\s*([^|\]]+))?(?:\s*\|\s*([^|\]]+))?\]\]/g;
+    const matches = Array.from(content.matchAll(wordRegex));
+
+    if (matches.length === 0) {
+      return <div className="whitespace-pre-wrap">{content}</div>;
+    }
+
+    const elements: React.ReactNode[] = [];
+    let lastIndex = 0;
+
+    matches.forEach((match, idx) => {
+      const matchIndex = match.index ?? 0;
+      if (matchIndex > lastIndex) {
+        const textBefore = content.substring(lastIndex, matchIndex);
+        elements.push(
+          <div key={`text-${idx}`} className="whitespace-pre-wrap my-1">
+            {textBefore}
+          </div>
+        );
+      }
+
+      const wordHr = match[1]?.trim() || "";
+      const translation = match[2]?.trim() || "";
+      const wordLevel = match[3]?.trim() || "";
+      const wordCategory = match[4]?.trim() || "";
+
+      const key = wordHr.toLowerCase();
+      const currentProg = wordProgressMap[key];
+      const status = currentProg?.status || "new";
+
+      const isLearned = status === "learned" || status === "mastered";
+      const isReview = status === "learning";
+
+      elements.push(
+        <div
+          key={`word-${idx}-${wordHr}`}
+          className="my-2 p-3.5 rounded-2xl glass border border-white/10 bg-white/5 hover:bg-white/10 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md"
+        >
+          <div className="flex-1">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-base font-black text-foreground tracking-wide">{wordHr}</span>
+              <button
+                type="button"
+                onClick={() => speakText(wordHr)}
+                className="p-1 rounded-lg bg-purple-500/20 text-purple-300 hover:bg-purple-500/40 hover:text-white transition-all cursor-pointer"
+                title={locale === "ua" ? "Озвучити слово" : locale === "ru" ? "Озвучить слово" : "Listen word"}
+              >
+                <Volume2 className="w-3.5 h-3.5" />
+              </button>
+              {wordLevel && (
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                  {wordLevel}
+                </span>
+              )}
+              {wordCategory && (
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                  {wordCategory}
+                </span>
+              )}
+
+              {/* Status Badge */}
+              {isLearned ? (
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
+                  <Check className="w-3 h-3" />
+                  {locale === "ua" ? "Вивчено" : locale === "ru" ? "Выучено" : "Learned"}
+                </span>
+              ) : isReview ? (
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center gap-1">
+                  <RotateCcw className="w-3 h-3" />
+                  {locale === "ua" ? "На повторенні" : locale === "ru" ? "На повторении" : "Needs Review"}
+                </span>
+              ) : (
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-500/20 text-slate-300 border border-slate-500/30">
+                  {locale === "ua" ? "Нове" : locale === "ru" ? "Новое" : "New"}
+                </span>
+              )}
+            </div>
+            <p className="text-xs text-muted-foreground mt-1 font-medium">{translation}</p>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
+            <button
+              type="button"
+              onClick={() => handleUpdateWordStatus(wordHr, "learned")}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1 cursor-pointer ${
+                isLearned
+                  ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/30 border border-emerald-500"
+                  : "bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 border border-emerald-500/20"
+              }`}
+            >
+              <Check className="w-3.5 h-3.5" />
+              {locale === "ua" ? "Вивчено" : locale === "ru" ? "Выучено" : "Learned"}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleUpdateWordStatus(wordHr, "learning")}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1 cursor-pointer ${
+                isReview
+                  ? "bg-amber-600 text-white shadow-lg shadow-amber-600/30 border border-amber-500"
+                  : "bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 border border-amber-500/20"
+              }`}
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              {locale === "ua" ? "Повторити" : locale === "ru" ? "Нужно повторить" : "Review"}
+            </button>
+          </div>
+        </div>
+      );
+
+      lastIndex = matchIndex + match[0].length;
+    });
+
+    if (lastIndex < content.length) {
+      elements.push(
+        <div key="text-end" className="whitespace-pre-wrap my-1">
+          {content.substring(lastIndex)}
+        </div>
+      );
+    }
+
+    return <div>{elements}</div>;
+  };
 
   const clearCurrentChat = () => {
     const initial = getInitialMessages(locale);
@@ -137,12 +330,12 @@ export default function AIChatPage() {
   ];
 
   const suggestedTopics = [
-    { key: "greet", label: t("topics.greet") },
-    { key: "order", label: t("topics.order") },
-    { key: "apartment", label: t("topics.apartment") },
-    { key: "directions", label: t("topics.directions") },
-    { key: "introduce", label: t("topics.introduce") },
-    { key: "shopping", label: t("topics.shopping") },
+    { key: "words_a1", label: locale === "ua" ? "📚 Слова A1 з БД" : locale === "ru" ? "📚 Слова A1 из БД" : "📚 A1 DB Words", prompt: locale === "ua" ? "Покажи мені список слів рівня A1 із мого словника БД" : locale === "ru" ? "Покажи мне список слов уровня A1 из моего словаря БД" : "Show me a list of A1 words from my DB dictionary" },
+    { key: "words_review", label: locale === "ua" ? "🔥 Слова на повторення" : locale === "ru" ? "🔥 Слова на повторение" : "🔥 Words for review", prompt: locale === "ua" ? "Дай мені мої слова на повторення зі словника" : locale === "ru" ? "Дай мне мои слова на повторение из словаря" : "Give me my review words from the dictionary" },
+    { key: "words_food", label: locale === "ua" ? "🥐 Тема: Їжа та продукти" : locale === "ru" ? "🥐 Тема: Еда и продукты" : "🥐 Theme: Food", prompt: locale === "ua" ? "Дай мені список слів із БД за темою Їжа (Food)" : locale === "ru" ? "Дай мне список слов из БД по теме Еда (Food)" : "Give me a list of food words from DB" },
+    { key: "greet", label: t("topics.greet"), prompt: t("topics.greet") },
+    { key: "order", label: t("topics.order"), prompt: t("topics.order") },
+    { key: "apartment", label: t("topics.apartment"), prompt: t("topics.apartment") },
   ];
 
   const startListening = async () => {
@@ -527,7 +720,7 @@ export default function AIChatPage() {
                   : "bg-white/5 border border-white/5 text-foreground"
               }`}
             >
-              <div className="whitespace-pre-wrap">{msg.content}</div>
+              {renderMessageContent(msg.content, msg.role === "assistant")}
 
               {/* TTS Audio button on assistant response */}
               {msg.role === "assistant" && (
@@ -577,7 +770,7 @@ export default function AIChatPage() {
             {suggestedTopics.map((topic) => (
               <button
                 key={topic.key}
-                onClick={() => sendMessage(topic.label)}
+                onClick={() => sendMessage(topic.prompt || topic.label)}
                 className="px-3 py-1 rounded-xl text-xs font-medium glass hover:bg-white/10 transition-all cursor-pointer"
               >
                 {topic.label}

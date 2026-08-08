@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
+import { vocabularyWords } from "@/lib/vocabulary-data";
 
 const DAILY_CHAT_LIMIT = 25; // Max 25 AI messages per day per standard user
 
@@ -102,6 +103,62 @@ export async function POST(req: Request) {
     };
     const targetLangName = langMap[nativeLang] || "English";
 
+    // Query DB dictionary words for context
+    let dbWordsContext = "";
+    try {
+      const dbFlashcards = await prisma.flashcard.findMany({
+        take: 100,
+        orderBy: { level: "asc" },
+      });
+
+      const allDictWords = [
+        ...vocabularyWords,
+        ...dbFlashcards.map((f) => ({
+          hr: f.wordHr,
+          en: f.translationEng,
+          ru: f.translationRu,
+          ua: f.translationUa,
+          level: f.level || "A1",
+          category: f.category || "general",
+        })),
+      ];
+
+      let dueWords: string[] = [];
+      if (userId) {
+        const userProgressList = await prisma.wordProgress.findMany({
+          where: { userId },
+          orderBy: { lastReviewed: "desc" },
+        });
+        dueWords = userProgressList
+          .filter((p) => p.status === "learning" || (p.nextReview && new Date(p.nextReview) <= new Date()))
+          .map((p) => p.wordHr.toLowerCase());
+      }
+
+      const msgLower = (message || "").toLowerCase();
+      let candidateWords = allDictWords;
+      if (msgLower.includes("повторит") || msgLower.includes("due") || msgLower.includes("review")) {
+        const filtered = allDictWords.filter((w) => dueWords.includes(w.hr.toLowerCase()));
+        if (filtered.length > 0) candidateWords = filtered;
+      } else if (msgLower.includes("a1")) {
+        candidateWords = allDictWords.filter((w) => w.level.toUpperCase() === "A1");
+      } else if (msgLower.includes("a2")) {
+        candidateWords = allDictWords.filter((w) => w.level.toUpperCase() === "A2");
+      } else if (msgLower.includes("b1")) {
+        candidateWords = allDictWords.filter((w) => w.level.toUpperCase() === "B1");
+      } else if (msgLower.includes("b2")) {
+        candidateWords = allDictWords.filter((w) => w.level.toUpperCase() === "B2");
+      }
+
+      const sample = candidateWords.slice(0, 25);
+      const targetTrans = (w: typeof sample[0]) => (nativeLang === "ru" ? w.ru : nativeLang === "ua" ? w.ua : w.en);
+
+      dbWordsContext = sample
+        .map((w) => `[[WORD: ${w.hr} | ${targetTrans(w)} | ${w.level} | ${w.category}]]`)
+        .join("\n");
+    } catch (e) {
+      console.warn("Error loading DB words for chat:", e);
+    }
+
     // Base Strict Guardrail Directive
     let systemPrompt = `You are "Croatia Mentor", an expert Croatian language AI tutor and native Croatian speaker.
 
@@ -111,7 +168,19 @@ CRITICAL GUARDRAIL RULE:
 
 Student Context:
 - Level: ${level} (CEFR). Tailor your Croatian complexity to level ${level}.
-- Native Language: ${targetLangName}. Write explanations, rule breakdowns, and translations in ${targetLangName}.`;
+- Native Language: ${targetLangName}. Write explanations, rule breakdowns, and translations in ${targetLangName}.
+
+DICTIONARY INTEGRATION INSTRUCTIONS:
+- You are directly integrated with the application's DB Dictionary.
+- Whenever you present, explain, or list Croatian words to the student, ALWAYS format each word item using the exact double-bracket tag format:
+[[WORD: wordHr | translation | level | category]]
+Example:
+[[WORD: kruh | хлеб | A1 | food]]
+[[WORD: mlijeko | молоко | A1 | food]]
+
+- This format creates interactive UI cards allowing the user to click "Выучено" (Learned), "Нужно повторить" (Needs Review), and hear speech audio.
+- Below is a sample of actual words pulled from the DB dictionary to use when recommending words:
+${dbWordsContext}`;
 
     if (mode === "essay" || mode === "pronunciation") {
       systemPrompt += `\n\nMODE: Essay & Text Correction (Проверка сочинений и текстов).
