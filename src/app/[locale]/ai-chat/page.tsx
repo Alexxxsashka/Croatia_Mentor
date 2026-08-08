@@ -39,7 +39,7 @@ const getInitialMessages = (locale: string): Record<ChatMode, Message[]> => ({
       role: "assistant",
       content:
         locale === "ua"
-          ? "Bok! 🇭🇷 Я твій особистий ІІ-репетитор з хорватської мови. Запитай мене про граматику, нові слова чи дай команду показати список слів зі словника!"
+          ? "Bok! 🇭🇷 Я твій особистий ШІ-репетитор з хорватської мови. Запитай мене про граматику, нові слова чи дай команду показати список слів зі словника!"
           : locale === "ru"
           ? "Bok! 🇭🇷 Я твой личный ИИ-репетитор по хорватскому языку. Спроси меня о грамматике, попроси список слов из словаря или слова на повторение!"
           : "Bok! 🇭🇷 I am your Croatian language AI tutor. Ask me about grammar, request a word list from the dictionary, or practice chatting!",
