@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
+import { ensureDefaultChangelogs } from "@/lib/changelog-helper";
 
 export async function GET() {
   try {
@@ -10,6 +11,8 @@ export async function GET() {
     if (!session || user?.role !== "admin") {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
+
+    await ensureDefaultChangelogs();
 
     const changelogs = await prisma.changelog.findMany({
       orderBy: { createdAt: "desc" },
