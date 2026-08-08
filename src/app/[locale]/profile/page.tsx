@@ -26,6 +26,7 @@ import {
   Target,
   Bell,
   Clock,
+  Languages,
 } from "lucide-react";
 import { toast } from "sonner";
 import { lessonsData } from "@/lib/lessons-data";
@@ -52,6 +53,7 @@ interface UserProfileData {
     currentLevel: string;
     totalXP: number;
     currentStreak: number;
+    totalWordsLearned?: number;
     completedLessons: string[];
     testScores: TestScore[] | string;
     lastActivityDate?: string;
@@ -337,6 +339,7 @@ export default function ProfilePage() {
   const streak = profile?.progress?.currentStreak ?? 0;
   const completedLessons = profile?.progress?.completedLessons || [];
   const completedCount = completedLessons.length;
+  const wordsLearned = profile?.progress?.totalWordsLearned ?? 0;
 
   const lessonsInLevel = lessonsData.filter((l) => l.level === currentLevel);
   const totalInLevel = lessonsInLevel.length;
@@ -398,9 +401,9 @@ export default function ProfilePage() {
         </div>
 
         {/* Quick Stats Badges */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-white/5 pt-6">
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 border-t border-white/5 pt-6">
           <div className="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-amber-500/20 text-amber-400">
+            <div className="p-2.5 rounded-xl bg-amber-500/20 text-amber-400 shrink-0">
               <Trophy className="w-5 h-5" />
             </div>
             <div>
@@ -410,7 +413,19 @@ export default function ProfilePage() {
           </div>
 
           <div className="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-orange-500/20 text-orange-400">
+            <div className="p-2.5 rounded-xl bg-emerald-500/20 text-emerald-400 shrink-0">
+              <Languages className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="text-xs text-muted-foreground">
+                {locale === "ua" ? "Вивчено слів" : locale === "ru" ? "Выучено слов" : "Words Learned"}
+              </p>
+              <p className="text-lg font-bold text-foreground">{wordsLearned}</p>
+            </div>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-orange-500/20 text-orange-400 shrink-0">
               <Flame className="w-5 h-5" />
             </div>
             <div>
@@ -420,7 +435,7 @@ export default function ProfilePage() {
           </div>
 
           <div className="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-blue-500/20 text-blue-400">
+            <div className="p-2.5 rounded-xl bg-blue-500/20 text-blue-400 shrink-0">
               <BookOpen className="w-5 h-5" />
             </div>
             <div>
@@ -429,8 +444,8 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          <div className="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-purple-500/20 text-purple-400">
+          <div className="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center gap-3 col-span-2 sm:col-span-1">
+            <div className="p-2.5 rounded-xl bg-purple-500/20 text-purple-400 shrink-0">
               <Sparkles className="w-5 h-5" />
             </div>
             <div>

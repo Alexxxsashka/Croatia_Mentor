@@ -119,7 +119,11 @@ export default function SpeedQuizPage() {
         fetch("/api/progress", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ xp: earnedXP }),
+          body: JSON.stringify({
+            xp: earnedXP,
+            wordsLearned: Math.floor(score / 20),
+            wordsReviewed: questions.length,
+          }),
         }).catch(console.error);
       }
       return;

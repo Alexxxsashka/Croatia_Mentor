@@ -175,7 +175,7 @@ export default function WordMatchPage() {
     fetch("/api/progress", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ xp: earnedXP }),
+      body: JSON.stringify({ xp: earnedXP, wordsLearned: pairCount, wordsReviewed: pairCount }),
     }).catch(console.error);
 
     // Save best time

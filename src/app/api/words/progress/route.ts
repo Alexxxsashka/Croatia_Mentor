@@ -95,6 +95,48 @@ export async function POST(req: Request) {
       },
     });
 
+    const isLearnedNow = sm2.status === "learned" || sm2.status === "mastered" || sm2.status === "learning";
+    const wasLearned = existing?.status === "learned" || existing?.status === "mastered" || existing?.status === "learning";
+    const isNewLearned = isLearnedNow && !wasLearned;
+
+    // Sync to DailyActivity and Progress
+    const today = new Date().toISOString().split("T")[0];
+    await prisma.dailyActivity.upsert({
+      where: {
+        userId_date: {
+          userId: session.user.id,
+          date: today,
+        },
+      },
+      update: {
+        wordsReviewed: { increment: 1 },
+        ...(isNewLearned ? { wordsLearned: { increment: 1 } } : {}),
+      },
+      create: {
+        userId: session.user.id,
+        date: today,
+        wordsReviewed: 1,
+        wordsLearned: isNewLearned ? 1 : 0,
+      },
+    });
+
+    if (isNewLearned) {
+      await prisma.progress.upsert({
+        where: { userId: session.user.id },
+        update: {
+          totalWordsLearned: { increment: 1 },
+          totalWordsReviewed: { increment: 1 },
+          lastActivityDate: new Date(),
+        },
+        create: {
+          userId: session.user.id,
+          totalWordsLearned: 1,
+          totalWordsReviewed: 1,
+          lastActivityDate: new Date(),
+        },
+      });
+    }
+
     return NextResponse.json({ wordProgress });
   } catch (error) {
     console.error("Word progress update error:", error);
