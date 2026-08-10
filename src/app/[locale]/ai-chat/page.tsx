@@ -80,6 +80,16 @@ const getInitialMessages = (locale: string): Record<ChatMode, Message[]> => ({
   ],
 });
 
+interface UserContextSummary {
+  userName: string | null;
+  currentLevel: string;
+  completedLessonsCount: number;
+  nextRecommendedLesson: string | null;
+  dueWordsCount: number;
+  learnedWordsCount: number;
+  weakWordsCount: number;
+}
+
 export default function AIChatPage() {
   const t = useTranslations("aiChat");
   const locale = useLocale();
@@ -96,6 +106,7 @@ export default function AIChatPage() {
   const [autoPlayVoice, setAutoPlayVoice] = useState(false);
   const [speakingIdx, setSpeakingIdx] = useState<number | null>(null);
   const [remainingLimit, setRemainingLimit] = useState<{ remaining: number; limit: number; isAdmin: boolean } | null>(null);
+  const [userContext, setUserContext] = useState<UserContextSummary | null>(null);
 
   // Synchronized Word Progress Map
   const [wordProgressMap, setWordProgressMap] = useState<Record<string, { status: string; nextReview?: string }>>({});
@@ -119,6 +130,9 @@ export default function AIChatPage() {
       .then((data) => {
         if (data && typeof data.remaining === "number") {
           setRemainingLimit({ remaining: data.remaining, limit: data.limit, isAdmin: !!data.isAdmin });
+          if (data.userContext) {
+            setUserContext(data.userContext);
+          }
         }
       })
       .catch(console.error);
@@ -617,6 +631,43 @@ export default function AIChatPage() {
         </div>
       </div>
 
+      {/* Personalized AI Mentor Profile Banner */}
+      {userContext && (
+        <div className="mb-3 p-3 rounded-2xl bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-pink-950/40 border border-purple-500/25 shadow-lg animate-fade-in">
+          <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+            <div className="flex items-center gap-2">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+              </span>
+              <span className="font-bold text-purple-200">
+                {locale === "ua" ? "Персональний ментор для:" : locale === "ru" ? "Персональный ментор для:" : "Personalized Mentor for:"}{" "}
+                <strong className="text-white font-black">{userContext.userName || (locale === "ua" ? "Учень" : locale === "ru" ? "Ученик" : "Student")}</strong> ({userContext.currentLevel})
+              </span>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3 text-muted-foreground font-medium">
+              <span className="flex items-center gap-1">
+                <BookOpen className="w-3.5 h-3.5 text-blue-400" />
+                {locale === "ua" ? "Уроків пройдено:" : locale === "ru" ? "Уроков пройдено:" : "Done:"} <strong className="text-white">{userContext.completedLessonsCount}</strong>
+              </span>
+              {userContext.dueWordsCount > 0 && (
+                <span className="flex items-center gap-1 text-amber-400 font-bold bg-amber-500/10 px-2.5 py-0.5 rounded-lg border border-amber-500/20 shadow-sm">
+                  <RotateCcw className="w-3.5 h-3.5 animate-spin-slow" />
+                  {locale === "ua" ? "До повторення:" : locale === "ru" ? "На повторение:" : "Due SRS:"} <strong>{userContext.dueWordsCount}</strong>
+                </span>
+              )}
+              {userContext.nextRecommendedLesson && (
+                <span className="hidden sm:inline-flex items-center gap-1 text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-lg border border-emerald-500/20">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  {locale === "ua" ? "Далі:" : locale === "ru" ? "Далее:" : "Next:"} <strong className="text-emerald-300 truncate max-w-[160px]">{userContext.nextRecommendedLesson}</strong>
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Mode Selection Tabs */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
         <button
@@ -762,16 +813,50 @@ export default function AIChatPage() {
       {/* Suggested Topics (when conversation just started) */}
       {messages.length <= 2 && (
         <div className="mb-3 animate-slide-up">
-          <p className="text-xs text-muted-foreground mb-1.5 flex items-center gap-1">
-            <Sparkles className="w-3 h-3 text-amber-400" />
-            {t("suggestedTopics")}
+          <p className="text-xs font-semibold text-muted-foreground mb-1.5 flex items-center gap-1">
+            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+            {locale === "ua" ? "Персональні підказки та теми:" : locale === "ru" ? "Персональные подсказки и темы:" : "Personalized Prompts & Topics:"}
           </p>
-          <div className="flex flex-wrap gap-1.5">
+
+          <div className="flex flex-wrap gap-1.5 mb-2">
+            {userContext?.nextRecommendedLesson && (
+              <button
+                type="button"
+                onClick={() => sendMessage(locale === "ua" ? `Що мені вчити далі? Поясни тему "${userContext.nextRecommendedLesson}"!` : locale === "ru" ? `Что мне учить дальше? Объясни тему "${userContext.nextRecommendedLesson}"!` : `What should I learn next? Explain the lesson "${userContext.nextRecommendedLesson}"!`)}
+                className="px-3 py-1.5 rounded-xl text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30 hover:bg-purple-500/30 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+              >
+                <GraduationCap className="w-3.5 h-3.5 text-purple-400" />
+                🎓 {locale === "ua" ? "Що вчити далі?" : locale === "ru" ? "Что учить дальше?" : "What to study next?"}
+              </button>
+            )}
+
+            {userContext && userContext.dueWordsCount > 0 && (
+              <button
+                type="button"
+                onClick={() => sendMessage(locale === "ua" ? `Давай попрактикуємо мої ${userContext.dueWordsCount} слів на повторення! Склади з ними діалог або вправою.` : locale === "ru" ? `Давай попрактикуем мои ${userContext.dueWordsCount} слов на повторение! Составь с ними диалог или упражнение.` : `Let's review my ${userContext.dueWordsCount} due words! Create a dialogue or exercise with them.`)}
+                className="px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 hover:bg-amber-500/30 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+              >
+                <RotateCcw className="w-3.5 h-3.5 text-amber-400" />
+                🔄 {locale === "ua" ? `Повторити слова (${userContext.dueWordsCount})` : locale === "ru" ? `Повторить слова (${userContext.dueWordsCount})` : `Review SRS Words (${userContext.dueWordsCount})`}
+              </button>
+            )}
+
+            {userContext && userContext.completedLessonsCount > 0 && (
+              <button
+                type="button"
+                onClick={() => sendMessage(locale === "ua" ? "Проведи експрес-тест по моїх пройдених уроках!" : locale === "ru" ? "Проведи экспресс-тест по моим пройденным урокам!" : "Give me a quiz on my completed lessons!")}
+                className="px-3 py-1.5 rounded-xl text-xs font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30 hover:bg-blue-500/30 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+              >
+                <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
+                🧪 {locale === "ua" ? "Перевірити пройдене" : locale === "ru" ? "Проверить пройденное" : "Quiz Completed"}
+              </button>
+            )}
+
             {suggestedTopics.map((topic) => (
               <button
                 key={topic.key}
                 onClick={() => sendMessage(topic.prompt || topic.label)}
-                className="px-3 py-1 rounded-xl text-xs font-medium glass hover:bg-white/10 transition-all cursor-pointer"
+                className="px-3 py-1.5 rounded-xl text-xs font-medium glass hover:bg-white/10 transition-all cursor-pointer text-muted-foreground hover:text-foreground"
               >
                 {topic.label}
               </button>

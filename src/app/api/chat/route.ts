@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { vocabularyWords } from "@/lib/vocabulary-data";
+import { getUserLearningContext } from "@/lib/ai-user-context";
 
 const DAILY_CHAT_LIMIT = 25; // Max 25 AI messages per day per standard user
 
@@ -19,8 +20,28 @@ export async function GET() {
     });
 
     const isAdmin = user?.role === "admin";
+    const userContext = await getUserLearningContext(session.user.id);
+
+    const contextSummary = userContext
+      ? {
+          userName: userContext.user.name,
+          currentLevel: userContext.stats.currentLevel,
+          completedLessonsCount: userContext.lessons.completedCount,
+          nextRecommendedLesson: userContext.lessons.nextRecommendedLesson,
+          dueWordsCount: userContext.vocabulary.dueForReview.length,
+          learnedWordsCount: userContext.vocabulary.learnedCount,
+          weakWordsCount: userContext.vocabulary.weakWords.length,
+        }
+      : null;
+
     if (isAdmin) {
-      return NextResponse.json({ remaining: 999, limit: 999, used: 0, isAdmin: true });
+      return NextResponse.json({
+        remaining: 999,
+        limit: 999,
+        used: 0,
+        isAdmin: true,
+        userContext: contextSummary,
+      });
     }
 
     const activity = await prisma.dailyActivity.findUnique({
@@ -35,7 +56,13 @@ export async function GET() {
     const used = activity?.chatCount || 0;
     const remaining = Math.max(0, DAILY_CHAT_LIMIT - used);
 
-    return NextResponse.json({ remaining, limit: DAILY_CHAT_LIMIT, used, isAdmin: false });
+    return NextResponse.json({
+      remaining,
+      limit: DAILY_CHAT_LIMIT,
+      used,
+      isAdmin: false,
+      userContext: contextSummary,
+    });
   } catch (error) {
     console.error("Chat GET error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
@@ -54,6 +81,8 @@ export async function POST(req: Request) {
     let currentChatCount = 0;
     let dailyActivityId: string | null = null;
 
+    // Fetch deep user learning context for individual AI adaptation
+    let userContextString = "";
     if (userId) {
       const user = await prisma.user.findUnique({
         where: { id: userId },
@@ -63,6 +92,11 @@ export async function POST(req: Request) {
       isAdmin = user?.role === "admin";
       level = user?.progress?.currentLevel || "A1";
       nativeLang = user?.nativeLanguage || "en";
+
+      const fullUserContext = await getUserLearningContext(userId);
+      if (fullUserContext) {
+        userContextString = fullUserContext.promptContextString;
+      }
 
       const today = new Date().toISOString().split("T")[0];
       const dailyActivity = await prisma.dailyActivity.upsert({
@@ -103,7 +137,7 @@ export async function POST(req: Request) {
     };
     const targetLangName = langMap[nativeLang] || "English";
 
-    // Query DB dictionary words for context
+    // Query DB dictionary words for context fallback
     let dbWordsContext = "";
     try {
       const dbFlashcards = await prisma.flashcard.findMany({
@@ -174,6 +208,8 @@ CRITICAL ALPHABET & SCRIPT DIRECTIVE (STRICT ENFORCEMENT):
 Student Context:
 - Level: ${level} (CEFR). Tailor your Croatian complexity to level ${level}.
 - Native Language: ${targetLangName}. Write explanations, rule breakdowns, and translations in ${targetLangName}.
+
+${userContextString ? userContextString : ""}
 
 DICTIONARY INTEGRATION INSTRUCTIONS:
 - You are directly integrated with the application's DB Dictionary.
