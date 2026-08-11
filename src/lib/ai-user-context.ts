@@ -159,6 +159,7 @@ INSTRUCTIONS FOR INDIVIDUAL ADAPTATION:
 3. If the student asks what to study next, explicitly recommend: "${nextRecommendedLesson || "level advancement"}".
 4. If practicing conversation or generating exercises, ACTIVELY INVOLVE their due SRS repetition words (${dueForReview.slice(0, 5).map((w) => w.hr).join(", ") || "recent vocabulary"}) to reinforce their memory.
 5. If the student makes mistakes on weak words (${weakWords.map((w) => w.hr).join(", ") || "none"}), give extra grammar guidance in ${targetLangName}.
+6. ABSOLUTE ALPHABET RULE: Provide explanations in ${targetLangName}, but ALL Croatian translations, words, and example sentences MUST be in genuine Croatian (Hrvatski) written strictly in Gaj's Latin alphabet (č, ć, đ, š, ž). NEVER output Cyrillic script for Croatian.
 ===========================================
 `;
 
