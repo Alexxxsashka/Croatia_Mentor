@@ -2,6 +2,51 @@ import { prisma } from "@/lib/prisma";
 
 export async function ensureDefaultChangelogs() {
   try {
+    const existing140 = await prisma.changelog.findUnique({
+      where: { id: "changelog-v1.4.0" },
+    });
+
+    if (!existing140) {
+      await prisma.changelog.upsert({
+        where: { id: "changelog-v1.4.0" },
+        update: {},
+        create: {
+          id: "changelog-v1.4.0",
+          version: "v1.4.0",
+          titleUa: "🤖 Точність ШІ-перекладів та чиста хорватська латинка!",
+          titleRu: "🤖 Точность ИИ-переводов и чистая хорватская латиница!",
+          titleEn: "🤖 Enhanced AI Accuracy & Pure Croatian Latin Script!",
+          contentUa: `[b]Що нового у версії 1.4.0:[/b]
+
+• [b]Чиста хорватська латинка[/b]: Виправлено генерацію хорватських слів та фраз — тепер усі переклади та приклади подаються виключно правильними хорватськими буквами (č, ć, đ, š, ž) без кирилиці.
+• [b]Зрозумілі пояснення[/b]: Усі пояснення граматики та розбори фраз надаються вашою рідною мовою, а самі переклади — точного хорватською.
+• [b]Підвищена точність[/b]: Оптимізовано роботу ШІ-моделей для більш чітких та достовірних відповідей.
+
+❤️ [b]Підтримайте проєкт:[/b]
+1. [b]Поділіться посиланням[/b] на сайт з друзями, знайомими та колегами, які вивчають хорватську мову!
+2. [b]Підтримайте нас донатом[/b] — це допомагає покривати витрати на сервер та ШІ-моделі, щоб платформа залишалася безкоштовною для всіх!`,
+          contentRu: `[b]Что нового в версии 1.4.0:[/b]
+
+• [b]Чистая хорватская латиница[/b]: Исправлена генерация хорватских слов и фраз — теперь все переводы и примеры выводятся исключительно правильными хорватскими буквами (č, ć, đ, š, ž) без кириллицы.
+• [b]Понятные объяснения[/b]: Все объяснения грамматики и разборы фраз даются на вашем родном языке, а сами переводы — точно на хорватском.
+• [b]Повышенная точность[/b]: Оптимизирована работа ИИ-моделей для более четких и достоверных ответов.
+
+❤️ [b]Поддержите проект:[/b]
+1. [b]Поделитесь ссылкой[/b] на сайт с друзьями, знакомыми и коллегами, которые изучают хорватский язык!
+2. [b]Поддержите нас донатом[/b] — это помогает покрывать расходы на сервер и ИИ-модели, чтобы платформа оставалась бесплатной для всех!`,
+          contentEn: `[b]What's new in version 1.4.0:[/b]
+
+• [b]Pure Croatian Latin Script[/b]: Fixed AI generation for Croatian translations — all words and example sentences are now strictly formatted in Gaj's Croatian Latin alphabet (č, ć, đ, š, ž).
+• [b]Native Language Explanations[/b]: Grammar breakdowns and hints are provided in your native language, while translations remain in pure Croatian.
+• [b]Higher Accuracy & Determinism[/b]: Fine-tuned AI generation parameters for clearer and more accurate responses.
+
+❤️ [b]Support the Project:[/b]
+1. [b]Share the website link[/b] with friends, family, and colleagues learning Croatian!
+2. [b]Consider supporting us with a donation[/b] — this helps keep the servers and AI models running for everyone for free!`
+        },
+      });
+    }
+
     const existing = await prisma.changelog.findUnique({
       where: { id: "changelog-v1.3.0" },
     });
