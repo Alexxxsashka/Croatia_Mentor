@@ -83,14 +83,44 @@ export default function LessonDetailPage({
 
   const lesson = lessonsData.find((l) => l.id === id);
 
+  const [shuffledExercises, setShuffledExercises] = useState<any[]>([]);
   const [currentExercise, setCurrentExercise] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [fillAnswer, setFillAnswer] = useState("");
   const [showResult, setShowResult] = useState(false);
+  const [isLastAnswerCorrect, setIsLastAnswerCorrect] = useState<boolean | null>(null);
+  const [hintsLeft, setHintsLeft] = useState<number>(1);
+  const [showCurrentHint, setShowCurrentHint] = useState<boolean>(false);
   const [correctCount, setCorrectCount] = useState(0);
   const [completed, setCompleted] = useState(false);
   const [alreadyCompleted, setAlreadyCompleted] = useState(false);
   const [xpAdded, setXpAdded] = useState(false);
+
+  // Shuffle exercises and options on mount/lesson change
+  useEffect(() => {
+    if (lesson?.content?.exercises) {
+      function shuffleArray<T>(array: T[]): T[] {
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const prepared = lesson.content.exercises.map((ex) => {
+        if (ex.type === "multiple-choice" && ex.options) {
+          return {
+            ...ex,
+            options: shuffleArray(ex.options),
+          };
+        }
+        return { ...ex };
+      });
+
+      setShuffledExercises(shuffleArray(prepared));
+    }
+  }, [id, lesson]);
 
   // Fetch initial progress to see if already completed
   useEffect(() => {
@@ -107,8 +137,6 @@ export default function LessonDetailPage({
       .catch(console.error);
   }, [id]);
 
-
-
   if (!lesson) {
     return (
       <div className="max-w-3xl mx-auto px-4 py-16 text-center">
@@ -123,11 +151,13 @@ export default function LessonDetailPage({
     );
   }
 
-  const exercises = lesson.content.exercises;
+  const exercises = shuffledExercises.length > 0 ? shuffledExercises : lesson.content.exercises;
   const exercise = exercises[currentExercise];
   const totalExercises = exercises.length;
 
   const checkAnswer = () => {
+    if (!exercise) return;
+
     const userAnswer =
       exercise.type === "fill-blank" || exercise.type === "translation" || exercise.type === "dictation"
         ? fillAnswer.trim()
@@ -145,22 +175,25 @@ export default function LessonDetailPage({
     };
 
     const isCorrect = normalize(userAnswer) === normalize(expectedAnswer);
+    setIsLastAnswerCorrect(isCorrect);
 
     if (isCorrect) {
-      setCorrectCount(correctCount + 1);
+      setCorrectCount((prev) => prev + 1);
       toast.success(t("correct") || "Correct! ✓");
     } else {
-      toast.error(`${t("incorrect") || "Incorrect"}: ${expectedAnswer}`);
+      toast.error(t("incorrect") || "Incorrect! ✗");
     }
     setShowResult(true);
   };
 
   const nextExercise = () => {
     if (currentExercise < totalExercises - 1) {
-      setCurrentExercise(currentExercise + 1);
+      setCurrentExercise((prev) => prev + 1);
       setSelectedAnswer(null);
       setFillAnswer("");
       setShowResult(false);
+      setShowCurrentHint(false);
+      setIsLastAnswerCorrect(null);
     } else {
       setCompleted(true);
       if (!xpAdded) {
@@ -231,6 +264,8 @@ export default function LessonDetailPage({
       </div>
     );
   }
+
+  if (!exercise) return null;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
@@ -308,22 +343,53 @@ export default function LessonDetailPage({
 
         <p className="text-lg font-medium mb-6">{getLocalizedText(exercise.question, locale)}</p>
 
+        {/* Hint Section (Max 1 hint per lesson) */}
+        {exercise.hint && (
+          <div className="mb-6">
+            {showCurrentHint ? (
+              <div className="flex items-center gap-2 text-sm text-yellow-400 bg-yellow-500/10 px-4 py-3 rounded-xl border border-yellow-500/20 animate-fade-in">
+                <Lightbulb className="w-4 h-4 shrink-0 text-yellow-400" />
+                <span>{getLocalizedText(exercise.hint, locale)}</span>
+              </div>
+            ) : hintsLeft > 0 ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setShowCurrentHint(true);
+                  setHintsLeft((prev) => prev - 1);
+                }}
+                className="flex items-center gap-2 text-xs font-semibold text-yellow-400 bg-yellow-500/10 hover:bg-yellow-500/20 px-3.5 py-2 rounded-xl border border-yellow-500/20 transition-all"
+              >
+                <Lightbulb className="w-4 h-4" />
+                <span>
+                  {locale === "ua" ? "Використати підказку" : locale === "ru" ? "Использовать подсказку" : "Use hint"} ({hintsLeft}/1)
+                </span>
+              </button>
+            ) : (
+              <div className="flex items-center gap-2 text-xs text-muted-foreground opacity-50 px-3 py-1.5">
+                <Lightbulb className="w-4 h-4" />
+                <span>
+                  {locale === "ua" ? "Підказок більше немає (0/1)" : locale === "ru" ? "Подсказок больше нет (0/1)" : "No hints left (0/1)"}
+                </span>
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Multiple choice */}
         {exercise.type === "multiple-choice" && exercise.options && (
           <div className="grid gap-3">
-            {exercise.options.map((option, i) => {
+            {exercise.options.map((option: string, i: number) => {
               let style = "glass hover:bg-white/10 cursor-pointer";
               if (showResult) {
-                if (option === exercise.correctAnswer) {
-                  style =
-                    "bg-green-500/10 border-green-500/50 text-green-400";
-                } else if (
-                  option === selectedAnswer &&
-                  option !== exercise.correctAnswer
-                ) {
-                  style = "bg-red-500/10 border-red-500/50 text-red-400";
+                if (option === selectedAnswer) {
+                  if (isLastAnswerCorrect) {
+                    style = "bg-green-500/10 border-green-500/50 text-green-400";
+                  } else {
+                    style = "bg-red-500/10 border-red-500/50 text-red-400";
+                  }
                 } else {
-                  style = "opacity-40";
+                  style = "opacity-40 cursor-not-allowed";
                 }
               } else if (option === selectedAnswer) {
                 style = "bg-blue-500/10 border-blue-500/50 text-blue-400";
@@ -341,14 +407,12 @@ export default function LessonDetailPage({
                       {String.fromCharCode(65 + i)}
                     </span>
                     <span>{option}</span>
-                    {showResult && option === exercise.correctAnswer && (
+                    {showResult && option === selectedAnswer && isLastAnswerCorrect && (
                       <CheckCircle2 className="w-5 h-5 ml-auto text-green-400" />
                     )}
-                    {showResult &&
-                      option === selectedAnswer &&
-                      option !== exercise.correctAnswer && (
-                        <XCircle className="w-5 h-5 ml-auto text-red-400" />
-                      )}
+                    {showResult && option === selectedAnswer && !isLastAnswerCorrect && (
+                      <XCircle className="w-5 h-5 ml-auto text-red-400" />
+                    )}
                   </div>
                 </button>
               );
@@ -361,12 +425,6 @@ export default function LessonDetailPage({
           exercise.type === "translation" ||
           exercise.type === "dictation") && (
           <div className="space-y-4">
-            {exercise.hint && (
-              <div className="flex items-center gap-2 text-sm text-yellow-400 bg-yellow-500/10 px-4 py-2 rounded-xl">
-                <Lightbulb className="w-4 h-4" />
-                {getLocalizedText(exercise.hint, locale)}
-              </div>
-            )}
             <input
               type="text"
               value={fillAnswer}
@@ -379,14 +437,19 @@ export default function LessonDetailPage({
               }
             />
             {showResult && (
-              <p className="text-sm">
-                <span className="text-muted-foreground">
-                  {t("correctAnswer")}:{" "}
-                </span>
-                <span className="text-green-400 font-medium">
-                  {getLocalizedText(exercise.correctAnswer, locale)}
-                </span>
-              </p>
+              <div className="flex items-center gap-2 text-sm font-medium">
+                {isLastAnswerCorrect ? (
+                  <span className="text-green-400 flex items-center gap-1.5">
+                    <CheckCircle2 className="w-4 h-4" />
+                    {t("correct") || "Correct! ✓"}
+                  </span>
+                ) : (
+                  <span className="text-red-400 flex items-center gap-1.5">
+                    <XCircle className="w-4 h-4" />
+                    {t("incorrect") || "Incorrect! ✗"}
+                  </span>
+                )}
+              </div>
             )}
           </div>
         )}
@@ -420,3 +483,4 @@ export default function LessonDetailPage({
     </div>
   );
 }
+
