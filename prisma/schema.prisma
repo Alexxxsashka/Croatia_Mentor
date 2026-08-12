@@ -60,18 +60,19 @@ model VerificationToken {
 }
 
 model Progress {
-  id                 String   @id @default(cuid())
-  userId             String   @unique
-  currentLevel       String   @default("A1")
-  totalXP            Int      @default(0)
-  currentStreak      Int      @default(0)
-  longestStreak      Int      @default(0)
-  totalWordsLearned  Int      @default(0)
-  totalWordsReviewed Int      @default(0)
-  lastActivityDate   DateTime @default(now())
-  completedLessons   String[] @default([])
-  testScores         Json     @default("[]")
-  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                 String    @id @default(cuid())
+  userId             String    @unique
+  currentLevel       String    @default("A1")
+  totalXP            Int       @default(0)
+  currentStreak      Int       @default(0)
+  longestStreak      Int       @default(0)
+  totalWordsLearned  Int       @default(0)
+  totalWordsReviewed Int       @default(0)
+  lastActivityDate   DateTime  @default(now())
+  lastLessonCompletedAt DateTime?
+  completedLessons   String[]  @default([])
+  testScores         Json      @default("[]")
+  user               User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model WordProgress {
@@ -93,16 +94,17 @@ model WordProgress {
 }
 
 model DailyActivity {
-  id             String  @id @default(cuid())
-  userId         String
-  date           String  // YYYY-MM-DD
-  wordsLearned   Int     @default(0)
-  wordsReviewed  Int     @default(0)
-  testsCompleted Int     @default(0)
-  xpEarned       Int     @default(0)
-  minutesSpent   Int     @default(0)
-  chatCount      Int     @default(0)
-  completed      Boolean @default(false)
+  id               String  @id @default(cuid())
+  userId           String
+  date             String  // YYYY-MM-DD
+  wordsLearned     Int     @default(0)
+  wordsReviewed    Int     @default(0)
+  lessonsCompleted Int     @default(0)
+  testsCompleted   Int     @default(0)
+  xpEarned         Int     @default(0)
+  minutesSpent     Int     @default(0)
+  chatCount        Int     @default(0)
+  completed        Boolean @default(false)
 
   @@unique([userId, date])
   @@index([userId, date])

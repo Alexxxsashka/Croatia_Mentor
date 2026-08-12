@@ -29,6 +29,29 @@ export async function POST(req: Request) {
       where: { userId: session.user.id },
     });
 
+    const today = new Date().toISOString().split("T")[0];
+    const existingCompleted = existing?.completedLessons || [];
+    const submittedCompleted = Array.isArray(completedLessons) ? completedLessons : [];
+    const isAddingNewLesson = submittedCompleted.some((id: string) => !existingCompleted.includes(id));
+
+    let lastLessonDateStr: string | null = null;
+    if (existing?.lastLessonCompletedAt) {
+      lastLessonDateStr = new Date(existing.lastLessonCompletedAt).toISOString().split("T")[0];
+    }
+    const hasCompletedLessonToday = lastLessonDateStr === today;
+
+    // Reject adding a second new lesson on the same calendar day
+    if (isAddingNewLesson && hasCompletedLessonToday) {
+      return NextResponse.json(
+        {
+          error: "Daily lesson limit reached",
+          dailyLimitReached: true,
+          message: "You can only complete 1 lesson per day. Spend time practicing vocabulary and playing mini-games!",
+        },
+        { status: 400 }
+      );
+    }
+
     // Also count words in WordProgress table
     const wordProgressCount = await prisma.wordProgress.count({
       where: {
@@ -40,18 +63,24 @@ export async function POST(req: Request) {
     const baseLearned = Math.max(existing?.totalWordsLearned || 0, wordProgressCount);
     const newTotalXP = addXP > 0 ? (existing?.totalXP || 0) + addXP : (totalXP !== undefined ? totalXP : existing?.totalXP || 0);
 
+    const updateData: any = {
+      ...(currentLevel ? { currentLevel } : {}),
+      totalXP: newTotalXP,
+      totalWordsLearned: baseLearned + addWordsLearned,
+      ...(addWordsReviewed > 0 ? { totalWordsReviewed: { increment: addWordsReviewed } } : {}),
+      ...(currentStreak !== undefined ? { currentStreak } : {}),
+      ...(completedLessons ? { completedLessons } : {}),
+      ...(testScores ? { testScores } : {}),
+      lastActivityDate: new Date(),
+    };
+
+    if (isAddingNewLesson) {
+      updateData.lastLessonCompletedAt = new Date();
+    }
+
     const progress = await prisma.progress.upsert({
       where: { userId: session.user.id },
-      update: {
-        ...(currentLevel ? { currentLevel } : {}),
-        totalXP: newTotalXP,
-        totalWordsLearned: baseLearned + addWordsLearned,
-        ...(addWordsReviewed > 0 ? { totalWordsReviewed: { increment: addWordsReviewed } } : {}),
-        ...(currentStreak !== undefined ? { currentStreak } : {}),
-        ...(completedLessons ? { completedLessons } : {}),
-        ...(testScores ? { testScores } : {}),
-        lastActivityDate: new Date(),
-      },
+      update: updateData,
       create: {
         userId: session.user.id,
         currentLevel: currentLevel || "A1",
@@ -61,12 +90,12 @@ export async function POST(req: Request) {
         currentStreak: currentStreak || 0,
         testScores: testScores || [],
         ...(completedLessons ? { completedLessons } : {}),
+        ...(isAddingNewLesson ? { lastLessonCompletedAt: new Date() } : {}),
       },
     });
 
     // Update DailyActivity for today
-    if (addXP > 0 || addWordsLearned > 0 || addWordsReviewed > 0) {
-      const today = new Date().toISOString().split("T")[0];
+    if (addXP > 0 || addWordsLearned > 0 || addWordsReviewed > 0 || isAddingNewLesson) {
       await prisma.dailyActivity.upsert({
         where: {
           userId_date: {
@@ -78,6 +107,7 @@ export async function POST(req: Request) {
           xpEarned: { increment: addXP },
           wordsLearned: { increment: addWordsLearned },
           wordsReviewed: { increment: addWordsReviewed },
+          ...(isAddingNewLesson ? { lessonsCompleted: { increment: 1 } } : {}),
         },
         create: {
           userId: session.user.id,
@@ -85,6 +115,7 @@ export async function POST(req: Request) {
           xpEarned: addXP,
           wordsLearned: addWordsLearned,
           wordsReviewed: addWordsReviewed,
+          lessonsCompleted: isAddingNewLesson ? 1 : 0,
         },
       });
     }
@@ -128,9 +159,16 @@ export async function GET() {
       progress.totalWordsLearned = realLearned;
     }
 
+    const today = new Date().toISOString().split("T")[0];
+    let hasCompletedLessonToday = false;
+    if (progress?.lastLessonCompletedAt) {
+      const lastLessonDateStr = new Date(progress.lastLessonCompletedAt).toISOString().split("T")[0];
+      hasCompletedLessonToday = lastLessonDateStr === today;
+    }
+
     return NextResponse.json({
       progress: progress
-        ? { ...progress, totalWordsLearned: realLearned }
+        ? { ...progress, totalWordsLearned: realLearned, hasCompletedLessonToday }
         : {
             currentLevel: "A1",
             totalXP: 0,
@@ -140,6 +178,7 @@ export async function GET() {
             totalWordsReviewed: 0,
             completedLessons: [],
             testScores: [],
+            hasCompletedLessonToday: false,
           },
     });
   } catch (error) {

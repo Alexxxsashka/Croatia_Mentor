@@ -78,6 +78,7 @@ interface InteractiveGameMapProps {
   completedLessons: string[];
   userLevel: string;
   locale: string;
+  hasCompletedLessonToday?: boolean;
   onStartPromoTest: (level: string) => void;
 }
 

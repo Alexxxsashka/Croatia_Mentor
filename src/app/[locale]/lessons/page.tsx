@@ -27,6 +27,7 @@ import {
   FileText,
   FileQuestion,
   Layers,
+  Clock,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -44,6 +45,7 @@ export default function LessonsPage() {
   const [completedLessons, setCompletedLessons] = useState<string[]>([]);
   const [userLevel, setUserLevel] = useState<string>("A1");
   const [totalXP, setTotalXP] = useState<number>(0);
+  const [hasCompletedLessonToday, setHasCompletedLessonToday] = useState(false);
 
   // Promotion Test states
   const [showPromoModal, setShowPromoModal] = useState(false);
@@ -69,6 +71,9 @@ export default function LessonsPage() {
           }
           if (data.progress.totalXP !== undefined) {
             setTotalXP(data.progress.totalXP);
+          }
+          if (data.progress.hasCompletedLessonToday) {
+            setHasCompletedLessonToday(true);
           }
         }
       })
@@ -269,6 +274,33 @@ export default function LessonsPage() {
         </div>
       </div>
 
+      {/* Daily Lesson Limit Warning Banner */}
+      {hasCompletedLessonToday && (
+        <div className="mb-8 p-4 sm:p-5 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-fade-in">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center shrink-0 text-amber-400 shadow-md">
+              <Clock className="w-5 h-5" />
+            </div>
+            <div>
+              <h4 className="font-bold text-sm text-amber-200">
+                {locale === "ua"
+                  ? "Денний ліміт уроків досягнуто"
+                  : locale === "ru"
+                  ? "Дневной лимит уроков достигнут"
+                  : "Daily Lesson Limit Reached"}
+              </h4>
+              <p className="text-xs text-amber-300/80 mt-0.5">
+                {locale === "ua"
+                  ? "Ви вже пройшли урок за сьогодні. Завітайте до міні-ігор для закріплення!"
+                  : locale === "ru"
+                  ? "Вы уже прошли урок за сегодня. Загляните в мини-игры для закрепления!"
+                  : "You have already completed a lesson today. Practice with mini-games to reinforce your knowledge!"}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Level Progress & Promotion Card */}
       <div className="glass rounded-3xl p-6 mb-8 animate-fade-in flex flex-col md:flex-row items-center justify-between gap-6 border border-white/5 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5">
         <div className="flex items-center gap-4">
@@ -376,6 +408,7 @@ export default function LessonsPage() {
           completedLessons={completedLessons}
           userLevel={userLevel}
           locale={locale}
+          hasCompletedLessonToday={hasCompletedLessonToday}
           onStartPromoTest={startPromotionTestForLevel}
         />
       )}

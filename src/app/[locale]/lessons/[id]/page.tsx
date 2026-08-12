@@ -12,6 +12,9 @@ import {
   ArrowRight,
   Trophy,
   Lightbulb,
+  Clock,
+  BookOpen,
+  Gamepad2,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -94,6 +97,7 @@ export default function LessonDetailPage({
   const [correctCount, setCorrectCount] = useState(0);
   const [completed, setCompleted] = useState(false);
   const [alreadyCompleted, setAlreadyCompleted] = useState(false);
+  const [hasCompletedLessonToday, setHasCompletedLessonToday] = useState(false);
   const [xpAdded, setXpAdded] = useState(false);
 
   // Shuffle exercises and options on mount/lesson change
@@ -122,7 +126,7 @@ export default function LessonDetailPage({
     }
   }, [id, lesson]);
 
-  // Fetch initial progress to see if already completed
+  // Fetch initial progress to see if already completed or completed today
   useEffect(() => {
     fetch("/api/progress")
       .then((res) => res.json())
@@ -131,6 +135,9 @@ export default function LessonDetailPage({
           const completedList = data.progress.completedLessons || [];
           if (completedList.includes(id)) {
             setAlreadyCompleted(true);
+          }
+          if (data.progress.hasCompletedLessonToday) {
+            setHasCompletedLessonToday(true);
           }
         }
       })
@@ -147,6 +154,57 @@ export default function LessonDetailPage({
         >
           {t("back") || "Back to Lessons"}
         </button>
+      </div>
+    );
+  }
+
+  // Daily limit modal if user already completed 1 lesson today and this is a new lesson
+  if (hasCompletedLessonToday && !alreadyCompleted) {
+    return (
+      <div className="max-w-2xl mx-auto px-4 py-16 text-center animate-fade-in">
+        <div className="glass rounded-3xl p-8 space-y-6 border border-white/10 shadow-2xl bg-slate-900/60 backdrop-blur-xl">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-amber-500/10 text-amber-400 border border-amber-500/20 shadow-lg">
+            <Clock className="w-8 h-8" />
+          </div>
+          <h2 className="text-2xl font-bold">
+            {locale === "ua"
+              ? "Денний ліміт уроків досягнуто (1 урок на добу)"
+              : locale === "ru"
+              ? "Дневной лимит уроков достигнут (1 урок в сутки)"
+              : "Daily Lesson Limit Reached (1 lesson per day)"}
+          </h2>
+          <p className="text-sm text-muted-foreground leading-relaxed max-w-lg mx-auto">
+            {locale === "ua"
+              ? "Ви вже пройшли 1 новий урок за сьогодні! Щоб мовний матеріал якісно засвоївся, не поспішайте. Приділіть час вивченню нових слів та міні-играм. Наступний новий урок буде доступний завтра."
+              : locale === "ru"
+              ? "Вы уже прошли 1 новый урок за сегодня! Чтобы языковой материал качественно усвоился, не спешите. Уделите время изучению новых слов и мини-играм. Следующий новый урок будет доступен завтра."
+              : "You have already completed 1 new lesson today! To learn effectively, don't rush. Spend time practicing vocabulary and playing mini-games. Your next new lesson will be available tomorrow."}
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+            <button
+              onClick={() => router.push("/vocabulary")}
+              className="w-full sm:w-auto px-6 py-3 rounded-2xl font-bold bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:opacity-90 transition-all shadow-lg flex items-center justify-center gap-2"
+            >
+              <BookOpen className="w-4 h-4" />
+              <span>{locale === "ua" ? "До словника" : locale === "ru" ? "К словарю" : "Practice Vocabulary"}</span>
+            </button>
+            <button
+              onClick={() => router.push("/games")}
+              className="w-full sm:w-auto px-6 py-3 rounded-2xl font-bold glass hover:bg-white/10 text-foreground transition-all flex items-center justify-center gap-2"
+            >
+              <Gamepad2 className="w-4 h-4" />
+              <span>{locale === "ua" ? "Міні-ігри" : locale === "ru" ? "Мини-игры" : "Mini-Games"}</span>
+            </button>
+          </div>
+          <div>
+            <button
+              onClick={() => router.push("/lessons")}
+              className="mt-2 text-xs text-muted-foreground hover:text-foreground transition-all"
+            >
+              {locale === "ua" ? "← Назад до списку уроків" : locale === "ru" ? "← Назад к списку уроков" : "← Back to Lessons"}
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
