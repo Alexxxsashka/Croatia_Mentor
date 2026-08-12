@@ -720,26 +720,47 @@ export default function AIChatPage() {
       </div>
 
       {/* Roleplay Scenario Selector bar */}
-      {chatMode === "roleplay" && (
-        <div className="flex items-center gap-2 mb-3 overflow-x-auto pb-1">
-          <span className="text-xs font-bold text-purple-400 shrink-0">
-            {t("scenarioLabel")}
-          </span>
-          {scenarios.map((s) => (
-            <button
-              key={s.id}
-              onClick={() => setSelectedScenario(s.id)}
-              className={`px-3 py-1 rounded-xl text-xs font-medium border shrink-0 transition-all cursor-pointer ${
-                selectedScenario === s.id
-                  ? "bg-blue-600 text-white border-blue-500 shadow"
-                  : "bg-white/5 border-white/10 text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {s.label}
-            </button>
-          ))}
-        </div>
-      )}
+      {chatMode === "roleplay" && (() => {
+        const roleplayScenarios = [
+          {
+            id: "Pekara / Bakery",
+            label: locale === "ua" ? "🥐 Замовлення в пекарні" : locale === "ru" ? "🥐 Заказ в пекарне" : "🥐 Bakery Order",
+          },
+          {
+            id: "Karta / Tickets",
+            label: locale === "ua" ? "🚌 Квитки (Автобус/Фері)" : locale === "ru" ? "🚌 Билеты (Автобус/Ферри)" : "🚌 Bus/Ferry Tickets",
+          },
+          {
+            id: "Apartman / Rent",
+            label: locale === "ua" ? "🏠 Оренда житла" : locale === "ru" ? "🏠 Аренда жилья" : "🏠 Rent Apartment",
+          },
+          {
+            id: "Liječnik / Doctor",
+            label: locale === "ua" ? "🏥 Лікар / Поліція" : locale === "ru" ? "🏥 Врач / Полиция" : "🏥 Doctor / Police",
+          },
+        ];
+
+        return (
+          <div className="flex items-center gap-2 mb-3 overflow-x-auto pb-1">
+            <span className="text-xs font-bold text-purple-400 shrink-0">
+              {t("scenarioLabel")}
+            </span>
+            {roleplayScenarios.map((s) => (
+              <button
+                key={s.id}
+                onClick={() => setSelectedScenario(s.id)}
+                className={`px-3 py-1.5 rounded-xl text-xs font-semibold border shrink-0 transition-all cursor-pointer ${
+                  selectedScenario === s.id
+                    ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white border-purple-400 shadow-md"
+                    : "bg-white/5 border-white/10 text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
+        );
+      })()}
 
       {/* Messages Feed Area */}
       <div className="flex-1 overflow-y-auto rounded-2xl glass p-4 mb-3 space-y-4">

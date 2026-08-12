@@ -23,6 +23,7 @@ model User {
   accounts       Account[]
   sessions       Session[]
   progress       Progress?
+  badges         UserBadge[]
 }
 
 model Account {
@@ -150,5 +151,16 @@ model Changelog {
   contentRu String   @db.Text
   contentUa String   @db.Text
   createdAt DateTime @default(now())
+}
+
+model UserBadge {
+  id         String   @id @default(cuid())
+  userId     String
+  badgeId    String
+  unlockedAt DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, badgeId])
+  @@index([userId])
 }
 

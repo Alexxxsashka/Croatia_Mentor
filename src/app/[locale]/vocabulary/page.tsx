@@ -600,6 +600,53 @@ export default function VocabularyPortal() {
         </p>
       </div>
 
+      {/* Smart SRS Review Notification Banner */}
+      {(() => {
+        const dueCount = Object.values(wordProgressMap).filter(
+          (prog) => prog.nextReview && new Date(prog.nextReview) <= new Date()
+        ).length;
+
+        if (dueCount === 0) return null;
+
+        return (
+          <div className="mb-6 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-fade-in shadow-lg">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center text-amber-400 shrink-0 shadow-md">
+                <RotateCcw className="w-5 h-5 animate-spin-slow" />
+              </div>
+              <div>
+                <h4 className="font-bold text-sm text-amber-200">
+                  {locale === "ua"
+                    ? `Розумне повторення SRS: на сьогодні є ${dueCount} слів!`
+                    : locale === "ru"
+                    ? `Умное повторение SRS: на сегодня есть ${dueCount} слов для повторения!`
+                    : `Smart SRS Review: ${dueCount} words due for review today!`}
+                </h4>
+                <p className="text-xs text-amber-300/80 mt-0.5">
+                  {locale === "ua"
+                    ? "Алгоритм пропонує повторити ці слова, щоб вони перейшли в довготривалу пам'ять."
+                    : locale === "ru"
+                    ? "Алгоритм предлагает повторить эти слова, чтобы они перешли в долговременную память."
+                    : "Spaced repetition algorithm recommends reviewing these words now to solidify memory."}
+                </p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => {
+                setSelectedStatus("due");
+                setActiveTab("flashcards");
+                setIsFlipped(false);
+              }}
+              className="px-4 py-2 rounded-xl text-xs font-extrabold bg-amber-500 text-slate-950 hover:bg-amber-400 transition-all shrink-0 cursor-pointer shadow-md"
+            >
+              {locale === "ua" ? "Повторити слова зараз" : locale === "ru" ? "Повторить слова сейчас" : "Review Due Words Now"}
+            </button>
+          </div>
+        );
+      })()}
+
       {/* Tabs */}
       <div className="flex justify-center mb-8 border-b border-white/10 pb-px">
         <div className="flex gap-2 p-1 glass rounded-xl flex-wrap justify-center">

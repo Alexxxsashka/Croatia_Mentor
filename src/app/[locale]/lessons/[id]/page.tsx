@@ -5,6 +5,8 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { lessonsData, getLocalizedText } from "@/lib/lessons-data";
 import { DictationPlayer } from "@/components/dictation-player";
+import { SpeechPronunciationEvaluator } from "@/components/speech/SpeechPronunciationEvaluator";
+import { InteractiveTextReader } from "@/components/learning/InteractiveTextReader";
 import {
   ArrowLeft,
   CheckCircle2,
@@ -357,7 +359,7 @@ export default function LessonDetailPage({
             <div key={i} className="glass rounded-2xl p-6">
               <h2 className="text-lg font-semibold mb-3">{getLocalizedText(section.title, locale)}</h2>
               <div className="text-sm text-muted-foreground leading-relaxed space-y-1">
-                {renderMarkdown(getLocalizedText(section.text, locale))}
+                <InteractiveTextReader text={getLocalizedText(section.text, locale)} locale={locale} />
               </div>
               {section.examples && (
                 <ul className="mt-4 space-y-2">
@@ -366,7 +368,7 @@ export default function LessonDetailPage({
                       key={j}
                       className="text-sm pl-4 border-l-2 border-blue-500/30 py-1"
                     >
-                      {getLocalizedText(ex, locale)}
+                      <InteractiveTextReader text={getLocalizedText(ex, locale)} locale={locale} />
                     </li>
                   ))}
                 </ul>
@@ -400,6 +402,14 @@ export default function LessonDetailPage({
         </div>
 
         <p className="text-lg font-medium mb-6">{getLocalizedText(exercise.question, locale)}</p>
+
+        {/* Speech Pronunciation Evaluator */}
+        {(exercise.type === "translation" || exercise.type === "dictation") && (
+          <SpeechPronunciationEvaluator
+            targetText={getLocalizedText(exercise.correctAnswer, locale)}
+            locale={locale}
+          />
+        )}
 
         {/* Hint Section (Max 1 hint per lesson) */}
         {exercise.hint && (
