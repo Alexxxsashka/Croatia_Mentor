@@ -31,6 +31,7 @@ import {
 import { toast } from "sonner";
 import { lessonsData } from "@/lib/lessons-data";
 import { requestNotificationPermission, scheduleReminder } from "@/lib/notifications";
+import { BadgesShowcase } from "@/components/gamification/BadgesShowcase";
 
 interface TestScore {
   type: string;
@@ -454,6 +455,11 @@ export default function ProfilePage() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Achievements & Badges Showcase */}
+      <div>
+        <BadgesShowcase locale={locale} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
