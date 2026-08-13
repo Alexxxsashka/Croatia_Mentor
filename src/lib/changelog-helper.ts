@@ -3,6 +3,72 @@ import { prisma } from "@/lib/prisma";
 export async function ensureDefaultChangelogs() {
   try {
     await prisma.changelog.upsert({
+      where: { id: "changelog-v1.5.0" },
+      update: {
+        version: "v1.5.0",
+        titleUa: "🎯 Баланс навчання, 1-разові уроки та розвиток проєкту!",
+        titleRu: "🎯 Баланс обучения, 1-разовые уроки и развитие проекта!",
+        titleEn: "🎯 Balanced Learning Pace, Single Lesson Completion & Community Support!",
+        contentUa: `[b]Що нового у версії 1.5.0:[/b]
+
+• [b]Оптимізація складності та темпу навчання[/b]: Уроки стали більш глибокими та насиченими. Щоб засвоєння матеріалу було максимально ефективним, а не перетворювалося на автоматичне проходження за 1 день, ми перейшли на систему одноразового щоденного проходження уроків.
+• [b]Адекватні терміни вивчення мови[/b]: Справжній прогрес у хорватській мові досягається регулярними щоденними кроками та повторенням, а не поспіхом. Нова система допоможе вам навчатися системно та без вигорання.
+
+🤝 [b]Розвиток проєкту та контакти:[/b]
+• [b]Збір на підтримку платформи[/b]: У розділі [b]Контакти[/b] відкрито збір коштів на розвиток проєкту. Ваші донати допомагають оплачувати сервери, ШІ-моделі та розробку нового функціоналу.
+• [b]Розповідайте про нас![/b]: Поділіться посиланням на сайт із друзями, знайомими та колегами, які вивчають хорватську мову. Чим більше нас — тим швидше розвивається платформа!`,
+        contentRu: `[b]Что нового в версии 1.5.0:[/b]
+
+• [b]Оптимизация сложности и темпа обучения[/b]: Уроки стали более глубокими и насыщенными. Чтобы усвоение материала было максимально эффективным, а не превращалось в автоматическое прохождение за 1 день, мы перешли на систему одноразового ежедневного прохождения уроков.
+• [b]Адекватные сроки выучения языка[/b]: Настоящий прогресс в хорватском языке достигается регулярными ежедневными подходами и повторением, а не спешкой. Новая система поможет вам заниматься системно и без выгорания.
+
+🤝 [b]Развитие проекта и контакты:[/b]
+• [b]Сбор на поддержку платформы[/b]: В разделе [b]Контакты[/b] открыт сбор средств на развитие проекта. Ваши донаты помогают оплачивать серверы, ИИ-модели и разработку нового функционала.
+• [b]Расскажите о нас![/b]: Поделитесь ссылкой на сайт с друзьями, знакомыми и коллегами, которые изучают хорватский язык. Чем больше нас — тем быстрее развивается платформа!`,
+        contentEn: `[b]What's new in version 1.5.0:[/b]
+
+• [b]Optimized Difficulty & Learning Pace[/b]: Lessons have been enhanced with more in-depth practice. To ensure sustainable memory retention rather than rushing through all lessons in a single day, we introduced a single-completion daily lesson pace.
+• [b]Realistic Language Learning Goals[/b]: Mastering Croatian requires consistency, spaced repetition, and daily practice. This update helps build a healthy learning habit without burnout.
+
+🤝 [b]Project Support & Contacts:[/b]
+• [b]Support Our Development[/b]: Check out the **Contacts** section where our community fundraiser is active. Your support helps cover server costs, AI model inference, and new feature development.
+• [b]Spread the Word![/b]: Share the platform link with friends, family, and language enthusiasts. The bigger our community grows, the faster we can ship new updates!`,
+        createdAt: new Date(),
+      },
+      create: {
+        id: "changelog-v1.5.0",
+        version: "v1.5.0",
+        titleUa: "🎯 Баланс навчання, 1-разові уроки та розвиток проєкту!",
+        titleRu: "🎯 Баланс обучения, 1-разовые уроки и развитие проекта!",
+        titleEn: "🎯 Balanced Learning Pace, Single Lesson Completion & Community Support!",
+        contentUa: `[b]Що нового у версії 1.5.0:[/b]
+
+• [b]Оптимізація складності та темпу навчання[/b]: Уроки стали більш глибокими та насиченими. Щоб засвоєння матеріалу було максимально ефективним, а не перетворювалося на автоматичне проходження за 1 день, ми перейшли на систему одноразового щоденного проходження уроків.
+• [b]Адекватні терміни вивчення мови[/b]: Справжній прогрес у хорватській мові досягається регулярними щоденними кроками та повторенням, а не поспіхом. Нова система допоможе вам навчатися системно та без вигорання.
+
+🤝 [b]Розвиток проєкту та контакти:[/b]
+• [b]Збір на підтримку платформи[/b]: У розділі [b]Контакти[/b] відкрито збір коштів на розвиток проєкту. Ваші донати допомагають оплачувати сервери, ШІ-моделі та розробку нового функціоналу.
+• [b]Розповідайте про нас![/b]: Поділіться посиланням на сайт із друзями, знайомими та колегами, які вивчають хорватську мову. Чим більше нас — тем швидше розвивається платформа!`,
+        contentRu: `[b]Что нового в версии 1.5.0:[/b]
+
+• [b]Оптимизация сложности и темпа обучения[/b]: Уроки стали более глубокими и насыщенными. Чтобы усвоение материала было максимально эффективным, а не превращалось в автоматическое прохождение за 1 день, мы перешли на систему одноразового ежедневного прохождения уроков.
+• [b]Адекватные сроки выучения языка[/b]: Настоящий прогресс в хорватском языке достигается регулярными ежедневными подходами и повторением, а не спешкой. Новая система поможет вам заниматься системно и без выгорания.
+
+🤝 [b]Развитие проекта и контакты:[/b]
+• [b]Сбор на поддержку платформы[/b]: В разделе [b]Контакты[/b] открыт сбор средств на развитие проекта. Ваши донаты помогают оплачивать серверы, ИИ-модели и разработку нового функционала.
+• [b]Расскажите о нас![/b]: Поделитесь ссылкой на сайт с друзьями, знакомыми и коллегами, которые изучают хорватский язык. Чем больше нас — тем быстрее развивается платформа!`,
+        contentEn: `[b]What's new in version 1.5.0:[/b]
+
+• [b]Optimized Difficulty & Learning Pace[/b]: Lessons have been enhanced with more in-depth practice. To ensure sustainable memory retention rather than rushing through all lessons in a single day, we introduced a single-completion daily lesson pace.
+• [b]Realistic Language Learning Goals[/b]: Mastering Croatian requires consistency, spaced repetition, and daily practice. This update helps build a healthy learning habit without burnout.
+
+🤝 [b]Project Support & Contacts:[/b]
+• [b]Support Our Development[/b]: Check out the **Contacts** section where our community fundraiser is active. Your support helps cover server costs, AI model inference, and new feature development.
+• [b]Spread the Word![/b]: Share the platform link with friends, family, and language enthusiasts. The bigger our community grows, the faster we can ship new updates!`
+      },
+    });
+
+    await prisma.changelog.upsert({
       where: { id: "changelog-v1.4.0" },
       update: {
         version: "v1.4.0",

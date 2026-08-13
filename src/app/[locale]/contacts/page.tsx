@@ -13,6 +13,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { toast } from "sonner";
+import { SocialShare } from "@/components/social-share";
 
 const texts = {
   ua: {
@@ -293,6 +294,11 @@ export default function ContactsPage() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Social Share Section */}
+        <div className="pt-6">
+          <SocialShare />
         </div>
       </div>
     </div>

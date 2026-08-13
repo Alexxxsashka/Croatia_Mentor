@@ -14,12 +14,22 @@ export async function generateMetadata({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
+  const baseUrl = "https://croatia-mentor.vercel.app";
 
   return {
     title: t("title"),
     description: t("description"),
     keywords: t("keywords"),
-    metadataBase: new URL("https://croatia-mentor.vercel.app"),
+    metadataBase: new URL(baseUrl),
+    alternates: {
+      canonical: `${baseUrl}/${locale}`,
+      languages: {
+        en: `${baseUrl}/en`,
+        uk: `${baseUrl}/ua`,
+        ru: `${baseUrl}/ru`,
+        "x-default": `${baseUrl}/en`,
+      },
+    },
     openGraph: {
       title: t("title"),
       description: t("description"),
@@ -39,9 +49,43 @@ export default async function LocaleLayout({
   const { locale } = await params;
   const messages = await getMessages();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "EducationalApplication",
+        "name": "Croatia Mentor",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "All",
+        "url": "https://croatia-mentor.vercel.app",
+        "description": "Interactive platform to learn Croatian language for free with AI tutor, audio vocabulary, grammar exercises, and roleplay simulations.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+        },
+      },
+      {
+        "@type": "Course",
+        "name": "Learn Croatian Language Course",
+        "description": "Complete interactive course for learning Croatian language from A1 to B2 level.",
+        "provider": {
+          "@type": "Organization",
+          "name": "Croatia Mentor",
+          "sameAs": "https://croatia-mentor.vercel.app",
+        },
+        "isAccessibleForFree": true,
+      },
+    ],
+  };
+
   return (
     <html lang={locale} className="dark" suppressHydrationWarning>
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `

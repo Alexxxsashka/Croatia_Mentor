@@ -56,6 +56,12 @@ export function Footer() {
                 {nav("aiChat")}
               </Link>
               <Link
+                href="/learn-croatian"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors font-medium text-emerald-400"
+              >
+                Learn Croatian Online
+              </Link>
+              <Link
                 href="/contacts"
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors font-medium text-blue-400 dark:text-blue-400"
               >
