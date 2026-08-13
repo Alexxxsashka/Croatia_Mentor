@@ -24,7 +24,7 @@ Product Hunt has a **Domain Authority (DA) of 90+**. A launch page provides a po
   > • **Native Audio & Gaj's Alphabet**: Pure Croatian diacritics (č, ć, đ, š, ž) with audio pronunciation.
   > • **Games & Spaced Repetition**: Flashcards and games to retain vocabulary long-term.
   > 
-  > Try it out for free: https://croatia-mentor.vercel.app/
+  > Try it out for free: https://croatia-mentor.space/
   > Would love your feedback! ❤️
 
 ---
@@ -44,7 +44,7 @@ Reddit posts generate direct organic visits and index rapidly on Google.
 * **Body**:
   > Bok свима!
   > 
-  > I noticed there weren't many comprehensive free online resources dedicated specifically to the Croatian language, so I created **Croatia Mentor**: https://croatia-mentor.vercel.app/
+  > I noticed there weren't many comprehensive free online resources dedicated specifically to the Croatian language, so I created **Croatia Mentor**: https://croatia-mentor.space/
   > 
   > What you'll find on the site:
   > - Lessons covering vocabulary & grammar (A1 through B2).
@@ -77,7 +77,7 @@ Join Expat groups in Croatia (where people actively ask "How can I learn Croatia
 * *Foreigners in Croatia*
 * *Learning Croatian Language Group*
 
-**Strategy**: Reply helpful answers to users asking for learning recommendations, linking to `https://croatia-mentor.vercel.app/learn-croatian`.
+**Strategy**: Reply helpful answers to users asking for learning recommendations, linking to `https://croatia-mentor.space/learn-croatian`.
 
 ---
 

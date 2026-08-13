@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 export function SocialShare({
   title = "Learn Croatian Online for Free with Croatia Mentor",
-  url = "https://croatia-mentor.vercel.app",
+  url = "https://croatia-mentor.space",
 }: {
   title?: string;
   url?: string;

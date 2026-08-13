@@ -14,7 +14,7 @@ export async function generateMetadata({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
-  const baseUrl = "https://croatia-mentor.vercel.app";
+  const baseUrl = "https://croatia-mentor.space";
 
   return {
     title: t("title"),
@@ -57,7 +57,7 @@ export default async function LocaleLayout({
         "name": "Croatia Mentor",
         "applicationCategory": "EducationalApplication",
         "operatingSystem": "All",
-        "url": "https://croatia-mentor.vercel.app",
+        "url": "https://croatia-mentor.space",
         "description": "Interactive platform to learn Croatian language for free with AI tutor, audio vocabulary, grammar exercises, and roleplay simulations.",
         "offers": {
           "@type": "Offer",
@@ -72,7 +72,7 @@ export default async function LocaleLayout({
         "provider": {
           "@type": "Organization",
           "name": "Croatia Mentor",
-          "sameAs": "https://croatia-mentor.vercel.app",
+          "sameAs": "https://croatia-mentor.space",
         },
         "isAccessibleForFree": true,
       },
