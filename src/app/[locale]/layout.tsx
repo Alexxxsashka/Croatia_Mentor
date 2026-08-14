@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer";
 import { Toaster } from "sonner";
 import { ChangelogModal } from "@/components/changelog-modal";
 import { NotificationListener } from "@/components/notification-listener";
+import Script from "next/script";
 
 export async function generateMetadata({
   params,
@@ -82,6 +83,12 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className="dark" suppressHydrationWarning>
       <head>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3481521548932439"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
