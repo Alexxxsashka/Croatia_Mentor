@@ -194,7 +194,12 @@ export function InteractiveGameMap({
       if (userLevelIdx > examLevelIdx) {
         return "completed";
       } else if (userLevelIdx === examLevelIdx) {
-        return "unlocked";
+        const levelLessons = lessons.filter((l) => l.level === item.level);
+        const levelDone = levelLessons.filter((l) =>
+          completedLessons.includes(l.id)
+        ).length;
+        const isAllDone = levelLessons.length > 0 && levelDone >= levelLessons.length;
+        return isAllDone ? "unlocked" : "locked";
       } else {
         return "locked";
       }
@@ -401,12 +406,17 @@ export function InteractiveGameMap({
                             <button
                               onClick={() => {
                                 if (status === "locked") {
+                                  const levelLessons = lessons.filter((l) => l.level === item.level);
+                                  const levelDoneCount = levelLessons.filter((l) =>
+                                    completedLessons.includes(l.id)
+                                  ).length;
+                                  const levelTotalCount = levelLessons.length;
                                   toast.error(
                                     locale === "ua"
-                                      ? `Іспит заблоковано. Пройдіть уроки модуля ${item.level}!`
+                                      ? `Іспит заблоковано. Пройдіть усі уроки модуля ${item.level}! (${levelDoneCount}/${levelTotalCount})`
                                       : locale === "ru"
-                                      ? `Экзамен заблокирован. Пройдите уроки модуля ${item.level}!`
-                                      : `Exam is locked. Complete ${item.level} module lessons first!`
+                                      ? `Экзамен заблокирован. Пройдите все уроки модуля ${item.level}! (${levelDoneCount}/${levelTotalCount})`
+                                      : `Exam is locked. Complete all ${item.level} module lessons first! (${levelDoneCount}/${levelTotalCount})`
                                   );
                                   return;
                                 }

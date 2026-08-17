@@ -136,6 +136,29 @@ export default function LessonsPage() {
       toast.error("No test available for this level.");
       return;
     }
+
+    const levelLessons = lessonsData.filter((l) => l.level === targetLevel);
+    const levelDoneCount = levelLessons.filter((l) =>
+      completedLessons.includes(l.id)
+    ).length;
+    const userLevelIdx = LEVEL_ORDER.indexOf(userLevel);
+    const targetLevelIdx = LEVEL_ORDER.indexOf(targetLevel);
+
+    if (
+      userLevelIdx === targetLevelIdx &&
+      levelLessons.length > 0 &&
+      levelDoneCount < levelLessons.length
+    ) {
+      toast.error(
+        locale === "ua"
+          ? `Іспит заблоковано. Спочатку пройдіть усі уроки модуля ${targetLevel}! (${levelDoneCount}/${levelLessons.length})`
+          : locale === "ru"
+          ? `Экзамен заблокирован. Сначала пройдите все уроки модуля ${targetLevel}! (${levelDoneCount}/${levelLessons.length})`
+          : `Exam is locked. Complete all lessons in module ${targetLevel} first! (${levelDoneCount}/${levelLessons.length})`
+      );
+      return;
+    }
+
     setPromoLevel(targetLevel);
     setCurrentPromoQ(0);
     setPromoAnswers(new Array(test.questions.length).fill(null));
@@ -335,9 +358,18 @@ export default function LessonsPage() {
           {userLevel !== "C2" ? (
             <button
               onClick={startPromotionTest}
-              className="w-full py-2.5 rounded-xl text-sm font-semibold transition-all shadow-lg flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 cursor-pointer shadow-blue-500/10"
+              disabled={currentLevelCompleted < currentLevelTotal}
+              className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-all shadow-lg flex items-center justify-center gap-2 ${
+                currentLevelCompleted >= currentLevelTotal && currentLevelTotal > 0
+                  ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 cursor-pointer shadow-blue-500/10"
+                  : "bg-slate-800 text-slate-400 border border-slate-700 cursor-not-allowed opacity-60 shadow-none"
+              }`}
             >
-              <Sparkles className="w-4 h-4" />
+              {currentLevelCompleted < currentLevelTotal ? (
+                <Lock className="w-4 h-4" />
+              ) : (
+                <Sparkles className="w-4 h-4" />
+              )}
               <span>
                 {locale === "ua"
                   ? `Скласти іспит на рівень ${LEVEL_ORDER[LEVEL_ORDER.indexOf(userLevel) + 1]}`
