@@ -33,10 +33,20 @@ import { toast } from "sonner";
 
 const LEVEL_ORDER = ["A1", "A2", "B1", "B2", "C1", "C2"];
 
+const DUST_PARTICLES = Array.from({ length: 30 }).map((_, i) => ({
+  id: i,
+  top: `${(i * 13) % 100}%`,
+  left: `${(i * 27) % 100}%`,
+  size: `${(i % 3) + 2}px`,
+  delay: `${(i * 0.3).toFixed(1)}s`,
+  duration: `${((i % 4) * 2 + 7).toFixed(1)}s`,
+}));
+
 export default function LessonsPage() {
   const t = useTranslations("lessons");
   const locale = useLocale();
 
+  const [scrollY, setScrollY] = useState(0);
   const [filterType, setFilterType] = useState<string>("all");
   const [filterLevel, setFilterLevel] = useState<string>("all");
   const [viewMode, setViewMode] = useState<"map" | "grid" | "list">("map");
@@ -83,6 +93,14 @@ export default function LessonsPage() {
     if (savedView && ["map", "grid", "list"].includes(savedView)) {
       setViewMode(savedView);
     }
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleViewChange = (mode: "map" | "grid" | "list") => {
@@ -246,7 +264,44 @@ export default function LessonsPage() {
   const activePromoQuestionObj = activeTest?.questions[currentPromoQ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="relative overflow-hidden min-h-screen">
+      {/* Background Parallax Layer */}
+      <div
+        className="fixed inset-0 bg-cover bg-center pointer-events-none transition-transform duration-75 ease-out scale-105"
+        style={{
+          backgroundImage: "url('/lessons-bg.jpg')",
+          transform: `translateY(${scrollY * 0.25}px)`,
+          zIndex: -2,
+        }}
+      />
+      {/* Dark overlay for optimal text readability */}
+      <div
+        className="fixed inset-0 bg-slate-950/70 dark:bg-slate-950/80 backdrop-blur-[1.5px] pointer-events-none"
+        style={{ zIndex: -1 }}
+      />
+
+      {/* Floating Dust Particles */}
+      <div
+        className="dust-container pointer-events-none"
+        style={{ transform: `translateY(${scrollY * -0.1}px)`, zIndex: -1 }}
+      >
+        {DUST_PARTICLES.map((p) => (
+          <div
+            key={p.id}
+            className="dust-particle"
+            style={{
+              top: p.top,
+              left: p.left,
+              width: p.size,
+              height: p.size,
+              animationDelay: p.delay,
+              animationDuration: p.duration,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
       {/* Header */}
       <div className="mb-8 animate-fade-in flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
@@ -845,6 +900,7 @@ export default function LessonsPage() {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }
