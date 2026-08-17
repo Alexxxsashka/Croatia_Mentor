@@ -265,22 +265,22 @@ export default function LessonsPage() {
 
   return (
     <div className="relative overflow-hidden min-h-screen">
-      {/* Background Parallax Layer */}
-      <div
-        className="fixed inset-0 pointer-events-none"
-        style={{
-          backgroundImage: "url('/lessons-bg.jpg')",
-          backgroundRepeat: "repeat-y",
-          backgroundSize: "cover",
-          backgroundPosition: `center ${-scrollY * 0.25}px`,
-          zIndex: -2,
-        }}
-      />
-      {/* Dark overlay for optimal text readability */}
-      <div
-        className="fixed inset-0 bg-slate-950/75 dark:bg-slate-950/85 backdrop-blur-[2px] pointer-events-none"
-        style={{ zIndex: -1 }}
-      />
+      {/* Background Parallax Container */}
+      <div className="fixed inset-0 pointer-events-none z-[-2] overflow-hidden bg-slate-950">
+        {/* Parallax Image Layer - oversized with clamped movement so edges are never exposed */}
+        <div
+          className="absolute inset-[-10%] bg-cover bg-center pointer-events-none transition-transform duration-100 ease-out"
+          style={{
+            backgroundImage: "url('/lessons-bg.jpg')",
+            transform: `translateY(${Math.max(-120, Math.min(120, -scrollY * 0.08))}px) scale(1.15)`,
+          }}
+        />
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-slate-950/70 dark:bg-slate-950/80 backdrop-blur-[1px]" />
+        
+        {/* Smooth bottom gradient fade into slate-950 */}
+        <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent" />
+      </div>
 
       {/* Floating Dust Particles */}
       <div
