@@ -267,13 +267,12 @@ export default function LessonsPage() {
     <div className="relative overflow-hidden min-h-screen">
       {/* Background Parallax Layer */}
       <div
-        className="fixed inset-0 pointer-events-none transition-transform duration-75 ease-out"
+        className="fixed inset-0 pointer-events-none"
         style={{
           backgroundImage: "url('/lessons-bg.jpg')",
           backgroundRepeat: "repeat-y",
           backgroundSize: "cover",
-          backgroundPosition: "center top",
-          transform: `translateY(${-(scrollY * 0.15)}px)`,
+          backgroundPosition: `center ${-scrollY * 0.25}px`,
           zIndex: -2,
         }}
       />
