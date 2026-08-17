@@ -267,16 +267,19 @@ export default function LessonsPage() {
     <div className="relative overflow-hidden min-h-screen">
       {/* Background Parallax Layer */}
       <div
-        className="fixed inset-0 bg-cover bg-center pointer-events-none transition-transform duration-75 ease-out scale-105"
+        className="fixed inset-0 pointer-events-none transition-transform duration-75 ease-out"
         style={{
           backgroundImage: "url('/lessons-bg.jpg')",
-          transform: `translateY(${scrollY * 0.25}px)`,
+          backgroundRepeat: "repeat-y",
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+          transform: `translateY(${-(scrollY * 0.15)}px)`,
           zIndex: -2,
         }}
       />
       {/* Dark overlay for optimal text readability */}
       <div
-        className="fixed inset-0 bg-slate-950/70 dark:bg-slate-950/80 backdrop-blur-[1.5px] pointer-events-none"
+        className="fixed inset-0 bg-slate-950/75 dark:bg-slate-950/85 backdrop-blur-[2px] pointer-events-none"
         style={{ zIndex: -1 }}
       />
 
