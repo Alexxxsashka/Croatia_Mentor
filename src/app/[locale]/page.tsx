@@ -78,39 +78,7 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="relative overflow-hidden min-h-screen">
-      {/* Background Parallax Layer */}
-      <div
-        className="absolute inset-0 bg-cover bg-center pointer-events-none transition-transform duration-75 ease-out"
-        style={{
-          backgroundImage: "url('/hero-bg.jpg')",
-          transform: `translateY(${scrollY * 0.3}px)`,
-          zIndex: -2,
-        }}
-      />
-      {/* Dark overlay to ensure text readability */}
-      <div 
-        className="absolute inset-0 bg-slate-950/80 backdrop-blur-[1px] pointer-events-none" 
-        style={{ zIndex: -1 }} 
-      />
-
-      {/* Floating Dust Particles */}
-      <div className="dust-container" style={{ transform: `translateY(${scrollY * -0.15}px)` }}>
-        {DUST_PARTICLES.map((p) => (
-          <div
-            key={p.id}
-            className="dust-particle"
-            style={{
-              top: p.top,
-              left: p.left,
-              width: p.size,
-              height: p.size,
-              animationDelay: p.delay,
-              animationDuration: p.duration,
-            }}
-          />
-        ))}
-      </div>
+    <div className="relative min-h-screen">
 
       {/* Hero Section */}
       <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-32">

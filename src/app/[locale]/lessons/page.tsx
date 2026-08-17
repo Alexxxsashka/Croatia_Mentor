@@ -264,44 +264,7 @@ export default function LessonsPage() {
   const activePromoQuestionObj = activeTest?.questions[currentPromoQ];
 
   return (
-    <div className="relative overflow-hidden min-h-screen">
-      {/* Background Parallax Container */}
-      <div className="fixed inset-0 pointer-events-none z-[-2] overflow-hidden bg-slate-950">
-        {/* Parallax Image Layer - oversized with clamped movement so edges are never exposed */}
-        <div
-          className="absolute inset-[-10%] bg-cover bg-center pointer-events-none transition-transform duration-100 ease-out"
-          style={{
-            backgroundImage: "url('/lessons-bg.jpg')",
-            transform: `translateY(${Math.max(-120, Math.min(120, -scrollY * 0.08))}px) scale(1.15)`,
-          }}
-        />
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-slate-950/70 dark:bg-slate-950/80 backdrop-blur-[1px]" />
-        
-        {/* Smooth bottom gradient fade into slate-950 */}
-        <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent" />
-      </div>
-
-      {/* Floating Dust Particles */}
-      <div
-        className="dust-container pointer-events-none"
-        style={{ transform: `translateY(${scrollY * -0.1}px)`, zIndex: -1 }}
-      >
-        {DUST_PARTICLES.map((p) => (
-          <div
-            key={p.id}
-            className="dust-particle"
-            style={{
-              top: p.top,
-              left: p.left,
-              width: p.size,
-              height: p.size,
-              animationDelay: p.delay,
-              animationDuration: p.duration,
-            }}
-          />
-        ))}
-      </div>
+    <div className="relative min-h-screen">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
       {/* Header */}

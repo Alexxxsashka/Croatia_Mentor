@@ -39,6 +39,8 @@ export async function generateMetadata({
   };
 }
 
+import { GlobalParallaxBackground } from "@/components/GlobalParallaxBackground";
+
 export default async function LocaleLayout({
   children,
   params,
@@ -100,9 +102,10 @@ export default async function LocaleLayout({
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col relative">
         <NextIntlClientProvider messages={messages}>
           <SessionProvider>
+            <GlobalParallaxBackground />
             <NotificationListener />
             <Navbar />
             <main className="flex-1">{children}</main>
