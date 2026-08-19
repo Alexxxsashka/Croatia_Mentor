@@ -81,19 +81,19 @@ export default function HomePage() {
     <div className="relative min-h-screen">
 
       {/* Hero Section */}
-      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-32">
+      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 sm:pt-24 sm:pb-32">
         <div className="text-center space-y-8 animate-fade-in">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-medium text-blue-400">
             <Sparkles className="w-4 h-4" />
             Croatian Without Microtransactions
           </div>
 
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight drop-shadow-md">
+          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black tracking-tight drop-shadow-md">
             {t("hero.title")}{" "}
             <span className="gradient-text">{t("hero.titleHighlight")}</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed drop-shadow-sm">
+          <p className="text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed drop-shadow-sm px-2 sm:px-0">
             {t("hero.subtitle")}
           </p>
 
@@ -101,7 +101,7 @@ export default function HomePage() {
             {session ? (
               <Link
                 href="/dashboard"
-                className="group flex items-center gap-2 px-8 py-4 rounded-2xl text-lg font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition-all shadow-2xl shadow-blue-500/25 glow-hover"
+                className="group flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-2xl text-lg font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition-all shadow-2xl shadow-blue-500/25 glow-hover"
               >
                 {t("hero.goToDashboard")}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -110,14 +110,14 @@ export default function HomePage() {
               <>
                 <Link
                   href="/sign-up"
-                  className="group flex items-center gap-2 px-8 py-4 rounded-2xl text-lg font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition-all shadow-2xl shadow-blue-500/25 glow-hover"
+                  className="group flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-2xl text-lg font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition-all shadow-2xl shadow-blue-500/25 glow-hover"
                 >
                   {t("hero.cta")}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
                   href="/sign-in"
-                  className="flex items-center gap-2 px-8 py-4 rounded-2xl text-lg font-semibold glass hover:bg-white/10 transition-all"
+                  className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-2xl text-lg font-semibold glass hover:bg-white/10 transition-all"
                 >
                   {t("hero.ctaSecondary")}
                 </Link>
@@ -166,9 +166,9 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
+      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-32">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+          <h2 className="text-2xl sm:text-4xl font-bold mb-4">
             {t("features.title")}
           </h2>
         </div>
@@ -194,9 +194,9 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
-        <div className="text-center p-12 rounded-3xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 glass border border-white/5">
-          <h2 className="text-3xl font-bold mb-4 flex items-center justify-center gap-2 flex-wrap">
+      <section className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-32">
+        <div className="text-center p-6 sm:p-12 rounded-3xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 glass border border-white/5">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4 flex items-center justify-center gap-2 flex-wrap">
             Počnimo učiti hrvatski!
             <Flag countryCode="hr" className="w-7 h-5 rounded-[3px] shadow" />
           </h2>
@@ -206,7 +206,7 @@ export default function HomePage() {
           </p>
           <Link
             href={session ? "/dashboard" : "/sign-up"}
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-lg font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition-all shadow-2xl shadow-blue-500/25"
+            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-2xl text-lg font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition-all shadow-2xl shadow-blue-500/25"
           >
             {session ? t("hero.goToDashboard") : t("hero.cta")}
             <ArrowRight className="w-5 h-5" />

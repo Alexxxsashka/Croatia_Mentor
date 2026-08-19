@@ -107,7 +107,7 @@ export default function ContactsPage() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-xl shadow-blue-500/10">
             <Mail className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
+          <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl">
             <span className="gradient-text">{t.title}</span>
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -115,16 +115,16 @@ export default function ContactsPage() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Left Column: Contact Cards */}
-          <div className="md:col-span-2 space-y-6">
+          <div className="space-y-6">
             <h2 className="text-xl font-bold flex items-center gap-2">
               <MessageSquare className="w-5 h-5 text-blue-400" />
               {t.contactInfo}
             </h2>
 
             {/* Email Card */}
-            <div className="glass rounded-2xl p-5 hover:border-white/20 transition-all flex flex-col justify-between h-40">
+            <div className="glass rounded-2xl p-5 hover:border-white/20 transition-all flex flex-col justify-between min-h-[8rem]">
               <div>
                 <span className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">
                   {t.email}
@@ -150,7 +150,7 @@ export default function ContactsPage() {
             </div>
 
             {/* Phone UA Card */}
-            <div className="glass rounded-2xl p-5 hover:border-white/20 transition-all flex flex-col justify-between h-40">
+            <div className="glass rounded-2xl p-5 hover:border-white/20 transition-all flex flex-col justify-between min-h-[8rem]">
               <div>
                 <span className="text-xs text-muted-foreground font-semibold uppercase tracking-wider flex items-center gap-1.5">
                   <Flag countryCode="ua" className="w-5 h-3.5 object-cover rounded-[3px] shadow-[0_1px_2px_rgba(0,0,0,0.15)]" /> {t.phoneUa}
@@ -177,7 +177,7 @@ export default function ContactsPage() {
             </div>
 
             {/* Phone HR Card */}
-            <div className="glass rounded-2xl p-5 hover:border-white/20 transition-all flex flex-col justify-between h-40">
+            <div className="glass rounded-2xl p-5 hover:border-white/20 transition-all flex flex-col justify-between min-h-[8rem]">
               <div>
                 <span className="text-xs text-muted-foreground font-semibold uppercase tracking-wider flex items-center gap-1.5">
                   <Flag countryCode="hr" className="w-5 h-3.5 object-cover rounded-[3px] shadow-[0_1px_2px_rgba(0,0,0,0.15)]" /> {t.phoneHr}
@@ -204,12 +204,12 @@ export default function ContactsPage() {
           </div>
 
           {/* Right Column: Donation details */}
-          <div className="md:col-span-3 space-y-6">
+          <div className="space-y-6">
             <h2 className="text-xl font-bold flex items-center gap-2">
               <Heart className="w-5 h-5 text-red-500 animate-pulse" />
               {t.donationTitle}
             </h2>
-            <div className="glass rounded-3xl p-6 md:p-8 space-y-6 border border-red-500/10">
+            <div className="glass rounded-3xl p-5 sm:p-8 space-y-6 border border-red-500/10">
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {t.donationDesc}
               </p>

@@ -138,7 +138,7 @@ export function NewsBell() {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="relative p-2 rounded-xl glass hover:bg-black/5 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-all duration-200"
+        className="relative p-2.5 rounded-xl glass hover:bg-black/5 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-all duration-200 touch-target"
         aria-label="Notifications"
       >
         <Bell className="w-4.5 h-4.5" />
@@ -151,7 +151,7 @@ export function NewsBell() {
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute right-0 mt-3 w-80 sm:w-96 rounded-2xl glass-dropdown border border-black/10 dark:border-white/10 shadow-2xl p-4 z-50 animate-scale-up space-y-3">
+        <div className="absolute right-0 sm:right-0 mt-3 w-[calc(100vw-2rem)] sm:w-96 max-w-[24rem] rounded-2xl glass-dropdown border border-black/10 dark:border-white/10 shadow-2xl p-3 sm:p-4 z-50 animate-scale-up space-y-3" style={{ right: 'min(0px, calc(-50vw + 50% + 1rem))' }}>
           {/* Header */}
           <div className="flex items-center justify-between border-b border-black/5 dark:border-white/10 pb-3">
             <div className="flex items-center gap-2">
@@ -225,8 +225,8 @@ export function NewsBell() {
 
       {/* Selected News Detail Modal */}
       {selectedNews && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md animate-fade-in">
-          <div className="relative w-full max-w-lg overflow-hidden glass-modal rounded-3xl border border-white/10 shadow-2xl p-6 md:p-8 animate-scale-up space-y-6">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-950/70 backdrop-blur-md animate-fade-in">
+          <div className="relative w-full sm:max-w-lg overflow-hidden glass-modal rounded-t-3xl sm:rounded-3xl border border-white/10 shadow-2xl p-5 sm:p-8 animate-scale-up space-y-5 sm:space-y-6 max-h-[85vh] overflow-y-auto">
             <button
               onClick={() => setSelectedNews(null)}
               className="absolute top-4 right-4 p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all"

@@ -570,7 +570,7 @@ export default function AIChatPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-4 h-[calc(100vh-7.5rem)] flex flex-col">
+    <div className="max-w-4xl mx-auto px-3 sm:px-4 py-3 sm:py-4 h-[calc(100dvh-3.5rem)] sm:h-[calc(100dvh-4rem)] flex flex-col">
       {/* Top Bar Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3 animate-fade-in border-b border-white/5 pb-3">
         <div className="flex items-center gap-3">
@@ -669,7 +669,7 @@ export default function AIChatPage() {
       )}
 
       {/* Mode Selection Tabs */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2 mb-3">
         <button
           onClick={() => setChatMode("conversation")}
           className={`p-2.5 rounded-xl text-xs font-bold border flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
@@ -763,7 +763,7 @@ export default function AIChatPage() {
       })()}
 
       {/* Messages Feed Area */}
-      <div className="flex-1 overflow-y-auto rounded-2xl glass p-4 mb-3 space-y-4">
+      <div className="flex-1 overflow-y-auto rounded-2xl glass p-3 sm:p-4 mb-3 space-y-3 sm:space-y-4">
         {messages.map((msg, i) => (
           <div
             key={i}
@@ -887,8 +887,8 @@ export default function AIChatPage() {
       )}
 
       {/* Diacritic Toolbar */}
-      <div className="flex items-center justify-center gap-1 mb-2">
-        <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider mr-1">
+      <div className="flex items-center justify-center gap-0.5 sm:gap-1 mb-2 mobile-scroll-x py-1">
+        <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider mr-1 shrink-0">
           {locale === "ua" ? "Літери:" : locale === "ru" ? "Буквы:" : "Diacritics:"}
         </span>
         {DIACRITICS.map((char) => (
@@ -896,7 +896,7 @@ export default function AIChatPage() {
             key={char}
             type="button"
             onClick={() => insertChar(char)}
-            className="w-7 h-7 rounded-md bg-white/5 border border-white/10 text-xs font-bold text-foreground hover:bg-purple-600 hover:text-white transition-all cursor-pointer"
+            className="w-8 h-8 sm:w-7 sm:h-7 rounded-md bg-white/5 border border-white/10 text-xs font-bold text-foreground hover:bg-purple-600 hover:text-white transition-all cursor-pointer shrink-0 touch-target"
           >
             {char}
           </button>
@@ -904,7 +904,7 @@ export default function AIChatPage() {
       </div>
 
       {/* Input controls with Microphone & Send */}
-      <div className="flex gap-2">
+      <div className="flex gap-1.5 sm:gap-2 pb-safe">
         <div className="flex-1 relative">
           <textarea
             ref={inputRef}
@@ -912,7 +912,7 @@ export default function AIChatPage() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             rows={1}
-            className="w-full px-4 py-3.5 pr-12 rounded-2xl glass border border-white/10 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all placeholder:text-muted-foreground/50"
+            className="w-full px-3 sm:px-4 py-3 sm:py-3.5 pr-4 rounded-2xl glass border border-white/10 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all placeholder:text-muted-foreground/50"
             placeholder={t("placeholder")}
           />
         </div>
@@ -921,7 +921,7 @@ export default function AIChatPage() {
         <button
           type="button"
           onClick={isListening ? stopListening : startListening}
-          className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all cursor-pointer shrink-0 ${
+          className={`w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center transition-all cursor-pointer shrink-0 ${
             isListening
               ? "bg-red-500 text-white animate-pulse shadow-lg shadow-red-500/30"
               : "glass border border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10"
@@ -936,7 +936,7 @@ export default function AIChatPage() {
           type="button"
           onClick={() => sendMessage()}
           disabled={!input.trim() || loading}
-          className="w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center text-white hover:opacity-90 transition-all shadow-lg shadow-purple-500/25 disabled:opacity-40 disabled:cursor-not-allowed shrink-0 cursor-pointer"
+          className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center text-white hover:opacity-90 transition-all shadow-lg shadow-purple-500/25 disabled:opacity-40 disabled:cursor-not-allowed shrink-0 cursor-pointer"
         >
           <Send className="w-5 h-5" />
         </button>

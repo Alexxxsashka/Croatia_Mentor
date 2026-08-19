@@ -68,7 +68,17 @@ function renderNavbarAvatar(avatarStr: string | null | undefined, nameInitials: 
 export function Navbar() {
   const t = useTranslations("nav");
   const { data: session } = useSession();
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileOpen, setMobileOpenRaw] = useState(false);
+
+  // Wrapper to lock/unlock body scroll when mobile menu toggles
+  const setMobileOpen = (open: boolean) => {
+    setMobileOpenRaw(open);
+    if (open) {
+      document.body.classList.add("mobile-menu-open");
+    } else {
+      document.body.classList.remove("mobile-menu-open");
+    }
+  };
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -93,6 +103,13 @@ export function Navbar() {
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Cleanup body scroll lock on unmount
+  useEffect(() => {
+    return () => {
+      document.body.classList.remove("mobile-menu-open");
+    };
   }, []);
 
   const toggleTheme = () => {
@@ -130,8 +147,8 @@ export function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 glass border-b border-black/5 dark:border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
           <Link
             href="/"
@@ -174,11 +191,11 @@ export function Navbar() {
           </div>
 
           {/* Right side */}
-          <div className="flex items-center gap-2.5 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-xl glass hover:bg-black/5 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-all duration-200"
+              className="p-2.5 sm:p-2 rounded-xl glass hover:bg-black/5 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-all duration-200 touch-target"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? (
@@ -279,12 +296,12 @@ export function Navbar() {
             {/* Mobile menu toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+              className="md:hidden p-2.5 rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition-colors touch-target"
             >
               {mobileOpen ? (
-                <X className="w-5 h-5" />
+                <X className="w-6 h-6" />
               ) : (
-                <Menu className="w-5 h-5" />
+                <Menu className="w-6 h-6" />
               )}
             </button>
           </div>
@@ -293,17 +310,17 @@ export function Navbar() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden pb-4 pt-2 border-t border-black/5 dark:border-white/5 animate-fade-in">
+        <div className="md:hidden pb-6 pt-3 border-t border-black/5 dark:border-white/5 animate-slide-down px-1 max-h-[calc(100vh-3.5rem)] overflow-y-auto pb-safe">
           <div className="flex flex-col gap-1">
             {navLinks.map((link) => {
               if (link.disabled) {
                 return (
                   <span
                     key={link.href}
-                    className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground/40 cursor-not-allowed"
+                    className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-muted-foreground/40 cursor-not-allowed"
                     title={locale === "ua" ? "Тимчасово недоступно" : locale === "ru" ? "Временно недоступно" : "Temporarily unavailable"}
                   >
-                    <link.icon className="w-4 h-4" />
+                    <link.icon className="w-5 h-5" />
                     {link.label}
                   </span>
                 );
@@ -313,9 +330,9 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-all"
+                  className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-all active:bg-black/10 dark:active:bg-white/10"
                 >
-                  <link.icon className="w-4 h-4" />
+                  <link.icon className="w-5 h-5" />
                   {link.label}
                 </Link>
               );
@@ -326,16 +343,16 @@ export function Navbar() {
                 <Link
                   href="/profile"
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-blue-400 hover:bg-blue-500/10 transition-all"
+                  className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-blue-400 hover:bg-blue-500/10 active:bg-blue-500/20 transition-all"
                 >
-                  <User className="w-4 h-4" />
+                  <User className="w-5 h-5" />
                   {locale === "ua" ? "Профіль учасника" : locale === "ru" ? "Профиль участника" : "My Profile"}
                 </Link>
                 {isAdmin && (
                   <Link
                     href="/admin"
                     onClick={() => setMobileOpen(false)}
-                    className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-amber-400 hover:bg-amber-500/10 transition-all"
+                    className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-amber-400 hover:bg-amber-500/10 active:bg-amber-500/20 transition-all"
                   >
                     <ShieldAlert className="w-4 h-4" />
                     Admin Panel
@@ -350,9 +367,9 @@ export function Navbar() {
                   signOut();
                   setMobileOpen(false);
                 }}
-                className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-red-400 hover:bg-red-500/10 transition-all"
+                className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-red-400 hover:bg-red-500/10 active:bg-red-500/20 transition-all"
               >
-                <LogOut className="w-4 h-4" />
+                <LogOut className="w-5 h-5" />
                 {t("signOut")}
               </button>
             ) : (
@@ -360,14 +377,14 @@ export function Navbar() {
                 <Link
                   href="/sign-in"
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-all"
+                  className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-all"
                 >
                   {t("signIn")}
                 </Link>
                 <Link
                   href="/sign-up"
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white text-center"
+                  className="flex items-center justify-center gap-3 px-4 py-3.5 rounded-xl text-base font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white text-center shadow-lg"
                 >
                   {t("signUp")}
                 </Link>
