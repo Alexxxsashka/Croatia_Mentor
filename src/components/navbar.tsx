@@ -195,13 +195,13 @@ export function Navbar() {
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
-              className="p-2.5 sm:p-2 rounded-xl glass hover:bg-black/5 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-all duration-200 touch-target"
+              className="hidden sm:flex p-2 rounded-xl glass hover:bg-black/5 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-all duration-200"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? (
-                <Sun className="w-4.5 h-4.5 text-yellow-500" />
+                <Sun className="w-4 h-4 text-yellow-500" />
               ) : (
-                <Moon className="w-4.5 h-4.5 text-indigo-600" />
+                <Moon className="w-4 h-4 text-indigo-600" />
               )}
             </button>
 
@@ -216,7 +216,7 @@ export function Navbar() {
                 <button
                   type="button"
                   onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-                  className="flex items-center gap-2 p-1.5 pr-2.5 rounded-xl glass hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-200 border border-black/5 dark:border-white/10"
+                  className="flex items-center gap-1.5 p-1 pr-2 sm:pr-2.5 rounded-xl glass hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-200 border border-black/5 dark:border-white/10"
                 >
                   <div className="w-7 h-7 rounded-lg overflow-hidden flex items-center justify-center shadow-md">
                     {renderNavbarAvatar(session.user?.image, session.user?.name?.[0]?.toUpperCase() || "U")}

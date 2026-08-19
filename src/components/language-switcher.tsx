@@ -40,12 +40,12 @@ export function LanguageSwitcher() {
     <div className="relative" ref={ref}>
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 px-2.5 sm:px-3 py-2.5 sm:py-2 rounded-xl glass hover:bg-black/5 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-all duration-200 shrink-0 touch-target"
+        className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 rounded-xl glass hover:bg-black/5 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-all duration-200 shrink-0"
         aria-label="Switch language"
       >
-        <Globe className="w-4 h-4 shrink-0" />
+        <Globe className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
         <span className="flex items-center justify-center shrink-0">
-          <Flag countryCode={currentLocale.countryCode} className="w-5 h-3.5 rounded-[2px] shadow-sm" />
+          <Flag countryCode={currentLocale.countryCode} className="w-4 h-3 sm:w-5 sm:h-3.5 rounded-[2px] shadow-sm" />
         </span>
       </button>
 

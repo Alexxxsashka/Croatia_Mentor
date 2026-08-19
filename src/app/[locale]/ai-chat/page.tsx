@@ -669,10 +669,10 @@ export default function AIChatPage() {
       )}
 
       {/* Mode Selection Tabs */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2 mb-3">
+      <div className="flex items-center gap-1.5 sm:gap-2 mb-3 mobile-scroll-x py-0.5">
         <button
           onClick={() => setChatMode("conversation")}
-          className={`p-2.5 rounded-xl text-xs font-bold border flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+          className={`px-3 py-2 sm:p-2.5 rounded-xl text-xs font-bold border flex items-center justify-center gap-1.5 transition-all cursor-pointer shrink-0 ${
             chatMode === "conversation"
               ? "bg-purple-600 text-white border-purple-500 shadow-md"
               : "glass border-white/10 text-muted-foreground hover:text-foreground"
@@ -684,7 +684,7 @@ export default function AIChatPage() {
 
         <button
           onClick={() => setChatMode("essay")}
-          className={`p-2.5 rounded-xl text-xs font-bold border flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+          className={`px-3 py-2 sm:p-2.5 rounded-xl text-xs font-bold border flex items-center justify-center gap-1.5 transition-all cursor-pointer shrink-0 ${
             chatMode === "essay"
               ? "bg-purple-600 text-white border-purple-500 shadow-md"
               : "glass border-white/10 text-muted-foreground hover:text-foreground"
@@ -696,7 +696,7 @@ export default function AIChatPage() {
 
         <button
           onClick={() => setChatMode("exam")}
-          className={`p-2.5 rounded-xl text-xs font-bold border flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+          className={`px-3 py-2 sm:p-2.5 rounded-xl text-xs font-bold border flex items-center justify-center gap-1.5 transition-all cursor-pointer shrink-0 ${
             chatMode === "exam"
               ? "bg-purple-600 text-white border-purple-500 shadow-md"
               : "glass border-white/10 text-muted-foreground hover:text-foreground"
@@ -708,7 +708,7 @@ export default function AIChatPage() {
 
         <button
           onClick={() => setChatMode("roleplay")}
-          className={`p-2.5 rounded-xl text-xs font-bold border flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+          className={`px-3 py-2 sm:p-2.5 rounded-xl text-xs font-bold border flex items-center justify-center gap-1.5 transition-all cursor-pointer shrink-0 ${
             chatMode === "roleplay"
               ? "bg-purple-600 text-white border-purple-500 shadow-md"
               : "glass border-white/10 text-muted-foreground hover:text-foreground"
@@ -741,7 +741,7 @@ export default function AIChatPage() {
         ];
 
         return (
-          <div className="flex items-center gap-2 mb-3 overflow-x-auto pb-1">
+          <div className="flex items-center gap-2 mb-3 mobile-scroll-x pb-1">
             <span className="text-xs font-bold text-purple-400 shrink-0">
               {t("scenarioLabel")}
             </span>
