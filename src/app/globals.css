@@ -117,12 +117,12 @@
   color: #0f172a !important;
 }
 
-[data-theme="orange-white"] .text-white {
+[data-theme="orange-white"] .text-slate-100 {
   color: #0f172a !important;
 }
 
-[data-theme="orange-white"] .text-slate-100 {
-  color: #0f172a !important;
+[data-theme="orange-white"] .text-slate-200 {
+  color: #1e293b !important;
 }
 
 [data-theme="orange-white"] .text-slate-300 {
@@ -137,25 +137,36 @@
   color: #64748b !important;
 }
 
+/* CARDS & CONTAINERS IN LIGHT MODE */
 [data-theme="orange-white"] .bg-slate-950,
 [data-theme="orange-white"] .bg-slate-950\/80,
 [data-theme="orange-white"] .bg-slate-950\/90,
-[data-theme="orange-white"] .bg-slate-950\/70 {
-  background-color: rgba(255, 255, 255, 0.94) !important;
+[data-theme="orange-white"] .bg-slate-950\/70,
+[data-theme="orange-white"] .bg-slate-950\/60,
+[data-theme="orange-white"] .bg-slate-950\/50,
+[data-theme="orange-white"] .bg-black\/40,
+[data-theme="orange-white"] .bg-black\/30,
+[data-theme="orange-white"] .bg-black\/20 {
+  background-color: rgba(241, 245, 249, 0.95) !important;
+  border-color: rgba(203, 213, 225, 0.8) !important;
   color: #0f172a !important;
 }
 
 [data-theme="orange-white"] .bg-slate-900,
 [data-theme="orange-white"] .bg-slate-900\/80,
-[data-theme="orange-white"] .bg-slate-900\/90 {
-  background-color: rgba(248, 250, 252, 0.95) !important;
+[data-theme="orange-white"] .bg-slate-900\/90,
+[data-theme="orange-white"] .bg-slate-900\/60 {
+  background-color: rgba(248, 250, 252, 0.96) !important;
   color: #0f172a !important;
+  border-color: rgba(203, 213, 225, 0.8) !important;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 }
 
 [data-theme="orange-white"] .border-slate-800,
 [data-theme="orange-white"] .border-slate-800\/80,
-[data-theme="orange-white"] .border-slate-800\/60 {
+[data-theme="orange-white"] .border-slate-800\/60,
+[data-theme="orange-white"] .border-white\/10,
+[data-theme="orange-white"] .border-white\/5 {
   border-color: rgba(203, 213, 225, 0.85) !important;
 }
 
@@ -163,10 +174,27 @@
   border-color: rgba(148, 163, 184, 0.6) !important;
 }
 
+/* INPUTS & SEARCH BARS IN LIGHT MODE */
+[data-theme="orange-white"] input,
+[data-theme="orange-white"] textarea,
+[data-theme="orange-white"] select {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: rgba(203, 213, 225, 0.9) !important;
+}
+
+[data-theme="orange-white"] input::placeholder,
+[data-theme="orange-white"] textarea::placeholder {
+  color: #64748b !important;
+}
+
+/* PURPLE ACCENTS & BADGES IN LIGHT MODE */
 [data-theme="orange-white"] .bg-purple-950\/50,
 [data-theme="orange-white"] .bg-purple-950\/40,
-[data-theme="orange-white"] .bg-purple-950\/60 {
+[data-theme="orange-white"] .bg-purple-950\/60,
+[data-theme="orange-white"] .bg-purple-950\/30 {
   background-color: rgba(243, 232, 255, 0.95) !important;
+  border-color: rgba(192, 132, 252, 0.4) !important;
 }
 
 [data-theme="orange-white"] .text-purple-300 {
@@ -197,10 +225,32 @@
   color: #0891b2 !important;
 }
 
+/* CRITICAL: BUTTONS & BADGES WITH PURPLE/INDIGO/GRADIENT BACKGROUNDS MUST ALWAYS KEEP CRISP WHITE TEXT */
+[data-theme="orange-white"] button.bg-gradient-to-r,
+[data-theme="orange-white"] a.bg-gradient-to-r,
+[data-theme="orange-white"] .bg-gradient-to-r,
+[data-theme="orange-white"] .bg-purple-600,
+[data-theme="orange-white"] .bg-purple-500,
+[data-theme="orange-white"] .bg-indigo-600,
+[data-theme="orange-white"] [class*="bg-gradient-to"] {
+  color: #ffffff !important;
+}
+
+[data-theme="orange-white"] button.bg-gradient-to-r *,
+[data-theme="orange-white"] a.bg-gradient-to-r *,
+[data-theme="orange-white"] .bg-gradient-to-r *,
+[data-theme="orange-white"] .bg-purple-600 *,
+[data-theme="orange-white"] .bg-purple-500 *,
+[data-theme="orange-white"] .bg-indigo-600 *,
+[data-theme="orange-white"] [class*="bg-gradient-to"] * {
+  color: #ffffff !important;
+}
+
 [data-theme="orange-white"] .bg-gradient-to-br.from-purple-950\/60 {
   background: linear-gradient(135deg, rgba(243, 232, 255, 0.95), rgba(238, 242, 255, 0.95)) !important;
   border-color: rgba(168, 85, 247, 0.4) !important;
 }
+
 
 
 
