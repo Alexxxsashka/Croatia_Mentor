@@ -610,33 +610,21 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
               <div className="pt-2 flex flex-wrap items-center gap-6 text-xs text-slate-300 font-mono">
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4 text-purple-400" />
-                  <span>{t("editorial.contactSection.emailValue")}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Send className="w-4 h-4 text-cyan-400" />
-                  <span>{t("editorial.contactSection.communityValue")}</span>
+                  <a href="mailto:guardsowh@gmail.com" className="hover:text-purple-300 transition-colors">
+                    {t("editorial.contactSection.emailValue")}
+                  </a>
                 </div>
               </div>
             </div>
 
-            <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-4">
+            <div className="lg:col-span-4 flex justify-end">
               <Link
                 href="/contacts"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 hover:from-purple-500 hover:to-indigo-500 text-white font-extrabold uppercase text-xs tracking-[0.2em] transition-all shadow-xl shadow-purple-600/30 rounded-xl text-center glow-hover"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 hover:from-purple-500 hover:to-indigo-500 text-white font-extrabold uppercase text-xs tracking-[0.2em] transition-all shadow-xl shadow-purple-600/30 rounded-xl text-center glow-hover w-full sm:w-auto"
               >
                 <Mail className="w-4 h-4" />
                 <span>{t("editorial.contactSection.ctaPrimary")}</span>
               </Link>
-              
-              <a
-                href="https://t.me/croatia_mentor_community"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-slate-900/90 border border-slate-700 hover:border-cyan-400 text-slate-300 hover:text-white font-extrabold uppercase text-xs tracking-[0.2em] transition-all rounded-xl text-center backdrop-blur-md"
-              >
-                <Send className="w-4 h-4 text-cyan-400" />
-                <span>{t("editorial.contactSection.ctaCommunity")}</span>
-              </a>
             </div>
 
           </div>

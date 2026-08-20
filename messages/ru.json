@@ -141,15 +141,12 @@
       },
 
       "contactSection": {
-        "tag": "СООБЩЕСТВО И ПОДДЕРЖКА",
+        "tag": "СЛУЖБА ПОДДЕРЖКИ",
         "title": "МЫ ВСЕГДА НА СВЯЗИ",
-        "desc": "Есть вопросы, предложения или нужна помощь в изучении хорватского? Напишите нам или присоединяйтесь к нашему сообществу.",
+        "desc": "Есть вопросы, предложения или нужна помощь в изучении хорватского? Напишите нам напрямую в службу поддержки.",
         "ctaPrimary": "НАПИСАТЬ В ПОДДЕРЖКУ",
-        "ctaCommunity": "TELEGRAM СООБЩЕСТВО",
         "emailLabel": "Email поддержки",
-        "emailValue": "support@croatia-mentor.space",
-        "communityLabel": "Сообщество учащихся",
-        "communityValue": "t.me/croatia_mentor_community"
+        "emailValue": "guardsowh@gmail.com"
       },
 
       "copyright": "© 2026 CROATIA MENTOR · ВСЕ ПРАВА ЗАЩИЩЕНЫ"

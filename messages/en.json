@@ -141,15 +141,12 @@
       },
 
       "contactSection": {
-        "tag": "COMMUNITY & SUPPORT",
+        "tag": "HELP & SUPPORT",
         "title": "WE ARE HERE TO HELP YOU SUCCEED",
-        "desc": "Have questions, feedback, or need help with your Croatian learning journey? Reach out to our team or join our community.",
+        "desc": "Have questions, feedback, or need help with your Croatian learning journey? Reach out directly to our support team.",
         "ctaPrimary": "CONTACT SUPPORT",
-        "ctaCommunity": "JOIN TELEGRAM COMMUNITY",
         "emailLabel": "Support Email",
-        "emailValue": "support@croatia-mentor.space",
-        "communityLabel": "Learner Community",
-        "communityValue": "t.me/croatia_mentor_community"
+        "emailValue": "guardsowh@gmail.com"
       },
 
       "copyright": "© 2026 CROATIA MENTOR · ALL RIGHTS RESERVED"
