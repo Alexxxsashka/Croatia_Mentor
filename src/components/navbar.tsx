@@ -23,7 +23,9 @@ import {
   User,
   ChevronDown,
   Flame,
+  Sparkles,
 } from "lucide-react";
+
 import { useState, useEffect, useRef } from "react";
 
 const PRESET_AVATARS = [
