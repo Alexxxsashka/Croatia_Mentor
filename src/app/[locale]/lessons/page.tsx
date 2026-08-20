@@ -24,29 +24,19 @@ import {
   Gamepad2,
   LayoutGrid,
   List as ListIcon,
-  FileText,
-  FileQuestion,
-  Layers,
   Clock,
+  Zap,
+  Award,
+  Compass,
 } from "lucide-react";
 import { toast } from "sonner";
 
 const LEVEL_ORDER = ["A1", "A2", "B1", "B2", "C1", "C2"];
 
-const DUST_PARTICLES = Array.from({ length: 30 }).map((_, i) => ({
-  id: i,
-  top: `${(i * 13) % 100}%`,
-  left: `${(i * 27) % 100}%`,
-  size: `${(i % 3) + 2}px`,
-  delay: `${(i * 0.3).toFixed(1)}s`,
-  duration: `${((i % 4) * 2 + 7).toFixed(1)}s`,
-}));
-
 export default function LessonsPage() {
   const t = useTranslations("lessons");
   const locale = useLocale();
 
-  const [scrollY, setScrollY] = useState(0);
   const [filterType, setFilterType] = useState<string>("all");
   const [filterLevel, setFilterLevel] = useState<string>("all");
   const [viewMode, setViewMode] = useState<"map" | "grid" | "list">("map");
@@ -59,7 +49,7 @@ export default function LessonsPage() {
 
   // Promotion Test states
   const [showPromoModal, setShowPromoModal] = useState(false);
-  const [promoLevel, setPromoLevel] = useState<string>("A1"); // level they are testing from
+  const [promoLevel, setPromoLevel] = useState<string>("A1");
   const [currentPromoQ, setCurrentPromoQ] = useState(0);
   const [promoAnswers, setPromoAnswers] = useState<(number | null)[]>([]);
   const [selectedPromoAnswer, setSelectedPromoAnswer] = useState<number | null>(null);
@@ -95,14 +85,6 @@ export default function LessonsPage() {
     }
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   const handleViewChange = (mode: "map" | "grid" | "list") => {
     setViewMode(mode);
     localStorage.setItem("lessons_view_mode", mode);
@@ -126,10 +108,10 @@ export default function LessonsPage() {
   };
 
   const typeGradients: Record<string, string> = {
-    grammar: "from-blue-500 to-cyan-400",
-    reading: "from-purple-500 to-pink-400",
-    dictation: "from-orange-500 to-yellow-400",
-    communication: "from-green-500 to-emerald-400",
+    grammar: "from-purple-600 to-indigo-500",
+    reading: "from-pink-600 to-purple-500",
+    dictation: "from-blue-600 to-cyan-500",
+    communication: "from-emerald-600 to-teal-500",
   };
 
   // Calculate current level progress
@@ -229,13 +211,12 @@ export default function LessonsPage() {
 
       if (passed) {
         const nextLevel = test.targetLevel;
-        // Save to DB
         fetch("/api/progress", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             currentLevel: nextLevel,
-            totalXP: totalXP + 100, // 100 XP bonus for passing level
+            totalXP: totalXP + 100,
           }),
         })
           .then((res) => res.json())
@@ -264,186 +245,232 @@ export default function LessonsPage() {
   const activePromoQuestionObj = activeTest?.questions[currentPromoQ];
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen bg-transparent text-slate-100 font-sans selection:bg-purple-600 selection:text-white py-8 px-4 sm:px-6 lg:px-8 space-y-10">
+      
+      <div className="max-w-7xl mx-auto space-y-8 relative z-10">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
-      {/* Header */}
-      <div className="mb-8 animate-fade-in flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-slate-900 dark:text-white">{t("title")}</h1>
-          <p className="text-slate-600 dark:text-slate-400 mt-1">{t("subtitle")}</p>
+        {/* HERO HEADER */}
+        <div className="animate-fade-in flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-2 border-b border-white/10">
+          <div className="space-y-3 max-w-2xl">
+            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-purple-300 bg-purple-950/50 px-4 py-2 rounded-full border border-purple-500/30 backdrop-blur-sm shadow-lg shadow-purple-950/50">
+              <Sparkles className="w-4 h-4 text-purple-400 animate-pulse" />
+              <span>
+                {locale === "ua"
+                  ? "ІНТЕРАКТИВНИЙ КАТАЛОГ УРОКІВ CEFR"
+                  : locale === "ru"
+                  ? "ИНТЕРАКТИВНЫЙ КАТАЛОГ УРОКОВ CEFR"
+                  : "INTERACTIVE CEFR LESSON PATH"}
+              </span>
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl font-black uppercase tracking-tight text-white leading-tight font-editorial">
+              {locale === "ua" ? (
+                <>
+                  Каталог <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-500 bg-clip-text text-transparent">Уроків</span> Хорватської
+                </>
+              ) : locale === "ru" ? (
+                <>
+                  Каталог <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-500 bg-clip-text text-transparent">Уроков</span> Хорватского
+                </>
+              ) : (
+                <>
+                  Croatian <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-500 bg-clip-text text-transparent">Lesson</span> Roadmap
+                </>
+              )}
+            </h1>
+
+            <p className="text-slate-300 text-base leading-relaxed">
+              {t("subtitle")}
+            </p>
+          </div>
+
+          {/* STATS OVERVIEW CARDS */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 shrink-0">
+            <div className="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 backdrop-blur-md text-center space-y-1">
+              <BookOpen className="w-5 h-5 text-purple-400 mx-auto" />
+              <span className="text-lg font-black text-white font-mono block">52</span>
+              <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
+                {locale === "ua" ? "Всього уроків" : locale === "ru" ? "Всего уроков" : "Total Lessons"}
+              </span>
+            </div>
+
+            <div className="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 backdrop-blur-md text-center space-y-1">
+              <CheckCircle2 className="w-5 h-5 text-emerald-400 mx-auto" />
+              <span className="text-lg font-black text-emerald-400 font-mono block">{completedLessons.length}</span>
+              <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
+                {locale === "ua" ? "Пройдено" : locale === "ru" ? "Пройдено" : "Completed"}
+              </span>
+            </div>
+
+            <div className="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 backdrop-blur-md text-center space-y-1">
+              <Zap className="w-5 h-5 text-amber-400 mx-auto" />
+              <span className="text-lg font-black text-amber-400 font-mono block">{totalXP} XP</span>
+              <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
+                {locale === "ua" ? "Накопичено" : locale === "ru" ? "Накоплено" : "Earned XP"}
+              </span>
+            </div>
+
+            <div className="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 backdrop-blur-md text-center space-y-1">
+              <Award className="w-5 h-5 text-indigo-400 mx-auto" />
+              <span className="text-lg font-black text-indigo-400 font-mono block">{userLevel}</span>
+              <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
+                {locale === "ua" ? "Рівень" : locale === "ru" ? "Уровень" : "Current Level"}
+              </span>
+            </div>
+          </div>
         </div>
 
-        {/* View Mode Switcher Toolbar */}
-        <div className="flex items-center gap-1.5 p-1.5 glass rounded-2xl border border-orange-500/20 shadow-lg shrink-0">
-          <button
-            onClick={() => handleViewChange("map")}
-            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
-              viewMode === "map"
-                ? "bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 text-white shadow-md shadow-orange-500/25"
-                : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
-            }`}
-            title="Interactive Map"
-          >
-            <Gamepad2 className="w-4 h-4" />
-            <span>{locale === "ua" ? "Карта" : locale === "ru" ? "Карта" : "Game Map"}</span>
-          </button>
+        {/* Daily Lesson Limit Warning Banner */}
+        {hasCompletedLessonToday && (
+          <div className="p-4 sm:p-5 rounded-2xl bg-purple-950/50 border border-purple-500/30 text-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-fade-in backdrop-blur-md shadow-lg shadow-purple-950/40">
+            <div className="flex items-center gap-3.5">
+              <div className="w-11 h-11 rounded-xl bg-purple-500/20 flex items-center justify-center shrink-0 text-purple-300 border border-purple-500/30 shadow-md">
+                <Clock className="w-6 h-6 animate-pulse" />
+              </div>
+              <div>
+                <h4 className="font-bold text-sm text-white uppercase tracking-wide">
+                  {locale === "ua"
+                    ? "Денний ліміт уроків досягнуто"
+                    : locale === "ru"
+                    ? "Дневной лимит уроков достигнут"
+                    : "Daily Lesson Limit Reached"}
+                </h4>
+                <p className="text-xs text-slate-300 mt-0.5">
+                  {locale === "ua"
+                    ? "Ви вже успішно пройшли урок за сьогодні. Закріплюйте знання в міні-іграх!"
+                    : locale === "ru"
+                    ? "Вы уже успешно прошли урок за сегодня. Закрепляйте знания в мини-играх!"
+                    : "You have already completed a lesson today. Practice with mini-games to reinforce your skills!"}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
-          <button
-            onClick={() => handleViewChange("grid")}
-            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
-              viewMode === "grid"
-                ? "bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 text-white shadow-md shadow-orange-500/25"
-                : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
-            }`}
-            title="Grid / Islands"
-          >
-            <LayoutGrid className="w-4 h-4" />
-            <span>{locale === "ua" ? "Острови" : locale === "ru" ? "Острова" : "Islands Grid"}</span>
-          </button>
+        {/* LEVEL PROGRESS & PROMOTION HUB CARD */}
+        <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-purple-500/30 backdrop-blur-md flex flex-col lg:flex-row items-center justify-between gap-6 shadow-2xl shadow-purple-950/40 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
 
-          <button
-            onClick={() => handleViewChange("list")}
-            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
-              viewMode === "list"
-                ? "bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 text-white shadow-md shadow-orange-500/25"
-                : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
-            }`}
-            title="List View"
-          >
-            <ListIcon className="w-4 h-4" />
-            <span>{locale === "ua" ? "Список" : locale === "ru" ? "Список" : "List"}</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Daily Lesson Limit Warning Banner */}
-      {hasCompletedLessonToday && (
-        <div className="mb-8 p-4 sm:p-5 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-900 dark:text-amber-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-fade-in">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center shrink-0 text-amber-600 dark:text-amber-400 shadow-md">
-              <Clock className="w-5 h-5" />
+          <div className="flex items-center gap-5 relative z-10">
+            <div className="w-18 h-18 rounded-2xl flex items-center justify-center text-white text-3xl font-black bg-gradient-to-br from-purple-600 via-indigo-600 to-violet-600 shadow-xl shadow-purple-600/30 border border-purple-400/30 shrink-0">
+              {userLevel}
             </div>
             <div>
-              <h4 className="font-bold text-sm text-amber-900 dark:text-amber-200">
-                {locale === "ua"
-                  ? "Денний ліміт уроків досягнуто"
+              <div className="flex items-center gap-2">
+                <h2 className="text-xl font-bold uppercase font-editorial text-white">
+                  {locale === "ua" ? "Поточний рівень" : locale === "ru" ? "Текущий уровень" : "Current Level"}:
+                </h2>
+                <span className="text-xl font-black text-purple-400 font-mono">{userLevel}</span>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-300 mt-1">
+                {locale === "ua" 
+                  ? `Вивчено уроків на рівні ${userLevel}: ${currentLevelCompleted}/${currentLevelTotal} (${Math.round(currentLevelPercent)}%)`
                   : locale === "ru"
-                  ? "Дневной лимит уроков достигнут"
-                  : "Daily Lesson Limit Reached"}
-              </h4>
-              <p className="text-xs text-amber-800 dark:text-amber-300/80 mt-0.5">
-                {locale === "ua"
-                  ? "Ви вже пройшли урок за сьогодні. Завітайте до міні-ігор для закріплення!"
-                  : locale === "ru"
-                  ? "Вы уже прошли урок за сегодня. Загляните в мини-игры для закрепления!"
-                  : "You have already completed a lesson today. Practice with mini-games to reinforce your knowledge!"}
+                  ? `Пройдено уроков на уровне ${userLevel}: ${currentLevelCompleted}/${currentLevelTotal} (${Math.round(currentLevelPercent)}%)`
+                  : `Completed lessons in level ${userLevel}: ${currentLevelCompleted}/${currentLevelTotal} (${Math.round(currentLevelPercent)}%)`
+                }
               </p>
             </div>
           </div>
-        </div>
-      )}
 
-      {/* Level Progress & Promotion Card */}
-      <div className="glass rounded-3xl p-6 mb-8 animate-fade-in flex flex-col md:flex-row items-center justify-between gap-6 border border-orange-500/20 bg-gradient-to-r from-orange-500/5 via-amber-500/5 to-orange-500/5">
-        <div className="flex items-center gap-4">
-          <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-white text-2xl font-black bg-gradient-to-br from-orange-500 to-amber-500 shadow-lg shadow-orange-500/25`}>
-            {userLevel}
-          </div>
-          <div>
-            <h2 className="text-xl font-bold flex items-center gap-2 text-slate-900 dark:text-white">
-              {locale === "ua" ? "Ваш поточний рівень" : locale === "ru" ? "Ваш текущий уровень" : "Your Current Level"}: <span className="text-orange-500 font-extrabold">{userLevel}</span>
-            </h2>
-            <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-              {locale === "ua" 
-                ? `Вивчено уроків на рівні ${userLevel}: ${currentLevelCompleted}/${currentLevelTotal} (${Math.round(currentLevelPercent)}%)`
-                : locale === "ru"
-                ? `Пройдено уроков на уровне ${userLevel}: ${currentLevelCompleted}/${currentLevelTotal} (${Math.round(currentLevelPercent)}%)`
-                : `Completed lessons in level ${userLevel}: ${currentLevelCompleted}/${currentLevelTotal} (${Math.round(currentLevelPercent)}%)`
-              }
-            </p>
-          </div>
-        </div>
-
-        <div className="flex-1 max-w-sm w-full">
-          <div className="h-3 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden mb-3">
-            <div
-              className={`h-full rounded-full bg-gradient-to-r ${
-                currentLevelPercent === 100 ? "from-emerald-400 to-teal-400 animate-pulse" : "from-orange-500 to-amber-500"
-              } transition-all duration-500`}
-              style={{ width: `${currentLevelPercent}%` }}
-            />
-          </div>
-          
-          {userLevel !== "C2" ? (
-            <button
-              onClick={startPromotionTest}
-              disabled={currentLevelCompleted < currentLevelTotal}
-              className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-all shadow-lg flex items-center justify-center gap-2 ${
-                currentLevelCompleted >= currentLevelTotal && currentLevelTotal > 0
-                  ? "bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 text-white hover:opacity-90 cursor-pointer shadow-orange-500/25"
-                  : "bg-slate-300 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-slate-700 cursor-not-allowed opacity-70 shadow-none"
-              }`}
-            >
-              {currentLevelCompleted < currentLevelTotal ? (
-                <Lock className="w-4 h-4" />
-              ) : (
-                <Sparkles className="w-4 h-4" />
-              )}
-              <span>
-                {locale === "ua"
-                  ? `Скласти іспит на рівень ${LEVEL_ORDER[LEVEL_ORDER.indexOf(userLevel) + 1]}`
-                  : locale === "ru"
-                  ? `Сдать экзамен на уровень ${LEVEL_ORDER[LEVEL_ORDER.indexOf(userLevel) + 1]}`
-                  : `Take ${LEVEL_ORDER[LEVEL_ORDER.indexOf(userLevel) + 1]} Promotion Exam`
-                }
-              </span>
-            </button>
-          ) : (
-            <div className="text-center py-2 text-xs font-bold text-amber-700 dark:text-yellow-400 bg-amber-500/15 border border-amber-500/30 rounded-xl">
-              🏆 {locale === "ua" ? "Вітаємо! Ви досягли максимального рівня!" : locale === "ru" ? "Поздравляем! Вы достигли максимального уровня!" : "Congratulations! You reached the maximum level!"}
+          <div className="flex-1 max-w-md w-full relative z-10 space-y-3">
+            <div className="h-3.5 rounded-full bg-slate-950/80 border border-white/10 overflow-hidden p-0.5">
+              <div
+                className={`h-full rounded-full bg-gradient-to-r ${
+                  currentLevelPercent === 100 ? "from-emerald-400 to-teal-400 animate-pulse" : "from-purple-500 via-indigo-500 to-pink-500"
+                } transition-all duration-500`}
+                style={{ width: `${currentLevelPercent}%` }}
+              />
             </div>
-          )}
-        </div>
-      </div>
-
-      {/* Filters */}
-      <div className="flex flex-wrap gap-6 mb-8 animate-slide-up">
-        {/* Type filter */}
-        <div className="space-y-2">
-          <div className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300 font-medium">
-            <Filter className="w-4 h-4 text-orange-500" />
-            {t("filterByType")}
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {types.map((type) => (
+            
+            {userLevel !== "C2" ? (
               <button
-                key={type.value}
-                onClick={() => setFilterType(type.value)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-                  filterType === type.value
-                    ? "bg-orange-500 text-white shadow-md shadow-orange-500/25"
-                    : "glass text-slate-800 dark:text-slate-200 hover:bg-orange-500/10"
+                onClick={startPromotionTest}
+                disabled={currentLevelCompleted < currentLevelTotal}
+                className={`w-full py-3.5 rounded-xl text-xs sm:text-sm font-extrabold uppercase tracking-wider transition-all shadow-xl flex items-center justify-center gap-2.5 ${
+                  currentLevelCompleted >= currentLevelTotal && currentLevelTotal > 0
+                    ? "bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 hover:from-purple-500 hover:to-indigo-500 text-white cursor-pointer shadow-purple-600/30 glow-hover"
+                    : "bg-slate-950/80 text-slate-500 border border-slate-800 cursor-not-allowed opacity-60 shadow-none"
                 }`}
               >
-                {type.label}
+                {currentLevelCompleted < currentLevelTotal ? (
+                  <Lock className="w-4 h-4" />
+                ) : (
+                  <Sparkles className="w-4 h-4 text-purple-300 animate-spin" />
+                )}
+                <span>
+                  {locale === "ua"
+                    ? `Скласти іспит на рівень ${LEVEL_ORDER[LEVEL_ORDER.indexOf(userLevel) + 1]}`
+                    : locale === "ru"
+                    ? `Сдать экзамен на уровень ${LEVEL_ORDER[LEVEL_ORDER.indexOf(userLevel) + 1]}`
+                    : `Take ${LEVEL_ORDER[LEVEL_ORDER.indexOf(userLevel) + 1]} Promotion Exam`
+                  }
+                </span>
               </button>
-            ))}
+            ) : (
+              <div className="text-center py-2.5 text-xs font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 rounded-xl uppercase tracking-wider">
+                🏆 {locale === "ua" ? "Вітаємо! Ви досягли максимального рівня!" : locale === "ru" ? "Поздравляем! Вы достигли максимального уровня!" : "Congratulations! You reached the maximum level!"}
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Level filter */}
-        <div className="space-y-2">
-          <div className="text-sm text-slate-700 dark:text-slate-300 font-medium">{t("filterByLevel")}</div>
-          <div className="flex flex-wrap gap-2">
+        {/* CONTROLS BAR: VIEW SWITCHER & FILTERS */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded-2xl bg-slate-900/90 border border-slate-800 backdrop-blur-md">
+          
+          {/* View Mode Toolbar */}
+          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-950/80 border border-white/10 shrink-0">
+            <button
+              onClick={() => handleViewChange("map")}
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-2 uppercase tracking-wider ${
+                viewMode === "map"
+                  ? "bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 text-white shadow-md shadow-purple-600/30"
+                  : "text-slate-400 hover:text-white hover:bg-white/5"
+              }`}
+            >
+              <Gamepad2 className="w-4 h-4" />
+              <span>{locale === "ua" ? "Карта" : locale === "ru" ? "Карта" : "Game Map"}</span>
+            </button>
+
+            <button
+              onClick={() => handleViewChange("grid")}
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-2 uppercase tracking-wider ${
+                viewMode === "grid"
+                  ? "bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 text-white shadow-md shadow-purple-600/30"
+                  : "text-slate-400 hover:text-white hover:bg-white/5"
+              }`}
+            >
+              <LayoutGrid className="w-4 h-4" />
+              <span>{locale === "ua" ? "Острови" : locale === "ru" ? "Острова" : "Islands Grid"}</span>
+            </button>
+
+            <button
+              onClick={() => handleViewChange("list")}
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-2 uppercase tracking-wider ${
+                viewMode === "list"
+                  ? "bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 text-white shadow-md shadow-purple-600/30"
+                  : "text-slate-400 hover:text-white hover:bg-white/5"
+              }`}
+            >
+              <ListIcon className="w-4 h-4" />
+              <span>{locale === "ua" ? "Список" : locale === "ru" ? "Список" : "List"}</span>
+            </button>
+          </div>
+
+          {/* Level Filter Pills */}
+          <div className="flex flex-wrap items-center gap-1.5 overflow-x-auto">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400 mr-1 flex items-center gap-1">
+              <Filter className="w-3.5 h-3.5 text-purple-400" />
+              {locale === "ua" ? "Рівень:" : locale === "ru" ? "Уровень:" : "Level:"}
+            </span>
             {levels.map((level) => (
               <button
                 key={level}
                 onClick={() => setFilterLevel(level)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all uppercase ${
                   filterLevel === level
-                    ? "bg-amber-500 text-white shadow-md shadow-amber-500/25"
-                    : "glass text-slate-800 dark:text-slate-200 hover:bg-amber-500/10"
+                    ? "bg-purple-600 text-white border border-purple-400 shadow-md shadow-purple-600/30"
+                    : "bg-slate-950/60 text-slate-400 hover:text-white hover:bg-slate-800 border border-white/5"
                 }`}
               >
                 {level === "all" ? t("all") : level}
@@ -451,421 +478,420 @@ export default function LessonsPage() {
             ))}
           </div>
         </div>
-      </div>
 
-
-      {/* VIEW MODE 1: GAME MAP */}
-      {viewMode === "map" && (
-        <InteractiveGameMap
-          lessons={filtered}
-          completedLessons={completedLessons}
-          userLevel={userLevel}
-          locale={locale}
-          hasCompletedLessonToday={hasCompletedLessonToday}
-          onStartPromoTest={startPromotionTestForLevel}
-        />
-      )}
-
-      {/* VIEW MODE 2: GRID / ISLANDS */}
-      {viewMode === "grid" && (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
-          {filtered.map((lesson) => {
-            const Icon = typeIcons[lesson.type] || BookOpen;
-            const gradient = typeGradients[lesson.type] || "from-gray-500 to-gray-400";
-            const isCompleted = completedLessons.includes(lesson.id);
-            const isLocked = LEVEL_ORDER.indexOf(lesson.level) > LEVEL_ORDER.indexOf(userLevel);
-
-            if (isLocked) {
-              return (
-                <div
-                  key={lesson.id}
-                  onClick={() => {
-                    toast.error(
-                      locale === "ua"
-                        ? `Цей урок заблоковано. Спочатку складіть іспит на рівень ${lesson.level}!`
-                        : locale === "ru"
-                        ? `Этот урок заблокирован. Сначала сдайте экзамен на уровень ${lesson.level}!`
-                        : `This lesson is locked. Pass the ${lesson.level} Promotion Exam first!`
-                    );
-                  }}
-                  className="group glass rounded-2xl p-6 block opacity-50 cursor-pointer border border-dashed border-white/5 relative"
-                >
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
-                      <Lock className="w-6 h-6 text-muted-foreground" />
-                    </div>
-                    <div className="flex-1 flex items-center justify-between">
-                      <div>
-                        <span className="text-xs font-semibold px-2 py-0.5 rounded-md bg-white/10 text-muted-foreground">
-                          {lesson.level}
-                        </span>
-                        <span className="text-xs text-muted-foreground ml-2 capitalize">
-                          {t(lesson.type as "grammar" | "reading" | "dictation" | "communication")}
-                        </span>
-                      </div>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-red-500/10 text-red-400 uppercase tracking-wider flex items-center gap-1">
-                        <Lock className="w-3 h-3" />
-                        {locale === "ua" ? "Заблоковано" : locale === "ru" ? "Заблокирован" : "Locked"}
-                      </span>
-                    </div>
-                  </div>
-                  <h3 className="font-semibold mb-2 text-muted-foreground line-clamp-1">
-                    {getLocalizedText(lesson.title, locale)}
-                  </h3>
-                  <p className="text-sm text-muted-foreground/60 line-clamp-2">
-                    {getLocalizedText(lesson.content.description, locale)}
-                  </p>
-                  <div className="flex items-center gap-1 mt-4 text-sm font-medium text-muted-foreground">
-                    {locale === "ua" ? "Заблоковано" : locale === "ru" ? "Заблокировано" : "Locked"}
-                  </div>
-                </div>
-              );
-            }
-
+        {/* Type Filter Tabs */}
+        <div className="flex flex-wrap gap-2 pt-1">
+          {types.map((type) => {
+            const Icon = type.icon || BookOpen;
             return (
-              <Link
-                key={lesson.id}
-                href={`/lessons/${lesson.id}`}
-                className={`group glass rounded-2xl p-6 block transition-all ${
-                  isCompleted 
-                    ? "border-emerald-500/20 bg-emerald-500/5 hover:border-emerald-500/40 opacity-90"
-                    : "card-hover"
+              <button
+                key={type.value}
+                onClick={() => setFilterType(type.value)}
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 uppercase tracking-wider ${
+                  filterType === type.value
+                    ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white border border-purple-400/40 shadow-lg shadow-purple-600/20"
+                    : "bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 border border-white/5"
                 }`}
               >
-                <div className="flex items-start gap-4 mb-4">
-                  <div
-                    className={`w-12 h-12 rounded-xl bg-gradient-to-br ${
-                      isCompleted ? "from-emerald-600 to-teal-500" : gradient
-                    } flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
-                  >
-                    <Icon className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1 flex items-center justify-between">
-                    <div>
-                      <span
-                        className={`text-xs font-semibold px-2 py-0.5 rounded-md level-${lesson.level.toLowerCase()} text-white`}
-                      >
-                        {lesson.level}
-                      </span>
-                      <span className="text-xs text-muted-foreground ml-2 capitalize">
-                        {t(lesson.type as "grammar" | "reading" | "dictation" | "communication")}
-                      </span>
-                    </div>
-                    {isCompleted && (
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                        {t("completed")}
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <h3 className={`font-semibold mb-2 group-hover:text-blue-400 transition-colors ${
-                  isCompleted ? "text-muted-foreground/90" : ""
-                }`}>
-                  {getLocalizedText(lesson.title, locale)}
-                </h3>
-                <p className="text-sm text-muted-foreground line-clamp-2">
-                  {getLocalizedText(lesson.content.description, locale)}
-                </p>
-                <div className={`flex items-center gap-1 mt-4 text-sm font-medium ${
-                  isCompleted ? "text-emerald-400" : "text-blue-400"
-                }`}>
-                  {isCompleted ? t("repeatLesson") : t("startLesson")}
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </Link>
+                <Icon className="w-4 h-4 text-purple-400" />
+                <span>{type.label}</span>
+              </button>
             );
           })}
         </div>
-      )}
 
-      {/* VIEW MODE 3: LIST */}
-      {viewMode === "list" && (
-        <div className="glass rounded-2xl border border-white/10 overflow-hidden shadow-xl animate-fade-in">
-          <div className="divide-y divide-white/5">
+        {/* VIEW MODE 1: GAME MAP */}
+        {viewMode === "map" && (
+          <InteractiveGameMap
+            lessons={filtered}
+            completedLessons={completedLessons}
+            userLevel={userLevel}
+            locale={locale}
+            hasCompletedLessonToday={hasCompletedLessonToday}
+            onStartPromoTest={startPromotionTestForLevel}
+          />
+        )}
+
+        {/* VIEW MODE 2: GRID / ISLANDS */}
+        {viewMode === "grid" && (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((lesson) => {
               const Icon = typeIcons[lesson.type] || BookOpen;
+              const gradient = typeGradients[lesson.type] || "from-purple-600 to-indigo-500";
               const isCompleted = completedLessons.includes(lesson.id);
               const isLocked = LEVEL_ORDER.indexOf(lesson.level) > LEVEL_ORDER.indexOf(userLevel);
 
-              return (
-                <div
-                  key={lesson.id}
-                  className={`p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-colors ${
-                    isLocked
-                      ? "opacity-50 bg-black/5 dark:bg-white/5"
-                      : isCompleted
-                      ? "bg-emerald-500/5 hover:bg-emerald-500/10"
-                      : "hover:bg-black/5 dark:hover:bg-white/5"
-                  }`}
-                >
-                  <div className="flex items-center gap-4 flex-1 min-w-0">
-                    <div
-                      className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
-                        isLocked
-                          ? "bg-gray-800 text-gray-500"
-                          : isCompleted
-                          ? "bg-emerald-500/20 text-emerald-400"
-                          : "bg-blue-500/20 text-blue-400"
-                      }`}
-                    >
-                      {isLocked ? <Lock className="w-5 h-5" /> : <Icon className="w-5 h-5" />}
-                    </div>
-
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-2 mb-1 flex-wrap">
-                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded level-${lesson.level.toLowerCase()} text-white uppercase`}>
+              if (isLocked) {
+                return (
+                  <div
+                    key={lesson.id}
+                    onClick={() => {
+                      toast.error(
+                        locale === "ua"
+                          ? `Цей урок заблоковано. Спочатку складіть іспит на рівень ${lesson.level}!`
+                          : locale === "ru"
+                          ? `Этот урок заблокирован. Сначала сдайте экзамен на уровень ${lesson.level}!`
+                          : `This lesson is locked. Pass the ${lesson.level} Promotion Exam first!`
+                      );
+                    }}
+                    className="p-6 rounded-3xl bg-slate-900/60 border border-dashed border-white/10 opacity-50 cursor-pointer space-y-4 relative"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center shrink-0 border border-white/5">
+                        <Lock className="w-6 h-6 text-slate-500" />
+                      </div>
+                      <div className="flex-1 flex items-center justify-between">
+                        <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-slate-800 text-slate-400 border border-slate-700">
                           {lesson.level}
                         </span>
-                        <span className="text-xs text-muted-foreground capitalize font-medium">
-                          {t(lesson.type as "grammar" | "reading" | "dictation" | "communication")}
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 uppercase tracking-wider">
+                          🔒 {locale === "ua" ? "Заблоковано" : locale === "ru" ? "Заблокировано" : "Locked"}
                         </span>
-                        {isCompleted && (
-                          <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded">
-                            ✓ {t("completed")}
-                          </span>
-                        )}
                       </div>
-                      <h4 className="font-bold text-sm text-foreground truncate">
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-base text-slate-400 line-clamp-1 font-editorial uppercase">
                         {getLocalizedText(lesson.title, locale)}
-                      </h4>
-                      <p className="text-xs text-muted-foreground truncate">
+                      </h3>
+                      <p className="text-xs text-slate-500 line-clamp-2 mt-1">
                         {getLocalizedText(lesson.content.description, locale)}
                       </p>
                     </div>
                   </div>
+                );
+              }
 
-                  <div className="shrink-0 w-full sm:w-auto">
-                    {isLocked ? (
-                      <button
-                        onClick={() => {
-                          toast.error(
-                            locale === "ua"
-                              ? `Урок заблоковано. Складіть іспит на рівень ${lesson.level}!`
-                              : locale === "ru"
-                              ? `Урок заблокирован. Сдайте экзамен на уровень ${lesson.level}!`
-                              : `Pass the ${lesson.level} Promotion Exam first!`
-                          );
-                        }}
-                        className="w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-semibold bg-gray-800 text-gray-400 cursor-not-allowed flex items-center justify-center gap-1.5"
-                      >
-                        <Lock className="w-3.5 h-3.5" />
-                        <span>{locale === "ua" ? "Заблоковано" : locale === "ru" ? "Заблокировано" : "Locked"}</span>
-                      </button>
-                    ) : (
-                      <Link
-                        href={`/lessons/${lesson.id}`}
-                        className={`w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
-                          isCompleted
-                            ? "bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400"
-                            : "bg-blue-500 text-white hover:bg-blue-600 shadow-md shadow-blue-500/20"
-                        }`}
-                      >
-                        <span>{isCompleted ? t("repeatLesson") : t("startLesson")}</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
-                    )}
+              return (
+                <Link
+                  key={lesson.id}
+                  href={`/lessons/${lesson.id}`}
+                  className={`p-6 rounded-3xl bg-slate-900/90 border backdrop-blur-md space-y-4 group transition-all duration-300 ${
+                    isCompleted 
+                      ? "border-emerald-500/30 bg-emerald-950/20 hover:border-emerald-500/60 shadow-lg shadow-emerald-950/30"
+                      : "border-slate-800 hover:border-purple-500/50 hover:bg-slate-900 shadow-xl"
+                  }`}
+                >
+                  <div className="flex items-start gap-4">
+                    <div
+                      className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${
+                        isCompleted ? "from-emerald-600 to-teal-500" : gradient
+                      } flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg text-white`}
+                    >
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <div className="flex-1 flex items-center justify-between">
+                      <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                        {lesson.level}
+                      </span>
+                      {isCompleted && (
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                          {t("completed")}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                </div>
+
+                  <div>
+                    <h3 className="font-bold text-base text-white group-hover:text-purple-300 transition-colors line-clamp-1 font-editorial uppercase">
+                      {getLocalizedText(lesson.title, locale)}
+                    </h3>
+                    <p className="text-xs text-slate-300 line-clamp-2 mt-1 leading-relaxed">
+                      {getLocalizedText(lesson.content.description, locale)}
+                    </p>
+                  </div>
+
+                  <div className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider ${
+                    isCompleted ? "text-emerald-400" : "text-purple-400 group-hover:text-purple-300"
+                  }`}>
+                    <span>{isCompleted ? t("repeatLesson") : t("startLesson")}</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </Link>
               );
             })}
           </div>
-        </div>
-      )}
+        )}
 
-      {filtered.length === 0 && (
-        <div className="text-center py-16 text-muted-foreground">
-          <BookOpen className="w-12 h-12 mx-auto mb-4 opacity-50" />
-          <p>No lessons found with the selected filters.</p>
-        </div>
-      )}
+        {/* VIEW MODE 3: LIST */}
+        {viewMode === "list" && (
+          <div className="rounded-3xl bg-slate-900/90 border border-slate-800 overflow-hidden shadow-2xl backdrop-blur-md">
+            <div className="divide-y divide-white/5">
+              {filtered.map((lesson) => {
+                const Icon = typeIcons[lesson.type] || BookOpen;
+                const isCompleted = completedLessons.includes(lesson.id);
+                const isLocked = LEVEL_ORDER.indexOf(lesson.level) > LEVEL_ORDER.indexOf(userLevel);
 
-      {/* Promotion Test Modal */}
-      {showPromoModal && activeTest && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in">
-          <div className="glass rounded-3xl p-6 max-w-xl w-full border border-black/5 dark:border-white/10 shadow-2xl relative animate-slide-up max-h-[90vh] overflow-y-auto">
-            {/* Close */}
-            <button
-              onClick={() => setShowPromoModal(false)}
-              className="absolute top-4 right-4 p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            {!promoFinished ? (
-              <div>
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400">
-                    <Target className="w-5 h-5" />
-                  </div>
-                  <h3 className="text-lg font-bold">
-                    {locale === "ua"
-                      ? `Іспит на рівень ${activeTest.targetLevel}`
-                      : locale === "ru"
-                      ? `Экзамен на уровень ${activeTest.targetLevel}`
-                      : `${activeTest.targetLevel} Promotion Exam`
-                    }
-                  </h3>
-                </div>
-
-                <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
-                  <span>
-                    {locale === "ua" ? "Питання" : locale === "ru" ? "Вопрос" : "Question"} {currentPromoQ + 1} / {activeTest.questions.length}
-                  </span>
-                  <span className="text-green-500 font-bold">
-                    {promoCorrectCount} ✓
-                  </span>
-                </div>
-
-                {/* Progress bar */}
-                <div className="h-1.5 w-full bg-white/5 rounded-full mb-6 overflow-hidden">
+                return (
                   <div
-                    className="h-full bg-blue-500 transition-all duration-300"
-                    style={{
-                      width: `${((currentPromoQ) / activeTest.questions.length) * 100}%`,
-                    }}
-                  />
-                </div>
+                    key={lesson.id}
+                    className={`p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-colors ${
+                      isLocked
+                        ? "opacity-50 bg-slate-950/40"
+                        : isCompleted
+                        ? "bg-emerald-950/10 hover:bg-emerald-950/20"
+                        : "hover:bg-slate-800/60"
+                    }`}
+                  >
+                    <div className="flex items-center gap-4 flex-1 min-w-0">
+                      <div
+                        className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 ${
+                          isLocked
+                            ? "bg-slate-800 text-slate-500"
+                            : isCompleted
+                            ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                            : "bg-purple-500/20 text-purple-400 border border-purple-500/30"
+                        }`}
+                      >
+                        {isLocked ? <Lock className="w-5 h-5" /> : <Icon className="w-5 h-5" />}
+                      </div>
 
-                {activePromoQuestionObj && (
-                  <div className="space-y-6">
-                    <p className="text-lg font-semibold text-foreground">
-                      {getLocalizedText(activePromoQuestionObj.question, locale)}
-                    </p>
-
-                    <div className="grid gap-3">
-                      {activePromoQuestionObj.options.map((optionObj, idx) => {
-                        let btnStyle = "glass hover:bg-black/5 dark:hover:bg-white/5 text-left border-black/5 dark:border-white/10";
-                        if (showPromoFeedback) {
-                          if (idx === activePromoQuestionObj.correctAnswer) {
-                            btnStyle = "bg-green-500/15 border-green-500/40 text-green-400";
-                          } else if (idx === selectedPromoAnswer) {
-                            btnStyle = "bg-red-500/15 border-red-500/40 text-red-400";
-                          } else {
-                            btnStyle = "opacity-40 border-black/5 dark:border-white/5";
-                          }
-                        } else if (idx === selectedPromoAnswer) {
-                          btnStyle = "bg-blue-500/15 border-blue-500/40 text-blue-400";
-                        }
-
-                        return (
-                          <button
-                            key={idx}
-                            disabled={showPromoFeedback}
-                            onClick={() => handlePromoAnswer(idx)}
-                            className={`w-full p-4 rounded-xl text-sm font-semibold transition-all flex items-center justify-between ${btnStyle}`}
-                          >
-                            <span>{getLocalizedText(optionObj, locale)}</span>
-                            {showPromoFeedback && idx === activePromoQuestionObj.correctAnswer && (
-                              <CheckCircle2 className="w-4 h-4 text-green-400 shrink-0 ml-2" />
-                            )}
-                            {showPromoFeedback && idx === selectedPromoAnswer && idx !== activePromoQuestionObj.correctAnswer && (
-                              <XCircle className="w-4 h-4 text-red-400 shrink-0 ml-2" />
-                            )}
-                          </button>
-                        );
-                      })}
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                            {lesson.level}
+                          </span>
+                          {isCompleted && (
+                            <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded border border-emerald-500/30 uppercase">
+                              ✓ {t("completed")}
+                            </span>
+                          )}
+                        </div>
+                        <h4 className="font-bold text-sm text-white font-editorial uppercase truncate">
+                          {getLocalizedText(lesson.title, locale)}
+                        </h4>
+                        <p className="text-xs text-slate-300 truncate">
+                          {getLocalizedText(lesson.content.description, locale)}
+                        </p>
+                      </div>
                     </div>
 
-                    {showPromoFeedback && (
-                      <div className="mt-4 space-y-4">
-                        <div className="flex items-start gap-2 bg-blue-500/10 border border-blue-500/20 p-4 rounded-2xl text-xs text-blue-400 leading-relaxed">
-                          <Lightbulb className="w-4 h-4 shrink-0 mt-0.5" />
-                          <div>
-                            <span className="font-semibold block mb-0.5">
-                              {locale === "ua" ? "Пояснення:" : locale === "ru" ? "Объяснение:" : "Explanation:"}
-                            </span>
-                            {getLocalizedText(activePromoQuestionObj.explanation, locale)}
+                    <div className="shrink-0 w-full sm:w-auto">
+                      {isLocked ? (
+                        <button
+                          onClick={() => {
+                            toast.error(
+                              locale === "ua"
+                                ? `Урок заблоковано. Складіть іспит на рівень ${lesson.level}!`
+                                : locale === "ru"
+                                ? `Урок заблокирован. Сдайте экзамен на уровень ${lesson.level}!`
+                                : `Pass the ${lesson.level} Promotion Exam first!`
+                            );
+                          }}
+                          className="w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 text-slate-500 cursor-not-allowed flex items-center justify-center gap-1.5"
+                        >
+                          <Lock className="w-3.5 h-3.5" />
+                          <span>{locale === "ua" ? "Заблоковано" : locale === "ru" ? "Заблокировано" : "Locked"}</span>
+                        </button>
+                      ) : (
+                        <Link
+                          href={`/lessons/${lesson.id}`}
+                          className={`w-full sm:w-auto px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 ${
+                            isCompleted
+                              ? "bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/30"
+                              : "bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 hover:from-purple-500 hover:to-indigo-500 text-white shadow-lg shadow-purple-600/30"
+                          }`}
+                        >
+                          <span>{isCompleted ? t("repeatLesson") : t("startLesson")}</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </Link>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {filtered.length === 0 && (
+          <div className="text-center py-16 text-slate-400 space-y-3 p-8 rounded-3xl bg-slate-900/90 border border-slate-800">
+            <BookOpen className="w-12 h-12 mx-auto text-purple-400 opacity-60" />
+            <p className="text-sm">No lessons found with the selected filters.</p>
+          </div>
+        )}
+
+        {/* PROMOTION EXAM MODAL */}
+        {showPromoModal && activeTest && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in">
+            <div className="p-6 sm:p-8 max-w-xl w-full rounded-3xl bg-slate-900 border border-purple-500/40 shadow-2xl relative animate-slide-up max-h-[90vh] overflow-y-auto text-slate-100">
+              <button
+                onClick={() => setShowPromoModal(false)}
+                className="absolute top-4 right-4 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              {!promoFinished ? (
+                <div className="space-y-6">
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 rounded-2xl bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                      <Target className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold uppercase font-editorial text-white">
+                        {locale === "ua"
+                          ? `Іспит на рівень ${activeTest.targetLevel}`
+                          : locale === "ru"
+                          ? `Экзамен на уровень ${activeTest.targetLevel}`
+                          : `${activeTest.targetLevel} Promotion Exam`
+                        }
+                      </h3>
+                      <span className="text-xs text-purple-400 font-bold">
+                        {locale === "ua" ? "Питання" : locale === "ru" ? "Вопрос" : "Question"} {currentPromoQ + 1} / {activeTest.questions.length}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Progress bar */}
+                  <div className="h-2 w-full bg-slate-950 rounded-full overflow-hidden border border-white/5">
+                    <div
+                      className="h-full bg-gradient-to-r from-purple-500 to-indigo-500 transition-all duration-300"
+                      style={{
+                        width: `${((currentPromoQ) / activeTest.questions.length) * 100}%`,
+                      }}
+                    />
+                  </div>
+
+                  {activePromoQuestionObj && (
+                    <div className="space-y-5 pt-2">
+                      <p className="text-lg font-bold text-white leading-relaxed">
+                        {getLocalizedText(activePromoQuestionObj.question, locale)}
+                      </p>
+
+                      <div className="grid gap-3">
+                        {activePromoQuestionObj.options.map((optionObj, idx) => {
+                          let btnStyle = "bg-slate-950/80 hover:bg-slate-800 border-white/10 text-slate-200";
+                          if (showPromoFeedback) {
+                            if (idx === activePromoQuestionObj.correctAnswer) {
+                              btnStyle = "bg-emerald-950/60 border-emerald-500/60 text-emerald-300 font-bold";
+                            } else if (idx === selectedPromoAnswer) {
+                              btnStyle = "bg-red-950/60 border-red-500/60 text-red-300 font-bold";
+                            } else {
+                              btnStyle = "opacity-40 border-white/5";
+                            }
+                          } else if (idx === selectedPromoAnswer) {
+                            btnStyle = "bg-purple-950/60 border-purple-500/60 text-purple-300 font-bold";
+                          }
+
+                          return (
+                            <button
+                              key={idx}
+                              disabled={showPromoFeedback}
+                              onClick={() => handlePromoAnswer(idx)}
+                              className={`w-full p-4 rounded-2xl text-sm font-semibold transition-all border flex items-center justify-between ${btnStyle}`}
+                            >
+                              <span>{getLocalizedText(optionObj, locale)}</span>
+                              {showPromoFeedback && idx === activePromoQuestionObj.correctAnswer && (
+                                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 ml-2" />
+                              )}
+                              {showPromoFeedback && idx === selectedPromoAnswer && idx !== activePromoQuestionObj.correctAnswer && (
+                                <XCircle className="w-5 h-5 text-red-400 shrink-0 ml-2" />
+                              )}
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      {showPromoFeedback && (
+                        <div className="mt-4 space-y-4">
+                          <div className="flex items-start gap-3 bg-purple-950/40 border border-purple-500/30 p-4 rounded-2xl text-xs text-purple-200 leading-relaxed">
+                            <Lightbulb className="w-5 h-5 text-purple-400 shrink-0 mt-0.5" />
+                            <div>
+                              <span className="font-bold block mb-0.5 uppercase tracking-wider text-purple-300">
+                                {locale === "ua" ? "Пояснення:" : locale === "ru" ? "Объяснение:" : "Explanation:"}
+                              </span>
+                              {getLocalizedText(activePromoQuestionObj.explanation, locale)}
+                            </div>
+                          </div>
+
+                          <div className="flex justify-end">
+                            <button
+                              onClick={nextPromoQuestion}
+                              className="px-6 py-3 rounded-xl font-bold uppercase text-xs tracking-wider bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 text-white shadow-lg shadow-purple-600/30 hover:from-purple-500 hover:to-indigo-500 transition-all"
+                            >
+                              {currentPromoQ < activeTest.questions.length - 1
+                                ? locale === "ua" ? "Наступне питання" : locale === "ru" ? "Следующий вопрос" : "Next Question"
+                                : locale === "ua" ? "Завершити іспит" : locale === "ru" ? "Завершить экзамен" : "Finish Exam"
+                              }
+                            </button>
                           </div>
                         </div>
-
-                        <div className="flex justify-end">
-                          <button
-                            onClick={nextPromoQuestion}
-                            className="px-6 py-2.5 rounded-xl font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 shadow-lg"
-                          >
-                            {currentPromoQ < activeTest.questions.length - 1
-                              ? locale === "ua" ? "Наступне питання" : locale === "ru" ? "Следующий вопрос" : "Next Question"
-                              : locale === "ua" ? "Завершити іспит" : locale === "ru" ? "Завершить экзамен" : "Finish Exam"
-                            }
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="text-center py-6 space-y-6">
-                {promoPassed ? (
-                  <>
-                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-yellow-400 to-orange-500 shadow-2xl animate-bounce">
-                      <Trophy className="w-10 h-10 text-white" />
+                      )}
                     </div>
-                    <h3 className="text-2xl font-black text-green-400">
-                      {locale === "ua" ? "Іспит складено! 🎉" : locale === "ru" ? "Экзамен сдан! 🎉" : "Exam Passed! 🎉"}
-                    </h3>
-                    <p className="text-muted-foreground text-sm max-w-sm mx-auto leading-relaxed">
-                      {locale === "ua"
-                        ? `Вітаємо! Ви правильно відповіли на ${promoCorrectCount} з ${activeTest.questions.length} питань та успішно перейшли на рівень ${activeTest.targetLevel}!`
-                        : locale === "ru"
-                        ? `Поздравляем! Вы правильно ответили на ${promoCorrectCount} из ${activeTest.questions.length} вопросов и успешно перешли на уровень ${activeTest.targetLevel}!`
-                        : `Congratulations! You answered ${promoCorrectCount} out of ${activeTest.questions.length} questions correctly and unlocked level ${activeTest.targetLevel}!`
-                      }
-                    </p>
-                    <div className="bg-emerald-500/10 text-emerald-400 px-4 py-2 rounded-xl text-xs font-bold inline-block border border-emerald-500/20">
-                      +100 XP {locale === "ua" ? "Бонус" : locale === "ru" ? "Бонус" : "Bonus"}
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-red-500/10 text-red-400 border border-red-500/20 shadow-2xl">
-                      <XCircle className="w-10 h-10" />
-                    </div>
-                    <h3 className="text-2xl font-black text-red-400">
-                      {locale === "ua" ? "Іспит не складено" : locale === "ru" ? "Экзамен не сдан" : "Exam Not Passed"}
-                    </h3>
-                    <p className="text-muted-foreground text-sm max-w-sm mx-auto leading-relaxed">
-                      {locale === "ua"
-                        ? `Ви правильно відповіли на ${promoCorrectCount} з ${activeTest.questions.length} питань. Для успішного переходу потрібно щонайменше 16 правильних відповідей. Спробуйте ще раз!`
-                        : locale === "ru"
-                        ? `Вы правильно ответили на ${promoCorrectCount} из ${activeTest.questions.length} вопросов. Для успешного перехода требуется минимум 16 правильных ответов. Попробуйте еще раз!`
-                        : `You answered ${promoCorrectCount} out of ${activeTest.questions.length} questions correctly. You need at least 16 correct answers to unlock the next level. Try again!`
-                      }
-                    </p>
-                  </>
-                )}
-
-                <div className="pt-4 flex justify-center gap-3">
-                  {promoPassed ? (
-                    <button
-                      onClick={() => setShowPromoModal(false)}
-                      className="px-8 py-3 rounded-2xl font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 shadow-lg"
-                    >
-                      {locale === "ua" ? "Чудово, до нових уроків!" : locale === "ru" ? "Отлично, к новым урокам!" : "Great, on to new lessons!"}
-                    </button>
-                  ) : (
-                    <>
-                      <button
-                        onClick={startPromotionTest}
-                        className="px-6 py-3 rounded-2xl font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 shadow-lg"
-                      >
-                        {locale === "ua" ? "Спробувати ще раз" : locale === "ru" ? "Попробовать еще раз" : "Try Again"}
-                      </button>
-                      <button
-                        onClick={() => setShowPromoModal(false)}
-                        className="px-6 py-3 rounded-2xl font-semibold glass hover:bg-black/5 dark:hover:bg-white/5 transition-all"
-                      >
-                        {locale === "ua" ? "Закрити" : locale === "ru" ? "Закрыть" : "Close"}
-                      </button>
-                    </>
                   )}
                 </div>
-              </div>
-            )}
+              ) : (
+                <div className="text-center py-6 space-y-6">
+                  {promoPassed ? (
+                    <>
+                      <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-purple-600 via-indigo-600 to-violet-600 shadow-2xl border border-purple-400/40">
+                        <Trophy className="w-10 h-10 text-white animate-bounce" />
+                      </div>
+                      <h3 className="text-2xl font-black uppercase font-editorial text-emerald-400">
+                        {locale === "ua" ? "Іспит складено! 🎉" : locale === "ru" ? "Экзамен сдан! 🎉" : "Exam Passed! 🎉"}
+                      </h3>
+                      <p className="text-slate-300 text-sm max-w-sm mx-auto leading-relaxed">
+                        {locale === "ua"
+                          ? `Вітаємо! Ви правильно відповіли на ${promoCorrectCount} з ${activeTest.questions.length} питань та успішно перейшли на рівень ${activeTest.targetLevel}!`
+                          : locale === "ru"
+                          ? `Поздравляем! Вы правильно ответили на ${promoCorrectCount} из ${activeTest.questions.length} вопросов и успешно перешли на уровень ${activeTest.targetLevel}!`
+                          : `Congratulations! You answered ${promoCorrectCount} out of ${activeTest.questions.length} questions correctly and unlocked level ${activeTest.targetLevel}!`
+                        }
+                      </p>
+                      <div className="bg-emerald-500/20 text-emerald-300 px-4 py-2 rounded-xl text-xs font-bold inline-block border border-emerald-500/30 uppercase tracking-wider">
+                        +100 XP {locale === "ua" ? "Бонус" : locale === "ru" ? "Бонус" : "Bonus"}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-red-500/10 text-red-400 border border-red-500/20 shadow-2xl">
+                        <XCircle className="w-10 h-10" />
+                      </div>
+                      <h3 className="text-2xl font-black uppercase font-editorial text-red-400">
+                        {locale === "ua" ? "Іспит не складено" : locale === "ru" ? "Экзамен не сдан" : "Exam Not Passed"}
+                      </h3>
+                      <p className="text-slate-300 text-sm max-w-sm mx-auto leading-relaxed">
+                        {locale === "ua"
+                          ? `Ви правильно відповіли на ${promoCorrectCount} з ${activeTest.questions.length} питань. Для успішного переходу потрібно щонайменше 16 правильних відповідей. Спробуйте ще раз!`
+                          : locale === "ru"
+                          ? `Вы правильно ответили на ${promoCorrectCount} из ${activeTest.questions.length} вопросов. Для успешного перехода требуется минимум 16 правильных ответов. Попробуйте еще раз!`
+                          : `You answered ${promoCorrectCount} out of ${activeTest.questions.length} questions correctly. You need at least 16 correct answers to unlock the next level. Try again!`
+                        }
+                      </p>
+                    </>
+                  )}
+
+                  <div className="pt-4 flex justify-center gap-3">
+                    {promoPassed ? (
+                      <button
+                        onClick={() => setShowPromoModal(false)}
+                        className="px-8 py-3 rounded-2xl font-bold uppercase text-xs tracking-wider bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 text-white shadow-xl shadow-purple-600/30 hover:from-purple-500 hover:to-indigo-500"
+                      >
+                        {locale === "ua" ? "Чудово, до нових уроків!" : locale === "ru" ? "Отлично, к новым урокам!" : "Great, on to new lessons!"}
+                      </button>
+                    ) : (
+                      <>
+                        <button
+                          onClick={startPromotionTest}
+                          className="px-6 py-3 rounded-2xl font-bold uppercase text-xs tracking-wider bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 text-white shadow-xl shadow-purple-600/30 hover:from-purple-500 hover:to-indigo-500"
+                        >
+                          {locale === "ua" ? "Спробувати ще раз" : locale === "ru" ? "Попробовать еще раз" : "Try Again"}
+                        </button>
+                        <button
+                          onClick={() => setShowPromoModal(false)}
+                          className="px-6 py-3 rounded-2xl font-bold uppercase text-xs tracking-wider bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all border border-white/10"
+                        >
+                          {locale === "ua" ? "Закрити" : locale === "ru" ? "Закрыть" : "Close"}
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
       </div>
     </div>
   );
