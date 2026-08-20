@@ -283,8 +283,9 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
           <Link href="/games" className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-2xl hover:shadow-orange-500/20 block">
             <div 
               className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700"
-              style={{ backgroundImage: "url('/hero-bg.jpg')" }}
+              style={{ backgroundImage: "url('/croatia-card-4.jpg')" }}
             />
+
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-slate-950/30" />
             
             <div className="relative z-10 flex items-center justify-between">
