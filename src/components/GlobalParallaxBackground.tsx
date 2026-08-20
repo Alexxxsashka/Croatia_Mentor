@@ -47,7 +47,7 @@ export function GlobalParallaxBackground() {
       
       {/* LAYER 1: 8K Seamless Vertical-Repeating Parallax Dubrovnik Landscape */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-90 dark:opacity-80 transition-[background-position] duration-75 ease-out"
+        className="absolute inset-0 pointer-events-none opacity-90 dark:opacity-85 transition-[background-position] duration-75 ease-out"
         style={{
           backgroundImage: "url('/croatia-hero.jpg')",
           backgroundRepeat: "repeat-y",
@@ -56,7 +56,31 @@ export function GlobalParallaxBackground() {
         }}
       />
 
-      {/* LAYER 2: Semi-Transparent Ambient Overlay Vignette */}
+      {/* LAYER 1.5: Seam-Erasing Fog Gradient Overlay synchronized with image repeating height */}
+      <div 
+        className="absolute inset-0 pointer-events-none transition-[background-position] duration-75 ease-out"
+        style={{
+          backgroundImage: `linear-gradient(to bottom, 
+            rgba(2, 6, 23, 0.95) 0%, 
+            rgba(2, 6, 23, 0.2) 15%, 
+            transparent 30%, 
+            transparent 70%, 
+            rgba(2, 6, 23, 0.2) 85%, 
+            rgba(2, 6, 23, 0.95) 100%)`,
+          backgroundRepeat: "repeat-y",
+          backgroundSize: "100% 1080px",
+          backgroundPosition: `center ${-scrollY * 0.2}px`,
+        }}
+      />
+
+      {/* LAYER 2: Animated Floating Misty Fog & Nebula Clouds */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-32 left-1/4 w-[700px] h-[400px] bg-gradient-to-r from-purple-900/30 via-indigo-900/40 to-slate-950/60 rounded-full blur-[100px] animate-fog-flow" />
+        <div className="absolute top-1/3 -right-20 w-[800px] h-[450px] bg-gradient-to-l from-indigo-950/50 via-purple-950/40 to-slate-950/70 rounded-full blur-[120px] animate-fog-flow [animation-delay:4s]" />
+        <div className="absolute bottom-1/4 left-10 w-[750px] h-[420px] bg-gradient-to-r from-purple-950/40 via-blue-950/30 to-slate-950/60 rounded-full blur-[110px] animate-fog-flow [animation-delay:8s]" />
+      </div>
+
+      {/* LAYER 2.5: Semi-Transparent Ambient Vignette */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-100/70 via-amber-50/50 to-slate-100/75 dark:from-slate-950/75 dark:via-slate-950/65 dark:to-slate-950/85 backdrop-blur-[1px]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-500/15 via-indigo-500/10 to-transparent pointer-events-none" />
 
@@ -113,6 +137,7 @@ export function GlobalParallaxBackground() {
           </div>
         ))}
       </div>
+
     </div>
   );
 }

@@ -278,9 +278,29 @@ select option {
   }
 }
 
+@keyframes fogFlow {
+  0% {
+    transform: translateX(-10%) translateY(0px) scale(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translateX(10%) translateY(-20px) scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(-10%) translateY(0px) scale(1);
+    opacity: 0.45;
+  }
+}
+
+.animate-fog-flow {
+  animation: fogFlow 18s ease-in-out infinite;
+}
+
 .animate-dust-float {
   animation: floatDust 7s ease-in-out infinite;
 }
+
 
 .animate-twinkle {
   animation: twinkleStar 3.5s ease-in-out infinite;
