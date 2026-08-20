@@ -27,21 +27,21 @@ export function GlobalParallaxBackground() {
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[-10] overflow-hidden bg-slate-950">
+    <div className="fixed inset-0 pointer-events-none z-[-10] overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-500">
       {/* Parallax Background Image Layer */}
       <div
-        className="absolute inset-[-10%] bg-cover bg-center pointer-events-none transition-transform duration-100 ease-out"
+        className="absolute inset-[-10%] bg-cover bg-center pointer-events-none transition-transform duration-100 ease-out opacity-20 dark:opacity-100"
         style={{
           backgroundImage: "url('/global-bg.jpg')",
           transform: `translateY(${Math.max(-140, Math.min(140, -scrollY * 0.08))}px) scale(1.15)`,
         }}
       />
 
-      {/* Dark overlay for contrast across all themes */}
-      <div className="absolute inset-0 bg-slate-950/70 dark:bg-slate-950/80 backdrop-blur-[1px]" />
+      {/* Theme specific overlays */}
+      <div className="absolute inset-0 bg-gradient-to-b from-orange-50/60 via-white/80 to-amber-50/40 dark:from-slate-950/80 dark:via-slate-950/70 dark:to-slate-950 backdrop-blur-[1px]" />
 
       {/* Bottom gradient fade for smooth transition */}
-      <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-white via-white/70 to-transparent dark:from-slate-950 dark:via-slate-950/80 dark:to-transparent" />
 
       {/* Floating Dust Particles */}
       <div
@@ -51,7 +51,7 @@ export function GlobalParallaxBackground() {
         {DUST_PARTICLES.map((p) => (
           <div
             key={p.id}
-            className="dust-particle"
+            className="dust-particle opacity-30 dark:opacity-50"
             style={{
               top: p.top,
               left: p.left,
@@ -65,4 +65,5 @@ export function GlobalParallaxBackground() {
       </div>
     </div>
   );
+
 }

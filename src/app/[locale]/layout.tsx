@@ -40,6 +40,7 @@ export async function generateMetadata({
 }
 
 import { GlobalParallaxBackground } from "@/components/GlobalParallaxBackground";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
 export default async function LocaleLayout({
   children,
@@ -82,7 +83,7 @@ export default async function LocaleLayout({
   };
 
   return (
-    <html lang={locale} className="dark" suppressHydrationWarning>
+    <html lang={locale} className="dark" data-theme="dark" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -92,7 +93,13 @@ export default async function LocaleLayout({
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                if (localStorage.getItem('theme') === 'light') {
+                var urlParams = new URLSearchParams(window.location.search);
+                var urlTheme = urlParams.get('theme');
+                var theme = (urlTheme === 'orange-white' || urlTheme === 'light') ? 'orange-white' :
+                            (urlTheme === 'dark' ? 'dark' : (localStorage.getItem('croatia_mentor_theme') || 'dark'));
+                if (urlTheme) localStorage.setItem('croatia_mentor_theme', theme);
+                document.documentElement.setAttribute('data-theme', theme);
+                if (theme === 'orange-white') {
                   document.documentElement.classList.remove('dark');
                 } else {
                   document.documentElement.classList.add('dark');
@@ -101,20 +108,24 @@ export default async function LocaleLayout({
             `,
           }}
         />
+
       </head>
       <body className="min-h-screen flex flex-col relative">
         <NextIntlClientProvider messages={messages}>
           <SessionProvider>
-            <GlobalParallaxBackground />
-            <NotificationListener />
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <Toaster position="top-right" richColors />
-            <ChangelogModal />
+            <ThemeProvider>
+              <GlobalParallaxBackground />
+              <NotificationListener />
+              <Navbar />
+              <main className="flex-1">{children}</main>
+              <Footer />
+              <Toaster position="top-right" richColors />
+              <ChangelogModal />
+            </ThemeProvider>
           </SessionProvider>
         </NextIntlClientProvider>
       </body>
     </html>
   );
 }
+

@@ -55,6 +55,45 @@
   --ring: 214 100% 55%;
 }
 
+[data-theme="orange-white"] {
+  --background: 0 0% 100%;
+  --foreground: 220 30% 11%;
+  --card: 210 20% 98%;
+  --card-foreground: 220 30% 11%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 220 30% 11%;
+  --primary: 25 100% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 30 100% 97%;
+  --secondary-foreground: 25 100% 45%;
+  --muted: 210 15% 95%;
+  --muted-foreground: 215 15% 45%;
+  --accent: 30 100% 96%;
+  --accent-foreground: 25 100% 45%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 215 15% 90%;
+  --input: 215 15% 90%;
+  --ring: 25 100% 50%;
+
+  --bg-main: #ffffff;
+  --bg-surface: #f8f9fa;
+  --bg-surface-hover: #fff8f3;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #9ca3af;
+
+  --accent-orange: #ff6b00;
+  --accent-orange-hover: #e05d00;
+  --accent-amber: #ffb800;
+  --accent-red: #ef4444;
+
+  --border-subtle: #e5e7eb;
+  --border-accent: rgba(255, 107, 0, 0.3);
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+
 * {
   border-color: hsl(var(--border));
 }

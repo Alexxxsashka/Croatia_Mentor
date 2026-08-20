@@ -5,6 +5,8 @@ import { useSession, signOut } from "next-auth/react";
 import { Link } from "@/i18n/navigation";
 import { LanguageSwitcher } from "./language-switcher";
 import { NewsBell } from "./news-bell";
+import { ThemeSwitcher } from "./theme/ThemeSwitcher";
+
 import {
   BookOpen,
   Gamepad2,
@@ -192,21 +194,12 @@ export function Navbar() {
 
           {/* Right side */}
           <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-            {/* Theme Toggle Button */}
-            <button
-              onClick={toggleTheme}
-              className="hidden sm:flex p-2 rounded-xl glass hover:bg-black/5 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-all duration-200"
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? (
-                <Sun className="w-4 h-4 text-yellow-500" />
-              ) : (
-                <Moon className="w-4 h-4 text-indigo-600" />
-              )}
-            </button>
+            {/* Theme Switcher Button */}
+            <ThemeSwitcher />
 
             {/* Notification Bell for News */}
             <NewsBell />
+
 
             <LanguageSwitcher />
 

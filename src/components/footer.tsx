@@ -9,7 +9,8 @@ export function Footer() {
   const nav = useTranslations("nav");
 
   return (
-    <footer className="border-t border-white/5 bg-black/20 pb-safe">
+    <footer className="border-t border-black/5 dark:border-white/5 bg-slate-900/5 dark:bg-black/20 pb-safe transition-colors duration-300">
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
