@@ -69,8 +69,46 @@
         "title": "Tailored for You",
         "description": "Fully translated explanations in English, Russian, and Ukrainian to match your native language."
       }
+    },
+    "editorial": {
+      "badge": "Vibrant Orange & White Editorial Edition",
+      "tagline": "INTERACTIVE LANGUAGE ADVENTURE",
+      "navSteps": "NAVIGATION STEPS",
+      "subtext01": {
+        "tag": "01 / IMMERSIVE CURRICULUM",
+        "desc": "Structured CEFR lessons from A1 to C2. Master Croatian grammar, daily situational dialogues, and vocabulary essential for living in Croatia.",
+        "link": "EXPLORE LESSONS"
+      },
+      "subtext02": {
+        "tag": "02 / AI TUTOR & DICTATION",
+        "desc": "Simulate natural conversation with an intelligent AI tutor powered by Google GenAI and natural audio speech generated via Edge TTS.",
+        "link": "START AI CHAT"
+      },
+      "subtext03": {
+        "tag": "03 / SPACED REPETITION (SRS)",
+        "desc": "Scientific SM-2 algorithm calculates ideal review intervals to guarantee rapid, long-term vocabulary retention without rote memory burn.",
+        "link": "VIEW VOCABULARY"
+      },
+      "placementTest": "TAKE PLACEMENT TEST",
+      "divider": "FIND YOUR FAVORITE MODULE — FROM A1 BEGINNER TO C2 MASTERY",
+      "cards": {
+        "c1": { "tag": "01 / LESSONS", "title": "1ST PLACE: CEFR MODULES", "desc": "Plitvice Lakes grammar track, reading comprehension & situational dialogues.", "cta": "START MODULE" },
+        "c2": { "tag": "02 / AI CHAT", "title": "2ND PLACE: AI TUTOR", "desc": "Hvar harbor café simulation, real-time voice conversation & corrections.", "cta": "START CONVERSATION" },
+        "c3": { "tag": "03 / VOCABULARY", "title": "3RD PLACE: SRS FLASHCARDS", "desc": "Spaced repetition memory cards with audio pronunciations & translations.", "cta": "REVIEW WORDS" },
+        "c4": { "tag": "04 / MINI GAMES", "title": "4TH PLACE: MINI GAMES", "desc": "Interactive word match, speed quizzes, listening dictation & hangman.", "cta": "PLAY GAMES" }
+      },
+      "promo": {
+        "tag": "AUDIO & IMMERSION EXPERIENCE",
+        "title": "DISCOVER CROATIAN IN A NEW WAY",
+        "quote": "Language integration is not about dry grammar rules—it is about feeling confident in your daily life, connecting with people, and enjoying every step of the journey.",
+        "cta": "START AUDIO LESSON",
+        "audio1": { "tag": "LESSON AUDIO 01", "title": "Official and unofficial greetings", "sub": "CEFR A1 · Audio & Dictation" },
+        "audio2": { "tag": "AI ROLEPLAY 02", "title": "At the café — Ordering coffee", "sub": "CEFR A2 · Voice Simulation" }
+      },
+      "copyright": "© 2026 CROATIA MENTOR · ALL RIGHTS RESERVED"
     }
   },
+
   "auth": {
     "signIn": {
       "title": "Welcome Back",

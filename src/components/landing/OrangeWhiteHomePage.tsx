@@ -25,6 +25,7 @@ import {
 
 export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
   const t = useTranslations("landing");
+  const nav = useTranslations("nav");
   const { data: session } = useSession();
 
   return (
@@ -53,7 +54,7 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
           </div>
           <div className="flex items-center gap-4 text-slate-300">
             <span className="px-3 py-1 bg-orange-950/60 text-orange-400 border border-orange-500/30 rounded-md font-mono text-[10px]">
-              EDITION 2026 / ORANGE & WHITE
+              {t("editorial.badge")}
             </span>
           </div>
         </div>
@@ -70,25 +71,25 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
             <div className="lg:col-span-9 space-y-6">
               <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-orange-400 bg-orange-950/40 px-3.5 py-1.5 rounded-full border border-orange-500/30 backdrop-blur-sm">
                 <Sparkles className="w-4 h-4 text-orange-400" />
-                INTERACTIVE LANGUAGE ADVENTURE
+                {t("editorial.tagline")}
               </div>
 
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight text-white leading-[1.05] font-editorial drop-shadow-md">
-                LEARN CROATIAN{" "}
+                {t("hero.title")}{" "}
                 <span className="bg-gradient-to-r from-orange-400 via-amber-400 to-orange-500 bg-clip-text text-transparent">
-                  NATURALLY
+                  {t("hero.titleHighlight")}
                 </span>
               </h1>
 
               <p className="text-lg sm:text-xl text-slate-300 max-w-3xl font-normal leading-relaxed">
-                Complete grammar explanations, vocabulary flashcards, audio dictation, and real-time AI conversation practice. Designed for Ukrainian relocators, expats, and international learners.
+                {t("hero.subtitle")}
               </p>
             </div>
 
             {/* Right: Vertical Step Indicator (Reference 1 & 4) */}
             <div className="lg:col-span-3 flex lg:flex-col items-center lg:items-end justify-between lg:justify-start gap-4 text-right border-t lg:border-t-0 lg:border-l border-slate-800 pt-6 lg:pt-0 lg:pl-8">
               <div className="font-mono text-xs font-bold uppercase tracking-widest text-slate-500">
-                NAVIGATION STEPS
+                {t("editorial.navSteps")}
               </div>
               <div className="flex lg:flex-col gap-3 font-mono text-base font-bold text-slate-500">
                 <span className="hover:text-white cursor-pointer">01</span>
@@ -107,48 +108,48 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-slate-800">
             <div className="space-y-3 pr-4 border-r-0 md:border-r border-slate-800">
               <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-orange-400">
-                01 / IMMERSIVE CURRICULUM
+                {t("editorial.subtext01.tag")}
               </h4>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Structured CEFR lessons from A1 to C2. Master Croatian grammar, daily situational dialogues, and vocabulary essential for living in Croatia.
+                {t("editorial.subtext01.desc")}
               </p>
               <Link 
                 href="/lessons"
                 className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-white hover:text-orange-400 transition-colors pt-2"
               >
-                <span>EXPLORE LESSONS</span>
+                <span>{t("editorial.subtext01.link")}</span>
                 <ChevronRight className="w-4 h-4 text-orange-400" />
               </Link>
             </div>
 
             <div className="space-y-3 pr-4 border-r-0 md:border-r border-slate-800">
               <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-orange-400">
-                02 / AI TUTOR & DICTATION
+                {t("editorial.subtext02.tag")}
               </h4>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Simulate natural conversation with an intelligent AI tutor powered by Google GenAI and natural audio speech generated via Edge TTS.
+                {t("editorial.subtext02.desc")}
               </p>
               <Link 
                 href="/ai-chat"
                 className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-white hover:text-orange-400 transition-colors pt-2"
               >
-                <span>START AI CHAT</span>
+                <span>{t("editorial.subtext02.link")}</span>
                 <ChevronRight className="w-4 h-4 text-orange-400" />
               </Link>
             </div>
 
             <div className="space-y-3">
               <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-orange-400">
-                03 / SPACED REPETITION (SRS)
+                {t("editorial.subtext03.tag")}
               </h4>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Scientific SM-2 algorithm calculates ideal review intervals to guarantee rapid, long-term vocabulary retention without rote memory burn.
+                {t("editorial.subtext03.desc")}
               </p>
               <Link 
                 href="/vocabulary"
                 className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-white hover:text-orange-400 transition-colors pt-2"
               >
-                <span>VIEW VOCABULARY</span>
+                <span>{t("editorial.subtext03.link")}</span>
                 <ChevronRight className="w-4 h-4 text-orange-400" />
               </Link>
             </div>
@@ -167,7 +168,7 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
               href="/placement-test"
               className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 bg-slate-900/80 border border-slate-700 hover:border-white text-white font-extrabold uppercase text-sm tracking-[0.2em] transition-all backdrop-blur-md"
             >
-              <span>TAKE PLACEMENT TEST</span>
+              <span>{t("editorial.placementTest")}</span>
             </Link>
           </div>
 
@@ -180,7 +181,7 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
           <div className="flex items-center justify-center gap-4">
             <span className="h-[1px] w-16 sm:w-32 bg-orange-500/60" />
             <p className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-slate-300">
-              FIND YOUR FAVORITE MODULE — FROM A1 BEGINNER TO C2 MASTERY
+              {t("editorial.divider")}
             </p>
             <span className="h-[1px] w-16 sm:w-32 bg-orange-500/60" />
           </div>
@@ -192,7 +193,7 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           
           {/* Card 1: Plitvice Waterfall Photo */}
-          <div className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-2xl hover:shadow-orange-500/20">
+          <Link href="/lessons" className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-2xl hover:shadow-orange-500/20 block">
             <div 
               className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700"
               style={{ backgroundImage: "url('/croatia-card-1.jpg')" }}
@@ -201,27 +202,27 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
             
             <div className="relative z-10 flex items-center justify-between">
               <span className="font-mono text-xs font-bold uppercase tracking-widest text-orange-400 bg-slate-950/80 px-2.5 py-1 rounded backdrop-blur-sm border border-orange-500/30">
-                01 / LESSONS
+                {t("editorial.cards.c1.tag")}
               </span>
               <span className="w-2.5 h-2.5 bg-orange-500 rounded-full shadow-md shadow-orange-500/50" />
             </div>
 
             <div className="relative z-10 space-y-2 text-white">
               <h3 className="text-2xl font-extrabold uppercase font-editorial tracking-wide group-hover:text-orange-400 transition-colors">
-                1ST PLACE: CEFR MODULES
+                {t("editorial.cards.c1.title")}
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed font-normal">
-                Plitvice Lakes grammar track, reading comprehension & situational dialogues.
+                {t("editorial.cards.c1.desc")}
               </p>
               <div className="pt-3 flex items-center justify-between text-xs font-extrabold uppercase tracking-wider text-orange-400">
-                <span>START MODULE</span>
+                <span>{t("editorial.cards.c1.cta")}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
               </div>
             </div>
-          </div>
+          </Link>
 
           {/* Card 2: Hvar Island Harbor Cafe Photo */}
-          <div className="group relative rounded-2xl overflow-hidden border border-slate-880 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-2xl hover:shadow-orange-500/20">
+          <Link href="/ai-chat" className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-2xl hover:shadow-orange-500/20 block">
             <div 
               className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700"
               style={{ backgroundImage: "url('/croatia-card-2.jpg')" }}
@@ -230,27 +231,27 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
             
             <div className="relative z-10 flex items-center justify-between">
               <span className="font-mono text-xs font-bold uppercase tracking-widest text-amber-400 bg-slate-950/80 px-2.5 py-1 rounded backdrop-blur-sm border border-amber-500/30">
-                02 / AI CHAT
+                {t("editorial.cards.c2.tag")}
               </span>
               <span className="w-2.5 h-2.5 bg-amber-500 rounded-full shadow-md shadow-amber-500/50" />
             </div>
 
             <div className="relative z-10 space-y-2 text-white">
               <h3 className="text-2xl font-extrabold uppercase font-editorial tracking-wide group-hover:text-amber-400 transition-colors">
-                2ND PLACE: AI TUTOR
+                {t("editorial.cards.c2.title")}
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed font-normal">
-                Hvar harbor café simulation, real-time voice conversation & corrections.
+                {t("editorial.cards.c2.desc")}
               </p>
               <div className="pt-3 flex items-center justify-between text-xs font-extrabold uppercase tracking-wider text-amber-400">
-                <span>START CONVERSATION</span>
+                <span>{t("editorial.cards.c2.cta")}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
               </div>
             </div>
-          </div>
+          </Link>
 
           {/* Card 3: Rovinj Bell Tower Seaside Photo */}
-          <div className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-2xl hover:shadow-orange-500/20">
+          <Link href="/vocabulary" className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-2xl hover:shadow-orange-500/20 block">
             <div 
               className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700"
               style={{ backgroundImage: "url('/croatia-card-3.jpg')" }}
@@ -259,27 +260,27 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
             
             <div className="relative z-10 flex items-center justify-between">
               <span className="font-mono text-xs font-bold uppercase tracking-widest text-orange-400 bg-slate-950/80 px-2.5 py-1 rounded backdrop-blur-sm border border-orange-500/30">
-                03 / VOCABULARY
+                {t("editorial.cards.c3.tag")}
               </span>
               <span className="w-2.5 h-2.5 bg-orange-500 rounded-full shadow-md shadow-orange-500/50" />
             </div>
 
             <div className="relative z-10 space-y-2 text-white">
               <h3 className="text-2xl font-extrabold uppercase font-editorial tracking-wide group-hover:text-orange-400 transition-colors">
-                3RD PLACE: SRS FLASHCARDS
+                {t("editorial.cards.c3.title")}
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed font-normal">
-                Spaced repetition memory cards with audio pronunciations & translations.
+                {t("editorial.cards.c3.desc")}
               </p>
               <div className="pt-3 flex items-center justify-between text-xs font-extrabold uppercase tracking-wider text-orange-400">
-                <span>REVIEW WORDS</span>
+                <span>{t("editorial.cards.c3.cta")}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
               </div>
             </div>
-          </div>
+          </Link>
 
           {/* Card 4: Dubrovnik Old Town Photo */}
-          <div className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-2xl hover:shadow-orange-500/20">
+          <Link href="/games" className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-2xl hover:shadow-orange-500/20 block">
             <div 
               className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700"
               style={{ backgroundImage: "url('/hero-bg.jpg')" }}
@@ -288,24 +289,24 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
             
             <div className="relative z-10 flex items-center justify-between">
               <span className="font-mono text-xs font-bold uppercase tracking-widest text-amber-400 bg-slate-950/80 px-2.5 py-1 rounded backdrop-blur-sm border border-amber-500/30">
-                04 / MINI GAMES
+                {t("editorial.cards.c4.tag")}
               </span>
               <span className="w-2.5 h-2.5 bg-amber-500 rounded-full shadow-md shadow-amber-500/50" />
             </div>
 
             <div className="relative z-10 space-y-2 text-white">
               <h3 className="text-2xl font-extrabold uppercase font-editorial tracking-wide group-hover:text-amber-400 transition-colors">
-                4TH PLACE: MINI GAMES
+                {t("editorial.cards.c4.title")}
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed font-normal">
-                Interactive word match, speed quizzes, listening dictation & hangman.
+                {t("editorial.cards.c4.desc")}
               </p>
               <div className="pt-3 flex items-center justify-between text-xs font-extrabold uppercase tracking-wider text-amber-400">
-                <span>PLAY GAMES</span>
+                <span>{t("editorial.cards.c4.cta")}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
               </div>
             </div>
-          </div>
+          </Link>
 
         </div>
       </section>
@@ -326,15 +327,15 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
             <div className="lg:col-span-7 space-y-6">
               <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.25em] text-orange-400">
                 <Play className="w-4 h-4 fill-orange-400" />
-                AUDIO & IMMERSION EXPERIENCE
+                {t("editorial.promo.tag")}
               </div>
               
               <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight leading-tight font-editorial">
-                DISCOVER CROATIAN IN A NEW WAY
+                {t("editorial.promo.title")}
               </h2>
 
               <blockquote className="text-sm sm:text-base text-slate-300 italic border-l-2 border-orange-500 pl-4 py-1 leading-relaxed">
-                &ldquo;Language integration is not about dry grammar rules—it is about feeling confident in your daily life, connecting with people, and enjoying every step of the journey.&rdquo;
+                &ldquo;{t("editorial.promo.quote")}&rdquo;
               </blockquote>
 
               <div className="pt-4 flex items-center gap-4">
@@ -343,7 +344,7 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
                   className="inline-flex items-center gap-3 px-8 py-4 bg-orange-600 hover:bg-orange-500 text-white font-extrabold uppercase text-xs tracking-[0.2em] transition-all shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50"
                 >
                   <Play className="w-4 h-4 fill-white" />
-                  <span>START AUDIO LESSON</span>
+                  <span>{t("editorial.promo.cta")}</span>
                 </Link>
               </div>
             </div>
@@ -352,32 +353,32 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
             <div className="lg:col-span-5 space-y-4">
               
               {/* Preview 1 */}
-              <div className="p-5 bg-slate-900/90 border border-slate-800 hover:border-orange-500 flex items-center gap-4 transition-colors group cursor-pointer backdrop-blur-md">
+              <Link href="/lessons" className="p-5 bg-slate-900/90 border border-slate-800 hover:border-orange-500 flex items-center gap-4 transition-colors group cursor-pointer backdrop-blur-md block">
                 <div className="w-14 h-14 rounded-full bg-orange-600/20 text-orange-500 border border-orange-500/30 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <Volume2 className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-orange-400">LESSON AUDIO 01</span>
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-orange-400">{t("editorial.promo.audio1.tag")}</span>
                   <h4 className="text-base font-bold text-white group-hover:text-orange-400 transition-colors">
-                    Službeni i neslužbeni pozdravi
+                    {t("editorial.promo.audio1.title")}
                   </h4>
-                  <p className="text-xs text-slate-400">CEFR A1 · Audio & Dictation</p>
+                  <p className="text-xs text-slate-400">{t("editorial.promo.audio1.sub")}</p>
                 </div>
-              </div>
+              </Link>
 
               {/* Preview 2 */}
-              <div className="p-5 bg-slate-900/90 border border-slate-800 hover:border-amber-500 flex items-center gap-4 transition-colors group cursor-pointer backdrop-blur-md">
+              <Link href="/ai-chat" className="p-5 bg-slate-900/90 border border-slate-800 hover:border-amber-500 flex items-center gap-4 transition-colors group cursor-pointer backdrop-blur-md block">
                 <div className="w-14 h-14 rounded-full bg-amber-600/20 text-amber-500 border border-amber-500/30 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <MessageCircle className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-amber-400">AI ROLEPLAY 02</span>
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-amber-400">{t("editorial.promo.audio2.tag")}</span>
                   <h4 className="text-base font-bold text-white group-hover:text-amber-400 transition-colors">
-                    U kafiću — Naručivanje kave
+                    {t("editorial.promo.audio2.title")}
                   </h4>
-                  <p className="text-xs text-slate-400">CEFR A2 · Voice Simulation</p>
+                  <p className="text-xs text-slate-400">{t("editorial.promo.audio2.sub")}</p>
                 </div>
-              </div>
+              </Link>
 
             </div>
 
@@ -387,7 +388,7 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
 
       {/* Footer Editorial Copyright Line */}
       <div className="border-t border-slate-800 bg-slate-950/80 backdrop-blur-md py-6 text-center text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
-        © 2026 CROATIA MENTOR · ALL RIGHTS RESERVED
+        {t("editorial.copyright")}
       </div>
     </div>
   );
