@@ -28,50 +28,39 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
   const { data: session } = useSession();
 
   return (
-    <div className="relative min-h-screen bg-white text-slate-900 font-sans selection:bg-orange-500 selection:text-white">
+    <div className="relative min-h-screen bg-transparent text-slate-100 font-sans selection:bg-orange-500 selection:text-white">
       
-      {/* Background 1px Architectural Grid Overlay */}
+      {/* Background Architectural Grid Overlay */}
       <div 
         className="absolute inset-0 pointer-events-none opacity-20 z-0"
         style={{
-          backgroundImage: "linear-gradient(to right, #e5e7eb 1px, transparent 1px), linear-gradient(to bottom, #e5e7eb 1px, transparent 1px)",
+          backgroundImage: "linear-gradient(to right, #334155 1px, transparent 1px), linear-gradient(to bottom, #334155 1px, transparent 1px)",
           backgroundSize: "60px 60px",
         }}
       />
 
       {/* Top Editorial Category Navigation Bar */}
-      <div className="relative z-20 border-b border-slate-200 bg-white/95 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between text-[11px] font-bold tracking-[0.2em] uppercase text-slate-500 overflow-x-auto whitespace-nowrap">
+      <div className="relative z-20 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between text-[11px] font-bold tracking-[0.2em] uppercase text-slate-400 overflow-x-auto whitespace-nowrap">
           <div className="flex items-center gap-6">
-            <span className="flex items-center gap-2 text-orange-600 font-extrabold">
+            <span className="flex items-center gap-2 text-orange-400 font-extrabold">
               <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
               CROATIA MENTOR
             </span>
-            <span className="hidden sm:inline border-l border-slate-200 pl-6">CEFR A1 — C2</span>
-            <span className="hidden md:inline border-l border-slate-200 pl-6">AI TUTOR & DICTATION</span>
-            <span className="hidden lg:inline border-l border-slate-200 pl-6">SRS SPACES REPETITION</span>
+            <span className="hidden sm:inline border-l border-slate-800 pl-6">CEFR A1 — C2</span>
+            <span className="hidden md:inline border-l border-slate-800 pl-6">AI TUTOR & DICTATION</span>
+            <span className="hidden lg:inline border-l border-slate-800 pl-6">SRS SPACES REPETITION</span>
           </div>
-          <div className="flex items-center gap-4 text-slate-700">
-            <span className="px-3 py-1 bg-orange-50 text-orange-600 border border-orange-200 rounded-md font-mono text-[10px]">
+          <div className="flex items-center gap-4 text-slate-300">
+            <span className="px-3 py-1 bg-orange-950/60 text-orange-400 border border-orange-500/30 rounded-md font-mono text-[10px]">
               EDITION 2026 / ORANGE & WHITE
             </span>
           </div>
         </div>
       </div>
 
-      {/* Hero Section with Parallax Croatian Landscape Background (Reference 1 & 4) */}
-      <section className="relative z-10 overflow-hidden border-b border-slate-200">
-        {/* Photography Background Layer */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center pointer-events-none opacity-25 dark:opacity-40 transition-transform duration-75"
-          style={{
-            backgroundImage: "url('/croatia-hero.jpg')",
-            transform: `translateY(${scrollY * 0.05}px) scale(1.05)`,
-          }}
-        />
-        {/* Soft Warm Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/80 pointer-events-none" />
-
+      {/* Hero Section with Dramatic Parallax Photography Background (Reference 1 & 4) */}
+      <section className="relative z-10 overflow-hidden border-b border-slate-800/80">
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-20 sm:pt-20 sm:pb-24">
           
           {/* Main Hero Header Row */}
@@ -79,88 +68,88 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
             
             {/* Left: Dominant ALL-CAPS Title */}
             <div className="lg:col-span-9 space-y-6">
-              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-orange-600">
-                <Sparkles className="w-4 h-4 text-orange-500" />
+              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-orange-400 bg-orange-950/40 px-3.5 py-1.5 rounded-full border border-orange-500/30 backdrop-blur-sm">
+                <Sparkles className="w-4 h-4 text-orange-400" />
                 INTERACTIVE LANGUAGE ADVENTURE
               </div>
 
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight text-slate-900 leading-[1.05] font-editorial drop-shadow-sm">
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight text-white leading-[1.05] font-editorial drop-shadow-md">
                 LEARN CROATIAN{" "}
-                <span className="bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-orange-400 via-amber-400 to-orange-500 bg-clip-text text-transparent">
                   NATURALLY
                 </span>
               </h1>
 
-              <p className="text-lg sm:text-xl text-slate-700 max-w-3xl font-normal leading-relaxed">
+              <p className="text-lg sm:text-xl text-slate-300 max-w-3xl font-normal leading-relaxed">
                 Complete grammar explanations, vocabulary flashcards, audio dictation, and real-time AI conversation practice. Designed for Ukrainian relocators, expats, and international learners.
               </p>
             </div>
 
             {/* Right: Vertical Step Indicator (Reference 1 & 4) */}
-            <div className="lg:col-span-3 flex lg:flex-col items-center lg:items-end justify-between lg:justify-start gap-4 text-right border-t lg:border-t-0 lg:border-l border-slate-300 pt-6 lg:pt-0 lg:pl-8">
+            <div className="lg:col-span-3 flex lg:flex-col items-center lg:items-end justify-between lg:justify-start gap-4 text-right border-t lg:border-t-0 lg:border-l border-slate-800 pt-6 lg:pt-0 lg:pl-8">
               <div className="font-mono text-xs font-bold uppercase tracking-widest text-slate-500">
                 NAVIGATION STEPS
               </div>
-              <div className="flex lg:flex-col gap-3 font-mono text-base font-bold text-slate-400">
-                <span className="hover:text-slate-900 cursor-pointer">01</span>
-                <span className="hover:text-slate-900 cursor-pointer">02</span>
-                <div className="flex items-center gap-2 text-orange-600 font-extrabold text-lg">
+              <div className="flex lg:flex-col gap-3 font-mono text-base font-bold text-slate-500">
+                <span className="hover:text-white cursor-pointer">01</span>
+                <span className="hover:text-white cursor-pointer">02</span>
+                <div className="flex items-center gap-2 text-orange-400 font-extrabold text-lg">
                   <span>03</span>
                   <span className="w-8 h-[2px] bg-orange-500 hidden lg:block" />
                 </div>
-                <span className="hover:text-slate-900 cursor-pointer">04</span>
-                <span className="hover:text-slate-900 cursor-pointer">05</span>
+                <span className="hover:text-white cursor-pointer">04</span>
+                <span className="hover:text-white cursor-pointer">05</span>
               </div>
             </div>
           </div>
 
           {/* 3-Column Editorial Subtext Grid (Reference 1) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-slate-300/80">
-            <div className="space-y-3 pr-4 border-r-0 md:border-r border-slate-300/80">
-              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-slate-800">
+            <div className="space-y-3 pr-4 border-r-0 md:border-r border-slate-800">
+              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-orange-400">
                 01 / IMMERSIVE CURRICULUM
               </h4>
-              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                 Structured CEFR lessons from A1 to C2. Master Croatian grammar, daily situational dialogues, and vocabulary essential for living in Croatia.
               </p>
               <Link 
                 href="/lessons"
-                className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-slate-900 hover:text-orange-600 transition-colors pt-2"
+                className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-white hover:text-orange-400 transition-colors pt-2"
               >
                 <span>EXPLORE LESSONS</span>
-                <ChevronRight className="w-4 h-4 text-orange-500" />
+                <ChevronRight className="w-4 h-4 text-orange-400" />
               </Link>
             </div>
 
-            <div className="space-y-3 pr-4 border-r-0 md:border-r border-slate-300/80">
-              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">
+            <div className="space-y-3 pr-4 border-r-0 md:border-r border-slate-800">
+              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-orange-400">
                 02 / AI TUTOR & DICTATION
               </h4>
-              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                 Simulate natural conversation with an intelligent AI tutor powered by Google GenAI and natural audio speech generated via Edge TTS.
               </p>
               <Link 
                 href="/ai-chat"
-                className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-slate-900 hover:text-orange-600 transition-colors pt-2"
+                className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-white hover:text-orange-400 transition-colors pt-2"
               >
                 <span>START AI CHAT</span>
-                <ChevronRight className="w-4 h-4 text-orange-500" />
+                <ChevronRight className="w-4 h-4 text-orange-400" />
               </Link>
             </div>
 
             <div className="space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">
+              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-orange-400">
                 03 / SPACED REPETITION (SRS)
               </h4>
-              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                 Scientific SM-2 algorithm calculates ideal review intervals to guarantee rapid, long-term vocabulary retention without rote memory burn.
               </p>
               <Link 
                 href="/vocabulary"
-                className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-slate-900 hover:text-orange-600 transition-colors pt-2"
+                className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-white hover:text-orange-400 transition-colors pt-2"
               >
                 <span>VIEW VOCABULARY</span>
-                <ChevronRight className="w-4 h-4 text-orange-500" />
+                <ChevronRight className="w-4 h-4 text-orange-400" />
               </Link>
             </div>
           </div>
@@ -169,14 +158,14 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
           <div className="flex flex-col sm:flex-row items-center gap-4 pt-10">
             <Link
               href={session ? "/dashboard" : "/sign-up"}
-              className="group flex items-center justify-center gap-3 w-full sm:w-auto px-10 py-4 bg-orange-600 hover:bg-orange-500 text-white font-extrabold uppercase text-sm tracking-[0.2em] transition-all shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50"
+              className="group flex items-center justify-center gap-3 w-full sm:w-auto px-10 py-4 bg-orange-600 hover:bg-orange-500 text-white font-extrabold uppercase text-sm tracking-[0.2em] transition-all shadow-xl shadow-orange-600/30 hover:shadow-orange-600/50"
             >
               <span>{session ? t("hero.goToDashboard") : t("hero.cta")}</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               href="/placement-test"
-              className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 bg-white/80 border border-slate-900 hover:bg-slate-900 hover:text-white text-slate-900 font-extrabold uppercase text-sm tracking-[0.2em] transition-all"
+              className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 bg-slate-900/80 border border-slate-700 hover:border-white text-white font-extrabold uppercase text-sm tracking-[0.2em] transition-all backdrop-blur-md"
             >
               <span>TAKE PLACEMENT TEST</span>
             </Link>
@@ -186,14 +175,14 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
       </section>
 
       {/* Full-Width Horizontal Linear Divider (Reference 1 & 2) */}
-      <section className="relative z-10 border-b border-slate-200 bg-slate-50 py-6">
+      <section className="relative z-10 border-b border-slate-800 bg-slate-950/70 backdrop-blur-md py-6">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <div className="flex items-center justify-center gap-4">
-            <span className="h-[1px] w-16 sm:w-32 bg-orange-400" />
-            <p className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-slate-800">
+            <span className="h-[1px] w-16 sm:w-32 bg-orange-500/60" />
+            <p className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-slate-300">
               FIND YOUR FAVORITE MODULE — FROM A1 BEGINNER TO C2 MASTERY
             </p>
-            <span className="h-[1px] w-16 sm:w-32 bg-orange-400" />
+            <span className="h-[1px] w-16 sm:w-32 bg-orange-500/60" />
           </div>
         </div>
       </section>
@@ -203,15 +192,15 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           
           {/* Card 1: Plitvice Waterfall Photo */}
-          <div className="group relative rounded-2xl overflow-hidden border border-slate-200 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-md hover:shadow-2xl hover:shadow-orange-500/20">
+          <div className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-2xl hover:shadow-orange-500/20">
             <div 
               className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700"
               style={{ backgroundImage: "url('/croatia-card-1.jpg')" }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-slate-950/20" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-slate-950/30" />
             
             <div className="relative z-10 flex items-center justify-between">
-              <span className="font-mono text-xs font-bold uppercase tracking-widest text-orange-400 bg-slate-900/80 px-2.5 py-1 rounded backdrop-blur-sm border border-orange-500/30">
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-orange-400 bg-slate-950/80 px-2.5 py-1 rounded backdrop-blur-sm border border-orange-500/30">
                 01 / LESSONS
               </span>
               <span className="w-2.5 h-2.5 bg-orange-500 rounded-full shadow-md shadow-orange-500/50" />
@@ -232,15 +221,15 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
           </div>
 
           {/* Card 2: Hvar Island Harbor Cafe Photo */}
-          <div className="group relative rounded-2xl overflow-hidden border border-slate-200 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-md hover:shadow-2xl hover:shadow-orange-500/20">
+          <div className="group relative rounded-2xl overflow-hidden border border-slate-880 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-2xl hover:shadow-orange-500/20">
             <div 
               className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700"
               style={{ backgroundImage: "url('/croatia-card-2.jpg')" }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-slate-950/20" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-slate-950/30" />
             
             <div className="relative z-10 flex items-center justify-between">
-              <span className="font-mono text-xs font-bold uppercase tracking-widest text-amber-400 bg-slate-900/80 px-2.5 py-1 rounded backdrop-blur-sm border border-amber-500/30">
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-amber-400 bg-slate-950/80 px-2.5 py-1 rounded backdrop-blur-sm border border-amber-500/30">
                 02 / AI CHAT
               </span>
               <span className="w-2.5 h-2.5 bg-amber-500 rounded-full shadow-md shadow-amber-500/50" />
@@ -261,15 +250,15 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
           </div>
 
           {/* Card 3: Rovinj Bell Tower Seaside Photo */}
-          <div className="group relative rounded-2xl overflow-hidden border border-slate-200 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-md hover:shadow-2xl hover:shadow-orange-500/20">
+          <div className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-2xl hover:shadow-orange-500/20">
             <div 
               className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700"
               style={{ backgroundImage: "url('/croatia-card-3.jpg')" }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-slate-950/20" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-slate-950/30" />
             
             <div className="relative z-10 flex items-center justify-between">
-              <span className="font-mono text-xs font-bold uppercase tracking-widest text-orange-400 bg-slate-900/80 px-2.5 py-1 rounded backdrop-blur-sm border border-orange-500/30">
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-orange-400 bg-slate-950/80 px-2.5 py-1 rounded backdrop-blur-sm border border-orange-500/30">
                 03 / VOCABULARY
               </span>
               <span className="w-2.5 h-2.5 bg-orange-500 rounded-full shadow-md shadow-orange-500/50" />
@@ -290,15 +279,15 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
           </div>
 
           {/* Card 4: Dubrovnik Old Town Photo */}
-          <div className="group relative rounded-2xl overflow-hidden border border-slate-200 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-md hover:shadow-2xl hover:shadow-orange-500/20">
+          <div className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-2xl hover:shadow-orange-500/20">
             <div 
               className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700"
               style={{ backgroundImage: "url('/hero-bg.jpg')" }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-slate-950/20" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-slate-950/30" />
             
             <div className="relative z-10 flex items-center justify-between">
-              <span className="font-mono text-xs font-bold uppercase tracking-widest text-amber-400 bg-slate-900/80 px-2.5 py-1 rounded backdrop-blur-sm border border-amber-500/30">
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-amber-400 bg-slate-950/80 px-2.5 py-1 rounded backdrop-blur-sm border border-amber-500/30">
                 04 / MINI GAMES
               </span>
               <span className="w-2.5 h-2.5 bg-amber-500 rounded-full shadow-md shadow-amber-500/50" />
@@ -322,10 +311,10 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
       </section>
 
       {/* Video & Photo Promo Statement Block (Reference 1, 3 & 4) */}
-      <section className="relative z-10 overflow-hidden border-t border-slate-200 bg-slate-950 text-white py-24">
+      <section className="relative z-10 overflow-hidden border-t border-slate-800 bg-slate-950/90 text-white py-24 backdrop-blur-md">
         {/* Photo Background Layer */}
         <div 
-          className="absolute inset-0 bg-cover bg-center pointer-events-none opacity-20"
+          className="absolute inset-0 bg-cover bg-center pointer-events-none opacity-25"
           style={{ backgroundImage: "url('/lessons-bg.jpg')" }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-950/80 pointer-events-none" />
@@ -397,7 +386,7 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
       </section>
 
       {/* Footer Editorial Copyright Line */}
-      <div className="border-t border-slate-200 bg-white py-6 text-center text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
+      <div className="border-t border-slate-800 bg-slate-950/80 backdrop-blur-md py-6 text-center text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
         © 2026 CROATIA MENTOR · ALL RIGHTS RESERVED
       </div>
     </div>

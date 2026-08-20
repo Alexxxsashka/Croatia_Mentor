@@ -27,23 +27,24 @@ export function GlobalParallaxBackground() {
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[-10] overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-500">
+    <div className="fixed inset-0 pointer-events-none z-[-10] overflow-hidden bg-slate-950">
       {/* Parallax Background Image Layer */}
       <div
-        className="absolute inset-[-10%] bg-cover bg-center pointer-events-none transition-transform duration-100 ease-out opacity-20 dark:opacity-100"
+        className="absolute inset-[-10%] bg-cover bg-center pointer-events-none transition-transform duration-100 ease-out opacity-85"
         style={{
-          backgroundImage: "url('/global-bg.jpg')",
+          backgroundImage: "url('/croatia-hero.jpg')",
           transform: `translateY(${Math.max(-140, Math.min(140, -scrollY * 0.08))}px) scale(1.15)`,
         }}
       />
 
-      {/* Theme specific overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-orange-50/60 via-white/80 to-amber-50/40 dark:from-slate-950/80 dark:via-slate-950/70 dark:to-slate-950 backdrop-blur-[1px]" />
+      {/* Dramatic Overlay with Warm Orange Accent Vignette */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-950/75 to-slate-950/90 backdrop-blur-[1px]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-orange-500/15 via-transparent to-transparent pointer-events-none" />
 
       {/* Bottom gradient fade for smooth transition */}
-      <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-white via-white/70 to-transparent dark:from-slate-950 dark:via-slate-950/80 dark:to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent" />
 
-      {/* Floating Dust Particles */}
+      {/* Floating Glowing Dust Particles */}
       <div
         className="dust-container pointer-events-none"
         style={{ transform: `translateY(${scrollY * -0.1}px)`, zIndex: -1 }}
@@ -51,7 +52,7 @@ export function GlobalParallaxBackground() {
         {DUST_PARTICLES.map((p) => (
           <div
             key={p.id}
-            className="dust-particle opacity-30 dark:opacity-50"
+            className="dust-particle opacity-60 bg-amber-400 shadow-[0_0_8px_rgba(255,165,0,0.8)]"
             style={{
               top: p.top,
               left: p.left,
@@ -65,5 +66,6 @@ export function GlobalParallaxBackground() {
       </div>
     </div>
   );
+
 
 }
