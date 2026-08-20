@@ -590,27 +590,27 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
 
       {/* NEW SECTION 4: Integrated Support & Contact Section (Внизу раздел под контакты) */}
       <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-purple-950/60 via-slate-900/90 to-slate-950/90 border border-purple-500/30 backdrop-blur-md shadow-2xl">
+        <div className="p-8 sm:p-12 rounded-3xl bg-slate-900/90 dark:bg-gradient-to-br dark:from-purple-950/60 dark:via-slate-900/90 dark:to-slate-950/90 border border-slate-300 dark:border-purple-500/30 backdrop-blur-md shadow-2xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             <div className="lg:col-span-8 space-y-4">
-              <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.25em] text-pink-400 bg-pink-950/40 px-3.5 py-1.5 rounded-full border border-pink-500/30">
-                <Mail className="w-4 h-4 text-pink-400" />
+              <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.25em] text-purple-700 dark:text-pink-400 bg-purple-100 dark:bg-pink-950/40 px-3.5 py-1.5 rounded-full border border-purple-300 dark:border-pink-500/30">
+                <Mail className="w-4 h-4 text-purple-600 dark:text-pink-400" />
                 {t("editorial.contactSection.tag")}
               </div>
               
-              <h2 className="text-3xl sm:text-4xl font-black uppercase font-editorial text-white">
+              <h2 className="text-3xl sm:text-4xl font-black uppercase font-editorial text-slate-900 dark:text-white">
                 {t("editorial.contactSection.title")}
               </h2>
 
-              <p className="text-slate-300 text-sm leading-relaxed max-w-2xl">
+              <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed max-w-2xl font-normal">
                 {t("editorial.contactSection.desc")}
               </p>
 
-              <div className="pt-2 flex flex-wrap items-center gap-6 text-xs text-slate-300 font-mono">
+              <div className="pt-2 flex flex-wrap items-center gap-6 text-xs text-slate-800 dark:text-slate-300 font-mono">
                 <div className="flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-purple-400" />
-                  <a href="mailto:guardsowh@gmail.com" className="hover:text-purple-300 transition-colors">
+                  <Mail className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                  <a href="mailto:guardsowh@gmail.com" className="font-bold text-slate-900 dark:text-slate-100 hover:text-purple-600 transition-colors">
                     {t("editorial.contactSection.emailValue")}
                   </a>
                 </div>
@@ -622,8 +622,8 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
                 href="/contacts"
                 className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 hover:from-purple-500 hover:to-indigo-500 text-white font-extrabold uppercase text-xs tracking-[0.2em] transition-all shadow-xl shadow-purple-600/30 rounded-xl text-center glow-hover w-full sm:w-auto"
               >
-                <Mail className="w-4 h-4" />
-                <span>{t("editorial.contactSection.ctaPrimary")}</span>
+                <Mail className="w-4 h-4 text-white" />
+                <span className="text-white">{t("editorial.contactSection.ctaPrimary")}</span>
               </Link>
             </div>
 
