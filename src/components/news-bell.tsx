@@ -151,18 +151,19 @@ export function NewsBell() {
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute right-0 sm:right-0 mt-3 w-[calc(100vw-2rem)] sm:w-96 max-w-[24rem] rounded-2xl glass-dropdown border border-black/10 dark:border-white/10 shadow-2xl p-3 sm:p-4 z-50 animate-scale-up space-y-3" style={{ right: 'min(0px, calc(-50vw + 50% + 1rem))' }}>
+        <div className="absolute right-0 mt-3 w-80 sm:w-96 max-w-[calc(100vw-2rem)] rounded-2xl bg-slate-900/95 dark:bg-slate-950/95 border border-slate-700/80 shadow-2xl p-4 z-50 animate-scale-up space-y-3 backdrop-blur-xl text-slate-100">
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-black/5 dark:border-white/10 pb-3">
+          <div className="flex items-center justify-between border-b border-white/10 pb-3">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-blue-400" />
+              <Sparkles className="w-4 h-4 text-purple-400" />
               <h3 className="font-bold text-sm text-foreground">{headerTitle}</h3>
               {unreadCount > 0 && (
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-500/10 text-red-500 dark:text-red-400 border border-red-500/20">
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
                   {unreadCount}
                 </span>
               )}
             </div>
+
             {unreadCount > 0 && (
               <button
                 type="button"
