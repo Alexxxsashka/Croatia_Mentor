@@ -15,7 +15,7 @@ const DUST_PARTICLES = Array.from({ length: 50 }).map((_, i) => ({
       ? "bg-amber-400 shadow-[0_0_10px_rgba(255,184,0,0.9)]"
       : i % 3 === 1
       ? "bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.9)]"
-      : "bg-orange-400 shadow-[0_0_10px_rgba(255,107,0,0.9)]",
+      : "bg-indigo-400 shadow-[0_0_10px_rgba(99,102,241,0.9)]",
 }));
 
 // Generate 30 glowing twinkling stars
@@ -45,24 +45,26 @@ export function GlobalParallaxBackground() {
   return (
     <div className="fixed inset-0 pointer-events-none z-[-10] overflow-hidden bg-slate-950">
       
-      {/* LAYER 1: Deep Croatian Parallax Photography Background */}
+      {/* LAYER 1: 8K Seamless Vertical-Repeating Parallax Dubrovnik Landscape */}
       <div
-        className="absolute inset-[-15%] bg-cover bg-center pointer-events-none transition-transform duration-75 ease-out opacity-90 dark:opacity-80"
+        className="absolute inset-0 pointer-events-none opacity-90 dark:opacity-80 transition-[background-position] duration-75 ease-out"
         style={{
           backgroundImage: "url('/croatia-hero.jpg')",
-          transform: `translateY(${scrollY * -0.22}px) scale(1.18)`,
+          backgroundRepeat: "repeat-y",
+          backgroundSize: "100% auto",
+          backgroundPosition: `center ${-scrollY * 0.2}px`,
         }}
       />
 
       {/* LAYER 2: Semi-Transparent Ambient Overlay Vignette */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-100/70 via-amber-50/50 to-slate-100/75 dark:from-slate-950/75 dark:via-slate-950/65 dark:to-slate-950/85 backdrop-blur-[1px]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-500/15 via-orange-500/10 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-500/15 via-indigo-500/10 to-transparent pointer-events-none" />
 
       {/* LAYER 3: Dedicated Animated Parallax Floating Dust Layer */}
       <div
         className="absolute inset-0 pointer-events-none transition-transform duration-100 ease-out"
         style={{
-          transform: `translateY(${scrollY * -0.38}px)`,
+          transform: `translateY(${-scrollY * 0.35}px)`,
         }}
       >
         {DUST_PARTICLES.map((p) => (
@@ -85,7 +87,7 @@ export function GlobalParallaxBackground() {
       <div
         className="absolute inset-0 pointer-events-none transition-transform duration-100 ease-out"
         style={{
-          transform: `translateY(${scrollY * -0.52}px)`,
+          transform: `translateY(${-scrollY * 0.5}px)`,
         }}
       >
         {STAR_PARTICLES.map((s) => (
@@ -111,9 +113,6 @@ export function GlobalParallaxBackground() {
           </div>
         ))}
       </div>
-
-      {/* Bottom Gradient Transition to Smoothly Fade Page Footer */}
-      <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-slate-100 via-slate-100/70 to-transparent dark:from-slate-950 dark:via-slate-950/70 to-transparent" />
     </div>
   );
 }
