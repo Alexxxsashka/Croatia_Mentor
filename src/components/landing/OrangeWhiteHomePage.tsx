@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import { Link } from "@/i18n/navigation";
@@ -17,6 +17,14 @@ import {
   Star,
   Award,
   Zap,
+  HelpCircle,
+  ChevronDown,
+  Mail,
+  Send,
+  CheckCircle2,
+  Brain,
+  Bot,
+  Trophy,
 } from "lucide-react";
 
 export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
@@ -29,11 +37,27 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
       ? "01"
       : scrollY < 900
       ? "02"
-      : scrollY < 1500
+      : scrollY < 1600
       ? "03"
-      : scrollY < 2000
+      : scrollY < 2400
       ? "04"
       : "05";
+
+  // State for interactive FAQ accordion
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
+  const levelCards = [
+    { key: "a1", badge: "A1", badgeColor: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30" },
+    { key: "a2", badge: "A2", badgeColor: "bg-teal-500/20 text-teal-400 border-teal-500/30" },
+    { key: "b1", badge: "B1", badgeColor: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30" },
+    { key: "b2", badge: "B2", badgeColor: "bg-purple-500/20 text-purple-400 border-purple-500/30" },
+    { key: "c1", badge: "C1", badgeColor: "bg-pink-500/20 text-pink-400 border-pink-500/30" },
+    { key: "c2", badge: "C2", badgeColor: "bg-indigo-500/20 text-indigo-400 border-indigo-500/30" },
+  ];
 
   return (
     <div className="relative min-h-screen bg-transparent text-slate-100 font-sans selection:bg-purple-600 selection:text-white">
@@ -93,7 +117,7 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
                 {t("hero.subtitle")}
               </p>
 
-              {/* Single Clean Hero CTA Button - PURPLE GRADIENT */}
+              {/* Single Clean Hero CTA Button */}
               <div className="pt-2 flex items-center gap-4">
                 <Link
                   href={session ? "/dashboard" : "/sign-up"}
@@ -126,7 +150,7 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
                         isActive ? "text-purple-400 font-extrabold text-lg scale-110" : "hover:text-slate-300"
                       }`}
                       onClick={() => {
-                        const targetY = step === "01" ? 0 : step === "02" ? 500 : step === "03" ? 1100 : step === "04" ? 1700 : 2200;
+                        const targetY = step === "01" ? 0 : step === "02" ? 500 : step === "03" ? 1100 : step === "04" ? 1800 : 2500;
                         window.scrollTo({ top: targetY, behavior: "smooth" });
                       }}
                     >
@@ -212,8 +236,8 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
         </div>
       </section>
 
-      {/* 4-Column Themed 3D Cards Grid with Scroll Reveal & Floating Micro-Interactions */}
-      <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      {/* 4-Column Themed 3D Cards Grid */}
+      <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-b border-slate-800/80">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           
           {/* Card 1: Lessons 3D Card */}
@@ -359,8 +383,102 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
         </div>
       </section>
 
+      {/* NEW SECTION 1: CEFR Level Breakdown Grid (A1 - C2 Modular Cards) */}
+      <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-b border-slate-800/80">
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.25em] text-purple-400 bg-purple-950/40 px-3.5 py-1.5 rounded-full border border-purple-500/30">
+            <BookOpen className="w-4 h-4 text-purple-400" />
+            {t("editorial.levels.tag")}
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-black uppercase font-editorial tracking-tight bg-gradient-to-r from-purple-300 via-pink-300 to-blue-200 bg-clip-text text-transparent">
+            {t("editorial.levels.title")}
+          </h2>
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+            {t("editorial.levels.subtitle")}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {levelCards.map((lvl) => (
+            <Link
+              key={lvl.key}
+              href="/lessons"
+              className="group p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-purple-500/60 backdrop-blur-md transition-all duration-300 hover:scale-[1.02] shadow-xl hover:shadow-purple-500/10 block"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <span className={`px-3 py-1 rounded-lg text-xs font-mono font-black border ${lvl.badgeColor}`}>
+                  {t(`editorial.levels.${lvl.key}.title`).split("·")[0]}
+                </span>
+                <span className="text-xs font-mono text-slate-500 uppercase tracking-widest">CEFR MODULE</span>
+              </div>
+              <h3 className="text-lg font-extrabold uppercase font-editorial text-white group-hover:text-purple-300 transition-colors mb-2">
+                {t(`editorial.levels.${lvl.key}.title`).split("·")[1] || t(`editorial.levels.${lvl.key}.title`)}
+              </h3>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                {t(`editorial.levels.${lvl.key}.desc`)}
+              </p>
+              <div className="mt-4 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-bold text-purple-400 group-hover:text-pink-400 transition-colors">
+                <span>GO TO MODULE</span>
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* NEW SECTION 2: 3 Pillars of Rapid Fluency (Learning Engine Methodology) */}
+      <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-b border-slate-800/80">
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.25em] text-indigo-400 bg-indigo-950/40 px-3.5 py-1.5 rounded-full border border-indigo-500/30">
+            <Zap className="w-4 h-4 text-indigo-400 animate-pulse" />
+            {t("editorial.methodology.tag")}
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-black uppercase font-editorial tracking-tight text-white">
+            {t("editorial.methodology.title")}
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="p-8 rounded-3xl bg-slate-900/90 border border-slate-800 hover:border-purple-500/50 backdrop-blur-md space-y-4 group transition-all">
+            <div className="w-14 h-14 rounded-2xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform">
+              <Bot className="w-7 h-7" />
+            </div>
+            <h3 className="text-xl font-bold uppercase font-editorial text-white group-hover:text-purple-300 transition-colors">
+              {t("editorial.methodology.p1.title")}
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+              {t("editorial.methodology.p1.desc")}
+            </p>
+          </div>
+
+          <div className="p-8 rounded-3xl bg-slate-900/90 border border-slate-800 hover:border-indigo-500/50 backdrop-blur-md space-y-4 group transition-all">
+            <div className="w-14 h-14 rounded-2xl bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 group-hover:scale-110 transition-transform">
+              <Brain className="w-7 h-7" />
+            </div>
+            <h3 className="text-xl font-bold uppercase font-editorial text-white group-hover:text-indigo-300 transition-colors">
+              {t("editorial.methodology.p2.title")}
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+              {t("editorial.methodology.p2.desc")}
+            </p>
+          </div>
+
+          <div className="p-8 rounded-3xl bg-slate-900/90 border border-slate-800 hover:border-pink-500/50 backdrop-blur-md space-y-4 group transition-all">
+            <div className="w-14 h-14 rounded-2xl bg-pink-600/20 border border-pink-500/30 flex items-center justify-center text-pink-400 group-hover:scale-110 transition-transform">
+              <Trophy className="w-7 h-7" />
+            </div>
+            <h3 className="text-xl font-bold uppercase font-editorial text-white group-hover:text-pink-300 transition-colors">
+              {t("editorial.methodology.p3.title")}
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+              {t("editorial.methodology.p3.desc")}
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Audio Immersion Statement Section */}
-      <section className="relative z-10 overflow-hidden border-t border-slate-800 bg-slate-950/90 text-white py-20 backdrop-blur-md">
+      <section className="relative z-10 overflow-hidden border-b border-slate-800/80 bg-slate-950/90 text-white py-20 backdrop-blur-md">
         <div 
           className="absolute inset-0 bg-cover bg-center pointer-events-none opacity-20"
           style={{ backgroundImage: "url('/lessons-bg.jpg')" }}
@@ -425,6 +543,100 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
                 </div>
               </Link>
 
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* NEW SECTION 3: Frequently Asked Questions (FAQ Accordion) */}
+      <section className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-b border-slate-800/80">
+        <div className="text-center mb-14 space-y-4">
+          <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.25em] text-purple-400 bg-purple-950/40 px-3.5 py-1.5 rounded-full border border-purple-500/30">
+            <HelpCircle className="w-4 h-4 text-purple-400" />
+            {t("editorial.faq.tag")}
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-black uppercase font-editorial tracking-tight text-white">
+            {t("editorial.faq.title")}
+          </h2>
+        </div>
+
+        <div className="space-y-4">
+          {[1, 2, 3, 4].map((i) => {
+            const idx = i - 1;
+            const isOpen = openFaq === idx;
+            return (
+              <div
+                key={i}
+                className="rounded-2xl bg-slate-900/90 border border-slate-800 overflow-hidden transition-colors"
+              >
+                <button
+                  onClick={() => toggleFaq(idx)}
+                  className="w-full p-6 text-left flex items-center justify-between gap-4 font-bold text-base text-white hover:text-purple-300 transition-colors"
+                >
+                  <span>{t(`editorial.faq.q${i}`)}</span>
+                  <ChevronDown className={`w-5 h-5 text-purple-400 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+                </button>
+                {isOpen && (
+                  <div className="px-6 pb-6 pt-0 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800/60 animate-fade-in">
+                    {t(`editorial.faq.a${i}`)}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* NEW SECTION 4: Integrated Support & Contact Section (Внизу раздел под контакты) */}
+      <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-purple-950/60 via-slate-900/90 to-slate-950/90 border border-purple-500/30 backdrop-blur-md shadow-2xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <div className="lg:col-span-8 space-y-4">
+              <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.25em] text-pink-400 bg-pink-950/40 px-3.5 py-1.5 rounded-full border border-pink-500/30">
+                <Mail className="w-4 h-4 text-pink-400" />
+                {t("editorial.contactSection.tag")}
+              </div>
+              
+              <h2 className="text-3xl sm:text-4xl font-black uppercase font-editorial text-white">
+                {t("editorial.contactSection.title")}
+              </h2>
+
+              <p className="text-slate-300 text-sm leading-relaxed max-w-2xl">
+                {t("editorial.contactSection.desc")}
+              </p>
+
+              <div className="pt-2 flex flex-wrap items-center gap-6 text-xs text-slate-300 font-mono">
+                <div className="flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-purple-400" />
+                  <span>{t("editorial.contactSection.emailValue")}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Send className="w-4 h-4 text-cyan-400" />
+                  <span>{t("editorial.contactSection.communityValue")}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-4">
+              <Link
+                href="/contacts"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 hover:from-purple-500 hover:to-indigo-500 text-white font-extrabold uppercase text-xs tracking-[0.2em] transition-all shadow-xl shadow-purple-600/30 rounded-xl text-center glow-hover"
+              >
+                <Mail className="w-4 h-4" />
+                <span>{t("editorial.contactSection.ctaPrimary")}</span>
+              </Link>
+              
+              <a
+                href="https://t.me/croatia_mentor_community"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-slate-900/90 border border-slate-700 hover:border-cyan-400 text-slate-300 hover:text-white font-extrabold uppercase text-xs tracking-[0.2em] transition-all rounded-xl text-center backdrop-blur-md"
+              >
+                <Send className="w-4 h-4 text-cyan-400" />
+                <span>{t("editorial.contactSection.ctaCommunity")}</span>
+              </a>
             </div>
 
           </div>

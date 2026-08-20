@@ -106,8 +106,55 @@
         "audio1": { "tag": "LESSON AUDIO 01", "title": "Official and unofficial greetings", "sub": "CEFR A1 · Audio & Dictation" },
         "audio2": { "tag": "AI ROLEPLAY 02", "title": "At the café — Ordering coffee", "sub": "CEFR A2 · Voice Simulation" }
       },
+
+      "levels": {
+        "tag": "STRUCTURED CURRICULUM",
+        "title": "EXPLORE CEFR LANGUAGE LEVELS",
+        "subtitle": "From your very first greeting in Zagreb to fluent business discussions in Split.",
+        "a1": { "title": "A1 · BEGINNER", "desc": "Master basic greetings, present tense (biti, imati), numbers, and daily survival phrases for moving to Croatia." },
+        "a2": { "title": "A2 · ELEMENTARY", "desc": "Order at cafes, ask for directions, navigate public transport, and master the past tense (perfekt) and cases." },
+        "b1": { "title": "B1 · INTERMEDIATE", "desc": "Hold natural conversations, express opinions, handle bureaucracy, and master future tense (futur prvi)." },
+        "b2": { "title": "B2 · UPPER INTERMEDIATE", "desc": "Understand news broadcasts, debate topics, master all 7 Croatian cases (padeži), and read local media." },
+        "c1": { "title": "C1 · ADVANCED", "desc": "Express complex thoughts fluently, master Croatian idioms, literature, and formal professional communication." },
+        "c2": { "title": "C2 · NATIVE MASTERY", "desc": "Complete linguistic fluency, effortless humor comprehension, regional dialects, and academic excellence." }
+      },
+
+      "methodology": {
+        "tag": "LEARNING ENGINE",
+        "title": "THREE PILLARS OF RAPID FLUENCY",
+        "p1": { "title": "Google GenAI Voice Roleplay", "desc": "Practice real spoken dialogues with an intelligent AI tutor that corrects your mistakes gently in real time." },
+        "p2": { "title": "SM-2 Spaced Repetition (SRS)", "desc": "Never forget a word. Our scientific memory algorithm schedules flashcard reviews right before memory fade." },
+        "p3": { "title": "Gamified XP & Daily Streaks", "desc": "Stay motivated every single day with daily streaks, level advancement badges, and interactive mini-games." }
+      },
+
+      "faq": {
+        "tag": "FREQUENTLY ASKED QUESTIONS",
+        "title": "EVERYTHING YOU NEED TO KNOW",
+        "q1": "Is Croatia Mentor really 100% free?",
+        "a1": "Yes! All lessons, grammar explanations, SRS vocabulary flashcards, mini-games, and AI chat are 100% free with no paywalls or microtransactions.",
+        "q2": "What native languages are supported?",
+        "a2": "Explanations and translations are fully localized in Ukrainian, Russian, and English for maximum comprehension.",
+        "q3": "How long does it take to reach B1 level?",
+        "a3": "With 15-20 minutes of daily practice using our structured lessons and AI roleplay, most learners reach B1 fluency within 4-6 months.",
+        "q4": "Do I need prior knowledge to start?",
+        "a4": "Not at all! Our A1 course starts from scratch—learning the Croatian alphabet, pronunciation rules, and essential greetings."
+      },
+
+      "contactSection": {
+        "tag": "COMMUNITY & SUPPORT",
+        "title": "WE ARE HERE TO HELP YOU SUCCEED",
+        "desc": "Have questions, feedback, or need help with your Croatian learning journey? Reach out to our team or join our community.",
+        "ctaPrimary": "CONTACT SUPPORT",
+        "ctaCommunity": "JOIN TELEGRAM COMMUNITY",
+        "emailLabel": "Support Email",
+        "emailValue": "support@croatia-mentor.space",
+        "communityLabel": "Learner Community",
+        "communityValue": "t.me/croatia_mentor_community"
+      },
+
       "copyright": "© 2026 CROATIA MENTOR · ALL RIGHTS RESERVED"
     }
+
   },
 
   "auth": {
