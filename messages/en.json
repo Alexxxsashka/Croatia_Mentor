@@ -71,7 +71,7 @@
       }
     },
     "editorial": {
-      "badge": "Vibrant Orange & White Editorial Edition",
+      "badge": "100% Free Language Platform",
       "tagline": "INTERACTIVE LANGUAGE ADVENTURE",
       "navSteps": "NAVIGATION STEPS",
       "subtext01": {
@@ -92,11 +92,12 @@
       "placementTest": "TAKE PLACEMENT TEST",
       "divider": "FIND YOUR FAVORITE MODULE — FROM A1 BEGINNER TO C2 MASTERY",
       "cards": {
-        "c1": { "tag": "01 / LESSONS", "title": "1ST PLACE: CEFR MODULES", "desc": "Plitvice Lakes grammar track, reading comprehension & situational dialogues.", "cta": "START MODULE" },
-        "c2": { "tag": "02 / AI CHAT", "title": "2ND PLACE: AI TUTOR", "desc": "Hvar harbor café simulation, real-time voice conversation & corrections.", "cta": "START CONVERSATION" },
-        "c3": { "tag": "03 / VOCABULARY", "title": "3RD PLACE: SRS FLASHCARDS", "desc": "Spaced repetition memory cards with audio pronunciations & translations.", "cta": "REVIEW WORDS" },
-        "c4": { "tag": "04 / MINI GAMES", "title": "4TH PLACE: MINI GAMES", "desc": "Interactive word match, speed quizzes, listening dictation & hangman.", "cta": "PLAY GAMES" }
+        "c1": { "tag": "01 / LESSONS", "title": "CEFR LESSONS", "desc": "Plitvice Lakes grammar track, reading comprehension & situational dialogues.", "cta": "START MODULE" },
+        "c2": { "tag": "02 / AI CHAT", "title": "AI TUTOR PRACTICE", "desc": "Hvar harbor café simulation, real-time voice conversation & corrections.", "cta": "START CONVERSATION" },
+        "c3": { "tag": "03 / VOCABULARY", "title": "SRS FLASHCARDS", "desc": "Spaced repetition memory cards with audio pronunciations & translations.", "cta": "REVIEW WORDS" },
+        "c4": { "tag": "04 / MINI GAMES", "title": "MINI-GAMES", "desc": "Interactive word match, speed quizzes, listening dictation & hangman.", "cta": "PLAY GAMES" }
       },
+
       "promo": {
         "tag": "AUDIO & IMMERSION EXPERIENCE",
         "title": "DISCOVER CROATIAN IN A NEW WAY",
