@@ -69,14 +69,14 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
             
             {/* Left: Dominant ALL-CAPS Title */}
             <div className="lg:col-span-9 space-y-6">
-              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-orange-400 bg-orange-950/40 px-3.5 py-1.5 rounded-full border border-orange-500/30 backdrop-blur-sm">
-                <Sparkles className="w-4 h-4 text-orange-400" />
+              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-purple-300 bg-purple-950/50 px-3.5 py-1.5 rounded-full border border-purple-500/30 backdrop-blur-sm shadow-lg shadow-purple-950/50">
+                <Sparkles className="w-4 h-4 text-purple-400" />
                 {t("editorial.tagline")}
               </div>
 
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight text-white leading-[1.05] font-editorial drop-shadow-md">
                 {t("hero.title")}{" "}
-                <span className="bg-gradient-to-r from-orange-400 via-amber-400 to-orange-500 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-500 bg-clip-text text-transparent drop-shadow-lg">
                   {t("hero.titleHighlight")}
                 </span>
               </h1>
@@ -94,15 +94,16 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
               <div className="flex lg:flex-col gap-3 font-mono text-base font-bold text-slate-500">
                 <span className="hover:text-white cursor-pointer">01</span>
                 <span className="hover:text-white cursor-pointer">02</span>
-                <div className="flex items-center gap-2 text-orange-400 font-extrabold text-lg">
+                <div className="flex items-center gap-2 text-purple-400 font-extrabold text-lg">
                   <span>03</span>
-                  <span className="w-8 h-[2px] bg-orange-500 hidden lg:block" />
+                  <span className="w-8 h-[2px] bg-purple-500 hidden lg:block" />
                 </div>
                 <span className="hover:text-white cursor-pointer">04</span>
                 <span className="hover:text-white cursor-pointer">05</span>
               </div>
             </div>
           </div>
+
 
           {/* 3-Column Editorial Subtext Grid (Reference 1) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-slate-800">
@@ -331,9 +332,10 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
                 {t("editorial.promo.tag")}
               </div>
               
-              <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight leading-tight font-editorial">
+              <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight leading-tight font-editorial bg-gradient-to-r from-purple-300 via-pink-300 to-blue-200 bg-clip-text text-transparent">
                 {t("editorial.promo.title")}
               </h2>
+
 
               <blockquote className="text-sm sm:text-base text-slate-300 italic border-l-2 border-orange-500 pl-4 py-1 leading-relaxed">
                 &ldquo;{t("editorial.promo.quote")}&rdquo;

@@ -34,13 +34,15 @@
   --ring: 25 100% 50%;
   --radius: 0.75rem;
 
-  --gradient-primary: linear-gradient(135deg, #FF6B00 0%, #E65100 50%, #FFB800 100%);
-  --gradient-accent: linear-gradient(135deg, #FF9100 0%, #FF3D00 100%);
-  --gradient-warm: linear-gradient(135deg, #FFAB40 0%, #FF6D00 100%);
-  --gradient-sunset: linear-gradient(135deg, #FF5500 0%, #FFCC00 100%);
-  --gradient-ocean: linear-gradient(135deg, #E65100 0%, #F57C00 100%);
-  --gradient-croatia: linear-gradient(135deg, #FF6B00 0%, #FFFFFF 50%, #FFB800 100%);
+  --gradient-primary: linear-gradient(135deg, #A855F7 0%, #EC4899 50%, #3B82F6 100%);
+  --gradient-accent: linear-gradient(135deg, #6366F1 0%, #A855F7 50%, #EC4899 100%);
+  --gradient-warm: linear-gradient(135deg, #C084FC 0%, #F472B6 100%);
+  --gradient-purple: linear-gradient(135deg, #8B5CF6 0%, #D946EF 50%, #06B6D4 100%);
+  --gradient-sunset: linear-gradient(135deg, #A855F7 0%, #EC4899 100%);
+  --gradient-ocean: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+  --gradient-croatia: linear-gradient(135deg, #8B5CF6 0%, #FFFFFF 50%, #EC4899 100%);
 }
+
 
 .dark {
   --background: 240 10% 3.9%;

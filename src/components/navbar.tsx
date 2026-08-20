@@ -166,9 +166,10 @@ export function Navbar() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <span className="text-xl font-extrabold uppercase font-editorial tracking-tight bg-gradient-to-r from-orange-400 via-amber-400 to-orange-500 bg-clip-text text-transparent hidden sm:block">
+            <span className="text-xl font-extrabold uppercase font-editorial tracking-tight bg-gradient-to-r from-purple-400 via-pink-400 to-blue-500 bg-clip-text text-transparent hidden sm:block">
               Croatia Mentor
             </span>
+
           </Link>
 
 
