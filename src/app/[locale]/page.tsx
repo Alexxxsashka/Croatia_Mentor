@@ -5,6 +5,8 @@ import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import { Link } from "@/i18n/navigation";
 import { Flag } from "@/components/flag";
+import { useTheme } from "@/components/theme/ThemeProvider";
+import { OrangeWhiteHomePage } from "@/components/landing/OrangeWhiteHomePage";
 import {
   MessageCircle,
   BookOpen,
@@ -28,6 +30,7 @@ const DUST_PARTICLES = Array.from({ length: 30 }).map((_, i) => ({
 export default function HomePage() {
   const t = useTranslations("landing");
   const { data: session } = useSession();
+  const { theme } = useTheme();
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -37,6 +40,10 @@ export default function HomePage() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  if (theme === "orange-white") {
+    return <OrangeWhiteHomePage scrollY={scrollY} />;
+  }
 
   const features = [
     {

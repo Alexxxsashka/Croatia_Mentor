@@ -145,7 +145,9 @@ export function Navbar() {
     { href: "/vocabulary", label: t("vocabulary"), icon: Languages },
     { href: "/games", label: t("games"), icon: Gamepad2 },
     { href: "/ai-chat", label: t("aiChat"), icon: MessageCircle },
+    { href: "/v2", label: "Orange V2", icon: Sparkles },
   ];
+
 
   return (
     <nav className="sticky top-0 z-50 glass border-b border-black/5 dark:border-white/10">
