@@ -1,13 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,800;0,900;1,600&family=Outfit:wght@500;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,600;0,700;0,800;0,900;1,800&family=Outfit:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap");
 @import "tailwindcss";
 
 .font-editorial {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.02em;
 }
 
 .font-sans-editorial {
-  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+  font-family: 'Outfit', 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  font-weight: 800;
 }
+
 
 
 @custom-variant dark (&:is(.dark *));
@@ -205,7 +209,7 @@
 }
 
 body {
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-family: "Outfit", "Plus Jakarta Sans", "Inter", system-ui, -apple-system, sans-serif;
   background: hsl(var(--background));
   color: hsl(var(--foreground));
   -webkit-font-smoothing: antialiased;
