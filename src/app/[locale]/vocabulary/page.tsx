@@ -110,10 +110,28 @@ export default function VocabularyPortal() {
   const [dbWords, setDbWords] = useState<Flashcard[]>([]);
   const [activeTab, setActiveTab] = useState<"categories" | "flashcards" | "quiz" | "glossary">("categories");
   const [expandedGlossary, setExpandedGlossary] = useState<Record<string, boolean>>({});
+  const [glossarySearchQuery, setGlossarySearchQuery] = useState("");
   const [selectedLevel, setSelectedLevel] = useState<string>("all");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedPOS, setSelectedPOS] = useState<string>("all");
   const [selectedStatus, setSelectedStatus] = useState<string>("all");
+
+  const expandAllGlossary = () => {
+    const map: Record<string, boolean> = {};
+    glossaryData.forEach((cat) => {
+      map[cat.id] = true;
+    });
+    setExpandedGlossary(map);
+  };
+
+  const collapseAllGlossary = () => {
+    const map: Record<string, boolean> = {};
+    glossaryData.forEach((cat) => {
+      map[cat.id] = false;
+    });
+    setExpandedGlossary(map);
+  };
+
   
   // Progress tracking map
   const [wordProgressMap, setWordProgressMap] = useState<Record<string, { status: string; nextReview?: string; correctCount: number; wrongCount: number }>>({});
@@ -1655,78 +1673,151 @@ export default function VocabularyPortal() {
       {/* Grammar Glossary Tab Content */}
       {activeTab === "glossary" && (
         <div className="space-y-6 animate-fade-in">
-          <div className="glass p-6 rounded-3xl border border-white/10 space-y-4">
-            <h2 className="text-xl font-bold flex items-center gap-2 text-foreground">
-              <GraduationCap className="w-6 h-6 text-purple-400" />
-              {locale === "ua" ? "Грамматичний довідник хорватської мови" : locale === "ru" ? "Грамматический справочник хорватского языка" : "Croatian Grammar Reference Glossary"}
-            </h2>
-            <p className="text-xs text-muted-foreground">
-              {locale === "ua"
-                ? "Правила відмінювання, відмінки, алфавіт, дієслова та граматичні структури."
-                : locale === "ru"
-                ? "Правила склонения, падежи, алфавит, глаголы и грамматические структуры."
-                : "Rules of declension, cases, alphabet, verb conjugations, and structure reference."}
-            </p>
+          <div className="glass p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6 shadow-xl">
+            
+            {/* Header & Subtitle */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+              <div>
+                <h2 className="text-xl sm:text-2xl font-black uppercase font-editorial flex items-center gap-2.5 text-foreground">
+                  <GraduationCap className="w-7 h-7 text-purple-400" />
+                  {locale === "ua" ? "Грамматичний довідник хорватської мови" : locale === "ru" ? "Грамматический справочник хорватского языка" : "Croatian Grammar Reference Glossary"}
+                </h2>
+                <p className="text-xs text-muted-foreground mt-1">
+                  {locale === "ua"
+                    ? "Правила відмінювання, відмінки, алфавіт, дієслова та граматичні структури."
+                    : locale === "ru"
+                    ? "Правила склонения, падежи, алфавит, глаголы и грамматические структуры."
+                    : "Rules of declension, cases, alphabet, verb conjugations, and structure reference."}
+                </p>
+              </div>
 
-            <div className="space-y-4 pt-2">
-              {glossaryData.map((cat) => (
-                <div key={cat.id} className="p-4 rounded-2xl bg-white/5 border border-white/5 space-y-3">
-                  <button
-                    onClick={() => setExpandedGlossary((prev) => ({ ...prev, [cat.id]: !prev[cat.id] }))}
-                    className="w-full flex items-center justify-between font-bold text-sm text-foreground hover:text-blue-400 transition-colors text-left"
-                  >
-                    <span>{cat.title[locale as "en" | "ru" | "ua"] || cat.title.en}</span>
-                    {expandedGlossary[cat.id] ? <ChevronDown className="w-4 h-4 text-muted-foreground" /> : <ChevronRight className="w-4 h-4 text-muted-foreground" />}
-                  </button>
+              {/* Quick Actions: Expand All / Collapse All */}
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  onClick={expandAllGlossary}
+                  className="px-3 py-1.5 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 border border-purple-500/30 text-xs font-bold transition-all"
+                >
+                  {locale === "ua" ? "Розгорнути всі" : locale === "ru" ? "Развернуть все" : "Expand All"}
+                </button>
+                <button
+                  onClick={collapseAllGlossary}
+                  className="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-foreground border border-white/10 text-xs font-bold transition-all"
+                >
+                  {locale === "ua" ? "Згорнути всі" : locale === "ru" ? "Свернуть все" : "Collapse All"}
+                </button>
+              </div>
+            </div>
 
-                  {(expandedGlossary[cat.id] ?? true) && (
-                    <div className="space-y-4 pt-2 text-xs text-muted-foreground">
-                      {cat.sections.map((sec) => (
-                        <div key={sec.id} className="p-3.5 rounded-xl bg-black/20 space-y-3">
-                          <h4 className="font-bold text-foreground text-sm flex items-center gap-2">
-                            <span>{sec.icon}</span>
-                            {sec.title[locale as "en" | "ru" | "ua"] || sec.title.en}
-                          </h4>
-                          {sec.subsections.map((sub, sIdx) => (
-                            <div key={sIdx} className="space-y-2 pl-2 border-l-2 border-white/10">
-                              <h5 className="font-semibold text-foreground text-xs">{sub.title[locale as "en" | "ru" | "ua"] || sub.title.en}</h5>
-                              <p className="leading-relaxed text-muted-foreground">{sub.text[locale as "en" | "ru" | "ua"] || sub.text.en}</p>
-                              {sub.table && (
-                                <div className="overflow-x-auto my-2 rounded-xl border border-white/10 bg-slate-900/50 p-2">
-                                  <table className="w-full text-xs text-left border-collapse">
-                                    <thead>
-                                      <tr className="border-b border-white/10 text-muted-foreground font-semibold">
-                                        {sub.table.headers.map((h, hIdx) => {
-                                          const hText = typeof h === "string" ? h : (h[locale as "en" | "ru" | "ua"] || h.en);
-                                          return <th key={hIdx} className="p-2">{hText}</th>;
-                                        })}
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      {sub.table.rows.map((row, rIdx) => (
-                                        <tr key={rIdx} className="border-b border-white/5 hover:bg-white/5">
-                                          {row.cells.map((cell, cIdx) => {
-                                            const cellText = typeof cell === "string" ? cell : (cell[locale as "en" | "ru" | "ua"] || cell.en);
-                                            return <td key={cIdx} className="p-2 font-medium text-foreground">{cellText}</td>;
-                                          })}
-                                        </tr>
-                                      ))}
-                                    </tbody>
-                                  </table>
+            {/* Search Filter Bar */}
+            <div className="relative">
+              <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
+              <input
+                type="text"
+                placeholder={locale === "ua" ? "Пошук по граматиці та правилам..." : locale === "ru" ? "Поиск по грамматике и правилам..." : "Search grammar rules & topics..."}
+                value={glossarySearchQuery}
+                onChange={(e) => setGlossarySearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900/60 dark:bg-black/30 border border-white/10 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-purple-500 transition-all"
+              />
+            </div>
+
+            {/* Categories Accordion */}
+            <div className="space-y-4 pt-1">
+              {glossaryData
+                .filter((cat) => {
+                  if (!glossarySearchQuery.trim()) return true;
+                  const query = glossarySearchQuery.toLowerCase();
+                  const catTitle = (cat.title[locale as "en" | "ru" | "ua"] || cat.title.en).toLowerCase();
+                  const matchesSection = cat.sections.some((s) =>
+                    (s.title[locale as "en" | "ru" | "ua"] || s.title.en).toLowerCase().includes(query) ||
+                    s.subsections.some((sub) =>
+                      (sub.title[locale as "en" | "ru" | "ua"] || sub.title.en).toLowerCase().includes(query) ||
+                      (sub.text[locale as "en" | "ru" | "ua"] || sub.text.en).toLowerCase().includes(query)
+                    )
+                  );
+                  return catTitle.includes(query) || matchesSection;
+                })
+                .map((cat) => {
+                  const isQueryActive = Boolean(glossarySearchQuery.trim());
+                  // Collapsed by default unless user toggled or query active
+                  const isOpen = isQueryActive ? true : (expandedGlossary[cat.id] ?? false);
+                  const sectionCount = cat.sections.length;
+
+                  return (
+                    <div 
+                      key={cat.id} 
+                      className={`rounded-2xl border transition-all duration-300 ${
+                        isOpen 
+                          ? "bg-slate-900/90 dark:bg-slate-950/80 border-purple-500/40 shadow-lg shadow-purple-500/5" 
+                          : "bg-white/5 dark:bg-slate-900/40 border-white/10 hover:border-purple-500/30"
+                      }`}
+                    >
+                      <button
+                        onClick={() => setExpandedGlossary((prev) => ({ ...prev, [cat.id]: !prev[cat.id] }))}
+                        className="w-full p-4.5 flex items-center justify-between font-bold text-sm text-foreground hover:text-purple-400 transition-colors text-left gap-4"
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className="w-2 h-2 rounded-full bg-purple-500" />
+                          <span className="uppercase tracking-wide font-editorial text-base">{cat.title[locale as "en" | "ru" | "ua"] || cat.title.en}</span>
+                        </div>
+
+                        <div className="flex items-center gap-3">
+                          <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                            {sectionCount} {locale === "ua" ? "розділів" : locale === "ru" ? "разделов" : "sections"}
+                          </span>
+                          <ChevronDown className={`w-4 h-4 text-purple-400 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+                        </div>
+                      </button>
+
+                      {isOpen && (
+                        <div className="p-4 sm:p-6 border-t border-white/10 space-y-5 text-xs text-muted-foreground animate-fade-in">
+                          {cat.sections.map((sec) => (
+                            <div key={sec.id} className="p-4 rounded-xl bg-slate-950/60 dark:bg-black/40 border border-white/5 space-y-3">
+                              <h4 className="font-bold text-foreground text-sm flex items-center gap-2 uppercase tracking-wide">
+                                <span className="text-base">{sec.icon}</span>
+                                <span>{sec.title[locale as "en" | "ru" | "ua"] || sec.title.en}</span>
+                              </h4>
+                              {sec.subsections.map((sub, sIdx) => (
+                                <div key={sIdx} className="space-y-2 pl-3 border-l-2 border-purple-500/30">
+                                  <h5 className="font-bold text-foreground text-xs">{sub.title[locale as "en" | "ru" | "ua"] || sub.title.en}</h5>
+                                  <p className="leading-relaxed text-muted-foreground">{sub.text[locale as "en" | "ru" | "ua"] || sub.text.en}</p>
+                                  {sub.table && (
+                                    <div className="overflow-x-auto my-3 rounded-xl border border-white/10 bg-slate-900/80 p-2">
+                                      <table className="w-full text-xs text-left border-collapse">
+                                        <thead>
+                                          <tr className="border-b border-white/10 text-purple-400 font-bold uppercase tracking-wider text-[10px]">
+                                            {sub.table.headers.map((h, hIdx) => {
+                                              const hText = typeof h === "string" ? h : (h[locale as "en" | "ru" | "ua"] || h.en);
+                                              return <th key={hIdx} className="p-2.5">{hText}</th>;
+                                            })}
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          {sub.table.rows.map((row, rIdx) => (
+                                            <tr key={rIdx} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                              {row.cells.map((cell, cIdx) => {
+                                                const cellText = typeof cell === "string" ? cell : (cell[locale as "en" | "ru" | "ua"] || cell.en);
+                                                return <td key={cIdx} className="p-2.5 font-medium text-foreground">{cellText}</td>;
+                                              })}
+                                            </tr>
+                                          ))}
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  )}
                                 </div>
-                              )}
+                              ))}
                             </div>
                           ))}
                         </div>
-                      ))}
+                      )}
                     </div>
-                  )}
-                </div>
-              ))}
+                  );
+                })}
             </div>
           </div>
         </div>
       )}
+
     </div>
   );
 }
