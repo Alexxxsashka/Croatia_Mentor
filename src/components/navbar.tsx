@@ -147,26 +147,29 @@ export function Navbar() {
     { href: "/vocabulary", label: t("vocabulary"), icon: Languages },
     { href: "/games", label: t("games"), icon: Gamepad2 },
     { href: "/ai-chat", label: t("aiChat"), icon: MessageCircle },
-    { href: "/v2", label: "Orange V2", icon: Sparkles },
   ];
 
-
   return (
-    <nav className="sticky top-0 z-50 glass border-b border-black/5 dark:border-white/10">
+    <nav className="sticky top-0 z-50 glass border-b border-orange-500/20 bg-slate-950/80 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 group"
+            className="flex items-center gap-2.5 group"
           >
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300">
-              <GraduationCap className="w-5 h-5 text-white" />
+            <div className="w-9 h-9 rounded-xl overflow-hidden shadow-md shadow-orange-500/20 group-hover:scale-105 transition-transform duration-300 border border-orange-500/30">
+              <img
+                src="/logos/logo-variant-1.jpg"
+                alt="Croatia Mentor Logo"
+                className="w-full h-full object-cover"
+              />
             </div>
-            <span className="text-xl font-bold gradient-text hidden sm:block">
+            <span className="text-xl font-extrabold uppercase font-editorial tracking-tight bg-gradient-to-r from-orange-400 via-amber-400 to-orange-500 bg-clip-text text-transparent hidden sm:block">
               Croatia Mentor
             </span>
           </Link>
+
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-1">
@@ -283,10 +286,11 @@ export function Navbar() {
                 </Link>
                 <Link
                   href="/sign-up"
-                  className="px-4 py-2 rounded-xl text-sm font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition-opacity shadow-lg shadow-blue-500/25"
+                  className="px-4 py-2 rounded-xl text-sm font-bold uppercase tracking-wider bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 text-white hover:from-orange-600 hover:to-amber-600 transition-all shadow-lg shadow-orange-500/25"
                 >
                   {t("signUp")}
                 </Link>
+
               </div>
             )}
 

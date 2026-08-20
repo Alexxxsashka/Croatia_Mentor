@@ -19,27 +19,27 @@
   --card-foreground: 240 10% 3.9%;
   --popover: 0 0% 100%;
   --popover-foreground: 240 10% 3.9%;
-  --primary: 214 100% 50%;
+  --primary: 25 100% 50%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 240 4.8% 95.9%;
-  --secondary-foreground: 240 5.9% 10%;
+  --secondary: 30 100% 97%;
+  --secondary-foreground: 25 100% 45%;
   --muted: 240 4.8% 95.9%;
   --muted-foreground: 240 3.8% 46.1%;
-  --accent: 240 4.8% 95.9%;
-  --accent-foreground: 240 5.9% 10%;
+  --accent: 30 100% 96%;
+  --accent-foreground: 25 100% 45%;
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 98%;
   --border: 240 5.9% 90%;
   --input: 240 5.9% 90%;
-  --ring: 214 100% 50%;
+  --ring: 25 100% 50%;
   --radius: 0.75rem;
 
-  --gradient-primary: linear-gradient(135deg, #0066ff 0%, #6c3ce0 50%, #e040bf 100%);
-  --gradient-accent: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%);
-  --gradient-warm: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  --gradient-sunset: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-  --gradient-ocean: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --gradient-croatia: linear-gradient(135deg, #ff0000 0%, #ffffff 50%, #0000ff 100%);
+  --gradient-primary: linear-gradient(135deg, #FF6B00 0%, #E65100 50%, #FFB800 100%);
+  --gradient-accent: linear-gradient(135deg, #FF9100 0%, #FF3D00 100%);
+  --gradient-warm: linear-gradient(135deg, #FFAB40 0%, #FF6D00 100%);
+  --gradient-sunset: linear-gradient(135deg, #FF5500 0%, #FFCC00 100%);
+  --gradient-ocean: linear-gradient(135deg, #E65100 0%, #F57C00 100%);
+  --gradient-croatia: linear-gradient(135deg, #FF6B00 0%, #FFFFFF 50%, #FFB800 100%);
 }
 
 .dark {
@@ -49,7 +49,7 @@
   --card-foreground: 0 0% 98%;
   --popover: 240 10% 6%;
   --popover-foreground: 0 0% 98%;
-  --primary: 214 100% 55%;
+  --primary: 25 100% 50%;
   --primary-foreground: 0 0% 100%;
   --secondary: 240 3.7% 15.9%;
   --secondary-foreground: 0 0% 98%;
@@ -61,8 +61,9 @@
   --destructive-foreground: 0 0% 98%;
   --border: 240 3.7% 15.9%;
   --input: 240 3.7% 15.9%;
-  --ring: 214 100% 55%;
+  --ring: 25 100% 50%;
 }
+
 
 [data-theme="orange-white"] {
   --background: 0 0% 100%;

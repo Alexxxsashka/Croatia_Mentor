@@ -15,14 +15,19 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                <GraduationCap className="w-4 h-4 text-white" />
+            <div className="flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-xl overflow-hidden shadow-md shadow-orange-500/20 border border-orange-500/30">
+                <img
+                  src="/logos/logo-variant-1.jpg"
+                  alt="Croatia Mentor Logo"
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <span className="text-lg font-bold gradient-text">
+              <span className="text-lg font-extrabold uppercase font-editorial tracking-tight bg-gradient-to-r from-orange-400 via-amber-400 to-orange-500 bg-clip-text text-transparent">
                 Croatia Mentor
               </span>
             </div>
+
             <p className="text-sm text-muted-foreground max-w-xs">
               {t("description")}
             </p>

@@ -30,12 +30,26 @@ export async function generateMetadata({
         "x-default": `${baseUrl}/en`,
       },
     },
+    icons: {
+      icon: "/logos/logo-variant-1.jpg",
+      shortcut: "/logos/logo-variant-1.jpg",
+      apple: "/logos/logo-variant-1.jpg",
+    },
     openGraph: {
       title: t("title"),
       description: t("description"),
       locale: locale === "ua" ? "uk_UA" : locale === "ru" ? "ru_RU" : "en_US",
       type: "website",
+      images: [
+        {
+          url: "/logos/logo-variant-1.jpg",
+          width: 800,
+          height: 800,
+          alt: "Croatia Mentor Official Logo",
+        },
+      ],
     },
+
   };
 }
 
