@@ -29,9 +29,10 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
 
   return (
     <div className="relative min-h-screen bg-white text-slate-900 font-sans selection:bg-orange-500 selection:text-white">
+      
       {/* Background 1px Architectural Grid Overlay */}
       <div 
-        className="absolute inset-0 pointer-events-none opacity-30 z-0"
+        className="absolute inset-0 pointer-events-none opacity-20 z-0"
         style={{
           backgroundImage: "linear-gradient(to right, #e5e7eb 1px, transparent 1px), linear-gradient(to bottom, #e5e7eb 1px, transparent 1px)",
           backgroundSize: "60px 60px",
@@ -39,7 +40,7 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
       />
 
       {/* Top Editorial Category Navigation Bar */}
-      <div className="relative z-10 border-b border-slate-200 bg-white/90 backdrop-blur-md">
+      <div className="relative z-20 border-b border-slate-200 bg-white/95 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between text-[11px] font-bold tracking-[0.2em] uppercase text-slate-500 overflow-x-auto whitespace-nowrap">
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-2 text-orange-600 font-extrabold">
@@ -58,120 +59,134 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
         </div>
       </div>
 
-      {/* Hero Section (Reference 1 & 4 Layout) */}
-      <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 sm:pt-20 sm:pb-24">
-        
-        {/* Main Hero Header Row */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
+      {/* Hero Section with Parallax Croatian Landscape Background (Reference 1 & 4) */}
+      <section className="relative z-10 overflow-hidden border-b border-slate-200">
+        {/* Photography Background Layer */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center pointer-events-none opacity-25 dark:opacity-40 transition-transform duration-75"
+          style={{
+            backgroundImage: "url('/croatia-hero.jpg')",
+            transform: `translateY(${scrollY * 0.05}px) scale(1.05)`,
+          }}
+        />
+        {/* Soft Warm Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/80 pointer-events-none" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-20 sm:pt-20 sm:pb-24">
           
-          {/* Left: Dominant ALL-CAPS Title */}
-          <div className="lg:col-span-9 space-y-6">
-            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-orange-600">
-              <Sparkles className="w-4 h-4 text-orange-500" />
-              INTERACTIVE LANGUAGE ADVENTURE
-            </div>
-
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight text-slate-900 leading-[1.05] font-editorial">
-              LEARN CROATIAN{" "}
-              <span className="bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 bg-clip-text text-transparent">
-                NATURALLY
-              </span>
-            </h1>
-
-            <p className="text-lg sm:text-xl text-slate-600 max-w-3xl font-normal leading-relaxed">
-              Complete grammar explanations, vocabulary flashcards, audio dictation, and real-time AI conversation practice. Designed for Ukrainian relocators, expats, and international learners.
-            </p>
-          </div>
-
-          {/* Right: Vertical Step Indicator (Reference 1 & 4) */}
-          <div className="lg:col-span-3 flex lg:flex-col items-center lg:items-end justify-between lg:justify-start gap-4 text-right border-t lg:border-t-0 lg:border-l border-slate-200 pt-6 lg:pt-0 lg:pl-8">
-            <div className="font-mono text-xs font-bold uppercase tracking-widest text-slate-400">
-              NAVIGATION STEPS
-            </div>
-            <div className="flex lg:flex-col gap-3 font-mono text-base font-bold text-slate-400">
-              <span className="hover:text-slate-900 cursor-pointer">01</span>
-              <span className="hover:text-slate-900 cursor-pointer">02</span>
-              <div className="flex items-center gap-2 text-orange-600 font-extrabold text-lg">
-                <span>03</span>
-                <span className="w-8 h-[2px] bg-orange-500 hidden lg:block" />
+          {/* Main Hero Header Row */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
+            
+            {/* Left: Dominant ALL-CAPS Title */}
+            <div className="lg:col-span-9 space-y-6">
+              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-orange-600">
+                <Sparkles className="w-4 h-4 text-orange-500" />
+                INTERACTIVE LANGUAGE ADVENTURE
               </div>
-              <span className="hover:text-slate-900 cursor-pointer">04</span>
-              <span className="hover:text-slate-900 cursor-pointer">05</span>
+
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight text-slate-900 leading-[1.05] font-editorial drop-shadow-sm">
+                LEARN CROATIAN{" "}
+                <span className="bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 bg-clip-text text-transparent">
+                  NATURALLY
+                </span>
+              </h1>
+
+              <p className="text-lg sm:text-xl text-slate-700 max-w-3xl font-normal leading-relaxed">
+                Complete grammar explanations, vocabulary flashcards, audio dictation, and real-time AI conversation practice. Designed for Ukrainian relocators, expats, and international learners.
+              </p>
+            </div>
+
+            {/* Right: Vertical Step Indicator (Reference 1 & 4) */}
+            <div className="lg:col-span-3 flex lg:flex-col items-center lg:items-end justify-between lg:justify-start gap-4 text-right border-t lg:border-t-0 lg:border-l border-slate-300 pt-6 lg:pt-0 lg:pl-8">
+              <div className="font-mono text-xs font-bold uppercase tracking-widest text-slate-500">
+                NAVIGATION STEPS
+              </div>
+              <div className="flex lg:flex-col gap-3 font-mono text-base font-bold text-slate-400">
+                <span className="hover:text-slate-900 cursor-pointer">01</span>
+                <span className="hover:text-slate-900 cursor-pointer">02</span>
+                <div className="flex items-center gap-2 text-orange-600 font-extrabold text-lg">
+                  <span>03</span>
+                  <span className="w-8 h-[2px] bg-orange-500 hidden lg:block" />
+                </div>
+                <span className="hover:text-slate-900 cursor-pointer">04</span>
+                <span className="hover:text-slate-900 cursor-pointer">05</span>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* 3-Column Editorial Subtext Grid (Reference 1) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-slate-200">
-          <div className="space-y-3 pr-4 border-r-0 md:border-r border-slate-200">
-            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">
-              01 / IMMERSIVE CURRICULUM
-            </h4>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Structured CEFR lessons from A1 to C2. Master Croatian grammar, daily situational dialogues, and vocabulary essential for living in Croatia.
-            </p>
-            <Link 
-              href="/lessons"
-              className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-slate-900 hover:text-orange-600 transition-colors pt-2"
+          {/* 3-Column Editorial Subtext Grid (Reference 1) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-slate-300/80">
+            <div className="space-y-3 pr-4 border-r-0 md:border-r border-slate-300/80">
+              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">
+                01 / IMMERSIVE CURRICULUM
+              </h4>
+              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                Structured CEFR lessons from A1 to C2. Master Croatian grammar, daily situational dialogues, and vocabulary essential for living in Croatia.
+              </p>
+              <Link 
+                href="/lessons"
+                className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-slate-900 hover:text-orange-600 transition-colors pt-2"
+              >
+                <span>EXPLORE LESSONS</span>
+                <ChevronRight className="w-4 h-4 text-orange-500" />
+              </Link>
+            </div>
+
+            <div className="space-y-3 pr-4 border-r-0 md:border-r border-slate-300/80">
+              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">
+                02 / AI TUTOR & DICTATION
+              </h4>
+              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                Simulate natural conversation with an intelligent AI tutor powered by Google GenAI and natural audio speech generated via Edge TTS.
+              </p>
+              <Link 
+                href="/ai-chat"
+                className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-slate-900 hover:text-orange-600 transition-colors pt-2"
+              >
+                <span>START AI CHAT</span>
+                <ChevronRight className="w-4 h-4 text-orange-500" />
+              </Link>
+            </div>
+
+            <div className="space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">
+                03 / SPACED REPETITION (SRS)
+              </h4>
+              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                Scientific SM-2 algorithm calculates ideal review intervals to guarantee rapid, long-term vocabulary retention without rote memory burn.
+              </p>
+              <Link 
+                href="/vocabulary"
+                className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-slate-900 hover:text-orange-600 transition-colors pt-2"
+              >
+                <span>VIEW VOCABULARY</span>
+                <ChevronRight className="w-4 h-4 text-orange-500" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Hero CTA Button Bar */}
+          <div className="flex flex-col sm:flex-row items-center gap-4 pt-10">
+            <Link
+              href={session ? "/dashboard" : "/sign-up"}
+              className="group flex items-center justify-center gap-3 w-full sm:w-auto px-10 py-4 bg-orange-600 hover:bg-orange-500 text-white font-extrabold uppercase text-sm tracking-[0.2em] transition-all shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50"
             >
-              <span>EXPLORE LESSONS</span>
-              <ChevronRight className="w-4 h-4 text-orange-500" />
+              <span>{session ? t("hero.goToDashboard") : t("hero.cta")}</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link
+              href="/placement-test"
+              className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 bg-white/80 border border-slate-900 hover:bg-slate-900 hover:text-white text-slate-900 font-extrabold uppercase text-sm tracking-[0.2em] transition-all"
+            >
+              <span>TAKE PLACEMENT TEST</span>
             </Link>
           </div>
 
-          <div className="space-y-3 pr-4 border-r-0 md:border-r border-slate-200">
-            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">
-              02 / AI TUTOR & DICTATION
-            </h4>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Simulate natural conversation with an intelligent AI tutor powered by Google GenAI and natural audio speech generated via Edge TTS.
-            </p>
-            <Link 
-              href="/ai-chat"
-              className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-slate-900 hover:text-orange-600 transition-colors pt-2"
-            >
-              <span>START AI CHAT</span>
-              <ChevronRight className="w-4 h-4 text-orange-500" />
-            </Link>
-          </div>
-
-          <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">
-              03 / SPACED REPETITION (SRS)
-            </h4>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Scientific SM-2 algorithm calculates ideal review intervals to guarantee rapid, long-term vocabulary retention without rote memory burn.
-            </p>
-            <Link 
-              href="/vocabulary"
-              className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-slate-900 hover:text-orange-600 transition-colors pt-2"
-            >
-              <span>VIEW VOCABULARY</span>
-              <ChevronRight className="w-4 h-4 text-orange-500" />
-            </Link>
-          </div>
-        </div>
-
-        {/* Hero CTA Button Bar */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 pt-10">
-          <Link
-            href={session ? "/dashboard" : "/sign-up"}
-            className="group flex items-center justify-center gap-3 w-full sm:w-auto px-10 py-4 rounded-none bg-orange-600 hover:bg-orange-500 text-white font-extrabold uppercase text-sm tracking-[0.2em] transition-all shadow-lg shadow-orange-600/25"
-          >
-            <span>{session ? t("hero.goToDashboard") : t("hero.cta")}</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
-          <Link
-            href="/placement-test"
-            className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-none border border-slate-900 hover:bg-slate-900 hover:text-white text-slate-900 font-extrabold uppercase text-sm tracking-[0.2em] transition-all"
-          >
-            <span>TAKE PLACEMENT TEST</span>
-          </Link>
         </div>
       </section>
 
       {/* Full-Width Horizontal Linear Divider (Reference 1 & 2) */}
-      <section className="relative z-10 border-y border-slate-200 bg-slate-50 py-6">
+      <section className="relative z-10 border-b border-slate-200 bg-slate-50 py-6">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <div className="flex items-center justify-center gap-4">
             <span className="h-[1px] w-16 sm:w-32 bg-orange-400" />
@@ -183,108 +198,139 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
         </div>
       </section>
 
-      {/* 4-Column Category Grid (Reference 1 & 4) */}
+      {/* 4-Column Photo Category Grid (Reference 1 & 4) */}
       <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           
-          {/* Card 1 */}
-          <div className="group relative bg-white border border-slate-200 hover:border-orange-500 p-6 flex flex-col justify-between h-[380px] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-orange-500/10">
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <span className="font-mono text-xs font-bold uppercase tracking-widest text-orange-600">01 / LESSONS</span>
-                <span className="w-2 h-2 bg-orange-500 rounded-full" />
-              </div>
-              <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-lg flex items-center justify-center mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-                <BookOpen className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-extrabold uppercase text-slate-900 mb-2 font-editorial">
+          {/* Card 1: Plitvice Waterfall Photo */}
+          <div className="group relative rounded-2xl overflow-hidden border border-slate-200 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-md hover:shadow-2xl hover:shadow-orange-500/20">
+            <div 
+              className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700"
+              style={{ backgroundImage: "url('/croatia-card-1.jpg')" }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-slate-950/20" />
+            
+            <div className="relative z-10 flex items-center justify-between">
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-orange-400 bg-slate-900/80 px-2.5 py-1 rounded backdrop-blur-sm border border-orange-500/30">
+                01 / LESSONS
+              </span>
+              <span className="w-2.5 h-2.5 bg-orange-500 rounded-full shadow-md shadow-orange-500/50" />
+            </div>
+
+            <div className="relative z-10 space-y-2 text-white">
+              <h3 className="text-2xl font-extrabold uppercase font-editorial tracking-wide group-hover:text-orange-400 transition-colors">
                 1ST PLACE: CEFR MODULES
               </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Grammar, reading comprehension, situational dialogues, and dictation.
+              <p className="text-xs text-slate-300 leading-relaxed font-normal">
+                Plitvice Lakes grammar track, reading comprehension & situational dialogues.
               </p>
-            </div>
-            <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-extrabold uppercase tracking-wider text-orange-600">
-              <span>EXPLORE</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <div className="pt-3 flex items-center justify-between text-xs font-extrabold uppercase tracking-wider text-orange-400">
+                <span>START MODULE</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+              </div>
             </div>
           </div>
 
-          {/* Card 2 */}
-          <div className="group relative bg-white border border-slate-200 hover:border-orange-500 p-6 flex flex-col justify-between h-[380px] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-orange-500/10">
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <span className="font-mono text-xs font-bold uppercase tracking-widest text-orange-600">02 / AI CHAT</span>
-                <span className="w-2 h-2 bg-orange-500 rounded-full" />
-              </div>
-              <div className="w-12 h-12 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-                <MessageCircle className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-extrabold uppercase text-slate-900 mb-2 font-editorial">
+          {/* Card 2: Hvar Island Harbor Cafe Photo */}
+          <div className="group relative rounded-2xl overflow-hidden border border-slate-200 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-md hover:shadow-2xl hover:shadow-orange-500/20">
+            <div 
+              className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700"
+              style={{ backgroundImage: "url('/croatia-card-2.jpg')" }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-slate-950/20" />
+            
+            <div className="relative z-10 flex items-center justify-between">
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-amber-400 bg-slate-900/80 px-2.5 py-1 rounded backdrop-blur-sm border border-amber-500/30">
+                02 / AI CHAT
+              </span>
+              <span className="w-2.5 h-2.5 bg-amber-500 rounded-full shadow-md shadow-amber-500/50" />
+            </div>
+
+            <div className="relative z-10 space-y-2 text-white">
+              <h3 className="text-2xl font-extrabold uppercase font-editorial tracking-wide group-hover:text-amber-400 transition-colors">
                 2ND PLACE: AI TUTOR
               </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Real-time Croatian conversation, sentence corrections, and roleplay.
+              <p className="text-xs text-slate-300 leading-relaxed font-normal">
+                Hvar harbor café simulation, real-time voice conversation & corrections.
               </p>
-            </div>
-            <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-extrabold uppercase tracking-wider text-orange-600">
-              <span>EXPLORE</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <div className="pt-3 flex items-center justify-between text-xs font-extrabold uppercase tracking-wider text-amber-400">
+                <span>START CONVERSATION</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+              </div>
             </div>
           </div>
 
-          {/* Card 3 */}
-          <div className="group relative bg-white border border-slate-200 hover:border-orange-500 p-6 flex flex-col justify-between h-[380px] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-orange-500/10">
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <span className="font-mono text-xs font-bold uppercase tracking-widest text-orange-600">03 / VOCABULARY</span>
-                <span className="w-2 h-2 bg-orange-500 rounded-full" />
-              </div>
-              <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-lg flex items-center justify-center mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-                <Languages className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-extrabold uppercase text-slate-900 mb-2 font-editorial">
-                3RD PLACE: SRS SM-2
+          {/* Card 3: Rovinj Bell Tower Seaside Photo */}
+          <div className="group relative rounded-2xl overflow-hidden border border-slate-200 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-md hover:shadow-2xl hover:shadow-orange-500/20">
+            <div 
+              className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700"
+              style={{ backgroundImage: "url('/croatia-card-3.jpg')" }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-slate-950/20" />
+            
+            <div className="relative z-10 flex items-center justify-between">
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-orange-400 bg-slate-900/80 px-2.5 py-1 rounded backdrop-blur-sm border border-orange-500/30">
+                03 / VOCABULARY
+              </span>
+              <span className="w-2.5 h-2.5 bg-orange-500 rounded-full shadow-md shadow-orange-500/50" />
+            </div>
+
+            <div className="relative z-10 space-y-2 text-white">
+              <h3 className="text-2xl font-extrabold uppercase font-editorial tracking-wide group-hover:text-orange-400 transition-colors">
+                3RD PLACE: SRS FLASHCARDS
               </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Smart flashcards with spaced repetition and EN/RU/UA translations.
+              <p className="text-xs text-slate-300 leading-relaxed font-normal">
+                Spaced repetition memory cards with audio pronunciations & translations.
               </p>
-            </div>
-            <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-extrabold uppercase tracking-wider text-orange-600">
-              <span>EXPLORE</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <div className="pt-3 flex items-center justify-between text-xs font-extrabold uppercase tracking-wider text-orange-400">
+                <span>REVIEW WORDS</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+              </div>
             </div>
           </div>
 
-          {/* Card 4 */}
-          <div className="group relative bg-white border border-slate-200 hover:border-orange-500 p-6 flex flex-col justify-between h-[380px] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-orange-500/10">
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <span className="font-mono text-xs font-bold uppercase tracking-widest text-orange-600">04 / GAMES</span>
-                <span className="w-2 h-2 bg-orange-500 rounded-full" />
-              </div>
-              <div className="w-12 h-12 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-                <Gamepad2 className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-extrabold uppercase text-slate-900 mb-2 font-editorial">
+          {/* Card 4: Dubrovnik Old Town Photo */}
+          <div className="group relative rounded-2xl overflow-hidden border border-slate-200 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-md hover:shadow-2xl hover:shadow-orange-500/20">
+            <div 
+              className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700"
+              style={{ backgroundImage: "url('/hero-bg.jpg')" }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-slate-950/20" />
+            
+            <div className="relative z-10 flex items-center justify-between">
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-amber-400 bg-slate-900/80 px-2.5 py-1 rounded backdrop-blur-sm border border-amber-500/30">
+                04 / MINI GAMES
+              </span>
+              <span className="w-2.5 h-2.5 bg-amber-500 rounded-full shadow-md shadow-amber-500/50" />
+            </div>
+
+            <div className="relative z-10 space-y-2 text-white">
+              <h3 className="text-2xl font-extrabold uppercase font-editorial tracking-wide group-hover:text-amber-400 transition-colors">
                 4TH PLACE: MINI GAMES
               </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Interactive word match, speed quizzes, listening, and hangman games.
+              <p className="text-xs text-slate-300 leading-relaxed font-normal">
+                Interactive word match, speed quizzes, listening dictation & hangman.
               </p>
-            </div>
-            <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-extrabold uppercase tracking-wider text-orange-600">
-              <span>EXPLORE</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <div className="pt-3 flex items-center justify-between text-xs font-extrabold uppercase tracking-wider text-amber-400">
+                <span>PLAY GAMES</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+              </div>
             </div>
           </div>
 
         </div>
       </section>
 
-      {/* Video & Promo Statement Block (Reference 1, 3 & 4) */}
-      <section className="relative z-10 border-t border-slate-200 bg-slate-900 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Video & Photo Promo Statement Block (Reference 1, 3 & 4) */}
+      <section className="relative z-10 overflow-hidden border-t border-slate-200 bg-slate-950 text-white py-24">
+        {/* Photo Background Layer */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center pointer-events-none opacity-20"
+          style={{ backgroundImage: "url('/lessons-bg.jpg')" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-950/80 pointer-events-none" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {/* Left Statement Block */}
@@ -305,7 +351,7 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
               <div className="pt-4 flex items-center gap-4">
                 <Link
                   href="/lessons"
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-orange-600 hover:bg-orange-500 text-white font-extrabold uppercase text-xs tracking-[0.2em] transition-all shadow-lg shadow-orange-600/30"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-orange-600 hover:bg-orange-500 text-white font-extrabold uppercase text-xs tracking-[0.2em] transition-all shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50"
                 >
                   <Play className="w-4 h-4 fill-white" />
                   <span>START AUDIO LESSON</span>
@@ -317,7 +363,7 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
             <div className="lg:col-span-5 space-y-4">
               
               {/* Preview 1 */}
-              <div className="p-5 rounded-none bg-slate-800/90 border border-slate-700 hover:border-orange-500 flex items-center gap-4 transition-colors group cursor-pointer">
+              <div className="p-5 bg-slate-900/90 border border-slate-800 hover:border-orange-500 flex items-center gap-4 transition-colors group cursor-pointer backdrop-blur-md">
                 <div className="w-14 h-14 rounded-full bg-orange-600/20 text-orange-500 border border-orange-500/30 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <Volume2 className="w-6 h-6" />
                 </div>
@@ -331,14 +377,14 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
               </div>
 
               {/* Preview 2 */}
-              <div className="p-5 rounded-none bg-slate-800/90 border border-slate-700 hover:border-orange-500 flex items-center gap-4 transition-colors group cursor-pointer">
+              <div className="p-5 bg-slate-900/90 border border-slate-800 hover:border-amber-500 flex items-center gap-4 transition-colors group cursor-pointer backdrop-blur-md">
                 <div className="w-14 h-14 rounded-full bg-amber-600/20 text-amber-500 border border-amber-500/30 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <MessageCircle className="w-6 h-6" />
                 </div>
                 <div>
                   <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-amber-400">AI ROLEPLAY 02</span>
                   <h4 className="text-base font-bold text-white group-hover:text-amber-400 transition-colors">
-                    U kافiću — Naruчиvanje kave
+                    U kafiću — Naručivanje kave
                   </h4>
                   <p className="text-xs text-slate-400">CEFR A2 · Voice Simulation</p>
                 </div>
