@@ -36,7 +36,7 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
       : "05";
 
   return (
-    <div className="relative min-h-screen bg-transparent text-slate-100 font-sans selection:bg-orange-500 selection:text-white">
+    <div className="relative min-h-screen bg-transparent text-slate-100 font-sans selection:bg-purple-600 selection:text-white">
       
       {/* Background Architectural Grid Overlay */}
       <div 
@@ -93,11 +93,11 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
                 {t("hero.subtitle")}
               </p>
 
-              {/* Single Clean Hero CTA Button */}
+              {/* Single Clean Hero CTA Button - PURPLE GRADIENT */}
               <div className="pt-2 flex items-center gap-4">
                 <Link
                   href={session ? "/dashboard" : "/sign-up"}
-                  className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 hover:from-orange-400 hover:to-amber-500 text-white font-extrabold uppercase text-xs sm:text-sm tracking-[0.2em] transition-all shadow-xl shadow-orange-500/25 hover:shadow-orange-500/40 rounded-xl glow-hover"
+                  className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 hover:from-purple-500 hover:to-indigo-500 text-white font-extrabold uppercase text-xs sm:text-sm tracking-[0.2em] transition-all shadow-xl shadow-purple-600/30 hover:shadow-purple-600/50 rounded-xl glow-hover"
                 >
                   <span>{session ? t("hero.goToDashboard") : t("hero.cta")}</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
@@ -148,7 +148,7 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
             }}
           >
             <div className="space-y-3 pr-4 border-r-0 md:border-r border-slate-800 group cursor-pointer">
-              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-orange-400 group-hover:text-amber-300 transition-colors">
+              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-purple-400 group-hover:text-pink-300 transition-colors">
                 {t("editorial.subtext01.tag")}
               </h4>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
@@ -156,15 +156,15 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
               </p>
               <Link 
                 href="/lessons"
-                className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-white hover:text-orange-400 transition-colors pt-2"
+                className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-white hover:text-purple-400 transition-colors pt-2"
               >
                 <span>{t("editorial.subtext01.link")}</span>
-                <ChevronRight className="w-4 h-4 text-orange-400 group-hover:translate-x-1 transition-transform" />
+                <ChevronRight className="w-4 h-4 text-purple-400 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
 
             <div className="space-y-3 pr-4 border-r-0 md:border-r border-slate-800 group cursor-pointer">
-              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-purple-400 group-hover:text-pink-300 transition-colors">
+              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-400 group-hover:text-purple-300 transition-colors">
                 {t("editorial.subtext02.tag")}
               </h4>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
@@ -172,15 +172,15 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
               </p>
               <Link 
                 href="/ai-chat"
-                className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-white hover:text-purple-400 transition-colors pt-2"
+                className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-white hover:text-indigo-400 transition-colors pt-2"
               >
                 <span>{t("editorial.subtext02.link")}</span>
-                <ChevronRight className="w-4 h-4 text-purple-400 group-hover:translate-x-1 transition-transform" />
+                <ChevronRight className="w-4 h-4 text-indigo-400 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
 
             <div className="space-y-3 group cursor-pointer">
-              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-amber-400 group-hover:text-yellow-300 transition-colors">
+              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-pink-400 group-hover:text-purple-300 transition-colors">
                 {t("editorial.subtext03.tag")}
               </h4>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
@@ -188,10 +188,10 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
               </p>
               <Link 
                 href="/vocabulary"
-                className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-white hover:text-amber-400 transition-colors pt-2"
+                className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-white hover:text-pink-400 transition-colors pt-2"
               >
                 <span>{t("editorial.subtext03.link")}</span>
-                <ChevronRight className="w-4 h-4 text-amber-400 group-hover:translate-x-1 transition-transform" />
+                <ChevronRight className="w-4 h-4 text-pink-400 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
@@ -219,7 +219,7 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
           {/* Card 1: Lessons 3D Card */}
           <Link 
             href="/lessons" 
-            className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-orange-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-2xl hover:shadow-orange-500/25 block cursor-pointer"
+            className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-purple-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-2xl hover:shadow-purple-500/25 block cursor-pointer"
             style={{
               transform: `translateY(${Math.max(-20, Math.min(20, (scrollY - 600) * -0.03))}px)`,
             }}
@@ -231,20 +231,20 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/65 to-slate-950/25 group-hover:via-slate-950/50 transition-colors" />
             
             <div className="relative z-10 flex items-center justify-between">
-              <span className="font-mono text-xs font-bold uppercase tracking-widest text-orange-400 bg-slate-950/80 px-2.5 py-1 rounded backdrop-blur-sm border border-orange-500/30">
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-purple-300 bg-slate-950/80 px-2.5 py-1 rounded backdrop-blur-sm border border-purple-500/30">
                 {t("editorial.cards.c1.tag")}
               </span>
-              <span className="w-2.5 h-2.5 bg-orange-500 rounded-full shadow-md shadow-orange-500/50 group-hover:animate-ping" />
+              <span className="w-2.5 h-2.5 bg-purple-500 rounded-full shadow-md shadow-purple-500/50 group-hover:animate-ping" />
             </div>
 
             <div className="relative z-10 space-y-2 text-white">
-              <h3 className="text-2xl font-extrabold uppercase font-editorial tracking-wide group-hover:text-orange-400 transition-colors">
+              <h3 className="text-2xl font-extrabold uppercase font-editorial tracking-wide group-hover:text-purple-300 transition-colors">
                 {t("editorial.cards.c1.title")}
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed font-normal">
                 {t("editorial.cards.c1.desc")}
               </p>
-              <div className="pt-3 flex items-center justify-between text-xs font-extrabold uppercase tracking-wider text-orange-400">
+              <div className="pt-3 flex items-center justify-between text-xs font-extrabold uppercase tracking-wider text-purple-300">
                 <span>{t("editorial.cards.c1.cta")}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
               </div>
@@ -254,7 +254,7 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
           {/* Card 2: AI Tutor 3D Card */}
           <Link 
             href="/ai-chat" 
-            className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-purple-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-2xl hover:shadow-purple-500/25 block cursor-pointer"
+            className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-indigo-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-2xl hover:shadow-indigo-500/25 block cursor-pointer"
             style={{
               transform: `translateY(${Math.max(-20, Math.min(20, (scrollY - 600) * 0.02))}px)`,
             }}
@@ -266,20 +266,20 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/65 to-slate-950/25 group-hover:via-slate-950/50 transition-colors" />
             
             <div className="relative z-10 flex items-center justify-between">
-              <span className="font-mono text-xs font-bold uppercase tracking-widest text-purple-300 bg-slate-950/80 px-2.5 py-1 rounded backdrop-blur-sm border border-purple-500/30">
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-indigo-300 bg-slate-950/80 px-2.5 py-1 rounded backdrop-blur-sm border border-indigo-500/30">
                 {t("editorial.cards.c2.tag")}
               </span>
-              <span className="w-2.5 h-2.5 bg-purple-500 rounded-full shadow-md shadow-purple-500/50 group-hover:animate-ping" />
+              <span className="w-2.5 h-2.5 bg-indigo-500 rounded-full shadow-md shadow-indigo-500/50 group-hover:animate-ping" />
             </div>
 
             <div className="relative z-10 space-y-2 text-white">
-              <h3 className="text-2xl font-extrabold uppercase font-editorial tracking-wide group-hover:text-purple-300 transition-colors">
+              <h3 className="text-2xl font-extrabold uppercase font-editorial tracking-wide group-hover:text-indigo-300 transition-colors">
                 {t("editorial.cards.c2.title")}
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed font-normal">
                 {t("editorial.cards.c2.desc")}
               </p>
-              <div className="pt-3 flex items-center justify-between text-xs font-extrabold uppercase tracking-wider text-purple-300">
+              <div className="pt-3 flex items-center justify-between text-xs font-extrabold uppercase tracking-wider text-indigo-300">
                 <span>{t("editorial.cards.c2.cta")}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
               </div>
@@ -289,7 +289,7 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
           {/* Card 3: SRS Flashcards 3D Card */}
           <Link 
             href="/vocabulary" 
-            className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-amber-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-2xl hover:shadow-amber-500/25 block cursor-pointer"
+            className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-violet-500 h-[420px] flex flex-col justify-between p-6 transition-all duration-500 shadow-2xl hover:shadow-violet-500/25 block cursor-pointer"
             style={{
               transform: `translateY(${Math.max(-20, Math.min(20, (scrollY - 600) * -0.02))}px)`,
             }}
@@ -301,20 +301,20 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/65 to-slate-950/25 group-hover:via-slate-950/50 transition-colors" />
             
             <div className="relative z-10 flex items-center justify-between">
-              <span className="font-mono text-xs font-bold uppercase tracking-widest text-amber-400 bg-slate-950/80 px-2.5 py-1 rounded backdrop-blur-sm border border-amber-500/30">
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-violet-300 bg-slate-950/80 px-2.5 py-1 rounded backdrop-blur-sm border border-violet-500/30">
                 {t("editorial.cards.c3.tag")}
               </span>
-              <span className="w-2.5 h-2.5 bg-amber-500 rounded-full shadow-md shadow-amber-500/50 group-hover:animate-ping" />
+              <span className="w-2.5 h-2.5 bg-violet-500 rounded-full shadow-md shadow-violet-500/50 group-hover:animate-ping" />
             </div>
 
             <div className="relative z-10 space-y-2 text-white">
-              <h3 className="text-2xl font-extrabold uppercase font-editorial tracking-wide group-hover:text-amber-400 transition-colors">
+              <h3 className="text-2xl font-extrabold uppercase font-editorial tracking-wide group-hover:text-violet-300 transition-colors">
                 {t("editorial.cards.c3.title")}
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed font-normal">
                 {t("editorial.cards.c3.desc")}
               </p>
-              <div className="pt-3 flex items-center justify-between text-xs font-extrabold uppercase tracking-wider text-amber-400">
+              <div className="pt-3 flex items-center justify-between text-xs font-extrabold uppercase tracking-wider text-violet-300">
                 <span>{t("editorial.cards.c3.cta")}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
               </div>
@@ -388,7 +388,7 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
               <div className="pt-4 flex items-center gap-4">
                 <Link
                   href="/games/audio-spelling"
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-white font-extrabold uppercase text-xs tracking-[0.2em] transition-all shadow-lg shadow-orange-500/25 rounded-xl glow-hover"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 hover:from-purple-500 hover:to-indigo-500 text-white font-extrabold uppercase text-xs tracking-[0.2em] transition-all shadow-lg shadow-purple-600/30 rounded-xl glow-hover"
                 >
                   <Play className="w-4 h-4 fill-white" />
                   <span>{t("editorial.promo.cta")}</span>
@@ -399,26 +399,26 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
             {/* Right Video / Audio Preview Cards */}
             <div className="lg:col-span-5 space-y-4">
               
-              <Link href="/games/audio-spelling" className="p-5 bg-slate-900/90 border border-slate-800 hover:border-orange-500 rounded-2xl flex items-center gap-4 transition-all group cursor-pointer backdrop-blur-md block shadow-lg hover:shadow-orange-500/15">
-                <div className="w-14 h-14 rounded-xl bg-orange-600/20 text-orange-400 border border-orange-500/30 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+              <Link href="/games/audio-spelling" className="p-5 bg-slate-900/90 border border-slate-800 hover:border-purple-500 rounded-2xl flex items-center gap-4 transition-all group cursor-pointer backdrop-blur-md block shadow-lg hover:shadow-purple-500/20">
+                <div className="w-14 h-14 rounded-xl bg-purple-600/20 text-purple-400 border border-purple-500/30 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <Volume2 className="w-6 h-6 animate-pulse" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-orange-400">{t("editorial.promo.audio1.tag")}</span>
-                  <h4 className="text-base font-bold text-white group-hover:text-orange-400 transition-colors">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-purple-400">{t("editorial.promo.audio1.tag")}</span>
+                  <h4 className="text-base font-bold text-white group-hover:text-purple-400 transition-colors">
                     {t("editorial.promo.audio1.title")}
                   </h4>
                   <p className="text-xs text-slate-400">{t("editorial.promo.audio1.sub")}</p>
                 </div>
               </Link>
 
-              <Link href="/ai-chat" className="p-5 bg-slate-900/90 border border-slate-800 hover:border-purple-500 rounded-2xl flex items-center gap-4 transition-all group cursor-pointer backdrop-blur-md block shadow-lg hover:shadow-purple-500/15">
-                <div className="w-14 h-14 rounded-xl bg-purple-600/20 text-purple-400 border border-purple-500/30 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+              <Link href="/ai-chat" className="p-5 bg-slate-900/90 border border-slate-800 hover:border-indigo-500 rounded-2xl flex items-center gap-4 transition-all group cursor-pointer backdrop-blur-md block shadow-lg hover:shadow-indigo-500/20">
+                <div className="w-14 h-14 rounded-xl bg-indigo-600/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <MessageCircle className="w-6 h-6 animate-pulse" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-purple-400">{t("editorial.promo.audio2.tag")}</span>
-                  <h4 className="text-base font-bold text-white group-hover:text-purple-400 transition-colors">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-indigo-400">{t("editorial.promo.audio2.tag")}</span>
+                  <h4 className="text-base font-bold text-white group-hover:text-indigo-400 transition-colors">
                     {t("editorial.promo.audio2.title")}
                   </h4>
                   <p className="text-xs text-slate-400">{t("editorial.promo.audio2.sub")}</p>

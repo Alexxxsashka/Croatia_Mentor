@@ -16,16 +16,17 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl overflow-hidden shadow-md shadow-orange-500/20 border border-orange-500/30">
+              <div className="w-9 h-9 rounded-xl overflow-hidden shadow-md shadow-purple-500/20 border border-purple-500/30">
                 <img
                   src="/logos/logo-variant-1.jpg"
                   alt="Croatia Mentor Logo"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <span className="text-lg font-extrabold uppercase font-editorial tracking-tight bg-gradient-to-r from-orange-400 via-amber-400 to-orange-500 bg-clip-text text-transparent">
+              <span className="text-lg font-extrabold uppercase font-editorial tracking-tight bg-gradient-to-r from-purple-400 via-pink-400 to-blue-500 bg-clip-text text-transparent">
                 Croatia Mentor
               </span>
+
             </div>
 
             <p className="text-sm text-muted-foreground max-w-xs">
