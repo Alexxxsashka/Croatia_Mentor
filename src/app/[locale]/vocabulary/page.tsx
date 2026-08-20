@@ -607,13 +607,38 @@ export default function VocabularyPortal() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      {/* Header */}
-      <div className="text-center mb-8 animate-fade-in">
-        <h1 className="text-4xl font-extrabold tracking-tight">
-          <span className="gradient-text">{t("title")}</span>
+    <div className="relative min-h-screen bg-transparent text-slate-100 font-sans selection:bg-purple-600 selection:text-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+      
+      {/* HERO HEADER */}
+      <div className="text-center space-y-4 animate-fade-in pt-2 pb-4 border-b border-white/10">
+        <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-purple-300 bg-purple-950/50 px-4 py-2 rounded-full border border-purple-500/30 backdrop-blur-sm shadow-lg shadow-purple-950/50">
+          <Sparkles className="w-4 h-4 text-purple-400 animate-pulse" />
+          <span>
+            {locale === "ua"
+              ? "ІНТЕРАКТИВНИЙ СЛОВНИКОВИЙ ПОРТАЛ"
+              : locale === "ru"
+              ? "ИНТЕРАКТИВНЫЙ СЛОВАРНЫЙ ПОРТАЛ"
+              : "INTERACTIVE VOCABULARY PORTAL"}
+          </span>
+        </div>
+
+        <h1 className="text-4xl sm:text-5xl font-black uppercase tracking-tight text-white leading-tight font-editorial">
+          {locale === "ua" ? (
+            <>
+              Словниковий <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-500 bg-clip-text text-transparent">Портал</span> Хорватської
+            </>
+          ) : locale === "ru" ? (
+            <>
+              Словарный <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-500 bg-clip-text text-transparent">Портал</span> Хорватского
+            </>
+          ) : (
+            <>
+              Croatian <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-500 bg-clip-text text-transparent">Vocabulary</span> Portal
+            </>
+          )}
         </h1>
-        <p className="text-muted-foreground mt-2 max-w-lg mx-auto">
+
+        <p className="text-slate-300 text-base max-w-2xl mx-auto leading-relaxed">
           {t("subtitle")}
         </p>
       </div>
@@ -627,25 +652,25 @@ export default function VocabularyPortal() {
         if (dueCount === 0) return null;
 
         return (
-          <div className="mb-6 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-fade-in shadow-lg">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center text-amber-400 shrink-0 shadow-md">
-                <RotateCcw className="w-5 h-5 animate-spin-slow" />
+          <div className="p-4 sm:p-5 rounded-3xl bg-purple-950/50 border border-purple-500/40 text-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-fade-in backdrop-blur-md shadow-xl shadow-purple-950/40">
+            <div className="flex items-center gap-3.5">
+              <div className="w-11 h-11 rounded-2xl bg-purple-500/20 flex items-center justify-center text-purple-300 border border-purple-500/30 shrink-0 shadow-md">
+                <RefreshCw className="w-5 h-5 animate-spin" />
               </div>
               <div>
-                <h4 className="font-bold text-sm text-amber-200">
+                <h4 className="font-bold text-sm text-white uppercase tracking-wide">
                   {locale === "ua"
                     ? `Розумне повторення SRS: на сьогодні є ${dueCount} слів!`
                     : locale === "ru"
                     ? `Умное повторение SRS: на сегодня есть ${dueCount} слов для повторения!`
                     : `Smart SRS Review: ${dueCount} words due for review today!`}
                 </h4>
-                <p className="text-xs text-amber-300/80 mt-0.5">
+                <p className="text-xs text-slate-300 mt-0.5">
                   {locale === "ua"
-                    ? "Алгоритм пропонує повторити ці слова, щоб вони перейшли в довготривалу пам'ять."
+                    ? "Алгоритм розрахував оптимальний інтервал для закріплення у довготривалій пам'яті."
                     : locale === "ru"
-                    ? "Алгоритм предлагает повторить эти слова, чтобы они перешли в долговременную память."
-                    : "Spaced repetition algorithm recommends reviewing these words now to solidify memory."}
+                    ? "Алгоритм рассчитал оптимальный интервал для закрепления в долговременной памяти."
+                    : "Spaced repetition algorithm recommends reviewing these words to solidify long-term memory."}
                 </p>
               </div>
             </div>
@@ -657,7 +682,7 @@ export default function VocabularyPortal() {
                 setActiveTab("flashcards");
                 setIsFlipped(false);
               }}
-              className="px-4 py-2 rounded-xl text-xs font-extrabold bg-amber-500 text-slate-950 hover:bg-amber-400 transition-all shrink-0 cursor-pointer shadow-md"
+              className="px-5 py-2.5 rounded-xl text-xs font-extrabold uppercase tracking-wider bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 hover:from-purple-500 hover:to-indigo-500 text-white transition-all shrink-0 cursor-pointer shadow-lg shadow-purple-600/30"
             >
               {locale === "ua" ? "Повторити слова зараз" : locale === "ru" ? "Повторить слова сейчас" : "Review Due Words Now"}
             </button>
@@ -665,37 +690,45 @@ export default function VocabularyPortal() {
         );
       })()}
 
-      {/* Tabs */}
-      <div className="flex justify-center mb-8 border-b border-white/10 pb-px">
-        <div className="flex gap-2 p-1 glass rounded-xl flex-wrap justify-center">
+      {/* Tabs Toolbar */}
+      <div className="flex justify-center border-b border-white/10 pb-4">
+        <div className="flex gap-2 p-1.5 bg-slate-900/90 border border-slate-800 rounded-2xl backdrop-blur-md flex-wrap justify-center shadow-xl">
           <button
             onClick={() => setActiveTab("categories")}
-            className={`px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 ${
-              activeTab === "categories" ? "bg-blue-600 text-white shadow-md" : "text-muted-foreground hover:text-foreground"
+            className={`px-5 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wider rounded-xl transition-all duration-200 ${
+              activeTab === "categories"
+                ? "bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 text-white shadow-lg shadow-purple-600/30 border border-purple-400/30"
+                : "text-slate-400 hover:text-white hover:bg-white/5"
             }`}
           >
             {t("categoriesTab") || "Themes"}
           </button>
           <button
             onClick={() => { setActiveTab("flashcards"); setIsFlipped(false); }}
-            className={`px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 ${
-              activeTab === "flashcards" ? "bg-blue-600 text-white shadow-md" : "text-muted-foreground hover:text-foreground"
+            className={`px-5 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wider rounded-xl transition-all duration-200 ${
+              activeTab === "flashcards"
+                ? "bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 text-white shadow-lg shadow-purple-600/30 border border-purple-400/30"
+                : "text-slate-400 hover:text-white hover:bg-white/5"
             }`}
           >
             {t("flashcards")}
           </button>
           <button
             onClick={() => { setActiveTab("quiz"); setQuizStarted(false); }}
-            className={`px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 ${
-              activeTab === "quiz" ? "bg-blue-600 text-white shadow-md" : "text-muted-foreground hover:text-foreground"
+            className={`px-5 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wider rounded-xl transition-all duration-200 ${
+              activeTab === "quiz"
+                ? "bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 text-white shadow-lg shadow-purple-600/30 border border-purple-400/30"
+                : "text-slate-400 hover:text-white hover:bg-white/5"
             }`}
           >
             {t("quiz")}
           </button>
           <button
             onClick={() => setActiveTab("glossary")}
-            className={`px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 ${
-              activeTab === "glossary" ? "bg-blue-600 text-white shadow-md" : "text-muted-foreground hover:text-foreground"
+            className={`px-5 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wider rounded-xl transition-all duration-200 ${
+              activeTab === "glossary"
+                ? "bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 text-white shadow-lg shadow-purple-600/30 border border-purple-400/30"
+                : "text-slate-400 hover:text-white hover:bg-white/5"
             }`}
           >
             {locale === "ua" ? "📖 Граматика та довідник" : locale === "ru" ? "📖 Грамматика и справочник" : "📖 Grammar & Reference"}
@@ -705,49 +738,66 @@ export default function VocabularyPortal() {
 
       {/* Vocabulary Progress Stats Overview Bar */}
       {activeTab !== "glossary" && !(activeTab === "quiz" && quizStarted) && (
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6 animate-fade-in">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 animate-fade-in">
           <button
             onClick={() => setSelectedStatus("learned")}
-            className={`glass p-3.5 rounded-2xl border transition-all text-center cursor-pointer ${selectedStatus === "learned" ? "border-emerald-500 bg-emerald-500/10" : "border-white/10 hover:bg-white/5"}`}
+            className={`p-4 rounded-2xl border transition-all text-center cursor-pointer backdrop-blur-md ${
+              selectedStatus === "learned" 
+                ? "border-emerald-500/60 bg-emerald-950/30 shadow-lg shadow-emerald-950/30" 
+                : "bg-slate-900/90 border-slate-800 hover:border-purple-500/40"
+            }`}
           >
-            <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider block">
+            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
               {locale === "ua" ? "Вивчено слів" : locale === "ru" ? "Выучено слов" : "Words Learned"}
             </span>
-            <span className="text-xl font-black text-emerald-400">
+            <span className="text-2xl font-black text-emerald-400 font-mono mt-0.5 block">
               {Object.values(wordProgressMap).filter((p) => p.status === "learned" || p.status === "mastered").length}
             </span>
           </button>
           <button
             onClick={() => setSelectedStatus("due")}
-            className={`glass p-3.5 rounded-2xl border transition-all text-center cursor-pointer ${selectedStatus === "due" ? "border-amber-500 bg-amber-500/10" : "border-white/10 hover:bg-white/5"}`}
+            className={`p-4 rounded-2xl border transition-all text-center cursor-pointer backdrop-blur-md ${
+              selectedStatus === "due" 
+                ? "border-amber-500/60 bg-amber-950/30 shadow-lg shadow-amber-950/30" 
+                : "bg-slate-900/90 border-slate-800 hover:border-purple-500/40"
+            }`}
           >
-            <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider block">
-              {locale === "ua" ? "Обов'язкове повторення" : locale === "ru" ? "Обязательный повтор" : "Mandatory Review"}
+            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
+              {locale === "ua" ? "Обов'язковий повтор" : locale === "ru" ? "Обязательный повтор" : "Mandatory Review"}
             </span>
-            <span className="text-xl font-black text-amber-400">
+            <span className="text-2xl font-black text-amber-400 font-mono mt-0.5 block">
               {Object.values(wordProgressMap).filter((p) => p.nextReview && new Date(p.nextReview) <= new Date()).length}
             </span>
           </button>
           <button
             onClick={() => setSelectedStatus("starred")}
-            className={`glass p-3.5 rounded-2xl border transition-all text-center cursor-pointer ${selectedStatus === "starred" ? "border-yellow-500 bg-yellow-500/10" : "border-white/10 hover:bg-white/5"}`}
+            className={`p-4 rounded-2xl border transition-all text-center cursor-pointer backdrop-blur-md ${
+              selectedStatus === "starred" 
+                ? "border-yellow-500/60 bg-yellow-950/30 shadow-lg shadow-yellow-950/30" 
+                : "bg-slate-900/90 border-slate-800 hover:border-purple-500/40"
+            }`}
           >
-            <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider block">
+            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
               {locale === "ua" ? "Обрані слова" : locale === "ru" ? "Избранные слова" : "Favorite Words"}
             </span>
-            <span className="text-xl font-black text-yellow-400">{starredWords.length}</span>
+            <span className="text-2xl font-black text-yellow-400 font-mono mt-0.5 block">{starredWords.length}</span>
           </button>
           <button
             onClick={() => setSelectedStatus("all")}
-            className={`glass p-3.5 rounded-2xl border transition-all text-center cursor-pointer ${selectedStatus === "all" ? "border-blue-500 bg-blue-500/10" : "border-white/10 hover:bg-white/5"}`}
+            className={`p-4 rounded-2xl border transition-all text-center cursor-pointer backdrop-blur-md ${
+              selectedStatus === "all" 
+                ? "border-purple-500/60 bg-purple-950/30 shadow-lg shadow-purple-950/30" 
+                : "bg-slate-900/90 border-slate-800 hover:border-purple-500/40"
+            }`}
           >
-            <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider block">
+            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
               {locale === "ua" ? "Всього у базі" : locale === "ru" ? "Всего в базе" : "Total in Database"}
             </span>
-            <span className="text-xl font-black text-blue-400">{allMergedWords.length}</span>
+            <span className="text-2xl font-black text-purple-400 font-mono mt-0.5 block">{allMergedWords.length}</span>
           </button>
         </div>
       )}
+
 
       {/* Filters (skip during active quiz or glossary) */}
       {!(activeTab === "quiz" && quizStarted && !quizComplete) && activeTab !== "glossary" && (
@@ -768,10 +818,10 @@ export default function VocabularyPortal() {
                   <button
                     key={st.id}
                     onClick={() => setSelectedStatus(st.id)}
-                    className={`px-3 py-1 text-xs font-semibold rounded-full border transition-all ${
+                    className={`px-3.5 py-1.5 text-xs font-bold rounded-full border transition-all ${
                       selectedStatus === st.id
-                        ? "bg-blue-500/20 text-blue-400 border-blue-500/40 font-bold"
-                        : "border-white/5 text-muted-foreground hover:text-foreground hover:bg-white/5"
+                        ? "bg-purple-500/20 text-purple-300 border-purple-500/40 shadow-md"
+                        : "border-white/10 text-slate-400 hover:text-white hover:bg-white/5"
                     }`}
                   >
                     {st.label}
@@ -781,7 +831,7 @@ export default function VocabularyPortal() {
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
+              <span className="text-xs text-slate-400 font-bold uppercase tracking-wider">
                 {t("levelFilter")}:
               </span>
               <div className="flex gap-1">
@@ -793,10 +843,10 @@ export default function VocabularyPortal() {
                       setDeckIndex(0);
                       setIsFlipped(false);
                     }}
-                    className={`px-3 py-1 text-xs font-semibold rounded-full border transition-all ${
+                    className={`px-3 py-1 text-xs font-mono font-bold rounded-full border transition-all ${
                       selectedLevel.toLowerCase() === lvl.toLowerCase()
-                        ? "bg-blue-500/10 text-blue-400 border-blue-500/30"
-                        : "border-white/5 text-muted-foreground hover:text-foreground hover:bg-white/5"
+                        ? "bg-purple-500/20 text-purple-300 border-purple-500/40"
+                        : "border-white/10 text-slate-400 hover:text-white hover:bg-white/5"
                     }`}
                   >
                     {lvl === "all" ? t("all") : lvl}
