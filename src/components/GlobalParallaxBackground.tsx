@@ -37,12 +37,13 @@ export function GlobalParallaxBackground() {
         }}
       />
 
-      {/* Dramatic Overlay with Warm Orange Accent Vignette */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-950/75 to-slate-950/90 backdrop-blur-[1px]" />
+      {/* Dramatic Overlay with Warm Accent Vignette */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-100/75 via-amber-50/65 to-slate-100/80 dark:from-slate-950/80 dark:via-slate-950/75 dark:to-slate-950/90 backdrop-blur-[1px]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-orange-500/15 via-transparent to-transparent pointer-events-none" />
 
       {/* Bottom gradient fade for smooth transition */}
-      <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-slate-100 via-slate-100/80 to-transparent dark:from-slate-950 dark:via-slate-950/80 dark:to-transparent" />
+
 
       {/* Floating Glowing Dust Particles */}
       <div

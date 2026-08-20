@@ -150,7 +150,8 @@ export function Navbar() {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 glass border-b border-orange-500/20 bg-slate-950/80 backdrop-blur-md">
+    <nav className="sticky top-0 z-50 border-b border-orange-500/20 bg-white/85 dark:bg-slate-950/85 backdrop-blur-md transition-colors duration-300">
+
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}

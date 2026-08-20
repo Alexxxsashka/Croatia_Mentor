@@ -66,41 +66,41 @@
 
 
 [data-theme="orange-white"] {
-  --background: 0 0% 100%;
-  --foreground: 220 30% 11%;
-  --card: 210 20% 98%;
-  --card-foreground: 220 30% 11%;
+  --background: 30 30% 97%;
+  --foreground: 220 30% 12%;
+  --card: 0 0% 100%;
+  --card-foreground: 220 30% 12%;
   --popover: 0 0% 100%;
-  --popover-foreground: 220 30% 11%;
+  --popover-foreground: 220 30% 12%;
   --primary: 25 100% 50%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 30 100% 97%;
+  --secondary: 30 100% 96%;
   --secondary-foreground: 25 100% 45%;
-  --muted: 210 15% 95%;
-  --muted-foreground: 215 15% 45%;
-  --accent: 30 100% 96%;
+  --muted: 30 20% 94%;
+  --muted-foreground: 220 15% 40%;
+  --accent: 30 100% 95%;
   --accent-foreground: 25 100% 45%;
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 98%;
-  --border: 215 15% 90%;
-  --input: 215 15% 90%;
+  --border: 30 20% 88%;
+  --input: 30 20% 88%;
   --ring: 25 100% 50%;
 
-  --bg-main: #ffffff;
-  --bg-surface: #f8f9fa;
-  --bg-surface-hover: #fff8f3;
-  --text-primary: #111827;
-  --text-secondary: #4b5563;
-  --text-muted: #9ca3af;
+  --bg-main: rgba(250, 248, 245, 0.75);
+  --bg-surface: rgba(255, 255, 255, 0.88);
+  --bg-surface-hover: rgba(255, 248, 240, 0.95);
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
 
   --accent-orange: #ff6b00;
   --accent-orange-hover: #e05d00;
   --accent-amber: #ffb800;
   --accent-red: #ef4444;
 
-  --border-subtle: #e5e7eb;
+  --border-subtle: rgba(226, 232, 240, 0.8);
   --border-accent: rgba(255, 107, 0, 0.3);
-  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.06);
 }
 
 
@@ -133,10 +133,11 @@ select option {
 
 /* Glass morphism utility */
 .glass {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.84);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 107, 0, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
 }
 
 .dark .glass {
@@ -144,7 +145,9 @@ select option {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
+
 
 /* Opaque glass for floating dropdowns, popovers, and modals */
 .glass-dropdown,

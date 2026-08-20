@@ -270,18 +270,18 @@ export default function LessonsPage() {
       {/* Header */}
       <div className="mb-8 animate-fade-in flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold">{t("title")}</h1>
-          <p className="text-muted-foreground mt-1">{t("subtitle")}</p>
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white">{t("title")}</h1>
+          <p className="text-slate-600 dark:text-slate-400 mt-1">{t("subtitle")}</p>
         </div>
 
         {/* View Mode Switcher Toolbar */}
-        <div className="flex items-center gap-1.5 p-1.5 glass rounded-2xl border border-white/10 shadow-lg shrink-0">
+        <div className="flex items-center gap-1.5 p-1.5 glass rounded-2xl border border-orange-500/20 shadow-lg shrink-0">
           <button
             onClick={() => handleViewChange("map")}
             className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
               viewMode === "map"
-                ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md shadow-blue-500/20"
-                : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                ? "bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 text-white shadow-md shadow-orange-500/25"
+                : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
             }`}
             title="Interactive Map"
           >
@@ -293,8 +293,8 @@ export default function LessonsPage() {
             onClick={() => handleViewChange("grid")}
             className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
               viewMode === "grid"
-                ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md shadow-blue-500/20"
-                : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                ? "bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 text-white shadow-md shadow-orange-500/25"
+                : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
             }`}
             title="Grid / Islands"
           >
@@ -306,8 +306,8 @@ export default function LessonsPage() {
             onClick={() => handleViewChange("list")}
             className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
               viewMode === "list"
-                ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md shadow-blue-500/20"
-                : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                ? "bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 text-white shadow-md shadow-orange-500/25"
+                : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
             }`}
             title="List View"
           >
@@ -319,20 +319,20 @@ export default function LessonsPage() {
 
       {/* Daily Lesson Limit Warning Banner */}
       {hasCompletedLessonToday && (
-        <div className="mb-8 p-4 sm:p-5 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-fade-in">
+        <div className="mb-8 p-4 sm:p-5 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-900 dark:text-amber-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-fade-in">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center shrink-0 text-amber-400 shadow-md">
+            <div className="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center shrink-0 text-amber-600 dark:text-amber-400 shadow-md">
               <Clock className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="font-bold text-sm text-amber-200">
+              <h4 className="font-bold text-sm text-amber-900 dark:text-amber-200">
                 {locale === "ua"
                   ? "Денний ліміт уроків досягнуто"
                   : locale === "ru"
                   ? "Дневной лимит уроков достигнут"
                   : "Daily Lesson Limit Reached"}
               </h4>
-              <p className="text-xs text-amber-300/80 mt-0.5">
+              <p className="text-xs text-amber-800 dark:text-amber-300/80 mt-0.5">
                 {locale === "ua"
                   ? "Ви вже пройшли урок за сьогодні. Завітайте до міні-ігор для закріплення!"
                   : locale === "ru"
@@ -345,16 +345,16 @@ export default function LessonsPage() {
       )}
 
       {/* Level Progress & Promotion Card */}
-      <div className="glass rounded-3xl p-6 mb-8 animate-fade-in flex flex-col md:flex-row items-center justify-between gap-6 border border-white/5 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5">
+      <div className="glass rounded-3xl p-6 mb-8 animate-fade-in flex flex-col md:flex-row items-center justify-between gap-6 border border-orange-500/20 bg-gradient-to-r from-orange-500/5 via-amber-500/5 to-orange-500/5">
         <div className="flex items-center gap-4">
-          <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-white text-2xl font-black level-${userLevel.toLowerCase()} shadow-lg`}>
+          <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-white text-2xl font-black bg-gradient-to-br from-orange-500 to-amber-500 shadow-lg shadow-orange-500/25`}>
             {userLevel}
           </div>
           <div>
-            <h2 className="text-xl font-bold flex items-center gap-2">
-              {locale === "ua" ? "Ваш поточний рівень" : locale === "ru" ? "Ваш текущий уровень" : "Your Current Level"}: <span className="text-blue-400">{userLevel}</span>
+            <h2 className="text-xl font-bold flex items-center gap-2 text-slate-900 dark:text-white">
+              {locale === "ua" ? "Ваш поточний рівень" : locale === "ru" ? "Ваш текущий уровень" : "Your Current Level"}: <span className="text-orange-500 font-extrabold">{userLevel}</span>
             </h2>
-            <p className="text-sm text-muted-foreground mt-1">
+            <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
               {locale === "ua" 
                 ? `Вивчено уроків на рівні ${userLevel}: ${currentLevelCompleted}/${currentLevelTotal} (${Math.round(currentLevelPercent)}%)`
                 : locale === "ru"
@@ -366,10 +366,10 @@ export default function LessonsPage() {
         </div>
 
         <div className="flex-1 max-w-sm w-full">
-          <div className="h-3 rounded-full bg-black/20 dark:bg-white/5 overflow-hidden mb-3">
+          <div className="h-3 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden mb-3">
             <div
               className={`h-full rounded-full bg-gradient-to-r ${
-                currentLevelPercent === 100 ? "from-emerald-400 to-teal-400 animate-pulse" : "from-blue-500 to-purple-600"
+                currentLevelPercent === 100 ? "from-emerald-400 to-teal-400 animate-pulse" : "from-orange-500 to-amber-500"
               } transition-all duration-500`}
               style={{ width: `${currentLevelPercent}%` }}
             />
@@ -381,8 +381,8 @@ export default function LessonsPage() {
               disabled={currentLevelCompleted < currentLevelTotal}
               className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-all shadow-lg flex items-center justify-center gap-2 ${
                 currentLevelCompleted >= currentLevelTotal && currentLevelTotal > 0
-                  ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 cursor-pointer shadow-blue-500/10"
-                  : "bg-slate-800 text-slate-400 border border-slate-700 cursor-not-allowed opacity-60 shadow-none"
+                  ? "bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 text-white hover:opacity-90 cursor-pointer shadow-orange-500/25"
+                  : "bg-slate-300 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-slate-700 cursor-not-allowed opacity-70 shadow-none"
               }`}
             >
               {currentLevelCompleted < currentLevelTotal ? (
@@ -400,7 +400,7 @@ export default function LessonsPage() {
               </span>
             </button>
           ) : (
-            <div className="text-center py-2 text-xs font-bold text-yellow-400 bg-yellow-500/15 border border-yellow-500/20 rounded-xl">
+            <div className="text-center py-2 text-xs font-bold text-amber-700 dark:text-yellow-400 bg-amber-500/15 border border-amber-500/30 rounded-xl">
               🏆 {locale === "ua" ? "Вітаємо! Ви досягли максимального рівня!" : locale === "ru" ? "Поздравляем! Вы достигли максимального уровня!" : "Congratulations! You reached the maximum level!"}
             </div>
           )}
@@ -411,8 +411,8 @@ export default function LessonsPage() {
       <div className="flex flex-wrap gap-6 mb-8 animate-slide-up">
         {/* Type filter */}
         <div className="space-y-2">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Filter className="w-4 h-4" />
+          <div className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300 font-medium">
+            <Filter className="w-4 h-4 text-orange-500" />
             {t("filterByType")}
           </div>
           <div className="flex flex-wrap gap-2">
@@ -422,8 +422,8 @@ export default function LessonsPage() {
                 onClick={() => setFilterType(type.value)}
                 className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                   filterType === type.value
-                    ? "bg-blue-500/20 text-blue-400 border border-blue-500/30"
-                    : "glass hover:bg-black/5 dark:hover:bg-white/10"
+                    ? "bg-orange-500 text-white shadow-md shadow-orange-500/25"
+                    : "glass text-slate-800 dark:text-slate-200 hover:bg-orange-500/10"
                 }`}
               >
                 {type.label}
@@ -434,7 +434,7 @@ export default function LessonsPage() {
 
         {/* Level filter */}
         <div className="space-y-2">
-          <div className="text-sm text-muted-foreground">{t("filterByLevel")}</div>
+          <div className="text-sm text-slate-700 dark:text-slate-300 font-medium">{t("filterByLevel")}</div>
           <div className="flex flex-wrap gap-2">
             {levels.map((level) => (
               <button
@@ -442,8 +442,8 @@ export default function LessonsPage() {
                 onClick={() => setFilterLevel(level)}
                 className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                   filterLevel === level
-                    ? "bg-purple-500/20 text-purple-400 border border-purple-500/30"
-                    : "glass hover:bg-black/5 dark:hover:bg-white/10"
+                    ? "bg-amber-500 text-white shadow-md shadow-amber-500/25"
+                    : "glass text-slate-800 dark:text-slate-200 hover:bg-amber-500/10"
                 }`}
               >
                 {level === "all" ? t("all") : level}
@@ -452,6 +452,7 @@ export default function LessonsPage() {
           </div>
         </div>
       </div>
+
 
       {/* VIEW MODE 1: GAME MAP */}
       {viewMode === "map" && (
