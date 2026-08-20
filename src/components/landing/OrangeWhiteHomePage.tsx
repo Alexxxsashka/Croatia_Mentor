@@ -340,7 +340,7 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
 
               <div className="pt-4 flex items-center gap-4">
                 <Link
-                  href="/lessons"
+                  href="/games/audio-spelling"
                   className="inline-flex items-center gap-3 px-8 py-4 bg-orange-600 hover:bg-orange-500 text-white font-extrabold uppercase text-xs tracking-[0.2em] transition-all shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50"
                 >
                   <Play className="w-4 h-4 fill-white" />
@@ -353,7 +353,7 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
             <div className="lg:col-span-5 space-y-4">
               
               {/* Preview 1 */}
-              <Link href="/lessons" className="p-5 bg-slate-900/90 border border-slate-800 hover:border-orange-500 flex items-center gap-4 transition-colors group cursor-pointer backdrop-blur-md block">
+              <Link href="/games/audio-spelling" className="p-5 bg-slate-900/90 border border-slate-800 hover:border-orange-500 flex items-center gap-4 transition-colors group cursor-pointer backdrop-blur-md block">
                 <div className="w-14 h-14 rounded-full bg-orange-600/20 text-orange-500 border border-orange-500/30 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <Volume2 className="w-6 h-6" />
                 </div>
@@ -365,6 +365,7 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
                   <p className="text-xs text-slate-400">{t("editorial.promo.audio1.sub")}</p>
                 </div>
               </Link>
+
 
               {/* Preview 2 */}
               <Link href="/ai-chat" className="p-5 bg-slate-900/90 border border-slate-800 hover:border-amber-500 flex items-center gap-4 transition-colors group cursor-pointer backdrop-blur-md block">
