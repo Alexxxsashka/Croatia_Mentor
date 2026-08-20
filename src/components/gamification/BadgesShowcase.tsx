@@ -70,26 +70,26 @@ export function BadgesShowcase({ locale }: BadgesShowcaseProps) {
               key={badge.id}
               className={`p-4 rounded-2xl border transition-all text-center flex flex-col items-center justify-between relative group ${
                 badge.unlocked
-                  ? "bg-gradient-to-b from-amber-500/10 to-yellow-500/5 border-amber-500/30 text-amber-200 shadow-md shadow-amber-500/10 hover:scale-[1.02]"
-                  : "glass opacity-50 border-white/5 grayscale hover:grayscale-0"
+                  ? "bg-amber-500/10 dark:bg-gradient-to-b dark:from-amber-500/20 dark:to-yellow-500/10 border-amber-500/40 text-slate-900 dark:text-amber-200 shadow-md shadow-amber-500/10 hover:scale-[1.02]"
+                  : "bg-slate-100/90 dark:bg-slate-900/60 border-slate-200 dark:border-white/10 opacity-70 grayscale hover:grayscale-0"
               }`}
             >
               <div className="text-3xl mb-2 relative">
                 {badge.icon}
                 {badge.unlocked ? (
-                  <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 text-white flex items-center justify-center">
-                    <CheckCircle2 className="w-3 h-3" />
+                  <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-md">
+                    <CheckCircle2 className="w-3 h-3 text-white" />
                   </div>
                 ) : (
-                  <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center">
+                  <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-slate-700 text-slate-300 flex items-center justify-center">
                     <Lock className="w-2.5 h-2.5" />
                   </div>
                 )}
               </div>
 
               <div>
-                <h4 className="font-bold text-xs line-clamp-1 text-foreground">{title}</h4>
-                <p className="text-[10px] text-muted-foreground mt-1 line-clamp-2 leading-tight">{desc}</p>
+                <h4 className="font-bold text-xs line-clamp-1 text-slate-900 dark:text-slate-100">{title}</h4>
+                <p className="text-[10px] font-medium text-slate-600 dark:text-slate-400 mt-1 line-clamp-2 leading-tight">{desc}</p>
               </div>
             </div>
           );
