@@ -80,9 +80,9 @@ export function GlobalParallaxBackground() {
         <div className="absolute bottom-1/4 left-10 w-[750px] h-[420px] bg-gradient-to-r from-purple-950/40 via-blue-950/30 to-slate-950/60 rounded-full blur-[110px] animate-fog-flow [animation-delay:8s]" />
       </div>
 
-      {/* LAYER 2.5: Semi-Transparent Ambient Vignette */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-100/70 via-amber-50/50 to-slate-100/75 dark:from-slate-950/75 dark:via-slate-950/65 dark:to-slate-950/85 backdrop-blur-[1px]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-500/15 via-indigo-500/10 to-transparent pointer-events-none" />
+      {/* LAYER 2.5: High-Contrast Light/Dark Ambient Vignette */}
+      <div className="absolute inset-0 bg-gradient-to-b from-amber-50/92 via-slate-100/90 to-amber-50/95 dark:from-slate-950/75 dark:via-slate-950/65 dark:to-slate-950/85 backdrop-blur-[4px] dark:backdrop-blur-[1px]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-500/10 via-indigo-500/5 to-transparent pointer-events-none" />
 
       {/* LAYER 3: Dedicated Animated Parallax Floating Dust Layer */}
       <div
