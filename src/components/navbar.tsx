@@ -159,14 +159,14 @@ export function Navbar() {
             href="/"
             className="flex items-center gap-2.5 group"
           >
-            <div className="w-9 h-9 rounded-xl overflow-hidden shadow-md shadow-orange-500/20 group-hover:scale-105 transition-transform duration-300 border border-orange-500/30">
+            <div className="w-9 h-9 rounded-xl overflow-hidden shadow-md shadow-purple-500/20 group-hover:scale-105 transition-transform duration-300 border border-purple-500/30">
               <img
                 src="/logos/logo-variant-1.jpg"
                 alt="Croatia Mentor Logo"
                 className="w-full h-full object-cover"
               />
             </div>
-            <span className="text-xl font-extrabold uppercase font-editorial tracking-tight bg-gradient-to-r from-purple-400 via-pink-400 to-blue-500 bg-clip-text text-transparent hidden sm:block">
+            <span className="text-lg sm:text-xl font-black uppercase tracking-wider font-sans text-slate-900 dark:text-white hidden sm:block drop-shadow-sm">
               Croatia Mentor
             </span>
 

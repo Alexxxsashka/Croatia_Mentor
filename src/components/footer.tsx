@@ -23,7 +23,7 @@ export function Footer() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <span className="text-lg font-extrabold uppercase font-editorial tracking-tight bg-gradient-to-r from-purple-400 via-pink-400 to-blue-500 bg-clip-text text-transparent">
+              <span className="text-lg font-black uppercase tracking-wider font-sans text-slate-900 dark:text-white drop-shadow-sm">
                 Croatia Mentor
               </span>
 
