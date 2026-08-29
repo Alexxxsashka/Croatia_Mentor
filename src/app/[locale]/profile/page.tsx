@@ -26,6 +26,7 @@ import {
   Clock,
   Languages,
   ShieldCheck,
+  AlertTriangle,
 } from "lucide-react";
 import { toast } from "sonner";
 import { lessonsData } from "@/lib/lessons-data";
@@ -878,6 +879,42 @@ export default function ProfilePage() {
               </div>
             </div>
 
+            {/* Unverified Email Warning Banner */}
+            {!profile?.emailVerified && (
+              <div className="p-4 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+                <div className="flex items-center gap-2.5 text-amber-300 font-semibold">
+                  <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0" />
+                  <span>
+                    {locale === "ua"
+                      ? "⚠️ Підтвердіть пошту для безпеки вашого акаунту"
+                      : locale === "ru"
+                      ? "⚠️ Подтвердите почту для безопасности вашего аккаунта"
+                      : "⚠️ Please verify your email for account security"}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    try {
+                      const res = await fetch("/api/auth/send-verification-email", { method: "POST" });
+                      const data = await res.json();
+                      if (res.ok && data.success) {
+                        toast.success(data.message || "Ссылка отправлена!");
+                      } else {
+                        toast.error(data.error || "Не удалось отправить ссылку");
+                      }
+                    } catch (err: unknown) {
+                      const error = err as Error;
+                      toast.error(error.message || "Ошибка отправки письма");
+                    }
+                  }}
+                  className="px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold shrink-0 transition-all text-[11px] shadow-md shadow-amber-500/20"
+                >
+                  {locale === "ua" ? "Надіслати лист" : locale === "ru" ? "Отправить ссылку" : "Send Link"}
+                </button>
+              </div>
+            )}
+
             {/* Change Email */}
             <form onSubmit={handleUpdateEmail} className="space-y-2">
               <div className="flex items-center justify-between">
@@ -894,11 +931,12 @@ export default function ProfilePage() {
                     type="button"
                     onClick={async () => {
                       try {
-                        if (auth.currentUser) {
-                          await sendEmailVerification(auth.currentUser);
-                          toast.success(`Verification link sent to ${auth.currentUser.email}!`);
+                        const res = await fetch("/api/auth/send-verification-email", { method: "POST" });
+                        const data = await res.json();
+                        if (res.ok && data.success) {
+                          toast.success(data.message || "Verification link sent!");
                         } else {
-                          toast.error("Please sign in with Firebase or link Google to verify email.");
+                          toast.error(data.error || "Failed to send verification link");
                         }
                       } catch (err: unknown) {
                         const error = err as Error;

@@ -2,10 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { CheckCircle2, AlertTriangle, Send, Loader2, X, MailCheck } from "lucide-react";
+import { CheckCircle2, AlertTriangle, Send, Loader2, X, MailCheck, Clock } from "lucide-react";
 import { toast } from "sonner";
 import { auth } from "@/lib/firebase";
-import { sendEmailVerification } from "firebase/auth";
 
 export function EmailVerificationModal() {
   const { data: session, status } = useSession();
@@ -21,7 +20,7 @@ export function EmailVerificationModal() {
         .then((res) => (res.ok ? res.json() : null))
         .then((data) => {
           if (isMounted) {
-            if (!data?.user?.emailVerified && !auth?.currentUser?.emailVerified) {
+            if (!data?.user?.emailVerified) {
               setVisible(true);
             } else {
               setVisible(false);
@@ -40,16 +39,19 @@ export function EmailVerificationModal() {
   const handleSendVerification = async () => {
     setSending(true);
     try {
-      if (auth?.currentUser) {
-        await sendEmailVerification(auth.currentUser);
-        toast.success(`Verification link sent to ${auth.currentUser.email}! Check your inbox.`);
+      const res = await fetch("/api/auth/send-verification-email", {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        toast.success(data.message || `Ссылка для подтверждения отправлена на ${session?.user?.email}!`);
       } else {
-        toast.error("Please sign in or link your account to send verification email.");
+        toast.error(data.error || "Не удалось отправить письмо с подтверждением");
       }
     } catch (err: unknown) {
       const error = err as Error;
       console.error("Send email verification error:", error);
-      toast.error(error.message || "Failed to send verification email");
+      toast.error(error.message || "Ошибка отправки письма");
     } finally {
       setSending(false);
     }
@@ -66,12 +68,22 @@ export function EmailVerificationModal() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email: auth.currentUser.email }),
           });
-          toast.success("Email verified successfully!");
+          toast.success("Почта успешно подтверждена!");
           setVisible(false);
           return;
         }
       }
-      toast.info("Email is not verified yet. Please check your inbox and click the verification link.");
+      // Re-fetch backend profile
+      const res = await fetch("/api/user/profile");
+      if (res.ok) {
+        const data = await res.json();
+        if (data?.user?.emailVerified) {
+          toast.success("Почта подтверждена!");
+          setVisible(false);
+          return;
+        }
+      }
+      toast.info("Почта пока не подтверждена. Проверьте ваш почтовый ящик и перейдите по ссылке.");
     } catch (err: unknown) {
       const error = err as Error;
       console.error("Check verification status error:", error);
@@ -88,7 +100,7 @@ export function EmailVerificationModal() {
         <button
           onClick={() => setDismissed(true)}
           className="absolute top-4 right-4 p-1.5 text-muted-foreground hover:text-foreground rounded-xl bg-white/5 hover:bg-white/10 transition-colors"
-          title="Close modal"
+          title="Закрыть"
         >
           <X className="w-4 h-4" />
         </button>
@@ -102,41 +114,51 @@ export function EmailVerificationModal() {
               Подтверждение почты
             </h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Пожалуйста, подтвердите вашу электронную почту, чтобы обеспечить безопасность аккаунта и получить доступ ко всем функциям.
+              Пожалуйста, подтвердите ваш email для обеспечения безопасности аккаунта и доступа ко всем функциям.
             </p>
           </div>
         </div>
 
         <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center gap-2 text-xs text-amber-300">
           <MailCheck className="w-4 h-4 text-amber-400 shrink-0" />
-          <span>Письмо будет отправлено на ваш email: <strong>{session?.user?.email}</strong></span>
+          <span>Письмо будет отправлено на: <strong>{session?.user?.email}</strong></span>
         </div>
 
-        <div className="flex items-center gap-3 pt-1">
-          <button
-            onClick={handleSendVerification}
-            disabled={sending}
-            className="flex-1 py-2.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 hover:opacity-90 text-white transition-all shadow-lg shadow-orange-500/25 disabled:opacity-50 flex items-center justify-center gap-2"
-          >
-            {sending ? (
-              <Loader2 className="w-4 h-4 animate-spin" />
-            ) : (
-              <Send className="w-4 h-4" />
-            )}
-            Отправить ссылку
-          </button>
+        <div className="flex flex-col gap-2 pt-1">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleSendVerification}
+              disabled={sending}
+              className="flex-1 py-2.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 hover:opacity-90 text-white transition-all shadow-lg shadow-orange-500/25 disabled:opacity-50 flex items-center justify-center gap-2"
+            >
+              {sending ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <Send className="w-4 h-4" />
+              )}
+              Отправить ссылку
+            </button>
+
+            <button
+              onClick={handleCheckStatus}
+              disabled={verifying}
+              className="py-2.5 px-4 rounded-xl text-xs font-bold bg-white/5 hover:bg-white/10 border border-white/10 text-foreground transition-all flex items-center gap-2"
+            >
+              {verifying ? (
+                <Loader2 className="w-4 h-4 animate-spin text-blue-400" />
+              ) : (
+                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              )}
+              Я подтвердил
+            </button>
+          </div>
 
           <button
-            onClick={handleCheckStatus}
-            disabled={verifying}
-            className="py-2.5 px-4 rounded-xl text-xs font-bold bg-white/5 hover:bg-white/10 border border-white/10 text-foreground transition-all flex items-center gap-2"
+            onClick={() => setDismissed(true)}
+            className="w-full py-2 px-3 rounded-xl text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all flex items-center justify-center gap-1.5"
           >
-            {verifying ? (
-              <Loader2 className="w-4 h-4 animate-spin text-blue-400" />
-            ) : (
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-            )}
-            Я подтвердил
+            <Clock className="w-3.5 h-3.5" />
+            Сделать позже
           </button>
         </div>
       </div>
