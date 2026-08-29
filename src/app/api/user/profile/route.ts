@@ -33,6 +33,7 @@ export async function GET() {
         role: user.role,
         image: user.image,
         phone: user.phone,
+        emailVerified: user.emailVerified,
         nativeLanguage: user.nativeLanguage,
         createdAt: user.createdAt,
         progress: user.progress,

@@ -43,6 +43,8 @@ import {
   updatePassword,
   signInWithPhoneNumber,
   linkWithPopup,
+  signInWithPopup,
+  sendEmailVerification,
   ConfirmationResult,
 } from "firebase/auth";
 
@@ -61,6 +63,7 @@ interface UserProfileData {
   role: string;
   image?: string;
   phone?: string;
+  emailVerified?: string | Date | null;
   nativeLanguage: string;
   createdAt: string;
   progress?: {
@@ -423,18 +426,41 @@ export default function ProfilePage() {
   const handleLinkProvider = async (providerName: "google" | "facebook" | "apple") => {
     setLinkingProvider(providerName);
     try {
-      if (!auth.currentUser) {
-        toast.error("No active Firebase session. Please sign in with Firebase.");
-        return;
-      }
       let provider;
       if (providerName === "google") provider = googleProvider;
       else if (providerName === "facebook") provider = facebookProvider;
       else provider = appleProvider;
 
-      await linkWithPopup(auth.currentUser, provider);
+      let resultUser;
+      if (auth.currentUser) {
+        const res = await linkWithPopup(auth.currentUser, provider);
+        resultUser = res.user;
+      } else {
+        const res = await signInWithPopup(auth, provider);
+        resultUser = res.user;
+      }
+
+      await fetch("/api/auth/firebase-sync", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          uid: resultUser.uid,
+          email: profile?.email || resultUser.email,
+          displayName: resultUser.displayName,
+          photoURL: resultUser.photoURL,
+          phoneNumber: resultUser.phoneNumber,
+          providerId: providerName,
+          emailVerified: resultUser.emailVerified,
+        }),
+      });
+
       toast.success(`Successfully linked ${providerName} account!`);
-      fetchProfile();
+      // Refresh profile data
+      const refreshRes = await fetch("/api/user/profile");
+      if (refreshRes.ok) {
+        const refreshData = await refreshRes.json();
+        setProfile(refreshData.user);
+      }
     } catch (err: unknown) {
       const error = err as Error;
       console.error("Link provider error:", error);
@@ -854,9 +880,37 @@ export default function ProfilePage() {
 
             {/* Change Email */}
             <form onSubmit={handleUpdateEmail} className="space-y-2">
-              <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                {locale === "ua" ? "Електронна пошта" : locale === "ru" ? "Электронная почта" : "Email Address"}
-              </label>
+              <div className="flex items-center justify-between">
+                <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                  {locale === "ua" ? "Електронна пошта" : locale === "ru" ? "Электронная почта" : "Email Address"}
+                </label>
+                {profile?.emailVerified ? (
+                  <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-1">
+                    <Check className="w-3 h-3" />
+                    Verified
+                  </span>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      try {
+                        if (auth.currentUser) {
+                          await sendEmailVerification(auth.currentUser);
+                          toast.success(`Verification link sent to ${auth.currentUser.email}!`);
+                        } else {
+                          toast.error("Please sign in with Firebase or link Google to verify email.");
+                        }
+                      } catch (err: unknown) {
+                        const error = err as Error;
+                        toast.error(error.message || "Failed to send verification email");
+                      }
+                    }}
+                    className="text-[10px] text-amber-400 font-bold hover:underline cursor-pointer"
+                  >
+                    Unverified — Click to Verify
+                  </button>
+                )}
+              </div>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <input

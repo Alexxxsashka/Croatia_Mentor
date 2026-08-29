@@ -69,6 +69,8 @@ function renderNavbarAvatar(avatarStr: string | null | undefined, nameInitials: 
   );
 }
 
+import { EmailVerificationModal } from "./auth/EmailVerificationModal";
+
 export function Navbar() {
   const t = useTranslations("nav");
   const { data: session } = useSession();
@@ -133,7 +135,7 @@ export function Navbar() {
   const user = session?.user as any;
   const isAdmin = user?.role === "admin";
 
-  const navLinks: { href: string; label: string; icon: any; disabled?: boolean }[] = [
+  const navLinks: { href: string; label: string; icon: React.ComponentType<{ className?: string }>; disabled?: boolean }[] = [
     ...(session
       ? [
           {
@@ -396,6 +398,8 @@ export function Navbar() {
           </div>
         </div>
       )}
+      {/* Email Verification Banner/Modal */}
+      <EmailVerificationModal />
     </nav>
   );
 }
