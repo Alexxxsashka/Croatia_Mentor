@@ -67,6 +67,7 @@ interface UserProfileData {
   emailVerified?: string | Date | null;
   nativeLanguage: string;
   createdAt: string;
+  linkedProviders?: string[];
   progress?: {
     currentLevel: string;
     totalXP: number;
@@ -960,8 +961,8 @@ export default function ProfilePage() {
               </div>
               <button
                 type="submit"
-                disabled={updatingEmail || emailField === profile?.email}
-                className="w-full px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-md shadow-blue-500/20 disabled:opacity-50 flex items-center justify-center gap-1.5"
+                disabled={updatingEmail || !emailField}
+                className="w-full px-4 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white transition-all shadow-md shadow-blue-500/25 disabled:opacity-50 flex items-center justify-center gap-1.5"
               >
                 {updatingEmail ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Edit2 className="w-3.5 h-3.5" />}
                 {locale === "ua" ? "Оновити пошту" : locale === "ru" ? "Обновить почту" : "Update Email"}
@@ -981,13 +982,13 @@ export default function ProfilePage() {
                     value={phoneField}
                     onChange={(e) => setPhoneField(e.target.value)}
                     placeholder="+380991234567"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-blue-500"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-purple-500"
                   />
                 </div>
                 <button
                   type="submit"
                   disabled={verifyingPhone || !phoneField}
-                  className="w-full px-4 py-2 rounded-xl text-xs font-semibold bg-purple-600 hover:bg-purple-500 text-white transition-all shadow-md shadow-purple-500/20 disabled:opacity-50 flex items-center justify-center gap-1.5"
+                  className="w-full px-4 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white transition-all shadow-md shadow-purple-500/25 disabled:opacity-50 flex items-center justify-center gap-1.5"
                 >
                   {verifyingPhone ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <ShieldCheck className="w-3.5 h-3.5" />}
                   {locale === "ua" ? "Підтвердити через SMS" : locale === "ru" ? "Подтвердить через SMS" : "Verify via SMS OTP"}
@@ -1036,13 +1037,13 @@ export default function ProfilePage() {
                   value={passwordField}
                   onChange={(e) => setPasswordField(e.target.value)}
                   placeholder="••••••••••••"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-blue-500"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-emerald-500"
                 />
               </div>
               <button
                 type="submit"
                 disabled={updatingPassword || !passwordField}
-                className="w-full px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition-all shadow-md shadow-emerald-500/20 disabled:opacity-50 flex items-center justify-center gap-1.5"
+                className="w-full px-4 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white transition-all shadow-md shadow-emerald-500/25 disabled:opacity-50 flex items-center justify-center gap-1.5"
               >
                 {updatingPassword ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Key className="w-3.5 h-3.5" />}
                 {locale === "ua" ? "Обновити пароль" : locale === "ru" ? "Обновить пароль" : "Update Password"}
@@ -1058,7 +1059,7 @@ export default function ProfilePage() {
 
               {/* Google */}
               <div className="p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between text-xs">
-                <span className="flex items-center gap-2 text-foreground">
+                <span className="flex items-center gap-2 text-foreground font-medium">
                   <svg className="w-4 h-4" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z" />
                     <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.25 21.32 7.33 24 12 24z" />
@@ -1067,50 +1068,71 @@ export default function ProfilePage() {
                   </svg>
                   Google
                 </span>
-                <button
-                  type="button"
-                  onClick={() => handleLinkProvider("google")}
-                  disabled={linkingProvider === "google"}
-                  className="text-[11px] font-bold text-blue-400 hover:text-blue-300"
-                >
-                  {linkingProvider === "google" ? "Linking..." : "Link Google"}
-                </button>
+                {profile?.linkedProviders?.includes("google") ? (
+                  <span className="text-[11px] font-bold text-emerald-400 flex items-center gap-1 bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/20">
+                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                    {locale === "ua" ? "Прив'язано" : locale === "ru" ? "Привязано" : "Linked"}
+                  </span>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => handleLinkProvider("google")}
+                    disabled={linkingProvider === "google"}
+                    className="px-3 py-1 rounded-lg text-[11px] font-bold bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-md shadow-blue-500/20 disabled:opacity-50"
+                  >
+                    {linkingProvider === "google" ? "Linking..." : "Link Google"}
+                  </button>
+                )}
               </div>
 
               {/* Facebook */}
               <div className="p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between text-xs">
-                <span className="flex items-center gap-2 text-foreground">
+                <span className="flex items-center gap-2 text-foreground font-medium">
                   <svg className="w-4 h-4 fill-blue-500" viewBox="0 0 24 24">
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                   </svg>
                   Facebook
                 </span>
-                <button
-                  type="button"
-                  onClick={() => handleLinkProvider("facebook")}
-                  disabled={linkingProvider === "facebook"}
-                  className="text-[11px] font-bold text-blue-400 hover:text-blue-300"
-                >
-                  {linkingProvider === "facebook" ? "Linking..." : "Link Facebook"}
-                </button>
+                {profile?.linkedProviders?.includes("facebook") ? (
+                  <span className="text-[11px] font-bold text-emerald-400 flex items-center gap-1 bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/20">
+                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                    {locale === "ua" ? "Прив'язано" : locale === "ru" ? "Привязано" : "Linked"}
+                  </span>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => handleLinkProvider("facebook")}
+                    disabled={linkingProvider === "facebook"}
+                    className="px-3 py-1 rounded-lg text-[11px] font-bold bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-md shadow-blue-500/20 disabled:opacity-50"
+                  >
+                    {linkingProvider === "facebook" ? "Linking..." : "Link Facebook"}
+                  </button>
+                )}
               </div>
 
               {/* Apple */}
               <div className="p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between text-xs">
-                <span className="flex items-center gap-2 text-foreground">
+                <span className="flex items-center gap-2 text-foreground font-medium">
                   <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24">
                     <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.09c.67-.82 1.13-1.96.99-3.09-1 .04-2.19.67-2.88 1.48-.61.71-1.15 1.88-.99 3 1.11.09 2.23-.57 2.88-1.39z" />
                   </svg>
                   Apple
                 </span>
-                <button
-                  type="button"
-                  onClick={() => handleLinkProvider("apple")}
-                  disabled={linkingProvider === "apple"}
-                  className="text-[11px] font-bold text-blue-400 hover:text-blue-300"
-                >
-                  {linkingProvider === "apple" ? "Linking..." : "Link Apple"}
-                </button>
+                {profile?.linkedProviders?.includes("apple") ? (
+                  <span className="text-[11px] font-bold text-emerald-400 flex items-center gap-1 bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/20">
+                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                    {locale === "ua" ? "Прив'язано" : locale === "ru" ? "Привязано" : "Linked"}
+                  </span>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => handleLinkProvider("apple")}
+                    disabled={linkingProvider === "apple"}
+                    className="px-3 py-1 rounded-lg text-[11px] font-bold bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-md shadow-blue-500/20 disabled:opacity-50"
+                  >
+                    {linkingProvider === "apple" ? "Linking..." : "Link Apple"}
+                  </button>
+                )}
               </div>
             </div>
           </section>

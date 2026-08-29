@@ -18,6 +18,7 @@ export async function GET() {
       },
       include: {
         progress: true,
+        accounts: true,
       },
     });
 
@@ -37,6 +38,7 @@ export async function GET() {
         nativeLanguage: user.nativeLanguage,
         createdAt: user.createdAt,
         progress: user.progress,
+        linkedProviders: user.accounts.map((a) => a.provider.toLowerCase()),
       },
     });
   } catch (error) {
