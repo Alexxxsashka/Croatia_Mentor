@@ -398,8 +398,6 @@ export function Navbar() {
           </div>
         </div>
       )}
-      {/* Email Verification Banner/Modal */}
-      <EmailVerificationModal />
     </nav>
   );
 }

@@ -5,6 +5,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Toaster } from "sonner";
 import { ChangelogModal } from "@/components/changelog-modal";
+import { EmailVerificationModal } from "@/components/auth/EmailVerificationModal";
 import { NotificationListener } from "@/components/notification-listener";
 
 export async function generateMetadata({
@@ -135,6 +136,7 @@ export default async function LocaleLayout({
               <Footer />
               <Toaster position="top-right" richColors />
               <ChangelogModal />
+              <EmailVerificationModal />
             </ThemeProvider>
           </SessionProvider>
         </NextIntlClientProvider>
