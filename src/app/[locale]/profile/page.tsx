@@ -109,7 +109,9 @@ export default function ProfilePage() {
   // Auth & Security fields
   const [emailField, setEmailField] = useState("");
   const [phoneField, setPhoneField] = useState("");
+  const [currentPasswordField, setCurrentPasswordField] = useState("");
   const [passwordField, setPasswordField] = useState("");
+  const [confirmPasswordField, setConfirmPasswordField] = useState("");
   const [updatingEmail, setUpdatingEmail] = useState(false);
   const [updatingPassword, setUpdatingPassword] = useState(false);
   const [verifyingPhone, setVerifyingPhone] = useState(false);
@@ -352,18 +354,53 @@ export default function ProfilePage() {
   const handleUpdatePassword = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!passwordField || passwordField.length < 6) {
-      toast.error("Password must be at least 6 characters");
+      toast.error(
+        locale === "ua"
+          ? "Новий пароль має бути не менше 6 символів"
+          : locale === "ru"
+          ? "Новый пароль должен быть не менее 6 символов"
+          : "New password must be at least 6 characters"
+      );
       return;
     }
+    if (passwordField !== confirmPasswordField) {
+      toast.error(
+        locale === "ua"
+          ? "Нові паролі не збігаються"
+          : locale === "ru"
+          ? "Новые пароли не совпадают"
+          : "New passwords do not match"
+      );
+      return;
+    }
+
     setUpdatingPassword(true);
 
     try {
-      if (auth.currentUser) {
-        await updatePassword(auth.currentUser, passwordField);
-        toast.success("Password updated successfully!");
+      const res = await fetch("/api/user/change-password", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          currentPassword: currentPasswordField,
+          newPassword: passwordField,
+          confirmPassword: confirmPasswordField,
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        toast.success(
+          locale === "ua"
+            ? "Пароль успішно змінено!"
+            : locale === "ru"
+            ? "Пароль успешно изменен!"
+            : "Password updated successfully!"
+        );
+        setCurrentPasswordField("");
         setPasswordField("");
+        setConfirmPasswordField("");
       } else {
-        toast.error("Please re-authenticate via Firebase to update password");
+        toast.error(data.error || "Не вдалося оновити пароль");
       }
     } catch (err: unknown) {
       const error = err as Error;
@@ -1071,27 +1108,56 @@ export default function ProfilePage() {
             )}
 
             {/* Change Password */}
-            <form onSubmit={handleUpdatePassword} className="space-y-2">
+            <form onSubmit={handleUpdatePassword} className="space-y-3">
               <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                {locale === "ua" ? "Новий пароль" : locale === "ru" ? "Новый пароль" : "New Password"}
+                {locale === "ua" ? "Зміна пароля" : locale === "ru" ? "Смена пароля" : "Change Password"}
               </label>
+
+              {/* Current Password */}
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <input
+                  type="password"
+                  value={currentPasswordField}
+                  onChange={(e) => setCurrentPasswordField(e.target.value)}
+                  placeholder={locale === "ua" ? "Поточний пароль" : locale === "ru" ? "Текущий пароль" : "Current password"}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-emerald-500"
+                />
+              </div>
+
+              {/* New Password */}
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <input
                   type="password"
                   value={passwordField}
                   onChange={(e) => setPasswordField(e.target.value)}
-                  placeholder="••••••••••••"
+                  placeholder={locale === "ua" ? "Новий пароль (мін. 6 символів)" : locale === "ru" ? "Новый пароль (мин. 6 символов)" : "New password (min 6 chars)"}
                   className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-emerald-500"
+                  required
                 />
               </div>
+
+              {/* Confirm Password */}
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <input
+                  type="password"
+                  value={confirmPasswordField}
+                  onChange={(e) => setConfirmPasswordField(e.target.value)}
+                  placeholder={locale === "ua" ? "Підтвердіть новий пароль" : locale === "ru" ? "Подтвердите новый пароль" : "Confirm new password"}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-emerald-500"
+                  required
+                />
+              </div>
+
               <button
                 type="submit"
-                disabled={updatingPassword || !passwordField}
+                disabled={updatingPassword || !passwordField || !confirmPasswordField}
                 className="w-full px-4 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white transition-all shadow-md shadow-emerald-500/25 disabled:opacity-50 flex items-center justify-center gap-1.5"
               >
                 {updatingPassword ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Key className="w-3.5 h-3.5" />}
-                {locale === "ua" ? "Обновити пароль" : locale === "ru" ? "Обновить пароль" : "Update Password"}
+                {locale === "ua" ? "Оновити пароль" : locale === "ru" ? "Обновить пароль" : "Update Password"}
               </button>
             </form>
 

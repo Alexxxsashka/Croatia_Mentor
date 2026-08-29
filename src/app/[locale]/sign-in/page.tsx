@@ -230,6 +230,32 @@ export default function SignInPage() {
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
+              <div className="flex items-center justify-end text-xs pt-1">
+                <button
+                  type="button"
+                  onClick={async () => {
+                    if (!form.email) {
+                      toast.error("Введіть вашу пошту у поле вище для скидання пароля");
+                      return;
+                    }
+                    try {
+                      const res = await fetch("/api/auth/send-verification-email", { method: "POST" });
+                      const data = await res.json();
+                      if (res.ok && data.success) {
+                        toast.success(data.message || "Посилання для відновлення пароля надіслано на вашу пошту!");
+                      } else {
+                        toast.error(data.error || "Не вдалося надіслати посилання для скидання пароля");
+                      }
+                    } catch (err: unknown) {
+                      const error = err as Error;
+                      toast.error(error.message || "Помилка відправки");
+                    }
+                  }}
+                  className="text-blue-400 hover:text-blue-300 font-medium transition-colors cursor-pointer"
+                >
+                  Забули пароль?
+                </button>
+              </div>
             </div>
 
             <button
