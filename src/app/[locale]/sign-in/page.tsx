@@ -244,7 +244,7 @@ export default function SignInPage() {
           <div className="relative flex items-center justify-center my-4">
             <div className="border-t border-white/10 w-full" />
             <span className="bg-slate-900 px-3 text-xs text-muted-foreground uppercase tracking-wider relative">
-              Firebase Auth
+              OR
             </span>
           </div>
 

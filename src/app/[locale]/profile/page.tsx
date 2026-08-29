@@ -873,7 +873,7 @@ export default function ProfilePage() {
               </div>
               <div>
                 <h2 className="text-base font-bold text-foreground">
-                  {locale === "ua" ? "Безпека та Firebase Auth" : locale === "ru" ? "Безопасность и Firebase Auth" : "Security & Firebase Auth"}
+                  {locale === "ua" ? "Безпека та прив'язки" : locale === "ru" ? "Безопасность и привязки" : "Security & Account Links"}
                 </h2>
                 <p className="text-xs text-muted-foreground">Manage your credentials & provider links</p>
               </div>
@@ -1052,9 +1052,8 @@ export default function ProfilePage() {
 
             {/* Linked Accounts */}
             <div className="space-y-3 pt-2 border-t border-white/5">
-              <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center justify-between">
+              <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                 <span>{locale === "ua" ? "Прив'язки акаунта" : locale === "ru" ? "Привязки аккаунта" : "Linked Accounts"}</span>
-                <span className="text-[10px] text-blue-400 font-medium">Firebase Auth</span>
               </label>
 
               {/* Google */}
