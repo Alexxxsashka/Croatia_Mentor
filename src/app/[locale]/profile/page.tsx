@@ -119,6 +119,9 @@ export default function ProfilePage() {
   const [phoneOtpCode, setPhoneOtpCode] = useState("");
   const [phoneConfirmation, setPhoneConfirmation] = useState<ConfirmationResult | null>(null);
   const [linkingProvider, setLinkingProvider] = useState<string | null>(null);
+  const [isPhoneModalOpen, setIsPhoneModalOpen] = useState(false);
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+  const [sendingResetPassword, setSendingResetPassword] = useState(false);
 
   // Learning settings states
   const [dailyGoalMinutes, setDailyGoalMinutes] = useState(10);
@@ -482,12 +485,25 @@ export default function ProfilePage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone: phoneField }),
       });
-      toast.success("Mobile phone verified & updated!");
+      toast.success(
+        locale === "ua"
+          ? "✅ Номер телефону успішно підтверджено та привязано!"
+          : locale === "ru"
+          ? "✅ Номер телефона успешно подтвержден и привязан!"
+          : "Mobile phone verified & updated!"
+      );
       setPhoneOtpStep("input");
+      setIsPhoneModalOpen(false);
       fetchProfile();
     } catch (err: unknown) {
       console.error("OTP verification error:", err);
-      toast.error("Invalid OTP verification code");
+      toast.error(
+        locale === "ua"
+          ? "Невірний SMS-код підтвердження"
+          : locale === "ru"
+          ? "Неверный SMS-код подтверждения"
+          : "Invalid OTP verification code"
+      );
     } finally {
       setVerifyingPhone(false);
     }
@@ -1038,115 +1054,78 @@ export default function ProfilePage() {
               </button>
             </form>
 
-            {/* Mobile Phone Verification */}
-            {phoneOtpStep === "input" ? (
-              <form onSubmit={handleSendPhoneOtp} className="space-y-2">
-                <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  {locale === "ua" ? "Мобільний номер" : locale === "ru" ? "Мобильный номер" : "Mobile Phone"}
-                </label>
-                <div className="relative">
-                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                  <input
-                    type="tel"
-                    value={phoneField}
-                    onChange={(e) => setPhoneField(e.target.value)}
-                    placeholder="+380991234567"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-purple-500"
-                  />
+            {/* Mobile Phone Section */}
+            <div className="space-y-2">
+              <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                {locale === "ua" ? "Мобільний номер" : locale === "ru" ? "Мобильный номер" : "Mobile Phone"}
+              </label>
+              <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between">
+                <div className="flex items-center gap-2 text-xs">
+                  <Phone className="w-4 h-4 text-purple-400" />
+                  <span className="font-mono text-foreground font-semibold">
+                    {profile?.phone || (locale === "ua" ? "Не вказано" : locale === "ru" ? "Не указан" : "Not set")}
+                  </span>
                 </div>
                 <button
-                  type="submit"
-                  disabled={verifyingPhone || !phoneField}
-                  className="w-full px-4 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white transition-all shadow-md shadow-purple-500/25 disabled:opacity-50 flex items-center justify-center gap-1.5"
+                  type="button"
+                  onClick={() => {
+                    setPhoneField(profile?.phone || "");
+                    setPhoneOtpStep("input");
+                    setPhoneOtpCode("");
+                    setIsPhoneModalOpen(true);
+                  }}
+                  className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-purple-600/30 hover:bg-purple-600/50 text-purple-200 border border-purple-500/30 transition-all shadow-sm"
                 >
-                  {verifyingPhone ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <ShieldCheck className="w-3.5 h-3.5" />}
-                  {locale === "ua" ? "Підтвердити через SMS" : locale === "ru" ? "Подтвердить через SMS" : "Verify via SMS OTP"}
+                  {profile?.phone
+                    ? (locale === "ua" ? "Змінити номер" : locale === "ru" ? "Изменить номер" : "Change Phone")
+                    : (locale === "ua" ? "Прив'язати номер" : locale === "ru" ? "Привязать номер" : "Link Phone")}
                 </button>
-              </form>
-            ) : (
-              <form onSubmit={handleVerifyPhoneOtp} className="space-y-2">
-                <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  SMS Code for {phoneField}
-                </label>
-                <input
-                  type="text"
-                  value={phoneOtpCode}
-                  onChange={(e) => setPhoneOtpCode(e.target.value)}
-                  placeholder="123456"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-xs text-center font-mono tracking-widest text-foreground focus:outline-none focus:border-purple-500"
-                />
-                <div className="flex gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setPhoneOtpStep("input")}
-                    className="w-1/3 px-3 py-2 rounded-xl text-xs font-medium bg-white/5 border border-white/10"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    disabled={verifyingPhone}
-                    className="w-2/3 px-3 py-2 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-500/20"
-                  >
-                    Verify Code
-                  </button>
-                </div>
-              </form>
-            )}
+              </div>
+            </div>
 
-            {/* Change Password */}
-            <form onSubmit={handleUpdatePassword} className="space-y-3">
+            {/* Password Section */}
+            <div className="space-y-2">
               <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                {locale === "ua" ? "Зміна пароля" : locale === "ru" ? "Смена пароля" : "Change Password"}
+                {locale === "ua" ? "Пароль акаунту" : locale === "ru" ? "Пароль аккаунта" : "Password"}
               </label>
-
-              {/* Current Password */}
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <input
-                  type="password"
-                  value={currentPasswordField}
-                  onChange={(e) => setCurrentPasswordField(e.target.value)}
-                  placeholder={locale === "ua" ? "Поточний пароль" : locale === "ru" ? "Текущий пароль" : "Current password"}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-emerald-500"
-                />
+              <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between">
+                <div className="flex items-center gap-2 text-xs">
+                  <Lock className="w-4 h-4 text-emerald-400" />
+                  <span className="font-mono text-muted-foreground tracking-widest">••••••••••••</span>
+                </div>
+                <button
+                  type="button"
+                  disabled={sendingResetPassword}
+                  onClick={async () => {
+                    setSendingResetPassword(true);
+                    try {
+                      const res = await fetch("/api/auth/send-verification-email", { method: "POST" });
+                      const data = await res.json();
+                      if (res.ok && data.success) {
+                        toast.success(
+                          locale === "ua"
+                            ? `📩 Лист із посиланням для зміни пароля надіслано на вашу пошту ${profile?.email}!`
+                            : locale === "ru"
+                            ? `📩 Письмо со ссылкой для смены пароля отправлено на вашу почту ${profile?.email}!`
+                            : `Password reset link sent to ${profile?.email}!`
+                        );
+                      } else {
+                        toast.error(data.error || "Failed to send reset email");
+                      }
+                    } catch (err: unknown) {
+                      const error = err as Error;
+                      toast.error(error.message || "Failed to send reset email");
+                    } finally {
+                      setSendingResetPassword(false);
+                    }
+                  }}
+                  className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-emerald-600/30 hover:bg-emerald-600/50 text-emerald-200 border border-emerald-500/30 transition-all flex items-center gap-1.5 shadow-sm disabled:opacity-50"
+                >
+                  {sendingResetPassword ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Key className="w-3.5 h-3.5" />}
+                  {locale === "ua" ? "Змінити пароль" : locale === "ru" ? "Изменить пароль" : "Change Password"}
+                </button>
               </div>
-
-              {/* New Password */}
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <input
-                  type="password"
-                  value={passwordField}
-                  onChange={(e) => setPasswordField(e.target.value)}
-                  placeholder={locale === "ua" ? "Новий пароль (мін. 6 символів)" : locale === "ru" ? "Новый пароль (мин. 6 символов)" : "New password (min 6 chars)"}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-emerald-500"
-                  required
-                />
-              </div>
-
-              {/* Confirm Password */}
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <input
-                  type="password"
-                  value={confirmPasswordField}
-                  onChange={(e) => setConfirmPasswordField(e.target.value)}
-                  placeholder={locale === "ua" ? "Підтвердіть новий пароль" : locale === "ru" ? "Подтвердите новый пароль" : "Confirm new password"}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-emerald-500"
-                  required
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={updatingPassword || !passwordField || !confirmPasswordField}
-                className="w-full px-4 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white transition-all shadow-md shadow-emerald-500/25 disabled:opacity-50 flex items-center justify-center gap-1.5"
-              >
-                {updatingPassword ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Key className="w-3.5 h-3.5" />}
-                {locale === "ua" ? "Оновити пароль" : locale === "ru" ? "Обновить пароль" : "Update Password"}
-              </button>
-            </form>
+            </div>
 
             {/* Linked Accounts */}
             <div className="space-y-3 pt-2 border-t border-white/5">
@@ -1290,6 +1269,111 @@ export default function ProfilePage() {
                 </button>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Phone Change Modal */}
+      {isPhoneModalOpen && (
+        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-slate-900 border border-white/10 rounded-2xl w-full max-w-md p-6 space-y-5 shadow-2xl relative">
+            <button
+              type="button"
+              onClick={() => setIsPhoneModalOpen(false)}
+              className="absolute top-4 right-4 text-muted-foreground hover:text-foreground text-sm font-bold w-7 h-7 rounded-full bg-white/5 flex items-center justify-center transition-colors"
+            >
+              ✕
+            </button>
+
+            {phoneOtpStep === "input" ? (
+              <form onSubmit={handleSendPhoneOtp} className="space-y-4">
+                <div className="space-y-1">
+                  <h3 className="text-lg font-bold text-foreground">
+                    {locale === "ua" ? "Зміна номера телефону" : locale === "ru" ? "Смена номера телефона" : "Change Phone Number"}
+                  </h3>
+                  <p className="text-xs text-muted-foreground">
+                    {locale === "ua"
+                      ? "Введіть новий номер у міжнародному форматі (+380...). Ми надішлемо вам 6-значний SMS-код."
+                      : locale === "ru"
+                      ? "Введите новый номер в международном формате (+380...). Мы отправим вам 6-значный SMS-код."
+                      : "Enter your phone number (+380...). We will send a 6-digit SMS code."}
+                  </p>
+                </div>
+
+                <div className="relative">
+                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-purple-400" />
+                  <input
+                    type="tel"
+                    value={phoneField}
+                    onChange={(e) => setPhoneField(e.target.value)}
+                    placeholder="+380991234567"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-3 text-sm text-foreground focus:outline-none focus:border-purple-500"
+                    required
+                  />
+                </div>
+
+                <div className="flex justify-end gap-2 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setIsPhoneModalOpen(false)}
+                    className="px-4 py-2 rounded-xl text-xs font-medium bg-white/5 border border-white/10 hover:bg-white/10"
+                  >
+                    {locale === "ua" ? "Скасувати" : locale === "ru" ? "Отмена" : "Cancel"}
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={verifyingPhone || !phoneField}
+                    className="px-5 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white transition-all flex items-center gap-1.5 shadow-md shadow-purple-500/25 disabled:opacity-50"
+                  >
+                    {verifyingPhone ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : null}
+                    {locale === "ua" ? "Далі (Надіслати SMS)" : locale === "ru" ? "Далее (Отправить SMS)" : "Next (Send SMS)"}
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <form onSubmit={handleVerifyPhoneOtp} className="space-y-4">
+                <div className="space-y-1">
+                  <h3 className="text-lg font-bold text-foreground">
+                    {locale === "ua" ? "Введіть SMS-код" : locale === "ru" ? "Введите SMS-код" : "Enter SMS Code"}
+                  </h3>
+                  <p className="text-xs text-muted-foreground">
+                    {locale === "ua"
+                      ? `SMS-код надіслано на номер ${phoneField}. Введіть його нижче.`
+                      : locale === "ru"
+                      ? `SMS-код отправлен на номер ${phoneField}. Введите его ниже.`
+                      : `SMS code sent to ${phoneField}. Enter it below.`}
+                  </p>
+                </div>
+
+                <input
+                  type="text"
+                  value={phoneOtpCode}
+                  onChange={(e) => setPhoneOtpCode(e.target.value)}
+                  placeholder="123456"
+                  maxLength={6}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-base text-center font-mono tracking-widest text-foreground focus:outline-none focus:border-purple-500"
+                  required
+                />
+
+                <div className="flex justify-end gap-2 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setPhoneOtpStep("input")}
+                    className="px-4 py-2 rounded-xl text-xs font-medium bg-white/5 border border-white/10 hover:bg-white/10"
+                  >
+                    {locale === "ua" ? "Назад" : locale === "ru" ? "Назад" : "Back"}
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={verifyingPhone || !phoneOtpCode}
+                    className="px-5 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition-all flex items-center gap-1.5 shadow-md shadow-emerald-500/25 disabled:opacity-50"
+                  >
+                    {verifyingPhone ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : null}
+                    {locale === "ua" ? "Підтвердити" : locale === "ru" ? "Подтвердить" : "Verify Code"}
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
         </div>
       )}
