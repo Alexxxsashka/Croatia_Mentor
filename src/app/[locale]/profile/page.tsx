@@ -1311,6 +1311,7 @@ export default function ProfilePage() {
                     required
                   />
                 </div>
+                <div id="recaptcha-profile-container" />
 
                 <div className="flex justify-end gap-2 pt-2">
                   <button
