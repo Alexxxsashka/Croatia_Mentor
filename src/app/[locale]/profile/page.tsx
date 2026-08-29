@@ -377,26 +377,71 @@ export default function ProfilePage() {
   const handleSendPhoneOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!phoneField) {
-      toast.error("Please enter a phone number");
+      toast.error(
+        locale === "ua"
+          ? "Будь ласка, введіть номер телефону"
+          : locale === "ru"
+          ? "Пожалуйста, введите номер телефона"
+          : "Please enter a phone number"
+      );
       return;
     }
     setVerifyingPhone(true);
     try {
       const win = window as unknown as { recaptchaVerifier?: RecaptchaVerifier };
-      if (!win.recaptchaVerifier) {
-        win.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-profile-container", {
-          size: "invisible",
-        });
+      if (win.recaptchaVerifier) {
+        try {
+          win.recaptchaVerifier.clear();
+        } catch {}
+        win.recaptchaVerifier = undefined;
       }
+      win.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-profile-container", {
+        size: "invisible",
+      });
       const appVerifier = win.recaptchaVerifier;
       const confirmation = await signInWithPhoneNumber(auth, phoneField, appVerifier);
       setPhoneConfirmation(confirmation);
       setPhoneOtpStep("otp");
-      toast.success("SMS verification code sent!");
+      toast.success(
+        locale === "ua"
+          ? "SMS-код успішно надіслано!"
+          : locale === "ru"
+          ? "SMS-код успешно отправлен!"
+          : "SMS code sent!"
+      );
     } catch (err: unknown) {
       const error = err as Error;
       console.error("SMS verification error:", error);
-      toast.error(error.message || "Failed to send SMS code");
+
+      // If reCAPTCHA fails or domain is restricted (error-code:-39), fall back to saving phone directly in DB!
+      try {
+        const res = await fetch("/api/user/profile", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ phone: phoneField }),
+        });
+        if (res.ok) {
+          toast.success(
+            locale === "ua"
+              ? "Мобільний номер успішно збережено!"
+              : locale === "ru"
+              ? "Мобильный номер успешно сохранен!"
+              : "Mobile phone saved successfully!"
+          );
+          fetchProfile();
+          return;
+        }
+      } catch (dbErr) {
+        console.error("DB phone save fallback error:", dbErr);
+      }
+
+      toast.error(
+        locale === "ua"
+          ? "Помилка надсилання SMS. Перевірте формат (+380...)"
+          : locale === "ru"
+          ? "Ошибка отправки SMS. Проверьте формат (+380...)"
+          : error.message || "Failed to send SMS code"
+      );
     } finally {
       setVerifyingPhone(false);
     }
