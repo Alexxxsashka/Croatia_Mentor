@@ -70,16 +70,30 @@ interface AdminUserItem {
   createdAt: string;
 }
 
+interface AdminMemoryItem {
+  id: string;
+  userId: string | null;
+  category: string;
+  key: string;
+  content: string;
+  sourceMessage: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export default function AdminPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  const [activeTab, setActiveTab] = useState<"news" | "stats">("news");
+  const [activeTab, setActiveTab] = useState<"news" | "stats" | "memory">("news");
   const [changelogs, setChangelogs] = useState<Changelog[]>([]);
   const [stats, setStats] = useState<AdminStats | null>(null);
   const [users, setUsers] = useState<AdminUserItem[]>([]);
+  const [memories, setMemories] = useState<AdminMemoryItem[]>([]);
+  const [learnedWordsCount, setLearnedWordsCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [statsLoading, setStatsLoading] = useState(false);
+  const [memoryLoading, setMemoryLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
   // Search state for stats tab
@@ -116,11 +130,47 @@ export default function AdminPage() {
     if (isAdmin) {
       if (activeTab === "news") {
         fetchChangelogs();
-      } else {
+      } else if (activeTab === "stats") {
         fetchStats();
+      } else if (activeTab === "memory") {
+        fetchMemories();
       }
     }
   }, [isAdmin, activeTab]);
+
+  const fetchMemories = async () => {
+    setMemoryLoading(true);
+    try {
+      const res = await fetch("/api/admin/memory");
+      if (res.ok) {
+        const data = await res.json();
+        setMemories(data.memories || []);
+        setLearnedWordsCount(data.learnedWordsCount || 0);
+      } else {
+        toast.error("Failed to fetch AI memory");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("An error occurred while fetching AI memory");
+    } finally {
+      setMemoryLoading(false);
+    }
+  };
+
+  const deleteMemory = async (id: string) => {
+    try {
+      const res = await fetch(`/api/admin/memory?id=${id}`, { method: "DELETE" });
+      if (res.ok) {
+        toast.success("Memory item removed successfully!");
+        fetchMemories();
+      } else {
+        toast.error("Failed to remove memory item");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("An error occurred while deleting memory item");
+    }
+  };
 
   const fetchChangelogs = async () => {
     try {
@@ -460,6 +510,17 @@ export default function AdminPage() {
             <BarChart3 className="w-4 h-4" />
             General Stats
           </button>
+          <button
+            onClick={() => setActiveTab("memory")}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
+              activeTab === "memory"
+                ? "bg-purple-500/25 text-purple-400 border border-purple-500/20"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <Sparkles className="w-4 h-4" />
+            AI Memory & Learning
+          </button>
         </div>
       </div>
 
@@ -720,7 +781,7 @@ export default function AdminPage() {
             </div>
           </section>
         </div>
-      ) : (
+      ) : activeTab === "stats" ? (
         /* STATS TAB CONTENT */
         <div className="space-y-8 animate-slide-up">
           {statsLoading || !stats ? (
@@ -878,7 +939,73 @@ export default function AdminPage() {
             </>
           )}
         </div>
-      )}
-    </div>
-  );
+      ) : (
+            /* AI MEMORY TAB CONTENT */
+            <div className="space-y-6 animate-slide-up">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="glass rounded-2xl p-5 border border-white/5 space-y-1">
+                  <div className="flex items-center gap-2 text-purple-400 text-sm font-semibold">
+                    <Sparkles className="w-4 h-4" />
+                    Saved AI Memory Items
+                  </div>
+                  <p className="text-3xl font-black">{memories.length}</p>
+                </div>
+                <div className="glass rounded-2xl p-5 border border-white/5 space-y-1">
+                  <div className="flex items-center gap-2 text-emerald-400 text-sm font-semibold">
+                    <Award className="w-4 h-4" />
+                    Auto-Learned Words in Dictionary
+                  </div>
+                  <p className="text-3xl font-black">{learnedWordsCount}</p>
+                </div>
+              </div>
+
+              <section className="glass rounded-3xl p-6 border border-white/5 space-y-4">
+                <h2 className="text-xl font-bold flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-purple-400" />
+                  Learned Facts, Corrections & User Profile Context
+                </h2>
+                {memoryLoading ? (
+                  <div className="flex items-center justify-center p-12 text-muted-foreground">
+                    <Loader2 className="w-6 h-6 animate-spin text-purple-400 mr-2" />
+                    Loading learned AI memories...
+                  </div>
+                ) : memories.length === 0 ? (
+                  <p className="text-center py-12 text-muted-foreground">
+                    No background AI memories learned yet. Chat with the AI tutor to automatically gather vocabulary and facts!
+                  </p>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {memories.map((m) => (
+                      <div key={m.id} className="p-4 rounded-2xl glass border border-white/10 space-y-2 relative group">
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/20">
+                            {m.category}
+                          </span>
+                          <button
+                            onClick={() => deleteMemory(m.id)}
+                            className="p-1 text-muted-foreground hover:text-red-400 transition-colors"
+                            title="Delete memory"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                        <h3 className="font-bold text-foreground">{m.key}</h3>
+                        <p className="text-xs text-muted-foreground leading-relaxed">{m.content}</p>
+                        {m.sourceMessage && (
+                          <p className="text-[11px] text-white/40 italic bg-white/5 p-2 rounded-lg">
+                            Source prompt: "{m.sourceMessage}"
+                          </p>
+                        )}
+                        <p className="text-[10px] text-muted-foreground/60 text-right">
+                          Learned on {new Date(m.createdAt).toLocaleDateString()}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </section>
+            </div>
+          )}
+        </div>
+      );
 }

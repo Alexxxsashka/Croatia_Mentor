@@ -3,6 +3,7 @@ import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { vocabularyWords } from "@/lib/vocabulary-data";
 import { getUserLearningContext } from "@/lib/ai-user-context";
+import { processUserMessageForLearning } from "@/lib/ai-learning";
 
 const DAILY_CHAT_LIMIT = 25; // Max 25 AI messages per day per standard user
 
@@ -371,6 +372,11 @@ CURRENT SCENARIO: "${scenario || "Pekara / Bakery"}".
         },
       });
     }
+
+    // Non-blocking background learning & site dictionary ingestion
+    void processUserMessageForLearning(message, aiReplyText, userId).catch((err) => {
+      console.warn("Background learning error:", err);
+    });
 
     const remaining = isAdmin ? 999 : Math.max(0, DAILY_CHAT_LIMIT - (currentChatCount + 1));
     return NextResponse.json({ response: aiReplyText, remaining, limit: DAILY_CHAT_LIMIT });

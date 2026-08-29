@@ -127,7 +127,27 @@ export async function getUserLearningContext(userId: string): Promise<UserLearni
       }
     });
 
-    // 3. Construct System Prompt Fragment
+    // 3. Query AI Learned Memories (User specific & Global site facts)
+    let aiMemoriesContext = "";
+    try {
+      const memories = await prisma.aiMemory.findMany({
+        where: {
+          OR: [{ userId }, { userId: null }],
+        },
+        take: 15,
+        orderBy: { updatedAt: "desc" },
+      });
+
+      if (memories.length > 0) {
+        aiMemoriesContext = memories
+          .map((m) => `- [${m.category.toUpperCase()}] ${m.key}: ${m.content}`)
+          .join("\n");
+      }
+    } catch (e) {
+      console.warn("Error fetching AI memories for prompt context:", e);
+    }
+
+    // 4. Construct System Prompt Fragment
     const langMap: Record<string, string> = {
       en: "English",
       ru: "Russian",
@@ -153,13 +173,15 @@ VOCABULARY STATUS:
 - Words Due for Spaced Repetition (SRS): ${dueForReview.length > 0 ? dueForReview.map((w) => `${w.hr}${w.translation ? ` (${w.translation})` : ""}`).join(", ") : "None currently due!"}
 - Weak/Misspelled Words: ${weakWords.length > 0 ? weakWords.map((w) => `${w.hr} (${w.wrongCount} mistakes)`).join(", ") : "None"}
 
+${aiMemoriesContext ? `BACKEND AI LEARNED MEMORY & FACTS:\n${aiMemoriesContext}\n` : ""}
 INSTRUCTIONS FOR INDIVIDUAL ADAPTATION:
 1. Greet ${userNameStr} warmly when starting a new topic.
 2. Adapt exercise complexity strictly to level ${currentLevel}.
 3. If the student asks what to study next, explicitly recommend: "${nextRecommendedLesson || "level advancement"}".
 4. If practicing conversation or generating exercises, ACTIVELY INVOLVE their due SRS repetition words (${dueForReview.slice(0, 5).map((w) => w.hr).join(", ") || "recent vocabulary"}) to reinforce their memory.
 5. If the student makes mistakes on weak words (${weakWords.map((w) => w.hr).join(", ") || "none"}), give extra grammar guidance in ${targetLangName}.
-6. ABSOLUTE ALPHABET RULE: Provide explanations in ${targetLangName}, but ALL Croatian translations, words, and example sentences MUST be in genuine Croatian (Hrvatski) written strictly in Gaj's Latin alphabet (č, ć, đ, š, ž). NEVER output Cyrillic script for Croatian.
+6. Utilize any learned background facts & corrections seamlessly without breaking character or explicitly mentioning database operations.
+7. ABSOLUTE ALPHABET RULE: Provide explanations in ${targetLangName}, but ALL Croatian translations, words, and example sentences MUST be in genuine Croatian (Hrvatski) written strictly in Gaj's Latin alphabet (č, ć, đ, š, ž). NEVER output Cyrillic script for Croatian.
 ===========================================
 `;
 
