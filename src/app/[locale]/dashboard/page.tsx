@@ -277,29 +277,36 @@ export default function DashboardPage() {
       href: "/lessons",
       icon: BookOpen,
       label: t("continueLearning"),
-      gradient: "from-blue-500 to-cyan-400",
+      badge: locale === "ua" ? "Навчання" : locale === "ru" ? "Обучение" : "Lessons",
+      badgeBg: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+      gradient: "from-blue-500 via-indigo-500 to-cyan-400",
       description: t("continueLearningDesc"),
     },
     {
       href: "/games",
       icon: Gamepad2,
       label: t("practiceFlashcards"),
-      gradient: "from-orange-500 to-yellow-400",
+      badge: locale === "ua" ? "Міні-ігри" : locale === "ru" ? "Мини-игры" : "Mini-games",
+      badgeBg: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+      gradient: "from-amber-500 via-orange-500 to-yellow-400",
       description: t("practiceFlashcardsDesc"),
     },
     {
       href: "/ai-chat",
       icon: MessageCircle,
       label: t("chatWithAI"),
-      gradient: "from-purple-500 to-pink-400",
-      description: t("chatWithAIDesc"),
-      disabled: true,
+      badge: "AI ⚡",
+      badgeBg: "bg-purple-500/20 text-purple-300 border-purple-500/30 animate-pulse",
+      gradient: "from-purple-500 via-pink-500 to-rose-400",
+      description: locale === "ua" ? "Практикуйте хорватську мову з віртуальним наставником" : locale === "ru" ? "Практикуйте хорватский язык с виртуальным наставником" : "Practice Croatian conversation with virtual AI mentor",
     },
     {
       href: "/placement-test",
       icon: Target,
       label: t("takeTest"),
-      gradient: "from-green-500 to-emerald-400",
+      badge: locale === "ua" ? "Тест рівня" : locale === "ru" ? "Тест уровня" : "Level Test",
+      badgeBg: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+      gradient: "from-emerald-500 via-teal-500 to-green-400",
       description: t("takeTestDesc"),
     },
   ];
@@ -349,6 +356,35 @@ export default function DashboardPage() {
               : "Reset Profile Progress"}
           </button>
         </div>
+      </div>
+
+      {/* Croatian Proverb of the Day Card */}
+      <div className="mb-8 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-blue-950/40 via-purple-950/30 to-indigo-950/40 border border-blue-500/20 backdrop-blur-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-lg shadow-blue-500/5">
+        <div className="flex items-start gap-3.5">
+          <div className="p-3 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20 shrink-0">
+            <Sparkles className="w-5 h-5 animate-pulse" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-blue-400">
+                {locale === "ua" ? "Прислів'я дня (Хорватська мова)" : locale === "ru" ? "Пословица дня (Хорватский)" : "Proverb of the Day"}
+              </span>
+            </div>
+            <p className="text-sm font-semibold text-foreground italic">
+              «Bez muke nema nauke.»
+            </p>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              {locale === "ua" ? "Без зусиль немає знань (Без праці немає науки)." : locale === "ru" ? "Без труда нет науки." : "No pain, no gain."}
+            </p>
+          </div>
+        </div>
+        <Link
+          href="/vocabulary"
+          className="px-3.5 py-2 rounded-xl text-xs font-bold text-blue-400 hover:text-white bg-blue-500/10 hover:bg-blue-600 border border-blue-500/30 transition-all shrink-0 flex items-center gap-1.5 self-end sm:self-auto"
+        >
+          <span>{locale === "ua" ? "Вчити нові слова" : locale === "ru" ? "Учить новые слова" : "Learn New Words"}</span>
+          <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
       </div>
 
       {/* Badges & Achievements Section */}
@@ -572,61 +608,60 @@ export default function DashboardPage() {
       <div className="grid lg:grid-cols-3 gap-8">
         {/* Quick Actions */}
         <div className="lg:col-span-2 space-y-6">
-          <h2 className="text-xl font-bold">{t("quickActions")}</h2>
-          <div className="grid sm:grid-cols-2 gap-4 stagger-children">
-            {quickActions.map((action) => {
-              if (action.disabled) {
-                return (
-                  <span
-                    key={action.href}
-                    className="group glass rounded-2xl p-5 opacity-40 cursor-not-allowed flex items-start gap-4 text-left"
-                    title={locale === "ua" ? "Тимчасово недоступно" : locale === "ru" ? "Временно недоступно" : "Temporarily unavailable"}
-                  >
-                    <div
-                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${action.gradient} flex items-center justify-center shrink-0 shadow-lg`}
-                    >
-                      <action.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-sm">
-                        {action.label}
-                      </h3>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        {action.description}
-                      </p>
-                    </div>
-                  </span>
-                );
-              }
-              return (
-                <Link
-                  key={action.href}
-                  href={action.href}
-                  className="group glass rounded-2xl p-5 card-hover flex items-start gap-4"
-                >
-                  <div
-                    className={`w-12 h-12 rounded-xl bg-gradient-to-br ${action.gradient} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
-                  >
-                    <action.icon className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1 min-w-0 text-left">
-                    <h3 className="font-semibold text-sm group-hover:text-blue-400 transition-colors">
-                      {action.label}
-                    </h3>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      {action.description}
-                    </p>
-                  </div>
-                  <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all shrink-0 mt-1" />
-                </Link>
-              );
-            })}
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-bold flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-purple-400" />
+              {t("quickActions")}
+            </h2>
+            <span className="text-xs text-muted-foreground font-medium">
+              {locale === "ua" ? "Швидкий доступ" : locale === "ru" ? "Быстрый доступ" : "Quick Access"}
+            </span>
           </div>
 
-          {/* Lessons Completed */}
-          <div className="glass rounded-2xl p-6">
+          <div className="grid sm:grid-cols-2 gap-4">
+            {quickActions.map((action) => (
+              <Link
+                key={action.href}
+                href={action.href}
+                className="group relative glass rounded-2xl p-5 border border-white/10 hover:border-purple-500/40 hover:bg-white/[0.07] hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 flex flex-col justify-between"
+              >
+                <div className="flex items-start justify-between gap-3 mb-3">
+                  <div
+                    className={`w-12 h-12 rounded-xl bg-gradient-to-br ${action.gradient} flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-md shadow-black/20`}
+                  >
+                    <action.icon className="w-6 h-6 text-white drop-shadow-sm" />
+                  </div>
+                  {action.badge && (
+                    <span
+                      className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${action.badgeBg}`}
+                    >
+                      {action.badge}
+                    </span>
+                  )}
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between gap-2">
+                    <h3 className="font-bold text-sm text-foreground group-hover:text-purple-400 transition-colors">
+                      {action.label}
+                    </h3>
+                    <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-purple-400 group-hover:translate-x-1.5 transition-all shrink-0" />
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1.5 line-clamp-2 leading-relaxed">
+                    {action.description}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Lessons Completed Level Progress */}
+          <div className="glass rounded-2xl p-6 border border-white/10 hover:border-blue-500/30 transition-all">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="font-semibold">{t("lessonsCompleted")}</h3>
+              <h3 className="font-semibold text-sm flex items-center gap-2">
+                <BookOpen className="w-4 h-4 text-blue-400" />
+                {t("lessonsCompleted")}
+              </h3>
               <span className="text-xl font-black text-blue-400">
                 {completedCount}
               </span>
@@ -643,21 +678,21 @@ export default function DashboardPage() {
                 {currentLevelCompleted} / {currentLevelTotal}
               </span>
             </div>
-            <div className="h-3 rounded-full bg-black/20 dark:bg-white/5 overflow-hidden">
+            <div className="h-3 rounded-full bg-black/30 dark:bg-white/5 overflow-hidden border border-white/5 p-0.5">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-1000"
+                className="h-full rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-all duration-1000 shadow-sm shadow-blue-500/50"
                 style={{
                   width: `${currentLevelPercent}%`,
                 }}
               />
             </div>
-            <p className="text-xs text-muted-foreground mt-2">
+            <p className="text-xs text-muted-foreground mt-3 leading-relaxed">
               {currentLevelPercent === 100 
                 ? (locale === "ua" 
-                    ? "Рівень повністю пройдено! Складіть іспит у розділі уроків." 
+                    ? "🎉 Рівень повністю пройдено! Складіть іспит у розділі уроків для відкриття наступного." 
                     : locale === "ru" 
-                    ? "Уровень полностью пройден! Сдайте экзамен в разделе уроков." 
-                    : "Level fully completed! Take the exam in the lessons section.")
+                    ? "🎉 Уровень полностью пройден! Сдайте экзамен в разделе уроков для открытия следующего." 
+                    : "🎉 Level fully completed! Take the exam in the lessons section to unlock the next level.")
                 : (locale === "ua"
                     ? `Залишилося пройти ще ${currentLevelTotal - currentLevelCompleted} уроків на рівні ${currentLevel}`
                     : locale === "ru"
@@ -670,20 +705,31 @@ export default function DashboardPage() {
 
         {/* Recent Activity */}
         <div className="space-y-6">
-          <h2 className="text-xl font-bold">{t("recentActivity")}</h2>
-          <div className="glass rounded-2xl p-5 space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-bold flex items-center gap-2">
+              <Clock className="w-5 h-5 text-emerald-400" />
+              {t("recentActivity")}
+            </h2>
+            {recentActivity.length > 0 && (
+              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                {recentActivity.length} {locale === "ua" ? "записів" : locale === "ru" ? "записей" : "items"}
+              </span>
+            )}
+          </div>
+
+          <div className="glass rounded-2xl p-5 space-y-3 border border-white/10">
             {recentActivity.map((activity, i) => (
               <div
                 key={i}
-                className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors"
+                className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/10 hover:bg-white/[0.06] transition-all group"
               >
                 <div
-                  className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                  className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-sm ${
                     activity.type === "lesson"
-                      ? "bg-blue-500/10 text-blue-400"
+                      ? "bg-blue-500/10 text-blue-400 border border-blue-500/20"
                       : activity.type === "game"
-                        ? "bg-orange-500/10 text-orange-400"
-                        : "bg-purple-500/10 text-purple-400"
+                        ? "bg-amber-500/10 text-amber-400 border border-amber-500/20"
+                        : "bg-purple-500/10 text-purple-400 border border-purple-500/20"
                   }`}
                 >
                   {activity.type === "lesson" ? (
@@ -695,24 +741,45 @@ export default function DashboardPage() {
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium truncate">
+                  <p className="text-sm font-semibold truncate text-foreground group-hover:text-blue-400 transition-colors">
                     {activity.title}
                   </p>
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <Clock className="w-3 h-3" />
+                  <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-0.5">
+                    <Clock className="w-3 h-3 text-muted-foreground/70" />
                     {activity.time}
                   </div>
                 </div>
-                <div className="flex items-center gap-1 text-xs font-semibold text-green-400">
-                  <CheckCircle2 className="w-3 h-3" />+{activity.xp} XP
+                <div className="shrink-0 flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />+{activity.xp} XP
                 </div>
               </div>
             ))}
 
             {recentActivity.length === 0 && (
-              <p className="text-sm text-muted-foreground text-center py-4">
-                {t("noActivity") || "No activity yet."}
-              </p>
+              <div className="text-center py-8 px-4 space-y-4">
+                <div className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center mx-auto">
+                  <Sparkles className="w-6 h-6 animate-pulse" />
+                </div>
+                <div className="space-y-1">
+                  <p className="text-sm font-semibold text-foreground">
+                    {locale === "ua" ? "Поки немає активності" : locale === "ru" ? "Пока нет активности" : "No recent activity yet"}
+                  </p>
+                  <p className="text-xs text-muted-foreground max-w-xs mx-auto">
+                    {locale === "ua" 
+                      ? "Пройдіть свій перший урок або гру зі словами, щоб почати накопичувати досвід XP!" 
+                      : locale === "ru" 
+                      ? "Пройдите свой первый урок или игру со словами, чтобы начать накапливать опыт XP!" 
+                      : "Complete your first lesson or vocabulary game to start earning XP!"}
+                  </p>
+                </div>
+                <Link
+                  href="/lessons"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 shadow-md shadow-blue-500/20 transition-all hover:scale-105"
+                >
+                  <BookOpen className="w-4 h-4" />
+                  {locale === "ua" ? "Розпочати перший урок" : locale === "ru" ? "Начать первый урок" : "Start First Lesson"}
+                </Link>
+              </div>
             )}
           </div>
         </div>
