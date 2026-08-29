@@ -269,9 +269,10 @@ export function Navbar() {
                     <div className="border-t border-black/5 dark:border-white/10 pt-1">
                       <button
                         type="button"
-                        onClick={() => {
+                        onClick={async () => {
                           setProfileDropdownOpen(false);
-                          signOut({ callbackUrl: `/${locale}` });
+                          await signOut({ redirect: false });
+                          window.location.href = `/${locale}`;
                         }}
                         className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-red-400 hover:bg-red-500/10 transition-all text-left"
                       >
@@ -370,9 +371,10 @@ export function Navbar() {
 
             {session ? (
               <button
-                onClick={() => {
-                  signOut({ callbackUrl: `/${locale}` });
+                onClick={async () => {
                   setMobileOpen(false);
+                  await signOut({ redirect: false });
+                  window.location.href = `/${locale}`;
                 }}
                 className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-red-400 hover:bg-red-500/10 active:bg-red-500/20 transition-all"
               >
