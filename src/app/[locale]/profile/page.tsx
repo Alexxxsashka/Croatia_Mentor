@@ -582,7 +582,13 @@ export default function ProfilePage() {
       console.error("Link provider error:", error);
 
       let msg = error.message || `Failed to link ${providerName}`;
-      if (error.message?.includes("invalid-app-id") || error.message?.includes("App ID")) {
+      if (error.message?.includes("operation-not-allowed")) {
+        msg = locale === "ua"
+          ? `Провайдер ${providerName === "apple" ? "Apple" : "Facebook"} вимкнено у консолі Firebase.`
+          : locale === "ru"
+          ? `Провайдер ${providerName === "apple" ? "Apple" : "Facebook"} отключен в консоли Firebase.`
+          : `${providerName === "apple" ? "Apple" : "Facebook"} sign-in is disabled in Firebase console.`;
+      } else if (error.message?.includes("invalid-app-id") || error.message?.includes("App ID")) {
         msg = locale === "ua"
           ? "Прив'язка Facebook потребує вказання Facebook App ID у консолі Firebase."
           : locale === "ru"
