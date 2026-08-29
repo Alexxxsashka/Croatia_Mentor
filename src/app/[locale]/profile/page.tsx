@@ -28,6 +28,7 @@ import {
   Languages,
   ShieldCheck,
   AlertTriangle,
+  RotateCcw,
 } from "lucide-react";
 import { toast } from "sonner";
 import { lessonsData } from "@/lib/lessons-data";
@@ -329,6 +330,46 @@ export default function ProfilePage() {
       toast.error("An error occurred while saving profile");
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleResetProfile = async () => {
+    const confirmMessage = locale === "ua"
+      ? "Ви впевнені, що хочете скинути весь свій прогрес? Це скасує ваші результати тестування та пройдені уроки."
+      : locale === "ru"
+      ? "Вы уверены, что хотите сбросить весь свой прогресс? Это обнулит результаты тестов и пройденные уроки."
+      : "Are you sure you want to reset all your progress? This will clear test results and completed lessons.";
+
+    if (!window.confirm(confirmMessage)) return;
+
+    try {
+      const res = await fetch("/api/progress", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          currentLevel: "A1",
+          totalXP: 0,
+          currentStreak: 0,
+          completedLessons: [],
+          testScores: [],
+        }),
+      });
+
+      if (res.ok) {
+        toast.success(
+          locale === "ua"
+            ? "Прогрес успішно скинуто!"
+            : locale === "ru"
+            ? "Прогресс успешно сброшен!"
+            : "Progress reset successfully!"
+        );
+        fetchProfile();
+      } else {
+        toast.error("Failed to reset progress");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to reset progress");
     }
   };
 
@@ -704,42 +745,56 @@ export default function ProfilePage() {
         <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 text-center sm:text-left relative z-10">
-          {/* Avatar Selector Trigger */}
-          <div className="relative group cursor-pointer" onClick={() => setIsSelectorOpen(true)}>
-            <div className="w-24 h-24 rounded-3xl overflow-hidden border-2 border-white/10 shadow-2xl transition-all duration-300 group-hover:opacity-80">
-              {renderAvatarContent(displayedAvatar, nameInitials)}
+        <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-6 text-center sm:text-left relative z-10">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+            {/* Avatar Selector Trigger */}
+            <div className="relative group cursor-pointer shrink-0" onClick={() => setIsSelectorOpen(true)}>
+              <div className="w-24 h-24 rounded-3xl overflow-hidden border-2 border-white/10 shadow-2xl transition-all duration-300 group-hover:opacity-80">
+                {renderAvatarContent(displayedAvatar, nameInitials)}
+              </div>
+              <div className="absolute inset-0 bg-black/40 rounded-3xl opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all duration-300">
+                <Camera className="w-6 h-6 text-white animate-pulse" />
+              </div>
+              <div className="absolute -bottom-2 -right-2 p-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs font-semibold flex items-center gap-1 text-blue-500 dark:text-blue-400 shadow-md">
+                <Award className="w-3.5 h-3.5" />
+                {currentLevel}
+              </div>
             </div>
-            <div className="absolute inset-0 bg-black/40 rounded-3xl opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all duration-300">
-              <Camera className="w-6 h-6 text-white animate-pulse" />
-            </div>
-            <div className="absolute -bottom-2 -right-2 p-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs font-semibold flex items-center gap-1 text-blue-500 dark:text-blue-400 shadow-md">
-              <Award className="w-3.5 h-3.5" />
-              {currentLevel}
+
+            <div className="space-y-2 flex-1">
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                <h1 className="text-2xl sm:text-3xl font-black text-foreground drop-shadow-sm">
+                  {profile?.name || "Participant"}
+                </h1>
+                <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                  {profile?.role === "admin" ? "Admin" : "Student"}
+                </span>
+              </div>
+
+              <p className="text-sm text-muted-foreground flex items-center justify-center sm:justify-start gap-1.5">
+                <Mail className="w-4 h-4 text-blue-400" />
+                {profile?.email}
+              </p>
+
+              <p className="text-xs text-muted-foreground flex items-center justify-center sm:justify-start gap-1.5">
+                <Calendar className="w-3.5 h-3.5" />
+                {locale === "ua" ? "З нами з:" : locale === "ru" ? "С нами с:" : "Member since:"}{" "}
+                {profile?.createdAt ? new Date(profile.createdAt).toLocaleDateString() : "2026"}
+              </p>
             </div>
           </div>
 
-          <div className="space-y-2 flex-1">
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-              <h1 className="text-2xl sm:text-3xl font-black text-foreground drop-shadow-sm">
-                {profile?.name || "Participant"}
-              </h1>
-              <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                {profile?.role === "admin" ? "Admin" : "Student"}
-              </span>
-            </div>
-
-            <p className="text-sm text-muted-foreground flex items-center justify-center sm:justify-start gap-1.5">
-              <Mail className="w-4 h-4 text-blue-400" />
-              {profile?.email}
-            </p>
-
-            <p className="text-xs text-muted-foreground flex items-center justify-center sm:justify-start gap-1.5">
-              <Calendar className="w-3.5 h-3.5" />
-              {locale === "ua" ? "З нами з:" : locale === "ru" ? "С нами с:" : "Member since:"}{" "}
-              {profile?.createdAt ? new Date(profile.createdAt).toLocaleDateString() : "2026"}
-            </p>
-          </div>
+          <button
+            onClick={handleResetProfile}
+            className="px-3.5 py-2 text-xs font-bold text-red-400 hover:text-white border border-red-500/20 hover:border-red-500 hover:bg-red-500/20 rounded-xl transition-all shadow-md flex items-center gap-1.5 cursor-pointer shrink-0"
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+            {locale === "ua" 
+              ? "Скинути прогрес" 
+              : locale === "ru" 
+              ? "Сбросить прогресс" 
+              : "Reset Profile Progress"}
+          </button>
         </div>
 
         {/* Quick Stats Badges */}

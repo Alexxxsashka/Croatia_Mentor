@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import { lessonsData, getLocalizedText } from "@/lib/lessons-data";
 import { DailyQuestWizard } from "@/components/daily-quest-wizard";
 import { LeaderboardModal } from "@/components/gamification/LeaderboardModal";
-import { BadgesShowcase } from "@/components/gamification/BadgesShowcase";
 import {
   Trophy,
   Sparkles,
@@ -20,7 +19,6 @@ import {
   CheckCircle2,
   Clock,
   Loader2,
-  RotateCcw,
   CalendarDays,
   Flame,
   RefreshCw,
@@ -163,55 +161,6 @@ export default function DashboardPage() {
     C2: "level-c2",
   };
 
-  const handleResetProfile = async () => {
-    const confirmMessage = locale === "ua"
-      ? "Ви впевнені, що хочете скинути весь свій прогрес? Це скасує ваші результати тестування та пройдені уроки."
-      : locale === "ru"
-      ? "Вы уверены, что хотите сбросить весь свой прогресс? Это обнулит результаты тестов и пройденные уроки."
-      : "Are you sure you want to reset all your progress? This will clear test results and completed lessons.";
-      
-    if (!window.confirm(confirmMessage)) return;
-
-    try {
-      const res = await fetch("/api/progress", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          currentLevel: "A1",
-          totalXP: 0,
-          currentStreak: 0,
-          completedLessons: [],
-          testScores: [],
-        }),
-      });
-
-      if (res.ok) {
-        const data = await res.json();
-        if (data.progress) {
-          setProgress({
-            currentLevel: "A1",
-            totalXP: 0,
-            currentStreak: 0,
-            completedLessons: [],
-            testScores: [],
-          });
-        }
-        toast.success(
-          locale === "ua"
-            ? "Прогрес успішно скинуто!"
-            : locale === "ru"
-            ? "Прогресс успешно сброшен!"
-            : "Progress reset successfully!"
-        );
-      } else {
-        toast.error("Failed to reset progress");
-      }
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to reset progress");
-    }
-  };
-
   // Build dynamic recent activity based on actual test scores and completions
   const rawRecentActivity: { type: "lesson" | "game" | "chat" | "test"; title: string; xp: number; time: string; rawDate: Date }[] = [];
 
@@ -343,18 +292,6 @@ export default function DashboardPage() {
             <Trophy className="w-4 h-4 text-yellow-400" />
             <span>{locale === "ua" ? "Таблиця лідерів" : locale === "ru" ? "Таблица лидеров" : "Leaderboard"}</span>
           </button>
-
-          <button
-            onClick={handleResetProfile}
-            className="px-3 sm:px-4 py-2.5 text-xs font-semibold text-red-500 hover:text-white border border-red-500/20 hover:border-red-500 hover:bg-red-500/10 rounded-xl transition-all shadow-md flex items-center gap-1.5 cursor-pointer flex-1 sm:flex-none justify-center"
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-            {locale === "ua" 
-              ? "Скинути прогрес" 
-              : locale === "ru" 
-              ? "Сбросить прогресс" 
-              : "Reset Profile Progress"}
-          </button>
         </div>
       </div>
 
@@ -385,11 +322,6 @@ export default function DashboardPage() {
           <span>{locale === "ua" ? "Вчити нові слова" : locale === "ru" ? "Учить новые слова" : "Learn New Words"}</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </Link>
-      </div>
-
-      {/* Badges & Achievements Section */}
-      <div className="mb-8">
-        <BadgesShowcase locale={locale} />
       </div>
 
       <LeaderboardModal
