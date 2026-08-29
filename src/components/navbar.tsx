@@ -73,7 +73,7 @@ import { EmailVerificationModal } from "./auth/EmailVerificationModal";
 
 export function Navbar() {
   const t = useTranslations("nav");
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [mobileOpen, setMobileOpenRaw] = useState(false);
 
   // Wrapper to lock/unlock body scroll when mobile menu toggles
@@ -214,7 +214,9 @@ export function Navbar() {
 
             <LanguageSwitcher />
 
-            {session ? (
+            {status === "loading" ? (
+              <div className="w-8 h-8 rounded-xl bg-white/10 animate-pulse border border-white/10" />
+            ) : session ? (
               <div className="relative" ref={dropdownRef}>
                 {/* Profile Trigger Button */}
                 <button

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { useSession } from "next-auth/react";
-import { useTranslations } from "next-intl";
+import { signIn, useSession } from "next-auth/react";
+import { useTranslations, useLocale } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { Flag } from "@/components/flag";
 import {
@@ -36,6 +36,7 @@ import {
 
 export default function SignUpPage() {
   const t = useTranslations("auth.signUp");
+  const locale = useLocale();
   const router = useRouter();
   const { status } = useSession();
   const [showPassword, setShowPassword] = useState(false);
@@ -162,22 +163,31 @@ export default function SignUpPage() {
   const handleSocialSignUp = async (providerName: "google" | "facebook" | "apple") => {
     setLoading(true);
     try {
-      let provider;
-      if (providerName === "google") provider = googleProvider;
-      else if (providerName === "facebook") provider = facebookProvider;
-      else provider = appleProvider;
+      if (providerName === "google") {
+        const result = await signInWithPopup(auth, googleProvider);
+        await syncUserToDb(result.user, "google");
 
-      const result = await signInWithPopup(auth, provider);
-      await syncUserToDb(result.user, providerName);
+        await signIn("google", { redirect: false });
 
-      toast.success(`Registered with ${providerName}!`);
-      router.push("/dashboard");
+        toast.success(
+          locale === "ua"
+            ? "Успішна реєстрація через Google!"
+            : locale === "ru"
+            ? "Успешная регистрация через Google!"
+            : "Registered with Google!"
+        );
+
+        window.location.replace(`/${locale}/dashboard`);
+      }
     } catch (err: unknown) {
       const error = err as Error;
       console.error("Social sign-up error:", error);
-      toast.error(error.message || `Failed to sign up with ${providerName}`);
-    } finally {
-      setLoading(false);
+      if (providerName === "google") {
+        signIn("google", { callbackUrl: `/${locale}/dashboard` });
+      } else {
+        toast.error(error.message || `Failed to sign up with ${providerName}`);
+        setLoading(false);
+      }
     }
   };
 
@@ -521,6 +531,20 @@ export default function SignUpPage() {
               </form>
             )}
           </div>
+        </div>
+      )}
+
+      {/* Full Page Auth Loading Overlay */}
+      {loading && (
+        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex flex-col items-center justify-center gap-4 animate-in fade-in duration-200">
+          <div className="w-12 h-12 rounded-full border-4 border-purple-500/30 border-t-purple-500 animate-spin" />
+          <p className="text-sm font-semibold text-foreground animate-pulse">
+            {locale === "ua"
+              ? "Реєстрація... Переходимо в особистий кабінет"
+              : locale === "ru"
+              ? "Регистрация... Переходим в личный кабинет"
+              : "Creating account... Redirecting to dashboard"}
+          </p>
         </div>
       )}
     </div>

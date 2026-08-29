@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { signIn, useSession } from "next-auth/react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { Mail, Lock, Eye, EyeOff, GraduationCap, Loader2, Phone, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
@@ -23,6 +23,7 @@ import {
 
 export default function SignInPage() {
   const t = useTranslations("auth.signIn");
+  const locale = useLocale();
   const router = useRouter();
   const { status } = useSession();
   const [showPassword, setShowPassword] = useState(false);
@@ -93,13 +94,15 @@ export default function SignInPage() {
 
       if (result?.error && !fbSuccess) {
         toast.error(t("error"));
+        setLoading(false);
       } else {
-        toast.success("Welcome back!");
-        router.push("/dashboard");
+        toast.success(
+          locale === "ua" ? "Авторизація успішна!" : locale === "ru" ? "Авторизация успешна!" : "Welcome back!"
+        );
+        window.location.replace(`/${locale}/dashboard`);
       }
     } catch {
       toast.error("Something went wrong");
-    } finally {
       setLoading(false);
     }
   };
@@ -107,26 +110,31 @@ export default function SignInPage() {
   const handleSocialLogin = async (providerName: "google" | "facebook" | "apple") => {
     setLoading(true);
     try {
-      let provider;
-      if (providerName === "google") provider = googleProvider;
-      else if (providerName === "facebook") provider = facebookProvider;
-      else provider = appleProvider;
+      if (providerName === "google") {
+        const result = await signInWithPopup(auth, googleProvider);
+        await syncUserToDb(result.user, "google");
 
-      const result = await signInWithPopup(auth, provider);
-      await syncUserToDb(result.user, providerName);
+        await signIn("google", { redirect: false });
 
-      toast.success(`Signed in with ${providerName}!`);
-      router.push("/dashboard");
+        toast.success(
+          locale === "ua"
+            ? "Успішний вхід через Google!"
+            : locale === "ru"
+            ? "Успешный вход через Google!"
+            : "Signed in with Google!"
+        );
+
+        window.location.replace(`/${locale}/dashboard`);
+      }
     } catch (err: unknown) {
       const error = err as Error;
       console.error("Social login error:", error);
       if (providerName === "google") {
-        signIn("google");
+        signIn("google", { callbackUrl: `/${locale}/dashboard` });
       } else {
         toast.error(error.message || `Failed to sign in with ${providerName}`);
+        setLoading(false);
       }
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -394,6 +402,20 @@ export default function SignInPage() {
               </form>
             )}
           </div>
+        </div>
+      )}
+
+      {/* Full Page Auth Loading Overlay */}
+      {loading && (
+        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex flex-col items-center justify-center gap-4 animate-in fade-in duration-200">
+          <div className="w-12 h-12 rounded-full border-4 border-blue-500/30 border-t-blue-500 animate-spin" />
+          <p className="text-sm font-semibold text-foreground animate-pulse">
+            {locale === "ua"
+              ? "Авторизація... Переходимо в особистий кабінет"
+              : locale === "ru"
+              ? "Авторизация... Переходим в личный кабинет"
+              : "Signing in... Redirecting to dashboard"}
+          </p>
         </div>
       )}
     </div>
