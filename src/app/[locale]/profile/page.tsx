@@ -429,15 +429,26 @@ export default function ProfilePage() {
     setVerifyingPhone(true);
     try {
       const win = window as unknown as { recaptchaVerifier?: RecaptchaVerifier };
+
+      // 1. Reset container HTML if reCAPTCHA was previously mounted
+      const container = document.getElementById("recaptcha-profile-container");
+      if (container) {
+        container.innerHTML = "";
+      }
+
+      // 2. Clear previous verifier instance
       if (win.recaptchaVerifier) {
         try {
           win.recaptchaVerifier.clear();
         } catch {}
         win.recaptchaVerifier = undefined;
       }
+
+      // 3. Initialize fresh RecaptchaVerifier
       win.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-profile-container", {
         size: "invisible",
       });
+
       const appVerifier = win.recaptchaVerifier;
       const confirmation = await signInWithPhoneNumber(auth, phoneField, appVerifier);
       setPhoneConfirmation(confirmation);
@@ -453,6 +464,19 @@ export default function ProfilePage() {
       const error = err as Error;
       console.error("SMS verification error:", error);
 
+      // Clean up verifier state on error
+      const win = window as unknown as { recaptchaVerifier?: RecaptchaVerifier };
+      if (win.recaptchaVerifier) {
+        try {
+          win.recaptchaVerifier.clear();
+        } catch {}
+        win.recaptchaVerifier = undefined;
+      }
+      const container = document.getElementById("recaptcha-profile-container");
+      if (container) {
+        container.innerHTML = "";
+      }
+
       let msg = error.message || "Failed to send SMS code";
       if (error.message?.includes("invalid-phone-number")) {
         msg = locale === "ua"
@@ -460,6 +484,12 @@ export default function ProfilePage() {
           : locale === "ru"
           ? "Неверный формат номера. Укажите в международном формате +380..."
           : "Invalid phone number format (+380...)";
+      } else if (error.message?.includes("already been rendered")) {
+        msg = locale === "ua"
+          ? "Спробуйте натиснути 'Далі' ще раз."
+          : locale === "ru"
+          ? "Попробуйте нажать 'Далее' еще раз."
+          : "Please try clicking 'Next' again.";
       } else if (error.message?.includes("error-code:-39") || error.message?.includes("captcha")) {
         msg = locale === "ua"
           ? "Перевірка капчі не пройдена або домен не авторизовано у Firebase."
