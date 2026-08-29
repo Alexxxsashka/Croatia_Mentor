@@ -14,9 +14,7 @@ import {
   Lock,
   Edit2,
   Check,
-  Globe,
   Key,
-  Link as LinkIcon,
   Loader2,
   Award,
   Sparkles,
@@ -27,11 +25,26 @@ import {
   Bell,
   Clock,
   Languages,
+  ShieldCheck,
 } from "lucide-react";
 import { toast } from "sonner";
 import { lessonsData } from "@/lib/lessons-data";
 import { requestNotificationPermission, scheduleReminder } from "@/lib/notifications";
 import { BadgesShowcase } from "@/components/gamification/BadgesShowcase";
+import {
+  auth,
+  googleProvider,
+  facebookProvider,
+  appleProvider,
+  RecaptchaVerifier,
+} from "@/lib/firebase";
+import {
+  updateEmail,
+  updatePassword,
+  signInWithPhoneNumber,
+  linkWithPopup,
+  ConfirmationResult,
+} from "firebase/auth";
 
 interface TestScore {
   type: string;
@@ -74,7 +87,7 @@ const PRESET_AVATARS = [
 
 export default function ProfilePage() {
   const locale = useLocale();
-  const { data: session, status, update: updateSession } = useSession();
+  const { status, update: updateSession } = useSession();
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -88,10 +101,17 @@ export default function ProfilePage() {
   const [customAvatarUrl, setCustomAvatarUrl] = useState("");
   const [isSelectorOpen, setIsSelectorOpen] = useState(false);
 
-  // Future auth fields (blocked/disabled)
+  // Auth & Security fields
   const [emailField, setEmailField] = useState("");
   const [phoneField, setPhoneField] = useState("");
   const [passwordField, setPasswordField] = useState("");
+  const [updatingEmail, setUpdatingEmail] = useState(false);
+  const [updatingPassword, setUpdatingPassword] = useState(false);
+  const [verifyingPhone, setVerifyingPhone] = useState(false);
+  const [phoneOtpStep, setPhoneOtpStep] = useState<"input" | "otp">("input");
+  const [phoneOtpCode, setPhoneOtpCode] = useState("");
+  const [phoneConfirmation, setPhoneConfirmation] = useState<ConfirmationResult | null>(null);
+  const [linkingProvider, setLinkingProvider] = useState<string | null>(null);
 
   // Learning settings states
   const [dailyGoalMinutes, setDailyGoalMinutes] = useState(10);
@@ -100,31 +120,41 @@ export default function ProfilePage() {
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const [savingSettings, setSavingSettings] = useState(false);
 
-  useEffect(() => {
-    if (status === "authenticated") {
-      fetchProfile();
-      fetchSettings();
-    } else if (status === "unauthenticated") {
-      setLoading(false);
-    }
-  }, [status]);
-
-  const fetchSettings = async () => {
+  const fetchProfile = async () => {
     try {
-      const res = await fetch("/api/settings");
+      const res = await fetch("/api/user/profile");
       if (res.ok) {
         const data = await res.json();
-        if (data.settings) {
-          setDailyGoalMinutes(data.settings.dailyGoalMinutes || 10);
-          setReminderEnabled(data.settings.reminderEnabled ?? true);
-          setReminderTime(data.settings.reminderTime || "09:00");
-          setNotificationsEnabled(data.settings.notificationsEnabled ?? false);
+        setProfile(data.user);
+        setName(data.user.name || "");
+        setNativeLang(data.user.nativeLanguage || "en");
+        setPhone(data.user.phone || "");
+        setEmailField(data.user.email || "");
+        setPhoneField(data.user.phone || "");
+
+        const userImg = data.user.image || "";
+        if (userImg) {
+          const isPreset = PRESET_AVATARS.some((p) => p.emoji === userImg);
+          if (isPreset) {
+            setAvatar(userImg);
+          } else {
+            setAvatar("custom");
+            setCustomAvatarUrl(userImg);
+          }
+        } else {
+          setAvatar("🦊");
         }
+      } else {
+        toast.error("Failed to load profile data");
       }
     } catch (err) {
-      console.error("Settings load error:", err);
+      console.error("Profile load error:", err);
+      toast.error("An error occurred while loading profile");
+    } finally {
+      setLoading(false);
     }
   };
+
 
   const handleSaveSettings = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -190,40 +220,55 @@ export default function ProfilePage() {
     }
   };
 
-  const fetchProfile = async () => {
-    try {
-      const res = await fetch("/api/user/profile");
-      if (res.ok) {
-        const data = await res.json();
-        setProfile(data.user);
-        setName(data.user.name || "");
-        setNativeLang(data.user.nativeLanguage || "en");
-        setPhone(data.user.phone || "");
-        setEmailField(data.user.email || "");
-        setPhoneField(data.user.phone || "");
+  useEffect(() => {
+    let isMounted = true;
+    if (status === "authenticated") {
+      fetch("/api/user/profile")
+        .then((res) => (res.ok ? res.json() : null))
+        .then((data) => {
+          if (isMounted && data?.user) {
+            setProfile(data.user);
+            setName(data.user.name || "");
+            setNativeLang(data.user.nativeLanguage || "en");
+            setPhone(data.user.phone || "");
+            setEmailField(data.user.email || "");
+            setPhoneField(data.user.phone || "");
 
-        const userImg = data.user.image || "";
-        if (userImg) {
-          const isPreset = PRESET_AVATARS.some((p) => p.emoji === userImg);
-          if (isPreset) {
-            setAvatar(userImg);
-          } else {
-            setAvatar("custom");
-            setCustomAvatarUrl(userImg);
+            const userImg = data.user.image || "";
+            if (userImg) {
+              const isPreset = PRESET_AVATARS.some((p) => p.emoji === userImg);
+              if (isPreset) {
+                setAvatar(userImg);
+              } else {
+                setAvatar("custom");
+                setCustomAvatarUrl(userImg);
+              }
+            } else {
+              setAvatar("🦊");
+            }
           }
-        } else {
-          setAvatar("🦊"); // Default fallback
-        }
-      } else {
-        toast.error("Failed to load profile data");
-      }
-    } catch (err) {
-      console.error("Profile load error:", err);
-      toast.error("An error occurred while loading profile");
-    } finally {
-      setLoading(false);
+        })
+        .catch((err) => console.error("Profile load error:", err))
+      fetch("/api/settings")
+        .then((res) => (res.ok ? res.json() : null))
+        .then((data) => {
+          if (isMounted && data?.settings) {
+            setDailyGoalMinutes(data.settings.dailyGoalMinutes || 10);
+            setReminderEnabled(data.settings.reminderEnabled ?? true);
+            setReminderTime(data.settings.reminderTime || "09:00");
+            setNotificationsEnabled(data.settings.notificationsEnabled ?? false);
+          }
+        })
+        .catch((err) => console.error("Settings load error:", err));
+    } else if (status === "unauthenticated") {
+      queueMicrotask(() => {
+        if (isMounted) setLoading(false);
+      });
     }
-  };
+    return () => {
+      isMounted = false;
+    };
+  }, [status]);
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -267,6 +312,135 @@ export default function ProfilePage() {
       toast.error("An error occurred while saving profile");
     } finally {
       setSaving(false);
+    }
+  };
+
+  // Security handlers (Firebase Auth)
+  const handleUpdateEmail = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!emailField || emailField === profile?.email) return;
+    setUpdatingEmail(true);
+
+    try {
+      if (auth.currentUser) {
+        await updateEmail(auth.currentUser, emailField);
+      }
+      const res = await fetch("/api/user/profile", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: emailField }),
+      });
+      if (res.ok) {
+        toast.success("Email address updated!");
+        fetchProfile();
+      } else {
+        toast.error("Failed to update email in profile");
+      }
+    } catch (err: unknown) {
+      const error = err as Error;
+      console.error("Email update error:", error);
+      toast.error(error.message || "Failed to update email");
+    } finally {
+      setUpdatingEmail(false);
+    }
+  };
+
+  const handleUpdatePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!passwordField || passwordField.length < 6) {
+      toast.error("Password must be at least 6 characters");
+      return;
+    }
+    setUpdatingPassword(true);
+
+    try {
+      if (auth.currentUser) {
+        await updatePassword(auth.currentUser, passwordField);
+        toast.success("Password updated successfully!");
+        setPasswordField("");
+      } else {
+        toast.error("Please re-authenticate via Firebase to update password");
+      }
+    } catch (err: unknown) {
+      const error = err as Error;
+      console.error("Password update error:", error);
+      toast.error(error.message || "Failed to update password");
+    } finally {
+      setUpdatingPassword(false);
+    }
+  };
+
+  const handleSendPhoneOtp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!phoneField) {
+      toast.error("Please enter a phone number");
+      return;
+    }
+    setVerifyingPhone(true);
+    try {
+      const win = window as unknown as { recaptchaVerifier?: RecaptchaVerifier };
+      if (!win.recaptchaVerifier) {
+        win.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-profile-container", {
+          size: "invisible",
+        });
+      }
+      const appVerifier = win.recaptchaVerifier;
+      const confirmation = await signInWithPhoneNumber(auth, phoneField, appVerifier);
+      setPhoneConfirmation(confirmation);
+      setPhoneOtpStep("otp");
+      toast.success("SMS verification code sent!");
+    } catch (err: unknown) {
+      const error = err as Error;
+      console.error("SMS verification error:", error);
+      toast.error(error.message || "Failed to send SMS code");
+    } finally {
+      setVerifyingPhone(false);
+    }
+  };
+
+  const handleVerifyPhoneOtp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!phoneOtpCode || !phoneConfirmation) return;
+    setVerifyingPhone(true);
+    try {
+      await phoneConfirmation.confirm(phoneOtpCode);
+      await fetch("/api/user/profile", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone: phoneField }),
+      });
+      toast.success("Mobile phone verified & updated!");
+      setPhoneOtpStep("input");
+      fetchProfile();
+    } catch (err: unknown) {
+      console.error("OTP verification error:", err);
+      toast.error("Invalid OTP verification code");
+    } finally {
+      setVerifyingPhone(false);
+    }
+  };
+
+  const handleLinkProvider = async (providerName: "google" | "facebook" | "apple") => {
+    setLinkingProvider(providerName);
+    try {
+      if (!auth.currentUser) {
+        toast.error("No active Firebase session. Please sign in with Firebase.");
+        return;
+      }
+      let provider;
+      if (providerName === "google") provider = googleProvider;
+      else if (providerName === "facebook") provider = facebookProvider;
+      else provider = appleProvider;
+
+      await linkWithPopup(auth.currentUser, provider);
+      toast.success(`Successfully linked ${providerName} account!`);
+      fetchProfile();
+    } catch (err: unknown) {
+      const error = err as Error;
+      console.error("Link provider error:", error);
+      toast.error(error.message || `Failed to link ${providerName}`);
+    } finally {
+      setLinkingProvider(null);
     }
   };
 
@@ -344,26 +518,21 @@ export default function ProfilePage() {
 
   const lessonsInLevel = lessonsData.filter((l) => l.level === currentLevel);
   const totalInLevel = lessonsInLevel.length;
-  const completedInLevel = lessonsInLevel.filter((l) =>
-    completedLessons.includes(l.id)
-  ).length;
+  const completedInLevel = lessonsInLevel.filter((l) => completedLessons.includes(l.id)).length;
   const levelPercent = totalInLevel > 0 ? Math.round((completedInLevel / totalInLevel) * 100) : 0;
 
   const nameInitials = profile?.name?.[0]?.toUpperCase() || "U";
   const displayedAvatar = avatar === "custom" ? customAvatarUrl : avatar;
 
-  const tempDisabledBadge =
-    locale === "ua" ? "Тимчасово недоступно" : locale === "ru" ? "Временно недоступно" : "Temporarily unavailable";
-
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 space-y-8 animate-fade-in">
+      <div id="recaptcha-profile-container"></div>
       {/* Profile Header Banner */}
       <div className="relative overflow-hidden glass rounded-3xl border border-white/10 p-6 md:p-8 space-y-6">
         <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 text-center sm:text-left relative z-10">
-          
           {/* Avatar Selector Trigger */}
           <div className="relative group cursor-pointer" onClick={() => setIsSelectorOpen(true)}>
             <div className="w-24 h-24 rounded-3xl overflow-hidden border-2 border-white/10 shadow-2xl transition-all duration-300 group-hover:opacity-80">
@@ -498,8 +667,6 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-
-
               <button
                 type="submit"
                 disabled={saving}
@@ -558,12 +725,6 @@ export default function ProfilePage() {
                     </button>
                   ))}
                 </div>
-                <p className="text-xs text-muted-foreground mt-2">
-                  {dailyGoalMinutes === 5 && (locale === "ua" ? "⚡ Легкий темп: 5 нових слів + 10 на повторення щодня" : locale === "ru" ? "⚡ Легкий темп: 5 новых слов + 10 на повторение ежедневно" : "⚡ Casual: 5 new words + 10 reviews daily")}
-                  {dailyGoalMinutes === 10 && (locale === "ua" ? "🔥 Стандартний темп: 10 нових слів + 15 на повторення щодня" : locale === "ru" ? "🔥 Стандартный темп: 10 новых слов + 15 на повторение ежедневно" : "🔥 Regular: 10 new words + 15 reviews daily")}
-                  {dailyGoalMinutes === 15 && (locale === "ua" ? "🚀 Интенсивний темп: 15 нових слів + 20 на повторення щодня" : locale === "ru" ? "🚀 Интенсивный темп: 15 новых слов + 20 на повторение ежедневно" : "🚀 Serious: 15 new words + 20 reviews daily")}
-                  {dailyGoalMinutes === 20 && (locale === "ua" ? "🏆 Максимальний темп: 20 нових слів + 25 на повторення щодня" : locale === "ru" ? "🏆 Максимальный темп: 20 новых слов + 25 на повторение ежедневно" : "🏆 Extreme: 20 new words + 25 reviews daily")}
-                </p>
               </div>
 
               {/* Reminders & Notifications */}
@@ -591,11 +752,11 @@ export default function ProfilePage() {
                         onChange={(e) => setReminderTime(e.target.value)}
                         className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs rounded-lg px-2 py-1 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-500 cursor-pointer"
                       >
-                        <option value="08:00" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">08:00</option>
-                        <option value="09:00" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">09:00</option>
-                        <option value="12:00" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">12:00</option>
-                        <option value="18:00" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">18:00</option>
-                        <option value="21:00" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">21:00</option>
+                        <option value="08:00">08:00</option>
+                        <option value="09:00">09:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="18:00">18:00</option>
+                        <option value="21:00">21:00</option>
                       </select>
                     </div>
                   )}
@@ -619,17 +780,10 @@ export default function ProfilePage() {
                       }`}
                     >
                       {notificationsEnabled
-                        ? (locale === "ua" ? "Увімкнено" : locale === "ru" ? "Включено" : "Enabled")
-                        : (locale === "ua" ? "Увімкнути" : locale === "ru" ? "Включить" : "Enable")}
+                        ? locale === "ua" ? "Увімкнено" : locale === "ru" ? "Включено" : "Enabled"
+                        : locale === "ua" ? "Увімкнути" : locale === "ru" ? "Включить" : "Enable"}
                     </button>
                   </div>
-                  <p className="text-[11px] text-muted-foreground">
-                    {locale === "ua"
-                      ? "Сповіщення нагадуватимуть про серію при пропусках."
-                      : locale === "ru"
-                      ? "Уведомления напомнят о серии при пропусках."
-                      : "Notifications alert you to protect your streak."}
-                  </p>
                 </div>
               </div>
 
@@ -683,7 +837,7 @@ export default function ProfilePage() {
           </section>
         </div>
 
-        {/* Security & Authentication Panel (Disabled Actions) */}
+        {/* Security & Authentication Panel (Firebase Auth Enabled) */}
         <div className="space-y-8">
           <section className="glass rounded-3xl p-6 border border-white/10 space-y-6">
             <div className="flex items-center gap-3 border-b border-white/5 pb-4">
@@ -692,113 +846,180 @@ export default function ProfilePage() {
               </div>
               <div>
                 <h2 className="text-base font-bold text-foreground">
-                  {locale === "ua" ? "Безпека та пароль" : locale === "ru" ? "Безопасность и пароль" : "Security & Password"}
+                  {locale === "ua" ? "Безпека та Firebase Auth" : locale === "ru" ? "Безопасность и Firebase Auth" : "Security & Firebase Auth"}
                 </h2>
-                <p className="text-xs text-muted-foreground">Manage authentication settings</p>
+                <p className="text-xs text-muted-foreground">Manage your credentials & provider links</p>
               </div>
             </div>
 
-            {/* Email change field (Blocked) */}
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  Email Address
-                </label>
-                <span className="text-[10px] text-amber-400 font-medium flex items-center gap-1">
-                  <Lock className="w-3 h-3" />
-                  {tempDisabledBadge}
-                </span>
+            {/* Change Email */}
+            <form onSubmit={handleUpdateEmail} className="space-y-2">
+              <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                {locale === "ua" ? "Електронна пошта" : locale === "ru" ? "Электронная почта" : "Email Address"}
+              </label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <input
+                  type="email"
+                  value={emailField}
+                  onChange={(e) => setEmailField(e.target.value)}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-blue-500"
+                  required
+                />
               </div>
-              <input
-                type="email"
-                value={emailField}
-                onChange={(e) => setEmailField(e.target.value)}
-                disabled
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-muted-foreground cursor-not-allowed"
-              />
               <button
-                type="button"
-                disabled
-                className="w-full px-4 py-2 rounded-xl text-xs bg-white/5 border border-white/10 text-muted-foreground cursor-not-allowed flex items-center justify-center gap-1.5"
+                type="submit"
+                disabled={updatingEmail || emailField === profile?.email}
+                className="w-full px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-md shadow-blue-500/20 disabled:opacity-50 flex items-center justify-center gap-1.5"
               >
-                <Lock className="w-3.5 h-3.5" />
-                {locale === "ua" ? "Змінити пошту" : locale === "ru" ? "Сменить почту" : "Change Email"}
+                {updatingEmail ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Edit2 className="w-3.5 h-3.5" />}
+                {locale === "ua" ? "Оновити пошту" : locale === "ru" ? "Обновить почту" : "Update Email"}
               </button>
-            </div>
+            </form>
 
-            {/* Phone adding/updating (Blocked) */}
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
+            {/* Mobile Phone Verification */}
+            {phoneOtpStep === "input" ? (
+              <form onSubmit={handleSendPhoneOtp} className="space-y-2">
                 <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                   {locale === "ua" ? "Мобільний номер" : locale === "ru" ? "Мобильный номер" : "Mobile Phone"}
                 </label>
-                <span className="text-[10px] text-amber-400 font-medium flex items-center gap-1">
-                  <Lock className="w-3 h-3" />
-                  {tempDisabledBadge}
-                </span>
-              </div>
-              <input
-                type="tel"
-                value={phoneField}
-                onChange={(e) => setPhoneField(e.target.value)}
-                disabled
-                placeholder="+380991234567"
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-muted-foreground cursor-not-allowed"
-              />
-              <button
-                type="button"
-                disabled
-                className="w-full px-4 py-2 rounded-xl text-xs bg-white/5 border border-white/10 text-muted-foreground cursor-not-allowed flex items-center justify-center gap-1.5"
-              >
-                <Lock className="w-3.5 h-3.5" />
-                {locale === "ua" ? "Підтвердити номер" : locale === "ru" ? "Подтвердить номер" : "Verify Phone Number"}
-              </button>
-            </div>
-
-            {/* Password changing (Blocked) */}
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
+                <div className="relative">
+                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <input
+                    type="tel"
+                    value={phoneField}
+                    onChange={(e) => setPhoneField(e.target.value)}
+                    placeholder="+380991234567"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-blue-500"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={verifyingPhone || !phoneField}
+                  className="w-full px-4 py-2 rounded-xl text-xs font-semibold bg-purple-600 hover:bg-purple-500 text-white transition-all shadow-md shadow-purple-500/20 disabled:opacity-50 flex items-center justify-center gap-1.5"
+                >
+                  {verifyingPhone ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <ShieldCheck className="w-3.5 h-3.5" />}
+                  {locale === "ua" ? "Підтвердити через SMS" : locale === "ru" ? "Подтвердить через SMS" : "Verify via SMS OTP"}
+                </button>
+              </form>
+            ) : (
+              <form onSubmit={handleVerifyPhoneOtp} className="space-y-2">
                 <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  {locale === "ua" ? "Новий пароль" : locale === "ru" ? "Новый пароль" : "New Password"}
+                  SMS Code for {phoneField}
                 </label>
-                <span className="text-[10px] text-amber-400 font-medium flex items-center gap-1">
-                  <Lock className="w-3 h-3" />
-                  {tempDisabledBadge}
-                </span>
-              </div>
-              <input
-                type="password"
-                value={passwordField}
-                onChange={(e) => setPasswordField(e.target.value)}
-                disabled
-                placeholder="••••••••••••"
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-muted-foreground cursor-not-allowed"
-              />
-              <button
-                type="button"
-                disabled
-                className="w-full px-4 py-2 rounded-xl text-xs bg-white/5 border border-white/10 text-muted-foreground cursor-not-allowed flex items-center justify-center gap-1.5"
-              >
-                <Lock className="w-3.5 h-3.5" />
-                {locale === "ua" ? "Оновити пароль" : locale === "ru" ? "Обновить пароль" : "Update Password"}
-              </button>
-            </div>
+                <input
+                  type="text"
+                  value={phoneOtpCode}
+                  onChange={(e) => setPhoneOtpCode(e.target.value)}
+                  placeholder="123456"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-xs text-center font-mono tracking-widest text-foreground focus:outline-none focus:border-purple-500"
+                />
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setPhoneOtpStep("input")}
+                    className="w-1/3 px-3 py-2 rounded-xl text-xs font-medium bg-white/5 border border-white/10"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={verifyingPhone}
+                    className="w-2/3 px-3 py-2 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-500/20"
+                  >
+                    Verify Code
+                  </button>
+                </div>
+              </form>
+            )}
 
-            {/* Linked Accounts (Blocked) */}
-            <div className="space-y-2 opacity-60 pt-2 border-t border-white/5">
+            {/* Change Password */}
+            <form onSubmit={handleUpdatePassword} className="space-y-2">
+              <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                {locale === "ua" ? "Новий пароль" : locale === "ru" ? "Новый пароль" : "New Password"}
+              </label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <input
+                  type="password"
+                  value={passwordField}
+                  onChange={(e) => setPasswordField(e.target.value)}
+                  placeholder="••••••••••••"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-blue-500"
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={updatingPassword || !passwordField}
+                className="w-full px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition-all shadow-md shadow-emerald-500/20 disabled:opacity-50 flex items-center justify-center gap-1.5"
+              >
+                {updatingPassword ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Key className="w-3.5 h-3.5" />}
+                {locale === "ua" ? "Обновити пароль" : locale === "ru" ? "Обновить пароль" : "Update Password"}
+              </button>
+            </form>
+
+            {/* Linked Accounts */}
+            <div className="space-y-3 pt-2 border-t border-white/5">
               <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center justify-between">
                 <span>{locale === "ua" ? "Прив'язки акаунта" : locale === "ru" ? "Привязки аккаунта" : "Linked Accounts"}</span>
-                <span className="text-[10px] text-amber-400 font-normal flex items-center gap-1">
-                  <Lock className="w-3 h-3" />
-                  {tempDisabledBadge}
-                </span>
+                <span className="text-[10px] text-blue-400 font-medium">Firebase Auth</span>
               </label>
-              <div className="p-3 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between text-xs text-muted-foreground">
-                <span className="flex items-center gap-2">
-                  <LinkIcon className="w-3.5 h-3.5" />
-                  Google / OAuth
+
+              {/* Google */}
+              <div className="p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between text-xs">
+                <span className="flex items-center gap-2 text-foreground">
+                  <svg className="w-4 h-4" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z" />
+                    <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.25 21.32 7.33 24 12 24z" />
+                    <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z" />
+                    <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.25 2.68 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z" />
+                  </svg>
+                  Google
                 </span>
-                <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded">Not linked</span>
+                <button
+                  type="button"
+                  onClick={() => handleLinkProvider("google")}
+                  disabled={linkingProvider === "google"}
+                  className="text-[11px] font-bold text-blue-400 hover:text-blue-300"
+                >
+                  {linkingProvider === "google" ? "Linking..." : "Link Google"}
+                </button>
+              </div>
+
+              {/* Facebook */}
+              <div className="p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between text-xs">
+                <span className="flex items-center gap-2 text-foreground">
+                  <svg className="w-4 h-4 fill-blue-500" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                  </svg>
+                  Facebook
+                </span>
+                <button
+                  type="button"
+                  onClick={() => handleLinkProvider("facebook")}
+                  disabled={linkingProvider === "facebook"}
+                  className="text-[11px] font-bold text-blue-400 hover:text-blue-300"
+                >
+                  {linkingProvider === "facebook" ? "Linking..." : "Link Facebook"}
+                </button>
+              </div>
+
+              {/* Apple */}
+              <div className="p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between text-xs">
+                <span className="flex items-center gap-2 text-foreground">
+                  <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.09c.67-.82 1.13-1.96.99-3.09-1 .04-2.19.67-2.88 1.48-.61.71-1.15 1.88-.99 3 1.11.09 2.23-.57 2.88-1.39z" />
+                  </svg>
+                  Apple
+                </span>
+                <button
+                  type="button"
+                  onClick={() => handleLinkProvider("apple")}
+                  disabled={linkingProvider === "apple"}
+                  className="text-[11px] font-bold text-blue-400 hover:text-blue-300"
+                >
+                  {linkingProvider === "apple" ? "Linking..." : "Link Apple"}
+                </button>
               </div>
             </div>
           </section>
