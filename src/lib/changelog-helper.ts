@@ -2,14 +2,21 @@ import { prisma } from "@/lib/prisma";
 
 export async function ensureDefaultChangelogs() {
   try {
-    await prisma.changelog.upsert({
-      where: { id: "changelog-v1.5.0" },
-      update: {
-        version: "v1.5.0",
-        titleUa: "🎯 Баланс навчання, 1-разові уроки та розвиток проєкту!",
-        titleRu: "🎯 Баланс обучения, 1-разовые уроки и развитие проекта!",
-        titleEn: "🎯 Balanced Learning Pace, Single Lesson Completion & Community Support!",
-        contentUa: `[b]Що нового у версії 1.5.0:[/b]
+    // Only seed default changelogs if the changelog table is completely empty
+    const count = await prisma.changelog.count();
+    if (count > 0) {
+      return;
+    }
+
+    await prisma.changelog.createMany({
+      data: [
+        {
+          id: "changelog-v1.5.0",
+          version: "v1.5.0",
+          titleUa: "🎯 Баланс навчання, 1-разові уроки та розвиток проєкту!",
+          titleRu: "🎯 Баланс обучения, 1-разовые уроки и развитие проекта!",
+          titleEn: "🎯 Balanced Learning Pace, Single Lesson Completion & Community Support!",
+          contentUa: `[b]Що нового у версії 1.5.0:[/b]
 
 • [b]Оптимізація складності та темпу навчання[/b]: Уроки стали більш глибокими та насиченими. Щоб засвоєння матеріалу було максимально ефективним, а не перетворювалося на автоматичне проходження за 1 день, ми перейшли на систему одноразового щоденного проходження уроків.
 • [b]Адекватні терміни вивчення мови[/b]: Справжній прогрес у хорватській мові досягається регулярними щоденними кроками та повторенням, а не поспіхом. Нова система допоможе вам навчатися системно та без вигорання.
@@ -17,7 +24,7 @@ export async function ensureDefaultChangelogs() {
 🤝 [b]Розвиток проєкту та контакти:[/b]
 • [b]Збір на підтримку платформи[/b]: У розділі [b]Контакти[/b] відкрито збір коштів на розвиток проєкту. Ваші донати допомагають оплачувати сервери, ШІ-моделі та розробку нового функціоналу.
 • [b]Розповідайте про нас![/b]: Поділіться посиланням на сайт із друзями, знайомими та колегами, які вивчають хорватську мову. Чим більше нас — тим швидше розвивається платформа!`,
-        contentRu: `[b]Что нового в версии 1.5.0:[/b]
+          contentRu: `[b]Что нового в версии 1.5.0:[/b]
 
 • [b]Оптимизация сложности и темпа обучения[/b]: Уроки стали более глубокими и насыщенными. Чтобы усвоение материала было максимально эффективным, а не превращалось в автоматическое прохождение за 1 день, мы перешли на систему одноразового ежедневного прохождения уроков.
 • [b]Адекватные сроки выучения языка[/b]: Настоящий прогресс в хорватском языке достигается регулярными ежедневными подходами и повторением, а не спешкой. Новая система поможет вам заниматься системно и без выгорания.
@@ -25,7 +32,7 @@ export async function ensureDefaultChangelogs() {
 🤝 [b]Развитие проекта и контакты:[/b]
 • [b]Сбор на поддержку платформы[/b]: В разделе [b]Контакты[/b] открыт сбор средств на развитие проекта. Ваши донаты помогают оплачивать серверы, ИИ-модели и разработку нового функционала.
 • [b]Расскажите о нас![/b]: Поделитесь ссылкой на сайт с друзьями, знакомыми и коллегами, которые изучают хорватский язык. Чем больше нас — тем быстрее развивается платформа!`,
-        contentEn: `[b]What's new in version 1.5.0:[/b]
+          contentEn: `[b]What's new in version 1.5.0:[/b]
 
 • [b]Optimized Difficulty & Learning Pace[/b]: Lessons have been enhanced with more in-depth practice. To ensure sustainable memory retention rather than rushing through all lessons in a single day, we introduced a single-completion daily lesson pace.
 • [b]Realistic Language Learning Goals[/b]: Mastering Croatian requires consistency, spaced repetition, and daily practice. This update helps build a healthy learning habit without burnout.
@@ -33,49 +40,15 @@ export async function ensureDefaultChangelogs() {
 🤝 [b]Project Support & Contacts:[/b]
 • [b]Support Our Development[/b]: Check out the **Contacts** section where our community fundraiser is active. Your support helps cover server costs, AI model inference, and new feature development.
 • [b]Spread the Word![/b]: Share the platform link with friends, family, and language enthusiasts. The bigger our community grows, the faster we can ship new updates!`,
-        createdAt: new Date(),
-      },
-      create: {
-        id: "changelog-v1.5.0",
-        version: "v1.5.0",
-        titleUa: "🎯 Баланс навчання, 1-разові уроки та розвиток проєкту!",
-        titleRu: "🎯 Баланс обучения, 1-разовые уроки и развитие проекта!",
-        titleEn: "🎯 Balanced Learning Pace, Single Lesson Completion & Community Support!",
-        contentUa: `[b]Що нового у версії 1.5.0:[/b]
-
-• [b]Оптимізація складності та темпу навчання[/b]: Уроки стали більш глибокими та насиченими. Щоб засвоєння матеріалу було максимально ефективним, а не перетворювалося на автоматичне проходження за 1 день, ми перейшли на систему одноразового щоденного проходження уроків.
-• [b]Адекватні терміни вивчення мови[/b]: Справжній прогрес у хорватській мові досягається регулярними щоденними кроками та повторенням, а не поспіхом. Нова система допоможе вам навчатися системно та без вигорання.
-
-🤝 [b]Розвиток проєкту та контакти:[/b]
-• [b]Збір на підтримку платформи[/b]: У розділі [b]Контакти[/b] відкрито збір коштів на розвиток проєкту. Ваші донати допомагають оплачувати сервери, ШІ-моделі та розробку нового функціоналу.
-• [b]Розповідайте про нас![/b]: Поділіться посиланням на сайт із друзями, знайомими та колегами, які вивчають хорватську мову. Чим більше нас — тем швидше розвивається платформа!`,
-        contentRu: `[b]Что нового в версии 1.5.0:[/b]
-
-• [b]Оптимизация сложности и темпа обучения[/b]: Уроки стали более глубокими и насыщенными. Чтобы усвоение материала было максимально эффективным, а не превращалось в автоматическое прохождение за 1 день, мы перешли на систему одноразового ежедневного прохождения уроков.
-• [b]Адекватные сроки выучения языка[/b]: Настоящий прогресс в хорватском языке достигается регулярными ежедневными подходами и повторением, а не спешкой. Новая система поможет вам заниматься системно и без выгорания.
-
-🤝 [b]Развитие проекта и контакты:[/b]
-• [b]Сбор на поддержку платформы[/b]: В разделе [b]Контакты[/b] открыт сбор средств на развитие проекта. Ваши донаты помогают оплачивать серверы, ИИ-модели и разработку нового функционала.
-• [b]Расскажите о нас![/b]: Поделитесь ссылкой на сайт с друзьями, знакомыми и коллегами, которые изучают хорватский язык. Чем больше нас — тем быстрее развивается платформа!`,
-        contentEn: `[b]What's new in version 1.5.0:[/b]
-
-• [b]Optimized Difficulty & Learning Pace[/b]: Lessons have been enhanced with more in-depth practice. To ensure sustainable memory retention rather than rushing through all lessons in a single day, we introduced a single-completion daily lesson pace.
-• [b]Realistic Language Learning Goals[/b]: Mastering Croatian requires consistency, spaced repetition, and daily practice. This update helps build a healthy learning habit without burnout.
-
-🤝 [b]Project Support & Contacts:[/b]
-• [b]Support Our Development[/b]: Check out the **Contacts** section where our community fundraiser is active. Your support helps cover server costs, AI model inference, and new feature development.
-• [b]Spread the Word![/b]: Share the platform link with friends, family, and language enthusiasts. The bigger our community grows, the faster we can ship new updates!`
-      },
-    });
-
-    await prisma.changelog.upsert({
-      where: { id: "changelog-v1.4.0" },
-      update: {
-        version: "v1.4.0",
-        titleUa: "🤖 Точність ШІ-перекладів та чиста хорватська латинка!",
-        titleRu: "🤖 Точность ИИ-переводов и чистая хорватская латиница!",
-        titleEn: "🤖 Enhanced AI Accuracy & Pure Croatian Latin Script!",
-        contentUa: `[b]Що нового у версії 1.4.0:[/b]
+          createdAt: new Date(),
+        },
+        {
+          id: "changelog-v1.4.0",
+          version: "v1.4.0",
+          titleUa: "🤖 Точність ШІ-перекладів та чиста хорватська латинка!",
+          titleRu: "🤖 Точность ИИ-переводов и чистая хорватская латиница!",
+          titleEn: "🤖 Enhanced AI Accuracy & Pure Croatian Latin Script!",
+          contentUa: `[b]Що нового у версії 1.4.0:[/b]
 
 • [b]Чиста хорватська латинка[/b]: Виправлено генерацію хорватських слів та фраз — тепер усі переклади та приклади подаються виключно правильними хорватськими буквами (č, ć, đ, š, ž) без кирилиці.
 • [b]Зрозумілі пояснення[/b]: Усі пояснення граматики та розбори фраз надаються вашою рідною мовою, а самі переклади — точного хорватською.
@@ -84,7 +57,7 @@ export async function ensureDefaultChangelogs() {
 ❤️ [b]Підтримайте проєкт:[/b]
 1. [b]Поділіться посиланням[/b] на сайт з друзями, знайомими та колегами, які вивчають хорватську мову!
 2. [b]Підтримайте нас донатом[/b] — це допомагає покривати витрати на сервер та ШІ-моделі, щоб платформа залишалася безкоштовною для всіх!`,
-        contentRu: `[b]Что нового в версии 1.4.0:[/b]
+          contentRu: `[b]Что нового в версии 1.4.0:[/b]
 
 • [b]Чистая хорватская латиница[/b]: Исправлена генерация хорватских слов и фраз — теперь все переводы и примеры выводятся исключительно правильными хорватскими буквами (č, ć, đ, š, ž) без кириллицы.
 • [b]Понятные объяснения[/b]: Все объяснения грамматики и разборы фраз даются на вашем родном языке, а сами переводы — точно на хорватском.
@@ -93,7 +66,7 @@ export async function ensureDefaultChangelogs() {
 ❤️ [b]Поддержите проект:[/b]
 1. [b]Поделитесь ссылкой[/b] на сайт с друзьями, знакомыми и коллегами, которые изучают хорватский язык!
 2. [b]Поддержите нас донатом[/b] — это помогает покрывать расходы на сервер и ИИ-модели, чтобы платформа оставалась бесплатной для всех!`,
-        contentEn: `[b]What's new in version 1.4.0:[/b]
+          contentEn: `[b]What's new in version 1.4.0:[/b]
 
 • [b]Pure Croatian Latin Script[/b]: Fixed AI generation for Croatian translations — all words and example sentences are now strictly formatted in Gaj's Croatian Latin alphabet (č, ć, đ, š, ž).
 • [b]Native Language Explanations[/b]: Grammar breakdowns and hints are provided in your native language, while translations remain in pure Croatian.
@@ -102,53 +75,9 @@ export async function ensureDefaultChangelogs() {
 ❤️ [b]Support the Project:[/b]
 1. [b]Share the website link[/b] with friends, family, and colleagues learning Croatian!
 2. [b]Consider supporting us with a donation[/b] — this helps keep the servers and AI models running for everyone for free!`,
-        createdAt: new Date(),
-      },
-      create: {
-        id: "changelog-v1.4.0",
-        version: "v1.4.0",
-        titleUa: "🤖 Точність ШІ-перекладів та чиста хорватська латинка!",
-        titleRu: "🤖 Точность ИИ-переводов и чистая хорватская латиница!",
-        titleEn: "🤖 Enhanced AI Accuracy & Pure Croatian Latin Script!",
-        contentUa: `[b]Що нового у версії 1.4.0:[/b]
-
-• [b]Чиста хорватська латинка[/b]: Виправлено генерацію хорватських слів та фраз — тепер усі переклади та приклади подаються виключно правильними хорватськими буквами (č, ć, đ, š, ž) без кирилиці.
-• [b]Зрозумілі пояснення[/b]: Усі пояснення граматики та розбори фраз надаються вашою рідною мовою, а самі переклади — точного хорватською.
-• [b]Підвищена точність[/b]: Оптимізовано роботу ШІ-моделей для більш чітких та достовірних відповідей.
-
-❤️ [b]Підтримайте проєкт:[/b]
-1. [b]Поділіться посиланням[/b] на сайт з друзями, знайомими та колегами, які вивчають хорватську мову!
-2. [b]Підтримайте нас донатом[/b] — це допомагає покривати витрати на сервер та ШІ-моделі, щоб платформа залишалася безкоштовною для всіх!`,
-        contentRu: `[b]Что нового в версии 1.4.0:[/b]
-
-• [b]Чистая хорватская латиница[/b]: Исправлена генерация хорватских слов и фраз — теперь все переводы и примеры выводятся исключительно правильными хорватскими буквами (č, ć, đ, š, ž) без кириллицы.
-• [b]Понятные объяснения[/b]: Все объяснения грамматики и разборы фраз даются на вашем родном языке, а сами переводы — точно на хорватском.
-• [b]Повышенная точность[/b]: Оптимизирована работа ИИ-моделей для более четких и достоверных ответов.
-
-❤️ [b]Поддержите проект:[/b]
-1. [b]Поделитесь ссылкой[/b] на сайт с друзьями, знакомыми и коллегами, которые изучают хорватский язык!
-2. [b]Поддержите нас донатом[/b] — это помогает покрывать расходы на сервер и ИИ-модели, чтобы платформа оставалась бесплатной для всех!`,
-        contentEn: `[b]What's new in version 1.4.0:[/b]
-
-• [b]Pure Croatian Latin Script[/b]: Fixed AI generation for Croatian translations — all words and example sentences are now strictly formatted in Gaj's Croatian Latin alphabet (č, ć, đ, š, ž).
-• [b]Native Language Explanations[/b]: Grammar breakdowns and hints are provided in your native language, while translations remain in pure Croatian.
-• [b]Higher Accuracy & Determinism[/b]: Fine-tuned AI generation parameters for clearer and more accurate responses.
-
-❤️ [b]Support the Project:[/b]
-1. [b]Share the website link[/b] with friends, family, and colleagues learning Croatian!
-2. [b]Consider supporting us with a donation[/b] — this helps keep the servers and AI models running for everyone for free!`
-      },
-    });
-
-    const existing = await prisma.changelog.findUnique({
-      where: { id: "changelog-v1.3.0" },
-    });
-
-    if (!existing) {
-      await prisma.changelog.upsert({
-        where: { id: "changelog-v1.3.0" },
-        update: {},
-        create: {
+          createdAt: new Date(),
+        },
+        {
           id: "changelog-v1.3.0",
           version: "v1.3.0",
           titleUa: "🤖 Оновлений ШІ-чат, 4 режими навчання та адаптація світлої теми!",
@@ -186,10 +115,11 @@ export async function ensureDefaultChangelogs() {
   4. [b]🎭 Roleplay[/b]: Real-life conversation scenarios (Bakery, Restaurant, Apartment Renting, Open Market).
 • [b]Instant Mode Switch & Isolated History[/b]: Each mode retains its own message history and specialized greeting. Added a "Clear Chat" button.
 • [b]Strict Tutor Guardrails[/b]: AI focuses strictly on Croatian language tutoring and politely declines off-topic prompts.
-• [b]Full Light Theme Support[/b]: Fixed select dropdowns, option elements, and inputs across all games and profile for light mode.`
-        }
-      });
-    }
+• [b]Full Light Theme Support[/b]: Fixed select dropdowns, option elements, and inputs across all games and profile for light mode.`,
+          createdAt: new Date(),
+        },
+      ],
+    });
   } catch (err) {
     console.error("ensureDefaultChangelogs error:", err);
   }
