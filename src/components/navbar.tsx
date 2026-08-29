@@ -23,6 +23,7 @@ import {
   User,
   ChevronDown,
   Flame,
+  Award,
   Sparkles,
 } from "lucide-react";
 
@@ -148,6 +149,7 @@ export function Navbar() {
     { href: "/lessons", label: t("lessons"), icon: BookOpen },
     { href: "/vocabulary", label: t("vocabulary"), icon: Languages },
     { href: "/games", label: t("games"), icon: Gamepad2 },
+    { href: "/achievements", label: locale === "ua" ? "Досягнення" : locale === "ru" ? "Достижения" : "Achievements", icon: Award },
     { href: "/ai-chat", label: t("aiChat"), icon: MessageCircle },
   ];
 

@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Award, Lock, Sparkles, CheckCircle2 } from "lucide-react";
+import { Link } from "@/i18n/navigation";
+import { Award, Lock, CheckCircle2, ArrowRight } from "lucide-react";
 
 interface BadgeItem {
   id: string;
@@ -44,24 +45,41 @@ export function BadgesShowcase({ locale }: BadgesShowcaseProps) {
   }
 
   const unlockedCount = badges.filter((b) => b.unlocked).length;
+  const showcaseBadges = badges.slice(0, 4);
 
   return (
-    <div className="glass rounded-3xl p-6 border border-white/10 space-y-4 animate-fade-in">
-      <div className="flex items-center justify-between">
+    <div className="glass rounded-3xl p-6 border border-amber-500/20 space-y-5 animate-fade-in shadow-lg shadow-amber-500/5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <Award className="w-5 h-5 text-amber-400" />
-          <h3 className="font-bold text-base text-foreground">
-            {locale === "ua" ? "Досягнення та значки" : locale === "ru" ? "Достижения и значки" : "Achievements & Badges"}
-          </h3>
+          <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+            <Award className="w-5 h-5" />
+          </div>
+          <div>
+            <h3 className="font-bold text-base text-foreground flex items-center gap-2">
+              {locale === "ua" ? "Досягнення та значки" : locale === "ru" ? "Достижения и значки" : "Achievements & Badges"}
+            </h3>
+            <p className="text-xs text-muted-foreground">
+              {locale === "ua" ? "Збирайте трофеї за активність у базі з 100+ нагород" : locale === "ru" ? "Собирайте трофеи за активность в базе из 100+ наград" : "Collect trophies from over 100+ available badges"}
+            </p>
+          </div>
         </div>
 
-        <span className="px-2.5 py-1 rounded-xl text-xs font-black bg-amber-500/10 text-amber-400 border border-amber-500/20">
-          {unlockedCount}/{badges.length} {locale === "ua" ? "Відкрито" : locale === "ru" ? "Открыто" : "Unlocked"}
-        </span>
+        <div className="flex items-center gap-3">
+          <span className="px-3 py-1 rounded-xl text-xs font-black bg-amber-500/10 text-amber-400 border border-amber-500/20">
+            {unlockedCount}/{badges.length} {locale === "ua" ? "Відкрито" : locale === "ru" ? "Открыто" : "Unlocked"}
+          </span>
+          <Link
+            href="/achievements"
+            className="px-3.5 py-1.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 transition-all flex items-center gap-1.5 shadow-sm shadow-amber-500/20 shrink-0"
+          >
+            <span>{locale === "ua" ? "Всі 100+ трофеїв" : locale === "ru" ? "Все 100+ трофеев" : "All 100+ Trophies"}</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        {badges.map((badge) => {
+        {showcaseBadges.map((badge) => {
           const title = locale === "ua" ? badge.titleUa : locale === "ru" ? badge.titleRu : badge.titleEn;
           const desc = locale === "ua" ? badge.descUa : locale === "ru" ? badge.descRu : badge.descEn;
 

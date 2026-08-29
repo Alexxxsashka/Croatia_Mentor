@@ -1,120 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
-
-export interface BadgeDefinition {
-  id: string;
-  titleEn: string;
-  titleRu: string;
-  titleUa: string;
-  descEn: string;
-  descRu: string;
-  descUa: string;
-  icon: string;
-}
-
-export const BADGE_DEFINITIONS: Record<string, BadgeDefinition> = {
-  words_10: {
-    id: "words_10",
-    titleEn: "First Steps",
-    titleRu: "Первые шаги",
-    titleUa: "Перші кроки",
-    descEn: "Learned your first 10 Croatian words",
-    descRu: "Выучил свои первые 10 хорватских слов",
-    descUa: "Вивчив свої перші 10 хорватських слів",
-    icon: "🌱",
-  },
-  words_100: {
-    id: "words_100",
-    titleEn: "First 100 Words",
-    titleRu: "Первая сотня слов",
-    titleUa: "Перша сотня слів",
-    descEn: "Learned 100 Croatian vocabulary words",
-    descRu: "Выучил 100 хорватских слов",
-    descUa: "Вивчив 100 хорватських слів",
-    icon: "📚",
-  },
-  words_500: {
-    id: "words_500",
-    titleEn: "Vocabulary Master",
-    titleRu: "Мастер словаря",
-    titleUa: "Майстер словника",
-    descEn: "Mastered 500 Croatian vocabulary words",
-    descRu: "Освоил 500 хорватских слов",
-    descUa: "Опанував 500 хорватських слів",
-    icon: "👑",
-  },
-  streak_7: {
-    id: "streak_7",
-    titleEn: "Streak Warrior",
-    titleRu: "7 дней подряд (Streak Warrior)",
-    titleUa: "7 днів поспіль (Streak Warrior)",
-    descEn: "Maintained a 7-day learning streak",
-    descRu: "Удерживал 7-дневный ударный режим",
-    descUa: "Утримував 7-денний ударний режим",
-    icon: "⚡",
-  },
-  streak_30: {
-    id: "streak_30",
-    titleEn: "Unstoppable Legend",
-    titleRu: "30 дней подряд (Несокрушимый)",
-    titleUa: "30 днів поспіль (Незламний)",
-    descEn: "Achieved a 30-day active learning streak",
-    descRu: "Достиг 30-дневного ударного режима",
-    descUa: "Досяг 30-денного ударного режиму",
-    icon: "🔥",
-  },
-  a1_master: {
-    id: "a1_master",
-    titleEn: "A1 Grammar Master",
-    titleRu: "Мастер грамматики A1",
-    titleUa: "Майстер граматики A1",
-    descEn: "Mastered all A1 beginner modules",
-    descRu: "Освоил начальные модули уровня A1",
-    descUa: "Опанував початкові модулі рівня A1",
-    icon: "🎓",
-  },
-  b1_expert: {
-    id: "b1_expert",
-    titleEn: "Intermediate Scholar",
-    titleRu: "Эрудит B1+",
-    titleUa: "Ерудит B1+",
-    descEn: "Reached level B1 or higher",
-    descRu: "Достиг уровня B1 или выше",
-    descUa: "Досяг рівня B1 або вище",
-    icon: "🏆",
-  },
-  dictation_sniper: {
-    id: "dictation_sniper",
-    titleEn: "Dictation Sniper",
-    titleRu: "Снайпер диктантов",
-    titleUa: "Снайпер диктантів",
-    descEn: "Completed 3 dictation audio exercises",
-    descRu: "Успешно прошёл 3 аудирования и диктанта",
-    descUa: "Успішно пройшов 3 аудіювання та диктанти",
-    icon: "🎯",
-  },
-  xp_1000: {
-    id: "xp_1000",
-    titleEn: "XP Legend",
-    titleRu: "Тысячник XP",
-    titleUa: "Тисячник XP",
-    descEn: "Accumulated 1,000+ total XP points",
-    descRu: "Заработал более 1000 XP",
-    descUa: "Заробив понад 1000 XP",
-    icon: "⭐",
-  },
-  lesson_hero: {
-    id: "lesson_hero",
-    titleEn: "Lesson Hero",
-    titleRu: "Герой уроков",
-    titleUa: "Герой уроків",
-    descEn: "Completed 10 lessons in total",
-    descRu: "Завершил 10 уроков",
-    descUa: "Завершив 10 уроків",
-    icon: "🚀",
-  },
-};
+import { BADGE_DEFINITIONS, BadgeDefinition } from "@/lib/badges-data";
 
 export async function GET() {
   try {
@@ -125,8 +12,8 @@ export async function GET() {
 
     const userId = session.user.id;
 
-    // Fetch user progress & existing badges
-    const [progress, existingBadges, wordCount] = await Promise.all([
+    // Fetch user progress, user badges, word counts, and daily activities
+    const [progress, existingBadges, wordCount, dailyActivities] = await Promise.all([
       prisma.progress.findUnique({ where: { userId } }),
       prisma.userBadge.findMany({ where: { userId } }),
       prisma.wordProgress.count({
@@ -135,46 +22,120 @@ export async function GET() {
           status: { in: ["learning", "learned", "mastered"] },
         },
       }),
+      prisma.dailyActivity.findMany({
+        where: { userId },
+        orderBy: { date: "desc" },
+        take: 90,
+      }),
     ]);
 
     const unlockedSet = new Set(existingBadges.map((b) => b.badgeId));
     const toUnlock: string[] = [];
 
     const realWordsLearned = Math.max(progress?.totalWordsLearned || 0, wordCount);
+    const completedLessons = progress?.completedLessons || [];
+    const currentStreak = progress?.currentStreak || 0;
+    const totalXP = progress?.totalXP || 0;
+    const currentLevel = progress?.currentLevel || "A1";
 
-    if (progress) {
-      if (realWordsLearned >= 10 && !unlockedSet.has("words_10")) {
-        toUnlock.push("words_10");
-      }
-      if (realWordsLearned >= 100 && !unlockedSet.has("words_100")) {
-        toUnlock.push("words_100");
-      }
-      if (realWordsLearned >= 500 && !unlockedSet.has("words_500")) {
-        toUnlock.push("words_500");
-      }
-      if ((progress.currentStreak || 0) >= 7 && !unlockedSet.has("streak_7")) {
-        toUnlock.push("streak_7");
-      }
-      if ((progress.currentStreak || 0) >= 30 && !unlockedSet.has("streak_30")) {
-        toUnlock.push("streak_30");
-      }
-      if (progress.currentLevel !== "A1" && !unlockedSet.has("a1_master")) {
-        toUnlock.push("a1_master");
-      }
-      if (["B1", "B2", "C1", "C2"].includes(progress.currentLevel) && !unlockedSet.has("b1_expert")) {
-        toUnlock.push("b1_expert");
-      }
-      if ((progress.completedLessons || []).filter((id) => id.includes("dictation")).length >= 3 && !unlockedSet.has("dictation_sniper")) {
-        toUnlock.push("dictation_sniper");
-      }
-      if ((progress.totalXP || 0) >= 1000 && !unlockedSet.has("xp_1000")) {
-        toUnlock.push("xp_1000");
-      }
-      if ((progress.completedLessons || []).length >= 10 && !unlockedSet.has("lesson_hero")) {
-        toUnlock.push("lesson_hero");
-      }
-    }
+    // Helper map for current progress calculation for each badge
+    const progressCurrentMap: Record<string, number> = {};
 
+    Object.values(BADGE_DEFINITIONS).forEach((badge) => {
+      let currentVal = 0;
+
+      switch (badge.category) {
+        case "words":
+          if (badge.id.startsWith("words_")) {
+            currentVal = realWordsLearned;
+          } else if (badge.id.startsWith("flashcards_")) {
+            currentVal = Math.floor(realWordsLearned * 0.8);
+          } else if (badge.id === "quiz_perfect") {
+            const hasPerfect = (progress?.testScores as any[])?.some((t: any) => t.score === t.total && t.total > 0);
+            currentVal = hasPerfect ? 1 : 0;
+          }
+          break;
+
+        case "streak":
+          if (badge.id.startsWith("streak_")) {
+            currentVal = currentStreak;
+          } else if (badge.id === "weekend_hero") {
+            const hasWeekend = dailyActivities.some((a) => {
+              const d = new Date(a.date);
+              return d.getDay() === 0 || d.getDay() === 6;
+            });
+            currentVal = hasWeekend ? 1 : 0;
+          } else if (badge.id === "early_bird" || badge.id === "night_owl") {
+            currentVal = unlockedSet.has(badge.id) ? 1 : 0;
+          }
+          break;
+
+        case "lessons":
+          if (badge.id.startsWith("lesson_")) {
+            currentVal = completedLessons.length;
+          } else if (badge.id.startsWith("level_")) {
+            const levels = ["A1", "A2", "B1", "B2", "C1", "C2"];
+            const targetLvl = badge.id.split("_")[1].toUpperCase();
+            const userIdx = levels.indexOf(currentLevel);
+            const targetIdx = levels.indexOf(targetLvl);
+            currentVal = userIdx >= targetIdx ? 1 : 0;
+          } else if (badge.id.startsWith("dictation_")) {
+            currentVal = completedLessons.filter((id) => id.includes("dictation")).length;
+          } else {
+            currentVal = completedLessons.length > 0 ? 1 : 0;
+          }
+          break;
+
+        case "xp":
+          if (badge.id.startsWith("xp_")) {
+            currentVal = totalXP;
+          } else if (badge.id.startsWith("daily_xp_")) {
+            const maxDailyXP = Math.max(...dailyActivities.map((a) => a.xpEarned), 0);
+            currentVal = maxDailyXP;
+          } else if (badge.id.startsWith("leaderboard_")) {
+            currentVal = unlockedSet.has(badge.id) ? 1 : 0;
+          }
+          break;
+
+        case "games":
+          const totalGames = dailyActivities.reduce((acc, a) => acc + (a.lessonsCompleted || 0), 0);
+          if (badge.id.startsWith("game_")) {
+            currentVal = totalGames;
+          } else {
+            currentVal = unlockedSet.has(badge.id) ? 1 : (totalGames > 0 ? 1 : 0);
+          }
+          break;
+
+        case "ai":
+          const totalChatMsgs = dailyActivities.reduce((acc, a) => acc + (a.chatCount || 0), 0);
+          if (badge.id.startsWith("ai_messages_") || badge.id === "ai_first") {
+            currentVal = totalChatMsgs;
+          } else {
+            currentVal = unlockedSet.has(badge.id) ? 1 : (totalChatMsgs > 0 ? 1 : 0);
+          }
+          break;
+
+        case "secrets":
+          currentVal = unlockedSet.has(badge.id) ? 1 : 0;
+          break;
+
+        default:
+          currentVal = 0;
+      }
+
+      progressCurrentMap[badge.id] = currentVal;
+
+      // Check unlock criteria
+      if (!unlockedSet.has(badge.id)) {
+        if (badge.target && currentVal >= badge.target) {
+          toUnlock.push(badge.id);
+        } else if (!badge.target && currentVal > 0) {
+          toUnlock.push(badge.id);
+        }
+      }
+    });
+
+    // Auto-unlock new qualifying badges
     if (toUnlock.length > 0) {
       await prisma.userBadge.createMany({
         data: toUnlock.map((badgeId) => ({ userId, badgeId })),
@@ -183,12 +144,32 @@ export async function GET() {
       toUnlock.forEach((id) => unlockedSet.add(id));
     }
 
-    const badges = Object.values(BADGE_DEFINITIONS).map((badge) => ({
-      ...badge,
-      unlocked: unlockedSet.has(badge.id),
-    }));
+    // Format response badges
+    const badges = Object.values(BADGE_DEFINITIONS).map((badge) => {
+      const unlocked = unlockedSet.has(badge.id);
+      const isSecret = badge.rarity === "secret";
 
-    return NextResponse.json({ badges });
+      return {
+        ...badge,
+        unlocked,
+        progressCurrent: progressCurrentMap[badge.id] || 0,
+        // Hide descriptions of locked secret badges
+        descEn: isSecret && !unlocked ? badge.descEn : (unlocked && badge.secretDescEn ? badge.secretDescEn : badge.descEn),
+        descRu: isSecret && !unlocked ? badge.descRu : (unlocked && badge.secretDescRu ? badge.secretDescRu : badge.descRu),
+        descUa: isSecret && !unlocked ? badge.descUa : (unlocked && badge.secretDescUa ? badge.secretDescUa : badge.descUa),
+      };
+    });
+
+    return NextResponse.json({
+      badges,
+      stats: {
+        total: badges.length,
+        unlocked: unlockedSet.size,
+        totalXP,
+        currentStreak,
+        currentLevel,
+      },
+    });
   } catch (error) {
     console.error("Badges API Error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
