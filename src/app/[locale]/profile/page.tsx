@@ -441,44 +441,31 @@ export default function ProfilePage() {
       setPhoneOtpStep("otp");
       toast.success(
         locale === "ua"
-          ? "SMS-код успішно надіслано!"
+          ? `📩 SMS-код успішно надіслано на номер ${phoneField}!`
           : locale === "ru"
-          ? "SMS-код успешно отправлен!"
-          : "SMS code sent!"
+          ? `📩 SMS-код успешно отправлен на номер ${phoneField}!`
+          : `SMS verification code sent to ${phoneField}!`
       );
     } catch (err: unknown) {
       const error = err as Error;
       console.error("SMS verification error:", error);
 
-      // If reCAPTCHA fails or domain is restricted (error-code:-39), fall back to saving phone directly in DB!
-      try {
-        const res = await fetch("/api/user/profile", {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ phone: phoneField }),
-        });
-        if (res.ok) {
-          toast.success(
-            locale === "ua"
-              ? "Мобільний номер успішно збережено!"
-              : locale === "ru"
-              ? "Мобильный номер успешно сохранен!"
-              : "Mobile phone saved successfully!"
-          );
-          fetchProfile();
-          return;
-        }
-      } catch (dbErr) {
-        console.error("DB phone save fallback error:", dbErr);
+      let msg = error.message || "Failed to send SMS code";
+      if (error.message?.includes("invalid-phone-number")) {
+        msg = locale === "ua"
+          ? "Невірний формат номера. Вкажіть у міжнародному форматі +380..."
+          : locale === "ru"
+          ? "Неверный формат номера. Укажите в международном формате +380..."
+          : "Invalid phone number format (+380...)";
+      } else if (error.message?.includes("error-code:-39") || error.message?.includes("captcha")) {
+        msg = locale === "ua"
+          ? "Перевірка капчі не пройдена або домен не авторизовано у Firebase."
+          : locale === "ru"
+          ? "Проверка капчи не пройдена или домен не авторизован в Firebase."
+          : "reCAPTCHA check failed or domain not authorized in Firebase.";
       }
 
-      toast.error(
-        locale === "ua"
-          ? "Помилка надсилання SMS. Перевірте формат (+380...)"
-          : locale === "ru"
-          ? "Ошибка отправки SMS. Проверьте формат (+380...)"
-          : error.message || "Failed to send SMS code"
-      );
+      toast.error(msg);
     } finally {
       setVerifyingPhone(false);
     }
