@@ -580,7 +580,23 @@ export default function ProfilePage() {
     } catch (err: unknown) {
       const error = err as Error;
       console.error("Link provider error:", error);
-      toast.error(error.message || `Failed to link ${providerName}`);
+
+      let msg = error.message || `Failed to link ${providerName}`;
+      if (error.message?.includes("invalid-app-id") || error.message?.includes("App ID")) {
+        msg = locale === "ua"
+          ? "Прив'язка Facebook потребує вказання Facebook App ID у консолі Firebase."
+          : locale === "ru"
+          ? "Привязка Facebook требует указания Facebook App ID в консоли Firebase."
+          : "Facebook linking requires configuring Facebook App ID in Firebase console.";
+      } else if (error.message?.includes("popup-closed-by-user")) {
+        msg = locale === "ua"
+          ? "Вікно авторизації було закрито."
+          : locale === "ru"
+          ? "Окно авторизации было закрыто."
+          : "Authorization window was closed.";
+      }
+
+      toast.error(msg);
     } finally {
       setLinkingProvider(null);
     }
