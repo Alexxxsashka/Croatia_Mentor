@@ -271,7 +271,7 @@ export function Navbar() {
                         type="button"
                         onClick={() => {
                           setProfileDropdownOpen(false);
-                          signOut();
+                          signOut({ callbackUrl: `/${locale}` });
                         }}
                         className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-red-400 hover:bg-red-500/10 transition-all text-left"
                       >
@@ -371,7 +371,7 @@ export function Navbar() {
             {session ? (
               <button
                 onClick={() => {
-                  signOut();
+                  signOut({ callbackUrl: `/${locale}` });
                   setMobileOpen(false);
                 }}
                 className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-red-400 hover:bg-red-500/10 active:bg-red-500/20 transition-all"
