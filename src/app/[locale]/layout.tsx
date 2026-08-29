@@ -7,6 +7,7 @@ import { Toaster } from "sonner";
 import { ChangelogModal } from "@/components/changelog-modal";
 import { EmailVerificationModal } from "@/components/auth/EmailVerificationModal";
 import { NotificationListener } from "@/components/notification-listener";
+import Script from "next/script";
 
 export async function generateMetadata({
   params,
@@ -123,7 +124,10 @@ export default async function LocaleLayout({
             `,
           }}
         />
-
+        <Script
+          src={`https://www.google.com/recaptcha/enterprise.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "6Lcygp4tAAAAANfBQrVBDs-OlWk4TjU-V4_0o5QB"}`}
+          strategy="afterInteractive"
+        />
       </head>
       <body className="min-h-screen flex flex-col relative">
         <NextIntlClientProvider messages={messages}>
