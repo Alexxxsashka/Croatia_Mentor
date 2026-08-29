@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export async function POST(req: Request) {
   try {
@@ -9,7 +10,16 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing identity info" }, { status: 400 });
     }
 
-    const normalizedEmail = email ? email.toLowerCase().trim() : `${uid}@firebase.user`;
+    const normalizedEmail = email ? email.toLowerCase().trim() : `${uid}@user`;
+
+    // Rate Limit: Max 5 provider sync/link attempts per 24 hours per user
+    const rateLimit = checkRateLimit(`sync-auth:${normalizedEmail}`, 5, 24 * 60 * 60 * 1000);
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        { error: "Ви перевищили ліміт прив'язки соцмереж (максимум 5 на добу). Спробуйте завтра." },
+        { status: 429 }
+      );
+    }
 
     let user = await prisma.user.findFirst({
       where: {
@@ -71,7 +81,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: true, user });
   } catch (error) {
-    console.error("Firebase sync error:", error);
+    console.error("Auth sync error:", error);
     return NextResponse.json({ error: "Sync failed" }, { status: 500 });
   }
 }

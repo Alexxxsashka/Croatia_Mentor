@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export async function GET() {
   try {
@@ -52,6 +53,16 @@ export async function PUT(req: Request) {
     const session = await auth();
     if (!session?.user?.id && !session?.user?.email) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const userId = session.user.id || session.user.email!;
+    // Rate limit: max 10 profile updates per 24 hours per user
+    const rateLimit = checkRateLimit(`update-profile:${userId}`, 10, 24 * 60 * 60 * 1000);
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        { error: "Ви перевищили ліміт оновлень профілю на добу (максимум 10 на добу). Спробуйте пізніше." },
+        { status: 429 }
+      );
     }
 
     const body = await req.json();

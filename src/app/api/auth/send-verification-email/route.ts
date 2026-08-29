@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth as getSessionAuth } from "@/auth";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export async function POST() {
   try {
@@ -8,12 +9,22 @@ export async function POST() {
       return NextResponse.json({ error: "Unauthorized or missing email" }, { status: 401 });
     }
 
+    const email = session.user.email;
+
+    // Rate Limit: Max 3 email verification attempts per 24 hours per user
+    const rateLimit = checkRateLimit(`send-email:${email.toLowerCase()}`, 3, 24 * 60 * 60 * 1000);
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        { error: "Ви перевищили добовий ліміт надсилання листів (максимум 3 на добу). Спробуйте пізніше." },
+        { status: 429 }
+      );
+    }
+
     const apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
     if (!apiKey) {
       return NextResponse.json({ error: "Firebase API key not configured" }, { status: 500 });
     }
 
-    const email = session.user.email;
     const defaultPassword = `MentorAuth_${session.user.id || "Secure"}_2026!`;
     let idToken: string | null = null;
 
@@ -70,7 +81,7 @@ export async function POST() {
         if (resetData.email) {
           return NextResponse.json({
             success: true,
-            message: "Verification / security link sent to your email!",
+            message: "Ссылка отправлена на вашу почту!",
           });
         }
       }
@@ -78,7 +89,7 @@ export async function POST() {
 
     if (!idToken) {
       return NextResponse.json(
-        { error: signUpData.error?.message || "Failed to authenticate with Firebase" },
+        { error: signUpData.error?.message || "Failed to authenticate with provider" },
         { status: 400 }
       );
     }
@@ -107,7 +118,7 @@ export async function POST() {
 
     return NextResponse.json({
       success: true,
-      message: `Verification link sent to ${email}`,
+      message: `Ссылка для подтверждения отправлена на ${email}`,
     });
   } catch (error) {
     console.error("Send verification email route error:", error);
