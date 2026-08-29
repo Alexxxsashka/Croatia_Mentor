@@ -46,10 +46,10 @@ export async function PUT(req: Request) {
     });
 
     if (!user) {
-      return NextResponse.json({ error: "Пользователь не найден" }, { status: 404 });
+      return NextResponse.json({ error: "Користувача не знайдено" }, { status: 404 });
     }
 
-    // If user has an existing password, verify current password
+    // Verify current password if user has an existing password in DB
     if (user.password) {
       if (!currentPassword) {
         return NextResponse.json(
@@ -67,13 +67,51 @@ export async function PUT(req: Request) {
       }
     }
 
-    // Hash new password securely
+    // 1. Hash new password securely and save to Prisma DB
     const hashedPassword = await bcrypt.hash(newPassword, 12);
 
     await prisma.user.update({
       where: { id: user.id },
       data: { password: hashedPassword },
     });
+
+    // 2. Sync updated password to Firebase Auth
+    const apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
+    if (apiKey && user.email) {
+      try {
+        // Authenticate with Firebase to get idToken, then update password
+        const signInRes = await fetch(
+          `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email: user.email,
+              password: currentPassword || `MentorAuth_${user.id}_2026!`,
+              returnSecureToken: true,
+            }),
+          }
+        );
+        const signInData = await signInRes.json();
+
+        if (signInData.idToken) {
+          await fetch(
+            `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${apiKey}`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                idToken: signInData.idToken,
+                password: newPassword,
+                returnSecureToken: true,
+              }),
+            }
+          );
+        }
+      } catch (fbErr) {
+        console.error("Firebase Auth password sync warning:", fbErr);
+      }
+    }
 
     return NextResponse.json({
       success: true,
