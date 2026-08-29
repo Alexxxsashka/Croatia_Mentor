@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { CheckCircle2, AlertTriangle, Send, Loader2, X, MailCheck, Clock } from "lucide-react";
 import { toast } from "sonner";
-import { auth } from "@/lib/firebase";
 
 export function EmailVerificationModal() {
   const { data: session, status } = useSession();
@@ -60,33 +59,23 @@ export function EmailVerificationModal() {
   const handleCheckStatus = async () => {
     setVerifying(true);
     try {
-      if (auth?.currentUser) {
-        await auth.currentUser.reload();
-        if (auth.currentUser.emailVerified) {
-          await fetch("/api/auth/verify-email", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email: auth.currentUser.email }),
-          });
-          toast.success("Почта успешно подтверждена!");
-          setVisible(false);
-          return;
-        }
+      const res = await fetch("/api/auth/verify-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: session?.user?.email }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        toast.success("Почта успешно подтверждена!");
+        setVisible(false);
+        window.location.reload();
+        return;
       }
-      // Re-fetch backend profile
-      const res = await fetch("/api/user/profile");
-      if (res.ok) {
-        const data = await res.json();
-        if (data?.user?.emailVerified) {
-          toast.success("Почта подтверждена!");
-          setVisible(false);
-          return;
-        }
-      }
-      toast.info("Почта пока не подтверждена. Проверьте ваш почтовый ящик и перейдите по ссылке.");
+      toast.error(data.error || "Не удалось подтвердить статус почты");
     } catch (err: unknown) {
       const error = err as Error;
       console.error("Check verification status error:", error);
+      toast.error(error.message || "Ошибка при проверке статуса");
     } finally {
       setVerifying(false);
     }
@@ -142,12 +131,12 @@ export function EmailVerificationModal() {
             <button
               onClick={handleCheckStatus}
               disabled={verifying}
-              className="py-2.5 px-4 rounded-xl text-xs font-bold bg-white/5 hover:bg-white/10 border border-white/10 text-foreground transition-all flex items-center gap-2"
+              className="py-2.5 px-4 rounded-xl text-xs font-bold bg-emerald-500 hover:bg-emerald-600 text-slate-950 transition-all flex items-center gap-2 shadow-lg shadow-emerald-500/20"
             >
               {verifying ? (
-                <Loader2 className="w-4 h-4 animate-spin text-blue-400" />
+                <Loader2 className="w-4 h-4 animate-spin" />
               ) : (
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                <CheckCircle2 className="w-4 h-4" />
               )}
               Я подтвердил
             </button>
