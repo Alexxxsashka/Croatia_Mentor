@@ -29,29 +29,27 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
+        isSocial: { label: "Is Social", type: "text" },
       },
       async authorize(credentials) {
-        const parsedCredentials = z
-          .object({
-            email: z.string().email(),
-            password: z.string().min(6),
-          })
-          .safeParse(credentials);
+        if (!credentials?.email) return null;
+        const email = (credentials.email as string).toLowerCase().trim();
+        const isSocial = credentials.isSocial === "true";
 
-        if (!parsedCredentials.success) return null;
-
-        const { email, password } = parsedCredentials.data;
-        const normalizedEmail = email.toLowerCase().trim();
         const user = await prisma.user.findFirst({
           where: {
-            email: { equals: normalizedEmail, mode: "insensitive" },
+            email: { equals: email, mode: "insensitive" },
           },
         });
 
-        if (!user || !user.password) return null;
+        if (!user) return null;
 
-        const passwordsMatch = await bcrypt.compare(password, user.password);
-        if (!passwordsMatch) return null;
+        if (!isSocial) {
+          if (!user.password || !credentials.password) return null;
+          const password = credentials.password as string;
+          const passwordsMatch = await bcrypt.compare(password, user.password);
+          if (!passwordsMatch) return null;
+        }
 
         return {
           id: user.id,

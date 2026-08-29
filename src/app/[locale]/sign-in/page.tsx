@@ -114,7 +114,14 @@ export default function SignInPage() {
         const result = await signInWithPopup(auth, googleProvider);
         await syncUserToDb(result.user, "google");
 
-        await signIn("google", { redirect: false });
+        const targetEmail = result.user.email;
+        if (targetEmail) {
+          await signIn("credentials", {
+            email: targetEmail,
+            isSocial: "true",
+            redirect: false,
+          });
+        }
 
         toast.success(
           locale === "ua"
@@ -129,12 +136,8 @@ export default function SignInPage() {
     } catch (err: unknown) {
       const error = err as Error;
       console.error("Social login error:", error);
-      if (providerName === "google") {
-        signIn("google", { callbackUrl: `/${locale}/dashboard` });
-      } else {
-        toast.error(error.message || `Failed to sign in with ${providerName}`);
-        setLoading(false);
-      }
+      toast.error(error.message || `Failed to sign in with ${providerName}`);
+      setLoading(false);
     }
   };
 
