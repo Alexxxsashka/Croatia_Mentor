@@ -227,18 +227,21 @@ export default function ProfilePage() {
   useEffect(() => {
     let isMounted = true;
     if (status === "authenticated") {
-      fetch("/api/user/profile")
-        .then((res) => (res.ok ? res.json() : null))
-        .then((data) => {
-          if (isMounted && data?.user) {
-            setProfile(data.user);
-            setName(data.user.name || "");
-            setNativeLang(data.user.nativeLanguage || "en");
-            setPhone(data.user.phone || "");
-            setEmailField(data.user.email || "");
-            setPhoneField(data.user.phone || "");
+      Promise.all([
+        fetch("/api/user/profile").then((r) => (r.ok ? r.json() : null)),
+        fetch("/api/settings").then((r) => (r.ok ? r.json() : null)),
+      ])
+        .then(([profileData, settingsData]) => {
+          if (!isMounted) return;
+          if (profileData?.user) {
+            setProfile(profileData.user);
+            setName(profileData.user.name || "");
+            setNativeLang(profileData.user.nativeLanguage || "en");
+            setPhone(profileData.user.phone || "");
+            setEmailField(profileData.user.email || "");
+            setPhoneField(profileData.user.phone || "");
 
-            const userImg = data.user.image || "";
+            const userImg = profileData.user.image || "";
             if (userImg) {
               const isPreset = PRESET_AVATARS.some((p) => p.emoji === userImg);
               if (isPreset) {
@@ -251,23 +254,19 @@ export default function ProfilePage() {
               setAvatar("🦊");
             }
           }
-        })
-        .catch((err) => console.error("Profile load error:", err))
-      fetch("/api/settings")
-        .then((res) => (res.ok ? res.json() : null))
-        .then((data) => {
-          if (isMounted && data?.settings) {
-            setDailyGoalMinutes(data.settings.dailyGoalMinutes || 10);
-            setReminderEnabled(data.settings.reminderEnabled ?? true);
-            setReminderTime(data.settings.reminderTime || "09:00");
-            setNotificationsEnabled(data.settings.notificationsEnabled ?? false);
+          if (settingsData?.settings) {
+            setDailyGoalMinutes(settingsData.settings.dailyGoalMinutes || 10);
+            setReminderEnabled(settingsData.settings.reminderEnabled ?? true);
+            setReminderTime(settingsData.settings.reminderTime || "09:00");
+            setNotificationsEnabled(settingsData.settings.notificationsEnabled ?? false);
           }
         })
-        .catch((err) => console.error("Settings load error:", err));
+        .catch((err) => console.error("Profile/settings load error:", err))
+        .finally(() => {
+          if (isMounted) setLoading(false);
+        });
     } else if (status === "unauthenticated") {
-      queueMicrotask(() => {
-        if (isMounted) setLoading(false);
-      });
+      if (isMounted) setLoading(false);
     }
     return () => {
       isMounted = false;
