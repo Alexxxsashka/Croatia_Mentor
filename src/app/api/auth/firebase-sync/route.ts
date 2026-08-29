@@ -9,13 +9,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing identity info" }, { status: 400 });
     }
 
-    // Identify target user by email or phone or linked provider
-    const searchEmail = email || `${uid}@firebase.user`;
-    
+    const normalizedEmail = email ? email.toLowerCase().trim() : `${uid}@firebase.user`;
+
     let user = await prisma.user.findFirst({
       where: {
         OR: [
-          email ? { email } : {},
+          email ? { email: { equals: normalizedEmail, mode: "insensitive" } } : {},
           phoneNumber ? { phone: phoneNumber } : {},
         ],
       },
@@ -24,7 +23,7 @@ export async function POST(req: Request) {
     if (!user) {
       user = await prisma.user.create({
         data: {
-          email: searchEmail,
+          email: normalizedEmail,
           name: displayName || email?.split("@")[0] || "User",
           image: photoURL || null,
           phone: phoneNumber || null,
@@ -50,7 +49,6 @@ export async function POST(req: Request) {
       });
     }
 
-    // Sync account provider if specified
     if (providerId) {
       const existingAccount = await prisma.account.findFirst({
         where: {

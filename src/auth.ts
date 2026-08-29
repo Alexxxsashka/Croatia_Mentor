@@ -17,10 +17,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      allowDangerousEmailAccountLinking: true,
     }),
     GitHub({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
+      allowDangerousEmailAccountLinking: true,
     }),
     Credentials({
       name: "credentials",
@@ -39,7 +41,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         if (!parsedCredentials.success) return null;
 
         const { email, password } = parsedCredentials.data;
-        const user = await prisma.user.findUnique({ where: { email } });
+        const normalizedEmail = email.toLowerCase().trim();
+        const user = await prisma.user.findFirst({
+          where: {
+            email: { equals: normalizedEmail, mode: "insensitive" },
+          },
+        });
 
         if (!user || !user.password) return null;
 
@@ -58,8 +65,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async jwt({ token, user, trigger, session }) {
       if (user) {
-        const dbUser = await prisma.user.findUnique({
-          where: { email: user.email! },
+        const dbUser = await prisma.user.findFirst({
+          where: {
+            email: { equals: user.email!, mode: "insensitive" },
+          },
           include: { progress: true },
         });
         if (dbUser) {
