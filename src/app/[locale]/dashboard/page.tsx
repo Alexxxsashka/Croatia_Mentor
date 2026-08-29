@@ -2,7 +2,7 @@
 
 import { useTranslations, useLocale } from "next-intl";
 import { useSession } from "next-auth/react";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import { useState, useEffect } from "react";
 import { lessonsData, getLocalizedText } from "@/lib/lessons-data";
 import { DailyQuestWizard } from "@/components/daily-quest-wizard";
@@ -53,6 +53,8 @@ interface UserProgress {
 
 export default function DashboardPage() {
   const t = useTranslations("dashboard");
+  const locale = useLocale();
+  const router = useRouter();
   const { data: session, status } = useSession();
 
   const [progress, setProgress] = useState<UserProgress | null>(null);
@@ -68,6 +70,12 @@ export default function DashboardPage() {
   } | null>(null);
 
   const [dailyHistory, setDailyHistory] = useState<{ date: string; xpEarned: number; completed: boolean }[]>([]);
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.replace("/sign-in");
+    }
+  }, [status, router]);
 
   useEffect(() => {
     if (status === "authenticated") {
@@ -128,7 +136,6 @@ export default function DashboardPage() {
   const totalXP = progress?.totalXP ?? 0;
   const streak = progress?.currentStreak ?? 0;
   const completedCount = progress?.completedLessons?.length ?? 0;
-  const locale = useLocale();
 
   // Level progress calculations
   const lessonsInCurrentLevel = lessonsData.filter((l) => l.level === currentLevel);
@@ -297,7 +304,7 @@ export default function DashboardPage() {
     },
   ];
 
-  if (loading) {
+  if (status === "loading" || status === "unauthenticated" || loading) {
     return (
       <div className="flex-1 flex items-center justify-center min-h-[50vh]">
         <div className="flex flex-col items-center gap-3">

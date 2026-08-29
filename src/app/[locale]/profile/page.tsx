@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useLocale } from "next-intl";
+import { Link, useRouter } from "@/i18n/navigation";
 import {
   User,
   Mail,
@@ -92,7 +93,14 @@ const PRESET_AVATARS = [
 
 export default function ProfilePage() {
   const locale = useLocale();
+  const router = useRouter();
   const { status, update: updateSession } = useSession();
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.replace("/sign-in");
+    }
+  }, [status, router]);
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
