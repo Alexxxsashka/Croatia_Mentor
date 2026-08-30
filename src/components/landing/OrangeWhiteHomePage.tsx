@@ -76,8 +76,12 @@ export function OrangeWhiteHomePage({ scrollY }: { scrollY: number }) {
       <div className="relative z-20 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between text-[11px] font-bold tracking-[0.2em] uppercase text-slate-400 overflow-x-auto whitespace-nowrap">
           <div className="flex items-center gap-6">
-            <span className="flex items-center gap-2 text-purple-400 font-extrabold">
-              <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
+            <span className="flex items-center gap-2 text-orange-400 font-extrabold">
+              <img
+                src="/logos/logo-variant-3.jpg"
+                alt="Croatia Mentor Logo"
+                className="w-5 h-5 rounded-md object-cover border border-orange-500/30"
+              />
               CROATIA MENTOR
             </span>
             <span className="hidden sm:inline border-l border-slate-800 pl-6 text-slate-300">CEFR A1 — C2</span>

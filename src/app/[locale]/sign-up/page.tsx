@@ -256,8 +256,12 @@ export default function SignUpPage() {
 
       <div className="relative w-full max-w-md">
         <div className="text-center mb-8 animate-fade-in">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-600 mb-4 shadow-2xl shadow-purple-500/25">
-            <GraduationCap className="w-8 h-8 text-white" />
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl overflow-hidden mb-4 shadow-2xl shadow-orange-500/25 border border-orange-500/20">
+            <img
+              src="/logos/logo-variant-3.jpg"
+              alt="Croatia Mentor Logo"
+              className="w-full h-full object-cover"
+            />
           </div>
           <h1 className="text-3xl font-bold mb-2">{t("title")}</h1>
           <p className="text-muted-foreground">{t("subtitle")}</p>

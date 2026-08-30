@@ -33,9 +33,9 @@ export async function generateMetadata({
       },
     },
     icons: {
-      icon: "/logos/logo-variant-1.jpg",
-      shortcut: "/logos/logo-variant-1.jpg",
-      apple: "/logos/logo-variant-1.jpg",
+      icon: "/logos/logo-variant-3.jpg",
+      shortcut: "/logos/logo-variant-3.jpg",
+      apple: "/logos/logo-variant-3.jpg",
     },
     openGraph: {
       title: t("title"),
@@ -44,7 +44,7 @@ export async function generateMetadata({
       type: "website",
       images: [
         {
-          url: "/logos/logo-variant-1.jpg",
+          url: "/logos/logo-variant-3.jpg",
           width: 800,
           height: 800,
           alt: "Croatia Mentor Official Logo",

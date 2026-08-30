@@ -16,9 +16,9 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl overflow-hidden shadow-md shadow-purple-500/20 border border-purple-500/30">
+              <div className="w-9 h-9 rounded-xl overflow-hidden shadow-md shadow-orange-500/20 border border-orange-500/30">
                 <img
-                  src="/logos/logo-variant-1.jpg"
+                  src="/logos/logo-variant-3.jpg"
                   alt="Croatia Mentor Logo"
                   className="w-full h-full object-cover"
                 />
