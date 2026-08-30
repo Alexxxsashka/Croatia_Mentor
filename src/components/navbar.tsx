@@ -23,7 +23,6 @@ import {
   User,
   ChevronDown,
   Flame,
-  Award,
   Sparkles,
 } from "lucide-react";
 
@@ -254,15 +253,6 @@ export function Navbar() {
                     >
                       <User className="w-4 h-4 text-blue-400" />
                       {locale === "ua" ? "Профіль учасника" : locale === "ru" ? "Профиль участника" : "My Profile"}
-                    </Link>
-
-                    <Link
-                      href="/achievements"
-                      onClick={() => setProfileDropdownOpen(false)}
-                      className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-amber-400 hover:bg-amber-500/10 transition-all"
-                    >
-                      <Award className="w-4 h-4 text-amber-400" />
-                      {locale === "ua" ? "Досягнення (100+)" : locale === "ru" ? "Достижения (100+)" : "Achievements (100+)"}
                     </Link>
 
                     {isAdmin && (
