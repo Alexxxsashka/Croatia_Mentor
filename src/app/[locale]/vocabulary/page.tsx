@@ -771,8 +771,8 @@ export default function VocabularyPortal() {
       )}
 
 
-      {/* Filters (skip during active quiz or glossary) */}
-      {!(activeTab === "quiz" && quizStarted && !quizComplete) && activeTab !== "glossary" && (
+      {/* Filters (skip during active quiz) */}
+      {!(activeTab === "quiz" && quizStarted && !quizComplete) && (
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 bg-white/5 p-4 rounded-2xl border border-white/10 animate-fade-in">
           <div className="flex flex-wrap items-center gap-4">
             <div className="flex items-center gap-2">
