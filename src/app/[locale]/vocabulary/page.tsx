@@ -1231,7 +1231,7 @@ export default function VocabularyPortal() {
                         </button>
 
                         {/* Front Side */}
-                        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 backface-hidden">
+                        <div className={`absolute inset-0 flex flex-col items-center justify-center p-6 backface-hidden transition-opacity duration-300 ${isFlipped ? "opacity-0 pointer-events-none" : "opacity-100 z-10"}`}>
                           <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 uppercase tracking-wider mb-4 border border-blue-500/20">
                             {word.level} • {getCategoryLabel(word.category)}
                           </span>
@@ -1255,7 +1255,7 @@ export default function VocabularyPortal() {
                         </div>
 
                         {/* Back Side */}
-                        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 backface-hidden rotate-y-180">
+                        <div className={`absolute inset-0 flex flex-col items-center justify-center p-6 backface-hidden rotate-y-180 transition-opacity duration-300 ${isFlipped ? "opacity-100 z-10" : "opacity-0 pointer-events-none"}`}>
                           <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 uppercase tracking-wider mb-3 border border-emerald-500/20">
                             {getCategoryLabel(word.category)}
                           </span>

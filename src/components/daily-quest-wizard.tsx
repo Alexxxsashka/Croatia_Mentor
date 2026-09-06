@@ -252,7 +252,7 @@ export function DailyQuestWizard({ onComplete }: DailyQuestWizardProps) {
           className="w-full h-64 cursor-pointer relative perspective my-4"
         >
           <div className={`w-full h-full duration-500 preserve-3d relative rounded-2xl glass border border-white/10 flex flex-col items-center justify-center p-6 text-center transition-transform shadow-xl ${isFlipped ? "rotate-y-180" : ""}`}>
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 backface-hidden">
+            <div className={`absolute inset-0 flex flex-col items-center justify-center p-6 backface-hidden transition-opacity duration-300 ${isFlipped ? "opacity-0 pointer-events-none" : "opacity-100 z-10"}`}>
               <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 mb-3">
                 {word.level} • {word.category}
               </span>
@@ -265,7 +265,7 @@ export function DailyQuestWizard({ onComplete }: DailyQuestWizardProps) {
               </button>
               <p className="text-xs text-muted-foreground mt-4">Переверніть картку 🔄</p>
             </div>
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 backface-hidden rotate-y-180">
+            <div className={`absolute inset-0 flex flex-col items-center justify-center p-6 backface-hidden rotate-y-180 transition-opacity duration-300 ${isFlipped ? "opacity-100 z-10" : "opacity-0 pointer-events-none"}`}>
               <h4 className="text-3xl font-extrabold text-foreground">{getTranslation(word)}</h4>
               {word.example && (
                 <p className="text-xs italic text-muted-foreground mt-3">&quot;{word.example.hr}&quot;</p>
