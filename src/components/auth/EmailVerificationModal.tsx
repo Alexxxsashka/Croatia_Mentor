@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { CheckCircle2, AlertTriangle, Send, Loader2, X, MailCheck, Clock } from "lucide-react";
 import { toast } from "sonner";
+import { auth } from "@/lib/firebase";
+import { sendEmailVerification } from "firebase/auth";
 
 export function EmailVerificationModal() {
   const { data: session, status } = useSession();
@@ -38,6 +40,12 @@ export function EmailVerificationModal() {
   const handleSendVerification = async () => {
     setSending(true);
     try {
+      if (auth?.currentUser && !auth.currentUser.emailVerified) {
+        await sendEmailVerification(auth.currentUser);
+        toast.success(`Ссылка для подтверждения отправлена на ${auth.currentUser.email}!`);
+        return;
+      }
+
       const res = await fetch("/api/auth/send-verification-email", {
         method: "POST",
       });

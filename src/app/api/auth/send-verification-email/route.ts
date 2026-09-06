@@ -65,23 +65,25 @@ export async function POST() {
       if (signInData.idToken) {
         idToken = signInData.idToken;
       } else {
-        // If password differs, trigger password reset verification link
-        const resetRes = await fetch(
+        // If password differs, send email sign-in / verification link instead of password reset email
+        const siteUrl = process.env.NEXTAUTH_URL || "https://croatia-mentor.space";
+        const emailLinkRes = await fetch(
           `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${apiKey}`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              requestType: "PASSWORD_RESET",
+              requestType: "EMAIL_SIGNIN",
               email,
+              continueUrl: `${siteUrl}/dashboard`,
             }),
           }
         );
-        const resetData = await resetRes.json();
-        if (resetData.email) {
+        const emailLinkData = await emailLinkRes.json();
+        if (emailLinkData.email) {
           return NextResponse.json({
             success: true,
-            message: "Ссылка отправлена на вашу почту!",
+            message: `Ссылка для подтверждения отправлена на ${email}!`,
           });
         }
       }
