@@ -51,6 +51,7 @@ export async function POST(req: Request) {
       user = await prisma.user.update({
         where: { id: user.id },
         data: {
+          email: normalizedEmail,
           ...(phoneNumber && !user.phone ? { phone: phoneNumber } : {}),
           ...(displayName && !user.name ? { name: displayName } : {}),
           ...(photoURL && !user.image ? { image: photoURL } : {}),

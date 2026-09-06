@@ -23,21 +23,47 @@ export async function POST(req: Request) {
     }
 
     const { name, email, password, nativeLanguage } = parsed.data;
+    const normalizedEmail = email.toLowerCase().trim();
 
-    const existingUser = await prisma.user.findUnique({ where: { email } });
-    if (existingUser) {
-      return NextResponse.json(
-        { error: "User already exists" },
-        { status: 409 }
-      );
-    }
+    // Check if user already exists (case-insensitive)
+    const existingUser = await prisma.user.findFirst({
+      where: {
+        email: { equals: normalizedEmail, mode: "insensitive" },
+      },
+    });
 
     const hashedPassword = await bcrypt.hash(password, 12);
+
+    if (existingUser) {
+      // If user exists and already has a password set, block duplicate registration
+      if (existingUser.password) {
+        return NextResponse.json(
+          { error: "User already exists" },
+          { status: 409 }
+        );
+      }
+
+      // If user was created via OAuth/Firebase sync without password, update existing account
+      const updatedUser = await prisma.user.update({
+        where: { id: existingUser.id },
+        data: {
+          name: name || existingUser.name,
+          password: hashedPassword,
+          nativeLanguage,
+          email: normalizedEmail, // Ensure stored email is lowercased
+        },
+      });
+
+      return NextResponse.json(
+        { message: "Password set and account updated successfully", userId: updatedUser.id },
+        { status: 200 }
+      );
+    }
 
     const user = await prisma.user.create({
       data: {
         name,
-        email,
+        email: normalizedEmail,
         password: hashedPassword,
         nativeLanguage,
         progress: {

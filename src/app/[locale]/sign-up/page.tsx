@@ -114,17 +114,37 @@ export default function SignUpPage() {
     }
 
     setLoading(true);
+    const normalizedEmail = form.email.toLowerCase().trim();
 
     try {
-      // 1. Register with Firebase Auth
-      let fbUser: FirebaseUser | undefined;
+      // 1. Register with App backend API (creates or updates user with password and normalized email)
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: normalizedEmail,
+          password: form.password,
+          nativeLanguage: form.nativeLanguage,
+        }),
+      });
+
+      const registerData = await res.json();
+
+      if (!res.ok) {
+        toast.error(registerData.error || "Registration failed");
+        setLoading(false);
+        return;
+      }
+
+      // 2. Register with Firebase Auth & sync
       try {
         const userCredential = await createUserWithEmailAndPassword(
           auth,
-          form.email,
+          normalizedEmail,
           form.password
         );
-        fbUser = userCredential.user;
+        const fbUser = userCredential.user;
         if (form.name) {
           await updateProfile(fbUser, { displayName: form.name });
         }
@@ -134,25 +154,8 @@ export default function SignUpPage() {
         console.log("Firebase registration notice:", error.message);
       }
 
-      // 2. Register with App backend API
-      const res = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          password: form.password,
-          nativeLanguage: form.nativeLanguage,
-        }),
-      });
-
-      if (res.ok || fbUser) {
-        toast.success(t("success"));
-        router.push("/sign-in");
-      } else {
-        const data = await res.json();
-        toast.error(data.error || "Registration failed");
-      }
+      toast.success(t("success"));
+      router.push("/sign-in");
     } catch {
       toast.error("Something went wrong");
     } finally {

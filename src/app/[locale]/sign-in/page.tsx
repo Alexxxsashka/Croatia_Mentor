@@ -73,12 +73,13 @@ export default function SignInPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    const normalizedEmail = form.email.toLowerCase().trim();
 
     try {
       // 1. Try Firebase Auth first
       let fbSuccess = false;
       try {
-        const userCredential = await signInWithEmailAndPassword(auth, form.email, form.password);
+        const userCredential = await signInWithEmailAndPassword(auth, normalizedEmail, form.password);
         await syncUserToDb(userCredential.user, "password");
         fbSuccess = true;
       } catch (fbErr) {
@@ -87,7 +88,7 @@ export default function SignInPage() {
 
       // 2. NextAuth Sign In
       const result = await signIn("credentials", {
-        email: form.email,
+        email: normalizedEmail,
         password: form.password,
         redirect: false,
       });
