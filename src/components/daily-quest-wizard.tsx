@@ -80,6 +80,7 @@ export function DailyQuestWizard({ onComplete }: DailyQuestWizardProps) {
     setRecallIndex(0);
     setupRecall(0, questWords);
     setStage("immediate_recall");
+    if (questWords[0]) speakText(questWords[0].hr);
   };
 
   const handleRecallAnswer = (option: string) => {
@@ -96,6 +97,7 @@ export function DailyQuestWizard({ onComplete }: DailyQuestWizardProps) {
       const nextIdx = recallIndex + 1;
       setRecallIndex(nextIdx);
       setupRecall(nextIdx, questWords);
+      if (questWords[nextIdx]) speakText(questWords[nextIdx].hr);
     } else {
       // Move to audio spelling
       setSpellingIndex(0);
@@ -307,9 +309,9 @@ export function DailyQuestWizard({ onComplete }: DailyQuestWizardProps) {
           <h3 className="text-3xl font-black text-foreground">{word.hr}</h3>
           <button
             onClick={() => speakText(word.hr)}
-            className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-muted-foreground transition-all inline-block mt-1"
+            className="p-2.5 sm:p-2 rounded-full bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-foreground transition-all inline-flex items-center justify-center min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 mt-1"
           >
-            <Volume2 className="w-4 h-4" />
+            <Volume2 className="w-5 h-5 sm:w-4 sm:h-4" />
           </button>
         </div>
         <div className="grid gap-2.5">

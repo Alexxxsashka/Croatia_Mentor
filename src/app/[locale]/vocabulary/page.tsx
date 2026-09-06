@@ -499,7 +499,7 @@ export default function VocabularyPortal() {
     setQuizComplete(false);
     setQuizStarted(true);
 
-    if (questions[0]?.type === "listening" || questions[0]?.type === "audio_spelling") {
+    if (questions[0]?.word?.hr) {
       setTimeout(() => speakText(questions[0].word.hr), 300);
     }
   };
@@ -553,7 +553,7 @@ export default function VocabularyPortal() {
       setQuizInputCorrect(false);
       setQuizSpellingResult(null);
 
-      if (quizQuestions[nextIdx]?.type === "listening" || quizQuestions[nextIdx]?.type === "audio_spelling") {
+      if (quizQuestions[nextIdx]?.word?.hr) {
         setTimeout(() => speakText(quizQuestions[nextIdx].word.hr), 300);
       }
     } else {
@@ -991,9 +991,9 @@ export default function VocabularyPortal() {
                             </button>
                             <button
                               onClick={() => speakWord(word.hr)}
-                              className="p-1 rounded bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
+                              className="p-2.5 sm:p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 flex items-center justify-center"
                             >
-                              <Volume2 className="w-4 h-4" />
+                              <Volume2 className="w-5 h-5 sm:w-4 sm:h-4" />
                             </button>
                           </div>
                         </div>
@@ -1244,9 +1244,9 @@ export default function VocabularyPortal() {
                                 e.stopPropagation();
                                 speakWord(word.hr);
                               }}
-                              className="p-2 rounded-full bg-blue-600/10 text-blue-400 border border-blue-500/20 hover:bg-blue-600 hover:text-white transition-all"
+                              className="p-3 sm:p-2 rounded-full bg-blue-600/10 text-blue-400 border border-blue-500/20 hover:bg-blue-600 hover:text-white transition-all min-w-[44px] min-h-[44px] flex items-center justify-center"
                             >
-                              <Volume2 className="w-4 h-4" />
+                              <Volume2 className="w-5 h-5 sm:w-4 sm:h-4" />
                             </button>
                             <span className="text-xs text-muted-foreground select-none">
                               {t("revealTranslation")}
@@ -1538,11 +1538,12 @@ export default function VocabularyPortal() {
                         <>
                           <h3 className="text-3xl font-black text-foreground tracking-tight">{q.prompt}</h3>
                           <div className="flex items-center justify-center gap-2 mt-1">
-                            {q.prompt === q.word.hr && (
-                              <button onClick={() => speakWord(q.word.hr)} className="p-1 rounded bg-blue-500/10 text-blue-400">
-                                <Volume2 className="w-3.5 h-3.5" />
-                              </button>
-                            )}
+                            <button 
+                              onClick={() => speakWord(q.word.hr)} 
+                              className="p-2.5 sm:p-1 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-600 hover:text-white transition-all min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 flex items-center justify-center"
+                            >
+                              <Volume2 className="w-5 h-5 sm:w-4 sm:h-4" />
+                            </button>
                             <p className="text-xs text-muted-foreground">{t("chooseCorrectTranslation")}</p>
                           </div>
                         </>

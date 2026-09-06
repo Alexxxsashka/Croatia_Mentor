@@ -4,7 +4,8 @@ import { useState, useEffect, useCallback } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { vocabularyWords } from "@/lib/vocabulary-data";
-import { ArrowLeft, RefreshCw, Trophy, Zap, Timer } from "lucide-react";
+import { ArrowLeft, RefreshCw, Trophy, Zap, Timer, Volume2 } from "lucide-react";
+import { speakText } from "@/lib/speech";
 
 function getTranslation(word: typeof vocabularyWords[0], locale: string) {
   if (locale === "ru") return word.ru;
@@ -249,10 +250,17 @@ export default function SpeedQuizPage() {
     );
   }
 
+  // Auto speech on question load
+  useEffect(() => {
+    if (gameStarted && !gameOver && questions[currentIndex]?.word?.hr) {
+      speakText(questions[currentIndex].word.hr);
+    }
+  }, [gameStarted, gameOver, currentIndex, questions]);
+
   const q = questions[currentIndex];
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-8">
+    <div className="max-w-2xl mx-auto px-4 py-8 space-y-6 sm:space-y-8">
       {/* Header */}
       <div className="flex items-center justify-between mb-6 animate-fade-in">
         <button onClick={() => router.push("/games")} className="p-2 rounded-xl glass hover:bg-white/10 transition-all">
@@ -283,9 +291,19 @@ export default function SpeedQuizPage() {
       </div>
 
       {/* Question word */}
-      <div className="text-center mb-8">
+      <div className="text-center mb-8 space-y-2">
         <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">{t("speedQuiz.translateThis")}</p>
-        <h2 className="text-4xl font-black text-foreground">{q.word.hr}</h2>
+        <div className="flex items-center justify-center gap-3">
+          <h2 className="text-4xl font-black text-foreground">{q.word.hr}</h2>
+          <button
+            type="button"
+            onClick={() => speakText(q.word.hr)}
+            className="p-2.5 sm:p-2 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 hover:bg-amber-500 hover:text-white transition-all min-w-[44px] min-h-[44px] flex items-center justify-center"
+            title="Listen"
+          >
+            <Volume2 className="w-5 h-5 sm:w-4 sm:h-4" />
+          </button>
+        </div>
         <span className="text-xs text-muted-foreground">{q.word.level}</span>
       </div>
 

@@ -83,7 +83,7 @@ export function DictationPlayer({ text }: DictationPlayerProps) {
             <button
               key={s}
               onClick={() => setSpeed(s)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`px-3.5 py-2.5 sm:px-3 sm:py-1.5 rounded-lg text-xs font-medium transition-all min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0 flex items-center justify-center ${
                 speed === s
                   ? "bg-blue-500/20 text-blue-400 border border-blue-500/30"
                   : "glass hover:bg-white/10"

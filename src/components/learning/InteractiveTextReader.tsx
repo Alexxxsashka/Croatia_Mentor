@@ -152,9 +152,9 @@ export function InteractiveTextReader({ text, locale }: InteractiveTextReaderPro
                 <button
                   type="button"
                   onClick={() => speakText(selectedWord.normalized)}
-                  className="p-1 rounded-lg glass hover:bg-white/10 text-cyan-400 cursor-pointer"
+                  className="p-2.5 sm:p-1.5 rounded-lg glass hover:bg-white/10 text-cyan-400 cursor-pointer min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 flex items-center justify-center"
                 >
-                  <Volume2 className="w-4 h-4" />
+                  <Volume2 className="w-5 h-5 sm:w-4 sm:h-4" />
                 </button>
               </div>
               <p className="text-xs text-muted-foreground mt-0.5">{selectedWord.translation}</p>

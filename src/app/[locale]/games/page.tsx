@@ -121,10 +121,10 @@ export default function GamesPage() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-transparent text-slate-100 font-sans selection:bg-purple-600 selection:text-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+    <div className="relative min-h-screen bg-transparent text-slate-100 font-sans selection:bg-purple-600 selection:text-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10 sm:space-y-12">
       
       {/* HERO HEADER */}
-      <div className="text-center space-y-4 animate-fade-in pt-2 pb-4 border-b border-white/10">
+      <div className="text-center space-y-6 sm:space-y-4 animate-fade-in pt-2 pb-6 border-b border-white/10">
         <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-purple-300 bg-purple-950/50 px-4 py-2 rounded-full border border-purple-500/30 backdrop-blur-sm shadow-lg shadow-purple-950/50">
           <Gamepad2 className="w-4 h-4 text-purple-400 animate-pulse" />
           <span>
@@ -157,7 +157,7 @@ export default function GamesPage() {
         </p>
 
         {/* Quick Stats Overview */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto pt-2">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-3 max-w-3xl mx-auto pt-2">
           <div className="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 backdrop-blur-md text-center space-y-1">
             <Gamepad2 className="w-5 h-5 text-purple-400 mx-auto" />
             <span className="text-lg font-black text-white font-mono block">8 Modes</span>
