@@ -7,7 +7,7 @@ export default function GlossaryRedirect() {
   const router = useRouter();
 
   useEffect(() => {
-    router.replace("/vocabulary?tab=glossary");
+    router.replace("/grammar");
   }, [router]);
 
   return null;

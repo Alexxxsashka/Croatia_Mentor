@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 import {
   vocabularyWords,
@@ -1724,6 +1725,29 @@ export default function VocabularyPortal() {
       {/* Grammar Glossary Tab Content */}
       {activeTab === "glossary" && (
         <div className="space-y-6 animate-fade-in">
+          {/* Banner to new Standalone Grammar Hub */}
+          <div className="p-6 rounded-3xl bg-gradient-to-r from-purple-900/60 via-indigo-900/60 to-slate-900 border border-purple-500/40 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl bg-purple-500/20 text-purple-300 flex items-center justify-center border border-purple-500/30 shrink-0">
+                <GraduationCap className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-white uppercase font-editorial">
+                  {locale === "ua" ? "Окремий граматичний довідник та інтерактивний тест" : locale === "ru" ? "Отдельный грамматический справочник и интерактивный тест" : "Standalone Grammar Handbook & Theory Practice Test"}
+                </h3>
+                <p className="text-xs text-purple-200 mt-0.5">
+                  {locale === "ua" ? "Відкривайте розділи у стилі Claude Code та ґенеруйте практики по кожній темі" : locale === "ru" ? "Открывайте разделы в стиле Claude Code и генерируйте практики по каждой теме" : "Open topics in Claude Code sidebar style & generate theory practice tests"}
+                </p>
+              </div>
+            </div>
+            <Link
+              href="/grammar"
+              className="px-5 py-2.5 rounded-xl font-bold bg-gradient-to-r from-purple-500 to-indigo-600 text-white text-xs uppercase tracking-wider shadow-lg hover:opacity-90 transition-all shrink-0 flex items-center gap-2"
+            >
+              <span>{locale === "ua" ? "Перейти до справочника →" : locale === "ru" ? "Перейти к справочнику →" : "Open Grammar Hub →"}</span>
+            </Link>
+          </div>
+
           <div className="glass p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6 shadow-xl">
             
             {/* Header & Subtitle */}
