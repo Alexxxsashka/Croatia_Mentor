@@ -155,12 +155,12 @@ export function Navbar() {
   return (
     <nav className="sticky top-0 z-50 border-b border-orange-500/20 bg-white/85 dark:bg-slate-950/85 backdrop-blur-md transition-colors duration-300">
 
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14 sm:h-16">
+      <div className="max-w-[96rem] w-full mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-14 sm:h-16 gap-2">
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 group"
+            className="flex items-center gap-2.5 group shrink-0"
           >
             <div className="w-9 h-9 rounded-xl overflow-hidden shadow-md shadow-orange-500/20 group-hover:scale-105 transition-transform duration-300 border border-orange-500/30">
               <img
@@ -169,25 +169,23 @@ export function Navbar() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <span className="text-lg sm:text-xl font-black uppercase tracking-wider font-sans text-slate-900 dark:text-white hidden sm:block drop-shadow-sm">
+            <span className="text-lg sm:text-xl font-black uppercase tracking-wider font-sans text-slate-900 dark:text-white hidden sm:block drop-shadow-sm whitespace-nowrap">
               Croatia Mentor
             </span>
-
           </Link>
 
-
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-0.5 lg:gap-1.5 shrink-0">
             {navLinks.map((link) => {
               if (link.disabled) {
                 return (
                   <span
                     key={link.href}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground/40 cursor-not-allowed bg-transparent"
+                    className="flex items-center gap-1.5 lg:gap-2 px-2.5 lg:px-3.5 py-2 rounded-xl text-xs lg:text-sm font-medium text-muted-foreground/40 cursor-not-allowed bg-transparent whitespace-nowrap"
                     title={locale === "ua" ? "Тимчасово недоступно" : locale === "ru" ? "Временно недоступно" : "Temporarily unavailable"}
                   >
-                    <link.icon className="w-4 h-4" />
-                    {link.label}
+                    <link.icon className="w-4 h-4 shrink-0" />
+                    <span className="whitespace-nowrap">{link.label}</span>
                   </span>
                 );
               }
@@ -195,10 +193,10 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-200"
+                  className="flex items-center gap-1.5 lg:gap-2 px-2.5 lg:px-3.5 py-2 rounded-xl text-xs lg:text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-200 whitespace-nowrap shrink-0"
                 >
-                  <link.icon className="w-4 h-4" />
-                  {link.label}
+                  <link.icon className="w-4 h-4 shrink-0" />
+                  <span className="whitespace-nowrap">{link.label}</span>
                 </Link>
               );
             })}
