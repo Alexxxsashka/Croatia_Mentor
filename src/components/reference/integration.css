@@ -41,6 +41,11 @@
 .reference-design .hero{color:#f5f3ed;--ref-text:#f5f3ed;--ref-muted:#b4c0c2;--ref-accent:#d2aa73}
 .reference-design.reference-home .public-header{color:#f5f3ed;--ref-text:#f5f3ed;--ref-muted:#b4c0c2;--ref-accent:#d2aa73}
 .reference-design .sidebar{--ref-text:#f5f3ed;--ref-muted:#b4c0c2;--ref-accent:#d2aa73;color:#f5f3ed}
+.reference-design .avatar{display:inline-flex;align-items:center;justify-content:center;overflow:hidden;border-radius:50%;width:35px;height:35px;border:1px solid var(--ref-line);background:var(--ref-surface);text-decoration:none;transition:transform .2s,border-color .2s;flex-shrink:0}
+.reference-design .avatar:hover{transform:scale(1.05);border-color:var(--ref-accent)}
+.reference-design .brand-symbol{overflow:hidden;border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid #d2aa7366}
+.reference-design .brand-symbol img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
 @media(max-width:700px){.reference-design .mobile-close{display:grid;position:absolute;right:12px;top:25px}.reference-design .header-actions{gap:6px}.reference-design .public-header .header-login{font-size:11px}.reference-design .public-header .brand{font-size:14px}.reference-design .legacy-content h1{font-size:28px}.reference-design .top-stats{display:none}}
 @media(prefers-reduced-motion:reduce){.reference-design *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media(max-width:700px){.reference-design .sidebar:not(.open){visibility:hidden}.reference-design .sidebar.open{visibility:visible}}
+

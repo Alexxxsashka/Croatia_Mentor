@@ -14,7 +14,87 @@ const navigation = [
   ['/vocabulary','Словарь',Languages], ['/games','Практика',Shapes],
   ['/ai-chat','AI-наставник',Sparkles],
 ] as const;
-function Brand(){return <Link href="/" className="brand"><span className="brand-symbol"><Route size={24}/></span><span>Croatian<span className="brand-second">Mentor</span></span></Link>}
+const PRESET_AVATARS_MAP: Record<string, string> = {
+  "🦊": "linear-gradient(135deg, #fb923c, #ef4444)",
+  "🐼": "linear-gradient(135deg, #334155, #0f172a)",
+  "🐱": "linear-gradient(135deg, #facc15, #f97316)",
+  "🧙‍♂️": "linear-gradient(135deg, #6366f1, #9333ea)",
+  "🚀": "linear-gradient(135deg, #22d3ee, #3b82f6)",
+  "🌟": "linear-gradient(135deg, #fde047, #f59e0b)",
+  "🧑‍🎓": "linear-gradient(135deg, #3b82f6, #4f46e5)",
+  "🦉": "linear-gradient(135deg, #34d399, #0d9488)",
+};
+
+function ShellAvatar({ image, name, email }: { image?: string | null; name?: string | null; email?: string | null }) {
+  const initial = (name || email || 'U').slice(0, 1).toUpperCase();
+
+  if (image) {
+    if (PRESET_AVATARS_MAP[image]) {
+      return (
+        <span
+          style={{
+            background: PRESET_AVATARS_MAP[image],
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '16px',
+            borderRadius: '50%',
+            userSelect: 'none',
+          }}
+        >
+          {image}
+        </span>
+      );
+    }
+
+    return (
+      <img
+        src={image}
+        alt={name || 'Avatar'}
+        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }}
+        onError={(e) => {
+          (e.currentTarget as HTMLImageElement).src = `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(initial)}`;
+        }}
+      />
+    );
+  }
+
+  return (
+    <span
+      style={{
+        background: 'linear-gradient(135deg, #d2aa73, #b9905f)',
+        color: '#101719',
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontWeight: 700,
+        fontSize: '13px',
+        borderRadius: '50%',
+      }}
+    >
+      {initial}
+    </span>
+  );
+}
+
+function Brand(){
+  return (
+    <Link href="/" className="brand">
+      <span className="brand-symbol">
+        <img
+          src="/logos/logo-variant-3.jpg"
+          alt="Croatia Mentor"
+          style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }}
+        />
+      </span>
+      <span>Croatian<span className="brand-second">Mentor</span></span>
+    </Link>
+  );
+}
 
 export function ReferenceShell({children}: {children:ReactNode}) {
   const pathname=usePathname(), router=useRouter(), locale=useLocale();
@@ -58,7 +138,19 @@ export function ReferenceShell({children}: {children:ReactNode}) {
     </select>
     <button className="icon-button" onClick={toggleTheme} aria-label={theme==='dark'?'Light theme':'Dark theme'}>{theme==='dark'?<Sun size={18}/>:<Moon size={18}/>}</button>
     <NewsBell/>
-    {session?<Link href="/profile" className="avatar" aria-label={t('Профиль')}>{(session.user?.name||session.user?.email||'M').slice(0,1)}</Link>:<Link href="/sign-in" className="header-login">{t('Войти')}<ArrowRight size={15}/></Link>}
+    {session ? (
+      <Link href="/profile" className="avatar" aria-label={t('Профиль')}>
+        <ShellAvatar
+          image={session.user?.image}
+          name={session.user?.name}
+          email={session.user?.email}
+        />
+      </Link>
+    ) : (
+      <Link href="/sign-in" className="header-login">
+        {t('Войти')}<ArrowRight size={15}/>
+      </Link>
+    )}
   </div>;
   return <div className={`reference-design ${theme==='orange-white'?'light':''} ${landing?'reference-home':''}`}>
     <a className="skip-link" href="#site-content">{t('Продолжить')}</a>
