@@ -1,0 +1,28 @@
+[
+  {
+    "antipattern": "layout-transition",
+    "name": "Layout property animation",
+    "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\guard\\Desktop\\AI trains\\References web\\src\\style.css",
+    "line": 1,
+    "snippet": "transition: width",
+    "importedBy": [
+      "main.jsx"
+    ]
+  },
+  {
+    "antipattern": "layout-transition",
+    "name": "Layout property animation",
+    "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\guard\\Desktop\\AI trains\\References web\\src\\style.css",
+    "line": 7,
+    "snippet": "transition: height",
+    "importedBy": [
+      "main.jsx"
+    ]
+  }
+]

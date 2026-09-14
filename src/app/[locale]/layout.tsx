@@ -1,8 +1,7 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { SessionProvider } from "@/components/providers/session-provider";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
+import { ReferenceShell } from "@/components/reference/shell";
 import { Toaster } from "sonner";
 import { ChangelogModal } from "@/components/changelog-modal";
 import { EmailVerificationModal } from "@/components/auth/EmailVerificationModal";
@@ -55,7 +54,6 @@ export async function generateMetadata({
   };
 }
 
-import { GlobalParallaxBackground } from "@/components/GlobalParallaxBackground";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
 export default async function LocaleLayout({
@@ -133,11 +131,8 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <SessionProvider>
             <ThemeProvider>
-              <GlobalParallaxBackground />
               <NotificationListener />
-              <Navbar />
-              <main className="flex-1">{children}</main>
-              <Footer />
+              <ReferenceShell>{children}</ReferenceShell>
               <Toaster position="top-right" richColors />
               <ChangelogModal />
               <EmailVerificationModal />

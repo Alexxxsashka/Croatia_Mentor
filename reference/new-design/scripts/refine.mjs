@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import * as allIcons from 'lucide-react';
+let main=fs.readFileSync('src/main.jsx','utf8');
+const text=['main','account','study','data'].map(x=>fs.readFileSync(`src/${x}.${x==='data'?'js':'jsx'}`,'utf8')).join('\n');
+const names=[...new Set(text.match(/\b[A-Z][A-Za-z0-9]+\b/g))].filter(x=>x in allIcons&&x!=='Icons').sort();
+main=main.replace("import * as Icons from'lucide-react';",`import {${names.join(',')}} from 'lucide-react';\nconst Icons={${names.join(',')}};`);
+fs.writeFileSync('src/main.jsx',main);
+let study=fs.readFileSync('src/study.jsx','utf8');
+study=study.replace(":['Карта','Острова'].includes(state.view)?",":level!=='Все'&&['Карта','Острова'].includes(state.view)?");
+study=study.replace("levels.indexOf(state.level)+1)]:'A1'", "levels.indexOf(state.level)+1)]:exam?state.level:'A1'");
+study=study.replace("if(exam)complete('exam-'", "if(exam&&score>=3)complete('exam-'");
+fs.writeFileSync('src/study.jsx',study);

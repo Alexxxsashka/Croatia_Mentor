@@ -1,0 +1,46 @@
+/* Production adapters: the supplied visual system wraps the existing server-backed pages. */
+@font-face{font-family:Manrope;src:url('/fonts/manrope-latin-400-normal.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:Manrope;src:url('/fonts/manrope-latin-600-normal.woff2') format('woff2');font-style:normal;font-weight:500 700;font-display:swap}
+@font-face{font-family:Manrope;src:url('/fonts/manrope-latin-800-normal.woff2') format('woff2');font-style:normal;font-weight:800;font-display:swap}
+@font-face{font-family:Manrope;src:url('/fonts/manrope-cyrillic-400-normal.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap;unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Manrope;src:url('/fonts/manrope-cyrillic-600-normal.woff2') format('woff2');font-style:normal;font-weight:500 700;font-display:swap;unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Manrope;src:url('/fonts/manrope-cyrillic-800-normal.woff2') format('woff2');font-style:normal;font-weight:800;font-display:swap;unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+.reference-design{min-height:100vh;font-family:Manrope,Arial,sans-serif;--background:193 22% 8%;--foreground:45 29% 95%;--card:193 22% 13%;--card-foreground:45 29% 95%;--popover:193 22% 13%;--popover-foreground:45 29% 95%;--primary:35 51% 64%;--primary-foreground:193 22% 8%;--secondary:193 20% 18%;--secondary-foreground:45 29% 95%;--muted:193 20% 18%;--muted-foreground:189 10% 73%;--accent:35 51% 64%;--accent-foreground:193 22% 8%;--border:193 18% 25%;--input:193 18% 35%;--ring:35 51% 64%;--gradient-primary:linear-gradient(135deg,#d2aa73,#b9905f);--gradient-accent:linear-gradient(135deg,#293d42,#192427);--gradient-warm:linear-gradient(135deg,#d2aa73,#b9905f);--gradient-purple:linear-gradient(135deg,#293d42,#192427);--gradient-sunset:linear-gradient(135deg,#d2aa73,#b9905f);--gradient-ocean:linear-gradient(135deg,#293d42,#192427)}
+.reference-design.light{--background:40 20% 96%;--foreground:193 22% 13%;--card:0 0% 100%;--card-foreground:193 22% 13%;--popover:0 0% 100%;--popover-foreground:193 22% 13%;--secondary:40 15% 92%;--secondary-foreground:193 22% 13%;--muted:40 15% 92%;--muted-foreground:193 12% 35%;--border:40 12% 80%;--input:193 18% 45%;--ref-bg:#f7f5ef;--ref-surface:#fff;--ref-raised:#e9ece6;--ref-text:#233034;--ref-muted:#576569;--ref-accent:#896234;--ref-line:#cdd4cd;--ref-control:#70858b;color:var(--ref-text);background:var(--ref-bg);color-scheme:light}
+.reference-design .reference-static-header{position:relative;border-bottom:1px solid var(--ref-line)}
+.reference-design .reference-public-content{min-height:70vh}
+.reference-design .mobile-close{display:none}
+.reference-design .reference-signout{display:flex;align-items:center;gap:12px;padding:13px 14px;color:#a8b6ba;font-size:12px}
+.reference-design .skip-link{position:fixed;top:-80px;left:16px;z-index:1000;background:var(--ref-surface);padding:12px;border:2px solid var(--ref-accent)}
+.reference-design .skip-link:focus{top:12px}
+.reference-design .legacy-content{font-family:Manrope,Arial,sans-serif}
+.reference-design .legacy-content>div{padding-top:20px}
+.reference-design .legacy-content .font-editorial,.reference-design .legacy-content .font-sans-editorial{font-family:inherit;font-weight:600;letter-spacing:-.035em}
+.reference-design .legacy-content .glass,.reference-design .legacy-content .glass-card,.reference-design .legacy-content .glass-strong,.reference-design .legacy-content .glass-dropdown{background:var(--ref-surface);border:1px solid var(--ref-line);box-shadow:none;backdrop-filter:none}
+.reference-design .legacy-content h1{font-size:clamp(28px,3vw,42px);font-weight:600;letter-spacing:-.04em;line-height:1.18}
+.reference-design .legacy-content h2{font-weight:600;letter-spacing:-.025em}
+.reference-design .legacy-content input,.reference-design .legacy-content textarea,.reference-design .legacy-content select{background:var(--ref-bg);border-color:var(--ref-control);color:var(--ref-text)}
+.reference-design .legacy-content select option{background:var(--ref-surface);color:var(--ref-text)}
+.reference-design .legacy-content .gradient-text,.reference-design .legacy-content .text-gradient{background:none;color:var(--ref-accent);-webkit-text-fill-color:currentColor}
+.reference-design .legacy-content [class*="text-purple-"],.reference-design .legacy-content [class*="text-orange-"],.reference-design .legacy-content [class*="text-indigo-"]{color:var(--ref-accent)}
+.reference-design .legacy-content [class*="border-purple-"],.reference-design .legacy-content [class*="border-orange-"],.reference-design .legacy-content [class*="border-indigo-"]{border-color:var(--ref-line)}
+.reference-design .legacy-content button[class*="bg-gradient"],.reference-design .legacy-content a[class*="bg-gradient"]{background:var(--ref-accent);color:var(--ref-bg);box-shadow:none}
+.reference-design .legacy-content .min-h-screen{min-height:calc(100vh - 180px)}
+.reference-design .legacy-content .pt-32,.reference-design .legacy-content .pt-28,.reference-design .legacy-content .pt-24{padding-top:24px}
+.reference-design .legacy-content .animate-pulse{animation:none}
+.reference-design .legacy-content [class*="bg-slate-9"],.reference-design .legacy-content [class*="bg-gray-9"],.reference-design .legacy-content [class*="bg-purple-9"],.reference-design .legacy-content [class*="bg-indigo-9"]{background-color:var(--ref-surface)}
+.reference-design .legacy-content [class*="bg-gradient"]:not(.bg-clip-text):not(button):not(a){background-image:none;background-color:var(--ref-surface);box-shadow:none}
+.reference-design .legacy-content .bg-clip-text{background:none;color:var(--ref-accent);-webkit-text-fill-color:currentColor}
+.reference-design .legacy-content h1,.reference-design .legacy-content h2,.reference-design .legacy-content h3{text-transform:none}
+.reference-design .legacy-content [class*="shadow-purple"],.reference-design .legacy-content [class*="shadow-indigo"]{box-shadow:none}
+.reference-design .legacy-content .game-card{background:var(--ref-surface);color:var(--ref-text);box-shadow:none}
+.reference-design .legacy-content .game-card h2{font-size:20px;white-space:normal}
+.reference-design .header-actions{position:relative}
+.reference-design .header-actions .glass{background:transparent;border-color:var(--ref-line);box-shadow:none}
+.reference-design .header-actions .glass-dropdown{background:var(--ref-surface);color:var(--ref-text);border-color:var(--ref-line)}
+.reference-design .hero{color:#f5f3ed;--ref-text:#f5f3ed;--ref-muted:#b4c0c2;--ref-accent:#d2aa73}
+.reference-design.reference-home .public-header{color:#f5f3ed;--ref-text:#f5f3ed;--ref-muted:#b4c0c2;--ref-accent:#d2aa73}
+.reference-design .sidebar{--ref-text:#f5f3ed;--ref-muted:#b4c0c2;--ref-accent:#d2aa73;color:#f5f3ed}
+@media(max-width:700px){.reference-design .mobile-close{display:grid;position:absolute;right:12px;top:25px}.reference-design .header-actions{gap:6px}.reference-design .public-header .header-login{font-size:11px}.reference-design .public-header .brand{font-size:14px}.reference-design .legacy-content h1{font-size:28px}.reference-design .top-stats{display:none}}
+@media(prefers-reduced-motion:reduce){.reference-design *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media(max-width:700px){.reference-design .sidebar:not(.open){visibility:hidden}.reference-design .sidebar.open{visibility:visible}}
