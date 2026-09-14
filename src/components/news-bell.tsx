@@ -151,14 +151,16 @@ export function NewsBell() {
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute right-0 mt-3 w-80 sm:w-96 max-w-[calc(100vw-2rem)] rounded-2xl bg-slate-900/95 dark:bg-slate-950/95 border border-slate-700/80 shadow-2xl p-4 z-50 animate-scale-up space-y-3 backdrop-blur-xl text-slate-100">
+        <div className="absolute right-0 mt-3 w-80 sm:w-96 max-w-[calc(100vw-2rem)] rounded-3xl bg-[#11151b]/95 border border-[#caa77d]/30 shadow-2xl p-4.5 z-50 animate-scale-up space-y-3.5 backdrop-blur-2xl text-slate-100">
           {/* Header */}
           <div className="flex items-center justify-between border-b border-white/10 pb-3">
-            <div className="flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-purple-400" />
-              <h3 className="font-bold text-sm text-foreground">{headerTitle}</h3>
+            <div className="flex items-center gap-2.5">
+              <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white shadow-md shadow-orange-500/20">
+                <Sparkles className="w-3.5 h-3.5 fill-white" />
+              </div>
+              <h3 className="font-bold text-sm text-foreground tracking-tight">{headerTitle}</h3>
               {unreadCount > 0 && (
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                <span className="text-[10px] font-bold font-mono px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
                   {unreadCount}
                 </span>
               )}
@@ -168,7 +170,7 @@ export function NewsBell() {
               <button
                 type="button"
                 onClick={markAllAsRead}
-                className="flex items-center gap-1 text-xs text-blue-500 dark:text-blue-400 hover:underline font-medium"
+                className="flex items-center gap-1 text-xs text-amber-400 hover:text-amber-300 hover:underline font-semibold transition-colors cursor-pointer"
               >
                 <CheckCheck className="w-3.5 h-3.5" />
                 {markAllText}
@@ -177,7 +179,7 @@ export function NewsBell() {
           </div>
 
           {/* List of News */}
-          <div className="max-h-80 overflow-y-auto space-y-2 pr-1">
+          <div className="max-h-80 overflow-y-auto space-y-2 pr-1 custom-scrollbar">
             {changelogs.length === 0 ? (
               <p className="text-xs text-center text-muted-foreground py-6">{emptyText}</p>
             ) : (
@@ -189,33 +191,33 @@ export function NewsBell() {
                     key={item.id}
                     type="button"
                     onClick={() => handleOpenNews(item)}
-                    className={`w-full text-left p-3 rounded-xl border transition-all flex items-start justify-between gap-2 group ${
+                    className={`w-full text-left p-3.5 rounded-2xl border transition-all flex items-start justify-between gap-3 group cursor-pointer ${
                       isUnread
-                        ? "bg-blue-500/5 dark:bg-blue-500/10 border-blue-500/30 dark:border-blue-500/30 hover:border-blue-500"
-                        : "bg-black/5 dark:bg-white/5 border-transparent hover:bg-black/10 dark:hover:bg-white/10"
+                        ? "bg-amber-500/10 border-amber-500/30 hover:border-amber-400/60 hover:bg-amber-500/15 shadow-sm shadow-amber-500/5"
+                        : "bg-white/5 border-white/5 hover:bg-white/10 hover:border-white/10"
                     }`}
                   >
-                    <div className="space-y-1 overflow-hidden pr-1">
+                    <div className="space-y-1.5 overflow-hidden pr-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-600 dark:text-purple-300">
+                        <span className="text-[10px] font-bold font-mono px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/30">
                           {item.version}
                         </span>
-                        <span className="text-[10px] text-muted-foreground flex items-center gap-0.5">
-                          <Calendar className="w-3 h-3" />
+                        <span className="text-[10px] text-slate-400 flex items-center gap-1">
+                          <Calendar className="w-3 h-3 text-slate-500" />
                           {new Date(item.createdAt).toLocaleDateString()}
                         </span>
                         {isUnread && (
-                          <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                          <span className="w-2 h-2 rounded-full bg-amber-400 shadow-sm shadow-amber-400 animate-pulse" />
                         )}
                       </div>
-                      <h4 className="font-semibold text-xs text-foreground line-clamp-1 group-hover:text-blue-400 transition-colors">
+                      <h4 className="font-bold text-xs text-white line-clamp-1 group-hover:text-amber-300 transition-colors">
                         {getTitle(item)}
                       </h4>
-                      <p className="text-[11px] text-muted-foreground line-clamp-2">
+                      <p className="text-[11px] text-slate-400 line-clamp-2 leading-relaxed">
                         {getContent(item).replace(/\[.*?\]/g, "")}
                       </p>
                     </div>
-                    <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground shrink-0 self-center transition-colors" />
+                    <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-amber-300 shrink-0 self-center transition-colors" />
                   </button>
                 );
               })
@@ -226,30 +228,30 @@ export function NewsBell() {
 
       {/* Selected News Detail Modal */}
       {selectedNews && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-950/70 backdrop-blur-md animate-fade-in">
-          <div className="relative w-full sm:max-w-lg overflow-hidden glass-modal rounded-t-3xl sm:rounded-3xl border border-white/10 shadow-2xl p-5 sm:p-8 animate-scale-up space-y-5 sm:space-y-6 max-h-[85vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in">
+          <div className="relative w-full sm:max-w-lg overflow-hidden rounded-t-3xl sm:rounded-3xl border border-[#caa77d]/30 bg-[#11151b]/98 shadow-2xl p-6 sm:p-8 animate-scale-up space-y-5 sm:space-y-6 max-h-[85vh] overflow-y-auto">
             <button
               onClick={() => setSelectedNews(null)}
-              className="absolute top-4 right-4 p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all"
+              className="absolute top-4 right-4 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="flex items-center gap-3">
-              <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg">
-                <Sparkles className="w-6 h-6" />
+            <div className="flex items-center gap-3.5">
+              <div className="p-3.5 rounded-2xl bg-gradient-to-br from-amber-500 via-orange-500 to-amber-600 text-white shadow-lg shadow-orange-500/25">
+                <Sparkles className="w-6 h-6 fill-white" />
               </div>
               <div>
-                <span className="text-xs font-semibold px-2 py-0.5 rounded-md bg-purple-500/20 text-purple-300">
+                <span className="text-[11px] font-bold font-mono px-2.5 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/30">
                   {selectedNews.version}
                 </span>
-                <h2 className="text-xl font-bold mt-1 text-foreground">
+                <h2 className="text-xl font-bold mt-1.5 text-white tracking-tight">
                   {getTitle(selectedNews)}
                 </h2>
               </div>
             </div>
 
-            <div className="text-sm text-muted-foreground leading-relaxed max-h-60 overflow-y-auto border-t border-b border-white/5 py-4">
+            <div className="text-sm text-slate-300 leading-relaxed max-h-60 overflow-y-auto border-t border-b border-white/10 py-4 custom-scrollbar">
               <BBCode content={getContent(selectedNews)} />
             </div>
 
@@ -257,9 +259,9 @@ export function NewsBell() {
               <button
                 type="button"
                 onClick={() => setSelectedNews(null)}
-                className="px-6 py-2.5 rounded-xl font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition-all text-sm shadow-md"
+                className="px-6 py-2.5 rounded-xl font-bold bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white hover:opacity-95 transition-all text-xs uppercase tracking-wider shadow-lg shadow-orange-500/25 cursor-pointer"
               >
-                Close
+                {locale === "ua" ? "Закрити" : locale === "ru" ? "Закрыть" : "Close"}
               </button>
             </div>
           </div>

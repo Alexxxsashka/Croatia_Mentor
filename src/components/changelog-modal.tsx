@@ -87,43 +87,43 @@ export function ChangelogModal() {
       : "What's New";
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md animate-fade-in">
-      <div className="relative w-full max-w-lg overflow-hidden glass-modal rounded-3xl border border-white/10 shadow-2xl p-6 md:p-8 animate-scale-up space-y-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in">
+      <div className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-[#caa77d]/30 bg-[#11151b]/98 shadow-2xl p-6 md:p-8 animate-scale-up space-y-6">
         
         {/* Glow effect */}
-        <div className="absolute -top-10 -left-10 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-10 -left-10 w-40 h-40 bg-amber-500/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-orange-500/15 rounded-full blur-3xl pointer-events-none" />
 
         {/* Close Button */}
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all"
+          className="absolute top-4 right-4 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Header Icon & Tag */}
-        <div className="flex items-center gap-3">
-          <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg">
+        <div className="flex items-center gap-3.5">
+          <div className="p-3.5 rounded-2xl bg-gradient-to-br from-amber-500 via-orange-500 to-amber-600 text-white shadow-lg shadow-orange-500/25">
             <Megaphone className="w-6 h-6 animate-pulse" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-blue-400">
+              <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
                 {tagText}
               </span>
-              <span className="text-xs font-semibold px-2 py-0.5 rounded-md bg-purple-500/20 text-purple-300">
+              <span className="text-[11px] font-bold font-mono px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/30">
                 {changelog.version}
               </span>
             </div>
-            <h2 className="text-xl font-bold mt-1 text-foreground drop-shadow-sm">
+            <h2 className="text-xl font-bold mt-1 text-white drop-shadow-sm tracking-tight">
               {title}
             </h2>
           </div>
         </div>
 
         {/* Body Content */}
-        <div className="text-sm text-muted-foreground leading-relaxed max-h-60 overflow-y-auto border-t border-b border-white/5 py-4">
+        <div className="text-sm text-slate-300 leading-relaxed max-h-60 overflow-y-auto border-t border-b border-white/10 py-4 custom-scrollbar">
           <BBCode content={content} />
         </div>
 
@@ -131,9 +131,9 @@ export function ChangelogModal() {
         <div className="flex items-center justify-end">
           <button
             onClick={handleClose}
-            className="flex items-center gap-2 px-6 py-3 rounded-2xl font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition-all shadow-xl shadow-blue-500/10"
+            className="flex items-center gap-2 px-6 py-3 rounded-2xl font-bold bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white hover:opacity-95 transition-all shadow-lg shadow-orange-500/25 cursor-pointer text-xs uppercase tracking-wider"
           >
-            <Sparkles className="w-4 h-4" />
+            <Sparkles className="w-4 h-4 fill-white" />
             {buttonText}
           </button>
         </div>
