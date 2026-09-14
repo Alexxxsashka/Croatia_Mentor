@@ -83,6 +83,11 @@ export default function LessonsPage() {
     if (savedView && ["map", "grid", "list"].includes(savedView)) {
       setViewMode(savedView);
     }
+    const requestedLevel = new URLSearchParams(window.location.search).get("level");
+    if (requestedLevel && LEVEL_ORDER.includes(requestedLevel)) {
+      setFilterLevel(requestedLevel);
+      setViewMode("grid");
+    }
   }, []);
 
   const handleViewChange = (mode: "map" | "grid" | "list") => {
