@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import {
-  Send,
   Bot,
   User,
   Sparkles,
@@ -21,6 +20,7 @@ import {
   Check,
   BookOpen,
 } from "lucide-react";
+import { SendIcon } from "@/components/ui/animated-state-icons";
 import { speakText } from "@/lib/speech";
 import { toast } from "sonner";
 
@@ -937,8 +937,9 @@ export default function AIChatPage() {
           onClick={() => sendMessage()}
           disabled={!input.trim() || loading}
           className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center text-white hover:opacity-90 transition-all shadow-lg shadow-purple-500/25 disabled:opacity-40 disabled:cursor-not-allowed shrink-0 cursor-pointer"
+          aria-label="Send message"
         >
-          <Send className="w-5 h-5" />
+          <SendIcon size={20} active={loading} color="currentColor" />
         </button>
       </div>
     </div>

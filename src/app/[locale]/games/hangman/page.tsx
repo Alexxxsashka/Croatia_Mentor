@@ -5,7 +5,8 @@ import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { vocabularyWords, type VocabWord } from "@/lib/vocabulary-data";
 import { speakText } from "@/lib/speech";
-import { ArrowLeft, RefreshCw, Trophy, Heart, Volume2, Lightbulb, Sparkles } from "lucide-react";
+import { ArrowLeft, RefreshCw, Trophy, Volume2, Lightbulb, Sparkles } from "lucide-react";
+import { HeartIcon } from "@/components/ui/animated-state-icons";
 
 function getTranslation(word: typeof vocabularyWords[0], locale: string) {
   if (locale === "ru") return word.ru;
@@ -161,7 +162,7 @@ export default function HangmanPage() {
     return (
       <div className="max-w-2xl mx-auto px-4 py-12 text-center animate-fade-in space-y-6">
         <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-red-500 to-pink-500 shadow-2xl shadow-red-500/25">
-          <Heart className="w-10 h-10 text-white" />
+          <HeartIcon size={40} color="#ffffff" active={true} />
         </div>
         <div className="space-y-2">
           <h1 className="text-3xl font-extrabold">{t("hangman.title")}</h1>
@@ -252,9 +253,14 @@ export default function HangmanPage() {
           <ArrowLeft className="w-5 h-5" />
         </button>
         <span className="text-sm font-medium text-muted-foreground">{gamesPlayed + 1}/{TOTAL_GAMES}</span>
-        <div className="flex gap-1">
+        <div className="flex gap-1.5 items-center">
           {Array.from({ length: MAX_MISTAKES }).map((_, i) => (
-            <Heart key={i} className={`w-4 h-4 ${i < MAX_MISTAKES - mistakes ? "text-red-400" : "text-white/10"}`} fill={i < MAX_MISTAKES - mistakes ? "currentColor" : "none"} />
+            <HeartIcon
+              key={i}
+              size={18}
+              active={i < MAX_MISTAKES - mistakes}
+              color={i < MAX_MISTAKES - mistakes ? "#EF4444" : "rgba(255,255,255,0.2)"}
+            />
           ))}
         </div>
       </div>

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useLocale } from "next-intl";
 import { Bell, Calendar, Sparkles, ChevronRight, CheckCheck, X } from "lucide-react";
+import { NotificationIcon } from "@/components/ui/animated-state-icons";
 import { BBCode } from "@/components/bbcode";
 
 export interface ChangelogItem {
@@ -138,10 +139,10 @@ export function NewsBell() {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="relative p-2.5 rounded-xl glass hover:bg-black/5 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-all duration-200 touch-target"
+        className="relative p-2 rounded-xl glass hover:bg-black/5 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-all duration-200 touch-target flex items-center justify-center"
         aria-label="Notifications"
       >
-        <Bell className="w-4.5 h-4.5" />
+        <NotificationIcon size={20} active={unreadCount > 0} color="currentColor" />
         {unreadCount > 0 && (
           <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[18px] h-[18px] px-1 text-[10px] font-bold leading-none text-white bg-red-500 rounded-full animate-pulse shadow-md shadow-red-500/50">
             {unreadCount > 9 ? "9+" : unreadCount}

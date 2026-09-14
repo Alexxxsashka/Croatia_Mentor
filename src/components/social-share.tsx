@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Share2, Check, Copy, Send, Globe } from "lucide-react";
+import { Share2, Send, Globe } from "lucide-react";
+import { CopiedIcon } from "@/components/ui/animated-state-icons";
 import { toast } from "sonner";
 
 export function SocialShare({
@@ -71,9 +72,9 @@ export function SocialShare({
 
         <button
           onClick={handleCopy}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium border border-slate-700 bg-slate-800/50 text-slate-200 hover:bg-slate-800 transition-all ml-auto"
+          className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium border border-slate-700 bg-slate-800/50 text-slate-200 hover:bg-slate-800 transition-all ml-auto cursor-pointer"
         >
-          {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
+          <CopiedIcon size={18} active={copied} color={copied ? "#4ade80" : "currentColor"} />
           {copied ? "Copied!" : "Copy Link"}
         </button>
       </div>

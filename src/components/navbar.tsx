@@ -12,8 +12,6 @@ import {
   Gamepad2,
   MessageCircle,
   LayoutDashboard,
-  Menu,
-  X,
   LogOut,
   GraduationCap,
   Languages,
@@ -25,6 +23,7 @@ import {
   Flame,
   Sparkles,
 } from "lucide-react";
+import { MenuCloseIcon } from "@/components/ui/animated-state-icons";
 
 import { useState, useEffect, useRef } from "react";
 
@@ -303,13 +302,10 @@ export function Navbar() {
             {/* Mobile menu toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2.5 rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition-colors touch-target"
+              className="md:hidden p-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition-colors touch-target flex items-center justify-center"
+              aria-label="Toggle Navigation Menu"
             >
-              {mobileOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
+              <MenuCloseIcon size={24} active={mobileOpen} />
             </button>
           </div>
         </div>

@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useTranslations, useLocale } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
-import { Mail, Lock, Eye, EyeOff, GraduationCap, Loader2, Phone, ShieldCheck } from "lucide-react";
+import { Mail, Lock, GraduationCap, Loader2, Phone, ShieldCheck } from "lucide-react";
+import { EyeToggleIcon } from "@/components/ui/animated-state-icons";
 import { toast } from "sonner";
 import {
   auth,
@@ -241,9 +242,10 @@ export default function SignInPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
                 >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  <EyeToggleIcon size={18} active={!showPassword} color="currentColor" />
                 </button>
               </div>
               <div className="flex items-center justify-end text-xs pt-1">
