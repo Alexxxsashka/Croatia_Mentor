@@ -18,15 +18,17 @@
   height: 120%;
   transform-origin: center center;
   will-change: transform;
+  background: url('/assets/croatian-road.png') center/cover;
 }
 
-.reference-design .mountain-backdrop video {
+.reference-design .mountain-backdrop img,
+.reference-design .mountain-backdrop-img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  background: url('/assets/croatian-road.png') center/cover;
+  pointer-events: none;
 }
 
 .reference-design .mountain-atmosphere {
@@ -62,7 +64,8 @@
     mask-position: 65% bottom;
     -webkit-mask-position: 65% bottom;
   }
-  .reference-design .mountain-backdrop video {
+  .reference-design .mountain-backdrop img,
+  .reference-design .mountain-backdrop-img {
     object-position: 62% center;
   }
 }
@@ -74,8 +77,9 @@
   .reference-design .hero .hero-content {
     transform: none !important;
   }
-  .reference-design .mountain-backdrop video {
-    visibility: hidden;
+  .reference-design .mountain-backdrop img,
+  .reference-design .mountain-backdrop-img {
+    transform: none !important;
   }
   .reference-design .mountain-backdrop {
     background: url('/assets/croatian-road.png') center/cover;

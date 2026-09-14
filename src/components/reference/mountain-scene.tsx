@@ -6,8 +6,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import './mountain-scene.css';
 
-const assets = '/assets/mountain/';
-
 declare global {
   interface Window {
     __lenis?: Lenis;
@@ -16,7 +14,6 @@ declare global {
 
 export function MountainScene() {
   const scene = useRef<HTMLDivElement>(null);
-  const video = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -24,21 +21,10 @@ export function MountainScene() {
     gsap.registerPlugin(ScrollTrigger);
 
     const el = scene.current;
-    const film = video.current;
     const hero = el?.closest<HTMLElement>('.hero');
     if (!el || !hero) return;
 
     const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-    // Source video lazily if supported
-    const sourceAndPlay = () => {
-      if (!film) return;
-      if (!film.getAttribute('src')) {
-        film.src = assets + (window.matchMedia('(max-width: 700px)').matches ? 'approach-mobile.mp4' : 'approach.mp4');
-        film.load();
-      }
-      void film.play().catch(() => {});
-    };
 
     // Initialize Lenis for smooth scrolling if not already initialized
     let lenis = window.__lenis;
@@ -66,10 +52,10 @@ export function MountainScene() {
     }
 
     // GSAP ScrollTrigger timeline for multi-layer parallax:
-    // - Layer 1 (Backdrop road/video): scrolls downward at moderate speed + subtle scale
+    // - Layer 1 (Backdrop road image): scrolls downward at moderate speed + subtle scale
     // - Layer 2 (Atmosphere haze): gentle drift
     // - Layer 3 (Hero copy): subtle lift
-    // - Layer 4 (Foreground plate): stays static (0 yPercent)
+    // - Layer 4 (Foreground plate): stays static (0 movement)
     let timeline: gsap.core.Timeline | null = null;
 
     if (!preference.matches) {
@@ -137,44 +123,7 @@ export function MountainScene() {
       }
     }
 
-    const sync = () => {
-      if (document.hidden) {
-        film?.pause();
-        return;
-      }
-      sourceAndPlay();
-    };
-
-    // Auto-play immediately when hero is in view
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          sync();
-        } else {
-          film?.pause();
-        }
-      },
-      { threshold: 0 }
-    );
-    observer.observe(hero);
-
-    const onVisibility = () => {
-      if (document.hidden) {
-        film?.pause();
-      } else {
-        sync();
-      }
-    };
-
-    document.addEventListener('visibilitychange', onVisibility);
-
-    // Initial playback trigger
-    sourceAndPlay();
-
     return () => {
-      observer.disconnect();
-      document.removeEventListener('visibilitychange', onVisibility);
-      film?.pause();
       timeline?.kill();
       ScrollTrigger.getAll().forEach((st) => {
         if (st.vars.trigger === hero) st.kill();
@@ -190,17 +139,13 @@ export function MountainScene() {
 
   return (
     <div className="mountain-scene" ref={scene} aria-hidden="true" data-parallax-layers>
-      {/* Layer 1: Backdrop with auto-looping video and fallback poster */}
+      {/* Layer 1: Backdrop with high-resolution mountain road image */}
       <div className="mountain-backdrop" data-depth="far" data-parallax-layer="1">
-        <video
-          ref={video}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          poster="/assets/croatian-road.png"
-          tabIndex={-1}
+        <img
+          src="/assets/croatian-road.png"
+          alt="Croatian Mountain Road"
+          className="mountain-backdrop-img"
+          loading="eager"
         />
       </div>
 
