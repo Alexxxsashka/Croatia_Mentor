@@ -7,7 +7,7 @@ const intlMiddleware = createMiddleware(routing);
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const protectedRoutes = ["/dashboard", "/profile", "/admin", "/lessons", "/games"];
+  const protectedRoutes = ["/dashboard", "/profile", "/admin", "/lessons", "/games", "/ai-chat"];
   const isProtectedRoute = protectedRoutes.some((route) =>
     pathname.includes(route)
   );

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
+import { useSearchParams } from "next/navigation";
 import { useRouter } from "@/i18n/navigation";
 import { readingTexts } from "@/lib/reading-data";
 import { ArrowLeft, BookOpen, Check, X, Volume2, ChevronRight, Trophy } from "lucide-react";
@@ -17,9 +18,18 @@ export default function ReadingPage() {
   const t = useTranslations("games");
   const locale = useLocale();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const [selectedText, setSelectedText] = useState<string | null>(null);
   const [phase, setPhase] = useState<"read" | "questions" | "translate" | "complete">("read");
+
+  useEffect(() => {
+    const idFromUrl = searchParams?.get("id");
+    if (idFromUrl && readingTexts.some((item) => item.id === idFromUrl)) {
+      setSelectedText(idFromUrl);
+      setPhase("read");
+    }
+  }, [searchParams]);
   const [currentQ, setCurrentQ] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [answered, setAnswered] = useState(false);

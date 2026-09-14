@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
+import { useSearchParams } from "next/navigation";
 import { useRouter } from "@/i18n/navigation";
 import { listeningData } from "@/lib/listening-data";
 import { ArrowLeft, Headphones, Play, ChevronRight, Check, X, Trophy, Volume2 } from "lucide-react";
@@ -17,9 +18,18 @@ export default function ListeningPage() {
   const t = useTranslations("games");
   const locale = useLocale();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [phase, setPhase] = useState<"listen" | "questions" | "blanks" | "complete">("listen");
+
+  useEffect(() => {
+    const idFromUrl = searchParams?.get("id");
+    if (idFromUrl && listeningData.some((item) => item.id === idFromUrl)) {
+      setSelectedItem(idFromUrl);
+      setPhase("listen");
+    }
+  }, [searchParams]);
   const [showSubtitles, setShowSubtitles] = useState(false);
   const [currentQ, setCurrentQ] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);

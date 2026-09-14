@@ -20,6 +20,41 @@ export interface ListeningItem {
 
 export const listeningData: ListeningItem[] = [
   {
+    id: "plitvice-audio",
+    title: { en: "On Plitvice Trails: Nature & Waterfalls", ru: "По тропам Плитвиц: Природа и водопады", ua: "Стежками Плітвіце: Природа та водоспади" },
+    type: "dialogue",
+    level: "A2",
+    youtubeId: "rK4iR3B39pY",
+    description: {
+      en: "Explore the magic of Plitvice Lakes National Park through this listening practice with authentic audio sentences and questions.",
+      ru: "Познакомьтесь с красотой Плитвицких озер через аудирование с аутентичными предложениями и вопросами.",
+      ua: "Познайомтеся з красою Плітвицьких озер через аудіювання з автентичними реченнями та запитаннями."
+    },
+    subtitles: [
+      { time: "0:00", hr: "Dobrodošli na Plitvička jezera!", translation: { en: "Welcome to Plitvice Lakes!", ru: "Добро пожаловать на Плитвицкие озера!", ua: "Ласкаво просимо до Плітвицьких озер!" } },
+      { time: "0:05", hr: "Ovdje imamo šesnaest prekrasnih jezera.", translation: { en: "Here we have sixteen beautiful lakes.", ru: "Здесь у нас шестнадцать прекрасных озер.", ua: "Тут у нас шістнадцять прекрасних озер." } },
+      { time: "0:12", hr: "Voda je kristalno čista i smaragdna.", translation: { en: "The water is crystal clear and emerald.", ru: "Вода кристально чистая и изумрудная.", ua: "Вода кришталево чиста та смарагдова." } },
+      { time: "0:18", hr: "Šetamo drvenim stazama kroz prirodu.", translation: { en: "We walk along wooden trails through nature.", ru: "Мы гуляем по деревянным тропам среди природы.", ua: "Ми гуляємо дерев'яними стежками серед природи." } },
+      { time: "0:25", hr: "Čujete li snažan zvuk velikog slapa?", translation: { en: "Do you hear the powerful sound of the big waterfall?", ru: "Слышите ли вы мощный шум большого водопада?", ua: "Чи чуєте ви потужний шум великого водоспаду?" } }
+    ],
+    questions: [
+      {
+        question: { en: "How many lakes are in Plitvice?", ru: "Сколько озер на Плитвицах?", ua: "Скільки озер на Плітвіце?" },
+        options: ["Šesnaest (16)", "Deset (10)", "Dvadeset (20)", "Pet (5)"],
+        correctAnswer: "Šesnaest (16)",
+      },
+      {
+        question: { en: "What color is the lake water described as?", ru: "Какого цвета вода в озерах?", ua: "Якого кольору вода в озерах?" },
+        options: ["Smaragdna (emerald)", "Crvena (red)", "Siva (grey)", "Crna (black)"],
+        correctAnswer: "Smaragdna (emerald)",
+      },
+    ],
+    fillBlanks: [
+      { sentence: "Voda je _____ čista", blank: "kristalno", hint: { en: "crystal", ru: "кристально", ua: "кришталево" } },
+      { sentence: "Šetamo _____ stazama kroz prirodu", blank: "drvenim", hint: { en: "wooden", ru: "деревянным", ua: "дерев'яними" } },
+    ],
+  },
+  {
     id: "djecja-pjesma-1",
     title: { en: "Croatian Children's Song: Ide maca oko tebe", ru: "Детская песня: Ide maca oko tebe", ua: "Дитяча пісня: Ide maca oko tebe" },
     type: "song",
