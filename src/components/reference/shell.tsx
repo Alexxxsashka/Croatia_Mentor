@@ -157,7 +157,20 @@ export function ReferenceShell({children}: {children:ReactNode}) {
     {publicPage?<>
       <header className={`public-header ${!landing?'reference-static-header':''}`}><Brand/><nav className="public-nav"><Link href="/learn-croatian">{t('Как это работает')}</Link><Link href={session ? "/lessons" : "/sign-in"}>{t('Программа')}</Link><Link href={session ? "/games" : "/sign-in"}>{t('Практика')}</Link><Link href="/contacts">{t('Контакты')}</Link></nav>{actions}</header>
       <div id="site-content" className={landing?'':'reference-public-content legacy-content'}>{children}</div>
-      <footer><div><Brand/><p>{t('Язык для жизни, а не только для учебника.')}</p></div><nav><Link href={session ? "/lessons" : "/sign-in"}>{t('Мой курс')}</Link><Link href="/contacts">{t('Контакты')}</Link><Link href="/learn-croatian">{t('Как это работает')}</Link></nav><div className="footer-bottom"><span>© 2026 Croatian Mentor</span><span>{t('В своём ритме.')}</span></div></footer>
+      <footer>
+        <div><Brand/><p>{t('Язык для жизни, а не только для учебника.')}</p></div>
+        <nav>
+          <Link href={session ? "/lessons" : "/sign-in"}>{t('Мой курс')}</Link>
+          <Link href="/contacts">{t('Контакты')}</Link>
+          <Link href="/learn-croatian">{t('Как это работает')}</Link>
+          <a href="/privacy_policy.pdf" target="_blank" rel="noopener noreferrer">{t('Политика конфиденциальности')}</a>
+          <a href="/terms_of_service.pdf" target="_blank" rel="noopener noreferrer">{t('Условия использования')}</a>
+        </nav>
+        <div className="footer-bottom">
+          <span>© 2026 Croatian Mentor. {t('Все права защищены.')}</span>
+          <span>{t('В своём ритме.')}</span>
+        </div>
+      </footer>
     </>:<div className="app-shell">
       {menu&&<button className="sidebar-shade" aria-label={t('Закрыть')} onClick={()=>setMenu(false)}/>}
       <aside ref={sidebarRef} id="study-navigation" className={`sidebar ${menu?'open':''}`}>
@@ -169,7 +182,20 @@ export function ReferenceShell({children}: {children:ReactNode}) {
           <div className="plan-mini"><Route size={27}/><p>{t('Один маленький шаг сегодня.')}<br/><strong>{t('В своём ритме.')}</strong></p><Link href="/placement-test" onClick={()=>setMenu(false)}>{t('Уровень')}<ArrowRight size={15}/></Link></div>
         </div>
       </aside>
-      <div className="workspace"><header className="app-header"><button className="icon-button mobile-menu" aria-label="Menu" aria-expanded={menu} aria-controls="study-navigation" onClick={()=>setMenu(!menu)}><Menu/></button><div className="header-context">{t('Один маленький шаг сегодня.')}</div>{actions}</header><main id="site-content" className="app-main legacy-content">{children}</main><div className="workspace-footer">Croatian Mentor<span>{t('В своём ритме.')}</span></div></div>
+      <div className="workspace">
+        <header className="app-header"><button className="icon-button mobile-menu" aria-label="Menu" aria-expanded={menu} aria-controls="study-navigation" onClick={()=>setMenu(!menu)}><Menu/></button><div className="header-context">{t('Один маленький шаг сегодня.')}</div>{actions}</header>
+        <main id="site-content" className="app-main legacy-content">{children}</main>
+        <div className="workspace-footer">
+          <div className="workspace-footer-legal">
+            <span>© 2026 Croatian Mentor</span>
+            <span className="dot-sep">•</span>
+            <a href="/privacy_policy.pdf" target="_blank" rel="noopener noreferrer">{t('Политика конфиденциальности')}</a>
+            <span className="dot-sep">•</span>
+            <a href="/terms_of_service.pdf" target="_blank" rel="noopener noreferrer">{t('Условия использования')}</a>
+          </div>
+          <span>{t('В своём ритме.')}</span>
+        </div>
+      </div>
     </div>}
   </div>;
 }

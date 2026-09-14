@@ -45,7 +45,14 @@
 .reference-design .avatar:hover{transform:scale(1.05);border-color:var(--ref-accent)}
 .reference-design .brand-symbol{overflow:hidden;border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid #d2aa7366}
 .reference-design .brand-symbol img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
-@media(max-width:700px){.reference-design .mobile-close{display:grid;position:absolute;right:12px;top:25px}.reference-design .header-actions{gap:6px}.reference-design .public-header .header-login{font-size:11px}.reference-design .public-header .brand{font-size:14px}.reference-design .legacy-content h1{font-size:28px}.reference-design .top-stats{display:none}}
+.reference-design .workspace-footer{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-top:1px solid var(--ref-line);font-size:11px;color:#879ba2;flex-wrap:wrap;gap:12px}
+.reference-design .workspace-footer-legal{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.reference-design .workspace-footer-legal a{color:inherit;text-decoration:none;transition:color .2s}
+.reference-design .workspace-footer-legal a:hover{color:var(--ref-accent);text-decoration:underline}
+.reference-design .dot-sep{opacity:.4}
+.reference-design footer nav a{transition:color .2s}
+.reference-design footer nav a:hover{color:var(--ref-accent)}
+@media(max-width:700px){.reference-design .mobile-close{display:grid;position:absolute;right:12px;top:25px}.reference-design .header-actions{gap:6px}.reference-design .public-header .header-login{font-size:11px}.reference-design .public-header .brand{font-size:14px}.reference-design .legacy-content h1{font-size:28px}.reference-design .top-stats{display:none}.reference-design .workspace-footer{padding:16px 20px}}
 @media(prefers-reduced-motion:reduce){.reference-design *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media(max-width:700px){.reference-design .sidebar:not(.open){visibility:hidden}.reference-design .sidebar.open{visibility:visible}}
 
