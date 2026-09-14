@@ -63,9 +63,9 @@ export function ReferenceShell({children}: {children:ReactNode}) {
   return <div className={`reference-design ${theme==='orange-white'?'light':''} ${landing?'reference-home':''}`}>
     <a className="skip-link" href="#site-content">{t('Продолжить')}</a>
     {publicPage?<>
-      <header className={`public-header ${!landing?'reference-static-header':''}`}><Brand/><nav className="public-nav"><Link href="/learn-croatian">{t('Как это работает')}</Link><Link href="/lessons">{t('Программа')}</Link><Link href="/games">{t('Практика')}</Link><Link href="/contacts">{t('Контакты')}</Link></nav>{actions}</header>
+      <header className={`public-header ${!landing?'reference-static-header':''}`}><Brand/><nav className="public-nav"><Link href="/learn-croatian">{t('Как это работает')}</Link><Link href={session ? "/lessons" : "/sign-in"}>{t('Программа')}</Link><Link href={session ? "/games" : "/sign-in"}>{t('Практика')}</Link><Link href="/contacts">{t('Контакты')}</Link></nav>{actions}</header>
       <div id="site-content" className={landing?'':'reference-public-content legacy-content'}>{children}</div>
-      <footer><div><Brand/><p>{t('Язык для жизни, а не только для учебника.')}</p></div><nav><Link href="/lessons">{t('Мой курс')}</Link><Link href="/contacts">{t('Контакты')}</Link><Link href="/learn-croatian">{t('Как это работает')}</Link></nav><div className="footer-bottom"><span>© 2026 Croatian Mentor</span><span>{t('В своём ритме.')}</span></div></footer>
+      <footer><div><Brand/><p>{t('Язык для жизни, а не только для учебника.')}</p></div><nav><Link href={session ? "/lessons" : "/sign-in"}>{t('Мой курс')}</Link><Link href="/contacts">{t('Контакты')}</Link><Link href="/learn-croatian">{t('Как это работает')}</Link></nav><div className="footer-bottom"><span>© 2026 Croatian Mentor</span><span>{t('В своём ритме.')}</span></div></footer>
     </>:<div className="app-shell">
       {menu&&<button className="sidebar-shade" aria-label={t('Закрыть')} onClick={()=>setMenu(false)}/>}
       <aside ref={sidebarRef} id="study-navigation" className={`sidebar ${menu?'open':''}`}>

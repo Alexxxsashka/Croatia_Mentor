@@ -145,11 +145,11 @@ export function Navbar() {
           },
         ]
       : []),
-    { href: "/lessons", label: t("lessons"), icon: BookOpen },
+    { href: session ? "/lessons" : "/sign-in", label: t("lessons"), icon: BookOpen },
     { href: "/grammar", label: t("grammar"), icon: GraduationCap },
     { href: "/vocabulary", label: t("vocabulary"), icon: Languages },
-    { href: "/games", label: t("games"), icon: Gamepad2 },
-    { href: "/ai-chat", label: t("aiChat"), icon: MessageCircle },
+    { href: session ? "/games" : "/sign-in", label: t("games"), icon: Gamepad2 },
+    { href: session ? "/ai-chat" : "/sign-in", label: t("aiChat"), icon: MessageCircle },
   ];
 
   return (
