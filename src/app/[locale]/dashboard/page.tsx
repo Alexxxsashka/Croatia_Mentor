@@ -446,42 +446,42 @@ export default function DashboardPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
             <Link
               href="/vocabulary?tab=flashcards"
-              className="p-4 rounded-2xl bg-gradient-to-r from-blue-600/20 to-indigo-600/20 border border-blue-500/30 hover:border-blue-500 flex items-center justify-between group transition-all"
+              className="p-4 rounded-2xl bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 hover:border-blue-400/60 flex items-center justify-between group transition-all duration-300 shadow-sm hover:shadow-md hover:shadow-blue-500/10"
             >
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-blue-500/20 text-blue-400 group-hover:scale-110 transition-transform">
+              <div className="flex items-center gap-3.5 min-w-0">
+                <div className="p-2.5 rounded-xl bg-blue-500/20 text-blue-600 dark:text-blue-400 border border-blue-500/30 group-hover:scale-105 transition-transform shrink-0">
                   <Languages className="w-5 h-5" />
                 </div>
-                <div>
-                  <h3 className="font-bold text-sm text-foreground">
+                <div className="min-w-0">
+                  <h3 className="font-bold text-sm text-foreground group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
                     {locale === "ua" ? "Тренувати слова (Flashcards)" : locale === "ru" ? "Тренировать слова (Flashcards)" : "Practice Flashcard Decks"}
                   </h3>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 mt-0.5 font-medium leading-normal">
                     {locale === "ua" ? "Активне запам'ятовування" : locale === "ru" ? "Активное запоминание" : "Anki & Quizlet style active recall"}
                   </p>
                 </div>
               </div>
-              <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all" />
+              <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:translate-x-1 transition-all shrink-0 ml-2" />
             </Link>
 
             <Link
               href="/vocabulary?tab=quiz"
-              className="p-4 rounded-2xl bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30 hover:border-purple-500 flex items-center justify-between group transition-all"
+              className="p-4 rounded-2xl bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 hover:border-purple-400/60 flex items-center justify-between group transition-all duration-300 shadow-sm hover:shadow-md hover:shadow-purple-500/10"
             >
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-purple-500/20 text-purple-400 group-hover:scale-110 transition-transform">
+              <div className="flex items-center gap-3.5 min-w-0">
+                <div className="p-2.5 rounded-xl bg-purple-500/20 text-purple-600 dark:text-purple-400 border border-purple-500/30 group-hover:scale-105 transition-transform shrink-0">
                   <Trophy className="w-5 h-5" />
                 </div>
-                <div>
-                  <h3 className="font-bold text-sm text-foreground">
-                    {locale === "ua" ? "Словарний тест" : locale === "ru" ? "Словарный тест" : "Custom Vocabulary Quiz"}
+                <div className="min-w-0">
+                  <h3 className="font-bold text-sm text-foreground group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors truncate">
+                    {locale === "ua" ? "Словниковий тест" : locale === "ru" ? "Словарный тест" : "Custom Vocabulary Quiz"}
                   </h3>
-                  <p className="text-xs text-muted-foreground">
-                    {locale === "ua" ? "Тести на 5-50 слів з выобором режиму" : locale === "ru" ? "Тесты на 5-50 слов с выбором режима" : "Configurable 5-50 Qs tests"}
+                  <p className="text-xs text-slate-600 dark:text-slate-300 mt-0.5 font-medium leading-normal">
+                    {locale === "ua" ? "Тести на 5-50 слів з вибором режиму" : locale === "ru" ? "Тесты на 5-50 слов с выбором режима" : "Configurable 5-50 Qs tests"}
                   </p>
                 </div>
               </div>
-              <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all" />
+              <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-purple-600 dark:group-hover:text-purple-400 group-hover:translate-x-1 transition-all shrink-0 ml-2" />
             </Link>
           </div>
         </div>
