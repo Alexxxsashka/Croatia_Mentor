@@ -173,7 +173,7 @@ export default function GrammarPage() {
               <div>
                 <h1 className="text-base sm:text-lg font-black uppercase font-editorial tracking-tight text-white flex items-center gap-2">
                   {locale === "ua"
-                    ? "Грамматичний Довідник"
+                    ? "Граматичний Довідник"
                     : locale === "ru"
                     ? "Грамматический Справочник"
                     : "Croatian Grammar Handbook"}
@@ -198,7 +198,9 @@ export default function GrammarPage() {
               className="px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-slate-300 border border-white/10 transition-all flex items-center gap-1.5"
             >
               <Brain className="w-4 h-4 text-purple-400" />
-              <span className="hidden sm:inline">Игровой Центр</span>
+              <span className="hidden sm:inline">
+                {locale === "ua" ? "Ігровий Центр" : locale === "ru" ? "Игровой Центр" : "Game Hub"}
+              </span>
             </button>
           </div>
         </div>
@@ -325,7 +327,7 @@ export default function GrammarPage() {
                   <div className="flex items-center gap-2 text-[10px] uppercase font-bold tracking-widest text-purple-400">
                     <span>{currentCategory.title[locale as "en" | "ru" | "ua"] || currentCategory.title.en}</span>
                     <span>•</span>
-                    <span>Раздел</span>
+                    <span>{locale === "ua" ? "Розділ" : locale === "ru" ? "Раздел" : "Section"}</span>
                   </div>
                   <h2 className="text-2xl sm:text-3xl font-black text-white uppercase font-editorial tracking-tight">
                     {currentSection.title[locale as "en" | "ru" | "ua"] || currentSection.title.en}
@@ -446,42 +448,76 @@ export default function GrammarPage() {
                   {/* Difficulty selector */}
                   <div>
                     <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
-                      Сложность (CEFR)
+                      {locale === "ua"
+                        ? "Складність (CEFR)"
+                        : locale === "ru"
+                        ? "Сложность (CEFR)"
+                        : "Difficulty (CEFR)"}
                     </label>
                     <select
                       value={testLevel}
                       onChange={(e) => setTestLevel(e.target.value)}
                       className="w-full bg-slate-900 border border-white/10 text-xs font-bold rounded-xl px-3.5 py-3 text-white focus:outline-none focus:border-purple-500 cursor-pointer shadow-sm"
                     >
-                      <option value="all">Все уровни (A1 - C1)</option>
-                      <option value="A1">A1 · Начинающий</option>
-                      <option value="A2">A2 · Элементарный</option>
-                      <option value="B1">B1 · Средний</option>
-                      <option value="B2">B2 · Выше среднего</option>
-                      <option value="C1">C1 · Продвинутый</option>
+                      <option value="all">
+                        {locale === "ua"
+                          ? "Всі рівні (A1 - C1)"
+                          : locale === "ru"
+                          ? "Все уровни (A1 - C1)"
+                          : "All levels (A1 - C1)"}
+                      </option>
+                      <option value="A1">
+                        {locale === "ua" ? "A1 · Початковий" : locale === "ru" ? "A1 · Начинающий" : "A1 · Beginner"}
+                      </option>
+                      <option value="A2">
+                        {locale === "ua" ? "A2 · Елементарний" : locale === "ru" ? "A2 · Элементарный" : "A2 · Elementary"}
+                      </option>
+                      <option value="B1">
+                        {locale === "ua" ? "B1 · Середній" : locale === "ru" ? "B1 · Средний" : "B1 · Intermediate"}
+                      </option>
+                      <option value="B2">
+                        {locale === "ua" ? "B2 · Вище середнього" : locale === "ru" ? "B2 · Выше среднего" : "B2 · Upper-Intermediate"}
+                      </option>
+                      <option value="C1">
+                        {locale === "ua" ? "C1 · Просунутий" : locale === "ru" ? "C1 · Продвинутый" : "C1 · Advanced"}
+                      </option>
                     </select>
                   </div>
 
                   {/* Speed / Timer mode */}
                   <div>
                     <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
-                      Режим скорости
+                      {locale === "ua"
+                        ? "Режим швидкості"
+                        : locale === "ru"
+                        ? "Режим скорости"
+                        : "Speed Mode"}
                     </label>
                     <select
                       value={testSpeed}
                       onChange={(e) => setTestSpeed(Number(e.target.value))}
                       className="w-full bg-slate-900 border border-white/10 text-xs font-bold rounded-xl px-3.5 py-3 text-white focus:outline-none focus:border-purple-500 cursor-pointer shadow-sm"
                     >
-                      <option value={5}>⚡ 5 сек (Спринт)</option>
-                      <option value={10}>⏱️ 10 сек (Стандарт)</option>
-                      <option value={0}>🧘 Без таймера (Практика)</option>
+                      <option value={5}>
+                        {locale === "ua" ? "⚡ 5 сек (Спринт)" : locale === "ru" ? "⚡ 5 сек (Спринт)" : "⚡ 5 sec (Sprint)"}
+                      </option>
+                      <option value={10}>
+                        {locale === "ua" ? "⏱️ 10 сек (Стандарт)" : locale === "ru" ? "⏱️ 10 сек (Стандарт)" : "⏱️ 10 sec (Standard)"}
+                      </option>
+                      <option value={0}>
+                        {locale === "ua" ? "🧘 Без таймера (Практика)" : locale === "ru" ? "🧘 Без таймера (Практика)" : "🧘 No timer (Practice)"}
+                      </option>
                     </select>
                   </div>
 
                   {/* Question count */}
                   <div>
                     <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
-                      Вопросов в тесте
+                      {locale === "ua"
+                        ? "Питань у тесті"
+                        : locale === "ru"
+                        ? "Вопросов в тесте"
+                        : "Questions in test"}
                     </label>
                     <div className="grid grid-cols-3 gap-2">
                       {[5, 10, 15].map((num) => (
@@ -507,7 +543,11 @@ export default function GrammarPage() {
                   className="w-full py-4 rounded-2xl text-base font-bold bg-gradient-to-r from-amber-500 via-orange-500 to-purple-600 text-white hover:opacity-95 transition-all shadow-xl shadow-orange-500/25 flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Sparkles className="w-5 h-5 fill-white animate-pulse" />
-                  Сгенерировать тест по теории ({testCount} вопросов)
+                  {locale === "ua"
+                    ? `Згенерувати тест з теорії (${testCount} питань)`
+                    : locale === "ru"
+                    ? `Сгенерировать тест по теории (${testCount} вопросов)`
+                    : `Generate Theory Practice Test (${testCount} Qs)`}
                 </button>
               </div>
             ) : testComplete ? (
@@ -515,17 +555,31 @@ export default function GrammarPage() {
               <div className="text-center py-6 space-y-6 animate-fade-in">
                 <Trophy className="w-16 h-16 text-amber-400 mx-auto animate-bounce" />
                 <div>
-                  <h4 className="text-2xl font-black text-white uppercase font-editorial">Тест завершен!</h4>
-                  <p className="text-xs text-slate-400 mt-1">Отличная работа по проверке теории</p>
+                  <h4 className="text-2xl font-black text-white uppercase font-editorial">
+                    {locale === "ua" ? "Тест завершено!" : locale === "ru" ? "Тест завершен!" : "Test Completed!"}
+                  </h4>
+                  <p className="text-xs text-slate-400 mt-1">
+                    {locale === "ua"
+                      ? "Чудова робота з перевірки теорії"
+                      : locale === "ru"
+                      ? "Отличная работа по проверке теории"
+                      : "Great job verifying grammar theory"}
+                  </p>
                 </div>
 
                 <div className="glass rounded-2xl p-6 max-w-sm mx-auto space-y-3 border border-white/10">
                   <div className="flex justify-between text-xs font-semibold">
-                    <span className="text-slate-400">Правильных ответов:</span>
-                    <span className="text-emerald-400 font-bold">{score / 10} из {questions.length}</span>
+                    <span className="text-slate-400">
+                      {locale === "ua" ? "Правильних відповідей:" : locale === "ru" ? "Правильных ответов:" : "Correct answers:"}
+                    </span>
+                    <span className="text-emerald-400 font-bold">
+                      {score / 10} {locale === "ua" ? "з" : locale === "ru" ? "из" : "of"} {questions.length}
+                    </span>
                   </div>
                   <div className="flex justify-between text-xs font-semibold">
-                    <span className="text-slate-400">Заработано XP:</span>
+                    <span className="text-slate-400">
+                      {locale === "ua" ? "Зароблено XP:" : locale === "ru" ? "Заработано XP:" : "Earned XP:"}
+                    </span>
                     <span className="text-amber-400 font-bold">+{score * 2} XP</span>
                   </div>
                 </div>
@@ -535,13 +589,18 @@ export default function GrammarPage() {
                     onClick={startPracticeTest}
                     className="px-6 py-3 rounded-2xl font-bold bg-gradient-to-r from-amber-500 to-orange-600 text-white hover:opacity-90 transition-all flex items-center gap-2 shadow-lg cursor-pointer text-xs uppercase"
                   >
-                    <RefreshCw className="w-4 h-4" /> Пройти новый тест по этой теме
+                    <RefreshCw className="w-4 h-4" />{" "}
+                    {locale === "ua"
+                      ? "Пройти новий тест за цією темою"
+                      : locale === "ru"
+                      ? "Пройти новый тест по этой теме"
+                      : "Take new test on this topic"}
                   </button>
                   <button
                     onClick={() => setTestActive(false)}
                     className="px-6 py-3 rounded-2xl font-bold glass border border-white/10 text-slate-300 hover:text-white transition-all text-xs uppercase cursor-pointer"
                   >
-                    Вернуться к теории
+                    {locale === "ua" ? "Повернутися до теорії" : locale === "ru" ? "Вернуться к теории" : "Back to theory"}
                   </button>
                 </div>
               </div>
@@ -550,7 +609,13 @@ export default function GrammarPage() {
               <div className="space-y-6 animate-fade-in">
                 {/* Header info */}
                 <div className="flex items-center justify-between text-xs text-slate-400 font-semibold">
-                  <span>Вопрос {currentIndex + 1} из {questions.length}</span>
+                  <span>
+                    {locale === "ua"
+                      ? `Питання ${currentIndex + 1} з ${questions.length}`
+                      : locale === "ru"
+                      ? `Вопрос ${currentIndex + 1} из ${questions.length}`
+                      : `Question ${currentIndex + 1} of ${questions.length}`}
+                  </span>
                   <span className="text-amber-400 font-bold">{score} pts</span>
                 </div>
 
@@ -630,7 +695,13 @@ export default function GrammarPage() {
                       <div className="p-4 rounded-2xl bg-slate-900/90 border border-purple-500/30 space-y-2 animate-fade-in">
                         <div className="flex items-center gap-2 text-xs font-bold text-purple-400 uppercase tracking-wider">
                           <Info className="w-4 h-4 text-purple-400" />
-                          <span>Объяснение правила:</span>
+                          <span>
+                            {locale === "ua"
+                              ? "Пояснення правила:"
+                              : locale === "ru"
+                              ? "Объяснение правила:"
+                              : "Rule explanation:"}
+                          </span>
                         </div>
                         <p className="text-xs text-slate-300 leading-relaxed">
                           {questions[currentIndex].explanation[locale as "en" | "ru" | "ua"] ||
@@ -641,7 +712,17 @@ export default function GrammarPage() {
                             onClick={handleNextQuestion}
                             className="px-6 py-2.5 rounded-xl font-bold bg-purple-600 hover:bg-purple-500 text-white shadow-lg text-xs uppercase tracking-wider transition-all cursor-pointer"
                           >
-                            {currentIndex < questions.length - 1 ? "Следующий вопрос →" : "Посмотреть результаты"}
+                            {currentIndex < questions.length - 1
+                              ? locale === "ua"
+                                ? "Наступне питання →"
+                                : locale === "ru"
+                                ? "Следующий вопрос →"
+                                : "Next Question →"
+                              : locale === "ua"
+                              ? "Переглянути результати"
+                              : locale === "ru"
+                              ? "Посмотреть результаты"
+                              : "View Results"}
                           </button>
                         </div>
                       </div>

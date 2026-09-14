@@ -1099,13 +1099,34 @@ export default function ProfilePage() {
                       const res = await fetch("/api/auth/send-verification-email", { method: "POST" });
                       const data = await res.json();
                       if (res.ok && data.success) {
-                        toast.success(data.message || "Ссылка отправлена!");
+                        toast.success(
+                          data.message ||
+                            (locale === "ua"
+                              ? "Посилання надіслано!"
+                              : locale === "ru"
+                              ? "Ссылка отправлена!"
+                              : "Link sent!")
+                        );
                       } else {
-                        toast.error(data.error || "Не удалось отправить ссылку");
+                        toast.error(
+                          data.error ||
+                            (locale === "ua"
+                              ? "Не вдалося надіслати посилання"
+                              : locale === "ru"
+                              ? "Не удалось отправить ссылку"
+                              : "Failed to send link")
+                        );
                       }
                     } catch (err: unknown) {
                       const error = err as Error;
-                      toast.error(error.message || "Ошибка отправки письма");
+                      toast.error(
+                        error.message ||
+                          (locale === "ua"
+                            ? "Помилка надсилання листа"
+                            : locale === "ru"
+                            ? "Ошибка отправки письма"
+                            : "Error sending email")
+                      );
                     }
                   }}
                   className="px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold shrink-0 transition-all text-[11px] shadow-md shadow-amber-500/20"

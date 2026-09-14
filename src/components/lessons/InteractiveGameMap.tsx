@@ -35,7 +35,7 @@ const MODULE_TITLES: Record<string, { ua: string; ru: string; en: string; descUa
     ua: "Модуль 2: Рівень A2 — Базовий",
     ru: "Модуль 2: Уровень A2 — Базовый",
     en: "Module 2: Level A2 — Elementary",
-    descUa: "Відмінники, часи дієслів, побутові теми та повсякденне спілкування",
+    descUa: "Відмінки, часи дієслів, побутові теми та повсякденне спілкування",
     descRu: "Падежи, времена глаголов, бытовые темы и повседневное общение",
     descEn: "Cases, verb tenses, everyday topics, and daily communication",
   },

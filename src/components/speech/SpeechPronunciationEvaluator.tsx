@@ -204,7 +204,11 @@ export function SpeechPronunciationEvaluator({
         </div>
       ) : (
         <div className="text-xs text-muted-foreground italic">
-          {locale === "ua" ? "Распознавание речи не поддерживается вашим браузером" : "Speech recognition is not supported in your browser"}
+          {locale === "ua"
+            ? "Розпізнавання мови не підтримується вашим браузером"
+            : locale === "ru"
+            ? "Распознавание речи не поддерживается вашим браузером"
+            : "Speech recognition is not supported in your browser"}
         </div>
       )}
 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { useLocale } from "next-intl";
 import { CheckCircle2, AlertTriangle, Send, Loader2, X, MailCheck, Clock } from "lucide-react";
 import { toast } from "sonner";
 import { auth } from "@/lib/firebase";
@@ -9,6 +10,7 @@ import { sendEmailVerification } from "firebase/auth";
 
 export function EmailVerificationModal() {
   const { data: session, status } = useSession();
+  const locale = useLocale();
   const [visible, setVisible] = useState(false);
   const [sending, setSending] = useState(false);
   const [verifying, setVerifying] = useState(false);
@@ -42,7 +44,13 @@ export function EmailVerificationModal() {
     try {
       if (auth?.currentUser && !auth.currentUser.emailVerified) {
         await sendEmailVerification(auth.currentUser);
-        toast.success(`Ссылка для подтверждения отправлена на ${auth.currentUser.email}!`);
+        toast.success(
+          locale === "ua"
+            ? `Посилання для підтвердження надіслано на ${auth.currentUser.email}!`
+            : locale === "ru"
+            ? `Ссылка для подтверждения отправлена на ${auth.currentUser.email}!`
+            : `Verification link sent to ${auth.currentUser.email}!`
+        );
         return;
       }
 
@@ -51,14 +59,35 @@ export function EmailVerificationModal() {
       });
       const data = await res.json();
       if (res.ok && data.success) {
-        toast.success(data.message || `Ссылка для подтверждения отправлена на ${session?.user?.email}!`);
+        toast.success(
+          data.message ||
+            (locale === "ua"
+              ? `Посилання для підтвердження надіслано на ${session?.user?.email}!`
+              : locale === "ru"
+              ? `Ссылка для подтверждения отправлена на ${session?.user?.email}!`
+              : `Verification link sent to ${session?.user?.email}!`)
+        );
       } else {
-        toast.error(data.error || "Не удалось отправить письмо с подтверждением");
+        toast.error(
+          data.error ||
+            (locale === "ua"
+              ? "Не вдалося надіслати лист із підтвердженням"
+              : locale === "ru"
+              ? "Не удалось отправить письмо с подтверждением"
+              : "Failed to send verification email")
+        );
       }
     } catch (err: unknown) {
       const error = err as Error;
       console.error("Send email verification error:", error);
-      toast.error(error.message || "Ошибка отправки письма");
+      toast.error(
+        error.message ||
+          (locale === "ua"
+            ? "Помилка надсилання листа"
+            : locale === "ru"
+            ? "Ошибка отправки письма"
+            : "Error sending email")
+      );
     } finally {
       setSending(false);
     }
@@ -74,16 +103,36 @@ export function EmailVerificationModal() {
       });
       const data = await res.json();
       if (res.ok && data.success) {
-        toast.success("Почта успешно подтверждена!");
+        toast.success(
+          locale === "ua"
+            ? "Пошту успішно підтверджено!"
+            : locale === "ru"
+            ? "Почта успешно подтверждена!"
+            : "Email successfully verified!"
+        );
         setVisible(false);
         window.location.reload();
         return;
       }
-      toast.error(data.error || "Не удалось подтвердить статус почты");
+      toast.error(
+        data.error ||
+          (locale === "ua"
+            ? "Не вдалося підтвердити статус пошти"
+            : locale === "ru"
+            ? "Не удалось подтвердить статус почты"
+            : "Failed to verify email status")
+      );
     } catch (err: unknown) {
       const error = err as Error;
       console.error("Check verification status error:", error);
-      toast.error(error.message || "Ошибка при проверке статуса");
+      toast.error(
+        error.message ||
+          (locale === "ua"
+            ? "Помилка при перевірці статусу"
+            : locale === "ru"
+            ? "Ошибка при проверке статуса"
+            : "Error checking verification status")
+      );
     } finally {
       setVerifying(false);
     }
@@ -97,7 +146,7 @@ export function EmailVerificationModal() {
         <button
           onClick={() => setDismissed(true)}
           className="absolute top-4 right-4 p-1.5 text-muted-foreground hover:text-foreground rounded-xl bg-white/5 hover:bg-white/10 transition-colors"
-          title="Закрыть"
+          title={locale === "ua" ? "Закрити" : locale === "ru" ? "Закрыть" : "Close"}
         >
           <X className="w-4 h-4" />
         </button>
@@ -108,17 +157,24 @@ export function EmailVerificationModal() {
           </div>
           <div className="space-y-1">
             <h3 className="text-base font-bold text-foreground flex items-center gap-2">
-              Подтверждение почты
+              {locale === "ua" ? "Підтвердження пошти" : locale === "ru" ? "Подтверждение почты" : "Email Verification"}
             </h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Пожалуйста, подтвердите ваш email для обеспечения безопасности аккаунта и доступа ко всем функциям.
+              {locale === "ua"
+                ? "Будь ласка, підтвердіть ваш email для забезпечення безпеки облікового запису та доступу до всіх функцій."
+                : locale === "ru"
+                ? "Пожалуйста, подтвердите ваш email для обеспечения безопасности аккаунта и доступа ко всем функциям."
+                : "Please verify your email address to secure your account and access all features."}
             </p>
           </div>
         </div>
 
         <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center gap-2 text-xs text-amber-300">
           <MailCheck className="w-4 h-4 text-amber-400 shrink-0" />
-          <span>Письмо будет отправлено на: <strong>{session?.user?.email}</strong></span>
+          <span>
+            {locale === "ua" ? "Лист буде надіслано на: " : locale === "ru" ? "Письмо будет отправлено на: " : "Email will be sent to: "}
+            <strong>{session?.user?.email}</strong>
+          </span>
         </div>
 
         <div className="flex flex-col gap-2 pt-1">
@@ -133,7 +189,7 @@ export function EmailVerificationModal() {
               ) : (
                 <Send className="w-4 h-4" />
               )}
-              Отправить ссылку
+              {locale === "ua" ? "Надіслати посилання" : locale === "ru" ? "Отправить ссылку" : "Send Link"}
             </button>
 
             <button
@@ -146,7 +202,7 @@ export function EmailVerificationModal() {
               ) : (
                 <CheckCircle2 className="w-4 h-4" />
               )}
-              Я подтвердил
+              {locale === "ua" ? "Я підтвердив" : locale === "ru" ? "Я подтвердил" : "I Verified"}
             </button>
           </div>
 
@@ -155,7 +211,7 @@ export function EmailVerificationModal() {
             className="w-full py-2 px-3 rounded-xl text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all flex items-center justify-center gap-1.5"
           >
             <Clock className="w-3.5 h-3.5" />
-            Сделать позже
+            {locale === "ua" ? "Зробити пізніше" : locale === "ru" ? "Сделать позже" : "Do it later"}
           </button>
         </div>
       </div>
