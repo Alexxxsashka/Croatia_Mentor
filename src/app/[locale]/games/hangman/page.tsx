@@ -49,7 +49,7 @@ export default function HangmanPage() {
   const TOTAL_GAMES = 5;
 
   const displayAlphabet = [
-    "a","b","c","č","ć","d","đ","e","f","g","h","i","j","k","l","m","n","o","p","r","s","š","t","u","v","z","ž"
+    "a", "b", "c", "č", "ć", "d", "đ", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "š", "t", "u", "v", "z", "ž"
   ];
 
   // Load best streak from localStorage
@@ -57,7 +57,7 @@ export default function HangmanPage() {
     try {
       const saved = localStorage.getItem("hangman_best_streak");
       if (saved) setBestStreak(Number(saved));
-    } catch (_) {}
+    } catch (_) { }
   }, []);
 
   const pickWord = useCallback(() => {
@@ -119,7 +119,7 @@ export default function HangmanPage() {
           const nextS = s + 1;
           if (nextS > bestStreak) {
             setBestStreak(nextS);
-            try { localStorage.setItem("hangman_best_streak", String(nextS)); } catch (_) {}
+            try { localStorage.setItem("hangman_best_streak", String(nextS)); } catch (_) { }
           }
           return nextS;
         });
@@ -287,13 +287,12 @@ export default function HangmanPage() {
           wordLetters.map((letter, i) => (
             <div
               key={i}
-              className={`w-10 h-12 rounded-lg border-b-2 flex items-center justify-center text-xl font-bold transition-all ${
-                guessedLetters.has(letter)
+              className={`w-10 h-12 rounded-lg border-b-2 flex items-center justify-center text-xl font-bold transition-all ${guessedLetters.has(letter)
                   ? "border-blue-500 text-foreground"
                   : gameOver
                     ? "border-red-500 text-red-400"
                     : "border-white/20"
-              }`}
+                }`}
             >
               {guessedLetters.has(letter) || gameOver ? letter.toUpperCase() : ""}
             </div>
@@ -340,28 +339,27 @@ export default function HangmanPage() {
             )}
           </div>
           <div className="flex flex-wrap justify-center gap-1.5 max-w-lg mx-auto">
-          {displayAlphabet.map((letter) => {
-            const isGuessed = guessedLetters.has(letter);
-            const isInWord = word?.hr.toLowerCase().includes(letter);
-            return (
-              <button
-                key={letter}
-                onClick={() => guessLetter(letter)}
-                disabled={isGuessed}
-                className={`w-9 h-9 rounded-lg text-sm font-bold transition-all ${
-                  isGuessed
-                    ? isInWord
-                      ? "bg-green-500/20 text-green-400 border border-green-500/30"
-                      : "bg-red-500/10 text-red-400/50 border border-red-500/20"
-                    : "glass hover:bg-white/10 border border-white/10 hover:scale-105"
-                }`}
-              >
-                {letter.toUpperCase()}
-              </button>
-            );
-          })}
+            {displayAlphabet.map((letter) => {
+              const isGuessed = guessedLetters.has(letter);
+              const isInWord = word?.hr.toLowerCase().includes(letter);
+              return (
+                <button
+                  key={letter}
+                  onClick={() => guessLetter(letter)}
+                  disabled={isGuessed}
+                  className={`w-9 h-9 rounded-lg text-sm font-bold transition-all ${isGuessed
+                      ? isInWord
+                        ? "bg-green-500/20 text-green-400 border border-green-500/30"
+                        : "bg-red-500/10 text-red-400/50 border border-red-500/20"
+                      : "glass hover:bg-white/10 border border-white/10 hover:scale-105"
+                    }`}
+                >
+                  {letter.toUpperCase()}
+                </button>
+              );
+            })}
+          </div>
         </div>
-      </div>
       )}
     </div>
   );
