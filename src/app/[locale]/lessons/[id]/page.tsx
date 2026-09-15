@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, use, useEffect } from "react";
+import { useState, use, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { lessonsData, getLocalizedText } from "@/lib/lessons-data";
@@ -17,6 +17,9 @@ import {
   Clock,
   BookOpen,
   Gamepad2,
+  Mic,
+  MicOff,
+  Sparkles,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -101,6 +104,100 @@ export default function LessonDetailPage({
   const [alreadyCompleted, setAlreadyCompleted] = useState(false);
   const [hasCompletedLessonToday, setHasCompletedLessonToday] = useState(false);
   const [xpAdded, setXpAdded] = useState(false);
+  const [isDictating, setIsDictating] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const dictationRef = useRef<any>(null);
+
+  const toggleDictation = () => {
+    if (isDictating) {
+      if (dictationRef.current) {
+        try {
+          dictationRef.current.stop();
+        } catch {
+          // ignore
+        }
+      }
+      setIsDictating(false);
+      return;
+    }
+
+    if (typeof window === "undefined") return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const SpeechRec = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+
+    if (!SpeechRec) {
+      toast.error(
+        locale === "ua"
+          ? "Розпізнавання голосу не підтримується у цьому браузері"
+          : locale === "ru"
+          ? "Распознавание голоса не поддерживается в этом браузере"
+          : "Voice recognition is not supported in this browser"
+      );
+      return;
+    }
+
+    try {
+      const rec = new SpeechRec();
+      rec.continuous = false;
+      rec.interimResults = true;
+      rec.lang = "hr-HR";
+
+      rec.onstart = () => {
+        setIsDictating(true);
+        toast.info(
+          locale === "ua"
+            ? "🎙️ Слухаю... Говоріть хорватською!"
+            : locale === "ru"
+            ? "🎙️ Слушаю... Говорите по-хорватски!"
+            : "🎙️ Listening... Speak in Croatian!"
+        );
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      rec.onresult = (event: any) => {
+        let transcript = "";
+        for (let i = 0; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
+        }
+        if (transcript.trim()) {
+          setFillAnswer(transcript.trim());
+        }
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      rec.onerror = (event: any) => {
+        setIsDictating(false);
+        const err = event?.error;
+        if (err === "not-allowed" || err === "service-not-allowed") {
+          toast.error(
+            locale === "ua"
+              ? "Доступ до мікрофону заблоковано в налаштуваннях браузера 🔒"
+              : locale === "ru"
+              ? "Доступ к микрофону заблокирован в настройках браузера 🔒"
+              : "Microphone access blocked in browser settings 🔒"
+          );
+        } else if (err === "no-speech") {
+          toast.warning(
+            locale === "ua"
+              ? "Мову не виявлено. Говоріть голосніше."
+              : locale === "ru"
+              ? "Речь не обнаружена. Говорите громче."
+              : "No speech detected. Please speak louder."
+          );
+        }
+      };
+
+      rec.onend = () => {
+        setIsDictating(false);
+      };
+
+      dictationRef.current = rec;
+      rec.start();
+    } catch (e) {
+      console.error(e);
+      setIsDictating(false);
+    }
+  };
 
   // Shuffle exercises and options on mount/lesson change
   useEffect(() => {
@@ -408,6 +505,14 @@ export default function LessonDetailPage({
           <SpeechPronunciationEvaluator
             targetText={getLocalizedText(exercise.correctAnswer, locale)}
             locale={locale}
+            onSuccess={(spoken) => {
+              if (!fillAnswer && spoken) {
+                setFillAnswer(spoken);
+              }
+            }}
+            onApplyAnswer={(spoken) => {
+              setFillAnswer(spoken);
+            }}
           />
         )}
 
@@ -426,7 +531,7 @@ export default function LessonDetailPage({
                   setShowCurrentHint(true);
                   setHintsLeft((prev) => prev - 1);
                 }}
-                className="flex items-center gap-2 text-xs font-semibold text-yellow-400 bg-yellow-500/10 hover:bg-yellow-500/20 px-3.5 py-2 rounded-xl border border-yellow-500/20 transition-all"
+                className="flex items-center gap-2 text-xs font-semibold text-yellow-400 bg-yellow-500/10 hover:bg-yellow-500/20 px-3.5 py-2 rounded-xl border border-yellow-500/20 transition-all cursor-pointer"
               >
                 <Lightbulb className="w-4 h-4" />
                 <span>
@@ -493,17 +598,56 @@ export default function LessonDetailPage({
           exercise.type === "translation" ||
           exercise.type === "dictation") && (
           <div className="space-y-4">
-            <input
-              type="text"
-              value={fillAnswer}
-              onChange={(e) => setFillAnswer(e.target.value)}
-              disabled={showResult}
-              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all placeholder:text-muted-foreground/50"
-              placeholder={t("yourAnswer")}
-              onKeyDown={(e) =>
-                e.key === "Enter" && !showResult && checkAnswer()
-              }
-            />
+            <div className="relative flex items-center">
+              <input
+                type="text"
+                value={fillAnswer}
+                onChange={(e) => setFillAnswer(e.target.value)}
+                disabled={showResult}
+                className="w-full px-4 py-3.5 pr-12 rounded-xl bg-white/5 border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all placeholder:text-muted-foreground/50"
+                placeholder={
+                  isDictating
+                    ? locale === "ua"
+                      ? "Слухаю... Говоріть..."
+                      : locale === "ru"
+                      ? "Слушаю... Говорите..."
+                      : "Listening... Speak now..."
+                    : t("yourAnswer") || (locale === "ua" ? "Ваша відповідь..." : locale === "ru" ? "Ваш ответ..." : "Your answer...")
+                }
+                onKeyDown={(e) =>
+                  e.key === "Enter" && !showResult && checkAnswer()
+                }
+              />
+              <button
+                type="button"
+                onClick={toggleDictation}
+                disabled={showResult}
+                className={`absolute right-2 p-2 rounded-lg transition-all cursor-pointer ${
+                  isDictating
+                    ? "bg-red-500 text-white animate-pulse shadow-md shadow-red-500/30"
+                    : "text-muted-foreground hover:text-cyan-400 hover:bg-white/10"
+                }`}
+                title={
+                  isDictating
+                    ? locale === "ua"
+                      ? "Зупинити диктовку"
+                      : locale === "ru"
+                      ? "Остановить диктовку"
+                      : "Stop dictation"
+                    : locale === "ua"
+                    ? "Надиктувати відповідь голосом"
+                    : locale === "ru"
+                    ? "Надиктовать ответ голосом"
+                    : "Dictate answer by voice"
+                }
+              >
+                {isDictating ? (
+                  <MicOff className="w-4 h-4 animate-spin-slow" />
+                ) : (
+                  <Mic className="w-4 h-4" />
+                )}
+              </button>
+            </div>
             {showResult && (
               <div className="flex items-center gap-2 text-sm font-medium">
                 {isLastAnswerCorrect ? (
