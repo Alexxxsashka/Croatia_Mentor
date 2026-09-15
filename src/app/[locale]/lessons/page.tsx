@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { lessonsData, getLocalizedText } from "@/lib/lessons-data";
 import { promotionTests } from "@/lib/promotion-tests-data";
+import {LessonCover} from '@/components/reference/lesson-cover';
 import { InteractiveGameMap } from "@/components/lessons/InteractiveGameMap";
 import {
   BookOpen,
@@ -539,9 +540,9 @@ export default function LessonsPage() {
                           : `This lesson is locked. Pass the ${lesson.level} Promotion Exam first!`
                       );
                     }}
-                    className="p-6 rounded-3xl bg-slate-900/60 border border-dashed border-white/10 opacity-50 cursor-pointer space-y-4 relative"
+                    data-depth-block className="lesson-grid-card p-6 rounded-3xl bg-slate-900/60 border border-dashed border-white/10 opacity-50 cursor-pointer space-y-4 relative"
                   >
-                    <div className="flex items-start gap-4">
+                    <LessonCover type={lesson.type}/><div className="flex items-start gap-4">
                       <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center shrink-0 border border-white/5">
                         <Lock className="w-6 h-6 text-slate-500" />
                       </div>
@@ -570,13 +571,13 @@ export default function LessonsPage() {
                 <Link
                   key={lesson.id}
                   href={`/lessons/${lesson.id}`}
-                  className={`p-6 rounded-3xl bg-slate-900/90 border backdrop-blur-md space-y-4 group transition-all duration-300 ${
+                  data-depth-block className={`lesson-grid-card p-6 rounded-3xl bg-slate-900/90 border backdrop-blur-md space-y-4 group transition-all duration-300 ${
                     isCompleted 
                       ? "border-emerald-500/30 bg-emerald-950/20 hover:border-emerald-500/60 shadow-lg shadow-emerald-950/30"
                       : "border-slate-800 hover:border-purple-500/50 hover:bg-slate-900 shadow-xl"
                   }`}
                 >
-                  <div className="flex items-start gap-4">
+                  <LessonCover type={lesson.type}/><div className="flex items-start gap-4">
                     <div
                       className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${
                         isCompleted ? "from-emerald-600 to-teal-500" : gradient
@@ -638,7 +639,7 @@ export default function LessonsPage() {
                         : "hover:bg-slate-800/60"
                     }`}
                   >
-                    <div className="flex items-center gap-4 flex-1 min-w-0">
+                    <div className="flex items-center gap-4 flex-1 min-w-0"><LessonCover type={lesson.type} compact/>
                       <div
                         className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 ${
                           isLocked

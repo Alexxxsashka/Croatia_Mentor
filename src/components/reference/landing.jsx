@@ -1,4 +1,5 @@
 "use client";
+import { DiscoverySections } from './discovery-sections';
 import { MountainScene } from './mountain-scene';
 import { useLocale } from "next-intl";
 import { useSession } from "next-auth/react";
@@ -169,7 +170,7 @@ export default function ReferenceLanding() {
           </div>
         </section>
 
-        <section className="final-land">
+        <DiscoverySections /><section className="final-land" data-depth-scene>
           <h2>
             {t('Ваше следующее открытие')}
             <br />

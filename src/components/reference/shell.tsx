@@ -7,6 +7,7 @@ import {Route, LayoutDashboard, BookOpen, Languages, Shapes, Sparkles, Award, Se
 import {MenuCloseIcon} from '@/components/ui/animated-state-icons';
 import {NewsBell} from '@/components/news-bell';
 import {useTheme} from '@/components/theme/ThemeProvider';
+import {DepthEffects} from './depth-effects';
 import {translate} from './translations';
 
 const navigation = [
@@ -153,8 +154,8 @@ export function ReferenceShell({children}: {children:ReactNode}) {
       </Link>
     )}
   </div>;
-  return <div className={`reference-design ${theme==='orange-white'?'light':''} ${landing?'reference-home':''}`}>
-    <a className="skip-link" href="#site-content">{t('Продолжить')}</a>
+  return <div className={`reference-design ${theme==='orange-white'?'light':''} ${landing?'reference-home':'reference-interior'}`}>
+    <DepthEffects landing={landing}/><a className="skip-link" href="#site-content">{t('Продолжить')}</a>
     {publicPage?<>
       <header className={`public-header ${!landing?'reference-static-header':''}`}><Brand/><nav className="public-nav"><Link href="/learn-croatian">{t('Как это работает')}</Link><Link href={session ? "/lessons" : "/sign-in"}>{t('Программа')}</Link><Link href={session ? "/games" : "/sign-in"}>{t('Практика')}</Link><Link href="/contacts">{t('Контакты')}</Link></nav>{actions}</header>
       <div id="site-content" className={landing?'':'reference-public-content legacy-content'}>{children}</div>
