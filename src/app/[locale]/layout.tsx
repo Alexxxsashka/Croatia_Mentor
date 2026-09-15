@@ -36,11 +36,29 @@ export async function generateMetadata({
       shortcut: "/logos/logo-variant-3.jpg",
       apple: "/logos/logo-variant-3.jpg",
     },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("title"),
+      description: t("description"),
+      images: ["/logos/logo-variant-3.jpg"],
+    },
     openGraph: {
       title: t("title"),
       description: t("description"),
       locale: locale === "ua" ? "uk_UA" : locale === "ru" ? "ru_RU" : "en_US",
       type: "website",
+      siteName: "Croatia Mentor",
       images: [
         {
           url: "/logos/logo-variant-3.jpg",
@@ -50,7 +68,6 @@ export async function generateMetadata({
         },
       ],
     },
-
   };
 }
 
@@ -70,7 +87,16 @@ export default async function LocaleLayout({
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebSite",
+        "@id": "https://croatia-mentor.space/#website",
+        "url": "https://croatia-mentor.space",
+        "name": "Croatia Mentor",
+        "description": "Learn Croatian language online for free with interactive CEFR lessons, AI tutor, and audio vocabulary.",
+        "inLanguage": ["en", "uk", "ru", "hr"],
+      },
+      {
         "@type": "EducationalApplication",
+        "@id": "https://croatia-mentor.space/#app",
         "name": "Croatia Mentor",
         "applicationCategory": "EducationalApplication",
         "operatingSystem": "All",
@@ -84,14 +110,17 @@ export default async function LocaleLayout({
       },
       {
         "@type": "Course",
-        "name": "Learn Croatian Language Course",
-        "description": "Complete interactive course for learning Croatian language from A1 to B2 level.",
+        "@id": "https://croatia-mentor.space/#course",
+        "name": "Learn Croatian Language Course (A1-C2)",
+        "description": "Complete interactive course for learning Croatian language from beginner to advanced level.",
         "provider": {
           "@type": "Organization",
           "name": "Croatia Mentor",
           "sameAs": "https://croatia-mentor.space",
         },
         "isAccessibleForFree": true,
+        "educationalLevel": "Beginner to Advanced (A1, A2, B1, B2, C1, C2)",
+        "inLanguage": ["en", "uk", "ru"],
       },
     ],
   };
