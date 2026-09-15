@@ -1,0 +1,82 @@
+.reference-design .hero {
+  --hero-copy-y: 0px;
+}
+
+.reference-design .mountain-scene {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+  --far-y: 0px;
+  --near-y: 0px;
+  --haze-y: 0px;
+  --far-scale: 1.025;
+  --near-scale: 1.015;
+  background: #101719;
+}
+
+.reference-design .mountain-backdrop {
+  position: absolute;
+  inset: -3%;
+  transform-origin: 78% 28%;
+  transform: translate3d(0, var(--far-y), 0) scale(var(--far-scale));
+  background: url('/assets/croatian-road.png') center/cover;
+}
+
+.reference-design .mountain-backdrop img,
+.reference-design .mountain-backdrop-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+
+.reference-design .mountain-atmosphere {
+  position: absolute;
+  inset: -10%;
+  background: radial-gradient(ellipse at 80% 30%, #e4b36821, transparent 40%);
+  mix-blend-mode: screen;
+  transform: translate3d(0, var(--haze-y), 0);
+}
+
+.reference-design .mountain-foreground {
+  position: absolute;
+  inset: 15% -3% -15%;
+  background: url('/assets/mountain/foreground.png') center bottom/cover no-repeat;
+  transform-origin: 78% 90%;
+  transform: translate3d(0, var(--near-y), 0) scale(var(--near-scale));
+}
+
+.reference-design .hero .hero-content {
+  transform: translate3d(0, var(--hero-copy-y), 0);
+}
+
+@media (max-width: 700px) {
+  .reference-design .mountain-foreground {
+    inset: 30% -30% -20%;
+    background-position: 65% bottom;
+  }
+  .reference-design .mountain-backdrop img,
+  .reference-design .mountain-backdrop-img {
+    object-position: 62% center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reference-design .mountain-backdrop,
+  .reference-design .mountain-foreground,
+  .reference-design .mountain-atmosphere,
+  .reference-design .hero .hero-content {
+    transform: none !important;
+  }
+  .reference-design .mountain-backdrop img,
+  .reference-design .mountain-backdrop-img {
+    transform: none !important;
+  }
+  .reference-design .mountain-backdrop {
+    background: url('/assets/croatian-road.png') center/cover;
+  }
+}

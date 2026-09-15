@@ -44,3 +44,6 @@ next-env.d.ts
 # autopilot serve
 .autopilot/serve.*
 
+# Local media rendering tools (not application dependencies)
+/.media-tools/
+

@@ -2,7 +2,8 @@
 
 import { useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
-import { Play, Pause, RotateCcw, Volume2 } from "lucide-react";
+import { RotateCcw } from "lucide-react";
+import { PlayPauseIcon, VolumeIcon } from "@/components/ui/animated-state-icons";
 
 import { speakText } from "@/lib/speech";
 
@@ -46,7 +47,7 @@ export function DictationPlayer({ text }: DictationPlayerProps) {
   return (
     <div className="glass rounded-2xl p-6">
       <div className="flex items-center gap-2 mb-4">
-        <Volume2 className="w-5 h-5 text-blue-400" />
+        <VolumeIcon size={22} active={isPlaying} color="currentColor" className="text-blue-400" />
         <h3 className="font-semibold">{t("dictationInstructions")}</h3>
       </div>
 
@@ -59,12 +60,9 @@ export function DictationPlayer({ text }: DictationPlayerProps) {
               ? "bg-red-500 hover:bg-red-600 shadow-red-500/25"
               : "bg-gradient-to-r from-blue-500 to-purple-600 hover:opacity-90 shadow-blue-500/25"
           }`}
+          aria-label={isPlaying ? "Pause dictation" : "Play dictation"}
         >
-          {isPlaying ? (
-            <Pause className="w-6 h-6 text-white" />
-          ) : (
-            <Play className="w-6 h-6 text-white ml-0.5" />
-          )}
+          <PlayPauseIcon size={26} active={isPlaying} color="#ffffff" />
         </button>
 
         {/* Replay */}

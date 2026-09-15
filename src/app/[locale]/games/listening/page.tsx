@@ -5,7 +5,8 @@ import { useTranslations, useLocale } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "@/i18n/navigation";
 import { listeningData } from "@/lib/listening-data";
-import { ArrowLeft, Headphones, Play, ChevronRight, Check, X, Trophy, Volume2 } from "lucide-react";
+import { ArrowLeft, Headphones, ChevronRight, Check, X, Trophy } from "lucide-react";
+import { PlayPauseIcon, VolumeIcon } from "@/components/ui/animated-state-icons";
 import { speakText as speakTextHelper } from "@/lib/speech";
 
 function getLocalized(obj: { en: string; ru: string; ua: string }, locale: string) {
@@ -191,9 +192,9 @@ export default function ListeningPage() {
                     const fullText = item.subtitles.map((s) => s.hr).join(". ");
                     speakText(fullText);
                   }}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 shadow-lg"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 shadow-lg cursor-pointer"
                 >
-                  <Play className="w-5 h-5" /> {t("listening.play")}
+                  <PlayPauseIcon size={20} color="#ffffff" active={false} /> {t("listening.play")}
                 </button>
               </>
             )}
@@ -214,8 +215,8 @@ export default function ListeningPage() {
               <div className="space-y-3 animate-fade-in">
                 {item.subtitles.map((sub, i) => (
                   <div key={i} className="flex items-start gap-3 p-2 rounded-lg hover:bg-white/5 transition-colors">
-                    <button onClick={() => speakText(sub.hr)} className="p-1 rounded text-muted-foreground hover:text-foreground shrink-0 mt-0.5">
-                      <Volume2 className="w-3.5 h-3.5" />
+                    <button onClick={() => speakText(sub.hr)} className="p-1 rounded text-muted-foreground hover:text-foreground shrink-0 mt-0.5 cursor-pointer">
+                      <VolumeIcon size={16} active={false} color="currentColor" />
                     </button>
                     <div>
                       <p className="text-sm font-medium text-foreground">{sub.hr}</p>

@@ -3,9 +3,11 @@ import {useState, useEffect, useRef, type ReactNode} from 'react';
 import {useLocale} from 'next-intl';
 import {useSession, signOut} from 'next-auth/react';
 import {Link, usePathname, useRouter} from '@/i18n/navigation';
-import {Route, LayoutDashboard, BookOpen, Languages, Shapes, Sparkles, Award, Settings2, Shield, Menu, X, Sun, Moon, ArrowRight, LogOut} from 'lucide-react';
+import {Route, LayoutDashboard, BookOpen, Languages, Shapes, Sparkles, Award, Settings2, Shield, Sun, Moon, ArrowRight, LogOut} from 'lucide-react';
+import {MenuCloseIcon} from '@/components/ui/animated-state-icons';
 import {NewsBell} from '@/components/news-bell';
 import {useTheme} from '@/components/theme/ThemeProvider';
+import {DepthEffects} from './depth-effects';
 import {translate} from './translations';
 
 const navigation = [
@@ -152,8 +154,8 @@ export function ReferenceShell({children}: {children:ReactNode}) {
       </Link>
     )}
   </div>;
-  return <div className={`reference-design ${theme==='orange-white'?'light':''} ${landing?'reference-home':''}`}>
-    <a className="skip-link" href="#site-content">{t('Продолжить')}</a>
+  return <div className={`reference-design ${theme==='orange-white'?'light':''} ${landing?'reference-home':'reference-interior'}`}>
+    <DepthEffects landing={landing}/><a className="skip-link" href="#site-content">{t('Продолжить')}</a>
     {publicPage?<>
       <header className={`public-header ${!landing?'reference-static-header':''}`}><Brand/><nav className="public-nav"><Link href="/learn-croatian">{t('Как это работает')}</Link><Link href={session ? "/lessons" : "/sign-in"}>{t('Программа')}</Link><Link href={session ? "/games" : "/sign-in"}>{t('Практика')}</Link><Link href="/contacts">{t('Контакты')}</Link></nav>{actions}</header>
       <div id="site-content" className={landing?'':'reference-public-content legacy-content'}>{children}</div>
@@ -174,7 +176,7 @@ export function ReferenceShell({children}: {children:ReactNode}) {
     </>:<div className="app-shell">
       {menu&&<button className="sidebar-shade" aria-label={t('Закрыть')} onClick={()=>setMenu(false)}/>}
       <aside ref={sidebarRef} id="study-navigation" className={`sidebar ${menu?'open':''}`}>
-        <Brand/><button className="mobile-close icon-button" onClick={()=>setMenu(false)} aria-label={t('Закрыть')}><X/></button>
+        <Brand/><button className="mobile-close icon-button" onClick={()=>setMenu(false)} aria-label={t('Закрыть')}><MenuCloseIcon size={20} active={true}/></button>
         <span className="sidebar-label">{t('Ваш учебный маршрут')}</span>
         <nav aria-label={t('Мой курс')}>{navigation.map(([url,label,Icon])=><Link key={url} href={url} onClick={()=>setMenu(false)} className={pathname===url||pathname.startsWith(url+'/')?'selected':''} aria-current={pathname===url?'page':undefined}><Icon size={20} strokeWidth={1.6}/><span>{t(label)}</span></Link>)}</nav>
         <div className="sidebar-bottom"><Link href="/achievements" onClick={()=>setMenu(false)}><Award size={20}/>{t('Достижения')}</Link><Link href="/profile" onClick={()=>setMenu(false)}><Settings2 size={20}/>{t('Настройки')}</Link>{admin&&<Link href="/admin" onClick={()=>setMenu(false)}><Shield size={20}/>{t('Админ-панель')}</Link>}
@@ -183,7 +185,7 @@ export function ReferenceShell({children}: {children:ReactNode}) {
         </div>
       </aside>
       <div className="workspace">
-        <header className="app-header"><button className="icon-button mobile-menu" aria-label="Menu" aria-expanded={menu} aria-controls="study-navigation" onClick={()=>setMenu(!menu)}><Menu/></button><div className="header-context">{t('Один маленький шаг сегодня.')}</div>{actions}</header>
+        <header className="app-header"><button className="icon-button mobile-menu" aria-label="Menu" aria-expanded={menu} aria-controls="study-navigation" onClick={()=>setMenu(!menu)}><MenuCloseIcon size={22} active={menu}/></button><div className="header-context">{t('Один маленький шаг сегодня.')}</div>{actions}</header>
         <main id="site-content" className="app-main legacy-content">{children}</main>
         <div className="workspace-footer">
           <div className="workspace-footer-legal">

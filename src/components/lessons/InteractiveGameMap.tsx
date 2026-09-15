@@ -1,5 +1,6 @@
 "use client";
 
+import Image from 'next/image';
 import { useState } from "react";
 import { LessonData, getLocalizedText } from "@/lib/lessons-data";
 import { Link } from "@/i18n/navigation";
@@ -218,7 +219,7 @@ export function InteractiveGameMap({
   const selectedLesson = lessons.find((l) => l.id === selectedNodeId);
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto py-6 px-2 sm:px-4 select-none">
+    <div className="lesson-archipelago relative w-full max-w-4xl mx-auto py-6 px-2 sm:px-4 select-none">
       {/* Outer Card Container with tech grid background */}
       <div className="glass rounded-3xl p-4 sm:p-8 border border-white/10 relative bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 shadow-2xl overflow-hidden">
         {/* Tech Grid Background Pattern */}
@@ -482,7 +483,7 @@ export function InteractiveGameMap({
                                   selectedNodeId === item.data.id ? null : item.data.id
                                 );
                               }}
-                              className={`w-20 h-20 rounded-3xl flex flex-col items-center justify-center relative transition-all duration-300 game-island-btn border-2 ${
+                              aria-label={getLocalizedText(item.data.title, locale)} aria-expanded={selectedNodeId === item.data.id} data-island-state={status} className={`lesson-island w-20 h-20 rounded-3xl flex flex-col items-center justify-center relative transition-all duration-300 game-island-btn border-2 ${
                                 status === "completed"
                                   ? "bg-gradient-to-br from-emerald-500 via-teal-600 to-cyan-600 border-emerald-300 text-white glow-emerald"
                                   : status === "current"
@@ -492,7 +493,7 @@ export function InteractiveGameMap({
                                   : "bg-slate-900/90 border-slate-800 text-slate-500 opacity-60"
                               }`}
                             >
-                              {(() => {
+                              <Image className="island-art" src="/assets/learning/island.png" alt="" width={240} height={160} sizes="200px" />{(() => {
                                 const IconComp = typeIcons[item.data.type] || BookOpen;
                                 return <IconComp className="w-8 h-8 drop-shadow-md" />;
                               })()}
