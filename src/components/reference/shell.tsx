@@ -12,10 +12,11 @@ import {translate} from './translations';
 
 const navigation = [
   ['/dashboard','Панель',LayoutDashboard], ['/lessons','Мой курс',Route],
-  ['/grammar','Грамматика',BookOpen], ['/glossary','Материалы',BookOpen],
+  ['/grammar','Грамматика',BookOpen],
   ['/vocabulary','Словарь',Languages], ['/games','Практика',Shapes],
   ['/ai-chat','AI-наставник',Sparkles],
 ] as const;
+
 const PRESET_AVATARS_MAP: Record<string, string> = {
   "🦊": "linear-gradient(135deg, #fb923c, #ef4444)",
   "🐼": "linear-gradient(135deg, #334155, #0f172a)",
