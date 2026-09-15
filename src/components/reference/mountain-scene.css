@@ -46,8 +46,6 @@
   position: absolute;
   inset: 15% -3% -15%;
   background: url('/assets/mountain/foreground.png') center bottom/cover no-repeat;
-  mask: url('/assets/mountain/foreground-matte.png') center bottom/cover no-repeat luminance;
-  -webkit-mask: url('/assets/mountain/foreground-matte.png') center bottom/cover no-repeat luminance;
   transform-origin: 78% 90%;
   transform: translate3d(0, var(--near-y), 0) scale(var(--near-scale));
 }
@@ -60,8 +58,6 @@
   .reference-design .mountain-foreground {
     inset: 30% -30% -20%;
     background-position: 65% bottom;
-    mask-position: 65% bottom;
-    -webkit-mask-position: 65% bottom;
   }
   .reference-design .mountain-backdrop img,
   .reference-design .mountain-backdrop-img {
