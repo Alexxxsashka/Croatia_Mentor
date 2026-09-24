@@ -34,23 +34,7 @@ export async function POST(req: Request) {
     const submittedCompleted = Array.isArray(completedLessons) ? completedLessons : [];
     const isAddingNewLesson = submittedCompleted.some((id: string) => !existingCompleted.includes(id));
 
-    let lastLessonDateStr: string | null = null;
-    if (existing?.lastLessonCompletedAt) {
-      lastLessonDateStr = new Date(existing.lastLessonCompletedAt).toISOString().split("T")[0];
-    }
-    const hasCompletedLessonToday = lastLessonDateStr === today;
-
-    // Reject adding a second new lesson on the same calendar day
-    if (isAddingNewLesson && hasCompletedLessonToday) {
-      return NextResponse.json(
-        {
-          error: "Daily lesson limit reached",
-          dailyLimitReached: true,
-          message: "You can only complete 1 lesson per day. Spend time practicing vocabulary and playing mini-games!",
-        },
-        { status: 400 }
-      );
-    }
+    // Daily lesson limit removed - users can complete unlimited lessons per day
 
     // Also count words in WordProgress table
     const wordProgressCount = await prisma.wordProgress.count({
@@ -159,12 +143,7 @@ export async function GET() {
       progress.totalWordsLearned = realLearned;
     }
 
-    const today = new Date().toISOString().split("T")[0];
-    let hasCompletedLessonToday = false;
-    if (progress?.lastLessonCompletedAt) {
-      const lastLessonDateStr = new Date(progress.lastLessonCompletedAt).toISOString().split("T")[0];
-      hasCompletedLessonToday = lastLessonDateStr === today;
-    }
+    const hasCompletedLessonToday = false;
 
     return NextResponse.json({
       progress: progress

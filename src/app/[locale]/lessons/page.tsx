@@ -25,7 +25,6 @@ import {
   Gamepad2,
   LayoutGrid,
   List as ListIcon,
-  Clock,
   Zap,
   Award,
   Compass,
@@ -46,7 +45,6 @@ export default function LessonsPage() {
   const [completedLessons, setCompletedLessons] = useState<string[]>([]);
   const [userLevel, setUserLevel] = useState<string>("A1");
   const [totalXP, setTotalXP] = useState<number>(0);
-  const [hasCompletedLessonToday, setHasCompletedLessonToday] = useState(false);
 
   // Promotion Test states
   const [showPromoModal, setShowPromoModal] = useState(false);
@@ -72,9 +70,6 @@ export default function LessonsPage() {
           }
           if (data.progress.totalXP !== undefined) {
             setTotalXP(data.progress.totalXP);
-          }
-          if (data.progress.hasCompletedLessonToday) {
-            setHasCompletedLessonToday(true);
           }
         }
       })
@@ -326,33 +321,6 @@ export default function LessonsPage() {
           </div>
         </div>
 
-        {/* Daily Lesson Limit Warning Banner */}
-        {hasCompletedLessonToday && (
-          <div className="p-4 sm:p-5 rounded-2xl bg-purple-950/50 border border-purple-500/30 text-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-fade-in backdrop-blur-md shadow-lg shadow-purple-950/40">
-            <div className="flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-xl bg-purple-500/20 flex items-center justify-center shrink-0 text-purple-300 border border-purple-500/30 shadow-md">
-                <Clock className="w-6 h-6 animate-pulse" />
-              </div>
-              <div>
-                <h4 className="font-bold text-sm text-white uppercase tracking-wide">
-                  {locale === "ua"
-                    ? "Денний ліміт уроків досягнуто"
-                    : locale === "ru"
-                    ? "Дневной лимит уроков достигнут"
-                    : "Daily Lesson Limit Reached"}
-                </h4>
-                <p className="text-xs text-slate-300 mt-0.5">
-                  {locale === "ua"
-                    ? "Ви вже успішно пройшли урок за сьогодні. Закріплюйте знання в міні-іграх!"
-                    : locale === "ru"
-                    ? "Вы уже успешно прошли урок за сегодня. Закрепляйте знания в мини-играх!"
-                    : "You have already completed a lesson today. Practice with mini-games to reinforce your skills!"}
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-
         {/* LEVEL PROGRESS & PROMOTION HUB CARD */}
         <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-purple-500/30 backdrop-blur-md flex flex-col lg:flex-row items-center justify-between gap-6 shadow-2xl shadow-purple-950/40 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-80 h-80 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
@@ -513,7 +481,6 @@ export default function LessonsPage() {
             completedLessons={completedLessons}
             userLevel={userLevel}
             locale={locale}
-            hasCompletedLessonToday={hasCompletedLessonToday}
             onStartPromoTest={startPromotionTestForLevel}
           />
         )}
