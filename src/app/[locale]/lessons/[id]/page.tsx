@@ -1,5 +1,8 @@
 "use client";
 
+import { A1PilotLesson } from "@/components/learning/A1PilotLesson";
+import { isPilotId } from "@/lib/a1-pilot";
+
 import { Workbook } from "@/components/learning/Workbook";
 import { getWorkbook } from "@/lib/workbook";
 
@@ -394,6 +397,8 @@ export default function LessonDetailPage({
         </div>
       </div>
 
+      {isPilotId(id) && <A1PilotLesson key={id} lessonId={id} locale={locale} />}
+
       {/* Lesson Content */}
       {lesson.content.sections && (
         <div className="space-y-6 mb-10 animate-slide-up">
@@ -438,7 +443,9 @@ export default function LessonDetailPage({
         </div>
       )}
 
-      <Workbook key={id} data={getWorkbook(id)} locale={locale} />
+      <div id="lesson-workbook" className="scroll-mt-8">
+        <Workbook key={id} data={getWorkbook(id)} locale={locale} />
+      </div>
 
       {/* Final quiz */}
       <div className="glass rounded-2xl p-8 animate-slide-up">

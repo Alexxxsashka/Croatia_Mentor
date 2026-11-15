@@ -24,6 +24,28 @@ model User {
   sessions       Session[]
   progress       Progress?
   badges         UserBadge[]
+  pilotSkills    PilotSkill[]
+}
+
+model PilotSkill {
+  userId            String
+  lessonId          String
+  startedAt         DateTime @default(now())
+  seed              Int
+  attempts          Int      @default(0)
+  reviews           Int      @default(0)
+  readyAt           DateTime?
+  dueAt             DateTime?
+  reviewOpenedAt    DateTime?
+  firstReviewAt     DateTime?
+  firstReviewPassed Boolean?
+  confirmedAt       DateTime?
+  lastAttempt       String?
+  lastMisses        Int[]    @default([])
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, lessonId])
+  @@index([dueAt])
 }
 
 model Account {

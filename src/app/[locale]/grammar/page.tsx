@@ -1,5 +1,6 @@
 "use client";
 
+import { A1PilotRepair } from "@/components/learning/A1PilotRepair";
 import { TheoryWorkbook } from "@/components/learning/TheoryWorkbook";
 
 import { useState, useEffect, useMemo } from "react";
@@ -415,6 +416,7 @@ export default function GrammarPage() {
           </div>
 
           {/* ========================================== */}
+          <A1PilotRepair locale={locale} />
           <TheoryWorkbook key={selectedCatId} category={selectedCatId} locale={locale} />
 
           {/* THEORY PRACTICE TEST GENERATOR AT BOTTOM   */}

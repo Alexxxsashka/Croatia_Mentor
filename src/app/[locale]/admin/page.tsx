@@ -1,5 +1,7 @@
 "use client";
 
+import { A1PilotMetrics } from "@/components/learning/A1PilotMetrics";
+
 import { useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "@/i18n/navigation";
@@ -864,6 +866,7 @@ export default function AdminPage() {
       ) : activeTab === "stats" ? (
         /* STATS TAB CONTENT */
         <div className="space-y-8 animate-slide-up">
+          <A1PilotMetrics />
           {/* Header Action Bar */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 glass p-4 rounded-2xl border border-white/5">
             <div>

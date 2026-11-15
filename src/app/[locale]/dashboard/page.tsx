@@ -1,5 +1,7 @@
 "use client";
 
+import { A1PilotOverview } from "@/components/learning/A1PilotOverview";
+
 import { useTranslations, useLocale } from "next-intl";
 import { useSession } from "next-auth/react";
 import { Link, useRouter } from "@/i18n/navigation";
@@ -295,6 +297,8 @@ export default function DashboardPage() {
         </div>
       </div>
 
+      <A1PilotOverview />
+
       {/* Croatian Proverb of the Day Card */}
       <div className="mb-8 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-blue-950/40 via-purple-950/30 to-indigo-950/40 border border-blue-500/20 backdrop-blur-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-lg shadow-blue-500/5">
         <div className="flex items-start gap-3.5">
@@ -367,7 +371,7 @@ export default function DashboardPage() {
         <div className="glass rounded-2xl p-4 sm:p-5 card-hover">
           <div className="flex items-center justify-between mb-3">
             <span className="text-sm text-muted-foreground">
-              {t("streak")}
+              {t("dailyStreak")}
             </span>
             <span className="text-lg">🔥</span>
           </div>

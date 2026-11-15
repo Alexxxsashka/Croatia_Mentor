@@ -1,5 +1,7 @@
 "use client";
 
+import { A1PilotMap } from "@/components/learning/A1PilotMap";
+
 import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -289,7 +291,7 @@ export default function LessonsPage() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 shrink-0">
             <div className="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 backdrop-blur-md text-center space-y-1">
               <BookOpen className="w-5 h-5 text-purple-400 mx-auto" />
-              <span className="text-lg font-black text-white font-mono block">52</span>
+              <span className="text-lg font-black text-white font-mono block">{lessonsData.length}</span>
               <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
                 {locale === "ua" ? "Всього уроків" : locale === "ru" ? "Всего уроков" : "Total Lessons"}
               </span>
@@ -320,6 +322,8 @@ export default function LessonsPage() {
             </div>
           </div>
         </div>
+
+        <A1PilotMap />
 
         {/* LEVEL PROGRESS & PROMOTION HUB CARD */}
         <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-purple-500/30 backdrop-blur-md flex flex-col lg:flex-row items-center justify-between gap-6 shadow-2xl shadow-purple-950/40 relative overflow-hidden">
