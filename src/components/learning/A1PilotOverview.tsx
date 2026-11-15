@@ -11,7 +11,6 @@ export function A1PilotOverview() {
   const locale = useLocale();
   const { data: session } = useSession();
   const userId = session?.user?.id;
-  const isAdmin = (session?.user as { role?: string } | undefined)?.role === "admin";
   const [loaded, setLoaded] = useState<{ userId: string; skills: PilotProgress[] }>();
   const [failed, setFailed] = useState(false);
   const [reload, setReload] = useState(0);
@@ -67,13 +66,12 @@ export function A1PilotOverview() {
             </li>;
           })}
         </ul>
-        <div className="flex flex-wrap gap-3 mt-5">
-          {next && <Link className="btn" href={`/lessons/${next}#a1-pilot`}>
+        {next && <div className="mt-5">
+          <Link className="btn" href={`/lessons/${next}#a1-pilot`}>
             {skills.some((skill) => skill.lessonId === next) ? t("Continue lesson", "Продолжить урок", "Продовжити урок")
               : t("Start next lesson", "Начать следующий урок", "Почати наступний урок")}
-          </Link>}
-          {isAdmin && <Link className="text-link" href="/lessons?level=A1#skills-map">{t("View the skills map", "Открыть карту навыков", "Відкрити карту навичок")}</Link>}
-        </div>
+          </Link>
+        </div>}
       </>}
     </section>
   );
