@@ -3,6 +3,7 @@
 import { CourseMap } from "@/components/learning/CourseMap";
 
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { lessonsData, getLocalizedText } from "@/lib/lessons-data";
@@ -38,6 +39,8 @@ const LEVEL_ORDER = ["A1", "A2", "B1", "B2", "C1", "C2"];
 export default function LessonsPage() {
   const t = useTranslations("lessons");
   const locale = useLocale();
+  const { data: session } = useSession();
+  const isAdmin = (session?.user as { role?: string } | undefined)?.role === "admin";
 
   const [filterType, setFilterType] = useState<string>("all");
   const [filterLevel, setFilterLevel] = useState<string>("all");
@@ -323,7 +326,7 @@ export default function LessonsPage() {
           </div>
         </div>
 
-        <CourseMap userLevel={userLevel} completedLessons={completedLessons} catalogLevel={filterLevel} />
+        {isAdmin && <CourseMap userLevel={userLevel} completedLessons={completedLessons} catalogLevel={filterLevel} />}
 
         {/* LEVEL PROGRESS & PROMOTION HUB CARD */}
         <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-purple-500/30 backdrop-blur-md flex flex-col lg:flex-row items-center justify-between gap-6 shadow-2xl shadow-purple-950/40 relative overflow-hidden">
