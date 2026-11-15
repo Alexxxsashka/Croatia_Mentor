@@ -469,5 +469,67 @@ export const readingTexts: ReadingText[] = [
         }
       }
     ]
-  }
+  },
+  {
+    id: "c2-rasprava-o-trgu",
+    title: {
+      en: "A Square for Everyone? Two Perspectives",
+      ru: "Площадь для всех? Два взгляда",
+      ua: "Площа для всіх? Два погляди",
+    },
+    author: "Croatia Mentor",
+    level: "C2",
+    text: `**Priopćenje gradske uprave**
+
+Predloženom obnovom Trg kestena postat će pristupačniji. Uklanjanje rubnjaka omogućit će lakše kretanje osobama u kolicima, a promet će se preusmjeriti na okolne ulice. Novim rasporedom terasa predviđen je širi pješački prolaz nego danas. Stanari su pozvani da dostave primjedbe na oblik klupa i odabir rasvjete. O opsegu komercijalnih sadržaja odlučit će se u sljedećoj fazi.
+
+**Kolumna u lokalnom listu**
+
+Trg će, nema sumnje, biti otvoren svima. Osobito onima koji na njemu mogu platiti kavu. Ne sporim da vrijedi ukloniti rubnjake. Pitanje je hoće li se nakon obnove moći sjesti i bez računa pod šalicom. Stanarima se nudi da biraju klupe prije nego što doznaju koliko će prostora ostati za njih. Možda bismo redoslijed ipak mogli obrnuti. Ako je svrha savjetovanja doznati što ljudima treba, trebalo bi prije svega pitati kako koriste trg, a tek onda koju bi boju trebala imati rasvjeta.`,
+    vocabulary: [
+      { hr: "rubnjak", en: "kerb", ru: "бордюр", ua: "бордюр" },
+      { hr: "osporavati", en: "to dispute", ru: "оспаривать", ua: "оспорювати" },
+      { hr: "opseg", en: "scope or extent", ru: "масштаб или объём", ua: "масштаб або обсяг" },
+      { hr: "savjetovanje", en: "consultation", ru: "консультация или обсуждение", ua: "консультація або обговорення" },
+    ],
+    questions: [
+      {
+        question: {
+          en: "Which point does the columnist explicitly concede?",
+          ru: "С каким пунктом автор колонки прямо соглашается?",
+          ua: "З яким пунктом автор колонки прямо погоджується?",
+        },
+        options: ["Treba ukloniti rubnjake.", "Terase će zauzeti manje prostora.", "O rasvjeti je već odlučeno.", "Savjetovanje nema nikakvu svrhu."],
+        correctAnswer: "Treba ukloniti rubnjake.",
+      },
+      {
+        question: {
+          en: "What does the reference to paying for coffee imply?",
+          ru: "На что намекает упоминание платы за кофе?",
+          ua: "На що натякає згадка про плату за каву?",
+        },
+        options: ["Autor želi niže cijene kave.", "Boravak na trgu mogao bi ovisiti o potrošnji.", "Grad namjerava zabraniti kafiće.", "Stanari ne žele pristupačan trg."],
+        correctAnswer: "Boravak na trgu mogao bi ovisiti o potrošnji.",
+      },
+      {
+        question: {
+          en: "Which difference between the texts is most important?",
+          ru: "Какое различие между двумя текстами наиболее существенно?",
+          ua: "Яка відмінність між двома текстами найсуттєвіша?",
+        },
+        options: ["Priopćenje i kolumna jednako tumače svrhu savjetovanja.", "Kolumna tvrdi da su svi detalji već dogovoreni.", "Priopćenje naglašava uređenje, a kolumna pita tko odlučuje o uporabi prostora.", "Priopćenje osporava uklanjanje rubnjaka."],
+        correctAnswer: "Priopćenje naglašava uređenje, a kolumna pita tko odlučuje o uporabi prostora.",
+      },
+    ],
+    translationTasks: [
+      {
+        hr: "Možda bismo redoslijed ipak mogli obrnuti.",
+        answer: {
+          en: "Perhaps we could reverse the order after all.",
+          ru: "Может быть, нам всё-таки стоит поменять порядок.",
+          ua: "Можливо, нам усе-таки варто змінити порядок.",
+        },
+      },
+    ],
+  },
 ];

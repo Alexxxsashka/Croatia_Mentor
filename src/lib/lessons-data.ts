@@ -2560,9 +2560,9 @@ export const lessonsData: LessonData[] = [
     type: "grammar",
     level: "B2",
     title: {
-      en: "Pasivni stan i glagolske imenice (Passive & Verbal Nouns)",
-      ru: "Пассивный залог и отглагольные имена (Pasivni stan)",
-      ua: "Відносини, пасивний стан та отглагольные іменники (Pasivni stan)"
+      en: "Pasiv i glagolske imenice (Passive & Verbal Nouns)",
+      ru: "Пассивный залог и отглагольные существительные (Pasiv)",
+      ua: "Пасивний стан і віддієслівні іменники (Pasiv)"
     },
     content: {
       description: {
@@ -2720,9 +2720,9 @@ export const lessonsData: LessonData[] = [
     type: "communication",
     level: "B2",
     title: {
-      en: "Robota ta robotočinje (Work & Career)",
-      ru: "Работа и карьера (Radno okruženje)",
-      ua: "Робота та робоче оточення (Radno okruženje)"
+      en: "Posao i karijera (Work & Career)",
+      ru: "Работа и карьера (Posao i karijera)",
+      ua: "Робота й кар’єра (Posao i karijera)"
     },
     content: {
       description: {

@@ -1,6 +1,6 @@
 "use client";
 
-import { A1PilotMap } from "@/components/learning/A1PilotMap";
+import { CourseMap } from "@/components/learning/CourseMap";
 
 import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
@@ -323,7 +323,7 @@ export default function LessonsPage() {
           </div>
         </div>
 
-        <A1PilotMap />
+        <CourseMap userLevel={userLevel} completedLessons={completedLessons} catalogLevel={filterLevel} />
 
         {/* LEVEL PROGRESS & PROMOTION HUB CARD */}
         <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-purple-500/30 backdrop-blur-md flex flex-col lg:flex-row items-center justify-between gap-6 shadow-2xl shadow-purple-950/40 relative overflow-hidden">

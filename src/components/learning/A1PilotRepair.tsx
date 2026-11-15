@@ -58,14 +58,14 @@ export function A1PilotRepair({ locale }: { locale: string }) {
 
   return <section id="a1-repair" className="panel my-6 scroll-mt-32" aria-labelledby="repair-heading">
     <h2 id="repair-heading">{t("Review my mistakes", "Разобрать мои ошибки", "Розібрати мої помилки")}</h2>
-    <p>{t("Practise the constructions you missed in the A1 pilot.", "Потренируйте конструкции, в которых ошиблись в пилоте A1.", "Потренуйте конструкції, у яких помилилися в пілоті A1.")}</p>
+    <p>{t("Practise the phrases you missed in recent lesson checks.", "Повторите конструкции, в которых ошиблись при проверке уроков.", "Повторіть конструкції, у яких помилилися під час перевірки уроків.")}</p>
     {!open && <button type="button" className="btn" onClick={() => setOpen(true)}>{t("Find exercises", "Подобрать упражнения", "Підібрати вправи")}</button>}
     {open && !errors && !failed && <p role="status">{t("Loading…", "Загружаем…", "Завантажуємо…")}</p>}
     {failed && <div role="alert">
       <p>{t("Could not load your mistakes.", "Не удалось загрузить ошибки.", "Не вдалося завантажити помилки.")}</p>
       <button type="button" className="btn secondary" onClick={() => { setFailed(false); setReload((value) => value + 1); }}>{t("Retry", "Повторить", "Повторити")}</button>
     </div>}
-    {errors?.length === 0 && <p role="status">{t("There are no pilot mistakes to review.", "Сейчас нет ошибок из пилота для разбора.", "Зараз немає помилок із пілоту для розбору.")}</p>}
+    {errors?.length === 0 && <p role="status">{t("There are no mistakes to review yet.", "Пока нет ошибок для разбора.", "Поки немає помилок для розбору.")}</p>}
     {errors?.map(({ lessonId, lastMisses }) => <div key={lessonId} className="my-5">
       <h3>{getLocalizedText(pilotLessons[lessonId].title, locale)}</h3>
       {lastMisses.map((index) => <RepairDrill key={index} item={drills[lessonId][index]} locale={locale} />)}

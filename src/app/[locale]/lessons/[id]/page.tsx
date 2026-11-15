@@ -448,7 +448,7 @@ export default function LessonDetailPage({
       </div>
 
       {/* Final quiz */}
-      <div className="glass rounded-2xl p-8 animate-slide-up">
+      <div id="lesson-quiz" className="glass rounded-2xl p-8 animate-slide-up scroll-mt-8">
         <div className="flex items-center justify-between mb-6">
           <h3 className="font-semibold">
             {t("exercise")} {currentExercise + 1}/{totalExercises}
