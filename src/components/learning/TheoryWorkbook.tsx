@@ -26,22 +26,22 @@ export function TheoryWorkbook({ category, locale }: { category: string; locale:
 
   return (
     <section aria-labelledby={id} className="border-t border-[var(--ref-line)] pt-6">
-      <h2 id={id}>{t("Generate theory exercises", "Генератор заданий по теории", "Генератор завдань з теорії")}</h2>
+      <h2 id={id}>{t("Practice by topic", "Практика по теме", "Практика за темою")}</h2>
       <form onSubmit={(event) => { event.preventDefault(); generate(); }}>
         <label className="max-w-xl">
-          {t("Practice topic", "Тема практики", "Тема практики")}
+          {t("Topic", "Тема", "Тема")}
           <select value={selected} onChange={(event) => setSelected(event.target.value)}>
             {topics.map((topic) => (
               <option key={topic.id} value={topic.id}>{topic.level} · {getLocalizedText(topic.title, locale)}</option>
             ))}
           </select>
         </label>
-        <button className="btn" type="submit">{t("Generate 3 exercises", "Собрать 3 задания", "Зібрати 3 завдання")}</button>
+        <button className="btn" type="submit">{t("Start practice", "Начать практику", "Почати практику")}</button>
       </form>
       <p role="status">{generated && t(
-        `Exercises ready · ${getLocalizedText(topics.find((topic) => topic.id === generated.id)?.title, locale)}`,
-        `Задания готовы · ${getLocalizedText(topics.find((topic) => topic.id === generated.id)?.title, locale)}`,
-        `Завдання готові · ${getLocalizedText(topics.find((topic) => topic.id === generated.id)?.title, locale)}`,
+        `Practice · ${getLocalizedText(topics.find((topic) => topic.id === generated.id)?.title, locale)}`,
+        `Практика · ${getLocalizedText(topics.find((topic) => topic.id === generated.id)?.title, locale)}`,
+        `Практика · ${getLocalizedText(topics.find((topic) => topic.id === generated.id)?.title, locale)}`,
       )}</p>
       {generated && <Workbook key={generated.run} data={generated.data} locale={locale} />}
     </section>

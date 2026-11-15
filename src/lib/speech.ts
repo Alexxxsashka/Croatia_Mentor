@@ -17,7 +17,10 @@ export function speakText(text: string, options?: SpeakOptions) {
   }
 
   const cleanText = text.replace(/^[A-Za-z\sčćžšđČĆŽŠĐ]+:\s*/, "").trim();
-  if (!cleanText) return { stop: () => {} };
+  if (!cleanText) {
+    queueMicrotask(() => options?.onError?.());
+    return { stop: () => {} };
+  }
 
   const rate = options?.rate ?? 0.8;
   const voice = options?.voice || "hr-HR-GabrijelaNeural";
@@ -48,110 +51,101 @@ export function speakText(text: string, options?: SpeakOptions) {
     }
   }
 
-  if (chunks.length === 0) return { stop: () => {} };
-
   let currentAudio: HTMLAudioElement | null = null;
-  let isStopped = false;
+  let timer: number | undefined;
+  let active = true;
   let hasStarted = false;
 
-  const playChunk = (index: number) => {
-    if (isStopped) return;
+  function start() {
+    if (!active || hasStarted) return;
+    hasStarted = true;
+    options?.onStart?.();
+  }
 
+  function clearAudio() {
+    window.clearTimeout(timer);
+    if (!currentAudio) return;
+    currentAudio.onplaying = null;
+    currentAudio.onended = null;
+    currentAudio.onerror = null;
+    currentAudio.pause();
+    currentAudio.removeAttribute("src");
+    currentAudio.load();
+    currentAudio = null;
+  }
+
+  function finish(error = false) {
+    if (!active) return;
+    active = false;
+    clearAudio();
+    if (error && options?.onError) options.onError();
+    else options?.onEnd?.();
+  }
+
+  function playChunk(index: number) {
+    if (!active) return;
     if (index >= chunks.length) {
-      options?.onEnd?.();
+      finish();
       return;
     }
 
     const chunkText = chunks[index];
-    const url = `/api/tts?text=${encodeURIComponent(chunkText)}&voice=${encodeURIComponent(voice)}`;
-    const audio = new Audio(url);
+    const audio = new Audio(`/api/tts?text=${encodeURIComponent(chunkText)}&voice=${encodeURIComponent(voice)}`);
     audio.playbackRate = rate;
     currentAudio = audio;
 
-    let playedSuccessfully = false;
-
-    audio.onplay = () => {
-      playedSuccessfully = true;
-      if (!hasStarted) {
-        hasStarted = true;
-        options?.onStart?.();
-      }
-    };
-
-    audio.onended = () => {
-      if (!isStopped) {
-        playChunk(index + 1);
-      }
-    };
-
-    const handleWebSpeechFallback = () => {
-      if (!("speechSynthesis" in window) || isStopped) {
-        if (!isStopped) playChunk(index + 1);
+    function fallback() {
+      if (!active || currentAudio !== audio) return;
+      clearAudio();
+      if (!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") {
+        finish(true);
         return;
       }
-      window.speechSynthesis.cancel();
+
+      const synth = window.speechSynthesis;
       const utterance = new SpeechSynthesisUtterance(chunkText);
       utterance.lang = "hr-HR";
       utterance.rate = rate;
-
-      const voices = window.speechSynthesis.getVoices();
-      let selectedVoice = voices.find(
-        (v) => v.lang === "hr-HR" || v.lang.startsWith("hr-")
-      );
-      if (selectedVoice) {
-        utterance.voice = selectedVoice;
-      }
-
-      if (!hasStarted) {
-        utterance.onstart = () => {
-          hasStarted = true;
-          options?.onStart?.();
-        };
-      }
-
+      const voices = synth.getVoices();
+      const croatianVoice = voices.find(({ lang }) => /^hr(?:[-_]|$)/i.test(lang));
+      if (croatianVoice) utterance.voice = croatianVoice;
+      utterance.onstart = () => {
+        window.clearTimeout(timer);
+        start();
+      };
       utterance.onend = () => {
-        if (!isStopped) playChunk(index + 1);
-      };
-      utterance.onerror = () => {
-        if (!isStopped) playChunk(index + 1);
-      };
-
-      window.speechSynthesis.speak(utterance);
-    };
-
-    audio.onerror = () => {
-      if (!playedSuccessfully) {
-        console.warn("Neural TTS chunk failed, falling back to Web Speech:", chunkText);
-        handleWebSpeechFallback();
-      } else if (!isStopped) {
+        if (!active) return;
+        window.clearTimeout(timer);
         playChunk(index + 1);
-      }
-    };
+      };
+      utterance.onerror = () => finish(true);
+      timer = window.setTimeout(() => {
+        finish(true);
+        synth.cancel();
+      }, 5000);
+      synth.speak(utterance);
+    }
 
-    audio.play().catch((err) => {
-      if (!playedSuccessfully) {
-        console.warn("Neural TTS play rejected, falling back to Web Speech:", err);
-        handleWebSpeechFallback();
-      } else if (!isStopped) {
-        playChunk(index + 1);
-      }
-    });
-  };
+    audio.onplaying = () => {
+      window.clearTimeout(timer);
+      start();
+    };
+    audio.onended = () => {
+      clearAudio();
+      playChunk(index + 1);
+    };
+    audio.onerror = fallback;
+    timer = window.setTimeout(fallback, 17000);
+    audio.play().catch(fallback);
+  }
 
   playChunk(0);
 
   return {
     stop: () => {
-      isStopped = true;
-      if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-        currentAudio = null;
-      }
-      if ("speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
-      options?.onEnd?.();
-    }
+      if (!active) return;
+      finish();
+      if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+    },
   };
 }

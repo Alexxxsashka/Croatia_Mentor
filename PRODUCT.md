@@ -7,7 +7,7 @@
 web
 
 ## Stack
-Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, Prisma ORM (PostgreSQL), NextAuth v5, next-intl (i18n), Google GenAI (@google/genai), edge-tts-universal.
+Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, Prisma ORM (PostgreSQL), NextAuth v5, next-intl (i18n), Google GenAI (@google/genai), msedge-tts.
 
 ## Users
 Ukrainian relocators seeking temporary protection and integration in Croatia, alongside expats, digital nomads, and general language enthusiasts across English, Russian, and Ukrainian speaking backgrounds who need practical Croatian for daily life, residency, and communication.

@@ -12,7 +12,7 @@ import {translate} from './translations';
 
 const navigation = [
   ['/dashboard','Панель',LayoutDashboard], ['/lessons','Мой курс',Route],
-  ['/grammar','Грамматика',BookOpen],
+  ['/grammar','Теория',BookOpen],
   ['/vocabulary','Словарь',Languages], ['/games','Практика',Shapes],
   ['/ai-chat','AI-наставник',Sparkles],
 ] as const;

@@ -387,7 +387,7 @@ export default function LessonDetailPage({
               {lesson.level}
             </span>
             <span className="text-xs text-muted-foreground capitalize">
-              {lesson.type}
+              {t(lesson.type)}
             </span>
           </div>
           <h1 className="text-2xl font-bold mt-1">{getLocalizedText(lesson.title, locale)}</h1>

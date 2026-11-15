@@ -14,22 +14,25 @@ type WorkbookData = ReturnType<typeof getWorkbook>;
 
 const copy = {
   loading: { en: "Loading word statuses…", ru: "Загружаем статусы слов…", ua: "Завантажуємо статуси слів…" },
-  title: { en: "Workbook", ru: "Практика в формате учебника", ua: "Практика у форматі підручника" },
-  gap: { en: "Fill in the blanks", ru: "Заполните пропуски", ua: "Заповніть пропуски" },
+  title: { en: "Practice", ru: "Практика", ua: "Практика" },
+  gap: { en: "Fill in the blanks", ru: "Пропуски", ua: "Пропуски" },
   orderHint: { en: "Compare your word order with the model after checking.", ru: "После проверки сравните свой порядок слов с образцом.", ua: "Після перевірки порівняйте свій порядок слів зі зразком." },
-  order: { en: "Put the words in order", ru: "Восстановите порядок слов", ua: "Відновіть порядок слів" },
-  dictation: { en: "Listen and write", ru: "Прослушайте и запишите", ua: "Прослухайте й запишіть" },
+  order: { en: "Word order", ru: "Порядок слов", ua: "Порядок слів" },
+  dictation: { en: "Dictation", ru: "Диктант", ua: "Диктант" },
   check: { en: "Check answers", ru: "Проверить ответы", ua: "Перевірити відповіді" },
   retry: { en: "Try again", ru: "Попробовать ещё раз", ua: "Спробувати ще раз" },
   listen: { en: "Play sentence", ru: "Прослушать предложение", ua: "Прослухати речення" },
+  audioLoading: { en: "Loading audio…", ru: "Загружаем аудио…", ua: "Завантажуємо аудіо…" },
+  audioStop: { en: "Stop playback", ru: "Остановить", ua: "Зупинити" },
+  audioError: { en: "Could not play audio. Try again.", ru: "Не удалось воспроизвести аудио. Попробуйте ещё раз.", ua: "Не вдалося відтворити аудіо. Спробуйте ще раз." },
   answer: { en: "Answer", ru: "Ответ", ua: "Відповідь" },
-  model: { en: "Model answer", ru: "Ответ по образцу", ua: "Відповідь за зразком" },
+  model: { en: "Model answer", ru: "Образец ответа", ua: "Зразок відповіді" },
   correct: { en: "Correct", ru: "Верно", ua: "Правильно" },
   score: { en: "Matched the model", ru: "Совпало с образцом", ua: "Збіглося зі зразком" },
-  next: { en: "Next exercise", ru: "Следующее задание", ua: "Наступне завдання" },
+  next: { en: "Next exercise", ru: "Следующее упражнение", ua: "Наступна вправа" },
   words: { en: "Vocabulary from this topic", ru: "Слова по теме", ua: "Слова за темою" },
-  learning: { en: "To learn", ru: "На обучение", ua: "На вивчення" },
-  learned: { en: "I know it", ru: "Готово", ua: "Готово" },
+  learning: { en: "Learning", ru: "Учу", ua: "Вчу" },
+  learned: { en: "I know it", ru: "Уже знаю", ua: "Уже знаю" },
   new: { en: "Reset status", ru: "Сбросить статус", ua: "Скинути статус" },
   signIn: { en: "Sign in to save words for review", ru: "Войдите, чтобы сохранить слова для повторения", ua: "Увійдіть, щоб зберегти слова для повторення" },
   error: { en: "Could not sync the vocabulary. Try again.", ru: "Не удалось синхронизировать словарь. Попробуйте ещё раз.", ua: "Не вдалося синхронізувати словник. Спробуйте ще раз." },
@@ -134,6 +137,8 @@ export function Workbook({ data, locale, preview = false }: {
   const [mode, setMode] = useState<Mode>("gap");
   const [drafts, setDrafts] = useState<Partial<Record<Mode, string[]>>>({});
   const [checked, setChecked] = useState<Partial<Record<Mode, boolean>>>({});
+  const speech = useRef<ReturnType<typeof speakText> | null>(null);
+  const [audio, setAudio] = useState<{ index: number; state: "loading" | "playing" | "error" } | null>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const result = useRef<HTMLParagraphElement>(null);
   const id = useId();
@@ -145,7 +150,23 @@ export function Workbook({ data, locale, preview = false }: {
   const matches = expected.map((answer, index) => normalize(answer) === normalize(answers[index] ?? ""));
   const nextMode = modes[modes.indexOf(mode) + 1];
 
+  function playSentence(sentence: string, index: number) {
+    speech.current?.stop();
+    if (audio?.index === index && audio.state !== "error") return;
+
+    setAudio({ index, state: "loading" });
+    speech.current = speakText(sentence, {
+      onStart: () => setAudio({ index, state: "playing" }),
+      onEnd: () => setAudio(null),
+      onError: () => setAudio({ index, state: "error" }),
+    });
+  }
+
+  useEffect(() => () => speech.current?.stop(), []);
+
   function openMode(next: Mode) {
+    speech.current?.stop();
+    setAudio(null);
     setMode(next);
     heading.current?.focus();
   }
@@ -175,14 +196,20 @@ export function Workbook({ data, locale, preview = false }: {
         <ol className="list-decimal ps-6 divide-y divide-[var(--ref-line)]">
           {rows.map((row, index) => {
             const words = row.sentence.replace(/[.,!?;:]/g, "").toLocaleLowerCase("hr").split(/\s+/).sort((a, b) => a.localeCompare(b, "hr"));
+            const audioState = audio?.index === index ? audio.state : null;
             return (
               <li className="py-4" key={index}>
                 {mode === "gap" && <div lang="hr" id={`${id}-prompt-${index}`}>{row.before}<span aria-hidden="true">_____</span><span className="sr-only"> […] </span>{row.after}{row.hint && <span> ({row.hint})</span>}</div>}
                 {mode === "order" && <div lang="hr" id={`${id}-prompt-${index}`}>{words.join(" / ")}</div>}
                 {mode === "dictation" && (
-                  <button type="button" className="btn secondary mb-2" onClick={() => speakText(row.sentence)}>
-                    <Volume2 size={18} aria-hidden="true" /> {t("listen")} {index + 1}
-                  </button>
+                  <div className="mb-2">
+                    <button type="button" className="btn secondary" onClick={() => playSentence(row.sentence, index)}>
+                      <Volume2 size={18} aria-hidden="true" />
+                      {audioState === "loading" || audioState === "playing" ? t("audioStop") : t("listen")} {index + 1}
+                    </button>
+                    {audioState === "loading" && <p role="status">{t("audioLoading")}</p>}
+                    {audioState === "error" && <p role="alert">{t("audioError")}</p>}
+                  </div>
                 )}
                 <label className="max-w-xl">
                   {t("answer")} {index + 1}

@@ -175,20 +175,20 @@ export default function GrammarPage() {
               <div>
                 <h1 className="text-base sm:text-lg font-black uppercase font-editorial tracking-tight text-white flex items-center gap-2">
                   {locale === "ua"
-                    ? "Граматичний Довідник"
+                    ? "Теорія"
                     : locale === "ru"
-                    ? "Грамматический Справочник"
-                    : "Croatian Grammar Handbook"}
+                    ? "Теория"
+                    : "Theory"}
                   <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
                     A1–C1
                   </span>
                 </h1>
                 <p className="text-[11px] text-slate-400 hidden sm:block">
                   {locale === "ua"
-                    ? "Правила відмінювання, відмінки, часи та генератор практичних тестів"
+                    ? "Правила, приклади та вправи з хорватської граматики"
                     : locale === "ru"
-                    ? "Правила склонения, падежи, времена и генератор практических тестов"
-                    : "Declension rules, cases, tenses & theory practice test generator"}
+                    ? "Правила, примеры и упражнения по хорватской грамматике"
+                    : "Croatian grammar rules, examples and exercises"}
                 </p>
               </div>
             </div>
@@ -339,7 +339,7 @@ export default function GrammarPage() {
 
               <div className="flex items-center gap-2">
                 <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                  A1 – C1 Theory
+                  A1–C1
                 </span>
               </div>
             </div>
@@ -428,10 +428,10 @@ export default function GrammarPage() {
                 <div>
                   <h3 className="text-xl font-black text-white uppercase font-editorial tracking-tight">
                     {locale === "ua"
-                      ? "Генератор Тестів по Теорії"
+                      ? "Тест за темою"
                       : locale === "ru"
-                      ? "Генератор Тестов по Теории"
-                      : "Theory Practice Test Generator"}
+                      ? "Тест по теме"
+                      : "Topic quiz"}
                   </h3>
                   <p className="text-xs text-slate-400">
                     {locale === "ua"
@@ -548,10 +548,10 @@ export default function GrammarPage() {
                 >
                   <Sparkles className="w-5 h-5 fill-white animate-pulse" />
                   {locale === "ua"
-                    ? `Згенерувати тест з теорії (${testCount} питань)`
+                    ? `Почати тест (${testCount})`
                     : locale === "ru"
-                    ? `Сгенерировать тест по теории (${testCount} вопросов)`
-                    : `Generate Theory Practice Test (${testCount} Qs)`}
+                    ? `Начать тест (${testCount})`
+                    : `Start quiz (${testCount})`}
                 </button>
               </div>
             ) : testComplete ? (
