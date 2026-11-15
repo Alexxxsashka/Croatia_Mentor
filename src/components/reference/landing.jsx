@@ -20,18 +20,6 @@ export default function ReferenceLanding() {
   locale = locale === 'ua' ? 'uk' : locale;
   const t = (key) => translate(key, locale);
 
-  const handleDiscoveryScroll = (e) => {
-    e.preventDefault();
-    const target = document.getElementById('journey');
-    if (!target) return;
-
-    if (typeof window !== 'undefined' && window.__lenis) {
-      window.__lenis.scrollTo(target, { offset: 0, duration: 1.2 });
-    } else {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <>
       <main>
@@ -39,7 +27,7 @@ export default function ReferenceLanding() {
           <MountainScene />
           <div className="hero-content">
             <div className="hero-pre">
-              <span className="small-line" />Bok. Dobro došli.
+              <span className="small-line" aria-hidden="true" />{t("Привет! Добро пожаловать.")}
             </div>
             <h1>
               {t('Ваш путь к хорватскому.')}
@@ -49,27 +37,24 @@ export default function ReferenceLanding() {
               {t('Изучайте хорватский через понятные уроки, живые ситуации и практику, которая подходит именно вам.')}
             </p>
             <div className="hero-buttons">
-              <A to="sign-up" className="btn">
-                {t('Начать обучение')}<Icon size={18} />
-              </A>
-              <A to={session ? "dashboard" : "sign-in"} className="watch-link">
-                <span><Icon name="Play" size={14} /></span>
-                {t('Начать')}
-              </A>
+              <A to={session ? "lessons" : "sign-up"} className="btn">{t(session ? "Мой курс" : "Создать аккаунт")}<Icon size={18} /></A>
+              <A to="placement-test" className="btn secondary">{t("Определить мой уровень")}</A>
+              <A to="trial-lesson" className="btn secondary">{t("Пробный урок A1")}</A>
             </div>
+            {!session && <p className="hero-account-note">{t("Тест и пробный урок доступны без аккаунта. Создайте аккаунт, чтобы открыть курс и сохранять прогресс.")}</p>}
             <div className="hero-meta">
               <span>A1 — C2</span>
               <span>{t('Язык для жизни, а не только для учебника.')}</span>
             </div>
           </div>
-          <div className="hero-route">
+          <div className="hero-route" aria-hidden="true">
             <span>01</span>
             <div />
             <span className="muted">06</span>
           </div>
           <div className="hero-bottom">
-            <span>HRVATSKA · 44°16′ N, 15°16′ E</span>
-            <a href="#journey" onClick={handleDiscoveryScroll}>
+            <span>{t("Хорватия")} · 44°16′ N, 15°16′ E</span>
+            <a href="#journey">
               {t('Ваше следующее открытие')}
               <Icon name="ArrowDown" size={17} />
             </a>
@@ -85,7 +70,7 @@ export default function ReferenceLanding() {
           </div>
         </section>
 
-        <section id="journey" className="landing-section journey">
+        <section id="journey" tabIndex={-1} className="landing-section journey">
           <div className="section-heading">
             <h2>
               {t('Один маленький шаг сегодня.')}
@@ -93,7 +78,7 @@ export default function ReferenceLanding() {
               <span>{t('Целый новый мир завтра.')}</span>
             </h2>
             <A to={session ? "lessons" : "sign-in"} className="text-link">
-              {t('Программа')}<Icon />
+              {t(session ? "Открыть уроки" : "Войти в курс")}<Icon />
             </A>
           </div>
           <div className="level-path">
@@ -102,7 +87,7 @@ export default function ReferenceLanding() {
                 <span className={'level-circle ' + (!i ? 'gold' : '')}>{l}</span>
                 <h3>{levelNames[locale][i]}</h3>
                 <span>
-                  {i === 0 ? t('Начните с малого') : i === 5 ? t('Без границ') : t('Продолжить')}
+                  {t(session ? "Открыть уроки" : "Войти для доступа")}
                   <Icon size={15} />
                 </span>
               </A>
@@ -110,7 +95,7 @@ export default function ReferenceLanding() {
           </div>
         </section>
 
-        <section className="landing-section practice-story">
+        <section id="practice" tabIndex={-1} className="landing-section practice-story">
           <div className="section-heading">
             <h2>{t('Язык для жизни, а не только для учебника.')}</h2>
             <p>{t('От первого bok до уверенного разговора.')}</p>
@@ -119,13 +104,13 @@ export default function ReferenceLanding() {
             {[
               ['split', 'Чтение', 'Утро в Сплите', 'city', 'games/reading?id=moja-obitelj-split'],
               ['plitvice', 'Аудирование', 'По тропам Плитвиц', 'forest', 'games/listening?id=plitvice-audio'],
-              ['chat', 'AI-наставник', 'Razgovarajmo.', 'sea', 'ai-chat']
+              ['chat', 'AI-наставник', 'Разговор с наставником', 'sea', 'ai-chat']
             ].map(([id, type, title, cl, taskUrl]) => (
               <A to={session ? taskUrl : "sign-in"} key={id} className={'story-card ' + cl}>
                 <span className="story-no">{t(type)}</span>
                 <div>
                   <h3>{t(title)}</h3>
-                  <span>{t('Начать')}<Icon /></span>
+                  <span>{t(session ? "Открыть практику" : "Войти для практики")}<Icon /></span>
                 </div>
               </A>
             ))}
@@ -138,21 +123,21 @@ export default function ReferenceLanding() {
             <h2>
               {t('AI-наставник')}
               <br />
-              <span>Razgovarajmo.</span>
+              <span>{t("Разговор с наставником")}</span>
             </h2>
             <p>
               {t('Изучайте хорватский через понятные уроки, живые ситуации и практику, которая подходит именно вам.')}
             </p>
             <A to={session ? "ai-chat" : "sign-in"} className="btn secondary">
-              {t('Начать')}<Icon />
+              {t(session ? "Открыть чат" : "Войти для доступа")}<Icon />
             </A>
           </div>
           <div className="chat-preview">
             <span className="online-dot" /> Croatian Mentor <small>AI</small>
-            <div className="sample-user">Kako naručiti kavu?</div>
+            <div className="sample-user" lang="hr">Kako naručiti kavu?</div>
             <div className="sample-ai">
-              Bok! Možete reći:<br />
-              <strong>„Jednu kavu, molim.”</strong><br />
+              <span lang="hr">Bok! Možete reći:</span><br />
+              <strong lang="hr">„Jednu kavu, molim.”</strong><br />
               <span>
                 {locale === 'ru'
                   ? '«Один кофе, пожалуйста». Попробуем вместе?'
@@ -176,8 +161,8 @@ export default function ReferenceLanding() {
             <br />
             <span>{t('Начните с малого')}</span>
           </h2>
-          <A to="sign-up" className="btn">
-            {t('Начать обучение')}<Icon />
+          <A to={session ? "lessons" : "sign-up"} className="btn">
+            {t(session ? "Мой курс" : "Создать аккаунт")}<Icon />
           </A>
           <A to="contacts" className="text-link">
             {t('Будущие возможности')}<Icon size={17} />

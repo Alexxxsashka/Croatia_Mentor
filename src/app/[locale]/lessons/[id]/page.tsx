@@ -1,5 +1,8 @@
 "use client";
 
+import { Workbook } from "@/components/learning/Workbook";
+import { getWorkbook } from "@/lib/workbook";
+
 import { useState, use, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
@@ -424,7 +427,9 @@ export default function LessonDetailPage({
         </div>
       )}
 
-      {/* Exercise Section */}
+      <Workbook key={id} data={getWorkbook(id)} locale={locale} />
+
+      {/* Final quiz */}
       <div className="glass rounded-2xl p-8 animate-slide-up">
         <div className="flex items-center justify-between mb-6">
           <h3 className="font-semibold">

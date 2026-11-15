@@ -1,3 +1,5 @@
+import { workbookWordsByLesson } from "./workbook-vocabulary";
+
 export interface VocabWord {
   hr: string;
   en: string;
@@ -41,7 +43,7 @@ export const categoryLabels: Record<VocabCategory, { en: string; ru: string; ua:
   prepositions: { en: "Prepositions", ru: "Предлоги", ua: "Прийменники" },
 };
 
-export const vocabularyWords: VocabWord[] = [
+const coreVocabularyWords: VocabWord[] = [
   {
     "hr": "kruh",
     "en": "bread",
@@ -5121,3 +5123,10 @@ export const vocabularyWords: VocabWord[] = [
   { "hr": "zbog", "en": "because of", "ru": "из-за", "ua": "через / з-за", "level": "B1", "category": "prepositions" }
 ];
 
+
+const vocabularyByWord = new Map(coreVocabularyWords.map((word) => [word.hr.toLowerCase(), word]));
+for (const word of Object.values(workbookWordsByLesson).flat()) {
+  if (!vocabularyByWord.has(word.hr)) vocabularyByWord.set(word.hr, word);
+}
+
+export const vocabularyWords = [...vocabularyByWord.values()];

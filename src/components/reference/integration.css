@@ -56,3 +56,66 @@
 @media(prefers-reduced-motion:reduce){.reference-design *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media(max-width:700px){.reference-design .sidebar:not(.open){visibility:hidden}.reference-design .sidebar.open{visibility:visible}}
 
+
+.reference-design .hero-buttons {
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.reference-design .hero-content > .hero-account-note {
+  margin: 14px 0 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #e8eeeb;
+}
+.reference-design .hero-account-note + .hero-meta {
+  margin-top: 24px;
+}
+.reference-design .hero-buttons .btn.secondary {
+  background: #101719;
+  border-color: #9baeb1;
+}
+.reference-design .hero-buttons .btn.secondary:hover {
+  background: #243236;
+}
+.reference-design .story-no {
+  background: #101719;
+  color: #f5f3ed;
+}
+.reference-design .discovery-access {
+  display: block;
+  color: var(--ref-muted);
+}
+.reference-design .level-path a,
+.reference-design .story-card {
+  outline-offset: 4px;
+}
+@media (max-width: 767px) {
+  .reference-design .hero-buttons {
+    flex-direction: row;
+    align-items: center;
+  }
+  .reference-design .hero-buttons .btn {
+    padding-inline: 14px;
+    white-space: normal;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reference-design {
+    scroll-behavior: auto;
+  }
+  .reference-design .story-card:hover::before,
+  .reference-design .level-path a:hover .level-circle {
+    transform: none;
+  }
+}
+
+
+@media (max-width: 360px) {
+  .reference-design .public-header {
+    padding-inline: 12px;
+  }
+  .reference-design .public-header .header-login svg {
+    display: none;
+  }
+}
+

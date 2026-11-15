@@ -108,7 +108,7 @@ export function ReferenceShell({children}: {children:ReactNode}) {
   const [progress,setProgress]=useState<{totalXP:number;currentStreak:number}|null>(null);
   const t=(key:string)=>translate(key,locale==='ua'?'uk':locale);
   const landing=pathname==='/' || pathname==='/orange' || pathname==='/v2';
-  const publicPage=landing || ['/sign-in','/sign-up','/contacts','/learn-croatian'].includes(pathname);
+  const publicPage=landing || ['/sign-in','/sign-up','/contacts','/learn-croatian','/trial-lesson'].includes(pathname) || (pathname === '/placement-test' && !session);
   const admin=(session?.user as {role?:string}|undefined)?.role==='admin';
   useEffect(()=>{
     if(!session?.user?.id)return;
@@ -139,7 +139,7 @@ export function ReferenceShell({children}: {children:ReactNode}) {
     <select className="language" aria-label={t('Язык интерфейса')} value={locale} onChange={e=>router.replace(pathname+window.location.search,{locale:e.target.value as 'en'|'ru'|'ua'})}>
       <option value="en">ENG</option><option value="ru">RU</option><option value="ua">UA</option>
     </select>
-    <button className="icon-button" onClick={toggleTheme} aria-label={theme==='dark'?'Light theme':'Dark theme'}>{theme==='dark'?<Sun size={18}/>:<Moon size={18}/>}</button>
+    <button className="icon-button theme-button" onClick={toggleTheme} aria-label={theme==='dark'?'Light theme':'Dark theme'}>{theme==='dark'?<Sun size={18}/>:<Moon size={18}/>}</button>
     <NewsBell/>
     {session ? (
       <Link href="/profile" className="avatar" aria-label={t('Профиль')}>
@@ -156,14 +156,14 @@ export function ReferenceShell({children}: {children:ReactNode}) {
     )}
   </div>;
   return <div className={`reference-design ${theme==='orange-white'?'light':''} ${landing?'reference-home':'reference-interior'}`}>
-    <DepthEffects landing={landing}/><a className="skip-link" href="#site-content">{t('Продолжить')}</a>
+    <DepthEffects landing={landing}/><a className="skip-link" href="#site-content">{t('Содержание страницы')}</a>
     {publicPage?<>
-      <header className={`public-header ${!landing?'reference-static-header':''}`}><Brand/><nav className="public-nav"><Link href="/learn-croatian">{t('Как это работает')}</Link><Link href={session ? "/lessons" : "/sign-in"}>{t('Программа')}</Link><Link href={session ? "/games" : "/sign-in"}>{t('Практика')}</Link><Link href="/contacts">{t('Контакты')}</Link></nav>{actions}</header>
-      <div id="site-content" className={landing?'':'reference-public-content legacy-content'}>{children}</div>
+      <header className={`public-header ${!landing?'reference-static-header':''}`}><Brand/><nav className="public-nav" aria-label={t('Основная навигация')}><Link href="/learn-croatian">{t('Как это работает')}</Link><Link href={session ? "/lessons" : "/#journey"}>{t('Программа')}</Link><Link href={session ? "/games" : "/#practice"}>{t('Практика')}</Link><Link href="/contacts">{t('Контакты')}</Link></nav>{actions}</header>
+      <div id="site-content" tabIndex={-1} className={landing?'':'reference-public-content legacy-content'}>{children}</div>
       <footer>
         <div><Brand/><p>{t('Язык для жизни, а не только для учебника.')}</p></div>
-        <nav>
-          <Link href={session ? "/lessons" : "/sign-in"}>{t('Мой курс')}</Link>
+        <nav aria-label={t('Ссылки в подвале')}>
+          <Link href={session ? "/lessons" : "/sign-in"}>{t(session ? "Мой курс" : "Войти в курс")}</Link>
           <Link href="/contacts">{t('Контакты')}</Link>
           <Link href="/learn-croatian">{t('Как это работает')}</Link>
           <a href="/privacy_policy.pdf" target="_blank" rel="noopener noreferrer">{t('Политика конфиденциальности')}</a>
@@ -187,7 +187,7 @@ export function ReferenceShell({children}: {children:ReactNode}) {
       </aside>
       <div className="workspace">
         <header className="app-header"><button className="icon-button mobile-menu" aria-label="Menu" aria-expanded={menu} aria-controls="study-navigation" onClick={()=>setMenu(!menu)}><MenuCloseIcon size={22} active={menu}/></button><div className="header-context">{t('Один маленький шаг сегодня.')}</div>{actions}</header>
-        <main id="site-content" className="app-main legacy-content">{children}</main>
+        <main id="site-content" tabIndex={-1} className="app-main legacy-content">{children}</main>
         <div className="workspace-footer">
           <div className="workspace-footer-legal">
             <span>© 2026 Croatian Mentor</span>

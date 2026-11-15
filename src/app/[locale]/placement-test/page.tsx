@@ -183,15 +183,15 @@ export default function PlacementTestPage() {
           <div className="glass max-w-md mx-auto p-6 rounded-2xl border border-red-500/10 space-y-3">
             <div className="flex items-center justify-center gap-2 text-red-400 font-semibold text-sm">
               <AlertCircle className="w-4 h-4" />
-              <span>Time Limit: 15 Minutes</span>
+              <span>{locale === "ru" ? "Время на тест — 15 минут" : locale === "ua" ? "Час на тест — 15 хвилин" : "15 minute time limit"}</span>
             </div>
             <p className="text-xs text-muted-foreground">
-              Once you start, the screen will be locked and a global timer will count down. Exiting or reloading will submit whatever you have answered. No hints or explanations are provided during the test.
+              {t("description")}
             </p>
           </div>
           <div className="glass inline-flex items-center gap-3 px-6 py-3 rounded-2xl">
             <span className="text-sm text-muted-foreground">
-              {totalQuestions} {t("question")}s • CEFR A1 → C2
+              {totalQuestions} · CEFR A1–C2
             </span>
           </div>
           <div>
@@ -273,10 +273,10 @@ export default function PlacementTestPage() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
-              onClick={() => router.push("/dashboard")}
+              onClick={() => router.push(session ? "/dashboard" : "/sign-up")}
               className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-lg font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition-all shadow-2xl shadow-blue-500/25"
             >
-              {t("results.goToDashboard")}
+              {session ? t("results.goToDashboard") : locale === "ru" ? "Создать аккаунт" : locale === "ua" ? "Створити акаунт" : "Create an account"}
               <ArrowRight className="w-5 h-5" />
             </button>
             <button
@@ -341,6 +341,7 @@ export default function PlacementTestPage() {
                   type="text"
                   value={typedAnswer}
                   onChange={(e) => setTypedAnswer(e.target.value)}
+                  aria-label={t("translationPlaceholder")}
                   placeholder={t("translationPlaceholder")}
                   className="flex-1 p-4 rounded-xl border border-white/10 bg-white/5 outline-none transition-all text-lg focus:border-blue-500 focus:bg-white/10"
                   autoFocus

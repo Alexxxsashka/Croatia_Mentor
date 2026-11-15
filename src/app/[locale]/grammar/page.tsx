@@ -1,5 +1,7 @@
 "use client";
 
+import { TheoryWorkbook } from "@/components/learning/TheoryWorkbook";
+
 import { useState, useEffect, useMemo } from "react";
 import { useLocale } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
@@ -413,6 +415,8 @@ export default function GrammarPage() {
           </div>
 
           {/* ========================================== */}
+          <TheoryWorkbook key={selectedCatId} category={selectedCatId} locale={locale} />
+
           {/* THEORY PRACTICE TEST GENERATOR AT BOTTOM   */}
           {/* ========================================== */}
           <div className="glass rounded-3xl p-6 sm:p-8 border border-purple-500/30 space-y-6 shadow-2xl relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-purple-950/40">
