@@ -1,65 +1,36 @@
 "use client";
 
 import { useState } from "react";
-import { Volume2, Plus, Check, Sparkles, X } from "lucide-react";
+import { Volume2, Plus, Check, X } from "lucide-react";
+import { commonWordTranslations, isCroatianWordToken, lessonWordPattern } from "@/lib/lesson-vocabulary";
 import { speakText } from "@/lib/speech";
 import { toast } from "sonner";
 
 interface InteractiveTextReaderProps {
   text: string;
+  croatianSources?: string[];
   locale: string;
 }
 
-// Basic dictionary for instant click translations
-const COMMON_WORD_TRANSLATIONS: Record<string, { ru: string; ua: string; en: string }> = {
-  dobar: { ru: "хороший", ua: "хороший", en: "good" },
-  dan: { ru: "день", ua: "день", en: "day" },
-  bok: { ru: "привет / пока", ua: "привіт / бувай", en: "hi / bye" },
-  hvala: { ru: "спасибо", ua: "дякую", en: "thanks" },
-  molim: { ru: "пожалуйста", ua: "будь ласка", en: "please / welcome" },
-  kava: { ru: "кофе", ua: "кава", en: "coffee" },
-  kruh: { ru: "хлеб", ua: "хліб", en: "bread" },
-  voda: { ru: "вода", ua: "вода", en: "water" },
-  pivo: { ru: "пиво", ua: "пиво", en: "beer" },
-  ja: { ru: "я", ua: "я", en: "I" },
-  ti: { ru: "ты", ua: "ти", en: "you" },
-  on: { ru: "он", ua: "він", en: "he" },
-  ona: { ru: "она", ua: "вона", en: "she" },
-  ono: { ru: "оно", ua: "воно", en: "it" },
-  mi: { ru: "мы", ua: "ми", en: "we" },
-  vi: { ru: "вы", ua: "ви", en: "you (plural)" },
-  oni: { ru: "они", ua: "вони", en: "they" },
-  sam: { ru: "есть (я)", ua: "є (я)", en: "am" },
-  si: { ru: "есть (ты)", ua: "є (ти)", en: "are" },
-  je: { ru: "есть (он/она)", ua: "є (він/вона)", en: "is" },
-  smo: { ru: "есть (мы)", ua: "є (ми)", en: "are" },
-  ste: { ru: "есть (вы)", ua: "є (ви)", en: "are" },
-  su: { ru: "есть (они)", ua: "є (вони)", en: "are" },
-  nisam: { ru: "не есть (я)", ua: "не є (я)", en: "am not" },
-  nisi: { ru: "не есть (ты)", ua: "не є (ти)", en: "are not" },
-  nije: { ru: "не есть (он/она)", ua: "не є (він/вона)", en: "is not" },
-  lijepo: { ru: "красиво / приятно", ua: "красиво / приємно", en: "nice / beautiful" },
-  dobro: { ru: "хорошо", ua: "добре", en: "well / good" },
-  sretan: { ru: "счастливый", ua: "щасливий", en: "happy" },
-};
-
-export function InteractiveTextReader({ text, locale }: InteractiveTextReaderProps) {
+export function InteractiveTextReader({ text, croatianSources, locale }: InteractiveTextReaderProps) {
   const [selectedWord, setSelectedWord] = useState<{
     original: string;
     normalized: string;
     translation: string;
     added: boolean;
+    saving: boolean;
   } | null>(null);
 
-  const cleanWord = (w: string) => w.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, "").trim();
+  // The Latin words embedded in the Cyrillic versions identify Croatian examples in English prose.
+  const sourceWords = croatianSources && new Set(croatianSources.flatMap((source) =>
+    source.split(lessonWordPattern).filter(isCroatianWordToken).map((word) => word.normalize("NFC").toLowerCase())
+  ));
 
-  const handleWordClick = (rawWord: string) => {
-    const norm = cleanWord(rawWord).toLowerCase();
-    if (!norm) return;
-
+  const handleWordClick = (word: string) => {
+    const norm = word.normalize("NFC").toLowerCase();
     speakText(norm);
 
-    const match = COMMON_WORD_TRANSLATIONS[norm];
+    const match = Object.hasOwn(commonWordTranslations, norm) ? commonWordTranslations[norm] : undefined;
     let translation = "";
     if (match) {
       translation = locale === "ua" ? match.ua : locale === "ru" ? match.ru : match.en;
@@ -68,27 +39,33 @@ export function InteractiveTextReader({ text, locale }: InteractiveTextReaderPro
     }
 
     setSelectedWord({
-      original: cleanWord(rawWord),
+      original: word,
       normalized: norm,
       translation,
       added: false,
+      saving: false,
     });
   };
 
   const handleAddToVocabulary = async () => {
-    if (!selectedWord) return;
+    if (!selectedWord || selectedWord.added || selectedWord.saving) return;
+
+    const pendingWord = { ...selectedWord, saving: true };
+    setSelectedWord(pendingWord);
 
     try {
-      await fetch("/api/words/progress", {
+      const response = await fetch("/api/words/progress", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          wordHr: selectedWord.original,
+          wordHr: selectedWord.normalized,
           status: "learning",
         }),
       });
 
-      setSelectedWord((prev) => (prev ? { ...prev, added: true } : null));
+      if (!response.ok) throw new Error(String(response.status));
+
+      setSelectedWord((prev) => prev === pendingWord ? { ...pendingWord, added: true, saving: false } : prev);
 
       toast.success(
         locale === "ua"
@@ -98,32 +75,36 @@ export function InteractiveTextReader({ text, locale }: InteractiveTextReaderPro
           : `Word "${selectedWord.original}" added to vocabulary! 📚`
       );
     } catch (err) {
+      setSelectedWord((prev) => prev === pendingWord ? { ...pendingWord, saving: false } : prev);
       console.error("Failed to add word to vocabulary:", err);
+      toast.error(locale === "ua"
+        ? "Не вдалося додати слово до словника"
+        : locale === "ru" ? "Не удалось добавить слово в словарь" : "Could not add the word to vocabulary");
     }
   };
 
   const renderInteractiveText = () => {
     const lines = text.split("\n");
     return lines.map((line, lIdx) => {
-      const words = line.split(" ");
+      const words = line.split(lessonWordPattern);
       return (
         <div key={lIdx} className="min-h-[1.4rem] leading-relaxed my-1">
           {words.map((word, wIdx) => {
-            const norm = cleanWord(word).toLowerCase();
-            const isClickable = norm.length > 1;
+            const norm = word.normalize("NFC").toLowerCase();
+            if (!isCroatianWordToken(word) || (sourceWords && !sourceWords.has(norm))) {
+              return word;
+            }
 
             return (
-              <span
+              <button
                 key={wIdx}
-                onClick={() => isClickable && handleWordClick(word)}
-                className={`inline-block mr-1 rounded px-0.5 transition-all ${
-                  isClickable
-                    ? "cursor-pointer hover:bg-blue-500/20 hover:text-blue-300 font-medium decoration-blue-500/30 decoration-dotted underline"
-                    : ""
-                }`}
+                type="button"
+                lang="hr"
+                onClick={() => handleWordClick(word)}
+                className="rounded cursor-pointer hover:bg-blue-500/20 hover:text-blue-300 font-medium decoration-blue-500/30 decoration-dotted underline"
               >
                 {word}
-              </span>
+              </button>
             );
           })}
         </div>
@@ -163,7 +144,7 @@ export function InteractiveTextReader({ text, locale }: InteractiveTextReaderPro
             <button
               type="button"
               onClick={handleAddToVocabulary}
-              disabled={selectedWord.added}
+              disabled={selectedWord.added || selectedWord.saving}
               className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
                 selectedWord.added
                   ? "bg-emerald-600 text-white border border-emerald-500 shadow-md shadow-emerald-600/30"
@@ -178,7 +159,7 @@ export function InteractiveTextReader({ text, locale }: InteractiveTextReaderPro
               ) : (
                 <>
                   <Plus className="w-3.5 h-3.5" />
-                  <span>{locale === "ua" ? "+ Додати у словник" : locale === "ru" ? "+ Добавить в словарь" : "+ Add to Vocabulary"}</span>
+                  <span>{locale === "ua" ? "Додати у словник" : locale === "ru" ? "Добавить в словарь" : "Add to Vocabulary"}</span>
                 </>
               )}
             </button>

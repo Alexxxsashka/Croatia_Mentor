@@ -401,7 +401,14 @@ export default function LessonDetailPage({
             <div key={i} className="glass rounded-2xl p-6">
               <h2 className="text-lg font-semibold mb-3">{getLocalizedText(section.title, locale)}</h2>
               <div className="text-sm text-muted-foreground leading-relaxed space-y-1">
-                <InteractiveTextReader text={getLocalizedText(section.text, locale)} locale={locale} />
+                <InteractiveTextReader
+                  text={getLocalizedText(section.text, section.croatianSource ?? locale)}
+                  croatianSources={locale === "en" && !section.croatianSource && typeof section.text !== "string" ? [section.text.ru, section.text.ua] : undefined}
+                  locale={locale}
+                />
+                {section.croatianSource && locale !== "en" && (
+                  <p className="mt-3 whitespace-pre-line">{getLocalizedText(section.text, locale)}</p>
+                )}
               </div>
               {section.examples && (
                 <ul className="mt-4 space-y-2">
@@ -410,7 +417,11 @@ export default function LessonDetailPage({
                       key={j}
                       className="text-sm pl-4 border-l-2 border-blue-500/30 py-1"
                     >
-                      <InteractiveTextReader text={getLocalizedText(ex, locale)} locale={locale} />
+                      <InteractiveTextReader
+                        text={getLocalizedText(ex, locale)}
+                        croatianSources={locale === "en" && typeof ex !== "string" ? [ex.ru, ex.ua] : undefined}
+                        locale={locale}
+                      />
                     </li>
                   ))}
                 </ul>

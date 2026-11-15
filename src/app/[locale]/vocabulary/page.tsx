@@ -10,6 +10,7 @@ import {
   categoryLabels,
   type VocabWord,
 } from "@/lib/vocabulary-data";
+import { commonWordTranslations, isCroatianWordToken } from "@/lib/lesson-vocabulary";
 import {
   Search,
   Volume2,
@@ -274,8 +275,19 @@ export default function VocabularyPortal() {
     }
   });
 
-  // Filter words
-  const filteredWords = allMergedWords.filter((w) => {
+  const catalogKeys = new Set(allMergedWords.map((word) => word.hr.toLowerCase()));
+  const savedWords: VocabWord[] = Object.keys(wordProgressMap)
+    .filter((word) => !catalogKeys.has(word) && isCroatianWordToken(word))
+    .map((word) => ({
+      hr: word,
+      level: "",
+      category: "lessons",
+      ...(Object.hasOwn(commonWordTranslations, word)
+        ? commonWordTranslations[word]
+        : { en: "", ru: "", ua: "" }),
+    }));
+
+  const matchesFilters = (w: VocabWord) => {
     const key = w.hr.toLowerCase();
     const levelMatch = selectedLevel === "all" || w.level.toLowerCase() === selectedLevel.toLowerCase();
     const categoryMatch = selectedCategory === "all" || w.category === selectedCategory;
@@ -302,7 +314,11 @@ export default function VocabularyPortal() {
     }
 
     return levelMatch && categoryMatch && posMatch && statusMatch;
-  });
+  };
+  const filteredWords = allMergedWords.filter(matchesFilters);
+  const displayedWords = activeTab === "categories"
+    ? [...filteredWords, ...savedWords.filter(matchesFilters)]
+    : filteredWords;
 
   const getTranslation = (word: VocabWord) => {
     if (locale === "ru") return word.ru;
@@ -311,6 +327,9 @@ export default function VocabularyPortal() {
   };
 
   const getCategoryLabel = (cat: string) => {
+    if (cat === "lessons") {
+      return locale === "ua" ? "З уроків" : locale === "ru" ? "Из уроков" : "From lessons";
+    }
     const found = vocabularyCategories.find((c) => c === cat);
     if (found) {
       const labelObj = categoryLabels[found];
@@ -872,7 +891,7 @@ export default function VocabularyPortal() {
           </div>
 
           <div className="text-xs text-muted-foreground">
-            {filteredWords.length} {t("wordsLoaded")}
+            {displayedWords.length} {t("wordsLoaded")}
           </div>
         </div>
       )}
@@ -883,8 +902,8 @@ export default function VocabularyPortal() {
           {/* Main Category Cards */}
           {selectedCategory === "all" ? (
             <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 stagger-children">
-              {vocabularyCategories.map((cat) => {
-                const catWords = allMergedWords.filter((w) => w.category === cat);
+              {[...(savedWords.length ? ["lessons"] : []), ...vocabularyCategories].map((cat) => {
+                const catWords = cat === "lessons" ? savedWords : allMergedWords.filter((w) => w.category === cat);
                 return (
                   <button
                     key={cat}
@@ -919,7 +938,7 @@ export default function VocabularyPortal() {
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 stagger-children">
-                {filteredWords.map((word, i) => {
+                {displayedWords.map((word, i) => {
                   const key = word.hr.toLowerCase();
                   const prog = wordProgressMap[key];
                   const isStarred = starredWords.includes(word.hr);
@@ -934,9 +953,11 @@ export default function VocabularyPortal() {
                       <div>
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-1.5">
-                            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-blue-500/10 text-blue-400">
-                              {word.level}
-                            </span>
+                            {word.level && (
+                              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-blue-500/10 text-blue-400">
+                                {word.level}
+                              </span>
+                            )}
                             {isLearned ? (
                               <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                                 {locale === "ua" ? "✅ Вивчено" : locale === "ru" ? "✅ Выучено" : "✅ Learned"}
@@ -974,7 +995,7 @@ export default function VocabularyPortal() {
                           {word.hr}
                         </h3>
                         <p className="text-sm font-semibold text-blue-400 mb-3">
-                          {getTranslation(word)}
+                          {getTranslation(word) || (locale === "ua" ? "Переклад відсутній" : locale === "ru" ? "Перевод отсутствует" : "No translation available")}
                         </p>
                       </div>
 

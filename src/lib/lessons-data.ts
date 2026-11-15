@@ -14,6 +14,7 @@ export interface LessonData {
     sections?: {
       title: string | LocalizedString;
       text: string | LocalizedString;
+      croatianSource?: "en";
       examples?: string[] | LocalizedString[];
     }[];
     exercises: {
@@ -570,6 +571,7 @@ export const lessonsData: LessonData[] = [
       sections: [
         {
           title: { en: "Dialogue", ru: "Диалог", ua: "Діалог" },
+          croatianSource: "en",
           text: {
             en: "Konobar: Dobar dan! Izvolite.\nAna: Dobar dan. Mogu li dobiti kavu s mlijekom?\nKonobar: Naravno. A za Vas?\nIvan: Ja ću čaj s limunom, molim.\nKonobar: U redu. Kava s mlijekom i čaj s limunom. Želite li vodu?\nAna: Da, gaziranu vodu, molim.\nIvan: Za mene negaziranu vodu.\nKonobar: Hvala, stiže odmah.",
             ru: "Официант: Добрый день! Пожалуйста.\nАна: Добрый день. Можно мне кофе с молоком?\nОфициант: Конечно. А для Вас?\nИван: Мне чай с лимоном, пожалуйста.\nОфициант: Хорошо. Кофе с молоком и чай с лимоном. Желаете воду?\nАна: Да, газированную воду, пожалуйста.\nИван: Мне негазированную воду.\nОфициант: Спасибо, сейчас принесу.",
@@ -2414,6 +2416,7 @@ export const lessonsData: LessonData[] = [
       sections: [
         {
           title: { en: "Ecology in Croatia", ru: "Экология в Хорватии", ua: "Екологія в Хорватії" },
+          croatianSource: "en",
           text: {
             en: "Zaštita okoliša i ekologija postaju sve važnije teme u Hrvatskoj. Zemlja je poznata po čistom moru, brojnim nacionalnim parkovima i bogatoj biološkoj raznolikosti. Međutim, brzi turistički razvoj i zbrinjavanje otpada predstavljaju velike izazove. Mnogi gradovi potiču razvrstavanje otpada i recikliranje. Građani također shvaćaju da očuvanje prirode izravno utječe na kvalitetu života i na zdravlje svih nas.",
             ru: "Охрана окружающей среды и экология становятся всё более важными темами в Хорватии. Страна известна своим чистым морем, многочисленными национальными парками и богатым биоразнообразием. Однако быстрое развитие туризма и утилизация отходов представляют собой серьезные вызовы. Многие города стимулируют сортировку мусора и переработку. Граждане также понимают, что сохранение природы напрямую влияет на качество жизни и здоровье всех нас.",

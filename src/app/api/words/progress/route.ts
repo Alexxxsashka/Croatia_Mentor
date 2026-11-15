@@ -42,8 +42,8 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { wordHr, correct, timeTakenMs, status: explicitStatus } = body;
 
-    if (!wordHr) {
-      return NextResponse.json({ error: "wordHr is required" }, { status: 400 });
+    if (typeof wordHr !== "string" || !wordHr.trim() || /\p{Script=Cyrillic}/u.test(wordHr)) {
+      return NextResponse.json({ error: "wordHr must be written in Latin script" }, { status: 400 });
     }
 
     // Get existing progress or create new
